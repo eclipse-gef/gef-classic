@@ -73,8 +73,8 @@ public class SharedImages {
 	public static final ImageDescriptor DESC_MARQUEE_TOOL_CONNECTIONS_24;
 
 	static {
-		DESC_SELECTION_TOOL_16 = createDescriptor("icons/arrow16.gif"); //$NON-NLS-1$
-		DESC_SELECTION_TOOL_24 = createDescriptor("icons/arrow24.gif"); //$NON-NLS-1$
+		DESC_SELECTION_TOOL_16 = createDescriptor("icons/arrow16.png"); //$NON-NLS-1$
+		DESC_SELECTION_TOOL_24 = createDescriptor("icons/arrow24.png"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_16 = createDescriptor("icons/marquee16.png"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_24 = createDescriptor("icons/marquee24.png"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_NODES_16 = createDescriptor("icons/marquee_nodes16.png"); //$NON-NLS-1$
