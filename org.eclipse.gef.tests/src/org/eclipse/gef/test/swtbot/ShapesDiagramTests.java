@@ -22,11 +22,14 @@ import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
 
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.test.swtbot.utils.SWTBotGefPalette;
+import org.eclipse.gef.ui.palette.ColorPalette;
 
 import org.junit.Test;
 
@@ -56,6 +59,20 @@ public class ShapesDiagramTests extends AbstractSWTBotEditorTests {
 		});
 
 		assertEquals(figure.getSize(), new Dimension(200, 200));
+	}
+
+	@Test
+	public void testCustomPalette() {
+		bot.menu("Palette").menu("Use Custom Color Palette").click();
+
+		SWTBotGefEditor editor = bot.gefEditor("shapesExample1.shapes");
+		editor.activateTool("Ellipse");
+
+		SWTBotGefPalette palette = new SWTBotGefPalette(editor.getSWTBotGefViewer());
+		ColorPalette colorPalette = palette.getColorPalette();
+
+		assertEquals(colorPalette.getHoverColor(), ColorConstants.cyan);
+		assertEquals(colorPalette.getSelectedColor(), ColorConstants.darkGreen);
 	}
 
 	@Override

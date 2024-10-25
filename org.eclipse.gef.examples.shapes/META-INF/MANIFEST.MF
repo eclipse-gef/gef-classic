@@ -13,8 +13,12 @@ Require-Bundle: org.eclipse.gef;bundle-version="[3.18.0,4.0.0)",
  org.eclipse.ui.views;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.workbench;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.ui.ide;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.jface;bundle-version="[3.2.0,4.0.0)"
+ org.eclipse.jface;bundle-version="[3.2.0,4.0.0)",
+ org.eclipse.e4.core.contexts;bundle-version="[1.12.600,2.0.0)",
+ org.eclipse.e4.core.di.annotations;bundle-version="[1.8.400,2.0.0)",
+ org.eclipse.e4.ui.model.workbench;bundle-version="[2.4.300,3.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.eclipse.gef.examples.shapes
+Model-Fragment: fragment.e4xmi
 

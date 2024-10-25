@@ -96,6 +96,7 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	private PaletteViewerPreferences prefs = PREFERENCE_STORE;
 	private Font font = null;
 	private PaletteAnimator paletteAnimator;
+	private ColorPalette colorPalette = DefaultColorPalette.INSTANCE;
 
 	/**
 	 * Constructor
@@ -228,6 +229,16 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	 */
 	public PaletteViewerPreferences getPaletteViewerPreferences() {
 		return prefs;
+	}
+
+	/**
+	 * @return The color palette that is used for painting the figures of this
+	 *         viewer. If no palette has been set by the user,
+	 *         {@link DefaultColorPalette} is returned instead of {@code null}.
+	 * @since 3.20
+	 */
+	public ColorPalette getColorPalette() {
+		return colorPalette;
 	}
 
 	private ToolEntryEditPart getToolEntryEditPart(ToolEntry entry) {
@@ -461,6 +472,22 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 		this.prefs = prefs;
 		if (getControl() != null && !getControl().isDisposed()) {
 			this.prefs.addPropertyChangeListener(prefListener);
+		}
+	}
+
+	/**
+	 * Sets the color palette that is used for painting the figures of this viewer.
+	 * If {@code null} is passed as an argument, the palette is reset to its default
+	 * configuration.
+	 *
+	 * @param colorPalette The color palette for this viewer.
+	 * @since 3.20
+	 */
+	public void setColorPalette(ColorPalette colorPalette) {
+		if (colorPalette == null) {
+			this.colorPalette = DefaultColorPalette.INSTANCE;
+		} else {
+			this.colorPalette = colorPalette;
 		}
 	}
 

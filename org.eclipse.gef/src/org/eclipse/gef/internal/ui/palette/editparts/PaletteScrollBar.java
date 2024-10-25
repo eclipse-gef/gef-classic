@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -35,6 +35,7 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.internal.ui.palette.PaletteColorUtil;
+import org.eclipse.gef.ui.palette.ColorPalette;
 
 public final class PaletteScrollBar extends ScrollBar {
 
@@ -81,7 +82,10 @@ public final class PaletteScrollBar extends ScrollBar {
 
 	protected Label upLabel;
 
-	public PaletteScrollBar() {
+	protected final ColorPalette colorPalette;
+
+	public PaletteScrollBar(ColorPalette colorPalette) {
+		this.colorPalette = colorPalette;
 	}
 
 	@Override
@@ -114,8 +118,8 @@ public final class PaletteScrollBar extends ScrollBar {
 				if (!getModel().isMouseOver()) {
 					g.drawImage(TRANSPARENCY, new Rectangle(0, 0, 1, 1), getBounds());
 				} else {
-					g.setBackgroundColor(getModel().isArmed() ? PaletteColorUtil.getSelectedColor()
-							: PaletteColorUtil.getHoverColor());
+					g.setBackgroundColor(getModel().isArmed() ? colorPalette.getSelectedColor()
+							: colorPalette.getHoverColor());
 					g.fillRectangle(getBounds());
 				}
 

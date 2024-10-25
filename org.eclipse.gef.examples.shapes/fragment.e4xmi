@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_NgZIIJVIEe-9Ku3Ok7Aflw">
+  <imports xsi:type="menu:Menu" xmi:id="_XpVcIJVKEe-9Ku3Ok7Aflw" elementId="org.eclipse.ui.main.menu"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_OIiGMJVIEe-9Ku3Ok7Aflw" featurename="handlers" parentElementId="xpath:/">
+    <elements xsi:type="commands:Handler" xmi:id="_SvOkgJVIEe-9Ku3Ok7Aflw" elementId="org.eclipse.gef.examples.shapes.handler.paletteHandler" contributionURI="bundleclass://org.eclipse.gef.examples.shapes/org.eclipse.gef.examples.shapes.handler.ColorPaletteHandler" command="_WIwFEJVIEe-9Ku3Ok7Aflw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Ug_dEJVIEe-9Ku3Ok7Aflw" featurename="commands" parentElementId="xpath:/">
+    <elements xsi:type="commands:Command" xmi:id="_WIwFEJVIEe-9Ku3Ok7Aflw" elementId="org.eclipse.gef.examples.shapes.command.paletteCommand" commandName="Use Custom Color Palette"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_DGMksJVJEe-9Ku3Ok7Aflw" featurename="menuContributions" parentElementId="xpath:/">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_FRJZUJVJEe-9Ku3Ok7Aflw" elementId="org.eclipse.gef.examples.shapes.menucontribution.paletteMenu" positionInParent="after=edit" parentId="org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_VaBhYJVJEe-9Ku3Ok7Aflw" elementId="org.eclipse.gef.examples.shapes.menu.palette" label="%menu.label.1">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_5lzhoJVKEe-9Ku3Ok7Aflw" contributionURI="bundleclass://org.eclipse.gef.examples.shapes/org.eclipse.gef.examples.shapes.handler.ColorPaletteExpression"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_knZOAJVKEe-9Ku3Ok7Aflw" elementId="org.eclipse.gef.examples.shapes.handledmenuitem.usecustompalette" label="%handledmenuitem.label.1" enabled="false" type="Check" command="_WIwFEJVIEe-9Ku3Ok7Aflw"/>
+      </children>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

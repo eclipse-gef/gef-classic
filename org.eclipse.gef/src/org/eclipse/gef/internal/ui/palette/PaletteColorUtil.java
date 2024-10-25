@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2010 IBM Corporation and others.
+ * Copyright (c) 2008, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,7 +14,6 @@
 package org.eclipse.gef.internal.ui.palette;
 
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
@@ -38,14 +37,6 @@ public class PaletteColorUtil {
 	public static final Color INFO_FOREGROUND = ColorConstants.tooltipForeground;
 
 	public static final Color ARROW_HOVER = new Color(null, 229, 229, 219);
-
-	private static final Color HOVER_COLOR = ColorConstants.listHoverBackgroundColor;
-
-	private static final Color SELECTED_COLOR = ColorConstants.listSelectedBackgroundColor;
-
-	private static final Color HOVER_COLOR_HICONTRAST = new Color(null, 0, 128, 0);
-
-	private static final Color SELECTED_COLOR_HICONTRAST = new Color(null, 128, 0, 128);
 
 	public static final Color WIDGET_BACKGROUND_LIST_BACKGROUND_40 = FigureUtilities
 			.mixColors(PaletteColorUtil.WIDGET_BACKGROUND, PaletteColorUtil.WIDGET_LIST_BACKGROUND, 0.4);
@@ -79,40 +70,4 @@ public class PaletteColorUtil {
 
 	public static final Color WIDGET_BACKGROUND_NORMAL_SHADOW_95 = FigureUtilities
 			.mixColors(PaletteColorUtil.WIDGET_BACKGROUND, PaletteColorUtil.WIDGET_NORMAL_SHADOW, 0.95);
-
-	/**
-	 * Gets the color to be used when hovering over palette items. The color differs
-	 * in high contrast mode.
-	 *
-	 * @return the hover color
-	 * @since 3.4
-	 */
-	public static Color getHoverColor() {
-		Display display = Display.getCurrent();
-		if (display == null) {
-			display = Display.getDefault();
-		}
-		if (display.getHighContrast()) {
-			return HOVER_COLOR_HICONTRAST;
-		}
-		return HOVER_COLOR;
-	}
-
-	/**
-	 * Gets the color to be used when selecting palette items. The color differs in
-	 * high contrast mode.
-	 *
-	 * @return the selected color
-	 * @since 3.4
-	 */
-	public static Color getSelectedColor() {
-		Display display = Display.getCurrent();
-		if (display == null) {
-			display = Display.getDefault();
-		}
-		if (display.getHighContrast()) {
-			return SELECTED_COLOR_HICONTRAST;
-		}
-		return SELECTED_COLOR;
-	}
 }

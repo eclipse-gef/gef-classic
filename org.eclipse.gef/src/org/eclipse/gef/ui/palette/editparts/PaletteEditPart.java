@@ -42,6 +42,7 @@ import org.eclipse.gef.palette.PaletteContainer;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.PaletteSeparator;
 import org.eclipse.gef.tools.SelectEditPartTracker;
+import org.eclipse.gef.ui.palette.ColorPalette;
 import org.eclipse.gef.ui.palette.PaletteMessages;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.PaletteViewerPreferences;
@@ -345,6 +346,17 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	@Override
 	public PaletteViewer getViewer() {
 		return (PaletteViewer) super.getViewer();
+	}
+
+	/**
+	 * Convenience method that simply delegates to
+	 * {@link PaletteViewer#getColorPalette()}.
+	 *
+	 * @return The color palette used for this edit part.
+	 * @since 3.20
+	 */
+	protected final ColorPalette getColorPalette() {
+		return getViewer().getColorPalette();
 	}
 
 	/**

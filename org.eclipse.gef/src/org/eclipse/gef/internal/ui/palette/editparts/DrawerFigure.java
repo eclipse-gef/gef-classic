@@ -46,6 +46,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.internal.ui.palette.PaletteColorUtil;
+import org.eclipse.gef.ui.palette.ColorPalette;
 import org.eclipse.gef.ui.palette.PaletteViewerPreferences;
 import org.eclipse.gef.ui.palette.editparts.PaletteToolbarLayout;
 
@@ -80,6 +81,7 @@ public class DrawerFigure extends Figure {
 	private boolean showPin = true;
 	private boolean skipNextEvent;
 	private EditPartTipHelper tipHelper;
+	private final ColorPalette colorPalette;
 
 	/**
 	 * This is the figure for the entire drawer label button.
@@ -139,12 +141,15 @@ public class DrawerFigure extends Figure {
 	/**
 	 * Constructor
 	 *
-	 * @param control The Control of the LWS to which this Figure belongs (it is
-	 *                used to display the drawer header with an EditPartTipHelper,
-	 *                if the header is not completely visible). It can be
-	 *                <code>null</code> (the tip won't be displayed).
+	 * @param control      The Control of the LWS to which this Figure belongs (it
+	 *                     is used to display the drawer header with an
+	 *                     EditPartTipHelper, if the header is not completely
+	 *                     visible). It can be <code>null</code> (the tip won't be
+	 *                     displayed).
+	 * @param colorPalette The color palette used for this figure.
 	 */
-	public DrawerFigure(final Control control) {
+	public DrawerFigure(final Control control, final ColorPalette colorPalette) {
+		this.colorPalette = colorPalette;
 		/*
 		 * A PaletteToolbarLayout is being used here instead of a ToolbarLayout so that
 		 * the ScrollPane can be stretched to take up vertical space. This affects
@@ -316,7 +321,7 @@ public class DrawerFigure extends Figure {
 		scrollpane.getViewport().setContentsTracksWidth(true);
 		scrollpane.setMinimumSize(new Dimension(0, 0));
 		scrollpane.setHorizontalScrollBarVisibility(ScrollPane.NEVER);
-		scrollpane.setVerticalScrollBar(new PaletteScrollBar());
+		scrollpane.setVerticalScrollBar(new PaletteScrollBar(colorPalette));
 		scrollpane.getVerticalScrollBar().setStepIncrement(20);
 		scrollpane.setLayoutManager(new OverlayScrollPaneLayout());
 		scrollpane.setContents(new Figure());

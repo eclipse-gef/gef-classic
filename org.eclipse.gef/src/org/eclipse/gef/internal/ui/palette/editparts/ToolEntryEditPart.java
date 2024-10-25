@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -38,7 +38,6 @@ import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
-import org.eclipse.gef.internal.ui.palette.PaletteColorUtil;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.PaletteStack;
 import org.eclipse.gef.palette.ToolEntry;
@@ -278,10 +277,10 @@ public class ToolEntryEditPart extends PaletteEditPart {
 				ButtonModel model = getModel();
 
 				if (model.isSelected()) {
-					graphics.setBackgroundColor(PaletteColorUtil.getSelectedColor());
+					graphics.setBackgroundColor(getColorPalette().getSelectedColor());
 					graphics.fillRoundRectangle(getSelectionRectangle(getLayoutSetting(), customLabel), 3, 3);
 				} else if (model.isMouseOver() || showHoverFeedback) {
-					graphics.setBackgroundColor(PaletteColorUtil.getHoverColor());
+					graphics.setBackgroundColor(getColorPalette().getHoverColor());
 					graphics.fillRoundRectangle(getSelectionRectangle(getLayoutSetting(), customLabel), 3, 3);
 				}
 			}

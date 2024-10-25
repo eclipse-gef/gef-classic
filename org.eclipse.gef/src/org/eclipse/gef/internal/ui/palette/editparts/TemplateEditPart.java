@@ -25,7 +25,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.Request;
-import org.eclipse.gef.internal.ui.palette.PaletteColorUtil;
 import org.eclipse.gef.palette.PaletteEntry;
 import org.eclipse.gef.palette.PaletteTemplateEntry;
 import org.eclipse.gef.ui.palette.PaletteViewerPreferences;
@@ -87,7 +86,7 @@ public class TemplateEditPart extends PaletteEditPart {
 				super.paintFigure(graphics);
 
 				if (isSelected()) {
-					graphics.setBackgroundColor(PaletteColorUtil.getSelectedColor());
+					graphics.setBackgroundColor(getColorPalette().getSelectedColor());
 				}
 				graphics.fillRoundRectangle(ToolEntryEditPart.getSelectionRectangle(getLayoutSetting(), this), 3, 3);
 			}

@@ -126,6 +126,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/ui/palette/DefaultColorPalette.java" type="org.eclipse.gef.ui.palette.DefaultColorPalette">
+        <filter comment="Default implementation for ColorPalette" id="576725006">
+            <message_arguments>
+                <message_argument value="ColorPalette"/>
+                <message_argument value="DefaultColorPalette"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/palette/DefaultPaletteViewerPreferences.java" type="org.eclipse.gef.ui.palette.DefaultPaletteViewerPreferences">
         <filter id="576725006">
             <message_arguments>
