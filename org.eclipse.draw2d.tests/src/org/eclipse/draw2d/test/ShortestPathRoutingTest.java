@@ -12,6 +12,9 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -19,11 +22,10 @@ import org.eclipse.draw2d.graph.Path;
 import org.eclipse.draw2d.graph.ShortestPathRouter;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ShortestPathRoutingTest extends Assert {
+public class ShortestPathRoutingTest {
 
 	private static final Point bend = new Point(620, 309);
 	private static final Point bendAEnd = new Point(264, 472);

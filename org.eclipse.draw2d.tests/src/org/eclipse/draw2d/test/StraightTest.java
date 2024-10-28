@@ -13,18 +13,22 @@
  */
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Straight;
 import org.eclipse.draw2d.geometry.Vector;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Alexander Nyssen
  *
  */
-public class StraightTest extends Assert {
+public class StraightTest {
 
 	@SuppressWarnings("static-method")
 	@Test

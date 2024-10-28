@@ -3,20 +3,21 @@
  */
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.LineAttributes;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author nyssen
  *
  */
-public class ShapeTest extends Assert {
+public class ShapeTest {
 
 	/**
 	 * Test case to demonstate bug #297223

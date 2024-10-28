@@ -13,6 +13,8 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
@@ -21,11 +23,10 @@ import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GraphicsClipping extends Assert {
+public class GraphicsClipping {
 
 	private Image image;
 	private GC gc;

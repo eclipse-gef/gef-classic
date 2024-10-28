@@ -13,14 +13,16 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class FigureUtilitiesTest extends Assert {
+public class FigureUtilitiesTest {
 
 	@SuppressWarnings("static-method")
 	@Test

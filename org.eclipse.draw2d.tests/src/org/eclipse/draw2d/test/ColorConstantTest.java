@@ -12,12 +12,13 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.swt.widgets.Display;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class ColorConstantTest extends Assert {
+public class ColorConstantTest {
 
 	@Test
 	@SuppressWarnings("static-method")

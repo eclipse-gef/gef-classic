@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +35,13 @@ import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Romain Raugi
  */
-public class RelativeBendpointTest extends Assert {
+public class RelativeBendpointTest {
 
 	private static class DiagramFigure extends FreeformLayeredPane {
 		public DiagramFigure() {

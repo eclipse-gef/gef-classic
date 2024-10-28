@@ -11,16 +11,18 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.draw2d.test;
+
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LayeredPaneTest extends Assert {
+public class LayeredPaneTest {
 
 	private LayeredPane pane;
 	private IFigure fig1;

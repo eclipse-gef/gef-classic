@@ -12,9 +12,11 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.geometry.Vector;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -23,7 +25,7 @@ import org.junit.Test;
  * @author aboyko
  *
  */
-public class VectorTest extends Assert {
+public class VectorTest {
 
 	@Test
 	public void testGetLength() {

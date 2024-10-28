@@ -13,9 +13,11 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -23,7 +25,7 @@ import org.junit.Test;
  *
  * @author Anthony Hunter
  */
-public class PrecisionPointTest extends Assert {
+public class PrecisionPointTest {
 
 	/**
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=227977

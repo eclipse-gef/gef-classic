@@ -12,19 +12,20 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.fail;
+
 import org.eclipse.swt.graphics.Image;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import org.eclipse.draw2d.ImageUtilities;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Pratik Shah
  */
-public class ImageUtilitiesTest extends Assert {
+public class ImageUtilitiesTest {
 
 	@SuppressWarnings("static-method")
 	@Test

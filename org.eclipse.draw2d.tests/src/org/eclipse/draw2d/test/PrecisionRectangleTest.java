@@ -13,18 +13,20 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author sshaw
  *
  */
-public class PrecisionRectangleTest extends Assert {
+public class PrecisionRectangleTest {
 
 	@SuppressWarnings("static-method")
 	@Test

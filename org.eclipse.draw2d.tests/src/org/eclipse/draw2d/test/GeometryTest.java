@@ -13,6 +13,9 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -22,10 +25,9 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.geometry.Geometry;
 import org.eclipse.draw2d.geometry.PointList;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class GeometryTest extends Assert {
+public class GeometryTest {
 
 	/*
 	 * For Geometry.polygonContainsPoint tests

@@ -12,14 +12,15 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class LayerTest extends Assert {
+public class LayerTest {
 
 	@Test
 	public void testContainsPointInLayer() {

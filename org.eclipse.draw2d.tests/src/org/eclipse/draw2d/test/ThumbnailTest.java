@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
@@ -20,10 +22,9 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.parts.Thumbnail;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class ThumbnailTest extends Assert {
+public class ThumbnailTest {
 
 	class TestThumbnail extends Thumbnail {
 		@Override

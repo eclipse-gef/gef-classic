@@ -13,6 +13,9 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Field;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -23,7 +26,6 @@ import org.eclipse.draw2d.graph.Edge;
 import org.eclipse.draw2d.graph.Node;
 import org.eclipse.draw2d.graph.Rank;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,7 +33,7 @@ import org.junit.Test;
  * Tests the swapping of adjacent nodes in a directed graph. since 3.0
  *
  */
-public class LocalOptimizerTest extends Assert {
+public class LocalOptimizerTest {
 
 	private DirectedGraph graph;
 	private Node a, b, c, d, e, f, g, h, i, j, k, l;

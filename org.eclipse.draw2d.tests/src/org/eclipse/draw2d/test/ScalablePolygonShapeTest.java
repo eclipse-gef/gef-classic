@@ -12,6 +12,10 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -24,10 +28,9 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-public class ScalablePolygonShapeTest extends Assert {
+public class ScalablePolygonShapeTest {
 
 	private static final int RECTANGLE_START = 1;
 

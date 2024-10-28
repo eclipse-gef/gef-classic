@@ -13,6 +13,8 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.Figure;
@@ -21,7 +23,6 @@ import org.eclipse.draw2d.XYAnchor;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +45,7 @@ import org.junit.Test;
  * @since 3.1
  */
 
-public class AnchorNotificationTest extends Assert {
+public class AnchorNotificationTest {
 
 	int count;
 
