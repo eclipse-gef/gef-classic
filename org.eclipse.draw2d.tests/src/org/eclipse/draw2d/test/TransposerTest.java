@@ -18,7 +18,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Transposer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author lobas_av

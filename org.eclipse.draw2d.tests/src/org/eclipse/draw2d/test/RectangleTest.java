@@ -18,7 +18,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RectangleTest extends BaseTestCase {
 

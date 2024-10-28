@@ -27,9 +27,9 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.UpdateListener;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PaintDamageEraseTest extends BaseTestCase implements UpdateListener {
 
@@ -205,7 +205,7 @@ public class PaintDamageEraseTest extends BaseTestCase implements UpdateListener
 		container = null;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		errMsg = ""; //$NON-NLS-1$
 		d = Display.getDefault();
@@ -224,7 +224,7 @@ public class PaintDamageEraseTest extends BaseTestCase implements UpdateListener
 		shell.open();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		doIndividualTearDown();
 

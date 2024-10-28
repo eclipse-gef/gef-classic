@@ -12,15 +12,15 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LayeredPaneTest {
 
@@ -29,7 +29,7 @@ public class LayeredPaneTest {
 	private IFigure fig2;
 	private IFigure fig3;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		pane = new LayeredPane();
@@ -56,7 +56,7 @@ public class LayeredPaneTest {
 		assertEquals(false, failed);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		pane = null;
 	}

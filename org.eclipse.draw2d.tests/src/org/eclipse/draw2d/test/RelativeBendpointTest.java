@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,9 +34,9 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Romain Raugi
@@ -91,7 +91,7 @@ public class RelativeBendpointTest {
 
 	private DiagramFigure diagram;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		shell = new Shell();
 		shell.setSize(300, 350);
@@ -103,7 +103,7 @@ public class RelativeBendpointTest {
 		lws.setContents(diagram);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		shell.close();
 	}

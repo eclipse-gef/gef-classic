@@ -19,7 +19,7 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PointListTests extends BaseTestCase {
 

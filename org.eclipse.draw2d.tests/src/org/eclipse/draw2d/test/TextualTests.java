@@ -22,7 +22,7 @@ import org.eclipse.draw2d.text.InlineFlow;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.draw2d.text.TextFragmentBox;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Pratik Shah

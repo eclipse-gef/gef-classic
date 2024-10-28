@@ -13,16 +13,16 @@
  */
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Straight;
 import org.eclipse.draw2d.geometry.Vector;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Alexander Nyssen

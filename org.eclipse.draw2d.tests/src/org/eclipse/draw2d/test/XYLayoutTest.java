@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,9 @@ import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class XYLayoutTest {
 	protected static final Rectangle EMPTY_RECTANGLE = new Rectangle(0, 0, 0, 0);
@@ -44,7 +44,7 @@ public class XYLayoutTest {
 	protected Handler logListener;
 	protected List<String> logMessages;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		constraint = new Rectangle(0, 0, 100, -1);
 		figure = new RectangleFigure();
@@ -73,7 +73,7 @@ public class XYLayoutTest {
 		log.addHandler(logListener);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		log.removeHandler(logListener);
 	}

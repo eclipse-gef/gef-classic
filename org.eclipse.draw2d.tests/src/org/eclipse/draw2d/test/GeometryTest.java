@@ -13,8 +13,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -25,7 +25,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.geometry.Geometry;
 import org.eclipse.draw2d.geometry.PointList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class GeometryTest {
 
@@ -64,9 +64,9 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testTopRhombHalfPoints() {
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 1)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 2, 1)); //$NON-NLS-1$
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 4, 1)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 0, 1), "This point is outside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 2, 1), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 4, 1), "This point is outside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -76,9 +76,9 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testBottomRhombHalfPoints() {
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 3)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 2, 3)); //$NON-NLS-1$
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 4, 3)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 0, 3), "This point is outside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 2, 3), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 4, 3), "This point is outside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -88,9 +88,9 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testRhombEquatorPoints() {
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, -1, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 2, 2)); //$NON-NLS-1$
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 5, 2)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, -1, 2), "This point is outside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 2, 2), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 5, 2), "This point is outside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -100,8 +100,8 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testTopRhombTangentPoints() {
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 0)); //$NON-NLS-1$
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 4, 0)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 0, 0), "This point is outside the rhomb"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 4, 0), "This point is outside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -111,8 +111,8 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testBottomRhombTangentPoints() {
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 4)); //$NON-NLS-1$
-		assertFalse("This point is outside the rhomb", Geometry.polygonContainsPoint(RHOMB, 4, 4)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 0, 4), "This point is outside the rhomb"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(RHOMB, 4, 4), "This point is outside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -121,11 +121,11 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testRhombBorderPoints() {
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 0, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 2, 4)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 2, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the rhomb", Geometry.polygonContainsPoint(RHOMB, 1, 1)); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 0, 2), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 0, 2), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 2, 4), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 2, 2), "This point is inside the rhomb"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(RHOMB, 1, 1), "This point is inside the rhomb"); //$NON-NLS-1$
 	}
 
 	/**
@@ -135,11 +135,11 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testConcavePentagonEquatorPoints() {
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 6)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 1, 6)); //$NON-NLS-1$
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 6)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 7, 6)); //$NON-NLS-1$
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 6)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 6), "This point is outside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 1, 6), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 6), "This point is outside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 7, 6), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 6), "This point is outside the pentagon"); //$NON-NLS-1$
 	}
 
 	/**
@@ -149,9 +149,9 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testTopConcavePentagonTangentPoints() {
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 8)); //$NON-NLS-1$
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 8)); //$NON-NLS-1$
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 8)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 8), "This point is outside the pentagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 8), "This point is outside the pentagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 8), "This point is outside the pentagon"); //$NON-NLS-1$
 	}
 
 	/**
@@ -161,10 +161,10 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testBottomConcavePentagonTangentPoints() {
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 4)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 1, 4)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 5, 4)); //$NON-NLS-1$
-		assertFalse("This point is outside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 4)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, -1, 4), "This point is outside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 1, 4), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 5, 4), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 9, 4), "This point is outside the pentagon"); //$NON-NLS-1$
 	}
 
 	/**
@@ -174,11 +174,11 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testConcavePentagonBorderPoints() {
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 0, 8)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 2, 6)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 4)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 6, 6)); //$NON-NLS-1$
-		assertTrue("This point is inside the pentagon", Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 8, 8)); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 0, 8), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 2, 6), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 4, 4), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 6, 6), "This point is inside the pentagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_PENTAGON, 8, 8), "This point is inside the pentagon"); //$NON-NLS-1$
 	}
 
 	/**
@@ -188,14 +188,14 @@ public class GeometryTest {
 	@SuppressWarnings("static-method")
 	@Test
 	public void testConcaveOctagonBottomTangentPoints() {
-		assertFalse("This point is outside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, -1, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 0, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 1, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 2, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 3, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 4, 2)); //$NON-NLS-1$
-		assertTrue("This point is inside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 5, 2)); //$NON-NLS-1$
-		assertFalse("This point is outside the octagon", Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 7, 2)); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, -1, 2), "This point is outside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 0, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 1, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 2, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 3, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 4, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertTrue(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 5, 2), "This point is inside the octagon"); //$NON-NLS-1$
+		assertFalse(Geometry.polygonContainsPoint(CONCAVE_OCTAGON, 7, 2), "This point is outside the octagon"); //$NON-NLS-1$
 	}
 
 	@SuppressWarnings("static-method")
@@ -229,53 +229,53 @@ public class GeometryTest {
 	@Test
 	public void testLinesIntersect() {
 		// line segments collapsed to single points
-		assertTrue("Starting point on segment", Geometry.linesIntersect(0, 0, 0, 0, 0, 0, 3, 3)); //$NON-NLS-1$
-		assertTrue("Starting point on segment", Geometry.linesIntersect(0, 0, 3, 3, 0, 0, 0, 0)); //$NON-NLS-1$
-		assertFalse("Single point next to starting point of segment", //$NON-NLS-1$
-				Geometry.linesIntersect(-1, -1, -1, -1, 0, 0, 2, 2));
-		assertFalse("Single point next to starting point of segment", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 2, 2, -1, -1, -1, -1));
-		assertTrue("Mid point on segment", Geometry.linesIntersect(0, 0, 0, 0, 3, 3, -3, -3)); //$NON-NLS-1$
-		assertTrue("Mid point on segment", Geometry.linesIntersect(3, 3, -3, -3, 0, 0, 0, 0)); //$NON-NLS-1$
-		assertFalse("Single point next to mid point of segment", Geometry.linesIntersect(0, 1, 0, 1, 0, 0, 2, 2)); //$NON-NLS-1$
-		assertFalse("Single point next to mid point of segment", Geometry.linesIntersect(0, 0, 2, 2, 0, 1, 0, 1)); //$NON-NLS-1$
-		assertTrue("Ending point on segment", Geometry.linesIntersect(3, 3, 3, 3, 0, 0, 3, 3)); //$NON-NLS-1$
-		assertTrue("Ending point on segment", Geometry.linesIntersect(0, 0, 3, 3, 3, 3, 3, 3)); //$NON-NLS-1$
-		assertFalse("Single point next to end point of segment", Geometry.linesIntersect(3, 3, 3, 3, 0, 0, 2, 2)); //$NON-NLS-1$
-		assertFalse("Single point next to end point of segment", Geometry.linesIntersect(0, 0, 2, 2, 3, 3, 3, 3)); //$NON-NLS-1$
-		assertTrue("Identical points", Geometry.linesIntersect(1, 1, 1, 1, 1, 1, 1, 1)); //$NON-NLS-1$
-		assertFalse("Distinct points", Geometry.linesIntersect(1, 1, 1, 1, 2, 2, 2, 2)); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 0, 0, 0, 0, 3, 3), "Starting point on segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 3, 3, 0, 0, 0, 0), "Starting point on segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(-1, -1, -1, -1, 0, 0, 2, 2),
+				"Single point next to starting point of segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 2, 2, -1, -1, -1, -1),
+				"Single point next to starting point of segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 0, 0, 3, 3, -3, -3), "Mid point on segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(3, 3, -3, -3, 0, 0, 0, 0), "Mid point on segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 1, 0, 1, 0, 0, 2, 2), "Single point next to mid point of segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 2, 2, 0, 1, 0, 1), "Single point next to mid point of segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(3, 3, 3, 3, 0, 0, 3, 3), "Ending point on segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 3, 3, 3, 3, 3, 3), "Ending point on segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(3, 3, 3, 3, 0, 0, 2, 2), "Single point next to end point of segment"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 2, 2, 3, 3, 3, 3), "Single point next to end point of segment"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(1, 1, 1, 1, 1, 1, 1, 1), "Identical points"); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(1, 1, 1, 1, 2, 2, 2, 2), "Distinct points"); //$NON-NLS-1$
 
 		// non-parallel
-		assertTrue("Line segments cross at (2.5, 2.5).", Geometry.linesIntersect(0, 0, 5, 5, 0, 5, 5, 0)); //$NON-NLS-1$
-		assertTrue("Line segments cross at (0, 1).", Geometry.linesIntersect(-2, 1, 1, 1, 0, 0, 0, 3)); //$NON-NLS-1$
-		assertTrue("Line segments share starting point", Geometry.linesIntersect(0, 0, 5, 5, 0, 0, 5, 0)); //$NON-NLS-1$
-		assertTrue("Line segments share ending point", Geometry.linesIntersect(0, 0, 5, 5, 0, 5, 5, 5)); //$NON-NLS-1$
-		assertTrue("First line segment contains starting point of second one.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 5, 5, 3, 3, 0, 5));
-		assertFalse("Line segments are non-parallel and do not cross and should thus not be regarded as intersecting.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 2, 2, 0, 1, 0, 2));
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 0, 5, 5, 0), "Line segments cross at (2.5, 2.5)."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(-2, 1, 1, 1, 0, 0, 0, 3), "Line segments cross at (0, 1)."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 0, 0, 5, 0), "Line segments share starting point"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 0, 5, 5, 5), "Line segments share ending point"); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 3, 3, 0, 5),
+				"First line segment contains starting point of second one."); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 2, 2, 0, 1, 0, 2),
+				"Line segments are non-parallel and do not cross and should thus not be regarded as intersecting."); //$NON-NLS-1$
 
 		// parallel
-		assertFalse("Line segments are parallel but not co-linear and should thus not be regarded as intersecting.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 5, 5, 1, 0, 6, 5));
-		assertFalse("Line segments are parallel but not co-linear and should thus not be regarded as intersecting.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 3, 3, 4, 0, 6, 2));
+		assertFalse(Geometry.linesIntersect(0, 0, 5, 5, 1, 0, 6, 5),
+				"Line segments are parallel but not co-linear and should thus not be regarded as intersecting."); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 3, 3, 4, 0, 6, 2),
+				"Line segments are parallel but not co-linear and should thus not be regarded as intersecting."); //$NON-NLS-1$
 
 		// co-linear
-		assertTrue("Line segments are co-linear, partly-overlapping.", Geometry.linesIntersect(0, 0, 5, 5, 3, 3, 6, 6)); //$NON-NLS-1$
-		assertTrue("Line segments are co-linear, partly-overlapping.", Geometry.linesIntersect(3, 3, 6, 6, 0, 0, 5, 5)); //$NON-NLS-1$
-		assertTrue("Line segments are co-linear, fully-overlapping.", Geometry.linesIntersect(0, 0, 5, 5, 1, 1, 3, 3)); //$NON-NLS-1$
-		assertTrue("Line segments are co-linear, fully-overlapping.", //$NON-NLS-1$
-				Geometry.linesIntersect(1, 1, 5, 5, -1, -1, 6, 6));
-		assertTrue("Line segments are co-linear, sharing ending/starting point.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 5, 5, 5, 5, 6, 6));
-		assertTrue("Line segments are co-linear, sharing starting/ending point.", //$NON-NLS-1$
-				Geometry.linesIntersect(3, 3, 6, 6, 0, 0, 3, 3));
-		assertFalse("Line segments are co-linear but non-overlapping, and should thus not be regarded as intersecting.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 5, 5, 10, 10, 20, 20));
-		assertFalse("Line segments are co-linear but non-overlapping, and should thus not be regarded as intersecting.", //$NON-NLS-1$
-				Geometry.linesIntersect(0, 0, 5, 5, -10, -10, -20, -20));
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 3, 3, 6, 6), "Line segments are co-linear, partly-overlapping."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(3, 3, 6, 6, 0, 0, 5, 5), "Line segments are co-linear, partly-overlapping."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 1, 1, 3, 3), "Line segments are co-linear, fully-overlapping."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(1, 1, 5, 5, -1, -1, 6, 6),
+				"Line segments are co-linear, fully-overlapping."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(0, 0, 5, 5, 5, 5, 6, 6),
+				"Line segments are co-linear, sharing ending/starting point."); //$NON-NLS-1$
+		assertTrue(Geometry.linesIntersect(3, 3, 6, 6, 0, 0, 3, 3),
+				"Line segments are co-linear, sharing starting/ending point."); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 5, 5, 10, 10, 20, 20),
+				"Line segments are co-linear but non-overlapping, and should thus not be regarded as intersecting."); //$NON-NLS-1$
+		assertFalse(Geometry.linesIntersect(0, 0, 5, 5, -10, -10, -20, -20),
+				"Line segments are co-linear but non-overlapping, and should thus not be regarded as intersecting."); //$NON-NLS-1$
 	}
 
 	public static void offTestDrawPolygons() {
@@ -311,8 +311,8 @@ public class GeometryTest {
 		for (int x = 0; x < IMAGE_SIZE; x++) {
 			for (int y = 0; y < IMAGE_SIZE; y++) {
 				boolean isPolygonPoint = imageData.getPixel(x, y) == 0;
-				assertTrue("Point (" + x + "," + y + ") is" + (isPolygonPoint ? " " : " not ") + "a point of polygon", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-						Geometry.polygonContainsPoint(pointlist, x, y) == isPolygonPoint);
+				assertTrue(Geometry.polygonContainsPoint(pointlist, x, y) == isPolygonPoint,
+						"Point (" + x + "," + y + ") is" + (isPolygonPoint ? " " : " not ") + "a point of polygon"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 			}
 		}
 	}
@@ -329,8 +329,8 @@ public class GeometryTest {
 		for (int x = 0; x < IMAGE_SIZE; x++) {
 			for (int y = 0; y < IMAGE_SIZE; y++) {
 				if (imageData.getPixel(x, y) == 0) {
-					assertTrue("Point (" + x + "," + y + ") is a point of polyline", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-							Geometry.polylineContainsPoint(pointlist, x, y, TOLERANCE));
+					assertTrue(Geometry.polylineContainsPoint(pointlist, x, y, TOLERANCE),
+							"Point (" + x + "," + y + ") is a point of polyline"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				}
 			}
 		}

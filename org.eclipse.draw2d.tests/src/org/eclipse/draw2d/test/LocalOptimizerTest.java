@@ -13,8 +13,8 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 import java.util.ArrayDeque;
@@ -26,8 +26,8 @@ import org.eclipse.draw2d.graph.Edge;
 import org.eclipse.draw2d.graph.Node;
 import org.eclipse.draw2d.graph.Rank;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the swapping of adjacent nodes in a directed graph. since 3.0
@@ -38,7 +38,7 @@ public class LocalOptimizerTest {
 	private DirectedGraph graph;
 	private Node a, b, c, d, e, f, g, h, i, j, k, l;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		graph = new DirectedGraph();
 
@@ -206,7 +206,7 @@ public class LocalOptimizerTest {
 			assertEquals(rank.size(), row.length);
 			for (int n = 0; n < row.length; n++) {
 				Node node = row[n];
-				assertEquals("Unexpected node encountered at:" + r + "," + n, node, rank.get(n)); //$NON-NLS-1$ //$NON-NLS-2$
+				assertEquals(node, rank.get(n), "Unexpected node encountered at:" + r + "," + n); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

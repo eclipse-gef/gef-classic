@@ -13,14 +13,14 @@
 
 package org.eclipse.draw2d.test.swtbot;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
 /**
  * Test suite containing all tests that require the SWTBot. These tests must
  * <b>NOT</b> be executed within the UI thread.
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses(FigureTest.class)
+@Suite
+@SelectClasses(FigureTest.class)
 public class SWTBotTestSuite {
 }

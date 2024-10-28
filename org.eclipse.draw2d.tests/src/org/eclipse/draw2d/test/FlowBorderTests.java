@@ -20,7 +20,7 @@ import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.draw2d.text.TextFragmentBox;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @since 3.1

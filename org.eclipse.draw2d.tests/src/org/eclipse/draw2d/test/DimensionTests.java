@@ -17,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DimensionTests extends BaseTestCase {
 

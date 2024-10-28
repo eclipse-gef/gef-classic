@@ -24,19 +24,19 @@ import org.eclipse.draw2d.geometry.Interval;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * @author Pratik Shah
  */
-public abstract class BaseTestCase extends Assert {
+public abstract class BaseTestCase extends Assertions {
 
 	protected static final Font TAHOMA = new Font(null, "Tahoma", 8, 0);//$NON-NLS-1$
 	protected static final Font SERIF = new Font(null, "Serif", 8, 0);//$NON-NLS-1$
 
 	public static void assertEquals(Image expected, Image actual) {
-		assertTrue("The given images did not match", //$NON-NLS-1$
-				Arrays.equals(expected.getImageData().data, actual.getImageData().data));
+		assertTrue(Arrays.equals(expected.getImageData().data, actual.getImageData().data),
+				"The given images did not match"); //$NON-NLS-1$
 	}
 
 	/**

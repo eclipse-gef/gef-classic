@@ -13,13 +13,14 @@
 
 package org.eclipse.draw2d.test.swtbot;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.invoke.MethodType;
 import java.lang.invoke.VarHandle;
+import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
@@ -33,31 +34,39 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotCanvas;
 
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.test.swtbot.AbstractSWTBotTests.SWTBotExtension;
 import org.eclipse.draw2d.test.utils.Snippet;
 
-import org.junit.Rule;
-import org.junit.rules.TestRule;
-import org.junit.runners.model.Statement;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.InvocationInterceptor;
+import org.junit.jupiter.api.extension.InvocationInterceptor.Invocation;
+import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
 
 /**
  * To be able to execute these tests in the Eclipse IDE, the tests must
  * <b>NOT</b> be run in the UI thread.
  */
 @SuppressWarnings("nls")
+@ExtendWith(SWTBotExtension.class)
 public abstract class AbstractSWTBotTests {
 	protected SWTBotCanvas bot;
 	protected FigureCanvas canvas;
 	protected IFigure root;
 
-	@Rule
-	public TestRule rule = (base, description) -> new Statement() {
+	public static class SWTBotExtension implements InvocationInterceptor {
 		@Override
-		public void evaluate() throws Throwable {
-			Snippet annotation = description.getAnnotation(Snippet.class);
-			Objects.requireNonNull(annotation, "Test is missing @Snippet annotation."); //$NON-NLS-1$
-			doTest(annotation, base);
+		public void interceptTestMethod(Invocation<Void> invocation,
+				ReflectiveInvocationContext<Method> invocationContext, ExtensionContext extensionContext)
+				throws Throwable {
+			Object target = invocationContext.getTarget().orElse(null);
+			if (target instanceof AbstractSWTBotTests testObject) {
+				Snippet annotation = invocationContext.getExecutable().getAnnotation(Snippet.class);
+				Objects.requireNonNull(annotation, "Test is missing @Snippet annotation."); //$NON-NLS-1$
+				testObject.doTest(annotation, invocation);
+			}
 		}
-	};
+	}
 
 	/**
 	 * Wrapper method to handle the instantiation of the example class and the
@@ -73,7 +82,7 @@ public abstract class AbstractSWTBotTests {
 	 * @param statement  The test to execute once the example has been created.
 	 * @throws Throwable If the example could not be instantiated.
 	 */
-	protected void doTest(Snippet annotation, Statement statement) throws Throwable {
+	protected void doTest(Snippet annotation, Invocation<Void> statement) throws Throwable {
 		if (Display.getCurrent() != null) {
 			fail("""
 					SWTBot test needs to run in a non-UI thread.
@@ -117,7 +126,7 @@ public abstract class AbstractSWTBotTests {
 			canvas = (FigureCanvas) bot.widget;
 			root = canvas.getLightweightSystem().getRootFigure();
 			// Run the actual test
-			statement.evaluate();
+			statement.proceed();
 		} finally {
 			// Close the snippet
 			if (shell != null) {

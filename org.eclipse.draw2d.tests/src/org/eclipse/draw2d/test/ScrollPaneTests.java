@@ -13,9 +13,9 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,9 +29,9 @@ import org.eclipse.draw2d.UpdateListener;
 import org.eclipse.draw2d.UpdateManager;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ScrollPaneTests {
 	private static final int WIDTH = 300;
@@ -41,7 +41,7 @@ public class ScrollPaneTests {
 	private Shell shell;
 	private FigureCanvas figureCanvas;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		shell = new Shell();
 		// Shell should be bigger to account for decorations
@@ -53,7 +53,7 @@ public class ScrollPaneTests {
 		shell.layout();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		shell.dispose();
 	}
@@ -69,14 +69,14 @@ public class ScrollPaneTests {
 		figureCanvas.setHorizontalScrollBarVisibility(FigureCanvas.ALWAYS);
 		figureCanvas.setVerticalScrollBarVisibility(FigureCanvas.ALWAYS);
 		Rectangle bounds = getViewportBounds(SWT.SCROLLBAR_OVERLAY);
-		assertEquals("Viewport width:", WIDTH, bounds.width()); //$NON-NLS-1$
-		assertEquals("Viewport height: ", HEIGHT, bounds.height()); //$NON-NLS-1$
+		assertEquals(WIDTH, bounds.width(), "Viewport width:"); //$NON-NLS-1$
+		assertEquals(HEIGHT, bounds.height(), "Viewport height: "); //$NON-NLS-1$
 
 		figureCanvas.setHorizontalScrollBarVisibility(FigureCanvas.NEVER);
 		figureCanvas.setVerticalScrollBarVisibility(FigureCanvas.NEVER);
 		bounds = getViewportBounds(SWT.SCROLLBAR_OVERLAY);
-		assertEquals("Viewport width:", WIDTH, bounds.width()); //$NON-NLS-1$
-		assertEquals("Viewport height: ", HEIGHT, bounds.height()); //$NON-NLS-1$
+		assertEquals(WIDTH, bounds.width(), "Viewport width:"); //$NON-NLS-1$
+		assertEquals(HEIGHT, bounds.height(), "Viewport height: "); //$NON-NLS-1$
 	}
 
 	/**
@@ -90,14 +90,14 @@ public class ScrollPaneTests {
 		figureCanvas.setHorizontalScrollBarVisibility(FigureCanvas.ALWAYS);
 		figureCanvas.setVerticalScrollBarVisibility(FigureCanvas.ALWAYS);
 		Rectangle bounds = getViewportBounds(SWT.NONE);
-		assertTrue("Expected non-empty scrollbar width", WIDTH > bounds.width()); //$NON-NLS-1$
-		assertTrue("Expected non-empty scrollbar height", HEIGHT > bounds.height()); //$NON-NLS-1$
+		assertTrue(WIDTH > bounds.width(), "Expected non-empty scrollbar width"); //$NON-NLS-1$
+		assertTrue(HEIGHT > bounds.height(), "Expected non-empty scrollbar height"); //$NON-NLS-1$
 
 		figureCanvas.setHorizontalScrollBarVisibility(FigureCanvas.NEVER);
 		figureCanvas.setVerticalScrollBarVisibility(FigureCanvas.NEVER);
 		bounds = getViewportBounds(SWT.NONE);
-		assertEquals("Viewport width:", WIDTH, bounds.width()); //$NON-NLS-1$
-		assertEquals("Viewport height: ", HEIGHT, bounds.height()); //$NON-NLS-1$
+		assertEquals(WIDTH, bounds.width(), "Viewport width:"); //$NON-NLS-1$
+		assertEquals(HEIGHT, bounds.height(), "Viewport height: "); //$NON-NLS-1$
 	}
 
 	private Rectangle getViewportBounds(int scrollMode) {
@@ -119,7 +119,7 @@ public class ScrollPaneTests {
 		updateManager.addInvalidFigure(new Figure());
 		updateManager.performValidation();
 
-		assertTrue("FigureCanvas.layoutViewport() has likely not been called!", layoutViewportCalled.get()); //$NON-NLS-1$
+		assertTrue(layoutViewportCalled.get(), "FigureCanvas.layoutViewport() has likely not been called!"); //$NON-NLS-1$
 		return figureCanvas.getViewport().getBounds();
 	}
 }

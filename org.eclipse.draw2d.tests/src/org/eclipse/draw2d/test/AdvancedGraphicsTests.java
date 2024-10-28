@@ -34,9 +34,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.SWTGraphics;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AdvancedGraphicsTests extends BaseTestCase {
 
@@ -63,7 +63,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 					// HACK, image operations seem to differ by as much as 4
 					if (Math.abs(rgb1.red - rgb2.red) > 4 || Math.abs(rgb1.green - rgb2.green) > 4
 							|| Math.abs(rgb1.blue - rgb2.blue) > 4) {
-						assertEquals("Discrepancy at coordinates <" + x + ", " + y + ">", rgb1, rgb2); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						assertEquals(rgb1, rgb2, "Discrepancy at coordinates <" + x + ", " + y + ">"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				}
 			}
@@ -104,7 +104,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		assertImageEquality(100 * tests.length, 100);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Path path1 = new Path(null);
 		path1.moveTo(20, 5);
@@ -128,7 +128,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		resources.push(imageGC);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		g.dispose();
 		while (!resources.isEmpty()) {

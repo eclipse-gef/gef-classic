@@ -15,16 +15,16 @@ package org.eclipse.draw2d.test;
 
 import org.eclipse.draw2d.graph.test.DirectedGraphLayoutTest;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
 /**
  * The main test suite for Draw2d.
  *
  * @author Eric Bordeau
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@Suite
+@SelectClasses({
 	FanRouterTest.class,
 	ShortestPathRoutingTest.class,
 	XYLayoutTest.class,

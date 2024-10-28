@@ -25,8 +25,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.test.utils.TestFigure;
 import org.eclipse.draw2d.test.utils.TestLogger;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("nls")
 public class FigurePaintingTest extends BaseTestCase {
@@ -34,7 +34,7 @@ public class FigurePaintingTest extends BaseTestCase {
 	private TestLogger actualLogger;
 	private Figure testFigure;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		expectedLogger = new TestLogger();
 		actualLogger = new TestLogger();

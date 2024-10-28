@@ -28,9 +28,9 @@ import org.eclipse.draw2d.text.ParagraphTextLayout;
 import org.eclipse.draw2d.text.TextFlow;
 import org.eclipse.draw2d.text.TextFragmentBox;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TextFlowWrapTest extends BaseTestCase {
 
@@ -56,13 +56,13 @@ public class TextFlowWrapTest extends BaseTestCase {
 	TextFlow textFlow, textFlow2;
 	ClassLoader classLoader;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		classLoader = Thread.currentThread().getContextClassLoader();
 		Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		Thread.currentThread().setContextClassLoader(classLoader);
 	}
@@ -102,12 +102,12 @@ public class TextFlowWrapTest extends BaseTestCase {
 				return;
 			}
 			if (answer == TRUNCATED) {
-				assertTrue("Failed on: " + string1 + string2 + "Fragment is not truncated\n", //$NON-NLS-1$ //$NON-NLS-2$
-						previousFrag.isTruncated());
+				assertTrue(previousFrag.isTruncated(),
+						"Failed on: " + string1 + string2 + "Fragment is not truncated\n"); //$NON-NLS-1$//$NON-NLS-2$
 				continue;
 			}
 			if (answer == NON_TRUNCATED) {
-				assertFalse("Failed on: " + string1 + string2 + "Fragment is truncated\n", previousFrag.isTruncated()); //$NON-NLS-1$ //$NON-NLS-2$
+				assertFalse(previousFrag.isTruncated(), "Failed on: " + string1 + string2 + "Fragment is truncated\n"); //$NON-NLS-1$ //$NON-NLS-2$
 				continue;
 			}
 
@@ -118,16 +118,16 @@ public class TextFlowWrapTest extends BaseTestCase {
 			TextFragmentBox frag = (TextFragmentBox) frags.next();
 
 			if (answer == SAMELINE) {
-				assertTrue("Failed on: " + string1 + string2 + " Fragments are not on the same line\n", //$NON-NLS-1$ //$NON-NLS-2$
-						previousFrag.getBaseline() == frag.getBaseline());
+				assertTrue(previousFrag.getBaseline() == frag.getBaseline(),
+						"Failed on: " + string1 + string2 + " Fragments are not on the same line\n"); //$NON-NLS-1$//$NON-NLS-2$
 				index++;
 				if (index >= answers.length) {
 					return;
 				}
 				answer = answers[index];
 			} else if (answer == NEWLINE) {
-				assertTrue("Failed on: " + string1 + string2 + " Fragments are on the same line\n", //$NON-NLS-1$ //$NON-NLS-2$
-						previousFrag.getBaseline() != frag.getBaseline());
+				assertTrue(previousFrag.getBaseline() != frag.getBaseline(),
+						"Failed on: " + string1 + string2 + " Fragments are on the same line\n"); //$NON-NLS-1$ //$NON-NLS-2$
 				index++;
 				if (index >= answers.length) {
 					return;
@@ -137,13 +137,13 @@ public class TextFlowWrapTest extends BaseTestCase {
 			previousFrag = frag;
 
 			if (textFlow.getFragments().contains(frag)) {
-				assertEquals("Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: \"" + answer //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						+ "\" Got: \"" + string1.substring(frag.offset, frag.offset + frag.length) + "\"\n", //$NON-NLS-1$ //$NON-NLS-2$
-						answer, string1.substring(frag.offset, frag.offset + frag.length));
+				assertEquals(answer, string1.substring(frag.offset, frag.offset + frag.length),
+						"Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: \"" + answer //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+								+ "\" Got: \"" + string1.substring(frag.offset, frag.offset + frag.length) + "\"\n"); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				assertEquals("Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: \"" + answer //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-						+ "\" Got: \"" + string2.substring(frag.offset, frag.offset + frag.length) + "\"\n", //$NON-NLS-1$ //$NON-NLS-2$
-						answer, string2.substring(frag.offset, frag.offset + frag.length));
+				assertEquals(answer, string2.substring(frag.offset, frag.offset + frag.length),
+						"Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: \"" + answer //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+								+ "\" Got: \"" + string2.substring(frag.offset, frag.offset + frag.length) + "\"\n"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 
@@ -153,8 +153,8 @@ public class TextFlowWrapTest extends BaseTestCase {
 			// which would cause an index out of bounds exception if there were
 			// no leftover
 			// fragments
-			assertFalse("Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: -" + answers[index] //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-					+ "- No corresponding fragment\n", true); //$NON-NLS-1$
+			assertFalse(true, "Failed on: \"" + string1 + "\" + \"" + string2 + "\" Fragment expected: -" + answers[index] //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					+ "- No corresponding fragment\n"); //$NON-NLS-1$
 		}
 	}
 

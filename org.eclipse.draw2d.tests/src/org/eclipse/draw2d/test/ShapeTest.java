@@ -3,7 +3,7 @@
  */
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.LineAttributes;
@@ -11,7 +11,7 @@ import org.eclipse.swt.graphics.LineAttributes;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Shape;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author nyssen

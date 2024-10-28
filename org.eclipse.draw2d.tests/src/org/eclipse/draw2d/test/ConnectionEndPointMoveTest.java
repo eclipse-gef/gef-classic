@@ -30,9 +30,9 @@ import org.eclipse.draw2d.UpdateListener;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConnectionEndPointMoveTest extends BaseTestCase implements UpdateListener {
 
@@ -43,7 +43,7 @@ public class ConnectionEndPointMoveTest extends BaseTestCase implements UpdateLi
 	private Rectangle lastDamaged;
 	private Rectangle origBounds;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		shell = new Shell(Display.getDefault());
 
@@ -113,7 +113,7 @@ public class ConnectionEndPointMoveTest extends BaseTestCase implements UpdateLi
 		assertTrue(lastDamaged.contains(origBounds));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		shell.dispose();
 	}

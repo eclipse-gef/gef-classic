@@ -3,7 +3,7 @@ package org.eclipse.draw2d.test;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PointTests extends BaseTestCase {
 

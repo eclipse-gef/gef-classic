@@ -13,9 +13,9 @@
 
 package org.eclipse.draw2d.graph.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -27,8 +27,8 @@ import org.eclipse.draw2d.graph.EdgeList;
 import org.eclipse.draw2d.graph.Node;
 import org.eclipse.draw2d.graph.NodeList;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("nls")
 public class DirectedGraphLayoutTest {
@@ -43,7 +43,7 @@ public class DirectedGraphLayoutTest {
 	Edge e2;
 	Edge e3;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		n1 = new Node("n1");
 		n2 = new Node("n2");

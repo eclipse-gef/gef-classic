@@ -14,7 +14,7 @@ package org.eclipse.draw2d.test;
 
 import org.eclipse.draw2d.geometry.Interval;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link Interval} class.

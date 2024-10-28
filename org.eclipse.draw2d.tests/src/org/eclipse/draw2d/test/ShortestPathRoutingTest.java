@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
@@ -21,9 +21,9 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.graph.Path;
 import org.eclipse.draw2d.graph.ShortestPathRouter;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ShortestPathRoutingTest {
 
@@ -143,18 +143,18 @@ public class ShortestPathRoutingTest {
 	private ShortestPathRouter routing;
 
 	private static void doAssertAbove(Point pt1, Point pt2, Rectangle r) {
-		assertTrue("Both points " + pt1 + " " + pt2 + " should bend above the rectangle. " + r, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				pt1.y < r.y && pt2.y < r.y);
+		assertTrue(pt1.y < r.y && pt2.y < r.y,
+				"Both points " + pt1 + " " + pt2 + " should bend above the rectangle. " + r); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static void doAssertBelow(Point pt1, Point pt2, Rectangle r) {
-		assertTrue("Both points " + pt1 + " " + pt2 + " should bend below the rectangle. " + r, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				pt1.y > r.bottom() && pt2.y > r.bottom());
+		assertTrue(pt1.y > r.bottom() && pt2.y > r.bottom(),
+				"Both points " + pt1 + " " + pt2 + " should bend below the rectangle. " + r); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static void doAssertLeft(Point pt1, Point pt2, Rectangle r) {
-		assertTrue("Both points " + pt1 + " " + pt2 + " should bend to the left of the rectangle. " + r, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				pt1.x < r.x && pt2.x < r.x);
+		assertTrue(pt1.x < r.x && pt2.x < r.x,
+				"Both points " + pt1 + " " + pt2 + " should bend to the left of the rectangle. " + r); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static void doAssertNoPathsSolved() {
@@ -163,60 +163,60 @@ public class ShortestPathRoutingTest {
 	}
 
 	private static void doAssertNumPoints(PointList path, int expectedBends) {
-		assertTrue("Path should have " + expectedBends + " but had " + (path.size() - 2), //$NON-NLS-1$ //$NON-NLS-2$
-				expectedBends == path.size() - 2);
+		assertTrue(expectedBends == path.size() - 2,
+				"Path should have " + expectedBends + " but had " + (path.size() - 2)); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static void doAssertOffsetShrink(Point pt1, Point pt2) {
-		assertTrue("Point : " + pt1 + " and " + pt2 + " should be separated by less than the normal offset: " + 4, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				Math.abs(pt2.x - pt1.x) < 4 && Math.abs(pt2.y - pt1.y) < 4);
+		assertTrue(Math.abs(pt2.x - pt1.x) < 4 && Math.abs(pt2.y - pt1.y) < 4,
+				"Point : " + pt1 + " and " + pt2 + " should be separated by less than the normal offset: " + 4); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	}
 
 	private static void doAssertPathAbove(PointList pathA, PointList pathB) {
-		assertEquals("Paths should have same number of bends " + pathA.size() + " " + pathB.size(), pathA.size(), //$NON-NLS-1$ //$NON-NLS-2$
-				pathB.size());
+		assertEquals(pathA.size(), pathB.size(),
+				"Paths should have same number of bends " + pathA.size() + " " + pathB.size()); //$NON-NLS-1$ //$NON-NLS-2$
 
 		for (int i = 1; i < pathA.size() - 1; i++) {
 			Point a = pathA.getPoint(i);
 			Point b = pathB.getPoint(i);
-			assertTrue("Point " + a + " should have been above " + b, a.y < b.y); //$NON-NLS-1$ //$NON-NLS-2$
+			assertTrue(a.y < b.y, "Point " + a + " should have been above " + b); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	private static void doAssertPathRight(PointList pathA, PointList pathB) {
-		assertEquals("Paths should have same number of bends " + pathA.size() + " " + pathB.size(), pathA.size(), //$NON-NLS-1$ //$NON-NLS-2$
-				pathB.size());
+		assertEquals(pathA.size(), pathB.size(),
+				"Paths should have same number of bends " + pathA.size() + " " + pathB.size()); //$NON-NLS-1$ //$NON-NLS-2$
 
 		for (int i = 1; i < pathA.size() - 1; i++) {
 			Point a = pathA.getPoint(i);
 			Point b = pathB.getPoint(i);
-			assertTrue("Point " + a + " should have been right of " + b, a.x > b.x); //$NON-NLS-1$ //$NON-NLS-2$
+			assertTrue(a.x > b.x, "Point " + a + " should have been right of " + b); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 
 	private static void doAssertPointAbove(Point above, Point point) {
-		assertTrue("Point : " + above + " should be below " + point, above.y < point.y); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(above.y < point.y, "Point : " + above + " should be below " + point); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static void doAssertPointBelow(Point below, Point point) {
-		assertTrue("Point : " + below + " should be below " + point, below.y > point.y); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(below.y > point.y, "Point : " + below + " should be below " + point); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static void doAssertPointLeft(Point left, Point point) {
-		assertTrue("Point : " + left + " should be left of " + point, left.x < point.x); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(left.x < point.x, "Point : " + left + " should be left of " + point); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static void doAssertPointRight(Point right, Point point) {
-		assertTrue("Point : " + right + " should be right of " + point, right.x > point.x); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(right.x > point.x, "Point : " + right + " should be right of " + point); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static void doAssertRight(Point pt1, Point pt2, Rectangle r) {
-		assertTrue("Both points " + pt1 + " " + pt2 + " should bend to the right of the rectangle. " + r, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				pt1.x > r.right() && pt2.x > r.right());
+		assertTrue(pt1.x > r.right() && pt2.x > r.right(),
+				"Both points " + pt1 + " " + pt2 + " should bend to the right of the rectangle. " + r); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 	}
 
 	private void doSetUp(Rectangle rectStatic, Point... pointsStatic) {
-		assertTrue("Each path requires a start and end point", pointsStatic.length % 2 == 0); //$NON-NLS-1$
+		assertTrue(pointsStatic.length % 2 == 0, "Each path requires a start and end point"); //$NON-NLS-1$
 		if (pointsStatic.length > 0) {
 			Path a = new Path(pointsStatic[0].getCopy(), pointsStatic[1].getCopy());
 			routing.addPath(a);
@@ -358,12 +358,12 @@ public class ShortestPathRoutingTest {
 		doAssertPointAbove(pathA.getPoint(1), pathB.getPoint(1));
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		routing = new ShortestPathRouter();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		routing = null;
 		pathA = null;
@@ -384,7 +384,7 @@ public class ShortestPathRoutingTest {
 
 		routing.addPath(a);
 
-		assertTrue("Should have solved path", !routing.solve().isEmpty()); //$NON-NLS-1$
+		assertTrue(!routing.solve().isEmpty(), "Should have solved path"); //$NON-NLS-1$
 
 		pathA = a.getPoints();
 
@@ -462,7 +462,7 @@ public class ShortestPathRoutingTest {
 
 		routing.addObstacle(deltaNewRectIntersec.getCopy());
 
-		assertTrue("Both paths should have been solved.", routing.solve().size() == 2); //$NON-NLS-1$
+		assertTrue(routing.solve().size() == 2, "Both paths should have been solved."); //$NON-NLS-1$
 	}
 
 	@Test
@@ -484,7 +484,7 @@ public class ShortestPathRoutingTest {
 		// only one path should have changed.
 		Path c = new Path(corner2CStart.getCopy(), corner2CEnd.getCopy());
 		routing.addPath(c);
-		assertTrue("Only the new path should have been solved.", !routing.solve().isEmpty()); //$NON-NLS-1$
+		assertTrue(!routing.solve().isEmpty(), "Only the new path should have been solved."); //$NON-NLS-1$
 
 		pathC = c.getPoints();
 		// the new path, however, should have moved the other two paths.
@@ -498,7 +498,7 @@ public class ShortestPathRoutingTest {
 
 		routing.updateObstacle(deltaRect.getCopy(), deltaRectNewBounds.getCopy());
 
-		assertTrue("Both paths should have been solved.", routing.solve().size() > 0); //$NON-NLS-1$
+		assertTrue(routing.solve().size() > 0, "Both paths should have been solved."); //$NON-NLS-1$
 	}
 
 	@Test
@@ -518,7 +518,7 @@ public class ShortestPathRoutingTest {
 
 		routing.removeObstacle(deltaRect.getCopy());
 
-		assertTrue("Both paths should have been solved.", !routing.solve().isEmpty()); //$NON-NLS-1$
+		assertTrue(!routing.solve().isEmpty(), "Both paths should have been solved."); //$NON-NLS-1$
 	}
 
 	@Test

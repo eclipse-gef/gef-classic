@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -28,7 +28,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ScalablePolygonShapeTest {
 
@@ -201,8 +201,8 @@ public class ScalablePolygonShapeTest {
 		for (int x = 0; x < imageSize; x++) {
 			for (int y = 0; y < imageSize; y++) {
 				boolean isPolygonPoint = imageData.getPixel(x, y) == 0;
-				assertTrue("Point (" + x + "," + y + ") is" + (isPolygonPoint ? " " : " not ") + "a point of polygon", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-						scalablePolygon.containsPoint(new Point(x, y)) == isPolygonPoint);
+				assertTrue(scalablePolygon.containsPoint(new Point(x, y)) == isPolygonPoint,
+						"Point (" + x + "," + y + ") is" + (isPolygonPoint ? " " : " not ") + "a point of polygon"); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$//$NON-NLS-5$//$NON-NLS-6$
 			}
 		}
 	}

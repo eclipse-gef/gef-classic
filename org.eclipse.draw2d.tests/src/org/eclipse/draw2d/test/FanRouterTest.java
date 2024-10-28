@@ -13,7 +13,7 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.ConnectionAnchor;
@@ -22,8 +22,8 @@ import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.XYAnchor;
 import org.eclipse.draw2d.geometry.Point;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FanRouterTest {
 	FanRouter router;
@@ -31,7 +31,7 @@ public class FanRouterTest {
 	ConnectionAnchor sourceAnchor;
 	ConnectionAnchor targetAnchor;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		sourceAnchor = new XYAnchor(new Point(0, 0));
 		targetAnchor = new XYAnchor(new Point(0, 50));

@@ -22,8 +22,8 @@ import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.InlineFlow;
 import org.eclipse.draw2d.text.TextFlow;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Pratik Shah
@@ -44,23 +44,23 @@ public class LookAheadTest extends BaseTestCase {
 	private TextFlow p1text3;
 
 	static void assertLineBreakFound(boolean b) {
-		assertTrue("Line break should have been found", b); //$NON-NLS-1$
+		assertTrue(b, "Line break should have been found"); //$NON-NLS-1$
 	}
 
 	static void assertLineBreakNotFound(boolean b) {
-		assertFalse("Line break should not be found.", b); //$NON-NLS-1$
+		assertFalse(b, "Line break should not be found."); //$NON-NLS-1$
 	}
 
 	static void assertLookaheadMatchesString(int[] width, String expected) {
-		assertEquals("Lookahead width did not match expected string:\"" + expected + "\"", getWidth(expected), //$NON-NLS-1$ //$NON-NLS-2$
-				width[0]);
+		assertEquals(getWidth(expected), width[0],
+				"Lookahead width did not match expected string:\"" + expected + "\""); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static int getWidth(String s) {
 		return FigureUtilities.getStringExtents(s, TIMES_ROMAN).width;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		simpleText = new TextFlow();
 		simpleText.setFont(TIMES_ROMAN);
@@ -97,7 +97,7 @@ public class LookAheadTest extends BaseTestCase {
 	@Test
 	public void testBlockLeadingWord() {
 		paragraph1.addLeadingWordRequirements(width);
-		assertEquals("Blocks should have no leading word", 0, width[0]); //$NON-NLS-1$
+		assertEquals(0, width[0], "Blocks should have no leading word"); //$NON-NLS-1$
 	}
 
 	static FlowContext getContext(FlowFigure figure) {
@@ -111,34 +111,34 @@ public class LookAheadTest extends BaseTestCase {
 
 	@Test
 	public void testContextLookaheadPrecedingInline() {
-		assertEquals("Context lookahead into inline flow failed", getFollow(p1text1), getWidth("brown")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(getFollow(p1text1), getWidth("brown"), "Context lookahead into inline flow failed"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void testContextLookaheadFromNested() {
-		assertEquals("Context lookahead from nested inline textflow failed", getFollow(p1text2), getWidth("jumped")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(getFollow(p1text2), getWidth("jumped"), "Context lookahead from nested inline textflow failed"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void testContextLookaheadAtEndOfBlock() {
-		assertTrue("Last figure in a block should have no lookahead", getFollow(p1text3) == 0); //$NON-NLS-1$
+		assertTrue(getFollow(p1text3) == 0, "Last figure in a block should have no lookahead"); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testContextLookaheadPastEmptyString() {
-		assertEquals("Context lookahead over empty TextFlow failed", getFollow(p2text1), getWidth("lo")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(getFollow(p2text1), getWidth("lo"), "Context lookahead over empty TextFlow failed"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void testContextChineseCharLookahead() {
 		p1text2.setText("\u7325abcdef"); //$NON-NLS-1$
-		assertTrue("Chinese characters should have no lookahead", getFollow(p1text1) == 0); //$NON-NLS-1$
+		assertTrue(getFollow(p1text1) == 0, "Chinese characters should have no lookahead"); //$NON-NLS-1$
 	}
 
 	@Test
 	public void testContextHyphenLookahead() {
 		p1text2.setText("-abc"); //$NON-NLS-1$
-		assertEquals("Context lookahead should be hyphen character", getFollow(p1text1), getWidth("-")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertEquals(getFollow(p1text1), getWidth("-"), "Context lookahead should be hyphen character"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
@@ -151,48 +151,48 @@ public class LookAheadTest extends BaseTestCase {
 	@Test
 	public void testSingleSpace() {
 		simpleText.setText(" "); //$NON-NLS-1$
-		assertTrue("Line break should have been found", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test21 failed", width[0], 0); //$NON-NLS-1$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "Line break should have been found"); //$NON-NLS-1$
+		assertEquals(width[0], 0, "test21 failed"); //$NON-NLS-1$
 
 		simpleText.setText("\u7325"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test22 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test23 failed", width[0], 0); //$NON-NLS-1$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test22 failed"); //$NON-NLS-1$
+		assertEquals(width[0], 0, "test23 failed"); //$NON-NLS-1$
 
 		simpleText.setText("-"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test24 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test25 failed", width[0], getWidth("-")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test24 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("-"), "test25 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("ombudsman"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test26 failed", !simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test27 failed", width[0], getWidth("ombudsman")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(!simpleText.addLeadingWordRequirements(width), "test26 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("ombudsman"), "test27 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("space bar"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test28 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test29 failed", width[0], getWidth("space")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test28 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("space"), "test29 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("endsInSpace "); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test30 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test31 failed", width[0], getWidth("endsInSpace")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test30 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("endsInSpace"), "test31 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("endsInHyphen-"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test32 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test33 failed", width[0], getWidth("endsInHyphen-")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test32 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("endsInHyphen-"), "test33 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("co-operate"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test34 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test35 failed", width[0], getWidth("co-")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test34 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("co-"), "test35 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		simpleText.setText("ab\u7325"); //$NON-NLS-1$
 		width[0] = 0;
-		assertTrue("test36 failed", simpleText.addLeadingWordRequirements(width)); //$NON-NLS-1$
-		assertEquals("test37 failed", width[0], getWidth("ab")); //$NON-NLS-1$ //$NON-NLS-2$
+		assertTrue(simpleText.addLeadingWordRequirements(width), "test36 failed"); //$NON-NLS-1$
+		assertEquals(width[0], getWidth("ab"), "test37 failed"); //$NON-NLS-1$ //$NON-NLS-2$
 
 // FIXME: the following test does not reliably run on all platforms
 //		simpleText.setText("hey, man."); //$NON-NLS-1$

@@ -13,7 +13,7 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.draw2d.ChopboxAnchor;
 import org.eclipse.draw2d.ConnectionAnchor;
@@ -23,8 +23,8 @@ import org.eclipse.draw2d.XYAnchor;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the notification of anchors and connection figures.
@@ -88,7 +88,7 @@ public class AnchorNotificationTest {
 	/**
 	 * @since 3.1
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() {
 		Figure contents = new Figure();
 		contents.addNotify();
@@ -124,7 +124,7 @@ public class AnchorNotificationTest {
 	public void testMoveTargetParent() {
 		count = 0;
 		nestedCoordinates.translate(10, 10);
-		assertTrue("Count != 1 :" + count, count == 1); //$NON-NLS-1$
+		assertTrue(count == 1, "Count != 1 :" + count); //$NON-NLS-1$
 	}
 
 	@Test

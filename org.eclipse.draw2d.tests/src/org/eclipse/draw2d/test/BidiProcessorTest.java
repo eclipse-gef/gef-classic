@@ -18,20 +18,20 @@ import java.util.ServiceLoader;
 
 import org.eclipse.draw2d.text.BidiProvider;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BidiProcessorTest extends BaseTestCase {
 	private ClassLoader classLoader;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		classLoader = Thread.currentThread().getContextClassLoader();
 		Thread.currentThread().setContextClassLoader(getClass().getClassLoader());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		Thread.currentThread().setContextClassLoader(classLoader);
 	}

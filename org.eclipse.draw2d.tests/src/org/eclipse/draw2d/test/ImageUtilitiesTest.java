@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -20,7 +20,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 import org.eclipse.draw2d.ImageUtilities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Pratik Shah

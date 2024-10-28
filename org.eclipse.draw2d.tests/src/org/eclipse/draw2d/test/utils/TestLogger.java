@@ -15,12 +15,12 @@ package org.eclipse.draw2d.test.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 /**
  * Helper class for logging into test cases.
  */
-public class TestLogger extends Assert {
+public class TestLogger extends Assertions {
 	private final List<String> events = new ArrayList<>();
 
 	/**

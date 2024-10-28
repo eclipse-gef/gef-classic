@@ -42,10 +42,10 @@ public class AbstractTextTest extends BaseTestCase {
 	public Rectangle expected = new Rectangle();
 
 	protected void assertFragmentLocation(TextFragmentBox box) {
-		assertEquals(FRAGMENT_LOCATION_ERROR, box.getX(), expected.x);
-		assertEquals(FRAGMENT_LOCATION_ERROR, box.getBaseline() - box.getAscent(), expected.y);
-		assertEquals(FRAGMENT_LOCATION_ERROR, box.getBaseline() + box.getDescent(), expected.bottom());
-		assertEquals(FRAGMENT_LOCATION_ERROR, box.getWidth() + box.getX(), expected.right());
+		assertEquals(box.getX(), expected.x, FRAGMENT_LOCATION_ERROR);
+		assertEquals(box.getBaseline() - box.getAscent(), expected.y, FRAGMENT_LOCATION_ERROR);
+		assertEquals(box.getBaseline() + box.getDescent(), expected.bottom(), FRAGMENT_LOCATION_ERROR);
+		assertEquals(box.getWidth() + box.getX(), expected.right(), FRAGMENT_LOCATION_ERROR);
 	}
 
 }

@@ -13,14 +13,14 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FigureUtilitiesTest {
 

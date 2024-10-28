@@ -22,7 +22,7 @@ import org.eclipse.draw2d.text.FlowPage;
 import org.eclipse.draw2d.text.InlineFlow;
 import org.eclipse.draw2d.text.TextFlow;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * @since 3.1
@@ -37,7 +37,7 @@ public class SimpleTextTest extends AbstractTextTest {
 	public TextFlow child2 = new TextFlow(PHRASE);
 	public Font font = Display.getDefault().getSystemFont();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		flowpage.setFont(font);
 		flowpage.add(sentence);
