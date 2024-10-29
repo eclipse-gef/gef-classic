@@ -60,13 +60,13 @@ Such an application providing the user with a way to modify a model graphically 
 
 The view, the model and the link between them are illustrated in this picture, which introduces the symbolic conventions I will try to follow for the rest of this page:
 
-![Gef desc im26.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im26.gif)
+![Gef desc im26.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im26.gif)
 
 In this general problem, the link between the model and the view can be anything, so it is possible that for two identical states of the model, the view shown to the user is different. For example, if the user can move the different figures of the view without any trace being kept of their positions in the model, there will be several possible views for a same state of the model (one for each possible location the user can choose for the figures in the view).
 
 Your graphical editor should work like that :
 
-![Gef desc im27.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im27.gif)
+![Gef desc im27.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im27.gif)
 
 But defined like that, I think that this problem is too fuzzy to start a good explanation, and to give clear ideas to people who want to get started with GEF. So I will define a problem which is less general and I will try to show in this page how GEF allows you to solve this less general problem. Anyway, I may be wrong but I think that GEF was thought to solve that less general problem, and even if it wasn't, I believe that it is good practice to follow the limitations introduced by the less general problem to keep things clear and simple.
 
@@ -76,7 +76,7 @@ This problem is just the same as above except that this time the link between th
 
 So this time the view shown to the user depends only on the current state of the model and is fully defined by it : the view is a function of the state of the model. This is illustrated on this picture :
 
-![Gef desc im28.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im28.gif)
+![Gef desc im28.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im28.gif)
 
 This loss of generality leads to a simplification of the architecture of the application : now the user's actions on the graphical interface can be interpreted in terms of model modifications only because we know that the new view will be fully defined by the new state of the model, whatever were the user actions on the GUI. We can make a clean separation between :
 
@@ -119,7 +119,7 @@ I think everybody has an intuitive view of what this term means so I will not tr
 *   The model must know nothing about the view or about any other part of the editor. The model must not hold any references to its view. This is very important. The model is just a container of data which get modified during the editing process and signals its changes through a notification mechanism (this is explained in the following point).
 *   The model must implement some kind of notification mechanism : it must fire events when it changes and it must be possible to register listeners to catch these events. This is illustrated here :
 
-![Gef desc im5.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im5.gif)
+![Gef desc im5.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im5.gif)
 
 GEF doesn't assume anything about the model you use. This means that you can use almost every model with GEF, and this is good news. But on the other hand, this also means that you will have to take care of the preceding requirements by yourself ! In particular you will have to implement by yourself the notification mechanism, and the listeners for it. But this is easy to do because there are some ready-to-use supports for notification in Eclipse and in the java.beans package. I will give examples of that later.
 
@@ -146,7 +146,7 @@ There is an EditPart between each model object which has to be graphically repre
 
 Here is an illustration to summarize all this :
 
-![Gef desc im7.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im7.gif)
+![Gef desc im7.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im7.gif)
 
 So now you should have a good idea about how the changes in the model result in an update of the view, and about which elements are involved in this process. But you still don't know how the actions of the user are translated into changes of the model. This involves too many things that are still to be introduced so it will be explained later.
 
@@ -179,7 +179,7 @@ Draw2d is a lightweight system of graphical components which follows the same ph
 
 Figures are the building blocks of Draw2d. A Draw2d GUI is defined by a tree of Figures used by the lightweight system to paint the GUI.
 
-![Gef desc im8.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im8.gif)
+![Gef desc im8.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im8.gif)
 
 You can add a Figure to its parent by calling parent.add(child) and remove it by calling parent.remove(child).
 
@@ -199,7 +199,7 @@ The tree of figures is painted recursively by calling paint(Graphics) on the roo
 
 The last two remarks define the painting order of the figures, and thus they define which figure is above another, like this :
 
-![Gef desc im9.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im9.gif)
+![Gef desc im9.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im9.gif)
 
 So if A is a child of B in the figures tree, it means that A will be painted above B.
 
@@ -211,7 +211,7 @@ Each Figure has bounds. For the large majority of the figures, the bounds can be
 
 The clipping windows associated with each figure of a tree are shown here :
 
-![Gef desc im10.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im10.gif)
+![Gef desc im10.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im10.gif)
 
 So if A is a child of B in the figure tree, A will not be allowed to paint itself outside of the bounds of B. In other words, if A is a child of B in the figure tree, it means that A is contained by B.
 
@@ -265,7 +265,7 @@ For each model object you want to be represented in the view, you will have to w
 
 The view of a model object doesn't have to be a single Figure. It will more likely be a subtree of Figures :
 
-![Gef desc im32.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im32.gif)
+![Gef desc im32.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im32.gif)
 
 You may wonder about one thing in this picture : the content pane. I didn't talk about that thing till now. Sorry, this will be explained later. For now think about it as a leaf of the figure subtree which serves as a container in the view of the model object and can be filled by GEF with some things if it is needed. You don't necessarily have to explicitly define a content pane. If you don't, GEF will use the root figure of the subtree as the content pane.
 
@@ -313,7 +313,7 @@ Figure to represent a person
     }
     
 
-![Gef desc im31.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im31.gif)
+![Gef desc im31.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im31.gif)
 
 Now you should wonder where you have to write the code to instanciate the view associated with a model object, and where you have to write the code to fill the view with the data from the model object to display. You already know that the controller links the view object to the model object and knows about them. So you may already guess the answer : this code belongs in the EditPart between the view object and the model object and I will explain how to do this in the next section.
 
@@ -321,7 +321,7 @@ Now you should wonder where you have to write the code to instanciate the view a
 
 This picture shows how the EditPart takes place between the model object and its view :
 
-![Gef desc im30.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im30.gif)
+![Gef desc im30.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im30.gif)
 
 The EditPart knows about two things in the Figures subtree of the view of the model object :
 
@@ -425,7 +425,7 @@ The EditParts are organized in a tree structure. You will understand what this s
 
 Don't worry too much about this, it is not the important part of the work and you can copy/paste some code to create this part of your editor from some example. What is important (for now) are the model, the EditParts, the Figures and the EditPartFactory.
 
-![Gef desc im13.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im13.gif)
+![Gef desc im13.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im13.gif)
 
 Some other roles of EditPartViewer are :
 
@@ -484,7 +484,7 @@ Now we have all we need to understand the way GEF builds the view. First I will 
 
 Here is a picture which describes the process approximately :
 
-![Gef desc im14.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im14.gif)
+![Gef desc im14.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im14.gif)
 
 Here is a chronological description of what happens during the building of the view. This is a recursive process which takes place in the EditParts themselves and is triggered by the addition of the content EditPart (the one associated with the content object) to the children of the RootEditPart of the viewer. But the only thing that matters and is explained here is what happens, not how exactly it is implemented.
 
@@ -514,7 +514,7 @@ But there is one question left : which model objects must be represented with E
 
 For example, if you want to represent a person, with a name and a surname, you could think at least about two different things :
 
-![Gef desc im15.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im15.gif)
+![Gef desc im15.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im15.gif)
 
 And you could also think about using only one big EditPart to link the whole model to the whole view (but it would be a very very bad idea).
 
@@ -533,7 +533,7 @@ Suppose you want to represent in the view of a Person the list of the fruits, bu
 
 If you want the fruits grouped in a content pane and the vegetables grouped in another content pane, you don't have the choice : you have to provide two EditParts, one with a content pane containing the fruits and with a getModelChildren method returning the list of the fruits, the other one for the vegetables, and these two EditParts have to be children of the PersonEditPart in order to subdivide its content pane artificially. Like that :
 
-![Gef desc im20.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc_im20.gif)
+![Gef desc im20.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc_im20.gif)
 
 These two new EditParts must listen to the Person model object to receive events when a fruit or a vegetable is added to the Person model and call refreshChildren on themselves when that happens (I suppose here the lists are too dumb to notify their changes themselves).
 
@@ -733,5 +733,5 @@ Example :
     	...
     }
 
-This article continues. Continue reading at [GEF_Description2](https://github.com/eclipse/gef-classic/blob/master/docs/GEF_Description2.md).
+This article continues. Continue reading at [GEF_Description2](https://github.com/eclipse-gef/gef-classic/blob/master/docs/GEF_Description2.md).
 

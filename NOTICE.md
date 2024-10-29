@@ -28,8 +28,8 @@ SPDX-License-Identifier: EPL-2.0
 
 The project maintains the following source code repositories:
 
-* https://github.com/eclipse/gef
-* https://github.com/eclipse/gef-classic
+* https://github.com/eclipse-gef/gef
+* https://github.com/eclipse-gef/gef-classic
 
 ## Third-party Content
 

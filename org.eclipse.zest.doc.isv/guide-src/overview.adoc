@@ -12,7 +12,7 @@ The following code snippet shows how to get a simple graph up and
 running using an SWT style interface. In this example, a graph is
 created with 3 nodes and 3 edges. The nodes are labeled rock, paper
 scissors. Further snippets can be found
-https://github.com/eclipse/gef-classic/tree/master/org.eclipse.zest.examples[here].
+https://github.com/eclipse-gef/gef-classic/tree/master/org.eclipse.zest.examples[here].
 
 image:images/GraphSnippet1.jpg[image]
 

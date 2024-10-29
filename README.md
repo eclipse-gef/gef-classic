@@ -1,11 +1,11 @@
 # Eclipse Graphical Editing Framework (GEF) Classic
 
 This repository contains the code base of the [Eclipse Graphical Editing Framework (GEF)](https://projects.eclipse.org/projects/tools.gef/) project's classic components: 
- - [GEF (MVC) 3.x](https://github.com/eclipse/gef-classic/wiki/GEF-(MCV))
- - [Draw2d 3.x](https://github.com/eclipse/gef-classic/wiki/Draw2D) 
- - [Zest 2.x](https://github.com/eclipse/gef-classic/wiki/Zest)
+ - [GEF (MVC) 3.x](https://github.com/eclipse-gef/gef-classic/wiki/GEF-(MCV))
+ - [Draw2d 3.x](https://github.com/eclipse-gef/gef-classic/wiki/Draw2D) 
+ - [Zest 2.x](https://github.com/eclipse-gef/gef-classic/wiki/Zest)
  
-The code base of the GEF components implemented in JavaFX is located in the [eclipse/gef](https://github.com/eclipse/gef) repository instead.
+The code base of the GEF components implemented in JavaFX is located in the [eclipse-gef/gef](https://github.com/eclipse-gef/gef) repository instead.
 
 # Update sites:
 
@@ -21,7 +21,7 @@ Other update sites are:
 ## Getting started with the framework components ([adopters](https://www.eclipse.org/projects/dev_process/#2_3_3_Adopters))
 In order to develop graphical applications with GEF Classic, you should first set up a proper development environment. The following sections shortly lay out how to set up an Eclipse IDE for this purpose. They conclude with running our deployed and undeployed examples to confirm everything is set up properly. 
 
-Having accomplished that, you might want to browse our [developer documentation](https://github.com/eclipse/gef-classic/wiki#developer-documentation) to learn about the framework components in detail. At any time, if you get stuck, feel free to [contact us](https://projects.eclipse.org/projects/tools.gef/contact).
+Having accomplished that, you might want to browse our [developer documentation](https://github.com/eclipse-gef/gef-classic/wiki#developer-documentation) to learn about the framework components in detail. At any time, if you get stuck, feel free to [contact us](https://projects.eclipse.org/projects/tools.gef/contact).
 
 ### Set up an Eclipse IDE
 1. Install a recent **Java SE Development Kit 17** as a prerequisite.
@@ -63,7 +63,7 @@ The undeployed Draw2d and Zest examples have to be checked out in source before.
 
 1. Go to *File -> Import...*, then select *Git/Projects from Git*, press *Next >*.
 2. Select *Clone URI*, press *Next >*.
-3. Paste `https://github.com/eclipse/gef-classic.git` to the *URI* field , press *Next >*.
+3. Paste `https://github.com/eclipse-gef/gef-classic.git` to the *URI* field , press *Next >*.
 3. Select *master* branch, press *Next >*.
 4. Confirm the local directory or change it as needed, press *Next >*.
 5. Ensure *Import existing Eclipse projects* is checked, then select *Working Tree* and press *Next >*.
@@ -75,4 +75,4 @@ The first thing you will probably want to consult is the developer documentation
 
 All further project information (forum, mailing list, issue tracker, update-site locations, release plans) can be retrieved from the project meta-data at [projects.eclipse.org](https://projects.eclipse.org/projects/tools.gef).
 
-If you want to contribute, please consult the [contributor guide](https://github.com/eclipse/gef-classic/blob/master/CONTRIBUTING.md#contributing-to-the-eclipse-graphical-editing-framework-gef).
+If you want to contribute, please consult the [contributor guide](https://github.com/eclipse-gef/gef-classic/blob/master/CONTRIBUTING.md#contributing-to-the-eclipse-graphical-editing-framework-gef).

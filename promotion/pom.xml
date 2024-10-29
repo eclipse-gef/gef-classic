@@ -90,7 +90,7 @@
                     org.eclipse.gef.sdk.feature.group
                     -iu-filter-pattern org.eclipse.(gef|draw2d|zest).*
                     -commit
-                    https://github.com/eclipse/gef-classic/commit/${commit.id}
+                    https://github.com/eclipse-gef/gef-classic/commit/${commit.id}
                     -target-url
                     https://download.eclipse.org/tools/gef
                     -promote

@@ -15,7 +15,7 @@
 		<maven.compiler.target>17</maven.compiler.target>		
 		<tycho.version>${tycho-version}</tycho.version>
 		<cbi-plugins.version>1.5.0</cbi-plugins.version>
-		<tycho.scmUrl>scm:git:https://github.com/eclipse/gef-classic.git</tycho.scmUrl>
+		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.21.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>

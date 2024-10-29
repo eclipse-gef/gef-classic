@@ -1,14 +1,14 @@
 # GEF Classic 3.22.0
 
 ## Draw2D
- - The refresh rate of the [Thumbnail](https://github.com/eclipse/gef-classic/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/parts/Thumbnail.java) and [DeferredUpdateManager](https://github.com/eclipse/gef-classic/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/DeferredUpdateManager.java) classes can be configured via the `setRefreshRate(int)` method. Events are then updated only once every given number of milliseconds, to reduce the CPU load when processing large amounts of update requests.
+ - The refresh rate of the [Thumbnail](https://github.com/eclipse-gef/gef-classic/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/parts/Thumbnail.java) and [DeferredUpdateManager](https://github.com/eclipse-gef/gef-classic/blob/master/org.eclipse.draw2d/src/org/eclipse/draw2d/DeferredUpdateManager.java) classes can be configured via the `setRefreshRate(int)` method. Events are then updated only once every given number of milliseconds, to reduce the CPU load when processing large amounts of update requests.
 
 ## GEF
  - _Linux Only_ The overlay scrolling of the palette can be configured via the _PaletteViewerPreferences.PREFERENCE_SCROLLBARS_MODE_ preference. Supported values are _SWT.NONE_ and _SWT.SCROLLBAR_OVERLAY_.
- - The refresh rate of the [TargetingTool](https://github.com/eclipse/gef-classic/blob/master/org.eclipse.gef/src/org/eclipse/gef/tools/TargetingTool.java) class can be configured via the `setRefreshRate(int)` method. Events are then updated only once every given number of milliseconds, to reduce the CPU load when processing large amounts of update requests.
+ - The refresh rate of the [TargetingTool](https://github.com/eclipse-gef/gef-classic/blob/master/org.eclipse.gef/src/org/eclipse/gef/tools/TargetingTool.java) class can be configured via the `setRefreshRate(int)` method. Events are then updated only once every given number of milliseconds, to reduce the CPU load when processing large amounts of update requests.
 
 ## Zest
- - Integration of Zest 2.0 development branch. See the [wiki](https://github.com/eclipse/gef-classic/wiki/Zest#zest-2x) for more details. In case only default layout algorithms are used, the initial migration should be seamless. Otherwise the algorithms can be adapted to run in legacy mode by extending `AbstractLayoutAlgorithm.Zest1` or have to be re-implemented using the new API by extending `AbstractLayoutAlgorithm`. Note that this legacy mode will be removed in a future release. The following list contains the most significant, deprecated features:
+ - Integration of Zest 2.0 development branch. See the [wiki](https://github.com/eclipse-gef/gef-classic/wiki/Zest#zest-2x) for more details. In case only default layout algorithms are used, the initial migration should be seamless. Otherwise the algorithms can be adapted to run in legacy mode by extending `AbstractLayoutAlgorithm.Zest1` or have to be re-implemented using the new API by extending `AbstractLayoutAlgorithm`. Note that this legacy mode will be removed in a future release. The following list contains the most significant, deprecated features:
    - `ContinuousLayoutAlgorithm` and `Stoppable`, with no replacement.
    - `ProgressListener` and `ProgressEvent`, with no replacement.
    - `LayoutConstraints`, `ConstrainAdapter`, with no replacement.
@@ -17,7 +17,7 @@
 
 # GEF Classic 3.21.0
 
-As part of this release, several of the icons have been converted from gif to png and updated to also contain a 200% zoom variant, in order to improve compatibility with high-DPI screens. See [here](https://github.com/eclipse/gef-classic/milestone/6) for a full list of changes.
+As part of this release, several of the icons have been converted from gif to png and updated to also contain a 200% zoom variant, in order to improve compatibility with high-DPI screens. See [here](https://github.com/eclipse-gef/gef-classic/milestone/6) for a full list of changes.
 
 ## Draw2d
  - Previously deprecated methods/fields in the Geometry component have been marked as "for removal".

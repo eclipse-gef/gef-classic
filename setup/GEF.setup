@@ -86,7 +86,7 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.gef.classic"
-      remoteURI="eclipse/gef-classic">
+      remoteURI="eclipse-gef/gef-classic">
     <annotation
         source="http://www.eclipse.org/oomph/setup/InducedChoices">
       <detail
@@ -302,7 +302,7 @@
     <setupTask
         xsi:type="setup:EclipseIniTask"
         option="-Doomph.redirection.gef.classic"
-        value="=https://raw.githubusercontent.com/eclipse/gef-classic/master/setup/GEF.setup->${git.clone.gef.classic.location|uri}/setup/GEF.setup"
+        value="=https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/setup/GEF.setup->${git.clone.gef.classic.location|uri}/setup/GEF.setup"
         vm="true">
       <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
     </setupTask>

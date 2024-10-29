@@ -107,7 +107,7 @@ public class GraphSWTTests extends AbstractGraphTest {
 	/**
 	 * Tests whether the animations are drawn.
 	 *
-	 * @see <a href="https://github.com/eclipse/gef-classic/issues/376">here</a>
+	 * @see <a href="https://github.com/eclipse-gef/gef-classic/issues/376">here</a>
 	 */
 	@Test
 	@Ignore

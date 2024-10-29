@@ -113,7 +113,7 @@ public class FlowDiagramTests extends AbstractSWTBotEditorTests {
 	 * selection tool. Note that the current viewer is null at the start of this
 	 * test, as it is only set when the cursor is moved inside the editor.
 	 *
-	 * @see <a href="https://github.com/eclipse/gef-classic/issues/466">here</a>
+	 * @see <a href="https://github.com/eclipse-gef/gef-classic/issues/466">here</a>
 	 */
 	@Test
 	public void testMarqueeSelection() {

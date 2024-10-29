@@ -36,7 +36,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * @author Manuel Selva
  * @see <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=226103">[1]
  *      here</a>
- * @see <a href="https://github.com/eclipse/gef-classic/issues/495">[2] here</a>
+ * @see <a href="https://github.com/eclipse-gef/gef-classic/issues/495">[2] here</a>
  */
 public class BugWithLocalCoordinateSystem {
 

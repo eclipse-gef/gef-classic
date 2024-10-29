@@ -1,12 +1,12 @@
 # Contributing to the Eclipse Graphical Editing Framework (GEF) Classic
 
-This guide provides all necessary information to enable [contributors and committers](https://www.eclipse.org/projects/dev_process/#2_3_1_Contributors_and_Committers) to contribute to the Eclipse Graphical Editing Framework (GEF) project's classic components. [Adopters](https://www.eclipse.org/projects/dev_process/#2_3_3_Adopters), who want to develop applications against GEF Classic, should rather consult our [README](https://github.com/eclipse/gef-classic/blob/master/README.md#eclipse-graphical-editing-framework-gef).
+This guide provides all necessary information to enable [contributors and committers](https://www.eclipse.org/projects/dev_process/#2_3_1_Contributors_and_Committers) to contribute to the Eclipse Graphical Editing Framework (GEF) project's classic components. [Adopters](https://www.eclipse.org/projects/dev_process/#2_3_3_Adopters), who want to develop applications against GEF Classic, should rather consult our [README](https://github.com/eclipse-gef/gef-classic/blob/master/README.md#eclipse-graphical-editing-framework-gef).
 
 ## Set up a development environment
 
 You can set up a pre-configured IDE for the development of GEF Classic using the following link:
 
-[![Create Eclipse Development Environment for GEF Classic](https://download.eclipse.org/oomph/www/setups/svg/GEF_Classic.svg)](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/eclipse/gef-classic/master/setup/GEFConfiguration.setup&show=true "Click to open Eclipse-Installer Auto Launch or drag onto your running installer's title area")
+[![Create Eclipse Development Environment for GEF Classic](https://download.eclipse.org/oomph/www/setups/svg/GEF_Classic.svg)](https://www.eclipse.org/setups/installer/?url=https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/setup/GEFConfiguration.setup&show=true "Click to open Eclipse-Installer Auto Launch or drag onto your running installer's title area")
 
 ### Set up an Eclipse IDE
 We recommend to download a recent '[Eclipse IDE for Eclipse Committers](http://www.eclipse.org/downloads/packages)' package and to prepare it as outlined below.

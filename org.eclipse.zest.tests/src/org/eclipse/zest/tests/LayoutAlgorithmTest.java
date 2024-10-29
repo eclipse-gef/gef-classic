@@ -41,7 +41,7 @@ public class LayoutAlgorithmTest {
 
 	// Check for ConcurrentModificationException when the listeners are
 	// added/removed while an event is fired.
-	// See https://github.com/eclipse/gef-classic/issues/398
+	// See https://github.com/eclipse-gef/gef-classic/issues/398
 
 	@Test
 	public void testWithConcurrentModification1() throws InvalidLayoutConfiguration {

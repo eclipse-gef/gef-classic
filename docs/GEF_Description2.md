@@ -36,7 +36,7 @@ Capturing user actions on the GUI and translating them into changes on the model
 
 Now the view is created when the editor is opened according to the state of the model at this time, and the view is updated when the model changes, whatever the way the model is modified, by GEF or by any other way. This is already something really useful that could be used like that to display an evolving model. But if your goal is to allow the user to modify your model graphically, this is not enough, you have to react on the user actions on the GUI and to modify the model accordingly :
 
-![Gef desc2 im16.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im16.gif)
+![Gef desc2 im16.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im16.gif)
 
 This process involves a lot of new GEF classes, so before going further I will introduce them. Also, don't be confused by my picture : the EditParts play a central role in this process too but I can't detail it on this little drawing without making it look like a big knot.
 
@@ -46,7 +46,7 @@ The EditDomain is the common denominator to all GEF objects which participate to
 
 Here is a picture of the EditDomain and the different elements it binds together. The golden arrows show how the user actions are translated from mouse moves and key stroke events into modifications of the model. Don't be afraid by this picture, all this process is handled by GEF. In order to allow edition, you only need to implement two types of classes : Commands and EditPolicies.
 
-![Gef desc2 im17.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im17.gif)
+![Gef desc2 im17.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im17.gif)
 
 You don't really have to worry about instanciating and putting all these things together. To begin, use a subclass of GraphicalEditorPart or GraphicalEditorPartWithPalette. These classes set all these things up for you. You only need to override some methods to configure the GraphicalViewer, the PaletteViewer and things like that. That's easy, just copy-paste some code from an existing gef plugin, don't waste your time on this, it isn't an important part of the explanations.
 
@@ -74,7 +74,7 @@ You hook into this process by providing two things :
 
 Events occuring on Controls where EditPartViewers are installed are what triggers all the editing process. GEF doesn't use any listeners on draw2d figures to capture events. Here is a picture from the IBM redbook which illustrates the event flow :
 
-![Gef desc2 im18.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im18.gif)
+![Gef desc2 im18.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im18.gif)
 
 All the events occuring on a SWT Control on the top of which an EditPartViewer is installed are forwarded to something called the "active tool" of the EditDomain. The active tool knows from which EditPartViewer the events it receives come.
 
@@ -117,7 +117,7 @@ When looking at the code, you may ask yourself the following questions : "But w
 
 Here is a picture illustrating this process :
 
-![Gef desc2 im19.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im19.gif)
+![Gef desc2 im19.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im19.gif)
 
 ### Commands
 
@@ -125,7 +125,7 @@ GEF can be used with any model you like. This is good news, but on the other han
 
 For each request your are interested to catch on an EditPart, you have to write a Command subclass and you have to provide an instance of this class when it is required by GEF through the EditPart.getCommand(Request) method (we will see how to achieve that goal later in the EditPolicies section).
 
-![Gef desc2 im21.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im21.gif)
+![Gef desc2 im21.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im21.gif)
 
 Commands are instances of subclasses of the Command class. This class declares the methods :
 
@@ -163,7 +163,7 @@ public class AddFruitCommand extends Command{
 
 Here is a sequence diagram showing what will happen when such a Command is executed by the CommandStack :
 
-![Gef desc2 im22.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im22.gif)
+![Gef desc2 im22.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im22.gif)
 
 ### CommandStack
 
@@ -178,7 +178,7 @@ Most of the time you don't have to worry about the CommandStack because the Tool
 
 Here is a picture illustrating all this :
 
-![Gef desc2 im23.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im23.gif)
+![Gef desc2 im23.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im23.gif)
 
 ### EditPolicies
 
@@ -267,7 +267,7 @@ Here are some interesting properties of Polylines :
 *   The containsPoint(Point) method is overriden to return true iff the Point is on the polyline or cointained by a child figure and this has the implications you can guess on the hit-testing algorithm of Draw2d (findFigureAt()).
 *   When you translate the parent figure of a Polyline, the Polyline doesn't get translated.
 
-![Gef desc2 im25.gif](https://raw.githubusercontent.com/eclipse/gef-classic/master/docs/images/Gef_desc2_im25.gif)
+![Gef desc2 im25.gif](https://raw.githubusercontent.com/eclipse-gef/gef-classic/master/docs/images/Gef_desc2_im25.gif)
 
 ConnectionAnchors track the movements of their owner Figure and when this Figure moves, they notify their listeners to tell them the geometrical location they define may have changed. The methods add / removeAnchorListener(AnchorListener) allow to add such listeners to a ConnectionAnchor.
 
