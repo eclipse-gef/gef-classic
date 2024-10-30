@@ -98,7 +98,7 @@
                     -timestamp ${build.timestamp}
                     -type ${build.type}
                     -favicon
-                    https://raw.githubusercontent.com/eclipse/gef/master/org.eclipse.gef.common/gef_eclipse_logo_32.png
+                    https://raw.githubusercontent.com/eclipse-gef/gef/master/org.eclipse.gef.common/gef_eclipse_logo_32.png
                     -body-image
                     https://projects.eclipse.org/sites/default/files/GEF_eclipse_logo.png
                     -breadcrumb "GEF https://projects.eclipse.org/projects/tools.gef"
