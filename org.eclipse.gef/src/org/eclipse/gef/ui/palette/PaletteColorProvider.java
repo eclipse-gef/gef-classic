@@ -18,28 +18,30 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.ColorConstants;
 
+import org.eclipse.gef.GEFColorProvider;
+
 /**
  * Default colors used by the {@link PaletteViewer} which are used when painting
  * the palette figures. Clients may extend this class to define their own
- * colors. The color palette can be set via
- * {@link PaletteViewer#setColorPalette(ColorPalette)}.
+ * colors. The color provider can be set via
+ * {@link PaletteViewer#setColorProvider(PaletteColorProvider)}.
  *
  * @since 3.20
  */
-public class DefaultColorPalette implements ColorPalette {
+public class PaletteColorProvider extends GEFColorProvider {
 	private static final Color HOVER_COLOR_HICONTRAST = new Color(null, 0, 128, 0);
 	private static final Color SELECTED_COLOR_HICONTRAST = new Color(null, 128, 0, 128);
 
-	public static final ColorPalette INSTANCE = new DefaultColorPalette();
+	public static final PaletteColorProvider INSTANCE = new PaletteColorProvider();
 
-	protected DefaultColorPalette() {
+	protected PaletteColorProvider() {
 		// This class should never be instantiated directly but instead, the singleton
 		// should be used. It may however be extended by clients to define their own
 		// colors.
 	}
 
 	@Override
-	public Color getSelectedColor() {
+	public Color getListSelectedBackgroundColor() {
 		Display display = Display.getCurrent();
 		if (display == null) {
 			display = Display.getDefault();
@@ -51,7 +53,7 @@ public class DefaultColorPalette implements ColorPalette {
 	}
 
 	@Override
-	public Color getHoverColor() {
+	public Color getListHoverBackgroundColor() {
 		Display display = Display.getCurrent();
 		if (display == null) {
 			display = Display.getDefault();

@@ -65,7 +65,7 @@ public class DrawerEditPart extends PaletteEditPart implements IPinnableEditPart
 	 */
 	@Override
 	public IFigure createFigure() {
-		DrawerFigure fig = new DrawerFigure(getViewer().getControl(), getColorPalette()) {
+		DrawerFigure fig = new DrawerFigure(getViewer().getControl(), getColorProvider()) {
 			@Override
 			IFigure buildTooltip() {
 				return createToolTip();

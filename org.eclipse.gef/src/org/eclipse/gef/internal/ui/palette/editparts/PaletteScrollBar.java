@@ -35,7 +35,7 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.internal.ui.palette.PaletteColorUtil;
-import org.eclipse.gef.ui.palette.ColorPalette;
+import org.eclipse.gef.ui.palette.PaletteColorProvider;
 
 public final class PaletteScrollBar extends ScrollBar {
 
@@ -82,10 +82,10 @@ public final class PaletteScrollBar extends ScrollBar {
 
 	protected Label upLabel;
 
-	protected final ColorPalette colorPalette;
+	protected final PaletteColorProvider colorProvider;
 
-	public PaletteScrollBar(ColorPalette colorPalette) {
-		this.colorPalette = colorPalette;
+	public PaletteScrollBar(PaletteColorProvider colorProvider) {
+		this.colorProvider = colorProvider;
 	}
 
 	@Override
@@ -118,8 +118,8 @@ public final class PaletteScrollBar extends ScrollBar {
 				if (!getModel().isMouseOver()) {
 					g.drawImage(TRANSPARENCY, new Rectangle(0, 0, 1, 1), getBounds());
 				} else {
-					g.setBackgroundColor(getModel().isArmed() ? colorPalette.getSelectedColor()
-							: colorPalette.getHoverColor());
+					g.setBackgroundColor(getModel().isArmed() ? colorProvider.getListSelectedBackgroundColor()
+							: colorProvider.getListHoverBackgroundColor());
 					g.fillRectangle(getBounds());
 				}
 

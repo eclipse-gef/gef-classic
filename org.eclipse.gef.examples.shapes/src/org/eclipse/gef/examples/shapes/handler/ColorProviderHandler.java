@@ -24,13 +24,13 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 
 import org.eclipse.gef.examples.shapes.ShapesEditor;
-import org.eclipse.gef.examples.shapes.palette.ShapesColorPalette;
+import org.eclipse.gef.examples.shapes.palette.ShapesColorProvider;
 
 /**
  * This handler manages the {@code Use Custom Palette} menu item which switches
  * between the default and the custom palette theme.
  */
-public class ColorPaletteHandler {
+public class ColorProviderHandler {
 	@Execute
 	@SuppressWarnings("static-method")
 	public void execute(@Active MPart activePart, MMenuItem menuItem) {
@@ -38,9 +38,9 @@ public class ColorPaletteHandler {
 		GraphicalViewer graphicalViewer = editorPart.getAdapter(GraphicalViewer.class);
 		PaletteViewer paletteViewer = graphicalViewer.getEditDomain().getPaletteViewer();
 		if (menuItem.isSelected()) {
-			paletteViewer.setColorPalette(new ShapesColorPalette());
+			paletteViewer.setColorProvider(new ShapesColorProvider());
 		} else {
-			paletteViewer.setColorPalette(null);
+			paletteViewer.setColorProvider(null);
 		}
 		paletteViewer.getControl().redraw();
 	}

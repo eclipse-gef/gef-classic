@@ -277,10 +277,10 @@ public class ToolEntryEditPart extends PaletteEditPart {
 				ButtonModel model = getModel();
 
 				if (model.isSelected()) {
-					graphics.setBackgroundColor(getColorPalette().getSelectedColor());
+					graphics.setBackgroundColor(getColorProvider().getListSelectedBackgroundColor());
 					graphics.fillRoundRectangle(getSelectionRectangle(getLayoutSetting(), customLabel), 3, 3);
 				} else if (model.isMouseOver() || showHoverFeedback) {
-					graphics.setBackgroundColor(getColorPalette().getHoverColor());
+					graphics.setBackgroundColor(getColorProvider().getListHoverBackgroundColor());
 					graphics.fillRoundRectangle(getSelectionRectangle(getLayoutSetting(), customLabel), 3, 3);
 				}
 			}

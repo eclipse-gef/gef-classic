@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.ui.IMemento;
 
+import org.eclipse.draw2d.ColorProvider.SystemColorFactory;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
 
@@ -96,7 +97,7 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	private PaletteViewerPreferences prefs = PREFERENCE_STORE;
 	private Font font = null;
 	private PaletteAnimator paletteAnimator;
-	private ColorPalette colorPalette = DefaultColorPalette.INSTANCE;
+	private PaletteColorProvider colorProvider = PaletteColorProvider.INSTANCE;
 
 	/**
 	 * Constructor
@@ -232,13 +233,14 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	}
 
 	/**
-	 * @return The color palette that is used for painting the figures of this
+	 * @return The color provider that is used for painting the figures of this
 	 *         viewer. If no palette has been set by the user,
-	 *         {@link DefaultColorPalette} is returned instead of {@code null}.
+	 *         {@link SystemColorFactory#getColorProvider()} is returned instead of
+	 *         {@code null}.
 	 * @since 3.20
 	 */
-	public ColorPalette getColorPalette() {
-		return colorPalette;
+	public PaletteColorProvider getColorProvider() {
+		return colorProvider;
 	}
 
 	private ToolEntryEditPart getToolEntryEditPart(ToolEntry entry) {
@@ -476,18 +478,18 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	}
 
 	/**
-	 * Sets the color palette that is used for painting the figures of this viewer.
+	 * Sets the color provider that is used for painting the figures of this viewer.
 	 * If {@code null} is passed as an argument, the palette is reset to its default
 	 * configuration.
 	 *
-	 * @param colorPalette The color palette for this viewer.
+	 * @param colorProvider The color provider for this viewer.
 	 * @since 3.20
 	 */
-	public void setColorPalette(ColorPalette colorPalette) {
-		if (colorPalette == null) {
-			this.colorPalette = DefaultColorPalette.INSTANCE;
+	public void setColorProvider(PaletteColorProvider colorProvider) {
+		if (colorProvider == null) {
+			this.colorProvider = PaletteColorProvider.INSTANCE;
 		} else {
-			this.colorPalette = colorPalette;
+			this.colorProvider = colorProvider;
 		}
 	}
 

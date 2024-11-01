@@ -6,7 +6,7 @@
 ## GEF
  - _Linux Only_ The overlay scrolling of the palette can be configured via the _PaletteViewerPreferences.PREFERENCE_SCROLLBARS_MODE_ preference. Supported values are _SWT.NONE_ and _SWT.SCROLLBAR_OVERLAY_.
  - The refresh rate of the [TargetingTool](https://github.com/eclipse-gef/gef-classic/blob/master/org.eclipse.gef/src/org/eclipse/gef/tools/TargetingTool.java) class can be configured via the `setRefreshRate(int)` method. Events are then updated only once every given number of milliseconds, to reduce the CPU load when processing large amounts of update requests.
- - The look of the palette viewer can be customized via the ColorPalette interface. Supported model elements and properties are:
+ - The look of the palette viewer can be customized via the ColorProvider interface. Supported model elements and properties are:
    - PaletteEntry (hover, selection) 
    - PaletteTemplateEntry (selection)
 

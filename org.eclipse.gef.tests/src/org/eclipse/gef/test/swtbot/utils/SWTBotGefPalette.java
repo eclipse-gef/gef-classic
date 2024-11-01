@@ -17,7 +17,7 @@ import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefViewer;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 
-import org.eclipse.gef.ui.palette.ColorPalette;
+import org.eclipse.gef.ui.palette.PaletteColorProvider;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 
 /**
@@ -38,7 +38,7 @@ public class SWTBotGefPalette extends SWTBotGefViewer {
 		return (PaletteViewer) graphicalViewer;
 	}
 
-	public ColorPalette getColorPalette() {
-		return getPaletteViewer().getColorPalette();
+	public PaletteColorProvider getColorProvider() {
+		return getPaletteViewer().getColorProvider();
 	}
 }

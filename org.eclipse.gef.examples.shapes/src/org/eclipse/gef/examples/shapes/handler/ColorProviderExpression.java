@@ -25,7 +25,7 @@ import org.eclipse.gef.examples.shapes.ShapesEditor;
  * This imperative expression is invoked by the {@code fragment.e4xmi} to check
  * whether the {@code Palette} menu item is visible.
  */
-public class ColorPaletteExpression {
+public class ColorProviderExpression {
 	@Evaluate
 	@SuppressWarnings("static-method")
 	public boolean test(@Optional @Active MPart activePart) {

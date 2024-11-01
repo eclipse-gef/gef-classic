@@ -86,7 +86,7 @@ public class TemplateEditPart extends PaletteEditPart {
 				super.paintFigure(graphics);
 
 				if (isSelected()) {
-					graphics.setBackgroundColor(getColorPalette().getSelectedColor());
+					graphics.setBackgroundColor(getColorProvider().getListSelectedBackgroundColor());
 				}
 				graphics.fillRoundRectangle(ToolEntryEditPart.getSelectionRectangle(getLayoutSetting(), this), 3, 3);
 			}

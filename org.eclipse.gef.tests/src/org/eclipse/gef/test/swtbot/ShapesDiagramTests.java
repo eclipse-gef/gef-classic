@@ -29,7 +29,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.test.swtbot.utils.SWTBotGefPalette;
-import org.eclipse.gef.ui.palette.ColorPalette;
+import org.eclipse.gef.ui.palette.PaletteColorProvider;
 
 import org.junit.Test;
 
@@ -69,10 +69,10 @@ public class ShapesDiagramTests extends AbstractSWTBotEditorTests {
 		editor.activateTool("Ellipse");
 
 		SWTBotGefPalette palette = new SWTBotGefPalette(editor.getSWTBotGefViewer());
-		ColorPalette colorPalette = palette.getColorPalette();
+		PaletteColorProvider colorProvider = palette.getColorProvider();
 
-		assertEquals(colorPalette.getHoverColor(), ColorConstants.cyan);
-		assertEquals(colorPalette.getSelectedColor(), ColorConstants.darkGreen);
+		assertEquals(colorProvider.getListHoverBackgroundColor(), ColorConstants.cyan);
+		assertEquals(colorProvider.getListSelectedBackgroundColor(), ColorConstants.darkGreen);
 	}
 
 	@Override

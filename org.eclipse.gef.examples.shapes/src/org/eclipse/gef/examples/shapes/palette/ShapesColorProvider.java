@@ -17,20 +17,20 @@ import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.draw2d.ColorConstants;
 
-import org.eclipse.gef.ui.palette.DefaultColorPalette;
+import org.eclipse.gef.ui.palette.PaletteColorProvider;
 
 /**
  * Defines arbitrary colors that distinguish themselves from the default
  * palette.
  */
-public class ShapesColorPalette extends DefaultColorPalette {
+public class ShapesColorProvider extends PaletteColorProvider {
 	@Override
-	public Color getSelectedColor() {
+	public Color getListSelectedBackgroundColor() {
 		return ColorConstants.darkGreen;
 	}
 
 	@Override
-	public Color getHoverColor() {
+	public Color getListHoverBackgroundColor() {
 		return ColorConstants.cyan;
 	}
 }
