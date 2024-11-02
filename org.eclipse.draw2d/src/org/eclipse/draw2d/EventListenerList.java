@@ -12,7 +12,12 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * This class is intended for internal use only. TODO: If this is for internal
@@ -20,7 +25,8 @@ import java.util.Iterator;
  */
 public final class EventListenerList {
 
-	private volatile Object[] array;
+	private final Map<Class<?>, Deque<Object>> listeners = new HashMap<>();
+	private static final Deque<Object> EMPTY_DEQUE = new ArrayDeque<>();
 
 	/**
 	 * Adds a listener of type <i>c</i> to the list.
@@ -33,15 +39,7 @@ public final class EventListenerList {
 			throw new IllegalArgumentException();
 		}
 
-		int oldSize = (array == null) ? 0 : array.length;
-		Object[] newArray = new Object[oldSize + 2];
-		if (oldSize != 0) {
-			System.arraycopy(array, 0, newArray, 0, oldSize);
-		}
-		newArray[oldSize] = c;
-		oldSize++;
-		newArray[oldSize] = listener;
-		array = newArray;
+		listeners.computeIfAbsent(c, newC -> new ConcurrentLinkedDeque<>()).add(listener);
 	}
 
 	/**
@@ -52,50 +50,8 @@ public final class EventListenerList {
 	 * @return whether this list contains a listener of type <i>c</i>
 	 */
 	public synchronized <T> boolean containsListener(Class<T> c) {
-		if (array == null) {
-			return false;
-		}
-		for (int i = 0; i < array.length; i += 2) {
-			if (array[i] == c) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	static class TypeIterator<T> implements Iterator<T> {
-		private final Object[] items;
-		private final Class<T> type;
-		private int index;
-
-		TypeIterator(Object[] items, Class<T> type) {
-			this.items = items;
-			this.type = type;
-		}
-
-		@Override
-		public T next() {
-			@SuppressWarnings("unchecked") // check is performed in hasNext
-			T result = (T) items[index + 1];
-			index += 2;
-			return result;
-		}
-
-		@Override
-		public boolean hasNext() {
-			if (items == null) {
-				return false;
-			}
-			while (index < items.length && items[index] != type) {
-				index += 2;
-			}
-			return index < items.length;
-		}
-
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException("Iterator removal not supported"); //$NON-NLS-1$
-		}
+		Deque<Object> specListeners = listeners.get(c);
+		return specListeners != null && !specListeners.isEmpty();
 	}
 
 	/**
@@ -104,8 +60,9 @@ public final class EventListenerList {
 	 * @param listenerType the type
 	 * @return an Iterator of all the listeners of type <i>c</i>
 	 */
+	@SuppressWarnings("unchecked")
 	public synchronized <T> Iterator<T> getListeners(final Class<T> listenerType) {
-		return new TypeIterator<>(array, listenerType);
+		return (Iterator<T>) listeners.getOrDefault(listenerType, EMPTY_DEQUE).iterator();
 	}
 
 	/**
@@ -115,8 +72,9 @@ public final class EventListenerList {
 	 * @return an Iterable of all the listeners of type <i>c</i>
 	 * @since 3.13
 	 */
+	@SuppressWarnings("unchecked")
 	public synchronized <T> Iterable<T> getListenersIterable(final Class<T> listenerType) {
-		return () -> new TypeIterator<>(array, listenerType);
+		return (Iterable<T>) listeners.getOrDefault(listenerType, EMPTY_DEQUE);
 	}
 
 	/**
@@ -126,28 +84,17 @@ public final class EventListenerList {
 	 * @param listener the listener
 	 */
 	public synchronized <T> void removeListener(Class<T> c, Object listener) {
-		if (array == null || array.length == 0) {
-			return;
-		}
 		if (listener == null || c == null) {
 			throw new IllegalArgumentException();
 		}
 
-		int index = 0;
-		while (index < array.length) {
-			if (array[index] == c && array[index + 1] == listener) {
-				break;
+		Deque<Object> specListeners = listeners.get(c);
+		if (specListeners != null) {
+			specListeners.remove(listener);
+			if (specListeners.isEmpty()) {
+				listeners.remove(c);
 			}
-			index += 2;
 		}
-		if (index == array.length) {
-			return; // listener was not found
-		}
-
-		Object[] newArray = new Object[array.length - 2];
-		System.arraycopy(array, 0, newArray, 0, index);
-		System.arraycopy(array, index + 2, newArray, index, array.length - index - 2);
-		array = newArray;
 	}
 
 }
