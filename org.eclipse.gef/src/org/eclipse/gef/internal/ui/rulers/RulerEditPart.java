@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -96,7 +96,7 @@ public class RulerEditPart extends AbstractGraphicalEditPart {
 	 */
 	@Override
 	protected IFigure createFigure() {
-		RulerFigure ruler = new RulerFigure(isHorizontal(), getRulerProvider().getUnit());
+		RulerFigure ruler = new RulerFigure(isHorizontal(), getRulerProvider());
 		if (ruler.getUnit() == RulerProvider.UNIT_PIXELS) {
 			ruler.setInterval(100, 2);
 		}

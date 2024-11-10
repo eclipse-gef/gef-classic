@@ -9,6 +9,7 @@
  - The look of the palette viewer can be customized via the ColorProvider interface. Supported model elements and properties are:
    - PaletteEntry (hover, selection) 
    - PaletteTemplateEntry (selection)
+ - Rulers can now be created with custom dots per unit settings. The `RulerProvider` interface has now a new unit constant `UNIT_CUSTOM`. When this is used the `RulerProvider` can provide via the new `getCustomRulerDPU()` an application specific dots per unit setting.
 
 ## Zest
  - Integration of Zest 2.0 development branch. See the [wiki](https://github.com/eclipse-gef/gef-classic/wiki/Zest#zest-2x) for more details. In case only default layout algorithms are used, the initial migration should be seamless. Otherwise the algorithms can be adapted to run in legacy mode by extending `AbstractLayoutAlgorithm.Zest1` or have to be re-implemented using the new API by extending `AbstractLayoutAlgorithm`. Note that this legacy mode will be removed in a future release. The following list contains the most significant, deprecated features:

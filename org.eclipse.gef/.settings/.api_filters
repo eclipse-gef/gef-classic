@@ -16,6 +16,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/rulers/RulerProvider.java" type="org.eclipse.gef.rulers.RulerProvider">
+        <filter id="336658481">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.rulers.RulerProvider"/>
+                <message_argument value="UNIT_CUSTOM"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/actions/AlignmentRetargetAction.java" type="org.eclipse.gef.ui.actions.AlignmentRetargetAction">
         <filter id="571473929">
             <message_arguments>

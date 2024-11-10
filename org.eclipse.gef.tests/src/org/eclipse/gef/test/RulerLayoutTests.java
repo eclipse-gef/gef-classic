@@ -52,7 +52,12 @@ public class RulerLayoutTests {
 		constraint = 42;
 		figure = new Figure();
 		dummy = new Figure();
-		container = new RulerFigure(true, RulerProvider.UNIT_CENTIMETERS);
+		container = new RulerFigure(true, new RulerProvider() {
+			@Override
+			public int getUnit() {
+				return RulerProvider.UNIT_CENTIMETERS;
+			}
+		});
 		container.add(figure, (Object) constraint);
 		container.add(dummy);
 		rulerLayout = (RulerLayout) container.getLayoutManager();

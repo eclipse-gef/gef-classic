@@ -79,6 +79,15 @@ public abstract class RulerProvider {
 	 * Constant indicating that the ruler should display pixel count.
 	 */
 	public static final int UNIT_PIXELS = 2;
+	/**
+	 * Constant indicating that the ruler should display a custom unit per pixel
+	 * count.
+	 *
+	 * The unit per pixel count shall be provided via {@link #getCustomRulerDPU()}.
+	 *
+	 * @since 3.20
+	 */
+	public static final int UNIT_CUSTOM = 3;
 
 	/**
 	 * A list of <code>RulerChangeListener</code>s that have to be notified of
@@ -181,6 +190,21 @@ public abstract class RulerProvider {
 	@SuppressWarnings("static-method")
 	public Command getCreateGuideCommand(int position) {
 		return UnexecutableCommand.INSTANCE;
+	}
+
+	/**
+	 * When the unit to be used for the ruler is {@link #UNIT_CUSTOM} clients need
+	 * to override this method to return the pixel dots per unit to be used for this
+	 * ruler. Clients should override this method to return
+	 *
+	 * @return the dots per unit for the ruler, default is 1 which is equal to use
+	 *         {@link #UNIT_PIXELS}.
+	 *
+	 * @since 3.20
+	 */
+	@SuppressWarnings("static-method")
+	public int getCustomRulerDPU() {
+		return 1;
 	}
 
 	/**
