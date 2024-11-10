@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -113,6 +113,7 @@ public class PasteTemplateAction extends SelectionAction {
 	 * @param container the parent of the new part that is being pasted
 	 * @return the location at which to insert
 	 */
+	@SuppressWarnings("static-method")
 	protected Point getPasteLocation(GraphicalEditPart container) {
 		Point result = new Point(10, 10);
 		IFigure fig = container.getContentPane();

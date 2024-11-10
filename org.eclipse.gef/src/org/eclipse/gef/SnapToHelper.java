@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -40,6 +40,7 @@ public abstract class SnapToHelper implements PositionConstants {
 	 * @param figure the reference figure
 	 * @param t      the object to translate
 	 */
+	@SuppressWarnings("static-method")
 	protected void makeAbsolute(IFigure figure, Translatable t) {
 		figure.translateToAbsolute(t);
 	}
@@ -50,6 +51,7 @@ public abstract class SnapToHelper implements PositionConstants {
 	 * @param figure the reference figure
 	 * @param t      the object to translate
 	 */
+	@SuppressWarnings("static-method")
 	protected void makeRelative(IFigure figure, Translatable t) {
 		figure.translateToRelative(t);
 	}
@@ -109,7 +111,7 @@ public abstract class SnapToHelper implements PositionConstants {
 	 * @param result        the correction will be applied to this point
 	 * @return the remaining snap locations
 	 */
-	public int snapPoint(Request request, int snapLocations, PrecisionRectangle rects[], PrecisionPoint result) {
+	public int snapPoint(Request request, int snapLocations, PrecisionRectangle[] rects, PrecisionPoint result) {
 		PrecisionRectangle resultRect = new PrecisionRectangle();
 		snapLocations = snapRectangle(request, snapLocations, rects, resultRect);
 		result.setPreciseX(result.preciseX() + resultRect.preciseX());
@@ -132,7 +134,7 @@ public abstract class SnapToHelper implements PositionConstants {
 	 * @param snapOrientation the input snap locations
 	 * @return the remaining snap locations
 	 */
-	public int snapRectangle(Request request, int snapOrientation, PrecisionRectangle baseRects[],
+	public int snapRectangle(Request request, int snapOrientation, PrecisionRectangle[] baseRects,
 			PrecisionRectangle result) {
 
 		for (int i = 0; i < baseRects.length && snapOrientation != 0; i++) {

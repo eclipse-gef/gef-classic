@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,6 +32,7 @@ public abstract class ContainerEditPolicy extends AbstractEditPolicy {
 	 * @param request the add request
 	 * @return the command contribution to the add
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getAddCommand(GroupRequest request) {
 		return null;
 	}
@@ -42,6 +43,7 @@ public abstract class ContainerEditPolicy extends AbstractEditPolicy {
 	 * @param request the clone request
 	 * @return the command contribution to the clone
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getCloneCommand(ChangeBoundsRequest request) {
 		return null;
 	}
@@ -82,6 +84,7 @@ public abstract class ContainerEditPolicy extends AbstractEditPolicy {
 	 * @param request the orphan request
 	 * @return a command contribution for the orphan
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getOrphanChildrenCommand(GroupRequest request) {
 		return null;
 	}

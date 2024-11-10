@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Google, Inc.
+ * Copyright (c) 2011, 2024 Google, Inc.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -55,6 +55,7 @@ public class TransposerTest extends BaseTestCase {
 		assertFalse(transposer.isEnabled());
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public void testTDimension() throws Exception {
 		Dimension dimension = new Dimension(100, 200);
@@ -75,6 +76,7 @@ public class TransposerTest extends BaseTestCase {
 		assertEquals(100, 200, dimension);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public void testTInsets() throws Exception {
 		Insets insets = new Insets(1, 2, 3, 4);
@@ -95,6 +97,7 @@ public class TransposerTest extends BaseTestCase {
 		assertEquals(1, 2, 3, 4, insets);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public void testTPoint() throws Exception {
 		Point point = new Point(100, 200);
@@ -115,6 +118,7 @@ public class TransposerTest extends BaseTestCase {
 		assertEquals(100, 200, point);
 	}
 
+	@SuppressWarnings("static-method")
 	@Test
 	public void testTRectangle() throws Exception {
 		Rectangle rectangle = new Rectangle(1, 2, 3, 4);

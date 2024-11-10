@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,6 +24,7 @@ public class TestModelUtil extends TestCase {
 
 	static List<ModelElement> result;
 
+	@SuppressWarnings("static-method")
 	public void testNestedBegin() {
 		Container doc = new Block(Container.TYPE_ROOT);
 		Container branch1 = new Block(0);
@@ -61,6 +62,7 @@ public class TestModelUtil extends TestCase {
 
 	}
 
+	@SuppressWarnings("static-method")
 	public void testNestedEnd() {
 		Container doc = new Block(Container.TYPE_ROOT);
 		Container branch1 = new Block(0);

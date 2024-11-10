@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -116,6 +116,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 *
 	 * @return the newly created GridLayer
 	 */
+	@SuppressWarnings("static-method")
 	protected GridLayer createGridLayer() {
 		return new GridLayer();
 	}
@@ -139,6 +140,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 * @see org.eclipse.gef.print.PrintGraphicalViewerOperation
 	 * @return a new LayeredPane containing the printable layers
 	 */
+	@SuppressWarnings("static-method")
 	protected LayeredPane createPrintableLayers() {
 		FreeformLayeredPane layeredPane = new FreeformLayeredPane();
 		layeredPane.add(new FreeformLayer(), PRIMARY_LAYER);

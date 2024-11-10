@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -54,6 +54,7 @@ public abstract class GraphicalNodeEditPolicy extends GraphicalEditPolicy {
 	 * @param req the operation being performed
 	 * @return a connection to use as feedback
 	 */
+	@SuppressWarnings("static-method")
 	protected Connection createDummyConnection(Request req) {
 		return new PolylineConnection();
 	}
@@ -227,9 +228,10 @@ public abstract class GraphicalNodeEditPolicy extends GraphicalEditPolicy {
 	 * @param request CreateConnectionRequest
 	 * @return <code>null</code> or the nearest source ConnectionAnchor
 	 */
+	@SuppressWarnings("static-method")
 	protected ConnectionAnchor getSourceConnectionAnchor(CreateConnectionRequest request) {
 		EditPart source = request.getSourceEditPart();
-		return source instanceof NodeEditPart ? ((NodeEditPart) source).getSourceConnectionAnchor(request) : null;
+		return source instanceof NodeEditPart nodeEP ? nodeEP.getSourceConnectionAnchor(request) : null;
 	}
 
 	/**
@@ -239,9 +241,10 @@ public abstract class GraphicalNodeEditPolicy extends GraphicalEditPolicy {
 	 * @param request CreateConnectionRequest
 	 * @return <code>null</code> or the nearest target ConnectionAnchor
 	 */
+	@SuppressWarnings("static-method")
 	protected ConnectionAnchor getTargetConnectionAnchor(CreateConnectionRequest request) {
 		EditPart target = request.getTargetEditPart();
-		return target instanceof NodeEditPart ? ((NodeEditPart) target).getTargetConnectionAnchor(request) : null;
+		return target instanceof NodeEditPart nodeEP ? nodeEP.getTargetConnectionAnchor(request) : null;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,8 +11,6 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.model;
-
-import java.io.IOException;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -33,7 +31,6 @@ public class LogicLabel extends LogicSubpart {
 	private static int count;
 
 	public LogicLabel() {
-		super();
 		size.width = DEFAULT_WIDTH;
 	}
 
@@ -54,10 +51,6 @@ public class LogicLabel extends LogicSubpart {
 	@Override
 	public Dimension getSize() {
 		return new Dimension(size.width, -1);
-	}
-
-	private void readObject(java.io.ObjectInputStream s) throws IOException, ClassNotFoundException {
-		s.defaultReadObject();
 	}
 
 	@Override

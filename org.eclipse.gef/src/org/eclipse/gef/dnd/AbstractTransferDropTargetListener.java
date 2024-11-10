@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -99,6 +99,7 @@ public abstract class AbstractTransferDropTargetListener implements TransferDrop
 	 *
 	 * @return the <code>Request</code> to be used with the <i>target</i> EditPart
 	 */
+	@SuppressWarnings("static-method")
 	protected Request createTargetRequest() {
 		return new Request();
 	}
@@ -237,8 +238,8 @@ public abstract class AbstractTransferDropTargetListener implements TransferDrop
 	protected Point getDropLocation() {
 		org.eclipse.swt.graphics.Point swt;
 		swt = new org.eclipse.swt.graphics.Point(getCurrentEvent().x, getCurrentEvent().y);
-		DropTarget target = (DropTarget) getCurrentEvent().widget;
-		swt = target.getControl().toControl(swt);
+		DropTarget curTarget = (DropTarget) getCurrentEvent().widget;
+		swt = curTarget.getControl().toControl(swt);
 		return new Point(swt.x, swt.y);
 	}
 

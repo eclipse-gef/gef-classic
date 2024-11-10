@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -95,6 +95,7 @@ public abstract class XYLayoutEditPolicy extends ConstrainedLayoutEditPolicy {
 	 * @param child the child
 	 * @return the current constraint
 	 */
+	@SuppressWarnings("static-method")
 	protected Rectangle getCurrentConstraintFor(GraphicalEditPart child) {
 		IFigure fig = child.getFigure();
 		return (Rectangle) fig.getParent().getLayoutManager().getConstraint(fig);
@@ -156,6 +157,7 @@ public abstract class XYLayoutEditPolicy extends ConstrainedLayoutEditPolicy {
 	 *             tracker, constructed by the 'satellite' primary drag edit policy
 	 *             should be parameterized with max and min size constraints.
 	 */
+	@SuppressWarnings("static-method")
 	@Deprecated
 	protected Dimension getMinimumSizeFor(GraphicalEditPart child) {
 		return new Dimension(8, 8);

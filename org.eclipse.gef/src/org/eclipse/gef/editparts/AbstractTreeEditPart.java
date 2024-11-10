@@ -64,12 +64,12 @@ public abstract class AbstractTreeEditPart extends AbstractEditPart implements T
 	 */
 	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
-		Widget widget = getWidget();
+		Widget curWidget = getWidget();
 		TreeItem item;
-		if (widget instanceof Tree tree) {
+		if (curWidget instanceof Tree tree) {
 			item = new TreeItem(tree, 0, index);
 		} else {
-			item = new TreeItem((TreeItem) widget, 0, index);
+			item = new TreeItem((TreeItem) curWidget, 0, index);
 		}
 		((TreeEditPart) childEditPart).setWidget(item);
 	}
@@ -114,6 +114,7 @@ public abstract class AbstractTreeEditPart extends AbstractEditPart implements T
 	 *
 	 * @return the Image to be displayed in the TreeItem
 	 */
+	@SuppressWarnings("static-method")
 	protected Image getImage() {
 		return null;
 	}

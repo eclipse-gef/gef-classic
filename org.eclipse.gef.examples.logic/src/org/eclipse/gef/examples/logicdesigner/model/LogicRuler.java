@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2022 IBM Corporation and others.
+ * Copyright (c) 2003, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,8 +32,8 @@ public class LogicRuler implements Serializable {
 
 	protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 	private int unit;
-	private boolean horizontal;
-	private List<LogicGuide> guides = new ArrayList<>();
+	private final boolean horizontal;
+	private final List<LogicGuide> guides = new ArrayList<>();
 
 	public LogicRuler(boolean isHorizontal) {
 		this(isHorizontal, RulerProvider.UNIT_PIXELS);
@@ -65,6 +65,7 @@ public class LogicRuler implements Serializable {
 		return unit;
 	}
 
+	@SuppressWarnings("static-method")
 	public boolean isHidden() {
 		return false;
 	}

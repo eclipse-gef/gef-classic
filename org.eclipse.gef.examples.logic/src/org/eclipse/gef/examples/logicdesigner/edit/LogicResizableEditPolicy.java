@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -84,7 +84,7 @@ public class LogicResizableEditPolicy extends ResizableEditPolicy {
 		return child;
 	}
 
-	protected IFigure getCustomFeedbackFigure(Object modelPart) {
+	private static IFigure getCustomFeedbackFigure(Object modelPart) {
 		IFigure figure;
 
 		if (modelPart instanceof Circuit) {

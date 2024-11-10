@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -17,7 +17,7 @@ package org.eclipse.gef.editparts;
  *
  * @author Eric Bordeau
  *
- * @deprecated Use {@link #org.eclipse.draw2d.zoom.ZoomListener} instead.
+ * @deprecated Use {@link org.eclipse.draw2d.zoom.ZoomListener} instead.
  */
 @Deprecated(since = "3.13", forRemoval = true)
 public interface ZoomListener extends org.eclipse.draw2d.zoom.ZoomListener {

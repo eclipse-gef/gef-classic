@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,7 +27,7 @@ public abstract class LogicElement implements IPropertySource, Cloneable, Serial
 	public static final String INPUTS = "inputs"; //$NON-NLS-1$
 	public static final String OUTPUTS = "outputs"; //$NON-NLS-1$
 
-	transient protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
+	protected transient PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 	static final long serialVersionUID = 1;
 
 	public void addPropertyChangeListener(PropertyChangeListener l) {
@@ -65,6 +65,7 @@ public abstract class LogicElement implements IPropertySource, Cloneable, Serial
 		return null;
 	}
 
+	@SuppressWarnings("static-method")
 	final Object getPropertyValue(String propName) {
 		return null;
 	}
@@ -74,6 +75,7 @@ public abstract class LogicElement implements IPropertySource, Cloneable, Serial
 		return isPropertySet((String) propName);
 	}
 
+	@SuppressWarnings("static-method")
 	final boolean isPropertySet(String propName) {
 		return true;
 	}

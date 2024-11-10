@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,9 +32,9 @@ import org.eclipse.gef.Request;
  */
 class DelayedDirectEditHelper implements Runnable {
 
-	private EditPartViewer viewer;
-	private EditPart part;
-	private Request req;
+	private final EditPartViewer viewer;
+	private final EditPart part;
+	private final Request req;
 	private FocusListener focus;
 	private MouseListener mouse;
 	private KeyListener key;
@@ -53,10 +53,10 @@ class DelayedDirectEditHelper implements Runnable {
 		this.viewer = viewer;
 		this.part = receiver;
 		if (activeHelper != null) {
-			activeHelper = null;
+			setActiveHelper(null);
 		} else {
 			hookControl(viewer.getControl());
-			activeHelper = this;
+			setActiveHelper(this);
 			Display display = Display.getCurrent();
 			display.timerExec(display.getDoubleClickTime(), this);
 		}
@@ -65,8 +65,9 @@ class DelayedDirectEditHelper implements Runnable {
 	/**
 	 * The edit is canceled by setting the active helper to <code>null</code>.
 	 */
+	@SuppressWarnings("static-method")
 	void abort() {
-		activeHelper = null;
+		setActiveHelper(null);
 	}
 
 	void hookControl(Control control) {
@@ -116,7 +117,10 @@ class DelayedDirectEditHelper implements Runnable {
 			viewer.getControl().removeMouseListener(mouse);
 			viewer.getControl().removeKeyListener(key);
 		}
-		activeHelper = null;
+		setActiveHelper(null);
 	}
 
+	public static synchronized void setActiveHelper(DelayedDirectEditHelper activeHelper) {
+		DelayedDirectEditHelper.activeHelper = activeHelper;
+	}
 }

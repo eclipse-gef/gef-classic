@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -100,6 +100,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param createRequest the create request
 	 * @return custom feedback figure
 	 */
+	@SuppressWarnings("static-method")
 	protected IFigure createSizeOnDropFeedback(CreateRequest createRequest) {
 		return null;
 	}
@@ -184,6 +185,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param request the ADD Request
 	 * @return A command to perform the ADD.
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getAddCommand(Request request) {
 		return null;
 	}
@@ -194,6 +196,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param request the clone request
 	 * @return the command contribution to the clone
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getCloneCommand(ChangeBoundsRequest request) {
 		return null;
 	}
@@ -246,6 +249,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param request the create request
 	 * @return insets, if necessary
 	 */
+	@SuppressWarnings("static-method")
 	protected Insets getCreationFeedbackOffset(CreateRequest request) {
 		return new Insets();
 	}
@@ -258,6 +262,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param request the Request
 	 * @return the Command to delete the child
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getDeleteDependantCommand(Request request) {
 		return null;
 	}
@@ -294,6 +299,7 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	 * @param request the Request
 	 * @return <code>null</code> or a Command to perform an orphan
 	 */
+	@SuppressWarnings("static-method")
 	protected Command getOrphanChildrenCommand(Request request) {
 		return null;
 	}

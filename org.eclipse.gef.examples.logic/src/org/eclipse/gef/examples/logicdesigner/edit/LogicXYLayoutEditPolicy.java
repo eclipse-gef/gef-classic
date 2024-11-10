@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2022 IBM Corporation and others.
+ * Copyright (c) 2001, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -75,6 +75,7 @@ public class LogicXYLayoutEditPolicy extends org.eclipse.gef.editpolicies.XYLayo
 		return result;
 	}
 
+	@SuppressWarnings("static-method")
 	protected Command chainGuideDetachmentCommand(Request request, LogicSubpart part, Command cmd, boolean horizontal) {
 		Command result = cmd;
 
@@ -189,11 +190,12 @@ public class LogicXYLayoutEditPolicy extends org.eclipse.gef.editpolicies.XYLayo
 		return editPolicy;
 	}
 
+	@SuppressWarnings("static-method")
 	protected int getResizeDirections(EditPart child) {
 		return getResizeDirections(child.getModel().getClass());
 	}
 
-	private static int getResizeDirections(Class modelClass) {
+	private static int getResizeDirections(Class<?> modelClass) {
 		if (LED.class.equals(modelClass) || SimpleOutput.class.isAssignableFrom(modelClass)) {
 			return PositionConstants.NONE;
 		}

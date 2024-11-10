@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -155,11 +155,10 @@ public abstract class TreeContainerEditPolicy extends AbstractEditPolicy {
 
 	private Tree getTree() {
 		Widget widget = ((TreeEditPart) getHost()).getWidget();
-		if (widget instanceof Tree) {
-			return (Tree) widget;
-		} else {
-			return ((TreeItem) widget).getParent();
+		if (widget instanceof Tree tree) {
+			return tree;
 		}
+		return ((TreeItem) widget).getParent();
 	}
 
 	private void insertMarkAfterLastChild(TreeItem[] children) {
@@ -169,7 +168,7 @@ public abstract class TreeContainerEditPolicy extends AbstractEditPolicy {
 		}
 	}
 
-	private boolean isInUpperHalf(Rectangle rect, org.eclipse.draw2d.geometry.Point pt) {
+	private static boolean isInUpperHalf(Rectangle rect, org.eclipse.draw2d.geometry.Point pt) {
 		Rectangle tempRect = new Rectangle(rect.x, rect.y, rect.width, rect.height / 2);
 		return tempRect.contains(new Point(pt.x, pt.y));
 	}

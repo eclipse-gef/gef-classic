@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -94,6 +94,7 @@ public class DimensionPropertySource implements IPropertySource {
 		return true;
 	}
 
+	@SuppressWarnings("static-method")
 	public boolean isPropertySet(String propName) {
 		return (ID_HEIGHT.equals(propName) || ID_WIDTH.equals(propName));
 	}

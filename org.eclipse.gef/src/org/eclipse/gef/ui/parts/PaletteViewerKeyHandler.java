@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -168,6 +168,7 @@ public class PaletteViewerKeyHandler extends GraphicalViewerKeyHandler {
 	 * Returns <code>true</code> if the passed Editpart is a collapsed
 	 * {@link org.eclipse.gef.ui.palette.DrawerEditPart Drawer}, false otherwise.
 	 */
+	@SuppressWarnings("static-method")
 	boolean isCollapsedDrawer(EditPart part) {
 		return part instanceof DrawerEditPart dEP && !dEP.isExpanded();
 	}
@@ -176,6 +177,7 @@ public class PaletteViewerKeyHandler extends GraphicalViewerKeyHandler {
 	 * Returns <code>true</code> if the passed Editpart is an expanded
 	 * {@link org.eclipse.gef.ui.palette.DrawerEditPart Drawer}, false otherwise.
 	 */
+	@SuppressWarnings("static-method")
 	boolean isExpandedDrawer(EditPart part) {
 		return part instanceof DrawerEditPart dEP && dEP.isExpanded();
 	}
@@ -184,6 +186,7 @@ public class PaletteViewerKeyHandler extends GraphicalViewerKeyHandler {
 	 * Returns <code>true</code> if the passed focusPart is a collapsed pinnable
 	 * palette stack, false otherwise.
 	 */
+	@SuppressWarnings("static-method")
 	boolean isCollapsedStack(EditPart focusPart) {
 		EditPart parent = focusPart.getParent();
 		return parent instanceof PaletteStackEditPart
@@ -194,6 +197,7 @@ public class PaletteViewerKeyHandler extends GraphicalViewerKeyHandler {
 	 * Returns <code>true</code> if the passed focusPart is an expanded pinnable
 	 * palette stack, false otherwise.
 	 */
+	@SuppressWarnings("static-method")
 	boolean isExpandedStack(EditPart focusPart) {
 		EditPart parent = focusPart.getParent();
 		return parent instanceof PaletteStackEditPart

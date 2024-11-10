@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -302,6 +302,7 @@ public class SnapToGeometry extends SnapToHelper {
 	 * @param part the child
 	 * @return the rectangular guide for that part
 	 */
+	@SuppressWarnings("static-method")
 	protected Rectangle getFigureBounds(GraphicalEditPart part) {
 		IFigure fig = part.getFigure();
 		return (fig instanceof HandleBounds hb) ? hb.getHandleBounds() : fig.getBounds();

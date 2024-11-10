@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -137,7 +137,7 @@ public class LogicDiagramEditPart extends LogicContainerEditPart implements Laye
 
 	@Override
 	public DragTracker getDragTracker(Request req) {
-		if (req instanceof SelectionRequest && ((SelectionRequest) req).getLastButtonPressed() == 3) {
+		if (req instanceof SelectionRequest selReq && selReq.getLastButtonPressed() == 3) {
 			return new DeselectAllTracker(this);
 		}
 		return new MarqueeDragTracker();
@@ -158,6 +158,7 @@ public class LogicDiagramEditPart extends LogicContainerEditPart implements Laye
 	 *
 	 * @return ConnectionAnchor
 	 */
+	@SuppressWarnings("static-method")
 	public ConnectionAnchor getSourceConnectionAnchor(int x, int y) {
 		return null;
 	}
@@ -177,6 +178,7 @@ public class LogicDiagramEditPart extends LogicContainerEditPart implements Laye
 	 *
 	 * @return ConnectionAnchor
 	 */
+	@SuppressWarnings("static-method")
 	public ConnectionAnchor getTargetConnectionAnchor(int x, int y) {
 		return null;
 	}

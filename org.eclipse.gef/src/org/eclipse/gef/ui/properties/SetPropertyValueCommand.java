@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -38,13 +38,13 @@ public class SetPropertyValueCommand extends Command {
 	protected static final Object DEFAULT_VALUE = new Object();
 
 	/** the value to set for the property */
-	private Object newValue;
+	private final Object newValue;
 	/** the old value of the property prior to executing this command */
 	private Object oldValue;
 	/** the id of the property whose value has to be set */
-	private Object propertyId;
+	private final Object propertyId;
 	/** the property source whose property has to be set */
-	private IPropertySource propertySource;
+	private final IPropertySource propertySource;
 
 	/**
 	 * Constructs a new {@link SetPropertyValueCommand}.
@@ -61,7 +61,7 @@ public class SetPropertyValueCommand extends Command {
 	 */
 	public SetPropertyValueCommand(String propertyLabel, IPropertySource propertySource, Object propertyId,
 			Object newValue) {
-		super(MessageFormat.format(GEFMessages.SetPropertyValueCommand_Label, new Object[] { propertyLabel }).trim());
+		super(MessageFormat.format(GEFMessages.SetPropertyValueCommand_Label, propertyLabel).trim());
 		this.propertySource = propertySource;
 		this.propertyId = propertyId;
 		this.newValue = newValue;
@@ -80,8 +80,8 @@ public class SetPropertyValueCommand extends Command {
 			// the notion of a default value and it does not already have this
 			// value
 			boolean canExecute = propertySource.isPropertySet(propertyId);
-			if (propertySource instanceof IPropertySource2) {
-				canExecute &= (((IPropertySource2) propertySource).isPropertyResettable(propertyId));
+			if (propertySource instanceof IPropertySource2 propertySource2) {
+				canExecute &= propertySource2.isPropertyResettable(propertyId);
 			}
 			return canExecute;
 		}
@@ -116,8 +116,8 @@ public class SetPropertyValueCommand extends Command {
 		// have to be resetted during undo); note that if the new value is
 		// DEFAULT_VALUE the old value may not have been the default value as
 		// well, as the command would not be executable in this case.
-		if (propertySource instanceof IPropertySource2) {
-			if (!wasPropertySet && ((IPropertySource2) propertySource).isPropertyResettable(propertyId)) {
+		if (propertySource instanceof IPropertySource2 propertySource2) {
+			if (!wasPropertySet && propertySource2.isPropertyResettable(propertyId)) {
 				oldValue = DEFAULT_VALUE;
 			}
 		} else {
@@ -191,9 +191,9 @@ public class SetPropertyValueCommand extends Command {
 		}
 	}
 
-	private Object unwrapValue(Object value) {
-		if (value instanceof IPropertySource) {
-			return ((IPropertySource) value).getEditableValue();
+	private static Object unwrapValue(Object value) {
+		if (value instanceof IPropertySource propertySource) {
+			return propertySource.getEditableValue();
 		}
 		return value;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -87,6 +87,7 @@ public abstract class ConstrainedLayoutEditPolicy extends LayoutEditPolicy {
 	 *              {@link #createAddCommand(ChangeBoundsRequest, EditPart, Object)}
 	 *              instead.
 	 */
+	@SuppressWarnings("static-method")
 	@Deprecated
 	protected Command createAddCommand(EditPart child, Object constraint) {
 		return null;
@@ -134,6 +135,7 @@ public abstract class ConstrainedLayoutEditPolicy extends LayoutEditPolicy {
 	 *              {@link #createChangeConstraintCommand(ChangeBoundsRequest, EditPart, Object)}
 	 *              instead.
 	 */
+	@SuppressWarnings("static-method")
 	@Deprecated
 	protected Command createChangeConstraintCommand(EditPart child, Object constraint) {
 		return null;
@@ -332,6 +334,7 @@ public abstract class ConstrainedLayoutEditPolicy extends LayoutEditPolicy {
 	 * @param figureConstraint the draw2d constraint
 	 * @return the model constraint
 	 */
+	@SuppressWarnings("static-method")
 	protected Object translateToModelConstraint(Object figureConstraint) {
 		return figureConstraint;
 	}

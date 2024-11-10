@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2024 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -107,17 +107,15 @@ public class LEDEditPart extends LogicEditPart {
 		return super.getAdapter(key);
 	}
 
-	protected Image getBackgroundImage(int state) {
+	private static Image getBackgroundImage(int state) {
 		if (state == SELECTED_PRIMARY) {
-			if (LED_SEL_PRIM_BG == null)
-			 {
+			if (LED_SEL_PRIM_BG == null) {
 				LED_SEL_PRIM_BG = createImage("icons/ledbgprim.gif"); //$NON-NLS-1$
 			}
 			return LED_SEL_PRIM_BG;
 		}
 		if (state == SELECTED) {
-			if (LED_SEL_SECD_BG == null)
-			 {
+			if (LED_SEL_SECD_BG == null) {
 				LED_SEL_SECD_BG = createImage("icons/ledbgsel.gif"); //$NON-NLS-1$
 			}
 			return LED_SEL_SECD_BG;

@@ -164,6 +164,7 @@ public abstract class LogicSubpart extends LogicElement {
 	/**
 	*
 	*/
+	@SuppressWarnings("static-method")
 	public boolean isPropertySet() {
 		return true;
 	}

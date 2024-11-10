@@ -155,7 +155,7 @@ public class DrawerFigure extends Figure {
 				return child.getPreferredSize(wHint, -1).height != child.getMinimumSize(wHint, -1).height;
 			}
 		});
-		
+
 		setBorder(new DrawerBackground());
 
 		Figure title = new Figure();
@@ -322,6 +322,7 @@ public class DrawerFigure extends Figure {
 		scrollpane.getContents().setBackgroundColor(PaletteColorUtil.WIDGET_LIST_BACKGROUND);
 	}
 
+	@SuppressWarnings("static-method")
 	IFigure buildTooltip() {
 		return null;
 	}
