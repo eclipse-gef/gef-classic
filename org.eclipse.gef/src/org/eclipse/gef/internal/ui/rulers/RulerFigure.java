@@ -187,7 +187,7 @@ public class RulerFigure extends Figure {
 		 * then every mark will be of medium size. If its value is 5, then every 5th
 		 * mark will be of medium size (the rest being of small size).
 		 */
-		int mediumMarkerDivNum = getMediumMakrerDivNum(divsPerMajorMark);
+		int mediumMarkerDivNum = getMediumMarkerDivNum(divsPerMajorMark);
 
 		/*
 		 * dotsPerDivision = number of pixels between each mark = number of pixels in a
