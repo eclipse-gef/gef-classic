@@ -120,7 +120,7 @@ class DelayedDirectEditHelper implements Runnable {
 		setActiveHelper(null);
 	}
 
-	public static synchronized void setActiveHelper(DelayedDirectEditHelper activeHelper) {
+	private static synchronized void setActiveHelper(DelayedDirectEditHelper activeHelper) {
 		DelayedDirectEditHelper.activeHelper = activeHelper;
 	}
 }
