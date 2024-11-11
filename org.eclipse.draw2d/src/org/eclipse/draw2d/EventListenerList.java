@@ -50,8 +50,7 @@ public final class EventListenerList {
 	 * @return whether this list contains a listener of type <i>c</i>
 	 */
 	public synchronized <T> boolean containsListener(Class<T> c) {
-		Deque<Object> specListeners = listeners.get(c);
-		return specListeners != null && !specListeners.isEmpty();
+		return listeners.containsKey(c);
 	}
 
 	/**
