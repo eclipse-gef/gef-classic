@@ -343,7 +343,7 @@ public class RulerFigure extends Figure {
 		return divsPerMajorMark;
 	}
 
-	private static int getMediumMakrerDivNum(int divsPerMajorMark) {
+	private static int getMediumMarkerDivNum(int divsPerMajorMark) {
 		return switch (divsPerMajorMark) {
 		case 20, 10, 5 -> 5;
 		case 16, 8 -> 4;
