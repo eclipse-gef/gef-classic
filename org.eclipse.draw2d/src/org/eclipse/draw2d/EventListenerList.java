@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * This class is intended for internal use only. TODO: If this is for internal
@@ -25,8 +25,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  */
 public final class EventListenerList {
 
-	private final Map<Class<?>, Deque<Object>> listeners = new HashMap<>();
-	private static final Deque<Object> EMPTY_DEQUE = new ArrayDeque<>();
+	private final Map<Class<?>, List<Object>> listeners = new HashMap<>();
 
 	/**
 	 * Adds a listener of type <i>c</i> to the list.
@@ -39,7 +38,7 @@ public final class EventListenerList {
 			throw new IllegalArgumentException();
 		}
 
-		listeners.computeIfAbsent(c, newC -> new ConcurrentLinkedDeque<>()).add(listener);
+		listeners.computeIfAbsent(c, newC -> new CopyOnWriteArrayList<>()).add(listener);
 	}
 
 	/**
@@ -61,7 +60,7 @@ public final class EventListenerList {
 	 */
 	@SuppressWarnings("unchecked")
 	public synchronized <T> Iterator<T> getListeners(final Class<T> listenerType) {
-		return (Iterator<T>) listeners.getOrDefault(listenerType, EMPTY_DEQUE).iterator();
+		return (Iterator<T>) listeners.getOrDefault(listenerType, Collections.emptyList()).iterator();
 	}
 
 	/**
@@ -73,7 +72,7 @@ public final class EventListenerList {
 	 */
 	@SuppressWarnings("unchecked")
 	public synchronized <T> Iterable<T> getListenersIterable(final Class<T> listenerType) {
-		return (Iterable<T>) listeners.getOrDefault(listenerType, EMPTY_DEQUE);
+		return (Iterable<T>) listeners.getOrDefault(listenerType, Collections.emptyList());
 	}
 
 	/**
@@ -87,7 +86,7 @@ public final class EventListenerList {
 			throw new IllegalArgumentException();
 		}
 
-		Deque<Object> specListeners = listeners.get(c);
+		List<Object> specListeners = listeners.get(c);
 		if (specListeners != null) {
 			specListeners.remove(listener);
 			if (specListeners.isEmpty()) {
