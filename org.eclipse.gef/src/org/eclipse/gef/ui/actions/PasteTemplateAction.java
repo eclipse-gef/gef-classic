@@ -66,7 +66,7 @@ public class PasteTemplateAction extends SelectionAction {
 	 */
 	protected Command createPasteCommand() {
 		Command result = null;
-		List<Object> selection = getSelectedObjects();
+		List<?> selection = getSelectedObjects();
 		if (selection != null && selection.size() == 1 && selection.get(0) instanceof GraphicalEditPart gep) {
 			Object template = getClipboardContents();
 			if (template != null) {

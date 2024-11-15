@@ -65,11 +65,14 @@ public abstract class SelectionAction extends WorkbenchPartAction {
 	}
 
 	/**
-	 * Returns a <code>List</code> containing the currently selected objects.
+	 * Returns a {@code List<EditPart} containing the currently selected objects.
+	 * The {@code set} method is supported but the {@code add}, {@code addAll},
+	 * {@code remove} {@code removeAll} methods are not. Changes to this list modify
+	 * the internal {@link #selection}.
 	 *
 	 * @return A List containing the currently selected objects.
 	 */
-	protected List<Object> getSelectedObjects() {
+	protected List<?> getSelectedObjects() {
 		if (!(getSelection() instanceof IStructuredSelection)) {
 			return Collections.emptyList();
 		}
@@ -77,14 +80,26 @@ public abstract class SelectionAction extends WorkbenchPartAction {
 	}
 
 	/**
-	 * Returns a <code>List<EditPart></code> containing the currently selected
-	 * EditParts.
+	 * Returns a {@code List<EditPart} containing the currently selected EditParts.
+	 * If elements not of type EditPart are selected, an empty list is returned. The
+	 * {@code set} method is supported but the {@code add}, {@code addAll},
+	 * {@code remove} {@code removeAll} methods are not. Changes to this list modify
+	 * the internal {@link #selection}.<br>
+	 * <em>Note:</em> This method only checks whether the first selected element is
+	 * of type {@link EditPart} and then performs a lazy cast from {@code List<?>}
+	 * to {@code List<EditPart>}. It should therefore only be called when a single
+	 * type of objects are selected.
 	 *
 	 * @return A List containing the currently selected EditParts.
 	 * @since 3.20
 	 */
+	@SuppressWarnings("unchecked") // We don't expect a "mixed" selection
 	protected final List<EditPart> getSelectedEditParts() {
-		return getSelectedObjects().stream().filter(EditPart.class::isInstance).map(EditPart.class::cast).toList();
+		List<?> selectedObjects = getSelectedObjects();
+		if (selectedObjects.isEmpty() || !(selectedObjects.get(0) instanceof EditPart)) {
+			return Collections.emptyList();
+		}
+		return (List<EditPart>) selectedObjects;
 	}
 
 	/**
