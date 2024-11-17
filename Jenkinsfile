@@ -141,6 +141,7 @@ def void mvn() {
            -Dcommit.id=$GIT_COMMIT \
            -Dbuild.type=$BUILD_TYPE \
            -Dorg.eclipse.justj.p2.manager.build.url=$JOB_URL \
+           -Dsonar.exclusions=**/.tycho-consumer-pom.xml \
            -Dsonar.projectKey=gef-classic \
            -Dsonar.organization=eclipse \
            clean \
