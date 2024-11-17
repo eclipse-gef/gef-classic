@@ -89,6 +89,9 @@
 						<plugin id="org.eclipse.gef.doc.isv" />
 						<plugin id="org.eclipse.zest.doc.isv" />
 						<!-- also possible to exclude feature-->
+						<feature id="org.eclipse.draw2d.source" />
+						<feature id="org.eclipse.gef.source" />
+						<feature id="org.eclipse.zest.source" />
 					  </excludes>
 					</configuration>
 				  </execution>
