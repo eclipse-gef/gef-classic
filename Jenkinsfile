@@ -98,6 +98,7 @@ BRANCH_NAME=${env.BRANCH_NAME}
   post {
     always {
       junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+      discoverGitReferenceBuild referenceJob: 'build-classic/master'
       recordIssues publishAllIssues: true, tools: [java(), mavenConsole(), javaDoc()]
     }
 
