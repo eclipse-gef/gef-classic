@@ -72,7 +72,8 @@ public abstract class SelectionAction extends WorkbenchPartAction {
 	 *
 	 * @return A List containing the currently selected objects.
 	 */
-	protected List<?> getSelectedObjects() {
+	@SuppressWarnings("unchecked")
+	protected List<Object> getSelectedObjects() {
 		if (!(getSelection() instanceof IStructuredSelection)) {
 			return Collections.emptyList();
 		}
