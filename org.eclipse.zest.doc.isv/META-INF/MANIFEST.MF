@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.zest.doc.isv; singleton:=true
-Bundle-Version: 1.8.900.qualifier
+Bundle-Version: 1.8.1000.qualifier
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.swt;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
  org.eclipse.jface;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
  org.eclipse.draw2d;bundle-version="[3.16.0,4.0.0)";resolution:=optional,

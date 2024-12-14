@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.draw2d.doc.isv; singleton:=true
-Bundle-Version: 3.13.300.qualifier
+Bundle-Version: 3.13.400.qualifier
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.swt;bundle-version="[3.2.0,4.0.0)";resolution:=optional,
  org.eclipse.platform.doc.isv;bundle-version="[3.2.0,5.0.0)";resolution:=optional

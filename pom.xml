@@ -5,20 +5,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.gef_root</groupId>
 	<artifactId>org.eclipse.gef.releng</artifactId>
-	<version>3.20.0-SNAPSHOT</version>
+	<version>3.23.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>		
-		<cbi-plugins.version>1.5.0</cbi-plugins.version>
+		<cbi-plugins.version>1.5.2</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.21.0</comparator.repo>
+		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.22.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
-		<asciidoctor-maven-plugin.version>2.2.4</asciidoctor-maven-plugin.version>
+		<asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.5.0</jruby.version>
 	</properties>
 

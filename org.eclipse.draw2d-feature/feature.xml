@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.draw2d"
       label="%featureName"
-      version="3.22.0.qualifier"
+      version="3.23.0.qualifier"
       provider-name="%providerName"
       license-feature="org.eclipse.license"
       license-feature-version="0.0.0">
