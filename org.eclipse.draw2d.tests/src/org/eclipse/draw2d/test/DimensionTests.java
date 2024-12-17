@@ -141,7 +141,7 @@ public class DimensionTests extends BaseTestCase {
 		assertEquals(template, testDimension);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testExpand() {
 		// check work expand(Dimension)
@@ -238,7 +238,7 @@ public class DimensionTests extends BaseTestCase {
 		assertEquals(template, testDimension);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testGetDifference() {
 		Dimension template1 = new Dimension(17, 18);

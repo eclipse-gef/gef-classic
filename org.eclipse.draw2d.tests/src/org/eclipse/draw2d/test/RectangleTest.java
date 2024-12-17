@@ -360,7 +360,7 @@ public class RectangleTest extends BaseTestCase {
 		assertEquals(-100, 200, 1024, 768, testRectangle);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testCrop() {
 		Rectangle template = new Rectangle(10, 15, 70, 30);
@@ -504,7 +504,7 @@ public class RectangleTest extends BaseTestCase {
 		assertEquals(2, 1, 4, 3, template);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testUnionDimension() {
 		Rectangle template = new Rectangle(1, 2, 3, 4);
@@ -768,7 +768,7 @@ public class RectangleTest extends BaseTestCase {
 		assertEquals(10, 10, 20, 30, rectangle);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testGetCropped() {
 		// check work getCropped() with null Insets
