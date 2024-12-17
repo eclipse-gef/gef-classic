@@ -14,7 +14,6 @@
 package org.eclipse.gef.examples.ui.pde.internal.wizards;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
@@ -41,7 +41,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
@@ -63,7 +63,7 @@ import org.eclipse.gef.examples.ui.pde.internal.l10n.Messages;
  *
  * @see Wizard
  */
-abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWizard, IExecutableExtension {
+public abstract class ProjectUnzipperNewWizard extends Wizard implements INewWizard, IExecutableExtension {
 
 	/**
 	 * Java Nature
@@ -84,32 +84,32 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	/**
 	 * The name of the project creation page
 	 */
-	private String pageName;
+	private final String pageName;
 
 	/**
 	 * The title of the project creation page
 	 */
-	private String pageTitle;
+	private final String pageTitle;
 
 	/**
 	 * The description of the project creation page
 	 */
-	private String pageDescription;
+	private final String pageDescription;
 
 	/**
 	 * The name of the project in the project creation page
 	 */
-	private String pageProjectName;
+	private final String pageProjectName;
 
 	/**
 	 * The list of paths pointing to the location of the project archives
 	 */
-	private URL[] projectZipURL;
+	private final URL[] projectZipURL;
 
 	/**
 	 * The list of formats to be applied to the user supplied name
 	 */
-	private String[] nameFormats;
+	private final String[] nameFormats;
 
 	/**
 	 * The configuration element associated with this new project wizard
@@ -126,7 +126,7 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 * @param projectZipURLIn   The URL pointing to the location of the project
 	 *                          archive
 	 */
-	public ProjectUnzipperNewWizard(String pageNameIn, String pageTitleIn, String pageDescriptionIn,
+	protected ProjectUnzipperNewWizard(String pageNameIn, String pageTitleIn, String pageDescriptionIn,
 			String pageProjectNameIn, URL projectZipURLIn) {
 		this(pageNameIn, pageTitleIn, pageDescriptionIn, pageProjectNameIn, new URL[] { projectZipURLIn },
 				new String[] { "{0}" }); //$NON-NLS-1$
@@ -141,7 +141,7 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 * @param pageProjectNameIn   The project name in the project creation page
 	 * @param projectZipURLListIn The list of URL pointing to the location of the
 	 *                            project archives
-	 * @param formatsIn           The list of formats to be applied to the user
+	 * @param nameFormatsIn       The list of formats to be applied to the user
 	 *                            supplied name. The {@link java.text.MessageFormat}
 	 *                            class should be consulted to understand
 	 *                            substitutions. The &quot;{0}&quot; substitution
@@ -150,14 +150,8 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 *                            which will completely ignore the user supplied
 	 *                            name.
 	 */
-	public ProjectUnzipperNewWizard(String pageNameIn, String pageTitleIn, String pageDescriptionIn,
+	protected ProjectUnzipperNewWizard(String pageNameIn, String pageTitleIn, String pageDescriptionIn,
 			String pageProjectNameIn, URL[] projectZipURLListIn, String[] nameFormatsIn) {
-		super();
-
-		// assert projectZipURLListIn.length > 0;
-		// assert nameFormatsIn.length > 0;
-		// assert projectZipURLListIn.length == nameFormatsIn.length;
-
 		pageName = pageNameIn;
 		pageTitle = pageTitleIn;
 		pageDescription = pageDescriptionIn;
@@ -182,18 +176,13 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 				@Override
 				public void execute(IProgressMonitor monitor) throws InterruptedException {
 					try {
-						monitor.beginTask(Messages.monitor_creatingProject, 120);
+						SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.monitor_creatingProject, 150);
 
-						/*
-						 * Create the project folder
-						 */
 						IPath projectPath = wizardNewProjectCreationPage.getLocationPath();
 
 						for (int i = 0; i < nameFormats.length; i++) {
 							String projectName = MessageFormat.format(nameFormats[i],
-									new Object[] { wizardNewProjectCreationPage.getProjectName() });
-							String projectFolder = projectPath.toOSString() + File.separator + projectName;
-							File projectFolderFile = new File(projectFolder);
+									wizardNewProjectCreationPage.getProjectName());
 
 							IWorkspace workspace = ResourcesPlugin.getWorkspace();
 							IProject project = workspace.getRoot().getProject(projectName);
@@ -201,31 +190,11 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 							// If the project does not exist, we will create it
 							// and populate it.
 							if (!project.exists()) {
-								projectFolderFile.mkdirs();
-								monitor.worked(10);
-
-								/*
-								 * Copy plug-in project code
-								 */
-								extractProject(projectFolderFile, getProjectZipURL()[i],
-										new SubProgressMonitor(monitor, 100));
-
-								if (monitor.isCanceled()) {
-									throw new InterruptedException();
-								}
-
-								if (projectPath.equals(workspace.getRoot().getLocation())) {
-									project.create(monitor);
-								} else {
-									IProjectDescription desc = workspace.newProjectDescription(project.getName());
-									desc.setLocation(new Path(projectFolder));
-
-									project.create(desc, monitor);
-								}
+								createProject(subMonitor, projectPath, project, getProjectZipURL()[i]);
 							}
 
 							// Now, we ensure that the project is open.
-							project.open(monitor);
+							project.open(subMonitor.newChild(10));
 
 							renameProject(project, projectName);
 
@@ -233,10 +202,10 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 							IProjectDescription desc = workspace.newProjectDescription(project.getName());
 							desc.setNatureIds(
 									new String[] { ORG_ECLIPSE_PDE_PLUGIN_NATURE, ORG_ECLIPSE_JDT_CORE_JAVANATURE });
-							project.setDescription(desc, monitor);
+							project.setDescription(desc, subMonitor.newChild(10));
 
-							monitor.worked(10);
-							if (monitor.isCanceled()) {
+							subMonitor.worked(10);
+							if (subMonitor.isCanceled()) {
 								throw new InterruptedException();
 							}
 						} // end for
@@ -245,8 +214,6 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 						throw new RuntimeException(e);
 					} catch (CoreException e) {
 						throw new RuntimeException(e);
-					} finally {
-						monitor.done();
 					}
 				}
 			};
@@ -269,43 +236,49 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 		return true;
 	}
 
+	private static void createProject(SubMonitor subMonitor, IPath projectPath, IProject project, URL projectZipUrl)
+			throws IOException, InterruptedException, CoreException {
+		String projectFolder = projectPath.toOSString() + File.separator + project.getName();
+		File projectFolderFile = new File(projectFolder);
+		projectFolderFile.mkdirs();
+		subMonitor.worked(10);
+
+		// Copy plug-in project code
+		extractProject(projectFolderFile, projectZipUrl, subMonitor.newChild(100));
+
+		if (subMonitor.isCanceled()) {
+			throw new InterruptedException();
+		}
+
+		if (projectPath.equals(project.getWorkspace().getRoot().getLocation())) {
+			project.create(subMonitor.newChild(10));
+		} else {
+			IProjectDescription desc = project.getWorkspace().newProjectDescription(project.getName());
+			desc.setLocation(new Path(projectFolder));
+
+			project.create(desc, subMonitor.newChild(10));
+		}
+	}
+
 	/**
 	 * Unzip the project archive to the specified folder
 	 *
 	 * @param projectFolderFile The folder where to unzip the project archive
 	 * @param monitor           Monitor to display progress and/or cancel operation
 	 * @throws IOException
-	 * @throws IOException
-	 * @throws InterruptedException
-	 * @throws FileNotFoundException
-	 *
-	 * @throws FileNotFoundException
 	 * @throws InterruptedException
 	 */
-	private void extractProject(File projectFolderFile, URL url, IProgressMonitor monitor)
-			throws FileNotFoundException, IOException, InterruptedException {
-
-		/*
-		 * Get project archive
-		 */
-		// URL urlZip = PdeUiPlugin.getDefault().find();
-		// URL urlZipLocal = Platform.asLocalURL(urlZip);
+	private static void extractProject(File projectFolderFile, URL url, IProgressMonitor monitor)
+			throws IOException, InterruptedException {
+		// Get project archive
 		URL urlZipLocal = FileLocator.toFileURL(url);
 
-		/*
-		 * Walk each element and unzip
-		 */
-		ZipFile zipFile = new ZipFile(urlZipLocal.getPath());
-
-		try {
-			/*
-			 * Allow for a hundred work units
-			 */
+		// Walk each element and unzip
+		try (ZipFile zipFile = new ZipFile(urlZipLocal.getPath())) {
+			// Allow for a hundred work units
 			monitor.beginTask(Messages.monitor_unzippingProject, zipFile.size());
-
 			unzip(zipFile, projectFolderFile, monitor);
 		} finally {
-			zipFile.close();
 			monitor.done();
 		}
 	}
@@ -317,75 +290,37 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 * @param projectFolderFile The folder where to unzip the project archive
 	 * @param monitor           Monitor to display progress and/or cancel operation
 	 * @throws IOException
-	 * @throws FileNotFoundException
 	 * @throws InterruptedException
 	 */
-	private void unzip(ZipFile zipFile, File projectFolderFile, IProgressMonitor monitor)
-			throws IOException, FileNotFoundException, InterruptedException {
+	private static void unzip(ZipFile zipFile, File projectFolderFile, IProgressMonitor monitor)
+			throws IOException, InterruptedException {
 
-		Enumeration e = zipFile.entries();
+		Enumeration<? extends ZipEntry> e = zipFile.entries();
 
 		while (e.hasMoreElements()) {
-			ZipEntry zipEntry = (ZipEntry) e.nextElement();
+			ZipEntry zipEntry = e.nextElement();
 			File file = new File(projectFolderFile, zipEntry.getName());
 
-			if (false == zipEntry.isDirectory()) {
+			if (!zipEntry.isDirectory()) {
 
-				/*
-				 * Copy files (and make sure parent directory exist)
-				 */
+				// Copy files (and make sure parent directory exist)
 				File parentFile = file.getParentFile();
-				if (null != parentFile && false == parentFile.exists()) {
+				if (null != parentFile && !parentFile.exists()) {
 					parentFile.mkdirs();
 				}
 
 				Path path = new Path(file.getPath());
 				if (path.getFileExtension().equals("java")) { //$NON-NLS-1$
-					InputStreamReader is = null;
-					OutputStreamWriter os = null;
-
-					try {
-						is = new InputStreamReader(zipFile.getInputStream(zipEntry), "ISO-8859-1"); //$NON-NLS-1$
-						os = new OutputStreamWriter(new FileOutputStream(file), ResourcesPlugin.getEncoding());
-						char[] buffer = new char[102400];
-						while (true) {
-							int len = is.read(buffer);
-							if (len < 0) {
-								break;
-							}
-							os.write(buffer, 0, len);
-						}
-					} finally {
-						if (null != is) {
-							is.close();
-						}
-						if (null != os) {
-							os.close();
-						}
+					try (InputStreamReader is = new InputStreamReader(zipFile.getInputStream(zipEntry),
+							StandardCharsets.UTF_8);
+							OutputStreamWriter os = new OutputStreamWriter(new FileOutputStream(file),
+									ResourcesPlugin.getEncoding());) {
+						is.transferTo(os);
 					}
 				} else {
-					InputStream is = null;
-					OutputStream os = null;
-
-					try {
-						is = zipFile.getInputStream(zipEntry);
-						os = new FileOutputStream(file);
-
-						byte[] buffer = new byte[102400];
-						while (true) {
-							int len = is.read(buffer);
-							if (len < 0) {
-								break;
-							}
-							os.write(buffer, 0, len);
-						}
-					} finally {
-						if (null != is) {
-							is.close();
-						}
-						if (null != os) {
-							os.close();
-						}
+					try (InputStream is = zipFile.getInputStream(zipEntry);
+							OutputStream os = new FileOutputStream(file);) {
+						is.transferTo(os);
 					}
 				}
 			}
@@ -405,7 +340,7 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 * @param projectName New name for the project
 	 * @throws CoreException
 	 */
-	private void renameProject(IProject project, String projectName) throws CoreException {
+	private static void renameProject(IProject project, String projectName) throws CoreException {
 		IProjectDescription description = project.getDescription();
 		description.setName(projectName);
 		project.move(description, IResource.FORCE | IResource.SHALLOW, null);
@@ -419,15 +354,10 @@ abstract public class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 	 */
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-
 		wizardNewProjectCreationPage = new WizardNewProjectCreationPage(getPageName());
-
 		wizardNewProjectCreationPage.setTitle(getPageTitle());
-
 		wizardNewProjectCreationPage.setDescription(getPageDescription());
-
 		wizardNewProjectCreationPage.setInitialProjectName(getPageProjectName());
-
 		this.addPage(wizardNewProjectCreationPage);
 	}
 
