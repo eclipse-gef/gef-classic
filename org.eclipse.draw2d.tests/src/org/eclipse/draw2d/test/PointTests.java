@@ -87,7 +87,7 @@ public class PointTests extends BaseTestCase {
 		assertEquals(-1, 2, new Point(-1, 2));
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testConstructorDoubleDouble() {
 		assertEquals((int) Math.PI, (int) -Math.E, new Point(Math.PI, -Math.E));
@@ -198,7 +198,7 @@ public class PointTests extends BaseTestCase {
 		assertEquals(5, new Point(-1, -2).getDistance(new Point(-5, 1)), 0);
 	}
 
-	@SuppressWarnings("static-method")
+	@SuppressWarnings({ "static-method", "removal" })
 	@Test
 	public void testGetDistanceOrthogonal() {
 		assertEquals(53, new Point(10, 20).getDistanceOrthogonal(new Point(51, 32)));

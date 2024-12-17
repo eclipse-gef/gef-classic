@@ -144,7 +144,7 @@ public class Label extends Figure implements PositionConstants {
 
 		calculatePlacement();
 		calculateAlignment();
-		Dimension offset = getSize().getDifference(getPreferredSize());
+		Dimension offset = getSize().getShrinked(getPreferredSize());
 		offset.width += getTextSize().width - getSubStringTextSize().width;
 		switch (labelAlignment) {
 		case CENTER:

@@ -17,7 +17,12 @@ package org.eclipse.draw2d.geometry;
  */
 public class Transform {
 
-	private double scaleX = 1.0, scaleY = 1.0, dx, dy, cos = 1.0, sin;
+	private double scaleX = 1.0;
+	private double scaleY = 1.0;
+	private double dx;
+	private double dy;
+	private double cos = 1.0;
+	private double sin;
 
 	/**
 	 * Sets the value for the amount of scaling to be done along both axes.
@@ -83,7 +88,7 @@ public class Transform {
 		temp = x * cos - y * sin;
 		y = x * sin + y * cos;
 		x = temp;
-		return new Point(Math.round(x + dx), Math.round(y + dy));
+		return new Point((int) Math.round(x + dx), (int) Math.round(y + dy));
 	}
 
 }
