@@ -20,6 +20,7 @@
 		<surefire.timeout>300</surefire.timeout>
 		<asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.5.0</jruby.version>
+		<JDK>SYSTEM</JDK>
 	</properties>
 
 	<build>
@@ -44,6 +45,7 @@
 					<log>xml</log>
 					<logDirectory>${project.build.directory}/ecj</logDirectory>
 					<showWarnings>true</showWarnings>
+					<useJDK>${JDK}</useJDK>
 				</configuration>
 			</plugin>
 			
