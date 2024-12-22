@@ -176,7 +176,7 @@ public abstract class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 				@Override
 				public void execute(IProgressMonitor monitor) throws InterruptedException {
 					try {
-						SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.monitor_creatingProject, 150);
+						SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.monitor_creatingProject, 140 * nameFormats.length);
 
 						IPath projectPath = wizardNewProjectCreationPage.getLocationPath();
 
