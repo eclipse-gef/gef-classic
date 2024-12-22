@@ -204,7 +204,6 @@ public abstract class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 									new String[] { ORG_ECLIPSE_PDE_PLUGIN_NATURE, ORG_ECLIPSE_JDT_CORE_JAVANATURE });
 							project.setDescription(desc, subMonitor.newChild(10));
 
-							subMonitor.worked(10);
 							if (subMonitor.isCanceled()) {
 								throw new InterruptedException();
 							}
