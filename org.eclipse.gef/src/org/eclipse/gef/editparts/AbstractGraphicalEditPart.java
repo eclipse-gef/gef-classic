@@ -498,8 +498,8 @@ public abstract class AbstractGraphicalEditPart extends AbstractEditPart impleme
 	 * @return the List of model source connections
 	 */
 	@SuppressWarnings("static-method")
-	protected List getModelSourceConnections() {
-		return Collections.EMPTY_LIST;
+	protected List<?> getModelSourceConnections() {
+		return Collections.emptyList();
 	}
 
 	/**
@@ -514,8 +514,8 @@ public abstract class AbstractGraphicalEditPart extends AbstractEditPart impleme
 	 * @return the List of model target connections
 	 */
 	@SuppressWarnings("static-method")
-	protected List getModelTargetConnections() {
-		return Collections.EMPTY_LIST;
+	protected List<?> getModelTargetConnections() {
+		return Collections.emptyList();
 	}
 
 	/**
