@@ -21,9 +21,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphContentProvider;
@@ -37,9 +37,11 @@ public class GraphJFaceSnippet4 {
 		public Object getDestination(Object rel) {
 			if (Messages.Rock2Paper.equals(rel)) {
 				return Messages.Rock;
-			} else if (Messages.Paper2Scissors.equals(rel)) {
+			}
+			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Paper;
-			} else if (Messages.Scissors2Rock.equals(rel)) {
+			}
+			if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Scissors;
 			}
 			return null;
@@ -54,16 +56,14 @@ public class GraphJFaceSnippet4 {
 		public Object getSource(Object rel) {
 			if (Messages.Rock2Paper.equals(rel)) {
 				return Messages.Paper;
-			} else if (Messages.Paper2Scissors.equals(rel)) {
+			}
+			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Scissors;
-			} else if (Messages.Scissors2Rock.equals(rel)) {
+			}
+			if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Rock;
 			}
 			return null;
-		}
-
-		public double getWeight(Object connection) {
-			return 0;
 		}
 
 		@Override
@@ -114,13 +114,12 @@ public class GraphJFaceSnippet4 {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				System.out
-						.println("Selection Changed: " + selectionToString((StructuredSelection) event.getSelection())); //$NON-NLS-1$
+				System.out.println("Selection Changed: " + selectionToString(event.getStructuredSelection())); //$NON-NLS-1$
 			}
 
-			private String selectionToString(StructuredSelection selection) {
+			private String selectionToString(IStructuredSelection selection) {
 				StringBuffer stringBuffer = new StringBuffer();
-				Iterator iterator = selection.iterator();
+				Iterator<?> iterator = selection.iterator();
 				boolean first = true;
 				while (iterator.hasNext()) {
 					if (first) {

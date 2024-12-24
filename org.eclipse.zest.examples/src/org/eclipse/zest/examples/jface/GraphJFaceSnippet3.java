@@ -72,10 +72,6 @@ public class GraphJFaceSnippet3 {
 			return parts[0];
 		}
 
-		public double getWeight(Object connection) {
-			return 0;
-		}
-
 		@Override
 		public void dispose() {
 

@@ -75,10 +75,6 @@ public class GraphJFaceSnippet5 {
 			this.elements = elements;
 		}
 
-		public double getWeight(Object connection) {
-			return 0;
-		}
-
 		@Override
 		public void dispose() {
 		}

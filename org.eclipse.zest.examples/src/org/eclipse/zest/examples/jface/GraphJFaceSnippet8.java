@@ -62,10 +62,6 @@ public class GraphJFaceSnippet8 {
 			return new String[] { Messages.First, Messages.Second, Messages.Third };
 		}
 
-		public double getWeight(Object entity1, Object entity2) {
-			return 0;
-		}
-
 		@Override
 		public void dispose() {
 
@@ -101,7 +97,7 @@ public class GraphJFaceSnippet8 {
 			pc.setSourceDecoration(createDecoration(ColorConstants.green));
 		}
 
-		private PolygonDecoration createDecoration(final Color color) {
+		private static PolygonDecoration createDecoration(final Color color) {
 			PolygonDecoration decoration = new PolygonDecoration() {
 				@Override
 				protected void fillShape(Graphics g) {

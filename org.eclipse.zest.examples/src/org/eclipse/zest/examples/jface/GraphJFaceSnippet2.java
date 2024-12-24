@@ -46,7 +46,8 @@ public class GraphJFaceSnippet2 {
 		public Object getDestination(Object rel) {
 			if (Messages.Rock2Paper.equals(rel)) {
 				return Messages.Rock;
-			} else if (Messages.Paper2Scissors.equals(rel)) {
+			}
+			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Paper;
 			} else if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Scissors;
@@ -63,16 +64,13 @@ public class GraphJFaceSnippet2 {
 		public Object getSource(Object rel) {
 			if (Messages.Rock2Paper.equals(rel)) {
 				return Messages.Paper;
-			} else if (Messages.Paper2Scissors.equals(rel)) {
+			}
+			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Scissors;
 			} else if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Rock;
 			}
 			return null;
-		}
-
-		public double getWeight(Object connection) {
-			return 0;
 		}
 
 		@Override

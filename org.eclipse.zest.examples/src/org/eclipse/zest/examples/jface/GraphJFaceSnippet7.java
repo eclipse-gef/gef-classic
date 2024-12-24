@@ -93,10 +93,6 @@ public class GraphJFaceSnippet7 {
 			return new String[] { Messages.First, Messages.Second, Messages.Third };
 		}
 
-		public double getWeight(Object entity1, Object entity2) {
-			return 0;
-		}
-
 		@Override
 		public void dispose() {
 

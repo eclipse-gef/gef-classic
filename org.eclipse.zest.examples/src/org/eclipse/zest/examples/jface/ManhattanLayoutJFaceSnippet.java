@@ -29,6 +29,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.GraphViewer;
+import org.eclipse.zest.core.viewers.IConnectionStyleProvider;
 import org.eclipse.zest.core.viewers.IConnectionStyleProvider2;
 import org.eclipse.zest.core.viewers.IEntityConnectionStyleProvider2;
 import org.eclipse.zest.core.viewers.IGraphContentProvider;
@@ -40,8 +41,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 
 /**
- * This snippet shows how to use the {@link IConnectionRouterStyleProvider}
- * interface to set the connection router for some references.
+ * This snippet shows how to use the {@link IConnectionStyleProvider} interface
+ * to set the connection router for some references.
  *
  * Based on {@link GraphJFaceSnippet4}.
  *
@@ -86,10 +87,6 @@ public class ManhattanLayoutJFaceSnippet {
 			return null;
 		}
 
-		public double getWeight(Object connection) {
-			return 0;
-		}
-
 		@Override
 		public void dispose() {
 		}
@@ -118,6 +115,7 @@ public class ManhattanLayoutJFaceSnippet {
 
 		/* Relation-based customization: IConnectionStyleProvider */
 
+		@Override
 		public ConnectionRouter getRouter(Object rel) {
 			if (!rel.equals(Messages.Scissors2Rock)) {
 				return new ManhattanConnectionRouter();
@@ -237,7 +235,7 @@ public class ManhattanLayoutJFaceSnippet {
 
 			private String selectionToString(StructuredSelection selection) {
 				StringBuffer stringBuffer = new StringBuffer();
-				Iterator iterator = selection.iterator();
+				Iterator<?> iterator = selection.iterator();
 				boolean first = true;
 				while (iterator.hasNext()) {
 					if (first) {
