@@ -7,18 +7,18 @@
 	</target>
 
 	<target name="generateJavadoc">
-		<echo message="Cleaning reference/api..." />
+		<echo level="info" message="Cleaning reference/api..." />
 		<delete dir="reference/api" />
 		<mkdir dir="reference/api" />
-		<echo message="Done." />
+		<echo level="info" message="Done." />
 
-		<echo message="Determining path to javadoc executable, using home dir ${java.home}..." />
+		<echo level="info" message="Determining path to javadoc executable, using home dir ${java.home}..." />
 		<available file="${java.home}/bin/javadoc.exe" property="javadoc" value="${java.home}/bin/javadoc.exe" />
 		<available file="${java.home}/../bin/javadoc" property="javadoc" value="${java.home}/../bin/javadoc" />
 		<available file="${java.home}/bin/javadoc" property="javadoc" value="${java.home}/bin/javadoc" />
-		<echo message="Done: ${javadoc}" />
+		<echo level="info" message="Done: ${javadoc}" />
 
-		<echo message="Determining args list delimiter..." />
+		<echo level="info" message="Determining args list delimiter..." />
 		<condition property="args.list.delimiter" value=":">
 			<or>
 				<os family="unix" />
@@ -28,9 +28,9 @@
 		<condition property="args.list.delimiter" value=";">
 			<os family="windows" />
 		</condition>
-		<echo message="Done: ${args.list.delimiter}" />
+		<echo level="info" message="Done: ${args.list.delimiter}" />
 
-		<echo message="Determining context libs for javadoc generation ..." />
+		<echo level="info" message="Determining context libs for javadoc generation ..." />
 		<path id="api.context.libs">
 			<fileset dir="api-context-libs">
 				<include name="*.jar" />
@@ -39,27 +39,27 @@
 		<pathconvert property="api.context.libs.classpath" pathsep="${args.list.delimiter}">
 			<path refid="api.context.libs" />
 		</pathconvert>
-		<echo message="Done: ${api.context.libs.classpath}" />
+		<echo level="info" message="Done: ${api.context.libs.classpath}" />
 		
-		<echo message="Preparing offline link target" />
+		<echo level="info" message="Preparing offline link target" />
 		<property name="linkoffline-target" value="linkoffline-target"/>
 		<unzip src="${linkoffline-target}/org.eclipse.platform.doc.isv.jar" dest="${linkoffline-target}/org.eclipse.platform.doc.isv/" />	
-		<echo message="Done: ${linkoffline-target} contains unzipped offline link target." />
+		<echo level="info" message="Done: ${linkoffline-target} contains unzipped offline link target." />
 
 		<property name="tmp.options.file" value="javadocOptions.txt" />
-		<echo message="Preparing temporary options file ${tmp.options.file}" />
+		<echo level="info" message="Preparing temporary options file ${tmp.options.file}" />
 		<replaceregexp file="${project.build.directory}/${tmp.options.file}" flags="g" match="(\r\n?|\n);" replace="${args.list.delimiter}" />
 		<replace file="${project.build.directory}/${tmp.options.file}" token="@context@" value="${api.context.libs.classpath}" />
 		<replace file="${project.build.directory}/${tmp.options.file}" token="@rt@" value="${bootclasspath}" />
 		<replace file="${project.build.directory}/${tmp.options.file}" token="@args.list.delimiter@" value="${args.list.delimiter}" />
 		<replace file="${project.build.directory}/${tmp.options.file}" token="@linkoffline-target@" value="${linkoffline-target}" />
-		<echo message="Done." />
+		<echo level="info" message="Done." />
 
-		<echo message="Generating javadoc..." />
+		<echo level="info" message="Generating javadoc..." />
 		<exec dir="." executable="${javadoc}" output="doc.bin.log">
 			<arg line="@${project.build.directory}/${tmp.options.file} -J-Xmx1000M" />
 		</exec>
-		<echo message="Done." />
+		<echo level="info" message="Done." />
 	</target>
 
 </project>
