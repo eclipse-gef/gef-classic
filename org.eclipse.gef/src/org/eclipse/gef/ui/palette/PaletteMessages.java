@@ -33,59 +33,59 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String SETTINGS_LAYOUT_OPTIONS_TITLE;
 	/**
-	 * The String "&Apply"
+	 * The String "&amp;Apply"
 	 */
 	public static String APPLY_LABEL;
 	/**
-	 * The String "Move &Up"
+	 * The String "Move &amp;Up"
 	 */
 	public static String MOVE_UP_LABEL;
 	/**
-	 * The String "Move Do&wn"
+	 * The String "Move Do&amp;wn"
 	 */
 	public static String MOVE_DOWN_LABEL;
 	/**
-	 * The String "&Delete"
+	 * The String "&amp;Delete"
 	 */
 	public static String DELETE_LABEL;
 	/**
-	 * The String "&New"
+	 * The String "&amp;New"
 	 */
 	public static String NEW_LABEL;
 	/**
-	 * The String "&Columns"
+	 * The String "&amp;Columns"
 	 */
 	public static String SETTINGS_COLUMNS_VIEW_LABEL;
 	/**
-	 * The String "&List"
+	 * The String "&amp;List"
 	 */
 	public static String SETTINGS_LIST_VIEW_LABEL;
 	/**
-	 * The String "&Use large icons"
+	 * The String "&amp;Use large icons"
 	 */
 	public static String SETTINGS_USE_LARGE_ICONS_LABEL;
 	/**
-	 * The String "&Use Large Icons"
+	 * The String "&amp;Use Large Icons"
 	 */
 	public static String SETTINGS_USE_LARGE_ICONS_LABEL_CAPS;
 	/**
-	 * The String "&Icons only"
+	 * The String "&amp;Icons only"
 	 */
 	public static String SETTINGS_ICONS_VIEW_LABEL;
 	/**
-	 * The String "&Icons Only"
+	 * The String "&amp;Icons Only"
 	 */
 	public static String SETTINGS_ICONS_VIEW_LABEL_CAPS;
 	/**
-	 * The String "&Never close"
+	 * The String "&amp;Never close"
 	 */
 	public static String COLLAPSE_NEVER_LABEL;
 	/**
-	 * The String "&Always close when opening another drawer"
+	 * The String "&amp;Always close when opening another drawer"
 	 */
 	public static String COLLAPSE_ALWAYS_LABEL;
 	/**
-	 * The String "Close automatically &when there is not enough room"
+	 * The String "Close automatically &amp;when there is not enough room"
 	 */
 	public static String COLLAPSE_AS_NEEDED_LABEL;
 	/**
@@ -93,15 +93,15 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String NO_SELECTION_TITLE;
 	/**
-	 * The String "Na&me: "
+	 * The String "Na&amp;me: "
 	 */
 	public static String NAME_LABEL;
 	/**
-	 * The String "Des&cription: "
+	 * The String "Des&amp;cription: "
 	 */
 	public static String DESCRIPTION_LABEL;
 	/**
-	 * The String "&Hide"
+	 * The String "&amp;Hide"
 	 */
 	public static String HIDDEN_LABEL;
 	/**
@@ -113,7 +113,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String NO_SELECTION_MADE;
 	/**
-	 * The String "Cus&tomize..."
+	 * The String "Cus&amp;tomize..."
 	 */
 	public static String MENU_OPEN_CUSTOMIZE_DIALOG;
 	/**
@@ -153,7 +153,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String NEW_GROUP_LABEL;
 	/**
-	 * The String "&Layout"
+	 * The String "&amp;Layout"
 	 */
 	public static String LAYOUT_MENU_LABEL;
 	/**
@@ -165,7 +165,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String ABORT_PAGE_FLIPPING_MESSAGE;
 	/**
-	 * The String "&Settings..."
+	 * The String "&amp;Settings..."
 	 */
 	public static String MENU_OPEN_SETTINGS_DIALOG;
 	/**
@@ -173,7 +173,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String SETTINGS_DIALOG_TITLE;
 	/**
-	 * The String "&Details"
+	 * The String "&amp;Details"
 	 */
 	public static String SETTINGS_DETAILS_VIEW_LABEL;
 	/**
@@ -181,7 +181,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String SETTINGS_FONT_TITLE;
 	/**
-	 * The String "C&hange..."
+	 * The String "C&amp;hange..."
 	 */
 	public static String SETTINGS_FONT_CHANGE;
 	/**
@@ -197,7 +197,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String SETTINGS_DRAWER_OPTIONS_TITLE;
 	/**
-	 * The String "&Open drawer at start-up"
+	 * The String "&amp;Open drawer at start-up"
 	 */
 	public static String EXPAND_DRAWER_AT_STARTUP_LABEL;
 	/**
@@ -217,23 +217,23 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String SETTINGS_OPTIONS_DETAILS;
 	/**
-	 * The String "&Override default column width settings"
+	 * The String "&amp;Override default column width settings"
 	 */
 	public static String SETTINGS_LAYOUT_COLUMNS_OVERRIDE_WIDTH;
 	/**
-	 * The String "Colu&mn width (in pixels): "
+	 * The String "Colu&amp;mn width (in pixels): "
 	 */
 	public static String SETTINGS_LAYOUT_COLUMNS_WIDTH;
 	/**
-	 * The String "&Pin drawer open at start-up"
+	 * The String "&amp;Pin drawer open at start-up"
 	 */
 	public static String DRAWER_PIN_AT_STARTUP;
 	/**
-	 * The String "&Restore Default"
+	 * The String "&amp;Restore Default"
 	 */
 	public static String SETTINGS_DEFAULT_FONT;
 	/**
-	 * The String "<Using Workbench Dialog Font>"
+	 * The String "&lt;Using Workbench Dialog Font&gt;"
 	 */
 	public static String SETTINGS_WORKBENCH_FONT_LABEL;
 	/**
@@ -241,7 +241,7 @@ public class PaletteMessages extends NLS {
 	 */
 	public static String NAME_DESCRIPTION_SEPARATOR;
 	/**
-	 * The String "&Pinned"
+	 * The String "&amp;Pinned"
 	 */
 	public static String PINNED;
 	/**
@@ -255,22 +255,22 @@ public class PaletteMessages extends NLS {
 	public static String TOOLTIP_UNPIN_FIGURE;
 
 	/**
-	 * The String "&Dock On"
+	 * The String "&amp;Dock On"
 	 */
 	public static String DOCK_LABEL;
 
 	/**
-	 * The String "&Left"
+	 * The String "&amp;Left"
 	 */
 	public static String LEFT_LABEL;
 
 	/**
-	 * The String "&Right"
+	 * The String "&amp;Right"
 	 */
 	public static String RIGHT_LABEL;
 
 	/**
-	 * The String "&Resize"
+	 * The String "&amp;Resize"
 	 */
 	public static String RESIZE_LABEL;
 

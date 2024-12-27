@@ -231,7 +231,7 @@ public class PaletteSettingsDialog extends Dialog {
 	 * @param id         The button's unique ID
 	 * @param label      The button's text
 	 * @param stylebits  The style bits for creating the button (eg.,
-	 *                   <code>SWT.PUSH</code) or <code>SWT.CHECK</code>)
+	 *                   <code>SWT.PUSH</code>) or <code>SWT.CHECK</code>)
 	 * @param descriptor The ImageDescriptor from which the image/icon for this
 	 *                   button should be created
 	 * @return The newly created button for convenience

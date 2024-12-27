@@ -385,12 +385,12 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 	 *
 	 * <p>
 	 * The outline creates the following:
+	 * </p>
 	 * <UL>
 	 * <LI>ToolBar ({@link #createOutlineToolBar(Composite)})</LI>
 	 * <LI>TreeViewer ({@link #createOutlineTreeViewer(Composite)})</LI>
 	 * <LI>Context menu ({@link #createOutlineContextMenu()})</LI>
 	 * </UL>
-	 * </p>
 	 *
 	 * @param container The Composite within which the outline has to be created
 	 * @return The newly created Control that has the outline
@@ -580,9 +580,11 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 	 *
 	 * <p>
 	 * The properties panel contains the following:
+	 * </p>
 	 * <UL>
 	 * <LI>Title ({@link #createPropertiesPanelTitle(Composite)})</LI>
 	 * </UL>
+	 * <p>
 	 * The rest of the panel is constructed in this method.
 	 * </p>
 	 *

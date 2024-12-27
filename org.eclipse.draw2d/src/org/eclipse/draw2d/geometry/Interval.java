@@ -20,7 +20,6 @@ import java.io.Serializable;
  * @author mitin_aa
  * @author lobas_av
  * @author scheglov_ke
- * @coverage gef.draw2d
  * @since 3.13
  */
 public record Interval(int begin, int length) implements Serializable {

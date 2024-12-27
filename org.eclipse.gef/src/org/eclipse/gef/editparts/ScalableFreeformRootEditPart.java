@@ -28,52 +28,53 @@ import org.eclipse.draw2d.Viewport;
  * {@link org.eclipse.gef.ui.actions.ZoomComboContributionItem}
  * <P>
  * The structure of layers (top-to-bottom) for this root is:
- * <table cellspacing="0" cellpadding="0">
+ * <table style="border-spacing: 0px">
+ * <caption></caption>
  * <tr>
- * <td colspan="4">Root Freeform Layered Pane</td>
+ * <td style="padding: 0px" colspan="4">Root Freeform Layered Pane</td>
  * </tr>
  * <tr>
- * <td>&#9500;</td>
- * <td colspan="3">&nbsp;Guide Layer</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px" colspan="3">&nbsp;Guide Layer</td>
  * </tr>
  * <tr>
- * <td>&#9500;</td>
- * <td colspan="3">&nbsp;Feedback Layer</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px" colspan="3">&nbsp;Feedback Layer</td>
  * </tr>
  * <tr>
- * <td>&#9500;</td>
- * <td colspan="3">&nbsp;Handle Layer</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px" colspan="3">&nbsp;Handle Layer</td>
  * </tr>
  * <tr>
- * <td>&#9492;</td>
- * <td colspan="2">&nbsp;<b>Scalable Layers</b></td>
- * <td>({@link ScalableFreeformLayeredPane})</td>
+ * <td style="padding: 0px">&#9492;</td>
+ * <td style="padding: 0px" colspan="2">&nbsp;<b>Scalable Layers</b></td>
+ * <td style="padding: 0px">({@link ScalableFreeformLayeredPane})</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&#9500;</td>
- * <td colspan="2">&nbsp;Scaled Feedback Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px" colspan="2">&nbsp;Scaled Feedback Layer</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&#9500;</td>
- * <td colspan="2">&nbsp;Printable Layers</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px" colspan="2">&nbsp;Printable Layers</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&nbsp;</td>
- * <td>&#9500; Connection Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9500; Connection Layer</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&nbsp;</td>
- * <td>&#9492;&nbsp;Primary Layer</td>
- * <td>&nbsp;</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9492;&nbsp;Primary Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&#9492;</td>
- * <td colspan="2">&nbsp;Grid Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9492;</td>
+ * <td style="padding: 0px" colspan="2">&nbsp;Grid Layer</td>
  * </tr>
  * </table>
  *

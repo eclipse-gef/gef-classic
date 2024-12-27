@@ -153,7 +153,7 @@ public class Animation {
 	}
 
 	/**
-	 * Returns the animation progress, where 0.0 < progress &#8804; 1.0.
+	 * Returns the animation progress, where 0.0 &lt; progress &#8804; 1.0.
 	 *
 	 * @return the progress of the animation
 	 * @since 3.2

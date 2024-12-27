@@ -68,7 +68,7 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	/**
 	 * The left-most bit that is reserved by this class for setting flags.
 	 * Subclasses may define additional flags starting at
-	 * <code>(MAX_FLAG << 1)</code>.
+	 * <code>(MAX_FLAG &lt;&lt; 1)</code>.
 	 */
 	protected static final int MAX_FLAG = FLAG_FOCUS;
 
@@ -335,8 +335,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * Subclasses should rarely extend this method.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that feedback be handled by EditPolicies, and not
 	 * directly by the EditPart.
 	 * </tr>
@@ -358,8 +359,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * rarely extend this method.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that feedback be handled by EditPolicies, and not
 	 * directly by the EditPart.
 	 * </tr>
@@ -466,8 +468,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * method is implemented indirectly using EditPolicies.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that Command creation be handled by EditPolicies, and
 	 * not directly by the EditPart.
 	 * </tr>
@@ -616,8 +619,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * EditPolicy is returned. Subclasses should rarely extend this method.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that targeting be handled by EditPolicies, and not
 	 * directly by the EditPart.
 	 * </tr>
@@ -1046,7 +1050,7 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * <ul>
 	 * <li>{@link EditPart#SELECTED_PRIMARY}</li>
 	 * <li>{@link EditPart#SELECTED}</li>
-	 * <li>{@link EditPart#SELECTED_NONE}</li>.
+	 * <li>{@link EditPart#SELECTED_NONE}</li>
 	 * </ul>
 	 *
 	 * As only selectable {@link EditPart}s may get selected, the method may only be
@@ -1083,8 +1087,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * Subclasses should rarely extend this method.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that feedback be handled by EditPolicies, and not
 	 * directly by the EditPart.
 	 * </tr>
@@ -1109,8 +1114,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * Subclasses should rarely extend this method.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that feedback be handled by EditPolicies, and not
 	 * directly by the EditPart.
 	 * </tr>
@@ -1146,8 +1152,9 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 	 * part's installed EditPolicies.
 	 * <P>
 	 * <table>
+	 * <caption></caption>
 	 * <tr>
-	 * <td><img src="../doc-files/important.gif"/>
+	 * <td><img src="../doc-files/important.gif" alt="Important!"/>
 	 * <td>It is recommended that EditPolicies implement
 	 * <code>understandsRequest()</code>
 	 * </tr>

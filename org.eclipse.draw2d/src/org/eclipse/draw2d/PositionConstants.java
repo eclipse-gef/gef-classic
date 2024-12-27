@@ -15,19 +15,20 @@ package org.eclipse.draw2d;
 /**
  * Constants representing cardinal directions and relative positions. Some of
  * these constants can be grouped as follows:
- * <TABLE border="1" cellpadding="5" cellspacing="0">
+ * <TABLE border="1" style="border-spacing: 0px">
+ * <CAPTION></CAPTION>
  * <TBODY>
  * <TR>
- * <TD>LEFT, CENTER, RIGHT</TD>
- * <TD>Used to describe horizontal position.</TD>
+ * <TD style="padding: 5px">LEFT, CENTER, RIGHT</TD>
+ * <TD style="padding: 5px">Used to describe horizontal position.</TD>
  * </TR>
  * <TR>
- * <TD>TOP, MIDDLE, BOTTOM</TD>
- * <TD>Used to describe vertical position.</TD>
+ * <TD style="padding: 5px">TOP, MIDDLE, BOTTOM</TD>
+ * <TD style="padding: 5px">Used to describe vertical position.</TD>
  * </TR>
  * <TR>
- * <TD>NORTH, SOUTH, EAST, WEST</TD>
- * <TD>Used to describe the four positions relative to an object's center point.
+ * <TD style="padding: 5px">NORTH, SOUTH, EAST, WEST</TD>
+ * <TD style="padding: 5px">Used to describe the four positions relative to an object's center point.
  * May also be used when describing which direction an object is facing.<BR>
  * NOTE: If you have a use for all four of these possibilities, do not use TOP,
  * BOTTOM, RIGHT, LEFT in place of NORTH, SOUTH, EAST, WEST.</TD>

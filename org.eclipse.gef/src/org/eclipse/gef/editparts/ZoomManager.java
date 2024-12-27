@@ -115,7 +115,7 @@ public class ZoomManager extends AbstractZoomManager {
 	 * @param listener the ZoomListener to be added
 	 *
 	 * @deprecated Use
-	 *             {@link #org.eclipse.draw2d.zoom.ZoomManager.addZoomListener(ZoomListener listener)}
+	 *             {{@link #addZoomListener(org.eclipse.draw2d.zoom.ZoomListener)}
 	 *             instead.
 	 */
 	@Deprecated(since = "3.13", forRemoval = true)
@@ -129,7 +129,7 @@ public class ZoomManager extends AbstractZoomManager {
 	 * @param listener the ZoomListener to be removed
 	 *
 	 * @deprecated Use
-	 *             {@link #org.eclipse.draw2d.zoom.ZoomManager.removeZoomListener(ZoomListener listener)}
+	 *             {@link #removeZoomListener(org.eclipse.draw2d.zoom.ZoomListener)}
 	 *             instead.
 	 */
 	@Deprecated(since = "3.13", forRemoval = true)

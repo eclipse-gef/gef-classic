@@ -29,7 +29,7 @@ import org.eclipse.zest.layouts.interfaces.LayoutContext;
  * then display the tree in a circular fashion with the roots in the center.
  *
  * @author Casey Best
- * @auhtor Rob Lintern
+ * @author Rob Lintern
  */
 public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 

@@ -34,7 +34,7 @@ import java.util.Deque;
  * completes, it will invert the edges again, but will leave the feedback flags
  * set.
  * <LI>for each node <em>n</em>, assign n to a "rank" R(n), such that: for each
- * edge (m, n) in n.incoming, R(m)<=R(n)-(m,n).delta. The total weighted edge
+ * edge (m, n) in n.incoming, R(m)&lt;=R(n)-(m,n).delta. The total weighted edge
  * lengths shall be no greater than is necessary to meet this requirement for
  * all edges in the graph.
  * <LI>attempt to order the nodes in their ranks as to minimize crossings.

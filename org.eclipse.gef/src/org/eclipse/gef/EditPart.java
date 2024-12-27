@@ -336,8 +336,9 @@ public interface EditPart extends IAdaptable {
 	void setFocus(boolean hasFocus);
 
 	/**
-	 * <img src="doc-files/dblack.gif"/>Sets the model. This method is made public
-	 * to facilitate the use of {@link EditPartFactory EditPartFactories} .
+	 * <img src="doc-files/dblack.gif" alt="&#9670;&#9670;"/>Sets the model. This
+	 * method is made public to facilitate the use of {@link EditPartFactory
+	 * EditPartFactories} .
 	 *
 	 * <P>
 	 * IMPORTANT: This method should only be called once.
@@ -347,17 +348,18 @@ public interface EditPart extends IAdaptable {
 	void setModel(Object model);
 
 	/**
-	 * <img src="doc-files/dblack.gif"/>Sets the parent. This should only be called
-	 * by the parent EditPart.
+	 * <img src="doc-files/dblack.gif" alt="&#9670;&#9670;"/>Sets the parent. This
+	 * should only be called by the parent EditPart.
 	 *
 	 * @param parent the parent EditPart
 	 */
 	void setParent(EditPart parent);
 
 	/**
-	 * <img src="doc-files/dblack.gif"/> Sets the selected state property to reflect
-	 * the selection in the EditPartViewer. Fires selectedStateChanged(EditPart) to
-	 * any EditPartListeners. Selection is maintained by the EditPartViewer.
+	 * <img src="doc-files/dblack.gif" alt="&#9670;&#9670;"/> Sets the selected
+	 * state property to reflect the selection in the EditPartViewer. Fires
+	 * selectedStateChanged(EditPart) to any EditPartListeners. Selection is
+	 * maintained by the EditPartViewer.
 	 * <P>
 	 * IMPORTANT: This method should only be called by the EditPartViewer.
 	 *

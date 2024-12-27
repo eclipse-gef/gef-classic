@@ -365,8 +365,8 @@
 		<module>org.eclipse.zest.layouts</module>
 		
 		<!--docs-->
-		<module>org.eclipse.zest.doc.isv</module>
 		<module>org.eclipse.draw2d.doc.isv</module>
+		<module>org.eclipse.zest.doc.isv</module>
 		<module>org.eclipse.gef.doc.isv</module>
 
 		<!--tests-->

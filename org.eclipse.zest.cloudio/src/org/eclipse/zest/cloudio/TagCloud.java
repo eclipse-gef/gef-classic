@@ -727,7 +727,7 @@ public class TagCloud extends Canvas {
 	 * that strings will be drawn on white areas only. If parameter
 	 * <code>bgData</code> is <code>null</code>, the old mask will be removed.
 	 *
-	 * @param bgData a square containing b&w pixels only
+	 * @param bgData a square containing b&amp;w pixels only
 	 */
 	public void setBackgroundMask(ImageData bgData) {
 		if (mask != null) {

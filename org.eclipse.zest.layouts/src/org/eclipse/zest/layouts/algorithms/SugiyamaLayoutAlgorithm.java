@@ -43,7 +43,7 @@ import org.eclipse.draw2d.geometry.Dimension;
  * For further information see http://dx.doi.org/10.1109/TSMC.1981.4308636
  *
  * This layout algorithm works only with - directed graphs (
- * {@link ZestStyles.CONNECTIONS_DIRECTED}) - graphs without cycles (otherwise
+ * {@code ZestStyles.CONNECTIONS_DIRECTED}) - graphs without cycles (otherwise
  * an appropriate RuntimeException is thrown)
  *
  * @version 1.2
@@ -149,8 +149,8 @@ public class SugiyamaLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	/**
 	 * Constructs a tree-like, layered layout of a directed graph.
 	 *
-	 * @param dir - {@link SugiyamaLayoutAlgorithm#HORIZONTAL}: left to right -
-	 *            {@link SugiyamaLayoutAlgorithm#VERTCAL}: top to bottom
+	 * @param dir - {@link SWT#HORIZONTAL}: left to right - {@link SWT#VERTICAL}:
+	 *            top to bottom
 	 *
 	 * @param dim - desired size of the layout area. Uses
 	 *            {@link LayoutContext#getBounds()} if not set

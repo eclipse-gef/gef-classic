@@ -23,7 +23,7 @@ import org.eclipse.gef.palette.PaletteRoot;
  *
  * <p>
  * This class does not create <code>PaletteContainer</code>s within other
- * </code>PaletteContainer</code>s. The necessary methods may be overridden
+ * <code>PaletteContainer</code>s. The necessary methods may be overridden
  * should such functionality be desired.
  * </p>
  *

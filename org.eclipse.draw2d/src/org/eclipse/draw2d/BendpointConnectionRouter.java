@@ -98,7 +98,7 @@ public class BendpointConnectionRouter extends AbstractRouter {
 	 * Sets the constraint for the given {@link Connection}.
 	 *
 	 * @param connection The connection whose constraint we are setting
-	 * @param constraint The constraint, which as to be a List<Bendpoint>
+	 * @param constraint The constraint, which as to be a List&lt;Bendpoint&gt;
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

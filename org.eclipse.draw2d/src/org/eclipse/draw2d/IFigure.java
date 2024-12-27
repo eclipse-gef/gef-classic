@@ -36,7 +36,7 @@ import org.eclipse.draw2d.geometry.Translatable;
 public interface IFigure {
 
 	/**
-	 * Insets that are all 0. Always returns <code>true<code> for
+	 * Insets that are all 0. Always returns <code>true</code> for
 	 * {@link #isEmpty()}.
 	 */
 	class NoInsets extends Insets {

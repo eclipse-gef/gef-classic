@@ -29,7 +29,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 /**
  * A scrolling Canvas that contains {@link Figure Figures} viewed through a
  * {@link Viewport}. Call {@link #setContents(IFigure)} to specify the root of
- * the tree of <tt>Figures</tt> to be viewed through the <tt>Viewport</tt>.
+ * the tree of {@link Figure Figures} to be viewed through the {@link Viewport}.
  * <p>
  * Normal procedure for using a FigureCanvas:
  * <ol>

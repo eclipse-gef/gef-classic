@@ -20,7 +20,7 @@ import java.beans.PropertyChangeSupport;
  *
  *
  * <pre>
- *                    |<----extent--->|
+ *                    |&lt;----extent---&gt;|
  *    ----|-----------|---------------|---------------|----
  *       min          |                              max
  *                  value

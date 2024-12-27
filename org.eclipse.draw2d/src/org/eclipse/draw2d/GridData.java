@@ -26,6 +26,7 @@ import org.eclipse.draw2d.geometry.Dimension;
  * <p>
  * There are two ways to create a <code>GridData</code> object with certain
  * fields set. The first is to set the fields directly, like this:
+ * </p>
  *
  * <pre>
  * GridData gridData = new GridData();
@@ -36,14 +37,15 @@ import org.eclipse.draw2d.geometry.Dimension;
  * myGridlayout.setConstraint(myFigure, gridData);
  * </pre>
  *
+ * <p>
  * The second is to take advantage of convenience style bits defined by
  * <code>GridData</code>:
+ * </p>
  *
  * <pre>
  * GridData gridData = new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL);
  * </pre>
  *
- * </p>
  * <p>
  * NOTE: Do not reuse <code>GridData</code> objects. Every child in the parent
  * <code>Figure</code> that is managed by the <code>GridLayout</code> must have

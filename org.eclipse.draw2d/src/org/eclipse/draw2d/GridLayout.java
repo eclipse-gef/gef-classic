@@ -67,7 +67,7 @@ import org.eclipse.draw2d.internal.Messages;
  * The <code>numColumns</code> field is the most important field in a
  * <code>GridLayout</code>. Widgets are laid out in columns from left to right,
  * and a new row is created when <code>numColumns</code>+ 1 figures are added to
- * the <code>Figure<code> parent container.
+ * the <code>Figure</code> parent container.
  *
  * @see GridData
  *

@@ -41,7 +41,7 @@ public interface UpdateListener {
 	void notifyValidating();
 
 	/**
-	 * An empty implementation of {@list UpdateListener} for convenience.
+	 * An empty implementation of {@link UpdateListener} for convenience.
 	 *
 	 * @since 3.16
 	 */

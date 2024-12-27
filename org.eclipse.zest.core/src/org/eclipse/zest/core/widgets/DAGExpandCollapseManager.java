@@ -35,7 +35,6 @@ import org.eclipse.zest.layouts.interfaces.NodeLayout;
  * expanded, all its successors are unpruned and connections pointing to them
  * are shown.
  * </p>
- * </p>
  * <p>
  * <b>NOTE:</b> A <code>Graph</code> using this manager should use
  * {@link DefaultSubgraph}, which doesn't show any information about subgraphs

@@ -27,9 +27,9 @@ import org.eclipse.gef.requests.DropRequest;
 
 /**
  * An EditPolicy for use with {@link org.eclipse.draw2d.FlowLayout}. This
- * EditPolicy knows how to map an <x,y> coordinate on the layout container to
- * the appropriate index for the operation being performed. It also shows target
- * feedback consisting of an insertion line at the appropriate location.
+ * EditPolicy knows how to map an &lt;x,y&gt; coordinate on the layout container
+ * to the appropriate index for the operation being performed. It also shows
+ * target feedback consisting of an insertion line at the appropriate location.
  *
  * @since 2.0
  */

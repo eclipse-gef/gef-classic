@@ -34,22 +34,26 @@ import org.eclipse.swt.widgets.Event;
  * perform the User's operation. Using Requests, Tools will:
  * <UL>
  * <LI>Ask EditParts for {@link org.eclipse.gef.commands.Command Commands} to
- * perform changes on the model.
- * <LI>Ask EditParts to show and erase feedback during an operation.
- * <LI>Ask EditParts to perform a generic function, using
- * {@link org.eclipse.gef.EditPart#performRequest(Request)}.
+ * perform changes on the model.</LI>
+ * <LI>Ask EditParts to show and erase feedback during an operation.</LI>
+ * <LI>Ask EditParts to perform a generic function, using</LI>
+ * {@link org.eclipse.gef.EditPart#performRequest(Request)}
+ * </UL>
  * <P>
  * Tools also perform operations that do not involve the EditParts directly,
  * such as changing the Viewer's selection, scrolling the viewer, or invoking an
  * {@link org.eclipse.jface.action.IAction Action}.
  * <table>
+ * <caption></caption>
  * <tr>
- * <td valign=top><img src="doc-files/important.gif"/>
+ * <td style="vertical-align:top"><img src="doc-files/important.gif" alt=
+ * "Important!"/>
  * <td>All feedback should be erased and temporary changes reverted prior to
  * executing any command.
  * </tr>
  * <tr>
- * <td valign=top><img src="doc-files/important.gif"/>
+ * <td style="vertical-align:top"><img src="doc-files/important.gif" alt=
+ * "Important!"/>
  * <td>Tools should process most keystrokes. For example, the DELETE key should
  * <EM>not</EM> be handled by adding a KeyListener to the Viewer's Control.
  * Doing so would mean that pressing DELETE would <EM>not</EM> be sensitive to

@@ -116,10 +116,10 @@ public abstract class OrderedLayout extends AbstractHintLayout {
 	 *
 	 * @return whether children are to be stretched in the minor axis.
 	 *
-	 * @TODO: Made abstract here, so that derived layout managers can guarantee
-	 *        backwards compatibility for their exposed fields. Can be made concrete
-	 *        in the next major release, removing implementations in the derived
-	 *        layout managers.
+	 * @TODO Made abstract here, so that derived layout managers can guarantee
+	 *       backwards compatibility for their exposed fields. Can be made concrete
+	 *       in the next major release, removing implementations in the derived
+	 *       layout managers.
 	 */
 	public abstract boolean isStretchMinorAxis();
 
@@ -157,10 +157,10 @@ public abstract class OrderedLayout extends AbstractHintLayout {
 	 * width.
 	 *
 	 * @param value whether children should be stretched in the minor axis.
-	 * @TODO: Made abstract here, so that derived layout managers can guarantee
-	 *        backwards compatibility for their exposed fields. Can be made concrete
-	 *        in the next major release, removing implementations in the derived
-	 *        layout managers.
+	 * @TODO Made abstract here, so that derived layout managers can guarantee
+	 *       backwards compatibility for their exposed fields. Can be made concrete
+	 *       in the next major release, removing implementations in the derived
+	 *       layout managers.
 	 */
 	public abstract void setStretchMinorAxis(boolean value);
 

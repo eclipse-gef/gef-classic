@@ -9,9 +9,15 @@
 -windowtitle "Draw2d API Specification"
 -doctitle "Draw2d API Specification"
 -header "<b>Draw2d</b><br>@build@"
--bottom "Copyright (c) IBM Corp. and others 2000, 2011.  All Rights Reserved."
--link http://docs.oracle.com/javase/1.4.2/docs/api/
+-bottom "Copyright (c) IBM Corp. and others 2000, 2024.  All Rights Reserved."
+-link https://docs.oracle.com/en/java/javase/17/
 -linkoffline PLUGINS_ROOT/org.eclipse.platform.doc.isv/reference/api @linkoffline-target@/org.eclipse.platform.doc.isv/reference/api
+-tag noextend:t:"@noextend"
+-tag noimplement:t:"@noimplement"
+-tag nooverride:m:"@nooverride"
+-tag noreference:tcmf:"@noreference"
+-tag noinstantiate:t:"@noinstantiate"
+-tag TODO:a:"TODO"
 
 org.eclipse.draw2d
 org.eclipse.draw2d.geometry

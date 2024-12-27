@@ -17,7 +17,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.GroupRequest;
 
 /**
- * A model-based EditPolicy for <i>components within a </i>container</i>. A
+ * A model-based EditPolicy for <i>components</i> within a <i>container</i>. A
  * model-based EditPolicy only knows about the host's model and the basic
  * operations it supports. A <i>component</i> is anything that is inside a
  * container. By default, ComponentEditPolicy understands being DELETEd from its
@@ -25,18 +25,22 @@ import org.eclipse.gef.requests.GroupRequest;
  * to handle additional behavior specific to the model.
  * <P>
  * ORPHAN is forwarded to the <i>parent</i> EditPart for it to handle.
+ * </P>
  * <P>
  * DELETE is also forwarded to the <i>parent</i> EditPart, but subclasses may
  * also contribute to the delete by overriding
  * {@link #createDeleteCommand(GroupRequest)}.
+ * </P>
  * <P>
  * This EditPolicy is not a
  * {@link org.eclipse.gef.editpolicies.GraphicalEditPolicy}, and should not be
  * used to show feedback or interact with the host's visuals in any way.
+ * </P>
  * <P>
  * This EditPolicy should not be used with
  * {@link org.eclipse.gef.ConnectionEditPart}. Connections do not really have a
  * parent; use {@link ConnectionEditPolicy}.
+ * </P>
  *
  * @since 2.0
  */

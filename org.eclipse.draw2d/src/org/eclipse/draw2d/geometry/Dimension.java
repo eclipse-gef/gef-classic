@@ -129,8 +129,8 @@ public class Dimension implements Cloneable, java.io.Serializable, Translatable 
 
 	/**
 	 * Returns <code>true</code> if this Dimension properly contains the one
-	 * specified. Proper containment is defined as containment using \"<\", instead
-	 * of \"<=\".
+	 * specified. Proper containment is defined as containment using \"&lt;\",
+	 * instead of \"&lt;=\".
 	 *
 	 * @param d the dimension being tested
 	 * @return <code>true</code> if this Dimension properly contains the one

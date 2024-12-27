@@ -56,29 +56,30 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  * This root serves as the diagram's
  * {@link org.eclipse.gef.editparts.LayerManager}, providing the following layer
  * structure, in top-to-bottom order:
- * <table cellspacing="0" cellpadding="0">
+ * <table style="border-spacing: 0px">
+ * <caption></caption>
  * <tr>
- * <td colspan="2">Root Freeform Layered Pane</td>
+ * <td colspan="2" style="padding: 0px">Root Freeform Layered Pane</td>
  * </tr>
  * <tr>
- * <td>&#9500;</td>
- * <td>&nbsp;Feedback Layer</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px">&nbsp;Feedback Layer</td>
  * </tr>
  * <tr>
- * <td>&#9500;</td>
- * <td>&nbsp;Handle Layer</td>
+ * <td style="padding: 0px">&#9500;</td>
+ * <td style="padding: 0px">&nbsp;Handle Layer</td>
  * </tr>
  * <tr>
- * <td>&#9492;</td>
- * <td>&nbsp;Printable Layers</td>
+ * <td style="padding: 0px">&#9492;</td>
+ * <td style="padding: 0px">&nbsp;Printable Layers</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&#9500; Connection Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9500; Connection Layer</td>
  * </tr>
  * <tr>
- * <td>&nbsp;</td>
- * <td>&#9492; Primary Layer</td>
+ * <td style="padding: 0px">&nbsp;</td>
+ * <td style="padding: 0px">&#9492; Primary Layer</td>
  * </tr>
  * </table>
  *

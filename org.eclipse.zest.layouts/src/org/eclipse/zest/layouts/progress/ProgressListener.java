@@ -27,7 +27,7 @@ package org.eclipse.zest.layouts.progress;
 @Deprecated(since = "2.0", forRemoval = true)
 public interface ProgressListener {
 	/**
-	 * An empty implementation of {@list ProgressListener} for convenience.
+	 * An empty implementation of {@link ProgressListener} for convenience.
 	 *
 	 * @deprecated No longer used in Zest 2.x. This interface will be removed in a
 	 *             future release.

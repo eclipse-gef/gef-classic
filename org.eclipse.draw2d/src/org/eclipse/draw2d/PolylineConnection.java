@@ -30,7 +30,6 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * <LI>A {@link DelegatingLayout} is set as the default layout. A delegating
  * layout allows children to position themselves via {@link Locator Locators}.
  * </UL>
- * <P>
  */
 public class PolylineConnection extends Polyline implements Connection, AnchorListener {
 

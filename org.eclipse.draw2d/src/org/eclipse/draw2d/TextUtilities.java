@@ -82,7 +82,7 @@ public class TextUtilities {
 
 	/**
 	 * Returns the largest substring of <i>s</i> in Font <i>f</i> that can be
-	 * confined to the number of pixels in <i>availableWidth<i>.
+	 * confined to the number of pixels in <i>availableWidth</i>.
 	 *
 	 * @param s              the original string
 	 * @param f              the font

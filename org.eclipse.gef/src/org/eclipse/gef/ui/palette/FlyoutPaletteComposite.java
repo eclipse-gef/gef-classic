@@ -688,7 +688,7 @@ public class FlyoutPaletteComposite extends Composite {
 		 * When there is no saved width, this method can return any int (preferrably a
 		 * non-positive int). Returning a non-positive int will cause the palette to be
 		 * sized to the default size, whereas returning a postive int will find the
-		 * closest match in the valid range (>= minimum and <= maximum)
+		 * closest match in the valid range (&gt;= minimum and &lt;= maximum)
 		 *
 		 * @return the saved width of the flyout palette
 		 */
