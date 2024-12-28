@@ -13,10 +13,10 @@
 
 package org.eclipse.gef.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +32,9 @@ import org.eclipse.gef.internal.ui.rulers.RulerFigure;
 import org.eclipse.gef.internal.ui.rulers.RulerLayout;
 import org.eclipse.gef.rulers.RulerProvider;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RulerLayoutTests {
 	private static final Rectangle EMPTY_RECTANGLE = new Rectangle(0, 0, 0, 0);
@@ -47,7 +47,7 @@ public class RulerLayoutTests {
 	protected ILogListener logListener;
 	protected List<String> logMessages;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		constraint = 42;
 		figure = new Figure();
@@ -67,7 +67,7 @@ public class RulerLayoutTests {
 		log.addLogListener(logListener);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		log.removeLogListener(logListener);
 	}

@@ -13,8 +13,8 @@
 
 package org.eclipse.gef.test.swtbot;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ import org.eclipse.draw2d.FigureCanvas;
 
 import org.eclipse.gef.EditPart;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * To be able to execute these tests in the Eclipse IDE, the tests must
@@ -44,7 +44,7 @@ public abstract class AbstractSWTBotTests {
 	private List<Throwable> problems;
 	protected SWTGefBot bot;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		if (Display.getCurrent() != null) {
 			fail("""
@@ -84,12 +84,12 @@ public abstract class AbstractSWTBotTests {
 		return false;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		// Cleanup problem listener and check for exceptions
 		Platform.removeLogListener(problemListener);
 		problems.forEach(Throwable::printStackTrace);
-		assertTrue("Test threw an unchecked exception. Check logs for details", problems.isEmpty());
+		assertTrue(problems.isEmpty(), "Test threw an unchecked exception. Check logs for details");
 	}
 
 	/**

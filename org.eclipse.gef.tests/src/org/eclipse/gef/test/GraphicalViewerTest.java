@@ -13,9 +13,9 @@
 
 package org.eclipse.gef.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 
@@ -36,13 +36,13 @@ import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.gef.ui.actions.DeleteAction;
 import org.eclipse.gef.ui.parts.GraphicalViewerImpl;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class GraphicalViewerTest {
 	private GraphicalViewer viewer;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		viewer = PlatformUI.getWorkbench().getDisplay().syncCall(GraphicalViewerImpl::new);
 	}

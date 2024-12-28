@@ -13,8 +13,8 @@
 
 package org.eclipse.gef.test.swtbot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicGuide;
 import org.eclipse.gef.examples.logicdesigner.model.LogicRuler;
 import org.eclipse.gef.examples.logicdesigner.rulers.LogicRulerProvider;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("nls")
 public class LogicDiagramTests extends AbstractSWTBotEditorTests {
@@ -111,7 +111,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 			forceUpdate(editor.getSWTBotGefViewer());
 		});
 
-		assertEquals("Part is not on grid line", figure.getLocation(), new Point(12, 22));
+		assertEquals(figure.getLocation(), new Point(12, 22), "Part is not on grid line");
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 			forceUpdate(editor.getSWTBotGefViewer());
 		});
 
-		assertEquals("Part didn't snap to LED", figure.getLocation(), new Point(200, 50));
+		assertEquals(figure.getLocation(), new Point(200, 50), "Part didn't snap to LED");
 	}
 
 	/**
@@ -161,11 +161,11 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		editPart.select();
 
 		LED led = (LED) editPart.part().getModel();
-		assertEquals("Unexpected LED value", led.getValue(), 0);
+		assertEquals(led.getValue(), 0, "Unexpected LED value");
 		bot.toolbarButtonWithTooltip("Increment LED").click();
-		assertEquals("Unexpected LED value", led.getValue(), 1);
+		assertEquals(led.getValue(), 1, "Unexpected LED value");
 		bot.toolbarButtonWithTooltip("Decrement LED").click();
-		assertEquals("Unexpected LED value", led.getValue(), 0);
+		assertEquals(led.getValue(), 0, "Unexpected LED value");
 	}
 
 	/**

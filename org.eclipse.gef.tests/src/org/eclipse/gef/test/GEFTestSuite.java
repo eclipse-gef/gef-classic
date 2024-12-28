@@ -14,16 +14,16 @@ package org.eclipse.gef.test;
 
 import org.eclipse.gef.test.swtbot.SWTBotTestSuite;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
 
 /**
  * The main test suite for GEF.
  *
  * @author Eric Bordeau
  */
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@Suite
+@SelectClasses({
 	PaletteCustomizerTest.class,
 	ToolUtilitiesTest.class,
 	DragEditPartsTrackerTest.class,

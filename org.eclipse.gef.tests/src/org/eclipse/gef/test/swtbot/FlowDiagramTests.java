@@ -13,10 +13,10 @@
 
 package org.eclipse.gef.test.swtbot;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("nls")
 public class FlowDiagramTests extends AbstractSWTBotEditorTests {
@@ -121,7 +121,7 @@ public class FlowDiagramTests extends AbstractSWTBotEditorTests {
 		editor.activateTool("Marquee");
 
 		UIThreadRunnable.syncExec(() -> editor.drag(0, 0, 500, 500));
-		assertFalse("At least one edit part should be selected", editor.selectedEditParts().isEmpty());
+		assertFalse(editor.selectedEditParts().isEmpty(), "At least one edit part should be selected");
 	}
 
 	@Override

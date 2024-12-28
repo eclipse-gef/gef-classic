@@ -31,15 +31,15 @@ import org.eclipse.ui.intro.IIntroPart;
 import org.eclipse.ui.wizards.IWizardDescriptor;
 import org.eclipse.ui.wizards.IWizardRegistry;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.osgi.framework.Bundle;
 
 @SuppressWarnings("nls")
 public abstract class AbstractSWTBotEditorTests extends AbstractSWTBotTests {
 	private static final String PROJECT_NAME = "TestProject";
 
-	@Before
+	@BeforeEach
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -87,7 +87,7 @@ public abstract class AbstractSWTBotEditorTests extends AbstractSWTBotTests {
 		});
 	}
 
-	@After
+	@AfterEach
 	@Override
 	public void tearDown() throws Exception {
 		IWorkbench wb = PlatformUI.getWorkbench();
