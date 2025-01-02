@@ -47,14 +47,22 @@ public class FilterGraphSnippet {
 
 		final Graph graph = new Graph(shell, SWT.NONE);
 
-		GraphNode a = new GraphNode(graph, SWT.NONE, "Root");
-		GraphNode b = new GraphNode(graph, SWT.NONE, "B");
-		GraphNode c = new GraphNode(graph, SWT.NONE, "C");
-		GraphNode d = new GraphNode(graph, SWT.NONE, "D");
-		GraphNode e = new GraphNode(graph, SWT.NONE, "E");
-		GraphNode f = new GraphNode(graph, SWT.NONE, "F");
-		GraphNode g = new GraphNode(graph, SWT.NONE, "G");
-		GraphNode h = new GraphNode(graph, SWT.NONE, "H");
+		GraphNode a = new GraphNode(graph, SWT.NONE);
+		a.setText("Root");
+		GraphNode b = new GraphNode(graph, SWT.NONE);
+		b.setText("B");
+		GraphNode c = new GraphNode(graph, SWT.NONE);
+		c.setText("C");
+		GraphNode d = new GraphNode(graph, SWT.NONE);
+		d.setText("D");
+		GraphNode e = new GraphNode(graph, SWT.NONE);
+		e.setText("E");
+		GraphNode f = new GraphNode(graph, SWT.NONE);
+		f.setText("F");
+		GraphNode g = new GraphNode(graph, SWT.NONE);
+		g.setText("G");
+		GraphNode h = new GraphNode(graph, SWT.NONE);
+		h.setText("H");
 		GraphConnection connection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, a, b);
 		connection.setData(Boolean.TRUE);
 		connection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, a, c);

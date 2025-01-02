@@ -14,7 +14,6 @@ package org.eclipse.zest.examples.swt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -57,12 +56,12 @@ public class GraphSnippet5 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		final Map figureListing = new HashMap();
+		final Map<String, GraphNode> figureListing = new HashMap<>();
 		final StringBuffer stringBuffer = new StringBuffer();
 		final Shell shell = new Shell();
 		final Display d = shell.getDisplay();
 		FontData fontData = d.getSystemFont().getFontData()[0];
-		fontData.height = 42;
+		fontData.setHeight(42);
 
 		final Font font = new Font(d, fontData);
 
@@ -75,9 +74,15 @@ public class GraphSnippet5 {
 
 		g = new Graph(shell, SWT.NONE);
 		g.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED);
-		GraphNode n1 = new GraphNode(g, SWT.NONE, Messages.GraphSnippet5_Information, image1);
-		GraphNode n2 = new GraphNode(g, SWT.NONE, Messages.GraphSnippet5_Warning, image2);
-		GraphNode n3 = new GraphNode(g, SWT.NONE, Messages.GraphSnippet5_Error, image3);
+		GraphNode n1 = new GraphNode(g, SWT.NONE);
+		n1.setText(Messages.GraphSnippet5_Information);
+		n1.setImage(image1);
+		GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText(Messages.GraphSnippet5_Warning);
+		n2.setImage(image2);
+		GraphNode n3 = new GraphNode(g, SWT.NONE);
+		n3.setText(Messages.GraphSnippet5_Error);
+		n3.setImage(image3);
 		figureListing.put(n1.getText().toLowerCase(), n1);
 		figureListing.put(n2.getText().toLowerCase(), n2);
 		figureListing.put(n3.getText().toLowerCase(), n3);
@@ -103,17 +108,15 @@ public class GraphSnippet5 {
 						|| (e.character == '.') || (e.character >= '0' && e.character <= '9')) {
 					stringBuffer.append(e.character);
 				}
-				Iterator iterator = figureListing.keySet().iterator();
-				List list = new ArrayList();
+				List<GraphItem> list = new ArrayList<>();
 				if (stringBuffer.length() > 0) {
-					while (iterator.hasNext()) {
-						String string = (String) iterator.next();
+					for (String string : figureListing.keySet()) {
 						if (string.indexOf(stringBuffer.toString().toLowerCase()) >= 0) {
 							list.add(figureListing.get(string));
 						}
 					}
 				}
-				g.setSelection((GraphItem[]) list.toArray(new GraphItem[list.size()]));
+				g.setSelection(list.toArray(new GraphItem[list.size()]));
 				if (complete && stringBuffer.length() > 0) {
 					stringBuffer.delete(0, stringBuffer.length());
 				}

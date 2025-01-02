@@ -13,8 +13,8 @@
 package org.eclipse.zest.examples.swt;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -40,18 +40,24 @@ public class ZoomSnippet {
 	private static Image classImage;
 
 	public static void createContainer(Graph g) {
-		GraphContainer a = new GraphContainer(g, SWT.NONE, Messages.ZoomSnippet_Container1, classImage);
+		GraphContainer a = new GraphContainer(g, SWT.NONE);
+		a.setText(Messages.ZoomSnippet_Container1);
+		a.setImage(classImage);
 		int r = (int) ((Math.random() * 3) + 1);
 		r = 2;
 		populateContainer(a, g, r, true);
 		for (int i = 0; i < 4; i++) {
-			GraphContainer b = new GraphContainer(g, SWT.NONE, Messages.ZoomSnippet_Container2, classImage);
+			GraphContainer b = new GraphContainer(g, SWT.NONE);
+			b.setText(Messages.ZoomSnippet_Container2);
+			b.setImage(classImage);
 			r = (int) ((Math.random() * 3) + 1);
 			r = 2;
 			populateContainer(b, g, r, false);
 			new GraphConnection(g, SWT.NONE, a, b);
 			for (int j = 0; j < 4; j++) {
-				GraphContainer c = new GraphContainer(g, SWT.NONE, Messages.ZoomSnippet_Container3, classImage);
+				GraphContainer c = new GraphContainer(g, SWT.NONE);
+				c.setText(Messages.ZoomSnippet_Container3);
+				c.setImage(classImage);
 				r = (int) ((Math.random() * 3) + 1);
 				r = 2;
 				populateContainer(c, g, r, true);
@@ -61,25 +67,30 @@ public class ZoomSnippet {
 	}
 
 	public static void populateContainer(GraphContainer c, Graph g, int number, boolean radial) {
-		GraphNode a = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-				Messages.ZoomSnippet_Node1, classImage);
+		GraphNode a = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+		a.setText(Messages.ZoomSnippet_Node1);
+		a.setImage(classImage);
 		for (int i = 0; i < 4; i++) {
-			GraphNode b = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-					Messages.ZoomSnippet_Node2, classImage);
+			GraphNode b = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+			b.setText(Messages.ZoomSnippet_Node2);
+			b.setImage(classImage);
 			new GraphConnection(g, SWT.NONE, a, b);
 			for (int j = 0; j < 4; j++) {
-				GraphNode d = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-						Messages.ZoomSnippet_Node3, classImage);
+				GraphNode d = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+				d.setText(Messages.ZoomSnippet_Node3);
+				d.setImage(classImage);
 				new GraphConnection(g, SWT.NONE, b, d);
 				if (number > 2) {
 					for (int k = 0; k < 4; k++) {
-						GraphNode e = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-								Messages.ZoomSnippet_Node4, classImage);
+						GraphNode e = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+						e.setText(Messages.ZoomSnippet_Node4);
+						e.setImage(classImage);
 						new GraphConnection(g, SWT.NONE, d, e);
 						if (number > 3) {
 							for (int l = 0; l < 4; l++) {
-								GraphNode f = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-										Messages.ZoomSnippet_Node5, classImage);
+								GraphNode f = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+								f.setText(Messages.ZoomSnippet_Node5);
+								f.setImage(classImage);
 								new GraphConnection(g, SWT.NONE, e, f);
 							}
 						}
@@ -124,7 +135,7 @@ public class ZoomSnippet {
 		// GridLayoutAlgorithm(LayoutStyles.NO_LAYOUT_NODE_RESIZING), true);
 		g.setLayoutAlgorithm(compositeLayoutAlgorithm, true);
 
-		g.addKeyListener(new KeyListener() {
+		g.addKeyListener(new KeyAdapter() {
 			boolean flip = true;
 
 			@Override
@@ -143,13 +154,6 @@ public class ZoomSnippet {
 				}
 
 			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
 		});
 
 		shell.open();

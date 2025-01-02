@@ -15,11 +15,10 @@ package org.eclipse.zest.examples.layouts;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -29,6 +28,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
+import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
@@ -58,15 +58,22 @@ public class SpringLayoutProgress {
 		g.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 5, 5));
 		g.setSize(500, 500);
 
-		GraphNode aa = new GraphNode(g, SWT.NONE, "A");
-		GraphNode bb = new GraphNode(g, SWT.NONE, "B");
-		GraphNode cc = new GraphNode(g, SWT.NONE, "C");
+		GraphNode aa = new GraphNode(g, SWT.NONE);
+		aa.setText("A");
+		GraphNode bb = new GraphNode(g, SWT.NONE);
+		bb.setText("B");
+		GraphNode cc = new GraphNode(g, SWT.NONE);
+		cc.setText("C");
 
-		GraphNode dd = new GraphNode(g, SWT.NONE, "D");
-		GraphNode ee = new GraphNode(g, SWT.NONE, "E");
-		GraphNode ff = new GraphNode(g, SWT.NONE, "F");
+		GraphNode dd = new GraphNode(g, SWT.NONE);
+		dd.setText("D");
+		GraphNode ee = new GraphNode(g, SWT.NONE);
+		ee.setText("E");
+		GraphNode ff = new GraphNode(g, SWT.NONE);
+		ff.setText("F");
 
-		GraphNode root = new GraphNode(g, SWT.NONE, "Root");
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText("Root");
 
 		new GraphConnection(g, SWT.NONE, root, aa);
 		new GraphConnection(g, SWT.NONE, root, bb);
@@ -89,9 +96,11 @@ public class SpringLayoutProgress {
 
 		for (int k = 0; k < 1; k++) {
 			for (int i = 0; i < 8; i++) {
-				GraphNode n = new GraphNode(g, SWT.NONE, "1 - " + i);
+				GraphNode n = new GraphNode(g, SWT.NONE);
+				n.setText("1 - " + i);
 				for (int j = 0; j < 5; j++) {
-					GraphNode n2 = new GraphNode(g, SWT.NONE, "2 - " + j);
+					GraphNode n2 = new GraphNode(g, SWT.NONE);
+					n2.setText("2 - " + j);
 					new GraphConnection(g, SWT.NONE, n, n2).setWeight(-1);
 					new GraphConnection(g, SWT.NONE, nodes[j % 3], n2);
 
@@ -100,68 +109,53 @@ public class SpringLayoutProgress {
 			}
 		}
 
-		List nodes2 = g.getNodes();
-		for (Object element : nodes2) {
+		List<? extends GraphItem> nodes2 = g.getNodes();
+		for (GraphItem element : nodes2) {
 			GraphNode node = (GraphNode) element;
 			node.setLocation(200, 200);
 		}
-		g.addMouseListener(new MouseListener() {
+		g.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				// TODO Auto-generated method stub
 				MouseDown = false;
 
 			}
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				// TODO Auto-generated method stub
 				MouseDown = true;
-
-			}
-
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
 
-		g.addSelectionListener(new SelectionListener() {
+		g.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				List selection = g.getSelection();
-				List graphNodes = g.getNodes();
-				for (Object graphNode : graphNodes) {
-					GraphNode node = (GraphNode) graphNode;
+				for (GraphNode node : g.getNodes()) {
 					if (!g.getSelection().contains(node)) {
 						node.unhighlight();
 					}
 				}
 
-				List connctions = g.getConnections();
-				for (Object connction : connctions) {
-					GraphConnection connection = (GraphConnection) connction;
+				for (GraphConnection connection : g.getConnections()) {
 					connection.unhighlight();
 					connection.setWeight(-1);
 				}
 
-				for (Object object : selection) {
+				for (GraphItem object : g.getSelection()) {
 					if (object instanceof GraphNode node) {
-						List sourceConnections = node.getSourceConnections();
-						for (Object sourceConnection : sourceConnections) {
-							GraphConnection connection = (GraphConnection) sourceConnection;
+						List<? extends GraphConnection> sourceConnections = node.getSourceConnections();
+						for (GraphConnection connection : sourceConnections) {
 							connection.getDestination().highlight();
 							connection.highlight();
 							connection.setWeight(10);
 
 						}
 
-						List target = node.getTargetConnections();
-						for (Object element : target) {
-							GraphConnection connection = (GraphConnection) element;
+						List<? extends GraphConnection> target = node.getTargetConnections();
+						for (GraphConnection connection : target) {
 							connection.getSource().highlight();
 							connection.highlight();
 							connection.setWeight(10);
@@ -171,12 +165,6 @@ public class SpringLayoutProgress {
 					}
 
 				}
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -213,7 +201,6 @@ public class SpringLayoutProgress {
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					Display.getCurrent().asyncExec(r);

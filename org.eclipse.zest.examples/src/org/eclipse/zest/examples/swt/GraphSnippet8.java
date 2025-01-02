@@ -49,14 +49,22 @@ public class GraphSnippet8 {
 
 		graph = new Graph(shell, SWT.NONE);
 
-		GraphNode a = new GraphNode(graph, SWT.NONE, Messages.Root);
-		GraphNode b = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node1);
-		GraphNode c = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node2);
-		GraphNode d = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node3);
-		GraphNode e = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node4);
-		GraphNode f = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node5);
-		GraphNode g = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node6);
-		GraphNode h = new GraphNode(graph, SWT.NONE, Messages.GraphSnippet8_Node7);
+		GraphNode a = new GraphNode(graph, SWT.NONE);
+		a.setText(Messages.Root);
+		GraphNode b = new GraphNode(graph, SWT.NONE);
+		b.setText(Messages.GraphSnippet8_Node1);
+		GraphNode c = new GraphNode(graph, SWT.NONE);
+		c.setText(Messages.GraphSnippet8_Node2);
+		GraphNode d = new GraphNode(graph, SWT.NONE);
+		d.setText(Messages.GraphSnippet8_Node3);
+		GraphNode e = new GraphNode(graph, SWT.NONE);
+		e.setText(Messages.GraphSnippet8_Node4);
+		GraphNode f = new GraphNode(graph, SWT.NONE);
+		f.setText(Messages.GraphSnippet8_Node5);
+		GraphNode g = new GraphNode(graph, SWT.NONE);
+		g.setText(Messages.GraphSnippet8_Node6);
+		GraphNode h = new GraphNode(graph, SWT.NONE);
+		h.setText(Messages.GraphSnippet8_Node7);
 		GraphConnection connection = new GraphConnection(graph, SWT.NONE, a, b);
 		connection.setData(Boolean.FALSE);
 		connection = new GraphConnection(graph, SWT.NONE, a, c);

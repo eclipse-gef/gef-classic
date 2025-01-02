@@ -46,11 +46,14 @@ public class LayoutExample {
 		shell.setSize(400, 400);
 
 		g = new Graph(shell, SWT.NONE);
-		GraphNode root = new GraphNode(g, SWT.NONE, Messages.Root);
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText(Messages.Root);
 		for (int i = 0; i < 3; i++) {
-			GraphNode n = new GraphNode(g, SWT.NONE, Messages.bind(Messages.LayoutExample_Node1, i));
+			GraphNode n = new GraphNode(g, SWT.NONE);
+			n.setText(Messages.bind(Messages.LayoutExample_Node1, i));
 			for (int j = 0; j < 3; j++) {
-				GraphNode n2 = new GraphNode(g, SWT.NONE, Messages.bind(Messages.LayoutExample_Node2, j));
+				GraphNode n2 = new GraphNode(g, SWT.NONE);
+				n2.setText(Messages.bind(Messages.LayoutExample_Node2, j));
 				new GraphConnection(g, SWT.NONE, n, n2);
 			}
 			new GraphConnection(g, SWT.NONE, root, n);

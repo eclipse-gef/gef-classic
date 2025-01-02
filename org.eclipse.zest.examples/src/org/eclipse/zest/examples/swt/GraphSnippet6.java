@@ -52,12 +52,15 @@ public class GraphSnippet6 {
 		g = new Graph(shell, SWT.NONE);
 		g.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED);
 		for (int i = 0; i < 80; i++) {
-			GraphNode n1 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE, Messages.Information,
-					image1);
-			GraphNode n2 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE, Messages.Warning,
-					image2);
-			GraphNode n3 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE, Messages.Error,
-					image3);
+			GraphNode n1 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE);
+			n1.setText(Messages.Information);
+			n1.setImage(image1);
+			GraphNode n2 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE);
+			n2.setText(Messages.Warning);
+			n2.setImage(image2);
+			GraphNode n3 = new GraphNode(g, ZestStyles.NODES_HIDE_TEXT | ZestStyles.NODES_FISHEYE);
+			n3.setText(Messages.Error);
+			n3.setImage(image3);
 			new GraphConnection(g, SWT.NONE, n1, n2);
 			new GraphConnection(g, SWT.NONE, n2, n3);
 			new GraphConnection(g, SWT.NONE, n3, n3);

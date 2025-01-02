@@ -43,8 +43,10 @@ public class HelloWorld {
 		shell.setSize(400, 400);
 
 		g = new Graph(shell, SWT.NONE);
-		GraphNode hello = new GraphNode(g, SWT.NONE, Messages.HelloWorld_Node1);
-		GraphNode world = new GraphNode(g, SWT.NONE, Messages.HelloWorld_Node2);
+		GraphNode hello = new GraphNode(g, SWT.NONE);
+		hello.setText(Messages.HelloWorld_Node1);
+		GraphNode world = new GraphNode(g, SWT.NONE);
+		world.setText(Messages.HelloWorld_Node2);
 		new GraphConnection(g, SWT.NONE, hello, world);
 		g.setLayoutAlgorithm(new SpringLayoutAlgorithm(), true);
 

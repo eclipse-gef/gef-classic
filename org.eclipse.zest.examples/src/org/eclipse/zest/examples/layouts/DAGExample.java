@@ -50,14 +50,20 @@ public class DAGExample {
 		g.setLayoutAlgorithm(algorithm, false);
 		g.setExpandCollapseManager(new DAGExpandCollapseManager());
 
-		GraphNode root = new GraphNode(g, SWT.NONE, "Root");
-		GraphNode a = new GraphNode(g, SWT.NONE, "A");
-		GraphNode b = new GraphNode(g, SWT.NONE, "B");
-		GraphNode c = new GraphNode(g, SWT.NONE, "C");
-		GraphNode e = new GraphNode(g, SWT.NONE, "D");
-
-		GraphNode f = new GraphNode(g, SWT.NONE, "E");
-		GraphNode h = new GraphNode(g, SWT.NONE, "F");
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText("Root");
+		GraphNode a = new GraphNode(g, SWT.NONE);
+		a.setText("A");
+		GraphNode b = new GraphNode(g, SWT.NONE);
+		b.setText("B");
+		GraphNode c = new GraphNode(g, SWT.NONE);
+		c.setText("C");
+		GraphNode e = new GraphNode(g, SWT.NONE);
+		e.setText("D");
+		GraphNode f = new GraphNode(g, SWT.NONE);
+		f.setText("E");
+		GraphNode h = new GraphNode(g, SWT.NONE);
+		h.setText("F");
 
 		new GraphConnection(g, ZestStyles.CONNECTIONS_DIRECTED, root, a);
 		new GraphConnection(g, ZestStyles.CONNECTIONS_DIRECTED, root, b);
@@ -110,7 +116,7 @@ public class DAGExample {
 		Action expandAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
 					GraphNode selected = (GraphNode) selection.get(0);
 					g.setExpanded(selected, true);
@@ -123,10 +129,10 @@ public class DAGExample {
 		Action collapseAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
-					GraphItem selected = (GraphItem) selection.get(0);
-					g.setExpanded((GraphNode) selected, false);
+					GraphNode selected = (GraphNode) selection.get(0);
+					g.setExpanded(selected, false);
 				}
 			}
 		};

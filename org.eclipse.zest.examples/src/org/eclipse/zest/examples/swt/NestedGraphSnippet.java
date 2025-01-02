@@ -37,18 +37,24 @@ public class NestedGraphSnippet {
 	private static Image classImage;
 
 	public static void createContainer(Graph g) {
-		GraphContainer a = new GraphContainer(g, SWT.NONE, Messages.NestedGraphSnippet_Container1, classImage);
+		GraphContainer a = new GraphContainer(g, SWT.NONE);
+		a.setText(Messages.NestedGraphSnippet_Container1);
+		a.setImage(classImage);
 		int r = (int) ((Math.random() * 3) + 1);
 		r = 2;
 		populateContainer(a, g, r, true);
 		for (int i = 0; i < 4; i++) {
-			GraphContainer b = new GraphContainer(g, SWT.NONE, Messages.NestedGraphSnippet_Container2, classImage);
+			GraphContainer b = new GraphContainer(g, SWT.NONE);
+			b.setText(Messages.NestedGraphSnippet_Container2);
+			b.setImage(classImage);
 			r = (int) ((Math.random() * 3) + 1);
 			r = 2;
 			populateContainer(b, g, r, false);
 			new GraphConnection(g, SWT.NONE, a, b);
 			for (int j = 0; j < 4; j++) {
-				GraphContainer c = new GraphContainer(g, SWT.NONE, Messages.NestedGraphSnippet_Container3, classImage);
+				GraphContainer c = new GraphContainer(g, SWT.NONE);
+				c.setText(Messages.NestedGraphSnippet_Container3);
+				c.setImage(classImage);
 				r = (int) ((Math.random() * 3) + 1);
 				r = 2;
 				populateContainer(c, g, r, true);
@@ -58,25 +64,30 @@ public class NestedGraphSnippet {
 	}
 
 	public static void populateContainer(GraphContainer c, Graph g, int number, boolean radial) {
-		GraphNode a = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-				Messages.NestedGraphSnippet_Node1, classImage);
+		GraphNode a = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+		a.setText(Messages.NestedGraphSnippet_Node1);
+		a.setImage(classImage);
 		for (int i = 0; i < 4; i++) {
-			GraphNode b = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-					Messages.NestedGraphSnippet_Node2, classImage);
+			GraphNode b = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+			b.setText(Messages.NestedGraphSnippet_Node2);
+			b.setImage(classImage);
 			new GraphConnection(g, SWT.NONE, a, b);
 			for (int j = 0; j < 4; j++) {
-				GraphNode d = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-						Messages.NestedGraphSnippet_Node3, classImage);
+				GraphNode d = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+				d.setText(Messages.NestedGraphSnippet_Node3);
+				d.setImage(classImage);
 				new GraphConnection(g, SWT.NONE, b, d);
 				if (number > 2) {
 					for (int k = 0; k < 4; k++) {
-						GraphNode e = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-								Messages.NestedGraphSnippet_Node4, classImage);
+						GraphNode e = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+						e.setText(Messages.NestedGraphSnippet_Node4);
+						e.setImage(classImage);
 						new GraphConnection(g, SWT.NONE, d, e);
 						if (number > 3) {
 							for (int l = 0; l < 4; l++) {
-								GraphNode f = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT,
-										Messages.NestedGraphSnippet_Node5, classImage);
+								GraphNode f = new GraphNode(c, ZestStyles.NODES_FISHEYE | ZestStyles.NODES_HIDE_TEXT);
+								f.setText(Messages.NestedGraphSnippet_Node5);
+								f.setImage(classImage);
 								new GraphConnection(g, SWT.NONE, e, f);
 							}
 						}

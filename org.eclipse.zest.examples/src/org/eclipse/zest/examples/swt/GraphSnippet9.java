@@ -44,7 +44,8 @@ public class GraphSnippet9 {
 
 		graph = new Graph(shell, SWT.NONE);
 
-		GraphNode a = new GraphNode(graph, ZestStyles.CONNECTIONS_DIRECTED, Messages.Root);
+		GraphNode a = new GraphNode(graph, ZestStyles.CONNECTIONS_DIRECTED);
+		a.setText(Messages.Root);
 		GraphConnection connection = new GraphConnection(graph, SWT.NONE, a, a);
 		connection.setText(Messages.GraphSnippet9_Connection);
 		a.setLocation(100, 100);

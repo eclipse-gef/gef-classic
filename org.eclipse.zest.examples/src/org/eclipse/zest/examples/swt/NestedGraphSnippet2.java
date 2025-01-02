@@ -64,11 +64,16 @@ public class NestedGraphSnippet2 {
 		container4.setText(Messages.NestedGraphSnippet2_Container7);
 
 		/* Objects */
-		GraphNode object1 = new GraphNode(container1, ZestStyles.NODES_FISHEYE, Messages.NestedGraphSnippet2_Node1);
-		GraphNode object2 = new GraphNode(container1, ZestStyles.NODES_FISHEYE, Messages.NestedGraphSnippet2_Node2);
-		GraphNode object3 = new GraphNode(container2, ZestStyles.NODES_FISHEYE, Messages.NestedGraphSnippet2_Node3);
-		GraphNode object4 = new GraphNode(container3, ZestStyles.NODES_FISHEYE, Messages.NestedGraphSnippet2_Node4);
-		GraphNode object5 = new GraphNode(container4, ZestStyles.NODES_FISHEYE, Messages.NestedGraphSnippet2_Node5);
+		GraphNode object1 = new GraphNode(container1, ZestStyles.NODES_FISHEYE);
+		object1.setText(Messages.NestedGraphSnippet2_Node1);
+		GraphNode object2 = new GraphNode(container1, ZestStyles.NODES_FISHEYE);
+		object2.setText(Messages.NestedGraphSnippet2_Node2);
+		GraphNode object3 = new GraphNode(container2, ZestStyles.NODES_FISHEYE);
+		object3.setText(Messages.NestedGraphSnippet2_Node3);
+		GraphNode object4 = new GraphNode(container3, ZestStyles.NODES_FISHEYE);
+		object4.setText(Messages.NestedGraphSnippet2_Node4);
+		GraphNode object5 = new GraphNode(container4, ZestStyles.NODES_FISHEYE);
+		object5.setText(Messages.NestedGraphSnippet2_Node5);
 
 		/* Connections */
 		new GraphConnection(g, ZestStyles.CONNECTIONS_DIRECTED, object1, object2);

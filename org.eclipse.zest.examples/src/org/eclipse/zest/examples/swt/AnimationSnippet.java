@@ -1,8 +1,8 @@
 package org.eclipse.zest.examples.swt;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
@@ -39,14 +39,12 @@ public class AnimationSnippet {
 
 		g = new Graph(shell, SWT.NONE);
 
-		final GraphNode n = new GraphNode(g, SWT.NONE, Messages.Paper);
-		final GraphNode n2 = new GraphNode(g, SWT.NONE, Messages.Rock);
+		final GraphNode n = new GraphNode(g, SWT.NONE);
+		n.setText(Messages.Paper);
+		final GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText(Messages.Rock);
 
-		b.addSelectionListener(new SelectionListener() {
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-
+		b.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Animation.markBegin();

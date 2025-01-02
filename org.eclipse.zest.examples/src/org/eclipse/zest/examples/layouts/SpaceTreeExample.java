@@ -14,6 +14,7 @@ import org.eclipse.zest.core.widgets.DefaultSubgraph;
 import org.eclipse.zest.core.widgets.DefaultSubgraph.TriangleSubgraphFactory;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
+import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.ZestStyles;
 import org.eclipse.zest.layouts.algorithms.SpaceTreeLayoutAlgorithm;
@@ -65,7 +66,8 @@ public class SpaceTreeExample {
 	}
 
 	private static GraphNode createTree(Graph g, String rootTitle, int depth, int breadth) {
-		GraphNode root = new GraphNode(g, SWT.NONE, rootTitle);
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText(rootTitle);
 		if (depth > 0) {
 			for (int i = 0; i < breadth; i++) {
 				GraphNode child = createTree(g, rootTitle + i, depth - 1 - i, breadth - i);
@@ -83,7 +85,7 @@ public class SpaceTreeExample {
 	}
 
 	private static void fillContextMenu(IMenuManager menuMgr) {
-		List selection = g.getSelection();
+		List<? extends GraphItem> selection = g.getSelection();
 		if (selection.size() == 1) {
 			if (selection.get(0) instanceof GraphNode) {
 				final GraphNode node = (GraphNode) selection.get(0);
@@ -152,7 +154,8 @@ public class SpaceTreeExample {
 			Action addNode = new Action() {
 				@Override
 				public void run() {
-					new GraphNode(g, SWT.NONE, "new!");
+					GraphNode n = new GraphNode(g, SWT.NONE);
+					n.setText("new!");
 				}
 			};
 			addNode.setText("add node");

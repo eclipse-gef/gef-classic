@@ -38,13 +38,20 @@ public class SugiyamaLayoutExample {
 		Graph g = new Graph(shell, SWT.NONE);
 		g.setConnectionStyle(ZestStyles.CONNECTIONS_DIRECTED);
 
-		GraphNode coal = new GraphNode(g, SWT.NONE, "Coal");
-		GraphNode ore = new GraphNode(g, SWT.NONE, "Ore");
-		GraphNode stone = new GraphNode(g, SWT.NONE, "Stone");
-		GraphNode metal = new GraphNode(g, SWT.NONE, "Metal");
-		GraphNode concrete = new GraphNode(g, SWT.NONE, "Concrete");
-		GraphNode machine = new GraphNode(g, SWT.NONE, "Machine");
-		GraphNode building = new GraphNode(g, SWT.NONE, "Building");
+		GraphNode coal = new GraphNode(g, SWT.NONE);
+		coal.setText("Coal");
+		GraphNode ore = new GraphNode(g, SWT.NONE);
+		ore.setText("Ore");
+		GraphNode stone = new GraphNode(g, SWT.NONE);
+		stone.setText("Stone");
+		GraphNode metal = new GraphNode(g, SWT.NONE);
+		metal.setText("Metal");
+		GraphNode concrete = new GraphNode(g, SWT.NONE);
+		concrete.setText("Concrete");
+		GraphNode machine = new GraphNode(g, SWT.NONE);
+		machine.setText("Machine");
+		GraphNode building = new GraphNode(g, SWT.NONE);
+		building.setText("Building");
 
 		new GraphConnection(g, SWT.NONE, coal, metal);
 		new GraphConnection(g, SWT.NONE, coal, concrete);

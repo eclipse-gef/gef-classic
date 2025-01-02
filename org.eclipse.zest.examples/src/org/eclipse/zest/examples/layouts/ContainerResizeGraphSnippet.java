@@ -13,8 +13,8 @@
 package org.eclipse.zest.examples.layouts;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -137,7 +137,7 @@ public class ContainerResizeGraphSnippet {
 		// GridLayoutAlgorithm(LayoutStyles.NO_LAYOUT_NODE_RESIZING), true);
 		g.setLayoutAlgorithm(compositeLayoutAlgorithm, true);
 
-		g.addKeyListener(new KeyListener() {
+		g.addKeyListener(new KeyAdapter() {
 			boolean flip = true;
 
 			@Override
@@ -156,13 +156,6 @@ public class ContainerResizeGraphSnippet {
 				}
 
 			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
 		});
 
 		shell.open();

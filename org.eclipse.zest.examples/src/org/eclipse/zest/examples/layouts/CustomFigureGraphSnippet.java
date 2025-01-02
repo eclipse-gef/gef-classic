@@ -12,11 +12,9 @@
  ******************************************************************************/
 package org.eclipse.zest.examples.layouts;
 
-import java.util.Iterator;
-
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -25,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.zest.core.widgets.CGraphNode;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
+import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
@@ -107,45 +106,38 @@ public class CustomFigureGraphSnippet {
 		shell.setSize(400, 400);
 
 		final Graph g = new Graph(shell, SWT.NONE);
-		g.addSelectionListener(new SelectionListener() {
-
+		g.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Iterator iter = g.getSelection().iterator();
-				while (iter.hasNext()) {
-					Object o = iter.next();
-					if (o instanceof CGraphNode) {
-						IFigure figure = ((CGraphNode) o).getFigure();
+				for (GraphItem graphItem : g.getSelection()) {
+					if (graphItem instanceof CGraphNode graphNode) {
+						IFigure figure = graphNode.getFigure();
 						figure.setBackgroundColor(ColorConstants.blue);
 						figure.setForegroundColor(ColorConstants.blue);
 					}
 				}
-				iter = g.getNodes().iterator();
-				while (iter.hasNext()) {
-					Object o = iter.next();
-					if (o instanceof CGraphNode) {
-						if (!g.getSelection().contains(o)) {
-							((CGraphNode) o).getFigure().setBackgroundColor(ColorConstants.black);
-							((CGraphNode) o).getFigure().setForegroundColor(ColorConstants.black);
+				for (GraphNode graphItem : g.getNodes()) {
+					if (graphItem instanceof CGraphNode graphNode) {
+						if (!g.getSelection().contains(graphNode)) {
+							IFigure figure = graphNode.getFigure();
+							figure.setBackgroundColor(ColorConstants.black);
+							figure.setForegroundColor(ColorConstants.black);
 						}
 					}
 				}
 			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
 		});
 
-		Image zx = new Image(d, "zx.png");
-		Image ibull = new Image(d, "ibull.jpg");
+		Image zx = new Image(d, "zx.png"); //$NON-NLS-1$
+		Image ibull = new Image(d, "ibull.jpg"); //$NON-NLS-1$
 		CGraphNode n = new CGraphNode(g, SWT.NONE, createPersonFigure(zx));
 		CGraphNode n2 = new CGraphNode(g, SWT.NONE, createPersonFigure(ibull));
-		GraphNode n3 = new GraphNode(g, SWT.NONE, "PDE");
-		GraphNode n4 = new GraphNode(g, SWT.NONE, "Zest");
-		GraphNode n5 = new GraphNode(g, SWT.NONE, "PDE Viz tool");
+		GraphNode n3 = new GraphNode(g, SWT.NONE);
+		n3.setText("PDE");
+		GraphNode n4 = new GraphNode(g, SWT.NONE);
+		n4.setText("Zest");
+		GraphNode n5 = new GraphNode(g, SWT.NONE);
+		n5.setText("PDE Viz tool");
 
 		new GraphConnection(g, SWT.NONE, n, n2);
 		new GraphConnection(g, SWT.NONE, n, n3);

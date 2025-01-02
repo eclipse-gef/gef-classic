@@ -66,9 +66,11 @@ public class ContainersGraphSnippet {
 		GraphContainer c2 = new GraphContainer(g, SWT.NONE);
 		c2.setText("USA");
 
-		GraphNode n1 = new GraphNode(c1, SWT.NONE, "Ian B.");
+		GraphNode n1 = new GraphNode(c1, SWT.NONE);
+		n1.setText("Ian B.");
 		n1.setSize(200, 100);
-		GraphNode n2 = new GraphNode(c2, SWT.NONE, "Chris A.");
+		GraphNode n2 = new GraphNode(c2, SWT.NONE);
+		n2.setText("Chris A.");
 		n2.setTooltip(tooltip);
 
 		GraphConnection connection = new GraphConnection(g, ZestStyles.CONNECTIONS_DIRECTED, n1, n2);

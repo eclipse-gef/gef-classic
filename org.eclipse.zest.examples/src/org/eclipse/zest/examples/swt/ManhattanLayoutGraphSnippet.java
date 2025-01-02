@@ -57,9 +57,12 @@ public class ManhattanLayoutGraphSnippet {
 
 		final Graph g = new Graph(shell, SWT.NONE);
 
-		GraphNode n = new GraphNode(g, SWT.NONE, Messages.Paper);
-		GraphNode n2 = new GraphNode(g, SWT.NONE, Messages.Rock);
-		GraphNode n3 = new GraphNode(g, SWT.NONE, Messages.Scissors);
+		GraphNode n = new GraphNode(g, SWT.NONE);
+		n.setText(Messages.Paper);
+		GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText(Messages.Rock);
+		GraphNode n3 = new GraphNode(g, SWT.NONE);
+		n3.setText(Messages.Scissors);
 		new GraphConnection(g, SWT.NONE, n, n2);
 		new GraphConnection(g, SWT.NONE, n2, n3);
 		new GraphConnection(g, SWT.NONE, n3, n);

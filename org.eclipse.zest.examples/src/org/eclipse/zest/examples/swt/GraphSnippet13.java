@@ -12,11 +12,9 @@
  ******************************************************************************/
 package org.eclipse.zest.examples.swt;
 
-import java.util.Iterator;
-
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
@@ -26,6 +24,7 @@ import org.eclipse.zest.core.widgets.CGraphNode;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphContainer;
+import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.ZestStyles;
 import org.eclipse.zest.examples.Messages;
@@ -114,35 +113,26 @@ public class GraphSnippet13 {
 		shell.setSize(400, 400);
 
 		g = new Graph(shell, SWT.NONE);
-		g.addSelectionListener(new SelectionListener() {
+		g.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Iterator iter = g.getSelection().iterator();
-				while (iter.hasNext()) {
-					Object o = iter.next();
-					if (o instanceof CGraphNode) {
-						IFigure figure = ((CGraphNode) o).getFigure();
+				for (GraphItem graphItem : g.getSelection()) {
+					if (graphItem instanceof CGraphNode graphNode) {
+						IFigure figure = graphNode.getFigure();
 						figure.setBackgroundColor(ColorConstants.blue);
 						figure.setForegroundColor(ColorConstants.blue);
 					}
 				}
-				iter = g.getNodes().iterator();
-				while (iter.hasNext()) {
-					Object o = iter.next();
-					if (o instanceof CGraphNode) {
-						if (!g.getSelection().contains(o)) {
-							((CGraphNode) o).getFigure().setBackgroundColor(ColorConstants.black);
-							((CGraphNode) o).getFigure().setForegroundColor(ColorConstants.black);
+				for (GraphNode graphItem : g.getNodes()) {
+					if (graphItem instanceof CGraphNode graphNode) {
+						if (!g.getSelection().contains(graphNode)) {
+							IFigure figure = graphNode.getFigure();
+							figure.setBackgroundColor(ColorConstants.black);
+							figure.setForegroundColor(ColorConstants.black);
 						}
 					}
 				}
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -163,9 +153,11 @@ public class GraphSnippet13 {
 		GraphContainer c2 = new GraphContainer(g, SWT.NONE);
 		c2.setText(Messages.GraphSnippet13_USA);
 
-		GraphNode n1 = new GraphNode(c1, SWT.NONE, Messages.GraphSnippet13_Node1);
+		GraphNode n1 = new GraphNode(c1, SWT.NONE);
+		n1.setText(Messages.GraphSnippet13_Node1);
 		n1.setSize(200, 100);
-		GraphNode n2 = new GraphNode(c2, SWT.NONE, Messages.GraphSnippet13_Node2);
+		GraphNode n2 = new GraphNode(c2, SWT.NONE);
+		n2.setText(Messages.GraphSnippet13_Node2);
 		n2.setTooltip(tooltip);
 
 		GraphConnection connection = new GraphConnection(g, ZestStyles.CONNECTIONS_DIRECTED, n1, n2);

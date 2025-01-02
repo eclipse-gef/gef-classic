@@ -68,7 +68,7 @@ public class SpaceTreeBuilding {
 		Action parentAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
 					GraphNode selected = (GraphNode) selection.get(0);
 					parentNode = selected;
@@ -82,7 +82,7 @@ public class SpaceTreeBuilding {
 		Action childAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
 					GraphNode selected = (GraphNode) selection.get(0);
 					childNode = selected;
@@ -96,7 +96,7 @@ public class SpaceTreeBuilding {
 		Action expandAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
 					GraphNode selected = (GraphNode) selection.get(0);
 					g.setExpanded(selected, true);
@@ -109,10 +109,10 @@ public class SpaceTreeBuilding {
 		Action collapseAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
-					GraphItem selected = (GraphItem) selection.get(0);
-					g.setExpanded((GraphNode) selected, false);
+					GraphNode selected = (GraphNode) selection.get(0);
+					g.setExpanded(selected, false);
 				}
 			}
 		};

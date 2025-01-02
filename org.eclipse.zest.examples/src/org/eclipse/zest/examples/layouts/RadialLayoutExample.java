@@ -22,11 +22,14 @@ public class RadialLayoutExample {
 
 		final Graph g = new Graph(shell, SWT.NONE);
 		g.setSize(500, 500);
-		GraphNode root = new GraphNode(g, SWT.NONE, "Root");
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText("Root");
 		for (int i = 0; i < 3; i++) {
-			GraphNode n = new GraphNode(g, SWT.NONE, "1 - " + i);
+			GraphNode n = new GraphNode(g, SWT.NONE);
+			n.setText("1 - " + i);
 			for (int j = 0; j < 3; j++) {
-				GraphNode n2 = new GraphNode(g, SWT.NONE, "2 - " + j);
+				GraphNode n2 = new GraphNode(g, SWT.NONE);
+				n2.setText("2 - " + j);
 				new GraphConnection(g, SWT.NONE, n, n2).setWeight(-1);
 			}
 			new GraphConnection(g, SWT.NONE, root, n);

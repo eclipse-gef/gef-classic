@@ -46,16 +46,19 @@ public class TreeLayoutExample {
 		g.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 10, 10));
 		g.setSize(500, 500);
 
-		GraphNode root = new GraphNode(g, SWT.NONE, "Root");
+		GraphNode root = new GraphNode(g, SWT.NONE);
+		root.setText("Root");
 
 		GraphNode lastNode = null;
 		for (int i = 0; i < 3; i++) {
-			GraphNode n = new GraphNode(g, SWT.NONE, "1 - " + i);
+			GraphNode n = new GraphNode(g, SWT.NONE);
+			n.setText("1 - " + i);
 			if (lastNode != null) {
 				new GraphConnection(g, SWT.NONE, n, lastNode).setDirected(true);
 			}
 			for (int j = 0; j < 1; j++) {
-				GraphNode n2 = new GraphNode(g, SWT.NONE, "2 - " + j);
+				GraphNode n2 = new GraphNode(g, SWT.NONE);
+				n2.setText("2 - " + j);
 				GraphConnection c = new GraphConnection(g, SWT.NONE, n, n2);
 				c.setWeight(-1);
 				c.setDirected(true);
@@ -136,7 +139,7 @@ public class TreeLayoutExample {
 		Action expandAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
 					GraphNode selected = (GraphNode) selection.get(0);
 					g.setExpanded(selected, true);
@@ -149,10 +152,10 @@ public class TreeLayoutExample {
 		Action collapseAction = new Action() {
 			@Override
 			public void run() {
-				List selection = g.getSelection();
+				List<? extends GraphItem> selection = g.getSelection();
 				if (!selection.isEmpty()) {
-					GraphItem selected = (GraphItem) selection.get(0);
-					g.setExpanded((GraphNode) selected, false);
+					GraphNode selected = (GraphNode) selection.get(0);
+					g.setExpanded(selected, false);
 				}
 			}
 		};

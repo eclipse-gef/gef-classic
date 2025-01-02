@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
+import org.eclipse.zest.examples.Messages;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
 /**
@@ -44,9 +45,12 @@ public class SimpleGraphSnippet {
 
 		Graph g = new Graph(shell, SWT.NONE);
 
-		GraphNode n = new GraphNode(g, SWT.NONE, "Paper");
-		GraphNode n2 = new GraphNode(g, SWT.NONE, "Rock");
-		GraphNode n3 = new GraphNode(g, SWT.NONE, "Scissors");
+		GraphNode n = new GraphNode(g, SWT.NONE);
+		n.setText(Messages.Paper);
+		GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText(Messages.Rock);
+		GraphNode n3 = new GraphNode(g, SWT.NONE);
+		n3.setText(Messages.Scissors);
 		new GraphConnection(g, SWT.NONE, n, n2);
 		new GraphConnection(g, SWT.NONE, n2, n3);
 		new GraphConnection(g, SWT.NONE, n3, n);

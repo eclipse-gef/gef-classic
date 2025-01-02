@@ -9,8 +9,8 @@ import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.layouts.LayoutAlgorithm;
+import org.eclipse.zest.layouts.algorithms.AbstractLayoutAlgorithm;
 import org.eclipse.zest.layouts.interfaces.EntityLayout;
-import org.eclipse.zest.layouts.interfaces.LayoutContext;
 
 /**
  * This snippet shows how to create a custom layout. This layout simply lays the
@@ -31,21 +31,17 @@ public class CustomLayout {
 
 		Graph g = new Graph(shell, SWT.NONE);
 
-		GraphNode n = new GraphNode(g, SWT.NONE, "Paper");
-		GraphNode n2 = new GraphNode(g, SWT.NONE, "Rock");
-		GraphNode n3 = new GraphNode(g, SWT.NONE, "Scissors");
+		GraphNode n = new GraphNode(g, SWT.NONE);
+		n.setText("Paper");
+		GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText("Rock");
+		GraphNode n3 = new GraphNode(g, SWT.NONE);
+		n3.setText("Scissors");
 		new GraphConnection(g, SWT.NONE, n, n2);
 		new GraphConnection(g, SWT.NONE, n2, n3);
 		new GraphConnection(g, SWT.NONE, n3, n);
 
-		LayoutAlgorithm layoutAlgorithm = new LayoutAlgorithm() {
-			private LayoutContext context;
-
-			@Override
-			public void setLayoutContext(LayoutContext context) {
-				this.context = context;
-			}
-
+		LayoutAlgorithm layoutAlgorithm = new AbstractLayoutAlgorithm() {
 			@Override
 			public void applyLayout(boolean clean) {
 				EntityLayout[] entitiesToLayout = context.getEntities();

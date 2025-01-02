@@ -51,8 +51,10 @@ public class GraphSnippet11 {
 		shell.setSize(400, 400);
 
 		g = new Graph(shell, SWT.NONE);
-		GraphNode n = new GraphNode(g, SWT.NONE, Messages.GraphSnippet11_Node1);
-		GraphNode n2 = new GraphNode(g, SWT.NONE, Messages.GraphSnippet11_Node2);
+		GraphNode n = new GraphNode(g, SWT.NONE);
+		n.setText(Messages.GraphSnippet11_Node1);
+		GraphNode n2 = new GraphNode(g, SWT.NONE);
+		n2.setText(Messages.GraphSnippet11_Node2);
 		createConnection(g, n, n2, ColorConstants.darkGreen, 20);
 		createConnection(g, n, n2, ColorConstants.darkGreen, -20);
 		createConnection(g, n, n2, ColorConstants.darkBlue, 40);
