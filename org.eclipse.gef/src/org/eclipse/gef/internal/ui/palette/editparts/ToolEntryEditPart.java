@@ -338,6 +338,9 @@ public class ToolEntryEditPart extends PaletteEditPart {
 				return key.cast(getParent());
 			}
 		}
+		if (key == Clickable.class) {
+			return key.cast(getFigure());
+		}
 		return super.getAdapter(key);
 	}
 
@@ -417,7 +420,7 @@ public class ToolEntryEditPart extends PaletteEditPart {
 	}
 
 	private ButtonModel getButtonModel() {
-		Clickable c = (Clickable) getFigure();
+		Clickable c = getFigure();
 		return c.getModel();
 	}
 
@@ -435,6 +438,11 @@ public class ToolEntryEditPart extends PaletteEditPart {
 	@Override
 	public ToolEntry getModel() {
 		return (ToolEntry) super.getModel();
+	}
+
+	@Override
+	public Clickable getFigure() {
+		return (Clickable) super.getFigure();
 	}
 
 	/**

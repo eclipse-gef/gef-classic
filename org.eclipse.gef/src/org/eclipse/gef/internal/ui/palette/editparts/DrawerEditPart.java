@@ -21,6 +21,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IMemento;
 
+import org.eclipse.draw2d.Clickable;
 import org.eclipse.draw2d.FocusEvent;
 import org.eclipse.draw2d.FocusListener;
 import org.eclipse.draw2d.IFigure;
@@ -98,6 +99,11 @@ public class DrawerEditPart extends PaletteEditPart implements IPinnableEditPart
 		}
 		if (key == MouseWheelHelper.class) {
 			return key.cast(new ViewportMouseWheelHelper(this));
+		}
+		if (key == Clickable.class) {
+			DrawerFigure drawerFigure = getFigure();
+			Clickable drawerToggle = drawerFigure.getCollapseToggle();
+			return key.cast(drawerToggle);
 		}
 		return super.getAdapter(key);
 	}

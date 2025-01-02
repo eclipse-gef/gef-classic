@@ -21,10 +21,13 @@ import org.eclipse.e4.ui.model.application.ui.menu.MMenuItem;
 import org.eclipse.ui.IEditorPart;
 
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.ui.palette.PaletteEditPartFactory;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 
 import org.eclipse.gef.examples.shapes.ShapesEditor;
 import org.eclipse.gef.examples.shapes.palette.ShapesColorProvider;
+import org.eclipse.gef.examples.shapes.palette.ShapesPaletteEditPartFactory;
 
 /**
  * This handler manages the {@code Use Custom Palette} menu item which switches
@@ -39,9 +42,15 @@ public class ColorProviderHandler {
 		PaletteViewer paletteViewer = graphicalViewer.getEditDomain().getPaletteViewer();
 		if (menuItem.isSelected()) {
 			paletteViewer.setColorProvider(new ShapesColorProvider());
+			paletteViewer.setEditPartFactory(new ShapesPaletteEditPartFactory());
 		} else {
 			paletteViewer.setColorProvider(null);
+			paletteViewer.setEditPartFactory(new PaletteEditPartFactory());
 		}
+		// Force recreation of all edit parts and figures
+		PaletteRoot paletteRoot = paletteViewer.getPaletteRoot();
+		paletteViewer.setPaletteRoot(null);
+		paletteViewer.setPaletteRoot(paletteRoot);
 		// Redraw the FlyoutPaletteComposite
 		paletteViewer.getControl().getParent().getParent().redraw();
 	}

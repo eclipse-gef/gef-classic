@@ -24,28 +24,34 @@ import org.eclipse.gef.ui.palette.PaletteColorProvider;
  * palette.
  */
 public class ShapesColorProvider extends PaletteColorProvider {
+	public static final Color COLOR_PALETTE_BACKGROUND = ColorConstants.button;
+	public static final Color COLOR_ENTRY_SELECTED = getShiftedColor(COLOR_PALETTE_BACKGROUND, 24);
+	public static final Color COLOR_DRAWER_GRAD_BEGIN = getShiftedColor(COLOR_PALETTE_BACKGROUND, -8);
+	public static final Color COLOR_DRAWER_GRAD_END = getShiftedColor(COLOR_PALETTE_BACKGROUND, 16);
+
 	@Override
 	public Color getListSelectedBackgroundColor() {
-		return ColorConstants.darkGreen;
+		return COLOR_ENTRY_SELECTED;
 	}
 
 	@Override
 	public Color getListHoverBackgroundColor() {
-		return ColorConstants.cyan;
+		return COLOR_PALETTE_BACKGROUND;
 	}
 
 	@Override
-	public Color getButton() {
-		return ColorConstants.lightGray;
+	public Color getListBackground() {
+		return COLOR_PALETTE_BACKGROUND;
 	}
 
-	@Override
-	public Color getButtonDarker() {
-		return ColorConstants.gray;
-	}
-
-	@Override
-	public Color getButtonDarkest() {
-		return ColorConstants.darkGray;
+	/**
+	 * @return new {@link Color} based on given {@link Color} and shifted on given
+	 *         value to make it darker or lighter.
+	 */
+	private static Color getShiftedColor(Color color, int delta) {
+		int r = Math.max(0, Math.min(color.getRed() + delta, 255));
+		int g = Math.max(0, Math.min(color.getGreen() + delta, 255));
+		int b = Math.max(0, Math.min(color.getBlue() + delta, 255));
+		return new Color(color.getDevice(), r, g, b);
 	}
 }
