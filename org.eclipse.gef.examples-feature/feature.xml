@@ -69,4 +69,20 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.eclipse.gef.examples.digraph1"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.gef.examples.digraph2"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.gef.examples.ui.capabilities"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.eclipse.gef.examples.ui.pde"
+         version="0.0.0"/>
+
 </feature>

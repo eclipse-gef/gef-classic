@@ -45,6 +45,18 @@
    <bundle id="org.eclipse.draw2d.examples.source">
       <category name="draw2d"/>
    </bundle>
+   <bundle id="org.eclipse.zest.examples.cloudio">
+      <category name="zest"/>
+   </bundle>
+   <bundle id="org.eclipse.zest.examples.cloudio.source">
+      <category name="zest"/>
+   </bundle>
+   <bundle id="org.eclipse.zest.examples.layouts">
+      <category name="zest"/>
+   </bundle>
+   <bundle id="org.eclipse.zest.examples.layouts.source">
+      <category name="zest"/>
+   </bundle>
    <category-def name="GEF" label="GEF (Graphical Editing Framework) Classic">
       <description>
          Draw2d, GEF (MVC), and Zest runtime, SDK, examples, and sources

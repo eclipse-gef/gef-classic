@@ -377,6 +377,8 @@
 		
 		<!--examples-->
 		<module>org.eclipse.draw2d.examples</module>
+		<module>org.eclipse.gef.examples.digraph1</module>
+		<module>org.eclipse.gef.examples.digraph2</module>
 		<module>org.eclipse.gef.examples.flow</module>
 		<module>org.eclipse.gef.examples.logic</module>
 		<module>org.eclipse.gef.examples.shapes</module>
