@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="264.58334mm"
+   height="79.375mm"
+   viewBox="0 0 264.58334 79.375"
+   version="1.1"
+   id="svg70272"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs70269">
+    <marker
+       style="overflow:visible"
+       id="marker76293"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="5.8241119"
+       markerHeight="6.7330775"
+       viewBox="0 0 5.8241121 6.7330776"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:2"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path76291" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="EmptyTriangleIn"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="5.8241119"
+       markerHeight="6.7330775"
+       viewBox="0 0 5.8241121 6.7330776"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:2"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path153" />
+    </marker>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(13.229167,-26.458334)">
+    <g
+       id="g74469"
+       transform="translate(52.916667)">
+      <rect
+         style="fill:#dcdcf4;fill-opacity:1;stroke:#000000;stroke-width:0.315586;stroke-dasharray:none"
+         id="rect70808"
+         width="105.51775"
+         height="26.142748"
+         x="0.157793"
+         y="26.616127" />
+      <text
+         xml:space="preserve"
+         style="font-size:16.9333px;fill:#0f0f0f;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none"
+         x="6.6126008"
+         y="44.090141"
+         id="text72268"><tspan
+           id="tspan72266"
+           style="fill:#0f0f0f;fill-opacity:1;stroke-width:0.264583"
+           x="6.6126008"
+           y="44.090141">GraphNode</tspan></text>
+    </g>
+    <g
+       id="g74464"
+       transform="translate(-13.229167,26.458332)">
+      <rect
+         style="fill:#dcdcf4;fill-opacity:1;stroke:#000000;stroke-width:0.271896;stroke-dasharray:none"
+         id="rect70810"
+         width="105.56144"
+         height="26.186438"
+         x="0.135948"
+         y="53.052616" />
+      <text
+         xml:space="preserve"
+         style="font-size:16.9333px;fill:#0f0f0f;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none"
+         x="1.4310008"
+         y="70.548477"
+         id="text72272"><tspan
+           id="tspan72270"
+           style="stroke-width:0.264583"
+           x="1.4310008"
+           y="70.548477">CGraphNode</tspan></text>
+      <path
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#EmptyTriangleIn)"
+         d="M 95.250001,29.104168 55.5625,49.330121"
+         id="path76167" />
+      <path
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.05833;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker76293)"
+         d="m 142.875,29.104168 42.33333,21.019823"
+         id="path76169" />
+    </g>
+    <g
+       id="g74459"
+       transform="translate(119.0625)">
+      <rect
+         style="fill:#dcdcf4;fill-opacity:1;stroke:#000000;stroke-width:0.228197;stroke-dasharray:none"
+         id="rect70812"
+         width="132.06348"
+         height="26.230137"
+         x="0.1140985"
+         y="79.489098" />
+      <text
+         xml:space="preserve"
+         style="font-size:16.9333px;fill:#0f0f0f;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none"
+         x="1.8755008"
+         y="97.006805"
+         id="text72276"><tspan
+           id="tspan72274"
+           style="stroke-width:0.264583"
+           x="1.8755008"
+           y="97.006805">GraphContainer</tspan></text>
+    </g>
+  </g>
+</svg>

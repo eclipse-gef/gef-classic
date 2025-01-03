@@ -7,5 +7,6 @@
 <toc link_to="../org.eclipse.gef.doc.isv/topics_Guide.xml#draw2d" label="none">
 	<topic label="Zest" href="guide/guide.html">
 		<topic label="Overview" href="guide/overview.html"/>
+ 		<topic label="Graph" href="guide/graph.html"/>
 	</topic>
 </toc>

@@ -18,12 +18,18 @@
 
 <toc link_to="../org.eclipse.gef.doc.isv/topics_Reference.xml#draw2d" label="none">
 	<topic label="Zest" href="reference/api/overview-summary.html">
-		<topic label="org.eclipse.zest" href="reference/api/org/eclipse/zest/package-summary.html" />
+		<topic label="org.eclipse.zest.cloudio" href="reference/api/org/eclipse/zest/cloudio/package-summary.html" />
+		<topic label="org.eclipse.zest.cloudio.layout" href="reference/api/org/eclipse/zest/cloudio/layout/package-summary.html" />
+		<topic label="org.eclipse.zest.cloudio.util" href="reference/api/org/eclipse/zest/cloudio/util/package-summary.html" />
 		<topic label="org.eclipse.zest.core.viewers" href="reference/api/org/eclipse/zest/core/viewers/package-summary.html" />
 		<topic label="org.eclipse.zest.core.widgets" href="reference/api/org/eclipse/zest/core/widgets/package-summary.html" />
+		<topic label="org.eclipse.zest.core.widgets.custom" href="reference/api/org/eclipse/zest/core/widgets/custom/package-summary.html" />
+		<topic label="org.eclipse.zest.core.widgets.gestures" href="reference/api/org/eclipse/zest/core/widgets/gestures/package-summary.html" />
 		<topic label="org.eclipse.zest.layouts" href="reference/api/org/eclipse/zest/layouts/package-summary.html" />
 		<topic label="org.eclipse.zest.layouts.algorithms" href="reference/api/org/eclipse/zest/layouts/algorithms/package-summary.html" />
 		<topic label="org.eclipse.zest.layouts.constraints" href="reference/api/org/eclipse/zest/layouts/constraints/package-summary.html" />
+		<topic label="org.eclipse.zest.layouts.dataStructures" href="reference/api/org/eclipse/zest/layouts/dataStructures/package-summary.html" />
+		<topic label="org.eclipse.zest.layouts.interfaces" href="reference/api/org/eclipse/zest/layouts/interfaces/package-summary.html" />
 		<topic label="org.eclipse.zest.layouts.progress" href="reference/api/org/eclipse/zest/layouts/progress/package-summary.html" />
 	</topic>
 </toc>

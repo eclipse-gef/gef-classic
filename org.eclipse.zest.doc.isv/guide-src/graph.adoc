@@ -1,0 +1,95 @@
+= Graph
+
+A graph represents the root widget for all Zest models and contains both edges
+and vertices. Both elements are added automatically to the graph when creating
+new instances of either `GraphConnection` (for edges) and `GraphNode` (for
+vertices), using the graph as constructor argument.
+
+Vertices can either be simple nodes or subgraphs, which themselves can contain
+additional vertices.
+
+image:images/Graph.png[width=33%,height=33%]
+
+== Graph Viewer
+
+Alternatively, graphs can also be created using the JFace structured viewers.
+Edges and vertices are created by supplying a special ContentProvider and can be
+stylized by a special LabelProvider.
+
+image:images/GraphViewer.png[width=33%,height=33%]
+
+=== Content Provider
+
+The content provider may implement one (but not multiple) of the following
+interfaces:
+
+- `IGraphEntityContentProvider` for graphs based on vertices. This content
+   provider returns all vertices contained by this graph and for each vertex,
+   the vertices it is connected to.
+- `IGraphEntityRelationshipContentProvider` for graphs based on edges. This
+   content provider returns all edges contained by this graph. The union of all
+   source and destination vertices define the vertices contained by this graph.
+- `IGraphContentProvider` for graphs based on pairs of vertices. This content
+  provider is similar to the `IGraphEntityRelationshipContentProvider`
+  where each pair represents an edge between a source and destination vertex.
+- `ITreeContentProvider`, for hierarchical graphs. A vertex is only connected
+  to its children, which themselves are represented as containers.
+
+Additionally, the content provider may implement the `INestedContentProvider`
+interface (except the `ITreeContentProvider`) to support sub-graphs.
+
+=== Label Provider
+
+The label provider may implement one (but not multiple) of the following
+interfaces:
+
+- `ISelfStyleProvider` for generic customizations of both edges and vertices,
+   such as dotted lines.
+- `IConnectionStyleProvider` (Edges only) for contributing details about an
+   edge. Incompatible with `IEntityConnectionStyleProvider`.
+- `IEntityConnectionStyleProvider` (Edges only) for contributing details
+   about an edge. Here the edge is described via the source and destination
+   vertices. Incompatible with `IConnectionStyleProvider`
+- `IEntityStyleProvider` (Vertices only) for contributing details about a
+   vertex.
+
+Additionally, the label provider may implement the `IFigureProvider` interface
+to supply custom figures for the graph elements.
+
+== Graph Node
+
+Each vertex is implemented by a _GraphNode and backed by a _model figure_ for
+visualization. Available classes are:
+
+- `GraphNode` is the default implementation used for vertices where the
+   attributes are defined by the widget.
+- `CGraphNode` is a custom implementation used for vertices where the
+   attributes are defined by the underlying figure.
+- `GraphContainer` is the default implementation used to visualize subgraphs. 
+
+image:images/GraphNode.png[width=33%,height=33%]
+
+=== "Hide Node" Feature
+
+When the graph has been created with the "hide node" feature enabled, the
+_model figure_ is contained by a _node figure_, providing additional decorations
+such as a _hide_ and _reveal_ button.
+
+image:images/GraphNodeFigure.png[width=33%,height=33%]
+
+As the name suggests, the _hide_ button will hide the node from the graph, while
+the _reveal_ button reveals all connected, hidden vertices. The number describes
+how many adjacent vertices are current hidden.
+
+NOTE: If this feature is disabled, the _model figure_ and _node figure_ are
+identical.
+
+== Graph Connection
+
+Each edge is implemented by a _GraphConnection_ and connects two _GraphNodes_.
+The shape of this connection can be customized using the _ConnectionRouter_ from
+Draw2D.
+
+NOTE: Graph connections are always added to the _Graph_, regardless of whether
+the node are inside a sub-graph. This means that it is possible to e.g. connect
+two vertices in separate sub-graphs.
