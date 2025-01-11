@@ -21,7 +21,7 @@ public class OutputFigure extends NodeFigure {
 	public OutputFigure() {
 		FixedConnectionAnchor outputConnectionAnchor = new FixedConnectionAnchor(this);
 		outputConnectionAnchor.topDown = false;
-		outputConnectionAnchor.offsetH = 7;
+		outputConnectionAnchor.offsetH = 14;
 		outputConnectionAnchors.add(outputConnectionAnchor);
 		connectionAnchors.put(SimpleOutput.TERMINAL_OUT, outputConnectionAnchor);
 		setLayoutManager(new StackLayout());

@@ -22,13 +22,12 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public class GroundFigure extends OutputFigure {
 
-	public static final Dimension SIZE = new Dimension(15, 15);
+	public static final Dimension SIZE = new Dimension(30, 30);
 
 	/**
 	 * Constructor for GroundFigure.
 	 */
 	public GroundFigure() {
-		super();
 	}
 
 	/**
@@ -54,11 +53,11 @@ public class GroundFigure extends OutputFigure {
 		g.translate(r.getLocation());
 
 		// Draw the "V"
-		g.drawLine(3, 4, 5, 9);
-		g.drawLine(5, 9, 7, 4);
+		g.drawLine(6, 8, 10, 18);
+		g.drawLine(10, 18, 14, 8);
 
 		// Draw the "0"
-		g.drawOval(7, 8, 3, 3);
+		g.drawOval(14, 16, 6, 6);
 	}
 
 }

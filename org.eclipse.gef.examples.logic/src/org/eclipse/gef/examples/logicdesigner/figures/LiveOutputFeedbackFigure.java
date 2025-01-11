@@ -37,14 +37,14 @@ public class LiveOutputFeedbackFigure extends LiveOutputFigure {
 		g.translate(r.getLocation());
 
 		// Draw the "V"
-		g.drawLine(3, 4, 5, 9);
-		g.drawLine(5, 9, 7, 4);
-		g.drawLine(5, 8, 5, 9);
+		g.drawLine(6, 8, 10, 18);
+		g.drawLine(10, 18, 14, 8);
+		g.drawLine(10, 16, 10, 18);
 
 		// Draw the "+"
-		g.drawLine(9, 7, 9, 11);
-		g.drawLine(7, 9, 11, 9);
-		g.drawPoint(9, 9);
+		g.drawLine(18, 14, 18, 22);
+		g.drawLine(14, 18, 22, 18);
+		g.drawPoint(18, 18);
 	}
 
 }

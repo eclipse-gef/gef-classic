@@ -35,12 +35,12 @@ public class GroundFeedbackFigure extends GroundFigure {
 		g.translate(r.getLocation());
 
 		// Draw the "V"
-		g.drawLine(3, 4, 5, 9);
-		g.drawLine(5, 9, 7, 4);
-		g.drawLine(5, 8, 5, 9);
+		g.drawLine(6, 8, 10, 18);
+		g.drawLine(10, 18, 14, 8);
+		g.drawLine(10, 16, 10, 18);
 
 		// Draw the "0"
-		g.drawOval(7, 8, 3, 3);
+		g.drawOval(14, 16, 6, 6);
 	}
 
 }
