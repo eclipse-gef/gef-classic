@@ -18,9 +18,9 @@ public class GateFigure extends OutputFigure {
 
 	public GateFigure() {
 		FixedConnectionAnchor inputConnectionAnchorA = new FixedConnectionAnchor(this);
-		inputConnectionAnchorA.offsetH = 4;
+		inputConnectionAnchorA.offsetH = 8;
 		FixedConnectionAnchor inputConnectionAnchorB = new FixedConnectionAnchor(this);
-		inputConnectionAnchorB.offsetH = 10;
+		inputConnectionAnchorB.offsetH = 20;
 		inputConnectionAnchors.add(inputConnectionAnchorA);
 		inputConnectionAnchors.add(inputConnectionAnchorB);
 		connectionAnchors.put(Gate.TERMINAL_A, inputConnectionAnchorA);
