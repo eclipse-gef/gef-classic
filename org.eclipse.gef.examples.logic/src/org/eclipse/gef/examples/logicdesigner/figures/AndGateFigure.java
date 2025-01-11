@@ -21,7 +21,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public class AndGateFigure extends GateFigure {
 
-	public static final Dimension SIZE = new Dimension(15, 17);
+	public static final Dimension SIZE = new Dimension(30, 34);
 
 	/**
 	 * Constructor for AndGateFigure.
@@ -44,12 +44,12 @@ public class AndGateFigure extends GateFigure {
 	@Override
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
-		r.translate(2, 2);
-		r.setSize(11, 9);
+		r.translate(4, 4);
+		r.setSize(22, 18);
 
 		// Draw terminals, 2 at top
-		g.drawLine(r.x + 2, r.y, r.x + 2, r.y - 2);
-		g.drawLine(r.right() - 3, r.y, r.right() - 3, r.y - 2);
+		g.drawLine(r.x + 4, r.y, r.x + 4, r.y - 4);
+		g.drawLine(r.right() - 6, r.y, r.right() - 6, r.y - 4);
 
 		// draw main area
 		g.fillRectangle(r);
@@ -60,13 +60,13 @@ public class AndGateFigure extends GateFigure {
 		g.drawLine(r.x, r.y, r.x, r.bottom() - 1);
 
 		// draw and outline the arc
-		r.height = 9;
-		r.y += 4;
+		r.height = 18;
+		r.y += 8;
 		g.fillArc(r, 180, 180);
 		r.width--;
 		r.height--;
 		g.drawArc(r, 180, 190);
-		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 2);
+		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
 	}
 
 }

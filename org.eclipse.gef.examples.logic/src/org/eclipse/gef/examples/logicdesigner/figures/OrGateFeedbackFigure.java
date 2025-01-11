@@ -28,27 +28,29 @@ public class OrGateFeedbackFigure extends OrGateFigure {
 		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
 
 		Rectangle r = getBounds().getCopy();
-		r.translate(2, 2);
-		r.setSize(11, 9);
+		r.translate(4, 4);
+		r.setSize(22, 18);
 
 		// Draw terminals, 2 at top
-		g.drawLine(r.x + 2, r.y + 2, r.x + 2, r.y - 2);
-		g.drawLine(r.right() - 3, r.y + 2, r.right() - 3, r.y - 2);
+		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
+		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
 
 		// fix it
-		g.drawPoint(r.x + 2, r.y + 2);
-		g.drawPoint(r.right() - 3, r.y + 2);
+		g.drawPoint(r.x + 4, r.y + 4);
+		g.drawPoint(r.right() - 6, r.y + 4);
 
 		// Draw the bottom arc of the gate
-		r.y += 4;
+		r.y += 8;
 
+		r.width--;
+		r.height--;
 		g.fillArc(r, 180, 180);
 		r.width--;
 		r.height--;
-		g.drawPoint(r.x, r.y + 4);
+		g.drawPoint(r.x, r.y + 8);
 
 		g.drawArc(r, 180, 180);
-		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 2);
+		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
 		g.drawPoint(r.x + r.width / 2, r.bottom());
 
 		// draw gate
