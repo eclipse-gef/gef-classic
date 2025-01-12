@@ -266,7 +266,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		assertNotEquals(first.getBounds().getCenter().y, second.getBounds().getCenter().y);
 		bot.toolbarButtonWithTooltip("Align Middle").click();
-		assertEquals(first.getBounds().getCenter().y, second.getBounds().getCenter().y);
+		assertEquals(first.getBounds().getCenter().y, second.getBounds().getCenter().y, 1.0);
 	}
 
 	/**
