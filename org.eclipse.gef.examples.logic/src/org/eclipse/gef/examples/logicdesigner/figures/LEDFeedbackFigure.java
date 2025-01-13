@@ -30,7 +30,7 @@ public class LEDFeedbackFigure extends LEDFigure {
 		g.translate(r.getLocation());
 
 		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
-		g.fillRectangle(0, 2, r.width, r.height - 4);
+		g.fillRectangle(0, 4, r.width, r.height - 8);
 
 		int right = r.width - 1;
 		g.drawLine(0, Y1, right, Y1);
@@ -45,8 +45,8 @@ public class LEDFeedbackFigure extends LEDFigure {
 
 		// Draw the gaps for the connectors
 		for (int i = 0; i < 4; i++) {
-			g.drawLine(GAP_CENTERS_X[i] - 2, Y1, GAP_CENTERS_X[i] + 3, Y1);
-			g.drawLine(GAP_CENTERS_X[i] - 2, Y2, GAP_CENTERS_X[i] + 3, Y2);
+			g.drawLine(GAP_CENTERS_X[i] - 4, Y1, GAP_CENTERS_X[i] + 6, Y1);
+			g.drawLine(GAP_CENTERS_X[i] - 4, Y2, GAP_CENTERS_X[i] + 6, Y2);
 		}
 
 		// Draw the connectors

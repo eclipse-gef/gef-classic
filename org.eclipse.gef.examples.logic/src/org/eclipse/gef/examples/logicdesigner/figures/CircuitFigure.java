@@ -33,7 +33,7 @@ import org.eclipse.gef.examples.logicdesigner.model.Circuit;
 
 public class CircuitFigure extends NodeFigure implements HandleBounds, IScrollableFigure {
 
-	private ScrollPane scrollpane;
+	private final ScrollPane scrollpane;
 
 	public CircuitFigure() {
 		setBorder(new CircuitBorder());
@@ -82,7 +82,7 @@ public class CircuitFigure extends NodeFigure implements HandleBounds, IScrollab
 	 */
 	@Override
 	public Rectangle getHandleBounds() {
-		return getBounds().getShrinked(new Insets(2, 0, 2, 0));
+		return getBounds().getShrinked(new Insets(4, 0, 4, 0));
 	}
 
 	protected FixedConnectionAnchor getOutputConnectionAnchor(int i) {
@@ -92,7 +92,7 @@ public class CircuitFigure extends NodeFigure implements HandleBounds, IScrollab
 	@Override
 	public Dimension getPreferredSize(int w, int h) {
 		Dimension prefSize = super.getPreferredSize(w, h);
-		Dimension defaultSize = new Dimension(100, 100);
+		Dimension defaultSize = new Dimension(200, 200);
 		prefSize.union(defaultSize);
 		return prefSize;
 	}
@@ -114,7 +114,7 @@ public class CircuitFigure extends NodeFigure implements HandleBounds, IScrollab
 	@Override
 	protected void paintFigure(Graphics graphics) {
 		Rectangle rect = getBounds().getCopy();
-		rect.shrink(new Insets(2, 0, 2, 0));
+		rect.shrink(new Insets(4, 0, 4, 0));
 		graphics.fillRectangle(rect);
 	}
 

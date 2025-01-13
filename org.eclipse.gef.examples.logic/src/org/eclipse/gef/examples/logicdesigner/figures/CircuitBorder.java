@@ -22,24 +22,24 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class CircuitBorder extends AbstractBorder {
 
-	protected static Insets insets = new Insets(8, 6, 8, 6);
+	protected static Insets insets = new Insets(16, 12, 16, 12);
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
 
 	static {
-		connector.addPoint(-2, 0);
-		connector.addPoint(1, 0);
-		connector.addPoint(2, 1);
-		connector.addPoint(2, 5);
-		connector.addPoint(-1, 5);
-		connector.addPoint(-1, 1);
+		connector.addPoint(-4, 0);
+		connector.addPoint(2, 0);
+		connector.addPoint(4, 2);
+		connector.addPoint(4, 10);
+		connector.addPoint(-2, 10);
+		connector.addPoint(-2, 2);
 
-		bottomConnector.addPoint(-2, -1);
-		bottomConnector.addPoint(1, -1);
-		bottomConnector.addPoint(2, -2);
-		bottomConnector.addPoint(2, -6);
-		bottomConnector.addPoint(-1, -6);
-		bottomConnector.addPoint(-1, -2);
+		bottomConnector.addPoint(-4, -1);
+		bottomConnector.addPoint(2, -1);
+		bottomConnector.addPoint(4, -2);
+		bottomConnector.addPoint(4, -12);
+		bottomConnector.addPoint(-2, -12);
+		bottomConnector.addPoint(-2, -2);
 	}
 
 	private static void drawConnectors(Graphics g, Rectangle rec) {
@@ -49,7 +49,7 @@ public class CircuitBorder extends AbstractBorder {
 
 			// Draw the "gap" for the connector
 			g.setForegroundColor(ColorConstants.listBackground);
-			g.drawLine(x1 - 2, rec.y + 2, x1 + 3, rec.y + 2);
+			g.drawLine(x1 - 4, rec.y + 4, x1 + 6, rec.y + 4);
 
 			// Draw the connectors
 			g.setForegroundColor(LogicColorConstants.connectorGreen);
@@ -58,7 +58,7 @@ public class CircuitBorder extends AbstractBorder {
 			g.drawPolygon(connector);
 			connector.translate(-x1, -rec.y);
 			g.setForegroundColor(ColorConstants.listBackground);
-			g.drawLine(x1 - 2, rec.bottom() - 3, x1 + 3, rec.bottom() - 3);
+			g.drawLine(x1 - 4, rec.bottom() - 6, x1 + 6, rec.bottom() - 6);
 			g.setForegroundColor(LogicColorConstants.connectorGreen);
 			bottomConnector.translate(x1, rec.bottom());
 			g.fillPolygon(bottomConnector);
@@ -80,20 +80,20 @@ public class CircuitBorder extends AbstractBorder {
 		g.setBackgroundColor(LogicColorConstants.logicGreen);
 
 		// Draw the sides of the border
-		g.fillRectangle(r.x, r.y + 2, r.width, 6);
-		g.fillRectangle(r.x, r.bottom() - 8, r.width, 6);
-		g.fillRectangle(r.x, r.y + 2, 6, r.height - 4);
-		g.fillRectangle(r.right() - 6, r.y + 2, 6, r.height - 4);
+		g.fillRectangle(r.x, r.y + 4, r.width, 12);
+		g.fillRectangle(r.x, r.bottom() - 16, r.width, 12);
+		g.fillRectangle(r.x, r.y + 4, 12, r.height - 8);
+		g.fillRectangle(r.right() - 12, r.y + 4, 12, r.height - 8);
 
 		// Outline the border
 		g.setForegroundColor(LogicColorConstants.connectorGreen);
-		g.drawLine(r.x, r.y + 2, r.right() - 1, r.y + 2);
-		g.drawLine(r.x, r.bottom() - 3, r.right() - 1, r.bottom() - 3);
-		g.drawLine(r.x, r.y + 2, r.x, r.bottom() - 3);
-		g.drawLine(r.right() - 1, r.bottom() - 3, r.right() - 1, r.y + 2);
+		g.drawLine(r.x, r.y + 4, r.right() - 1, r.y + 4);
+		g.drawLine(r.x, r.bottom() - 6, r.right() - 1, r.bottom() - 6);
+		g.drawLine(r.x, r.y + 4, r.x, r.bottom() - 6);
+		g.drawLine(r.right() - 1, r.bottom() - 6, r.right() - 1, r.y + 4);
 
-		r.shrink(new Insets(1, 1, 0, 0));
-		r.expand(1, 1);
+		r.shrink(new Insets(2, 2, 0, 0));
+		r.expand(2, 2);
 		r.shrink(getInsets(figure));
 		drawConnectors(g, figure.getBounds().getShrinked(in));
 	}

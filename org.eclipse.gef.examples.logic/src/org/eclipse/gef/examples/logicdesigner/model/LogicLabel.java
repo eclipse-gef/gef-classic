@@ -20,7 +20,7 @@ import org.eclipse.gef.examples.logicdesigner.LogicMessages;
 
 public class LogicLabel extends LogicSubpart {
 
-	private static final int DEFAULT_WIDTH = 50;
+	private static final int DEFAULT_WIDTH = 100;
 
 	static final long serialVersionUID = 1;
 

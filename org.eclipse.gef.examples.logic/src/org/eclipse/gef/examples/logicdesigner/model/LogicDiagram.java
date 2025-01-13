@@ -44,10 +44,10 @@ public class LogicDiagram extends LogicSubpart {
 	private double zoom = 1.0;
 
 	public LogicDiagram() {
-		size.width = 100;
-		size.height = 100;
-		location.x = 20;
-		location.y = 20;
+		size.width = 200;
+		size.height = 200;
+		location.x = 40;
+		location.y = 40;
 		createRulers();
 	}
 

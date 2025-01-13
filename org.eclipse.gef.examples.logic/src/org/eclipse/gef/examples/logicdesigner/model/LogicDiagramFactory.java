@@ -37,13 +37,13 @@ public class LogicDiagramFactory {
 
 		circuit1 = createHalfAdder();
 		circuit2 = createHalfAdder();
-		circuit1.setLocation(new Point(2, 10));
-		circuit2.setLocation(new Point(38, 90));
+		circuit1.setLocation(new Point(4, 20));
+		circuit2.setLocation(new Point(76, 180));
 
 		circuit = new Circuit();
-		circuit.setSize(new Dimension(120, 216));
+		circuit.setSize(new Dimension(240, 432));
 		or = new OrGate();
-		or.setLocation(new Point(22, 162));
+		or.setLocation(new Point(44, 324));
 
 		circuit.addChild(circuit1);
 		circuit.addChild(circuit2);
@@ -67,11 +67,11 @@ public class LogicDiagramFactory {
 		Circuit circuit;
 
 		circuit = new Circuit();
-		circuit.setSize(new Dimension(60, 70));
+		circuit.setSize(new Dimension(120, 140));
 		and = new AndGate();
-		and.setLocation(new Point(2, 12));
+		and.setLocation(new Point(4, 24));
 		xor = new XORGate();
-		xor.setLocation(new Point(22, 12));
+		xor.setLocation(new Point(44, 24));
 
 		circuit.addChild(xor);
 		circuit.addChild(and);
@@ -97,30 +97,30 @@ public class LogicDiagramFactory {
 		led2 = new LED();
 		led2.setValue(7);
 		led3 = new LED();
-		led1.setLocation(new Point(170, 16));
-		led2.setLocation(new Point(320, 16));
-		led3.setLocation(new Point(245, 360));
+		led1.setLocation(new Point(340, 32));
+		led2.setLocation(new Point(640, 32));
+		led3.setLocation(new Point(490, 720));
 		root.addChild(led1);
 		root.addChild(led2);
 		root.addChild(led3);
 		//
 		circuit1 = createHalfAdder();
-		circuit1.setSize(new Dimension(64, 216));
-		circuit1.setLocation(new Point(455, 104));
+		circuit1.setSize(new Dimension(128, 432));
+		circuit1.setLocation(new Point(910, 208));
 		root.addChild(circuit1);
 		//
 		circuit2 = createFullAdder();
-		circuit2.setLocation(new Point(305, 104));
+		circuit2.setLocation(new Point(610, 208));
 		root.addChild(circuit2);
 		connect(circuit1, Circuit.TERMINALS_OUT[4], circuit2, Circuit.TERMINALS_IN[3]);
 		//
 		circuit3 = createFullAdder();
-		circuit3.setLocation(new Point(155, 104));
+		circuit3.setLocation(new Point(310, 208));
 		root.addChild(circuit3);
 		connect(circuit2, Circuit.TERMINALS_OUT[4], circuit3, Circuit.TERMINALS_IN[3]);
 		//
 		circuit4 = createFullAdder();
-		circuit4.setLocation(new Point(5, 104));
+		circuit4.setLocation(new Point(10, 208));
 		//
 		connect(led1, LED.TERMINAL_1_OUT, circuit1, Circuit.TERMINALS_IN[0]);
 		connect(led1, LED.TERMINAL_2_OUT, circuit2, Circuit.TERMINALS_IN[0]);

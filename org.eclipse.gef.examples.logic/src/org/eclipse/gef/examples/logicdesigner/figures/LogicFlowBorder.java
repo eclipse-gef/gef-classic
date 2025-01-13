@@ -20,20 +20,21 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 public class LogicFlowBorder extends org.eclipse.draw2d.LineBorder {
 
-	protected int grabBarWidth = 20;
-	protected Dimension grabBarSize = new Dimension(grabBarWidth, 18);
+	protected int grabBarWidth = 40;
+	protected Dimension grabBarSize = new Dimension(grabBarWidth, 36);
 
 	public LogicFlowBorder() {
 	}
 
 	public LogicFlowBorder(int width) {
 		setGrabBarWidth(width);
-		grabBarSize = new Dimension(width, 18);
+		grabBarSize = new Dimension(width, 36);
 	}
 
 	@Override
 	public Insets getInsets(IFigure figure) {
-		return new Insets(getWidth() + 2, grabBarWidth + 2, getWidth() + 2, getWidth() + 2);
+		return new Insets(getWidth() + 4, grabBarWidth + 4, getWidth() + 4, getWidth() + 4);
+
 	}
 
 	public Dimension getPreferredSize() {

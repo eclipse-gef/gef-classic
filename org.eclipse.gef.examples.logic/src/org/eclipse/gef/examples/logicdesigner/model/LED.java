@@ -28,7 +28,7 @@ public class LED extends LogicSubpart {
 
 	static final long serialVersionUID = 1;
 
-	private static final Dimension DEFAULT_SIZE = new Dimension(61, 47);
+	private static final Dimension DEFAULT_SIZE = new Dimension(122, 94);
 
 	private static final Image LED_ICON = createImage(LED.class, "icons/ledicon16.gif"); //$NON-NLS-1$
 	private static int count;
