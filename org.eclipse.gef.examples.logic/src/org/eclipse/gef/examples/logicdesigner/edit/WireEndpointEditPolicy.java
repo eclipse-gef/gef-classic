@@ -19,7 +19,7 @@ public class WireEndpointEditPolicy extends org.eclipse.gef.editpolicies.Connect
 	@Override
 	protected void addSelectionHandles() {
 		super.addSelectionHandles();
-		getConnectionFigure().setLineWidth(2);
+		getConnectionFigure().setLineWidth(3);
 	}
 
 	protected PolylineConnection getConnectionFigure() {
@@ -29,7 +29,7 @@ public class WireEndpointEditPolicy extends org.eclipse.gef.editpolicies.Connect
 	@Override
 	protected void removeSelectionHandles() {
 		super.removeSelectionHandles();
-		getConnectionFigure().setLineWidth(0);
+		getConnectionFigure().setLineWidth(1);
 	}
 
 }
