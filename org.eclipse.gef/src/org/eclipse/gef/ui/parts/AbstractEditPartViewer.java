@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
@@ -82,7 +83,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @deprecated
 	 */
 	@Deprecated
-	protected List<ISelectionChangedListener> selectionListeners = new ArrayList<>(1);
+	protected ListenerList<ISelectionChangedListener> selectionListeners = new ListenerList<>();
 
 	/**
 	 * The editpart specifically set to have focus. Note that if this value is
