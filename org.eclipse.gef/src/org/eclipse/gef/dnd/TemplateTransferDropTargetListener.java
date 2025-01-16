@@ -127,10 +127,11 @@ public class TemplateTransferDropTargetListener extends AbstractTransferDropTarg
 		}
 		EditPartViewer viewer = getViewer();
 		viewer.getControl().forceFocus();
-		if (viewer.getEditPartForModel(model) instanceof EditPart ep) {
+		EditPart editPartForModel = viewer.getEditPartForModel(model);
+		if (editPartForModel != null) {
 			// Force a layout first.
 			getViewer().flush();
-			viewer.select(ep);
+			viewer.select(editPartForModel);
 		}
 	}
 
