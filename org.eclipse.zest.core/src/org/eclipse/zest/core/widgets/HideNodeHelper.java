@@ -10,8 +10,8 @@
 
 package org.eclipse.zest.core.widgets;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.zest.core.widgets.internal.ContainerFigure;
 import org.eclipse.zest.core.widgets.internal.GraphLabel;
@@ -39,7 +39,7 @@ public class HideNodeHelper extends ContainerFigure {
 	private final GraphLabel hiddenNodesLabel = new GraphLabel("0", false); //$NON-NLS-1$
 
 	private final HideNodeListener thisHideNodeListener;
-	private final List<HideNodeListener> hideNodeListeners = new ArrayList<>();
+	private final List<HideNodeListener> hideNodeListeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Create a HideNodeHelper and add it to the node's nodeFigure

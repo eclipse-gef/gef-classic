@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
@@ -31,7 +32,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
@@ -83,7 +83,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @deprecated
 	 */
 	@Deprecated
-	protected ListenerList<ISelectionChangedListener> selectionListeners = new ListenerList<>();
+	protected List<ISelectionChangedListener> selectionListeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * The editpart specifically set to have focus. Note that if this value is

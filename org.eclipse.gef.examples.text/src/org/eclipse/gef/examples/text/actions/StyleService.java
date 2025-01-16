@@ -15,6 +15,7 @@ package org.eclipse.gef.examples.text.actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @since 3.1
@@ -25,7 +26,7 @@ public class StyleService {
 	public static final Object STATE_READ_ONLY = new Object();
 	public static final Object UNDEFINED = new Object();
 
-	private List<StyleListener> listeners = new ArrayList<>();
+	private List<StyleListener> listeners = new CopyOnWriteArrayList<>();
 	private StyleProvider provider;
 	private StyleListener providerListener = StyleService.this::propogateChange;
 

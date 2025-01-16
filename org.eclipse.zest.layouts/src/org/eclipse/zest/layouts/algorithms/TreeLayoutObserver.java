@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.zest.layouts.interfaces.ConnectionLayout;
 import org.eclipse.zest.layouts.interfaces.GraphStructureListener;
@@ -409,7 +410,7 @@ public class TreeLayoutObserver {
 	private final TreeNodeFactory factory;
 	private final LayoutContext context;
 	private TreeNode superRoot;
-	private final List<TreeListener> treeListeners = new ArrayList<>();
+	private final List<TreeListener> treeListeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Creates a

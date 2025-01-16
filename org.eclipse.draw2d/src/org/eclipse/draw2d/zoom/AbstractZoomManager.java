@@ -14,9 +14,9 @@ package org.eclipse.draw2d.zoom;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.widgets.Display;
 
@@ -54,7 +54,7 @@ public abstract class AbstractZoomManager {
 	/** Style bit meaning animate during {@link #zoomIn()} and {@link #zoomOut()} */
 	public static final int ANIMATE_ZOOM_IN_OUT = 1;
 
-	private final List<ZoomListener> listeners = new ArrayList<>();
+	private final List<ZoomListener> listeners = new CopyOnWriteArrayList<>();
 
 	private double multiplier = 1.0;
 	private final ScalableFigure pane;

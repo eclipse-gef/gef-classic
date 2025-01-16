@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ControlAdapter;
@@ -113,7 +114,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	Set<IFigure> subgraphFigures;
 	private HideNodeHelper hoverNode = null;
 	IFigure fisheyedFigure = null;
-	private final List<FisheyeListener> fisheyeListeners = new ArrayList<>();
+	private final List<FisheyeListener> fisheyeListeners = new CopyOnWriteArrayList<>();
 	private List<SelectionListener> selectionListeners = null;
 
 	/** This maps all visible nodes to their model element. */
@@ -231,7 +232,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		this.connections = new ArrayList<>();
 		this.constraintAdapters = new ArrayList<>();
 		this.selectedItems = new ArrayList<>();
-		this.selectionListeners = new ArrayList<>();
+		this.selectionListeners = new CopyOnWriteArrayList<>();
 		this.figure2ItemMap = new HashMap<>();
 		this.enableHideNodes = enableHideNodes;
 		this.subgraphFigures = new HashSet<>();

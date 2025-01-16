@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -362,7 +362,7 @@ public class PolylineConnection extends Polyline implements Connection, AnchorLi
 	final class RoutingNotifier implements ConnectionRouter {
 
 		ConnectionRouter realRouter;
-		List<RoutingListener> listeners = new ArrayList<>(1);
+		List<RoutingListener> listeners = new CopyOnWriteArrayList<>();
 
 		RoutingNotifier(ConnectionRouter router, RoutingListener listener) {
 			realRouter = router;

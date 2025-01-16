@@ -14,8 +14,8 @@ package org.eclipse.gef.ui.palette;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.FocusEvent;
@@ -91,7 +91,7 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	private PaletteCustomizer customizer = null;
 	private PaletteCustomizerDialog customizerDialog = null;
 	private boolean globalScrollbar = false;
-	private final List<PaletteListener> paletteListeners = new ArrayList<>();
+	private final List<PaletteListener> paletteListeners = new CopyOnWriteArrayList<>();
 	private PaletteRoot paletteRoot = null;
 	private final PreferenceListener prefListener = new PreferenceListener();
 	private PaletteViewerPreferences prefs = PREFERENCE_STORE;

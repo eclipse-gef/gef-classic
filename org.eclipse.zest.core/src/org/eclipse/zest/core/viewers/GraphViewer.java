@@ -12,8 +12,8 @@
  ******************************************************************************/
 package org.eclipse.zest.core.viewers;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -92,7 +92,7 @@ public class GraphViewer extends AbstractStructuredGraphViewer implements ISelec
 	protected void hookControl(Control control) {
 		super.hookControl(control);
 
-		selectionChangedListeners = new ArrayList<>();
+		selectionChangedListeners = new CopyOnWriteArrayList<>();
 		getGraphControl().addSelectionListener(new SelectionAdapter() {
 
 			@Override

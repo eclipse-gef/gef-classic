@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.zest.layouts.Filter;
 import org.eclipse.zest.layouts.InvalidLayoutConfiguration;
@@ -74,7 +75,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		private Thread creationThread = null;
 		protected Comparator comparator;
 		protected Filter filter;
-		private final List<ProgressListener> progressListeners = new ArrayList<>();
+		private final List<ProgressListener> progressListeners = new CopyOnWriteArrayList<>();
 		private Calendar lastProgressEventFired;
 		private double widthToHeightRatio;
 

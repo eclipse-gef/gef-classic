@@ -16,6 +16,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * A ButtonGroup holds a group of {@link Clickable Clickable's} models and
@@ -32,7 +33,7 @@ public class ButtonGroup {
 	private ButtonModel selectedModel;
 	private ButtonModel defaultModel;
 	private final List<ButtonModel> members = new ArrayList<>();
-	private final List<PropertyChangeListener> listeners = new ArrayList<>();
+	private final List<PropertyChangeListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * Constructs a ButtonGroup with no default selection.

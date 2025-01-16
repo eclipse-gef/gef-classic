@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.graphics.GC;
 
@@ -45,7 +45,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public abstract class UpdateManager {
 
-	private final List<UpdateListener> listeners = new ArrayList<>();
+	private final List<UpdateListener> listeners = new CopyOnWriteArrayList<>();
 	private boolean disposed;
 
 	/**

@@ -13,8 +13,8 @@
 
 package org.eclipse.draw2d;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Abstract implementation of the image figure. Implements attaching/detaching
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public abstract class AbstractImageFigure extends Figure implements IImageFigure {
 
-	private final List<ImageChangedListener> imageListeners = new ArrayList<>();
+	private final List<ImageChangedListener> imageListeners = new CopyOnWriteArrayList<>();
 
 	@Override
 	public final void addImageChangedListener(ImageChangedListener listener) {

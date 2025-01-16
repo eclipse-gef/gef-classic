@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.zest.layouts.LayoutAlgorithm;
 import org.eclipse.zest.layouts.dataStructures.DisplayIndependentRectangle;
@@ -37,10 +38,10 @@ class InternalLayoutContext implements LayoutContext {
 
 	final IContainer2 container;
 	private final List<LayoutFilter> filters = new ArrayList<>();
-	private final List<ContextListener> contextListeners = new ArrayList<>();
-	private final List<GraphStructureListener> graphStructureListeners = new ArrayList<>();
-	private final List<LayoutListener> layoutListeners = new ArrayList<>();
-	private final List<PruningListener> pruningListeners = new ArrayList<>();
+	private final List<ContextListener> contextListeners = new CopyOnWriteArrayList<>();
+	private final List<GraphStructureListener> graphStructureListeners = new CopyOnWriteArrayList<>();
+	private final List<LayoutListener> layoutListeners = new CopyOnWriteArrayList<>();
+	private final List<PruningListener> pruningListeners = new CopyOnWriteArrayList<>();
 	private LayoutAlgorithm mainAlgorithm;
 	private LayoutAlgorithm layoutAlgorithm;
 	private ExpandCollapseManager expandCollapseManager;

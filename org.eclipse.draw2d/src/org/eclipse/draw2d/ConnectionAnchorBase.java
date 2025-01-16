@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Provides support for a ConnectionAnchor. A ConnectionAnchor is one of the end
@@ -25,7 +25,7 @@ public abstract class ConnectionAnchorBase implements ConnectionAnchor {
 	/**
 	 * The list of listeners
 	 */
-	protected List<AnchorListener> listeners = new ArrayList<>(1);
+	protected List<AnchorListener> listeners = new CopyOnWriteArrayList<>();
 
 	/**
 	 * @see org.eclipse.draw2d.ConnectionAnchor#addAnchorListener(AnchorListener)
