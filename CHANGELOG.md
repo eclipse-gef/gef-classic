@@ -6,6 +6,7 @@
  - `DrawerEditPart` can be adapted to a `Clickable`
  - `ToolEntryEditPart` can be adapted to a `Clickable`
  - In addition to the previous release, it is now also possible to customize the background and foreground color of the palette entries.
+ - The deprecated `org.eclipse.gef.editparts.ZoomListener` interface has been deleted.
 
 ## Zest
 - The Zest Graph style have to be set via the `setGraphStyle()` method rather than the constructor. Reason being that otherwise, the same style is used to initialize the underlying `FigureCanvas`.

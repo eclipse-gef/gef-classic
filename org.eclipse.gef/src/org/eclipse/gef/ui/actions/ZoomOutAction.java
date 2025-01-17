@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.gef.ui.actions;
+
+import org.eclipse.draw2d.zoom.ZoomListener;
 
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.internal.GEFMessages;
@@ -42,7 +44,7 @@ public class ZoomOutAction extends ZoomAction {
 	}
 
 	/**
-	 * @see org.eclipse.gef.editparts.ZoomListener#zoomChanged(double)
+	 * @see ZoomListener#zoomChanged(double)
 	 */
 	@Override
 	public void zoomChanged(double zoom) {

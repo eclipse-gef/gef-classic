@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.gef" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="3.21.0"/>
+                <message_argument value="3.20.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.gef.editparts.ZoomListener">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.editparts.ZoomListener"/>
+                <message_argument value="org.eclipse.gef_3.21.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/editparts/ZoomManager.java" type="org.eclipse.gef.editparts.ZoomManager">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.editparts.ZoomManager"/>
+                <message_argument value="addZoomListener(ZoomListener)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.editparts.ZoomManager"/>
+                <message_argument value="removeZoomListener(ZoomListener)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/actions/AlignmentRetargetAction.java" type="org.eclipse.gef.ui.actions.AlignmentRetargetAction">
         <filter id="571473929">
             <message_arguments>
@@ -80,11 +110,35 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/ui/actions/ZoomComboContributionItem.java" type="org.eclipse.gef.ui.actions.ZoomComboContributionItem">
+        <filter id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.ui.actions.ZoomComboContributionItem"/>
+                <message_argument value="org.eclipse.gef.editparts.ZoomListener"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/ui/actions/ZoomInAction.java" type="org.eclipse.gef.ui.actions.ZoomInAction">
+        <filter id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.ui.actions.ZoomInAction"/>
+                <message_argument value="org.eclipse.gef.editparts.ZoomListener"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/actions/ZoomInRetargetAction.java" type="org.eclipse.gef.ui.actions.ZoomInRetargetAction">
         <filter id="571473929">
             <message_arguments>
                 <message_argument value="RetargetAction"/>
                 <message_argument value="ZoomInRetargetAction"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/ui/actions/ZoomOutAction.java" type="org.eclipse.gef.ui.actions.ZoomOutAction">
+        <filter id="337682486">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.ui.actions.ZoomOutAction"/>
+                <message_argument value="org.eclipse.gef.editparts.ZoomListener"/>
             </message_arguments>
         </filter>
     </resource>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -239,10 +239,8 @@ public class ZoomContributionViewItem extends ContributionItem implements ZoomLi
 		combo.setEnabled(true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.eclipse.gef.editparts.ZoomListener#zoomChanged(double)
+	/**
+	 * @see ZoomListener#zoomChanged(double)
 	 */
 	@Override
 	public void zoomChanged(double z) {

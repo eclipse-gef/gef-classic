@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -107,34 +107,6 @@ public class ZoomManager extends AbstractZoomManager {
 	public ScalableFreeformLayeredPane getPane() {
 		Assert.isTrue(super.getScalableFigure() instanceof ScalableFreeformLayeredPane);
 		return (ScalableFreeformLayeredPane) super.getScalableFigure();
-	}
-
-	/**
-	 * Adds the given ZoomListener to this ZoomManager's list of listeners.
-	 *
-	 * @param listener the ZoomListener to be added
-	 *
-	 * @deprecated Use
-	 *             {{@link #addZoomListener(org.eclipse.draw2d.zoom.ZoomListener)}
-	 *             instead.
-	 */
-	@Deprecated(since = "3.13", forRemoval = true)
-	public void addZoomListener(ZoomListener listener) {
-		super.addZoomListener(listener);
-	}
-
-	/**
-	 * Removes the given ZoomListener from this ZoomManager's list of listeners.
-	 *
-	 * @param listener the ZoomListener to be removed
-	 *
-	 * @deprecated Use
-	 *             {@link #removeZoomListener(org.eclipse.draw2d.zoom.ZoomListener)}
-	 *             instead.
-	 */
-	@Deprecated(since = "3.13", forRemoval = true)
-	public void removeZoomListener(ZoomListener listener) {
-		super.removeZoomListener(listener);
 	}
 
 	@Override
