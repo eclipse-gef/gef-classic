@@ -113,6 +113,23 @@ public class PrecisionPoint extends Point {
 	}
 
 	/**
+	 * provide a precision version of
+	 * org.eclipse.draw2d.geometry.Point#getDistanceSquared(org.eclipse.draw2d.geometry.Point)
+	 *
+	 * @since 3.19
+	 */
+	@Override
+	public int getDistanceSquared(Point p) {
+		double deltaX = p.preciseX() - this.preciseX();
+		double deltaY = p.preciseX() - this.preciseX();
+		long result = (long) (deltaX * deltaX + deltaY * deltaY);
+		if (result > Integer.MAX_VALUE) {
+			return Integer.MAX_VALUE;
+		}
+		return (int) result;
+	}
+
+	/**
 	 * Returns a precise copy of this.
 	 *
 	 * @return a precise copy
