@@ -43,7 +43,6 @@ public class PrecisionPoint extends Point {
 	 * Constructor for PrecisionPoint.
 	 */
 	public PrecisionPoint() {
-		super();
 	}
 
 	/**
@@ -100,6 +99,17 @@ public class PrecisionPoint extends Point {
 	@Override
 	public Dimension getDifference(Point p) {
 		return new PrecisionDimension(this.preciseX() - p.preciseX(), this.preciseY() - p.preciseY());
+	}
+
+	/**
+	 * provide a precision version of
+	 * org.eclipse.draw2d.geometry.Point#getDistanceOrthogonal(org.eclipse.draw2d.geometry.Point)
+	 *
+	 * @since 3.19
+	 */
+	@Override
+	public int getDistanceOrthogonal(Point p) {
+		return (int) (Math.abs(this.preciseX() - p.preciseX()) + Math.abs(this.preciseY() - p.preciseY()));
 	}
 
 	/**

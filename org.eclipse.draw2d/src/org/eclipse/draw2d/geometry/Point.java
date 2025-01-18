@@ -230,11 +230,7 @@ public class Point implements Cloneable, java.io.Serializable, Translatable {
 	 *
 	 * @param p The reference Point
 	 * @return the orthogonal distance
-	 * @noreference This method is not intended to be referenced by clients.
-	 * @deprecated May not be guaranteed by precision subclasses and should thus not
-	 *             be used any more.
 	 */
-	@Deprecated(since = "3.7", forRemoval = true)
 	public int getDistanceOrthogonal(Point p) {
 		return Math.abs(y - p.y()) + Math.abs(x - p.x());
 	}
