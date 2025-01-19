@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
+import static org.eclipse.draw2d.FigureUtilities.getTextExtents;
+
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 
@@ -43,13 +45,15 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	 */
 	public static final Color DISPLAY_TEXT = new Color(null, 255, 199, 16);
 
-	protected static final Font DISPLAY_FONT = new Font(null, "", 38, 0); //$NON-NLS-1$
+	protected static final Font DISPLAY_FONT = new Font(null, "", 23, 0); //$NON-NLS-1$
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
 	protected static Rectangle displayRectangle = new Rectangle(30, 22, 62, 50);
 	protected static Rectangle displayShadow = new Rectangle(28, 20, 64, 52);
 	protected static Rectangle displayHighlight = new Rectangle(30, 22, 64, 52);
 	protected static Point valuePoint = new Point(32, 20);
+	private static final int HORIZONTAL_PADDING = 3;
+	private static final int VERTICAL_OFFSET = -1;
 
 	static {
 		connector.addPoint(-4, 0);
@@ -181,10 +185,16 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 		g.setBackgroundColor(ColorConstants.black);
 		g.fillRectangle(displayRectangle);
 
+		// Calculate centered position within display inlcuding padding
+		Dimension textExtents = getTextExtents(value, DISPLAY_FONT);
+		int x = displayRectangle.x + HORIZONTAL_PADDING
+				+ ((displayRectangle.width - 2 * HORIZONTAL_PADDING) - textExtents.width) / 2;
+		int y = displayRectangle.y + (displayRectangle.height - textExtents.height) / 2 + VERTICAL_OFFSET;
+
 		// Draw the value
 		g.setFont(DISPLAY_FONT);
 		g.setForegroundColor(DISPLAY_TEXT);
-		g.drawText(value, valuePoint);
+		g.drawText(value, new Point(x, y));
 	}
 
 	/**
