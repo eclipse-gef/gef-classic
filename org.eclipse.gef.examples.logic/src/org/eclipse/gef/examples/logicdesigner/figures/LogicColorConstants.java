@@ -16,14 +16,14 @@ import org.eclipse.swt.graphics.Color;
 
 public interface LogicColorConstants {
 
-	public final static Color andGate = new Color(null, 204, 61, 61);
-	public final static Color orGate = new Color(null, 41, 121, 255);
-	public final static Color xorGate = new Color(null, 255, 204, 0);
-	public static final Color outlineColor = new Color(null, 64, 64, 64);
-	public final static Color logicGreen = new Color(null, 123, 174, 148);
-	public final static Color logicHighlight = new Color(null, 66, 166, 115);
-	public final static Color connectorGreen = new Color(null, 0, 69, 40);
-	public final static Color logicBackgroundBlue = new Color(null, 200, 200, 240);
-	public final static Color ghostFillColor = new Color(null, 31, 31, 31);
+	public final static Color andGate = new Color(204, 61, 61);
+	public final static Color orGate = new Color(41, 121, 255);
+	public final static Color xorGate = new Color(255, 204, 0);
+	public static final Color outlineColor = new Color(64, 64, 64);
+	public final static Color logicGreen = new Color(123, 174, 148);
+	public final static Color logicHighlight = new Color(66, 166, 115);
+	public final static Color connectorGreen = new Color(0, 69, 40);
+	public final static Color logicBackgroundBlue = new Color(200, 200, 240);
+	public final static Color ghostFillColor = new Color(31, 31, 31);
 
 }
