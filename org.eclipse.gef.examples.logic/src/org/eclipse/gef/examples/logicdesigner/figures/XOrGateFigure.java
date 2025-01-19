@@ -53,6 +53,7 @@ public class XOrGateFigure extends GateFigure {
 	 */
 	public XOrGateFigure() {
 		setBackgroundColor(LogicColorConstants.xorGate);
+		setForegroundColor(LogicColorConstants.outlineColor);
 	}
 
 	/**
@@ -72,6 +73,8 @@ public class XOrGateFigure extends GateFigure {
 		r.translate(4, 4);
 		r.setSize(22, 18);
 
+		g.setLineWidth(2);
+
 		// Draw terminals, 2 at top
 		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
 		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
@@ -84,13 +87,13 @@ public class XOrGateFigure extends GateFigure {
 		 * top arc of the gate, so this region is clipped.
 		 */
 		g.pushState();
-		r.y += 2;
-		g.clipRect(r);
-		r.y--;
-		r.width--;
-		r.height--;
+		Rectangle clipRect = r.getCopy();
+		clipRect.x -= 2;
+		clipRect.width += 2;
+		clipRect.y = r.y + 6;
+		g.clipRect(clipRect);
 		g.fillOval(r);
-		r.width--;
+		r.width -= 2;
 		r.height--;
 		g.drawOval(r);
 		g.popState();

@@ -28,6 +28,8 @@ public class AndGateFigure extends GateFigure {
 	 */
 	public AndGateFigure() {
 		setBackgroundColor(LogicColorConstants.andGate);
+
+		setForegroundColor(LogicColorConstants.outlineColor);
 	}
 
 	/**
@@ -47,17 +49,19 @@ public class AndGateFigure extends GateFigure {
 		r.translate(4, 4);
 		r.setSize(22, 18);
 
+		g.setLineWidth(2);
+
 		// Draw terminals, 2 at top
 		g.drawLine(r.x + 4, r.y, r.x + 4, r.y - 4);
 		g.drawLine(r.right() - 6, r.y, r.right() - 6, r.y - 4);
 
 		// draw main area
-		g.fillRectangle(r);
+		g.fillRoundRectangle(r, 5, 5);
 
 		// outline main area
-		g.drawLine(r.x, r.y, r.right() - 1, r.y);
-		g.drawLine(r.right() - 1, r.y, r.right() - 1, r.bottom() - 1);
-		g.drawLine(r.x, r.y, r.x, r.bottom() - 1);
+		Rectangle outlineRect = r.getCopy();
+		outlineRect.width--;
+		g.drawRoundRectangle(outlineRect, 5, 5);
 
 		// draw and outline the arc
 		r.height = 18;
@@ -65,7 +69,7 @@ public class AndGateFigure extends GateFigure {
 		g.fillArc(r, 180, 180);
 		r.width--;
 		r.height--;
-		g.drawArc(r, 180, 190);
+		g.drawArc(r, 180, 180);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
 	}
 

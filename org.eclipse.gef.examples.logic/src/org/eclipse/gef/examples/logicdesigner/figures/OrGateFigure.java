@@ -41,6 +41,7 @@ public class OrGateFigure extends GateFigure {
 	 */
 	public OrGateFigure() {
 		setBackgroundColor(LogicColorConstants.orGate);
+		setForegroundColor(LogicColorConstants.outlineColor);
 	}
 
 	/**
@@ -60,6 +61,8 @@ public class OrGateFigure extends GateFigure {
 		r.translate(4, 4);
 		r.setSize(22, 18);
 
+		g.setLineWidth(2);
+
 		// Draw terminals, 2 at top
 		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
 		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
@@ -67,11 +70,11 @@ public class OrGateFigure extends GateFigure {
 		// Draw the bottom arc of the gate
 		r.y += 8;
 
-		r.width--;
-		r.height--;
+		r.x -= 1;
 		g.fillOval(r);
-		r.width--;
+		r.width -= 2;
 		r.height--;
+		r.x++;
 
 		g.drawOval(r);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
