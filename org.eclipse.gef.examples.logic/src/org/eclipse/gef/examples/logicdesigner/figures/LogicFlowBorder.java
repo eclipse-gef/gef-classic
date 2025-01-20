@@ -22,6 +22,7 @@ public class LogicFlowBorder extends org.eclipse.draw2d.LineBorder {
 
 	protected int grabBarWidth = 40;
 	protected Dimension grabBarSize = new Dimension(grabBarWidth, 36);
+	private static final int CORNER_RADIUS = 8;
 
 	public LogicFlowBorder() {
 	}
@@ -44,10 +45,25 @@ public class LogicFlowBorder extends org.eclipse.draw2d.LineBorder {
 	@Override
 	public void paint(IFigure figure, Graphics graphics, Insets insets) {
 		Rectangle bounds = figure.getBounds();
-		tempRect.setBounds(new Rectangle(bounds.x, bounds.y, grabBarWidth, bounds.height));
+		graphics.setLineWidth(4);
+
+		// Draw grab bar
+		Rectangle grabBar = new Rectangle(bounds.x, bounds.y, grabBarWidth, bounds.height);
 		graphics.setBackgroundColor(LogicColorConstants.logicGreen);
-		graphics.fillRectangle(tempRect);
-		super.paint(figure, graphics, insets);
+		graphics.fillRoundRectangle(grabBar, CORNER_RADIUS, CORNER_RADIUS);
+
+		// Fill right part
+		Rectangle rightPart = grabBar.getCopy();
+		rightPart.x += rightPart.width / 2;
+		rightPart.width = rightPart.width / 2;
+		graphics.fillRectangle(rightPart);
+
+		// Draw main border
+		Rectangle mainBorder = bounds.getCopy();
+		mainBorder.width--;
+		mainBorder.height--;
+		graphics.setForegroundColor(LogicColorConstants.logicGreen);
+		graphics.drawRoundRectangle(mainBorder, CORNER_RADIUS, CORNER_RADIUS);
 	}
 
 	public void setGrabBarWidth(int width) {

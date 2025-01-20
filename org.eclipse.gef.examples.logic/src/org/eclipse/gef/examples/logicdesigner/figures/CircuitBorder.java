@@ -25,21 +25,22 @@ public class CircuitBorder extends AbstractBorder {
 	protected static Insets insets = new Insets(16, 12, 16, 12);
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
+	private static final int CORNER_RADIUS = 6;
 
 	static {
 		connector.addPoint(-4, 0);
-		connector.addPoint(2, 0);
-		connector.addPoint(4, 2);
-		connector.addPoint(4, 10);
-		connector.addPoint(-2, 10);
-		connector.addPoint(-2, 2);
+		connector.addPoint(4, 0);
+		connector.addPoint(6, 2);
+		connector.addPoint(6, 8);
+		connector.addPoint(-4, 8);
+		connector.addPoint(-4, 2);
 
-		bottomConnector.addPoint(-4, -1);
-		bottomConnector.addPoint(2, -1);
-		bottomConnector.addPoint(4, -2);
-		bottomConnector.addPoint(4, -12);
-		bottomConnector.addPoint(-2, -12);
-		bottomConnector.addPoint(-2, -2);
+		bottomConnector.addPoint(-4, 0);
+		bottomConnector.addPoint(4, 0);
+		bottomConnector.addPoint(6, -2);
+		bottomConnector.addPoint(6, -8);
+		bottomConnector.addPoint(-4, -8);
+		bottomConnector.addPoint(-4, -2);
 	}
 
 	private static void drawConnectors(Graphics g, Rectangle rec) {
@@ -49,7 +50,7 @@ public class CircuitBorder extends AbstractBorder {
 
 			// Draw the "gap" for the connector
 			g.setForegroundColor(ColorConstants.listBackground);
-			g.drawLine(x1 - 4, rec.y + 4, x1 + 6, rec.y + 4);
+			g.drawLine(x1 - 2, rec.y + 2, x1 + 3, rec.y + 2);
 
 			// Draw the connectors
 			g.setForegroundColor(LogicColorConstants.connectorGreen);
@@ -58,7 +59,7 @@ public class CircuitBorder extends AbstractBorder {
 			g.drawPolygon(connector);
 			connector.translate(-x1, -rec.y);
 			g.setForegroundColor(ColorConstants.listBackground);
-			g.drawLine(x1 - 4, rec.bottom() - 6, x1 + 6, rec.bottom() - 6);
+			g.drawLine(x1 - 2, rec.bottom() - 3, x1 + 3, rec.bottom() - 3);
 			g.setForegroundColor(LogicColorConstants.connectorGreen);
 			bottomConnector.translate(x1, rec.bottom());
 			g.fillPolygon(bottomConnector);
@@ -79,22 +80,16 @@ public class CircuitBorder extends AbstractBorder {
 		g.setForegroundColor(LogicColorConstants.logicGreen);
 		g.setBackgroundColor(LogicColorConstants.logicGreen);
 
-		// Draw the sides of the border
-		g.fillRectangle(r.x, r.y + 4, r.width, 12);
-		g.fillRectangle(r.x, r.bottom() - 16, r.width, 12);
-		g.fillRectangle(r.x, r.y + 4, 12, r.height - 8);
-		g.fillRectangle(r.right() - 12, r.y + 4, 12, r.height - 8);
+		// Draw top and bottom
+		Rectangle topBorder = new Rectangle(r.x, r.y + 4, r.width, 12);
+		g.fillRoundRectangle(topBorder, CORNER_RADIUS * 2, CORNER_RADIUS * 2);
+		Rectangle bottomBorder = new Rectangle(r.x, r.bottom() - 16, r.width, 12);
+		g.fillRoundRectangle(bottomBorder, CORNER_RADIUS * 2, CORNER_RADIUS * 2);
 
-		// Outline the border
-		g.setForegroundColor(LogicColorConstants.connectorGreen);
-		g.drawLine(r.x, r.y + 4, r.right() - 1, r.y + 4);
-		g.drawLine(r.x, r.bottom() - 6, r.right() - 1, r.bottom() - 6);
-		g.drawLine(r.x, r.y + 4, r.x, r.bottom() - 6);
-		g.drawLine(r.right() - 1, r.bottom() - 6, r.right() - 1, r.y + 4);
+		// Draw left and right side
+		g.fillRectangle(r.x, r.y + 4 + CORNER_RADIUS, 8, r.height - 8 - CORNER_RADIUS * 2);
+		g.fillRectangle(r.right() - 8, r.y + 4 + CORNER_RADIUS, 8, r.height - 8 - CORNER_RADIUS * 2);
 
-		r.shrink(new Insets(2, 2, 0, 0));
-		r.expand(2, 2);
-		r.shrink(getInsets(figure));
 		drawConnectors(g, figure.getBounds().getShrinked(in));
 	}
 

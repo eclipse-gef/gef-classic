@@ -72,20 +72,19 @@ public class BentCornerFigure extends Figure {
 
 		graphics.fillPolygon(outline);
 
-		// draw the inner outline
-		PointList innerLine = new PointList();
+		graphics.pushState();
+		graphics.setLineWidth(2);
+		graphics.drawRoundRectangle(new Rectangle(0, 0, rect.width - 1, rect.height - 1), 8, 8);
 
-		innerLine.addPoint(rect.width - cornerSize - 1, 0);
-		innerLine.addPoint(rect.width - cornerSize - 1, cornerSize);
-		innerLine.addPoint(rect.width - 1, cornerSize);
-		innerLine.addPoint(rect.width - cornerSize - 1, 0);
-		innerLine.addPoint(0, 0);
-		innerLine.addPoint(0, rect.height - 1);
-		innerLine.addPoint(rect.width - 1, rect.height - 1);
-		innerLine.addPoint(rect.width - 1, cornerSize);
+		// draw a rectangle over the bent corner area to hide the rounded corner
+		graphics.setBackgroundColor(ColorConstants.white);
+		graphics.fillRectangle(rect.width - cornerSize - 1, 0, cornerSize + 2, cornerSize + 1);
+		graphics.popState();
 
-		graphics.drawPolygon(innerLine);
-
+		// Draw bent corner lines
+		graphics.drawLine(rect.width - cornerSize - 1, 0, rect.width - cornerSize - 1, cornerSize);
+		graphics.drawLine(rect.width - cornerSize - 1, cornerSize, rect.width - 1, cornerSize);
+		graphics.drawLine(rect.width - cornerSize - 1, 0, rect.width - 1, cornerSize);
 		graphics.translate(getLocation().getNegated());
 	}
 

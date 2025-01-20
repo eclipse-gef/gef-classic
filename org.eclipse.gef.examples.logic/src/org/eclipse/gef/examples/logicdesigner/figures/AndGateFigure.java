@@ -28,7 +28,6 @@ public class AndGateFigure extends GateFigure {
 	 */
 	public AndGateFigure() {
 		setBackgroundColor(LogicColorConstants.andGate);
-
 		setForegroundColor(LogicColorConstants.outlineColor);
 	}
 

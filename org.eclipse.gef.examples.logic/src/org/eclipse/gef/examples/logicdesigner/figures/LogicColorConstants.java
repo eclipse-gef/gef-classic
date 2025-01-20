@@ -20,10 +20,12 @@ public interface LogicColorConstants {
 	public final static Color orGate = new Color(41, 121, 255);
 	public final static Color xorGate = new Color(255, 204, 0);
 	public static final Color outlineColor = new Color(64, 64, 64);
-	public final static Color logicGreen = new Color(123, 174, 148);
-	public final static Color logicHighlight = new Color(66, 166, 115);
-	public final static Color connectorGreen = new Color(0, 69, 40);
+	public static final Color outputFigureColor = new Color(218, 165, 32);
+	public final static Color logicGreen = new Color(67, 160, 120);
+	public final static Color logicHighlight = new Color(255, 187, 51);
+	public final static Color connectorGreen = new Color(57, 150, 110);
 	public final static Color logicBackgroundBlue = new Color(200, 200, 240);
 	public final static Color ghostFillColor = new Color(31, 31, 31);
+	public static final Color displayTextLED = new Color(255, 187, 51);
 
 }

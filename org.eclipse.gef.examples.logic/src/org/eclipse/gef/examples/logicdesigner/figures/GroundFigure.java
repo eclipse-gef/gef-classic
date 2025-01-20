@@ -12,7 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -28,6 +29,8 @@ public class GroundFigure extends OutputFigure {
 	 * Constructor for GroundFigure.
 	 */
 	public GroundFigure() {
+		setBackgroundColor(LogicColorConstants.outputFigureColor);
+		setForegroundColor(LogicColorConstants.outlineColor);
 	}
 
 	/**
@@ -44,11 +47,16 @@ public class GroundFigure extends OutputFigure {
 	@Override
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
-		g.setBackgroundColor(ColorConstants.yellow);
+
+		g.setAntialias(SWT.ON);
+		g.setLineWidth(2);
+
+		r.x += 1;
+		r.y += 1;
+		r.width -= 2;
+		r.height -= 2;
 
 		g.fillOval(r);
-		r.height--;
-		r.width--;
 		g.drawOval(r);
 		g.translate(r.getLocation());
 

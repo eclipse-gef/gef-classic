@@ -14,7 +14,7 @@ package org.eclipse.gef.examples.logicdesigner.figures;
 
 import static org.eclipse.draw2d.FigureUtilities.getTextExtents;
 
-import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -33,19 +33,9 @@ import org.eclipse.gef.examples.logicdesigner.model.LED;
  * @author danlee
  */
 public class LEDFigure extends NodeFigure implements HandleBounds {
+
 	public static final Dimension SIZE = new Dimension(122, 94);
-
-	/**
-	 * Color of the shadow around the LEDFigure's display
-	 */
-	public static final Color DISPLAY_SHADOW = new Color(null, 57, 117, 90);
-
-	/**
-	 * Color of the LEDFigure's displayed value
-	 */
-	public static final Color DISPLAY_TEXT = new Color(null, 255, 199, 16);
-
-	protected static final Font DISPLAY_FONT = new Font(null, "", 23, 0); //$NON-NLS-1$
+	protected static final Font DISPLAY_FONT = new Font(null, "DialogInput", 23, SWT.NORMAL); //$NON-NLS-1$
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
 	protected static Rectangle displayRectangle = new Rectangle(30, 22, 62, 50);
@@ -54,6 +44,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	protected static Point valuePoint = new Point(32, 20);
 	private static final int HORIZONTAL_PADDING = 3;
 	private static final int VERTICAL_OFFSET = -1;
+	private static final int CORNER_RADIUS = 6;
 
 	static {
 		connector.addPoint(-4, 0);
@@ -144,47 +135,45 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
 		g.translate(r.getLocation());
+
 		g.setBackgroundColor(LogicColorConstants.logicGreen);
-		g.setForegroundColor(LogicColorConstants.connectorGreen);
-		g.fillRectangle(0, 4, r.width, r.height - 8);
-		int right = r.width - 1;
-		g.drawLine(0, Y1, right, Y1);
-		g.drawLine(0, Y1, 0, Y2);
+		Rectangle mainBody = new Rectangle(0, 2, r.width, r.height - 4);
+		g.fillRoundRectangle(mainBody, CORNER_RADIUS, CORNER_RADIUS);
+		drawConnectors(g, r);
 
-		g.setForegroundColor(LogicColorConstants.connectorGreen);
-		g.drawLine(0, Y2, right, Y2);
-		g.drawLine(right, Y1, right, Y2);
+		// Draw display
+		g.setBackgroundColor(ColorConstants.black);
+		g.fillRoundRectangle(displayRectangle, CORNER_RADIUS, CORNER_RADIUS);
 
-		// Draw the gaps for the connectors
-		g.setForegroundColor(ColorConstants.listBackground);
-		for (int i = 0; i < 4; i++) {
-			g.drawLine(GAP_CENTERS_X[i] - 4, Y1, GAP_CENTERS_X[i] + 6, Y1);
-			g.drawLine(GAP_CENTERS_X[i] - 4, Y2, GAP_CENTERS_X[i] + 6, Y2);
+		// Draw text
+		if (value != null) {
+			drawModernText(g);
 		}
 
-		// Draw the connectors
-		g.setForegroundColor(LogicColorConstants.connectorGreen);
-		g.setBackgroundColor(LogicColorConstants.connectorGreen);
+	}
+
+	private void drawConnectors(Graphics g, Rectangle r) {
 		for (int i = 0; i < 4; i++) {
+			// Draw the gaps for the connectors
+			g.setForegroundColor(ColorConstants.listBackground);
+			g.drawLine(GAP_CENTERS_X[i] - 2, Y1, GAP_CENTERS_X[i] + 3, Y1);
+			g.drawLine(GAP_CENTERS_X[i] - 2, Y2, GAP_CENTERS_X[i] + 3, Y2);
+
+			// Draw the connectors
+			g.setForegroundColor(LogicColorConstants.connectorGreen);
+			g.setBackgroundColor(LogicColorConstants.connectorGreen);
+
 			connector.translate(GAP_CENTERS_X[i], 0);
 			g.fillPolygon(connector);
-			g.drawPolygon(connector);
 			connector.translate(-GAP_CENTERS_X[i], 0);
 
 			bottomConnector.translate(GAP_CENTERS_X[i], r.height - 1);
 			g.fillPolygon(bottomConnector);
-			g.drawPolygon(bottomConnector);
-			bottomConnector.translate(-GAP_CENTERS_X[i], -r.height + 1);
+			bottomConnector.translate(-GAP_CENTERS_X[i], -(r.height - 1));
 		}
+	}
 
-		// Draw the display
-		g.setBackgroundColor(LogicColorConstants.logicHighlight);
-		g.fillRectangle(displayHighlight);
-		g.setBackgroundColor(DISPLAY_SHADOW);
-		g.fillRectangle(displayShadow);
-		g.setBackgroundColor(ColorConstants.black);
-		g.fillRectangle(displayRectangle);
-
+	private void drawModernText(Graphics g) {
 		// Calculate centered position within display inlcuding padding
 		Dimension textExtents = getTextExtents(value, DISPLAY_FONT);
 		int x = displayRectangle.x + HORIZONTAL_PADDING
@@ -193,7 +182,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 
 		// Draw the value
 		g.setFont(DISPLAY_FONT);
-		g.setForegroundColor(DISPLAY_TEXT);
+		g.setForegroundColor(LogicColorConstants.displayTextLED);
 		g.drawText(value, new Point(x, y));
 	}
 
