@@ -152,7 +152,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 
 	}
 
-	private void drawConnectors(Graphics g, Rectangle r) {
+	private static void drawConnectors(Graphics g, Rectangle r) {
 		for (int i = 0; i < 4; i++) {
 			// Draw the gaps for the connectors
 			g.setForegroundColor(ColorConstants.listBackground);
