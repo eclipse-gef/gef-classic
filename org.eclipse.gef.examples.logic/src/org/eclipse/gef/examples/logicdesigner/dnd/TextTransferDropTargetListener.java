@@ -31,13 +31,14 @@ public class TextTransferDropTargetListener extends AbstractTransferDropTargetLi
 		return new NativeDropRequest();
 	}
 
-	protected NativeDropRequest getNativeDropRequest() {
-		return (NativeDropRequest) getTargetRequest();
+	@Override
+	protected NativeDropRequest getTargetRequest() {
+		return (NativeDropRequest) super.getTargetRequest();
 	}
 
 	@Override
 	protected void updateTargetRequest() {
-		getNativeDropRequest().setData(getCurrentEvent().data);
+		getTargetRequest().setData(getCurrentEvent().data);
 	}
 
 }

@@ -141,6 +141,14 @@ public class DragEditPartsTracker extends SelectEditPartTracker {
 	}
 
 	/**
+	 * @since 3.21
+	 */
+	@Override
+	protected ChangeBoundsRequest getTargetRequest() {
+		return (ChangeBoundsRequest) super.getTargetRequest();
+	}
+
+	/**
 	 * Returns the unioned bounds of the {@link #getOperationSet() operation set
 	 * edit parts'} figures in absolute coordinates. In case the figures implement
 	 * {@link HandleBounds} their {@link HandleBounds#getHandleBounds() handle
@@ -663,7 +671,7 @@ public class DragEditPartsTracker extends SelectEditPartTracker {
 	@Override
 	protected void updateTargetRequest() {
 		repairStartLocation();
-		ChangeBoundsRequest request = (ChangeBoundsRequest) getTargetRequest();
+		ChangeBoundsRequest request = getTargetRequest();
 		request.setEditParts(getOperationSet());
 		Dimension delta = getDragMoveDelta();
 

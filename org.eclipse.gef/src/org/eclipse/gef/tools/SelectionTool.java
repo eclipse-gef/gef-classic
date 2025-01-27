@@ -158,6 +158,14 @@ public class SelectionTool extends TargetingTool {
 	}
 
 	/**
+	 * @since 3.21
+	 */
+	@Override
+	protected SelectionRequest getTargetRequest() {
+		return (SelectionRequest) super.getTargetRequest();
+	}
+
+	/**
 	 * Returns the target hover request. If <code>null</code>, it will be created
 	 * via {@link #createHoverRequest()}.
 	 *
@@ -199,7 +207,7 @@ public class SelectionTool extends TargetingTool {
 			}
 		}
 		updateTargetRequest();
-		((SelectionRequest) getTargetRequest()).setLastButtonPressed(button);
+		getTargetRequest().setLastButtonPressed(button);
 		updateTargetUnderMouse();
 		EditPart editpart = getTargetEditPart();
 		if (editpart != null) {
@@ -220,7 +228,7 @@ public class SelectionTool extends TargetingTool {
 		if (getCurrentInput().isAnyButtonDown()) {
 			return false;
 		}
-		((SelectionRequest) getTargetRequest()).setLastButtonPressed(0);
+		getTargetRequest().setLastButtonPressed(0);
 		setDragTracker(null);
 		setState(STATE_INITIAL);
 		unlockTargetEditPart();
@@ -695,7 +703,7 @@ public class SelectionTool extends TargetingTool {
 	 */
 	@Override
 	protected void updateTargetRequest() {
-		SelectionRequest request = (SelectionRequest) getTargetRequest();
+		SelectionRequest request = getTargetRequest();
 		request.setModifiers(getCurrentInput().getModifiers());
 		request.setType(getCommandName());
 		request.setLocation(getLocation());

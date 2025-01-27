@@ -103,6 +103,11 @@ class TreeViewerTransferDropListener extends AbstractTransferDropTargetListener 
 		return selection.get(0);
 	}
 
+	@Override
+	protected ChangeBoundsRequest getTargetRequest() {
+		return (ChangeBoundsRequest) super.getTargetRequest();
+	}
+
 	protected List<EditPart> includeChildren(List<? extends EditPart> list) {
 		List<EditPart> result = new ArrayList<>();
 		for (EditPart element : list) {
@@ -133,7 +138,7 @@ class TreeViewerTransferDropListener extends AbstractTransferDropTargetListener 
 
 	@Override
 	protected void updateTargetRequest() {
-		ChangeBoundsRequest request = (ChangeBoundsRequest) getTargetRequest();
+		ChangeBoundsRequest request = getTargetRequest();
 		request.setLocation(getDropLocation());
 		request.setType(getCommandName());
 	}

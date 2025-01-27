@@ -189,6 +189,14 @@ public class AbstractConnectionCreationTool extends TargetingTool {
 	}
 
 	/**
+	 * @since 3.21
+	 */
+	@Override
+	protected CreateConnectionRequest getTargetRequest() {
+		return (CreateConnectionRequest) super.getTargetRequest();
+	}
+
+	/**
 	 * When the button is first pressed, the source node and its command
 	 * contribution are determined and locked in. After that time, the tool will be
 	 * looking for the target node to complete the connection
@@ -204,7 +212,7 @@ public class AbstractConnectionCreationTool extends TargetingTool {
 			updateTargetUnderMouse();
 			setConnectionSource(getTargetEditPart());
 			Command command = getCommand();
-			((CreateConnectionRequest) getTargetRequest()).setSourceEditPart(getTargetEditPart());
+			getTargetRequest().setSourceEditPart(getTargetEditPart());
 			if (command != null) {
 				setState(STATE_CONNECTION_STARTED);
 				setCurrentCommand(command);
@@ -402,7 +410,7 @@ public class AbstractConnectionCreationTool extends TargetingTool {
 	 */
 	@Override
 	protected void updateTargetRequest() {
-		CreateConnectionRequest request = (CreateConnectionRequest) getTargetRequest();
+		CreateConnectionRequest request = getTargetRequest();
 		request.setType(getCommandName());
 		request.setLocation(getLocation());
 	}

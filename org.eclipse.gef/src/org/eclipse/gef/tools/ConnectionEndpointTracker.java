@@ -168,6 +168,14 @@ public class ConnectionEndpointTracker extends TargetingTool implements DragTrac
 	}
 
 	/**
+	 * @since 3.21
+	 */
+	@Override
+	protected ReconnectRequest getTargetRequest() {
+		return (ReconnectRequest) super.getTargetRequest();
+	}
+
+	/**
 	 * If currently in the drag-in-progress state, it goes into the terminal state
 	 * erases feedback and executes the current command.
 	 *
@@ -338,7 +346,7 @@ public class ConnectionEndpointTracker extends TargetingTool implements DragTrac
 	 */
 	@Override
 	protected void updateTargetRequest() {
-		ReconnectRequest request = (ReconnectRequest) getTargetRequest();
+		ReconnectRequest request = getTargetRequest();
 		Point p = getLocation();
 		request.setLocation(p);
 	}

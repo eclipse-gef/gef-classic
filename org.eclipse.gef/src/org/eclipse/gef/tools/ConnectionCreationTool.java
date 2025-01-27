@@ -24,7 +24,6 @@ import org.eclipse.gef.AccessibleAnchorProvider;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.requests.CreateConnectionRequest;
 import org.eclipse.gef.requests.CreationFactory;
 
 /**
@@ -205,7 +204,7 @@ public class ConnectionCreationTool extends AbstractConnectionCreationTool {
 		if (command != null && command.canExecute()) {
 			updateTargetUnderMouse();
 			setConnectionSource(getTargetEditPart());
-			((CreateConnectionRequest) getTargetRequest()).setSourceEditPart(getTargetEditPart());
+			getTargetRequest().setSourceEditPart(getTargetEditPart());
 			setState(STATE_ACCESSIBLE_DRAG_IN_PROGRESS);
 			placeMouseInViewer(getLocation().getTranslated(6, 6));
 		}

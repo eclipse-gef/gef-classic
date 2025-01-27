@@ -133,9 +133,11 @@ public class CreationTool extends TargetingTool {
 	 *
 	 * @return the target request as a CreateRequest
 	 * @see TargetingTool#getTargetRequest()
+	 * @deprecated use TargetingTool#getTargetRequest()
 	 */
+	@Deprecated(since = "3.21", forRemoval = true)
 	protected CreateRequest getCreateRequest() {
-		return (CreateRequest) getTargetRequest();
+		return getTargetRequest();
 	}
 
 	/**
@@ -349,7 +351,7 @@ public class CreationTool extends TargetingTool {
 	 * @since 3.7
 	 */
 	protected void enforceConstraintsForSizeOnDropCreate(CreateRequest request) {
-		CreateRequest createRequest = (CreateRequest) getTargetRequest();
+		CreateRequest createRequest = getTargetRequest();
 		if (createRequest.getSize() != null) {
 			// ensure create request respects minimum and maximum size
 			// constraints
@@ -391,4 +393,11 @@ public class CreationTool extends TargetingTool {
 		return IFigure.MIN_DIMENSION;
 	}
 
+	/**
+	 * @since 3.21
+	 */
+	@Override
+	protected CreateRequest getTargetRequest() {
+		return (CreateRequest) super.getTargetRequest();
+	}
 }
