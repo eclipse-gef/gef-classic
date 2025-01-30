@@ -110,8 +110,15 @@ public class FlyoutPaletteComposite extends Composite {
 	private static final int MIN_PALETTE_SIZE = 20;
 	private static final int MAX_PALETTE_SIZE = 500;
 
-	private static final int STATE_HIDDEN = 8;
-	private static final int STATE_EXPANDED = 1;
+	/**
+	 * @since 3.21
+	 */
+	protected static final int STATE_HIDDEN = 8;
+
+	/**
+	 * @since 3.21
+	 */
+	protected static final int STATE_EXPANDED = 1;
 
 	private static final Dimension ARROW_SIZE = new Dimension(6, 11);
 	private static final int SASH_BUTTON_WIDTH = 11;
@@ -129,12 +136,22 @@ public class FlyoutPaletteComposite extends Composite {
 	public static final int STATE_PINNED_OPEN = 4;
 
 	private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
-	private final Composite paletteContainer;
+
+	/**
+	 * @since 3.21
+	 */
+	protected final Composite paletteContainer;
 	private PaletteViewer pViewer;
 	private PaletteViewer externalViewer;
 	private IMemento capturedPaletteState;
-	private Control graphicalControl;
-	private final Composite sash;
+	/**
+	 * @since 3.21
+	 */
+	protected Control graphicalControl;
+	/**
+	 * @since 3.21
+	 */
+	protected final Composite sash;
 	private final PaletteViewerProvider provider;
 	private final FlyoutPreferences prefs;
 	private Point cachedBounds = new Point(0, 0);
@@ -147,10 +164,26 @@ public class FlyoutPaletteComposite extends Composite {
 	 * button is visible.
 	 */
 	private boolean transferFocus = false;
-	private int dock = PositionConstants.EAST;
-	private int paletteState = STATE_HIDDEN;
-	private int paletteWidth = DEFAULT_PALETTE_SIZE;
-	private int minWidth = MIN_PALETTE_SIZE;
+
+	/**
+	 * @since 3.21
+	 */
+	protected int dock = PositionConstants.EAST;
+
+	/**
+	 * @since 3.21
+	 */
+	protected int paletteState = STATE_HIDDEN;
+
+	/**
+	 * @since 3.21
+	 */
+	protected int paletteWidth = DEFAULT_PALETTE_SIZE;
+
+	/**
+	 * @since 3.21
+	 */
+	protected int minWidth = MIN_PALETTE_SIZE;
 	private int cachedSize = -1;
 	private int cachedState = -1;
 	private int cachedLocation = -1;
@@ -309,7 +342,10 @@ public class FlyoutPaletteComposite extends Composite {
 		return false;
 	}
 
-	private boolean isInState(int state) {
+	/**
+	 * @since 3.21
+	 */
+	protected boolean isInState(int state) {
 		return (paletteState & state) != 0;
 	}
 
