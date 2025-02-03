@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
@@ -73,6 +75,7 @@ public class XOrGateFigure extends GateFigure {
 		r.translate(4, 4);
 		r.setSize(22, 18);
 
+		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
 		// Draw terminals, 2 at top
@@ -92,8 +95,10 @@ public class XOrGateFigure extends GateFigure {
 		clipRect.width += 2;
 		clipRect.y = r.y + 6;
 		g.clipRect(clipRect);
+		r.width--;
+
 		g.fillOval(r);
-		r.width -= 2;
+		r.width--;
 		r.height--;
 		g.drawOval(r);
 		g.popState();

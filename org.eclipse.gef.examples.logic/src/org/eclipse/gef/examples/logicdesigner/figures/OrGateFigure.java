@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
@@ -61,6 +63,7 @@ public class OrGateFigure extends GateFigure {
 		r.translate(4, 4);
 		r.setSize(22, 18);
 
+		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
 		// Draw terminals, 2 at top
@@ -70,11 +73,10 @@ public class OrGateFigure extends GateFigure {
 		// Draw the bottom arc of the gate
 		r.y += 8;
 
-		r.x -= 1;
+		r.width--;
 		g.fillOval(r);
-		r.width -= 2;
+		r.width--;
 		r.height--;
-		r.x++;
 
 		g.drawOval(r);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
