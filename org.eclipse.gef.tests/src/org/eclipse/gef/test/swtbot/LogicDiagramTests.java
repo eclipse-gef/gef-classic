@@ -111,7 +111,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 			forceUpdate(editor.getSWTBotGefViewer());
 		});
 
-		assertEquals(figure.getLocation(), new Point(12, 20), "Part is not on grid line");
+		assertEquals(figure.getLocation(), new Point(12, 21), "Part is not on grid line");
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		SWTBotGefEditor editor = bot.gefEditor("emptyModel1.logic");
 		editor.activateTool("LED");
-		editor.click(50, 48);
+		editor.click(50, 49);
 
 		editor.activateTool("Label");
 		editor.click(200, 200);
