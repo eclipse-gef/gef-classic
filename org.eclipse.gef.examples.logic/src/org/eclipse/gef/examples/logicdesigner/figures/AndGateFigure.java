@@ -47,17 +47,18 @@ public class AndGateFigure extends GateFigure {
 	@Override
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
-		r.translate(4, 4);
+		r.translate(4, 5);
 		r.setSize(22, 18);
 
 		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
 		// Draw terminals, 2 at top
-		g.drawLine(r.x + 4, r.y, r.x + 4, r.y - 4);
-		g.drawLine(r.right() - 6, r.y, r.right() - 6, r.y - 4);
+		g.drawLine(r.x + 4, r.y, r.x + 4, r.y - 6);
+		g.drawLine(r.right() - 5, r.y, r.right() - 5, r.y - 5);
 
 		// draw main area
+		r.width++;
 		r.height++;
 		g.fillRoundRectangle(r, 5, 5);
 
@@ -68,7 +69,7 @@ public class AndGateFigure extends GateFigure {
 
 		// draw and outline the arc
 		r.height = 18;
-		r.y += 8;
+		r.y += 7;
 		g.fillArc(r, 180, 180);
 		r.width--;
 		r.height--;
