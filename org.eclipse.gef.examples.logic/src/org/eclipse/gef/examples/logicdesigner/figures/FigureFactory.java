@@ -25,7 +25,7 @@ public class FigureFactory {
 	public static PolylineConnection createNewBendableWire(Wire wire) {
 		PolylineConnection conn = new PolylineConnection();
 		conn.addRoutingListener(RoutingAnimator.getDefault());
-		conn.setLineWidth(2);
+		conn.setLineWidth(3);
 		// conn.setSourceDecoration(new PolygonDecoration());
 		// conn.setTargetDecoration(new PolylineDecoration());
 		return conn;
@@ -35,7 +35,7 @@ public class FigureFactory {
 
 		PolylineConnection conn = new PolylineConnection();
 		conn.addRoutingListener(RoutingAnimator.getDefault());
-		conn.setLineWidth(2);
+		conn.setLineWidth(3);
 		PolygonDecoration arrow;
 
 		if (wire == null || wire.getSource() instanceof SimpleOutput) {
@@ -43,7 +43,7 @@ public class FigureFactory {
 		} else {
 			arrow = new PolygonDecoration();
 			arrow.setTemplate(PolygonDecoration.INVERTED_TRIANGLE_TIP);
-			arrow.setScale(10, 5);
+			arrow.setScale(20, 10);
 		}
 		conn.setSourceDecoration(arrow);
 
@@ -52,7 +52,7 @@ public class FigureFactory {
 		} else {
 			arrow = new PolygonDecoration();
 			arrow.setTemplate(PolygonDecoration.INVERTED_TRIANGLE_TIP);
-			arrow.setScale(10, 5);
+			arrow.setScale(20, 10);
 		}
 		conn.setTargetDecoration(arrow);
 		return conn;

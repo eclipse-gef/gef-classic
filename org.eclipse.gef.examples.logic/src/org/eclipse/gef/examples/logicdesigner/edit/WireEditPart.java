@@ -61,7 +61,7 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 		 * its router to change.
 		 */
 		getFigure().addPropertyChangeListener(Connection.PROPERTY_CONNECTION_ROUTER, this);
-		((PolylineConnection) getFigure()).setLineWidth(2);
+		((PolylineConnection) getFigure()).setLineWidth(3);
 	}
 
 	/**
