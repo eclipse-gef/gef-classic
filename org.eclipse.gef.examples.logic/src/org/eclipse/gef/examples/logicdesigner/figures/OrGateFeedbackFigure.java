@@ -12,7 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -23,9 +24,10 @@ public class OrGateFeedbackFigure extends OrGateFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		g.setXORMode(true);
-		g.setForegroundColor(ColorConstants.white);
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
+		g.setBackgroundColor(LogicColorConstants.feedbackFill);
+		g.setForegroundColor(LogicColorConstants.feedbackOutline);
+		g.setAntialias(SWT.ON);
+		g.setLineWidth(2);
 
 		Rectangle r = getBounds().getCopy();
 		r.translate(4, 4);
@@ -35,28 +37,21 @@ public class OrGateFeedbackFigure extends OrGateFigure {
 		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
 		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
 
-		// fix it
-		g.drawPoint(r.x + 4, r.y + 4);
-		g.drawPoint(r.right() - 6, r.y + 4);
-
 		// Draw the bottom arc of the gate
 		r.y += 8;
 
 		r.width--;
-		r.height--;
-		g.fillArc(r, 180, 180);
+		g.fillOval(r);
 		r.width--;
 		r.height--;
-		g.drawPoint(r.x, r.y + 8);
 
-		g.drawArc(r, 180, 180);
+		g.drawOval(r);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
-		g.drawPoint(r.x + r.width / 2, r.bottom());
 
 		// draw gate
 		g.translate(getLocation());
-		g.drawPolyline(GATE_OUTLINE);
 		g.fillPolygon(GATE_OUTLINE);
+		g.drawPolyline(GATE_OUTLINE);
 		g.translate(getLocation().getNegated());
 	}
 

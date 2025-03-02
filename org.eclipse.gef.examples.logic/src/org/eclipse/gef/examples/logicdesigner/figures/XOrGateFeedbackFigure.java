@@ -12,7 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -23,9 +24,12 @@ public class XOrGateFeedbackFigure extends XOrGateFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		g.setXORMode(true);
-		g.setForegroundColor(ColorConstants.white);
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
+
+		g.setBackgroundColor(LogicColorConstants.feedbackFill);
+		g.setForegroundColor(LogicColorConstants.feedbackOutline);
+		g.setAntialias(SWT.ON);
+		g.setLineWidth(2);
+
 		Rectangle r = getBounds().getCopy();
 		r.translate(4, 4);
 		r.setSize(22, 18);
@@ -46,20 +50,19 @@ public class XOrGateFeedbackFigure extends XOrGateFigure {
 		 * top arc of the gate, so this region is clipped.
 		 */
 		g.pushState();
-		r.y++;
-		g.clipRect(r);
-		r.y--;
+		Rectangle clipRect = r.getCopy();
+		clipRect.x -= 2;
+		clipRect.width += 2;
+		clipRect.y = r.y + 6;
+		g.clipRect(clipRect);
+		r.width--;
 
+		g.fillOval(r);
 		r.width--;
 		r.height--;
-		g.fillArc(r, 180, 180);
-		r.width--;
-		r.height--;
-		g.drawArc(r, 180, 180);
-		g.drawPoint(r.x, r.y + 8);
+		g.drawOval(r);
 		g.popState();
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
-		g.drawPoint(r.x + r.width / 2, r.bottom());
 
 		// Draw the gate outline and top curve
 		g.translate(getLocation());
