@@ -12,7 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
+import static org.eclipse.gef.examples.logicdesigner.figures.CircuitBorder.CORNER_RADIUS;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Insets;
@@ -29,10 +30,12 @@ public class CircuitFeedbackBorder extends CircuitBorder {
 
 			// Draw the connectors
 			connector.translate(x1, rec.y);
+			g.fillPolygon(connector);
 			g.drawPolygon(connector);
 			connector.translate(-x1, -rec.y);
 			g.drawLine(x1 - 2, rec.bottom() - 3, x1 + 3, rec.bottom() - 3);
 			bottomConnector.translate(x1, rec.bottom());
+			g.fillPolygon(bottomConnector);
 			g.drawPolygon(bottomConnector);
 			bottomConnector.translate(-x1, -rec.bottom());
 		}
@@ -40,36 +43,21 @@ public class CircuitFeedbackBorder extends CircuitBorder {
 
 	@Override
 	public void paint(IFigure figure, Graphics g, Insets in) {
-		g.setXORMode(true);
-		g.setForegroundColor(ColorConstants.white);
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
+		g.setForegroundColor(LogicColorConstants.feedbackFill);
+		g.setBackgroundColor(LogicColorConstants.feedbackFill);
 
 		Rectangle r = figure.getBounds().getShrinked(in);
 
-		// Draw the sides of the border
-		g.fillRectangle(r.x, r.y + 2, r.width, 6);
-		g.fillRectangle(r.x, r.bottom() - 8, r.width, 6);
-		g.fillRectangle(r.x, r.y + 2, 6, r.height - 4);
-		g.fillRectangle(r.right() - 6, r.y + 2, 6, r.height - 4);
+		// Draw top and bottom
+		Rectangle topBorder = new Rectangle(r.x, r.y + 4, r.width, 12);
+		g.fillRoundRectangle(topBorder, CORNER_RADIUS * 2, CORNER_RADIUS * 2);
+		Rectangle bottomBorder = new Rectangle(r.x, r.bottom() - 16, r.width, 12);
+		g.fillRoundRectangle(bottomBorder, CORNER_RADIUS * 2, CORNER_RADIUS * 2);
 
-		g.fillRectangle(r.x, r.y + 2, 6, 6);
-		g.fillRectangle(r.x, r.bottom() - 8, 6, 6);
-		g.fillRectangle(r.right() - 6, r.y + 2, 6, 6);
-		g.fillRectangle(r.right() - 6, r.bottom() - 8, 6, 6);
+		// Draw left and right side
+		g.fillRectangle(r.x, r.y + 4 + CORNER_RADIUS, 8, r.height - 8 - CORNER_RADIUS * 2);
+		g.fillRectangle(r.right() - 8, r.y + 4 + CORNER_RADIUS, 8, r.height - 8 - CORNER_RADIUS * 2);
 
-		// Outline the border
-		g.drawPoint(r.x, r.y + 2);
-		g.drawPoint(r.x, r.bottom() - 3);
-		g.drawPoint(r.right() - 1, r.y + 2);
-		g.drawPoint(r.right() - 1, r.bottom() - 3);
-		g.drawLine(r.x, r.y + 2, r.right() - 1, r.y + 2);
-		g.drawLine(r.x, r.bottom() - 3, r.right() - 1, r.bottom() - 3);
-		g.drawLine(r.x, r.y + 2, r.x, r.bottom() - 3);
-		g.drawLine(r.right() - 1, r.bottom() - 3, r.right() - 1, r.y + 2);
-
-		r.shrink(new Insets(1, 1, 0, 0));
-		r.expand(1, 1);
-		r.shrink(getInsets(figure));
 		drawConnectors(g, figure.getBounds().getShrinked(in));
 	}
 

@@ -25,7 +25,7 @@ public class CircuitBorder extends AbstractBorder {
 	protected static Insets insets = new Insets(16, 12, 16, 12);
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
-	private static final int CORNER_RADIUS = 6;
+	protected static final int CORNER_RADIUS = 6;
 
 	static {
 		connector.addPoint(-4, 0);
