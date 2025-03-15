@@ -27,5 +27,7 @@ public interface LogicColorConstants {
 	public final static Color logicBackgroundBlue = new Color(200, 200, 240);
 	public final static Color ghostFillColor = new Color(31, 31, 31);
 	public static final Color displayTextLED = new Color(255, 187, 51);
+	public final static Color feedbackFill = new Color(120, 120, 120);
+	public final static Color feedbackOutline = new Color(70, 70, 70);
 
 }
