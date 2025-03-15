@@ -299,6 +299,9 @@ public abstract class ProjectUnzipperNewWizard extends Wizard implements INewWiz
 		while (e.hasMoreElements()) {
 			ZipEntry zipEntry = e.nextElement();
 			File file = new File(projectFolderFile, zipEntry.getName());
+			if (!file.toPath().normalize().startsWith(projectFolderFile.toPath().normalize())) {
+				throw new IOException("Bad zip entry");
+			}
 
 			if (!zipEntry.isDirectory()) {
 
