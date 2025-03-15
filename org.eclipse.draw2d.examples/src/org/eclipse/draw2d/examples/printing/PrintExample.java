@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,13 +13,15 @@
 package org.eclipse.draw2d.examples.printing;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.printing.PrintDialog;
 import org.eclipse.swt.printing.Printer;
+import org.eclipse.swt.printing.PrinterData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -73,18 +75,10 @@ public class PrintExample {
 		addAllFigures(printFigure);
 		lws.setContents(printFigure);
 
-		printButton.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-			}
-
+		printButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				printIt(printFigure);
-			}
-
-			@Override
-			public void mouseUp(MouseEvent e) {
+				printIt(printFigure, shell);
 			}
 		});
 		shell.setSize(300, 500);
@@ -139,8 +133,13 @@ public class PrintExample {
 		parent.add(c);
 	}
 
-	static private void printIt(IFigure fig) {
-		Printer p = new Printer();
+	static private void printIt(IFigure fig, Shell shell) {
+		PrintDialog dialog = new PrintDialog(shell);
+		PrinterData pd = dialog.open();
+		if (pd == null) {
+			return;
+		}
+		Printer p = new Printer(pd);
 		PrintOperation op = new PrintFigureOperation(p, fig);
 		op.setPrintMargin(new Insets(0, 0, 0, 0));
 		op.run("Test"); // "Test" is the print job name //$NON-NLS-1$
