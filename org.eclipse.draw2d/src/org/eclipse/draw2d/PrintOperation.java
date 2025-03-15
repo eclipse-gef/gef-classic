@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,7 +31,7 @@ public abstract class PrintOperation {
 							// print job
 	private Insets printMargin = new Insets(0, 0, 0, 0);
 	private Printer printer;
-	private PrinterGraphics printerGraphics;
+	private Graphics printerGraphics;
 	private SWTGraphics g;
 
 	/**
@@ -65,11 +65,37 @@ public abstract class PrintOperation {
 
 	/**
 	 * Returns a new PrinterGraphics setup for the Printer associated with this
-	 * PrintOperation.
+	 * PrintOperation. This method will be removed after the 2027-06 release.
+	 * <i>Important:</i> This method should <b>not</b> be called if
+	 * {@link #createGraphics(SWTGraphics, Printer)} has been subclasses.
 	 *
 	 * @return PrinterGraphics The new PrinterGraphics
+	 * @deprecated Use {@link #getFreshGraphics()} instead. This method will be
+	 *             removed after the 2027-06 release.
 	 */
+	@Deprecated(forRemoval = true, since = "2025-06")
 	protected PrinterGraphics getFreshPrinterGraphics() {
+		return (PrinterGraphics) doGetFreshGraphics();
+	}
+
+	/**
+	 * Returns a new Graphics setup for the Printer associated with this
+	 * PrintOperation.
+	 *
+	 * @return Graphics The new Graphics
+	 * @since 3.19
+	 */
+	protected Graphics getFreshGraphics() {
+		try {
+			return getFreshPrinterGraphics();
+		} catch (ClassCastException ignore) {
+			// createGraphics(SWTGraphics,Printer) has been subclasses
+		}
+		return doGetFreshGraphics();
+	}
+
+	// Can be inlined once getFreshPrinterGraphics() has been removed
+	private Graphics doGetFreshGraphics() {
 		if (printerGraphics != null) {
 			printerGraphics.dispose();
 			g.dispose();
@@ -77,9 +103,23 @@ public abstract class PrintOperation {
 			g = null;
 		}
 		g = new SWTGraphics(printerGC);
-		printerGraphics = new PrinterGraphics(g, printer);
+		printerGraphics = createGraphics(g, printer);
 		setupGraphicsForPage(printerGraphics);
 		return printerGraphics;
+	}
+
+	/**
+	 * Creates a new {@link PrinterGraphics} with Graphics {@code g}, using Printer
+	 * {@code p}. May be overridden by subclasses if a different {@link Graphics}
+	 * object is required.
+	 *
+	 * @param g Graphics object to draw with
+	 * @param p Printer to print to
+	 * @return A new {@link PrinterGraphics} object.
+	 * @since 3.19
+	 */
+	protected Graphics createGraphics(SWTGraphics g, Printer p) {
+		return new PrinterGraphics(g, printer);
 	}
 
 	/**
@@ -185,11 +225,35 @@ public abstract class PrintOperation {
 	 * of the page. (Default is the top left corner of the page).
 	 *
 	 * @param pg The PrinterGraphics to setup
+	 * @deprecated Use {@link #setupGraphicsForPage(Graphics)} instead. This method
+	 *             will be removed after the 2027-06 release.
 	 */
+	@Deprecated(forRemoval = true, since = "2025-06")
 	protected void setupGraphicsForPage(PrinterGraphics pg) {
-		Rectangle printRegion = getPrintRegion();
-		pg.clipRect(printRegion);
-		pg.translate(printRegion.getTopLeft());
+		doSetupGraphicsForPage(g);
 	}
 
+	/**
+	 * Manipulates the PrinterGraphics to position it to paint in the desired region
+	 * of the page. (Default is the top left corner of the page).
+	 *
+	 * @param g The Graphics to setup
+	 * @since 3.19
+	 */
+	protected void setupGraphicsForPage(Graphics g) {
+		try {
+			setupGraphicsForPage((PrinterGraphics) g);
+			return;
+		} catch (ClassCastException ignore) {
+			// createGraphics(SWTGraphics,Printer) has been subclasses
+		}
+		doSetupGraphicsForPage(g);
+	}
+
+	// Can be inlined once setupGraphicsForPage(PrinterGraphics) has been removed
+	private void doSetupGraphicsForPage(Graphics g) {
+		Rectangle printRegion = getPrintRegion();
+		g.clipRect(printRegion);
+		g.translate(printRegion.getTopLeft());
+	}
 }
