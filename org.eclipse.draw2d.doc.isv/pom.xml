@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.eclipse.draw2d.plugins</groupId>
 	<artifactId>org.eclipse.draw2d.doc.isv</artifactId>
-	<version>3.13.400-SNAPSHOT</version>
+	<version>3.13.500-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 	<name>[bundle] GEF Classic Draw2d Developer Documentation</name>
 	<build>
