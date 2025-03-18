@@ -12,14 +12,12 @@
  *******************************************************************************/
 package org.eclipse.gef.internal.ui.rulers;
 
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.ImageUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -218,7 +216,7 @@ public class RulerFigure extends Figure {
 				if (isHorizontal()) {
 					drawHorizontalMajorMark(graphics, clippedBounds, leading, forbiddenZone, y, num);
 				} else {
-					drawVerticalMajorMark(graphics, clippedBounds, forbiddenZone, y, num);
+					drawVerticalMajorMark(graphics, clippedBounds, leading, forbiddenZone, y, num);
 				}
 			} else if ((div % divsPerMajorMark) % mediumMarkerDivNum == 0) {
 				// this is a medium mark, so its length should be longer than the small marks
@@ -248,7 +246,6 @@ public class RulerFigure extends Figure {
 		forbiddenZone.setLocation(textLocation);
 		forbiddenZone.setSize(numSize);
 		forbiddenZone.expand(1, 1);
-		graphics.fillRectangle(forbiddenZone);
 		// Uncomment the following line of code if you want to see a line at the exact
 		// position of the major mark
 		// graphics.drawLine(y, clippedBounds.x, y, clippedBounds.x +
@@ -256,17 +253,25 @@ public class RulerFigure extends Figure {
 		graphics.drawText(num, textLocation);
 	}
 
-	private void drawVerticalMajorMark(Graphics graphics, Rectangle clippedBounds, Rectangle forbiddenZone, int y,
-			String num) {
-		Image numImage = ImageUtilities.createRotatedImageOfString(num, getFont(), getForegroundColor(),
-				getBackgroundColor());
-		Point textLocation = new Point(clippedBounds.x + textMargin, y - (numImage.getBounds().height / 2));
+	private void drawVerticalMajorMark(Graphics graphics, Rectangle clippedBounds, int leading, Rectangle forbiddenZone,
+			int y, String num) {
+		Dimension numSize = FigureUtilities.getStringExtents(num, getFont());
+		// If the width is even, we want to increase it by 1. This will ensure that when
+		// marks are erased because they are too close to the number, they are erased
+		// from both sides of that number.
+		if (numSize.width % 2 == 0) {
+			numSize.width++;
+		}
+		Point textLocation = new Point(clippedBounds.x + textMargin - leading, y - (numSize.width / 2));
 		forbiddenZone.setLocation(textLocation);
-		forbiddenZone.setSize(numImage.getBounds().width, numImage.getBounds().height);
-		forbiddenZone.expand(1, 1 + (numImage.getBounds().height % 2 == 0 ? 1 : 0));
-		graphics.fillRectangle(forbiddenZone);
-		graphics.drawImage(numImage, textLocation);
-		numImage.dispose();
+		forbiddenZone.setSize(numSize.height, numSize.width);
+		forbiddenZone.expand(1, 1);
+		textLocation.translate(0, numSize.width);
+		graphics.pushState();
+		graphics.translate(textLocation);
+		graphics.rotate(-90);
+		graphics.drawText(num, 0, 0);
+		graphics.popState();
 	}
 
 	private void drawMediumMark(Graphics graphics, Rectangle clippedBounds, Rectangle forbiddenZone, int y) {
