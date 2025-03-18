@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.gef.internal.ui.rulers;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.ColorConstants;
@@ -142,6 +143,8 @@ public class RulerFigure extends Figure {
 	 */
 	@Override
 	protected void paintFigure(Graphics graphics) {
+		graphics.setTextAntialias(SWT.ON);
+
 		double dotsPerUnit = getDPU();
 		Rectangle clip = transposer.t(graphics.getClip(Rectangle.SINGLETON));
 		Rectangle figClientArea = transposer.t(getClientArea());
