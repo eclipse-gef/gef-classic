@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 Stephan Schwiebert and others.
+ * Copyright (c) 2011, 2025 Stephan Schwiebert and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,9 +18,6 @@ import java.util.EventListener;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -146,12 +143,6 @@ public class TagCloud extends Canvas {
 	private Set<Word> selection = new HashSet<>();
 
 	private CloudMatrix cloudMatrix;
-
-	/**
-	 * Executor service to process the creation of {@link RectTree} objects in
-	 * parallel.
-	 */
-	private ExecutorService executors;
 
 	private ILayouter layouter;
 
@@ -459,7 +450,6 @@ public class TagCloud extends Canvas {
 		double step = 80D / wordsToUse.size();
 		double current = 0;
 		int next = 10;
-		executors = Executors.newFixedThreadPool(getNumberOfThreads());
 		final Color color = gc.getDevice().getSystemColor(SWT.COLOR_BLACK);
 		for (final Word word : wordsToUse) {
 			FontData[] fontData = word.getFontData();
@@ -472,16 +462,14 @@ public class TagCloud extends Canvas {
 			final Point stringExtent = gc.stringExtent(word.string);
 			FontMetrics fm = gc.getFontMetrics();
 			stringExtent.y = fm.getHeight();
-			executors.execute(() -> {
-				double radian = Math.toRadians(word.angle);
-				final double sin = Math.abs(Math.sin(radian));
-				final double cos = Math.abs(Math.cos(radian));
-				final int x = (int) ((cos * stringExtent.x) + (sin * stringExtent.y));
-				final int y = (int) ((cos * stringExtent.y) + (sin * stringExtent.x));
-				ImageData id = createImageData(word, font, stringExtent, sin, cos, x, y, color);
-				calcWordExtents(word, id);
-				font.dispose();
-			});
+			double radian = Math.toRadians(word.angle);
+			final double sin = Math.abs(Math.sin(radian));
+			final double cos = Math.abs(Math.cos(radian));
+			final int x = (int) ((cos * stringExtent.x) + (sin * stringExtent.y));
+			final int y = (int) ((cos * stringExtent.y) + (sin * stringExtent.x));
+			ImageData id = createImageData(word, font, stringExtent, sin, cos, x, y, color);
+			calcWordExtents(word, id);
+			font.dispose();
 			if (monitor != null) {
 				current += step;
 				if (current > next) {
@@ -489,12 +477,6 @@ public class TagCloud extends Canvas {
 					next += 5;
 				}
 			}
-		}
-		executors.shutdown();
-		try {
-			executors.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
 		}
 		Collections.sort(wordsToUse, (o1, o2) -> (o2.width * o2.height) - (o1.width * o1.height));
 		short i = 1;
@@ -596,7 +578,6 @@ public class TagCloud extends Canvas {
 		gc.setTextAntialias(SWT.ON);
 		gc.setBackground(getBackground());
 		gc.fillRectangle(tmpImage.getBounds());
-		executors = Executors.newFixedThreadPool(1);
 		int success = 0;
 		if (wordsToUse != null) {
 			double step = 100D / wordsToUse.size();
@@ -622,7 +603,7 @@ public class TagCloud extends Canvas {
 					r.height = word.y + word.height;
 				}
 				final Word wrd = word;
-				executors.execute(() -> drawWord(g, wrd, wrd.getColor()));
+				drawWord(g, wrd, wrd.getColor());
 				current += step;
 				if (current > next) {
 					next += 5;
@@ -631,12 +612,6 @@ public class TagCloud extends Canvas {
 					}
 				}
 
-			}
-			executors.shutdown();
-			try {
-				executors.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
 		gc.dispose();
@@ -752,10 +727,6 @@ public class TagCloud extends Canvas {
 		word.tree = new RectTree(new SmallRect(0, 0, cloudArea.width, cloudArea.height), accuracy);
 		calcWordExtents(word, mask);
 		word.tree.place(cloudMatrix, RectTree.BACKGROUND);
-	}
-
-	private static int getNumberOfThreads() {
-		return Runtime.getRuntime().availableProcessors();
 	}
 
 	/**
