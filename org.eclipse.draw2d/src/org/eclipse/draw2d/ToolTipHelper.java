@@ -57,18 +57,21 @@ public class ToolTipHelper extends PopUpHelper {
 	 * otherwise it will be painted directly above cursor.
 	 */
 	private Point computeWindowLocation(IFigure tip, int eventX, int eventY) {
-		org.eclipse.swt.graphics.Rectangle clientArea = control.getDisplay().getClientArea();
+		org.eclipse.swt.graphics.Rectangle clientArea = control.getMonitor().getClientArea();
+
 		Point preferredLocation = new Point(eventX, eventY + 26);
 
 		Dimension tipSize = getLightweightSystem().getRootFigure().getPreferredSize().getExpanded(getShellTrimSize());
 
 		// Adjust location if tip is going to fall outside display
-		if (preferredLocation.y + tipSize.height > clientArea.height) {
+		int clientRangeY = clientArea.height + clientArea.y;
+		if (preferredLocation.y + tipSize.height > clientRangeY) {
 			preferredLocation.y = eventY - tipSize.height;
 		}
 
-		if (preferredLocation.x + tipSize.width > clientArea.width) {
-			preferredLocation.x -= (preferredLocation.x + tipSize.width) - clientArea.width;
+		int clientRangeX = clientArea.width + clientArea.x;
+		if (preferredLocation.x + tipSize.width > clientRangeX) {
+			preferredLocation.x -= (preferredLocation.x + tipSize.width) - clientRangeX;
 		}
 
 		return preferredLocation;
