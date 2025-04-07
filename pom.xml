@@ -233,9 +233,10 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-				    <target>
+					<target>
 						<file>../target-platform/GEF_classic.target</file>
-					  </target>
+					</target>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 					<environments>
 						<environment>
 							<os>linux</os>
