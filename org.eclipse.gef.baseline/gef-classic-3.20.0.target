@@ -2,9 +2,14 @@
 <?pde version="3.8"?>
 <target name="GEF Classic 3.20.0 Base Line Target" sequenceNumber="1">
 <locations>
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.license.feature.group" version="2.0.2.v20181016-2210"/>
+		<repository location="http://download.eclipse.org/cbi/updates/license"/>
+	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="http://download.eclipse.org/releases/2024-06"/>
 		<unit id="org.eclipse.sdk.feature.group" version="4.32.0.v20240601-0610"/>
+		<unit id="org.eclipse.swtbot.eclipse.gef.feature.group" version="4.2.0.202405291350"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="https://download.eclipse.org/tools/gef/classic/release/3.20.0"/>

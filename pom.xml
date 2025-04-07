@@ -20,7 +20,8 @@
 		<surefire.timeout>300</surefire.timeout>
 		<asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.5.0</jruby.version>
-		<JDK>SYSTEM</JDK>
+		<target-platform>../target-platform/GEF_classic.target</target-platform>
+		<execution-environment>JavaSE-21</execution-environment>
 	</properties>
 
 	<build>
@@ -45,7 +46,6 @@
 					<log>xml</log>
 					<logDirectory>${project.build.directory}/ecj</logDirectory>
 					<showWarnings>true</showWarnings>
-					<useJDK>${JDK}</useJDK>
 				</configuration>
 			</plugin>
 			
@@ -234,9 +234,9 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<target>
-						<file>../target-platform/GEF_classic.target</file>
+						<file>${target-platform}</file>
 					</target>
-					<executionEnvironment>JavaSE-21</executionEnvironment>
+					<executionEnvironment>${execution-environment}</executionEnvironment>
 					<environments>
 						<environment>
 							<os>linux</os>
@@ -350,6 +350,18 @@
 				<modules>
 					<module>promotion</module>
 				</modules>
+			</profile>
+			<!-- Empty profile required for GitHub action -->
+			<profile>
+				<id>master</id>
+			</profile>
+			<profile>
+				<id>baseline</id>
+				<properties>
+					<target-platform>../org.eclipse.gef.baseline/gef-classic-3.20.0.target</target-platform>
+					<execution-environment>JavaSE-17</execution-environment>
+					<tycho.p2.baseline.skip>true</tycho.p2.baseline.skip>
+				</properties>
 			</profile>
 	</profiles>
 

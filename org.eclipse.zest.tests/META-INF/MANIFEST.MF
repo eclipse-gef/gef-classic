@@ -19,8 +19,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.zest.examples,
  org.eclipse.zest.layouts,
  org.junit,
- org.eclipse.swtbot.swt.finder;bundle-version="4.2.1"
+ org.eclipse.swtbot.swt.finder;bundle-version="[4.2.0,5.0.0)"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-21
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.eclipse.zest.tests
 
