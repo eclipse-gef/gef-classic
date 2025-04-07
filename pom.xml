@@ -75,32 +75,32 @@
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<executions>
-				  <execution>
-					<id>plugin-source</id>
-					<goals>
-					  <goal>plugin-source</goal>
-					</goals>
-				  </execution>
-				  <execution>
-					<id>feature-source</id>
-					<goals>
-					  <goal>feature-source</goal>
-					</goals>
-					<configuration>
-					  <excludes>
-						<!-- provide plug-ins not containing any source code -->
-						<plugin id="org.eclipse.draw2d.doc.isv" />
-						<plugin id="org.eclipse.gef.doc.isv" />
-						<plugin id="org.eclipse.zest.doc.isv" />
-						<!-- also possible to exclude feature-->
-						<feature id="org.eclipse.draw2d.source" />
-						<feature id="org.eclipse.gef.source" />
-						<feature id="org.eclipse.zest.source" />
-					  </excludes>
-					</configuration>
-				  </execution>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<!-- provide plug-ins not containing any source code -->
+								<plugin id="org.eclipse.draw2d.doc.isv" />
+								<plugin id="org.eclipse.gef.doc.isv" />
+								<plugin id="org.eclipse.zest.doc.isv" />
+								<!-- also possible to exclude feature-->
+								<feature id="org.eclipse.draw2d.source" />
+								<feature id="org.eclipse.gef.source" />
+								<feature id="org.eclipse.zest.source" />
+							</excludes>
+						</configuration>
+					</execution>
 				</executions>
-			  </plugin>
+			</plugin>
 			<plugin>
 				<!-- This is needed for source feature generation, as outlined in bug 
 					#398250 -->
@@ -318,39 +318,39 @@
 		<profile>
 			<id>eclipse-sign</id>
 			<build>
-			  <plugins>
-				<plugin>
-				  <groupId>org.eclipse.cbi.maven.plugins</groupId>
-				  <artifactId>eclipse-jarsigner-plugin</artifactId>
-				  <version>${cbi-plugins.version}</version>
-				  <executions>
-					<execution>
-					  <id>sign</id>
-					  <goals>
-						<goal>sign</goal>
-					  </goals>
-					  <phase>verify</phase>
-					</execution>
-				  </executions>
-				  <configuration>
-					<excludeInnerJars>${defaultSigning-excludeInnerJars}</excludeInnerJars>
-					<!--
-					 The default timeout is 0 seconds which means "wait forever": https://www.eclipse.org/cbi/sitedocs/eclipse-jarsigner-plugin/sign-mojo.html#timeoutMillis
-					 We don't want to wait until the build finally aborts, so, setting a timeout (see bug 507369).
-					 Increasing timeout from 60000 to 120000 (see bug 544823).
-					-->
-					<timeoutMillis>120000</timeoutMillis>
-				  </configuration>
-				</plugin>
-			  </plugins>
-			</build>
-		  </profile>
-		  <profile>
-			<id>promote</id>
-			<modules>
-				<module>promotion</module>
-			</modules>
-		  </profile>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.cbi.maven.plugins</groupId>
+						<artifactId>eclipse-jarsigner-plugin</artifactId>
+						<version>${cbi-plugins.version}</version>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>verify</phase>
+							</execution>
+						</executions>
+						<configuration>
+							<excludeInnerJars>${defaultSigning-excludeInnerJars}</excludeInnerJars>
+							<!--
+							 The default timeout is 0 seconds which means "wait forever": https://www.eclipse.org/cbi/sitedocs/eclipse-jarsigner-plugin/sign-mojo.html#timeoutMillis
+							 We don't want to wait until the build finally aborts, so, setting a timeout (see bug 507369).
+							 Increasing timeout from 60000 to 120000 (see bug 544823).
+							-->
+							<timeoutMillis>120000</timeoutMillis>
+							</configuration>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+			<profile>
+				<id>promote</id>
+				<modules>
+					<module>promotion</module>
+				</modules>
+			</profile>
 	</profiles>
 
 	<pluginRepositories>
