@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Google, Inc.
+ * Copyright (c) 2011, 2025 Google, Inc. and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -340,5 +340,27 @@ public class FigurePaintingTest extends BaseTestCase {
 		// check no reset state during setVisible() if visible not change
 		testFigure.setVisible(true);
 		actualLogger.assertEmpty();
+	}
+
+	/**
+	 * https://github.com/eclipse-gef/gef-classic/issues/721
+	 */
+	@Test
+	public void testConcurrentModificationOnRepair() {
+		testFigure = new TestFigure(actualLogger) {
+			@Override
+			public Rectangle getBounds() {
+				getUpdateManager().addDirtyRegion(new Figure(), new Rectangle(25, 25, 25, 25));
+				return bounds;
+			}
+		};
+		testFigure.setOpaque(true);
+		actualLogger.clear();
+
+		testFigure.getUpdateManager().addDirtyRegion(testFigure, new Rectangle(0, 0, 50, 50));
+		expectedLogger.log("repaint(0, 0, 50, 50)"); //$NON-NLS-1$
+		testFigure.getUpdateManager().performUpdate();
+		expectedLogger.log("repaint(25, 25, 25, 25)"); //$NON-NLS-1$
+		actualLogger.assertEquals(expectedLogger);
 	}
 }

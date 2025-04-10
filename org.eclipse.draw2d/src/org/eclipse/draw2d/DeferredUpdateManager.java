@@ -287,7 +287,12 @@ public class DeferredUpdateManager extends UpdateManager {
 	 * regions.
 	 */
 	protected void repairDamage() {
-		dirtyRegions.forEach((figure, contribution) -> {
+		// Any regions marked dirty while calculating
+		// the damage are processed in the next cycle
+		Map<IFigure, Rectangle> oldRegions = dirtyRegions;
+		dirtyRegions = new HashMap<>();
+
+		oldRegions.forEach((figure, contribution) -> {
 			IFigure walker = figure.getParent();
 			// A figure can't paint beyond its own bounds
 			contribution.intersect(figure.getBounds());
@@ -303,9 +308,7 @@ public class DeferredUpdateManager extends UpdateManager {
 			}
 		});
 
-		if (!dirtyRegions.isEmpty()) {
-			Map<IFigure, Rectangle> oldRegions = dirtyRegions;
-			dirtyRegions = new HashMap<>();
+		if (!oldRegions.isEmpty()) {
 			firePainting(damage, oldRegions);
 		}
 
