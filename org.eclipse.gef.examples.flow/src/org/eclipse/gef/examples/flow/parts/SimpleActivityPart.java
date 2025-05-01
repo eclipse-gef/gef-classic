@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -35,6 +35,7 @@ public class SimpleActivityPart extends ActivityPart {
 	@Override
 	public void contributeNodesToGraph(CompoundDirectedGraph graph, Subgraph s,
 			Map<AbstractGraphicalEditPart, Object> map) {
+		LayoutAnimator.getDefault().invalidate(getFigure());
 		Node n = new Node(this, s);
 		n.outgoingOffset = getAnchorOffset();
 		n.incomingOffset = getAnchorOffset();
@@ -51,6 +52,7 @@ public class SimpleActivityPart extends ActivityPart {
 	@Override
 	protected IFigure createFigure() {
 		Label l = new SimpleActivityLabel();
+		l.addLayoutListener(LayoutAnimator.getDefault());
 		l.setLabelAlignment(PositionConstants.LEFT);
 		l.setIcon(FlowImages.GEAR);
 		return l;

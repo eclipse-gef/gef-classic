@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,8 +12,10 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.flow.parts;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.Container;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -35,13 +37,16 @@ public class ActivityDiagramPart extends StructuredActivityPart {
 
 	CommandStackEventListener stackListener = event -> {
 		if ((event.getDetail() & CommandStack.POST_MASK) != 0) {
-			if (!GraphAnimation.captureLayout(getFigure())) {
+			if (!Animation.markBegin()) {
 				return;
 			}
-			while (GraphAnimation.step()) {
-				getFigure().getUpdateManager().performUpdate();
-			}
-			GraphAnimation.end();
+			Map<AbstractGraphicalEditPart, Object> partsToNodes = new HashMap<>();
+			CompoundDirectedGraph graph = new CompoundDirectedGraph();
+			// Invalidate all nodes and register them for animation
+			contributeNodesToGraph(graph, null, partsToNodes);
+			// Invalidate all edges and register them for animation
+			contributeEdgesToGraph(graph, partsToNodes);
+			Animation.run(230);
 		}
 	};
 
@@ -74,7 +79,7 @@ public class ActivityDiagramPart extends StructuredActivityPart {
 
 	@Override
 	protected IFigure createFigure() {
-		return new Container(new GraphLayoutManager(this)) {
+		IFigure activity = new Container(new GraphLayoutManager(this)) {
 			@Override
 			public void setBounds(Rectangle rect) {
 				int x = bounds.x;
@@ -99,6 +104,8 @@ public class ActivityDiagramPart extends StructuredActivityPart {
 				}
 			}
 		};
+		activity.addLayoutListener(LayoutAnimator.getDefault());
+		return activity;
 	}
 
 	/**

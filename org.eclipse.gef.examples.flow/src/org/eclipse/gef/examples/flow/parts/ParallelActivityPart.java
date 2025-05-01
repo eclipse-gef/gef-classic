@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,7 +24,9 @@ public class ParallelActivityPart extends StructuredActivityPart {
 
 	@Override
 	protected IFigure createFigure() {
-		return new ParallelActivityFigure();
+		IFigure activity = new ParallelActivityFigure();
+		activity.addLayoutListener(LayoutAnimator.getDefault());
+		return activity;
 	}
 
 	/**

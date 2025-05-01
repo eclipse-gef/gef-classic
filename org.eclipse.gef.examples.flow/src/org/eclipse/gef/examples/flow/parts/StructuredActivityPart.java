@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -77,7 +77,7 @@ public abstract class StructuredActivityPart extends ActivityPart implements Nod
 	@Override
 	public void contributeNodesToGraph(CompoundDirectedGraph graph, Subgraph s,
 			Map<AbstractGraphicalEditPart, Object> map) {
-		GraphAnimation.recordInitialState(getContentPane());
+		LayoutAnimator.getDefault().invalidate(getFigure());
 		Subgraph me = new Subgraph(this, s);
 		me.outgoingOffset = 5;
 		me.incomingOffset = 5;

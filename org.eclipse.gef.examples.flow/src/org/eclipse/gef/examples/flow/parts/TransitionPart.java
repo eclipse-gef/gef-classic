@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.eclipse.draw2d.AbsoluteBendpoint;
 import org.eclipse.draw2d.BendpointConnectionRouter;
-import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
@@ -80,15 +79,8 @@ public class TransitionPart extends AbstractConnectionEditPart {
 	@Override
 	protected IFigure createFigure() {
 		PolylineConnection conn = (PolylineConnection) super.createFigure();
-		conn.setConnectionRouter(new BendpointConnectionRouter() {
-			@Override
-			public void route(Connection conn) {
-				GraphAnimation.recordInitialState(conn);
-				if (!GraphAnimation.playbackState(conn)) {
-					super.route(conn);
-				}
-			}
-		});
+		conn.addRoutingListener(RoutingAnimator.getDefault());
+		conn.setConnectionRouter(new BendpointConnectionRouter());
 
 		conn.setTargetDecoration(new PolygonDecoration());
 		return conn;
@@ -108,7 +100,7 @@ public class TransitionPart extends AbstractConnectionEditPart {
 	}
 
 	public void contributeToGraph(CompoundDirectedGraph graph, Map<AbstractGraphicalEditPart, Object> map) {
-		GraphAnimation.recordInitialState(getConnectionFigure());
+		RoutingAnimator.getDefault().invalidate(getConnectionFigure());
 		Node source = (Node) map.get(getSource());
 		Node target = (Node) map.get(getTarget());
 		Edge e = new Edge(this, source, target);
