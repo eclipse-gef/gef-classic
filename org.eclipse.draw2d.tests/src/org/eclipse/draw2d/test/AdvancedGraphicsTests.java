@@ -13,8 +13,6 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -140,9 +138,6 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 	@Test
 	public void testAntialias() {
-		assumeFalse("gtk".equals(SWT.getPlatform()), //$NON-NLS-1$
-				"Requires https://github.com/eclipse-platform/eclipse.platform.swt/pull/1839"); //$NON-NLS-1$
-
 		class AntialiasSettings implements Runnable {
 			private final Color color;
 			private final int normal;
