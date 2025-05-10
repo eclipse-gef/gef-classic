@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -26,9 +25,8 @@ public class LabelFeedbackFigure extends BentCornerFigure {
 	protected void paintFigure(Graphics graphics) {
 		Rectangle rect = getBounds().getCopy();
 
-		graphics.setXORMode(true);
-		graphics.setForegroundColor(ColorConstants.white);
-		graphics.setBackgroundColor(LogicColorConstants.ghostFillColor);
+		graphics.setBackgroundColor(LogicColorConstants.feedbackFill);
+		graphics.setForegroundColor(LogicColorConstants.feedbackOutline);
 
 		graphics.translate(getLocation());
 
