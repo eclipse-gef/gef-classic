@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2024 IBM Corporation and others.
+ * Copyright (c) 2004, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -134,6 +134,7 @@ public class FlyoutPaletteComposite extends Composite {
 	private PaletteViewer externalViewer;
 	private IMemento capturedPaletteState;
 	private Control graphicalControl;
+	private final Control customArea;
 	private final Composite sash;
 	private final PaletteViewerProvider provider;
 	private final FlyoutPreferences prefs;
@@ -187,6 +188,7 @@ public class FlyoutPaletteComposite extends Composite {
 		provider = pvProvider;
 		prefs = preferences;
 		sash = createSash();
+		customArea = createCustomArea();
 		paletteContainer = createPaletteContainer();
 		hookIntoWorkbench(page.getWorkbenchWindow());
 
@@ -221,6 +223,28 @@ public class FlyoutPaletteComposite extends Composite {
 				prefs.setPaletteState(paletteState);
 			}
 		});
+	}
+
+	/**
+	 * Creates and returns the contents of an area which appears to the right (if
+	 * the palette is docked west) or to the left (if the palette is docked east) of
+	 * the sash.
+	 * <p>
+	 * The default implementation of this method returns {@code null}. Subclasses
+	 * may override.
+	 * </p>
+	 *
+	 * @since 3.21
+	 */
+	protected Control createCustomArea() {
+		Composite c = new Composite(this, SWT.NONE) {
+			@Override
+			public Point computeSize(int wHint, int hHint, boolean changed) {
+				return new Point(15, -1);
+			}
+		};
+		c.setBackground(ColorConstants.darkGreen);
+		return c;
 	}
 
 	private void addListenerToCtrlHierarchy(Control parent, int eventType, Listener listener) {
@@ -331,6 +355,11 @@ public class FlyoutPaletteComposite extends Composite {
 			return;
 		}
 
+		int customWidth = 0;
+		if (customArea != null) {
+			customWidth = customArea.computeSize(-1, -1).x;
+		}
+
 		int sashWidth = sash.computeSize(-1, -1).x;
 		int pWidth = paletteWidth;
 		int maxWidth = Math.min(area.width / 2, MAX_PALETTE_SIZE);
@@ -357,13 +386,16 @@ public class FlyoutPaletteComposite extends Composite {
 			setRedraw(false);
 		}
 		if (isInState(STATE_HIDDEN)) {
+			if (customArea != null) {
+				customArea.setVisible(false);
+			}
 			sash.setVisible(false);
 			paletteContainer.setVisible(false);
 			graphicalControl.setBounds(area);
 		} else if (dock == PositionConstants.EAST) {
-			layoutComponentsEast(area, sashWidth, pWidth);
+			layoutComponentsEast(area, sashWidth, pWidth, customWidth);
 		} else {
-			layoutComponentsWest(area, sashWidth, pWidth);
+			layoutComponentsWest(area, sashWidth, pWidth, customWidth);
 		}
 		sash.layout();
 		// #65892 see above
@@ -373,12 +405,15 @@ public class FlyoutPaletteComposite extends Composite {
 		update();
 	}
 
-	private void layoutComponentsEast(Rectangle area, int sashWidth, int pWidth) {
+	private void layoutComponentsEast(Rectangle area, int sashWidth, int pWidth, int customWidth) {
 		if (isInState(STATE_COLLAPSED)) {
 			paletteContainer.setVisible(false);
 			sash.setBounds(area.x + area.width - sashWidth, area.y, sashWidth, area.height);
 			sash.setVisible(true);
 			graphicalControl.setBounds(area.x, area.y, area.width - sashWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(false);
+			}
 		} else if (isInState(STATE_EXPANDED)) {
 			paletteContainer.moveAbove(graphicalControl);
 			sash.moveAbove(paletteContainer);
@@ -387,21 +422,35 @@ public class FlyoutPaletteComposite extends Composite {
 			sash.setVisible(true);
 			paletteContainer.setVisible(true);
 			graphicalControl.setBounds(area.x, area.y, area.width - sashWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(true);
+				customArea.setBounds(area.x + area.width - pWidth - sashWidth - customWidth, area.y, customWidth,
+						area.height);
+				customArea.moveAbove(sash);
+			}
 		} else if (isInState(STATE_PINNED_OPEN)) {
 			sash.setBounds(area.x + area.width - pWidth - sashWidth, area.y, sashWidth, area.height);
 			paletteContainer.setBounds(area.x + area.width - pWidth, area.y, pWidth, area.height);
 			sash.setVisible(true);
 			paletteContainer.setVisible(true);
-			graphicalControl.setBounds(area.x, area.y, area.width - sashWidth - pWidth, area.height);
+			graphicalControl.setBounds(area.x, area.y, area.width - sashWidth - pWidth - customWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(true);
+				customArea.setBounds(area.x + area.width - pWidth - sashWidth - customWidth, area.y, customWidth,
+						area.height);
+			}
 		}
 	}
 
-	private void layoutComponentsWest(Rectangle area, int sashWidth, int pWidth) {
+	private void layoutComponentsWest(Rectangle area, int sashWidth, int pWidth, int customWidth) {
 		if (isInState(STATE_COLLAPSED)) {
 			paletteContainer.setVisible(false);
 			sash.setBounds(area.x, area.y, sashWidth, area.height);
 			sash.setVisible(true);
 			graphicalControl.setBounds(area.x + sashWidth, area.y, area.width - sashWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(false);
+			}
 		} else if (isInState(STATE_EXPANDED)) {
 			paletteContainer.setVisible(true);
 			paletteContainer.moveAbove(graphicalControl);
@@ -410,13 +459,22 @@ public class FlyoutPaletteComposite extends Composite {
 			paletteContainer.setBounds(area.x, area.y, pWidth, area.height);
 			sash.setVisible(true);
 			graphicalControl.setBounds(area.x + sashWidth, area.y, area.width - sashWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(true);
+				customArea.setBounds(area.x + pWidth + sashWidth, area.y, customWidth, area.height);
+				customArea.moveAbove(sash);
+			}
 		} else if (isInState(STATE_PINNED_OPEN)) {
 			paletteContainer.setVisible(true);
 			sash.setBounds(area.x + pWidth, area.y, sashWidth, area.height);
 			paletteContainer.setBounds(area.x, area.y, pWidth, area.height);
 			sash.setVisible(true);
-			graphicalControl.setBounds(area.x + pWidth + sashWidth, area.y, area.width - sashWidth - pWidth,
-					area.height);
+			graphicalControl.setBounds(area.x + pWidth + sashWidth + customWidth, area.y,
+					area.width - sashWidth - pWidth - customWidth, area.height);
+			if (customArea != null) {
+				customArea.setVisible(true);
+				customArea.setBounds(area.x + pWidth + sashWidth, area.y, customWidth, area.height);
+			}
 		}
 	}
 
