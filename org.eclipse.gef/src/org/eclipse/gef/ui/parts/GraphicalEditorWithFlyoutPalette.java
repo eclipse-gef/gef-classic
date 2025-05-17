@@ -129,7 +129,7 @@ public abstract class GraphicalEditorWithFlyoutPalette extends GraphicalEditor {
 	 */
 	@SuppressWarnings("static-method")
 	protected FlyoutPreferences getPalettePreferences() {
-		return FlyoutPaletteComposite.createFlyoutPreferences(InternalGEFPlugin.getDefault().getPluginPreferences());
+		return FlyoutPaletteComposite.createFlyoutPreferences(InternalGEFPlugin.getDefault().getPreferenceStore());
 	}
 
 	/**

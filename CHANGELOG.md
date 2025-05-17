@@ -22,6 +22,8 @@
 ## GEF
 
  - When used with SWT 3.130.0 or newer, the `org.eclipse.swt.svg` bundle (or similar) is required.
+ - FlyoutPaletteComposite: createFlyoutPreferences(Preferences) has been marked for removal.
+   Please use createFlyoutPreferences(IPreferenceStore) instead.
 
 ## Zest
 

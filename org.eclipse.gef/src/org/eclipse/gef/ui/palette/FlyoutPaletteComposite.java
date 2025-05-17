@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2024 IBM Corporation and others.
+ * Copyright (c) 2004, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,8 @@ package org.eclipse.gef.ui.palette;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.ACC;
@@ -52,6 +54,7 @@ import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
@@ -264,10 +267,25 @@ public class FlyoutPaletteComposite extends Composite {
 	 * @param prefs {@link Plugin#getPluginPreferences() a plugin's Preferences}
 	 * @return a default implementation of FlyoutPreferences that stores the
 	 *         settings in the given Preferences
+	 * @deprecated Use {@link #createFlyoutPreferences(IPreferenceStore)} instead.
+	 *             This method will be removed after the 2027-06 release.
 	 * @since 3.2
 	 */
+	@Deprecated(forRemoval = true, since = "3.22.0")
 	public static FlyoutPreferences createFlyoutPreferences(Preferences prefs) {
-		return new DefaultFlyoutPreferences(prefs);
+		return new DefaultFlyoutPreferences(prefs::getInt, prefs::setValue);
+	}
+
+	/**
+	 * This is a convenient method to get a default FlyoutPreferences object.
+	 *
+	 * @param prefs an {@link IPreferenceStore}
+	 * @return a default implementation of FlyoutPreferences that stores the
+	 *         settings in the given Preferences
+	 * @since 3.22
+	 */
+	public static FlyoutPreferences createFlyoutPreferences(IPreferenceStore prefs) {
+		return new DefaultFlyoutPreferences(prefs::getInt, prefs::setValue);
 	}
 
 	private Composite createPaletteContainer() {
@@ -1505,40 +1523,42 @@ public class FlyoutPaletteComposite extends Composite {
 		private static final String PALETTE_SIZE = "org.eclipse.gef.psize"; //$NON-NLS-1$
 		private static final String PALETTE_STATE = "org.eclipse.gef.pstate"; //$NON-NLS-1$
 
-		private final Preferences prefs;
+		private final Function<String, Integer> getter;
+		private final BiConsumer<String, Integer> setter;
 
-		private DefaultFlyoutPreferences(Preferences preferences) {
-			prefs = preferences;
+		private DefaultFlyoutPreferences(Function<String, Integer> getter, BiConsumer<String, Integer> setter) {
+			this.getter = getter;
+			this.setter = setter;
 		}
 
 		@Override
 		public int getDockLocation() {
-			return prefs.getInt(PALETTE_DOCK_LOCATION);
+			return getter.apply(PALETTE_DOCK_LOCATION);
 		}
 
 		@Override
 		public int getPaletteState() {
-			return prefs.getInt(PALETTE_STATE);
+			return getter.apply(PALETTE_STATE);
 		}
 
 		@Override
 		public int getPaletteWidth() {
-			return prefs.getInt(PALETTE_SIZE);
+			return getter.apply(PALETTE_SIZE);
 		}
 
 		@Override
 		public void setDockLocation(int location) {
-			prefs.setValue(PALETTE_DOCK_LOCATION, location);
+			setter.accept(PALETTE_DOCK_LOCATION, location);
 		}
 
 		@Override
 		public void setPaletteState(int state) {
-			prefs.setValue(PALETTE_STATE, state);
+			setter.accept(PALETTE_STATE, state);
 		}
 
 		@Override
 		public void setPaletteWidth(int width) {
-			prefs.setValue(PALETTE_SIZE, width);
+			setter.accept(PALETTE_SIZE, width);
 		}
 	}
 
