@@ -14,6 +14,7 @@
 package org.eclipse.zest.tests.examples;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.invoke.VarHandle;
@@ -26,9 +27,6 @@ import org.eclipse.zest.core.viewers.IGraphContentProvider;
 import org.eclipse.zest.core.viewers.IGraphEntityContentProvider;
 import org.eclipse.zest.core.viewers.INestedContentProvider;
 import org.eclipse.zest.core.widgets.Graph;
-import org.eclipse.zest.core.widgets.GraphConnection;
-import org.eclipse.zest.core.widgets.GraphContainer;
-import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.internal.ContainerFigure;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet1;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet2;
@@ -39,6 +37,9 @@ import org.eclipse.zest.examples.jface.GraphJFaceSnippet6;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet7;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet8;
 import org.eclipse.zest.examples.uml.UMLClassFigure;
+import org.eclipse.zest.tests.utils.SWTBotGraphConnection;
+import org.eclipse.zest.tests.utils.SWTBotGraphContainer;
+import org.eclipse.zest.tests.utils.SWTBotGraphNode;
 import org.eclipse.zest.tests.utils.Snippet;
 
 import org.junit.jupiter.api.Test;
@@ -74,15 +75,15 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet1.class)
 	public void testGraphJFaceSnippet1() {
-		assertNode(graph.getNodes().get(0), "First");
-		assertNode(graph.getNodes().get(1), "Second");
-		assertNode(graph.getNodes().get(2), "Third");
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getNode("First"));
+		assertNotNull(graphRobot.getNode("Second"));
+		assertNotNull(graphRobot.getNode("Third"));
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		assertConnection(graph.getConnections().get(0), "Second", "Third");
-		assertConnection(graph.getConnections().get(1), "Third", "First");
-		assertConnection(graph.getConnections().get(2), "First", "Second");
-		assertEquals(graph.getConnections().size(), 3);
+		assertNotNull(graphRobot.getConnection("Second", "Third"));
+		assertNotNull(graphRobot.getConnection("Third", "First"));
+		assertNotNull(graphRobot.getConnection("First", "Second"));
+		assertEquals(graphRobot.getConnections().size(), 3);
 	}
 
 	/**
@@ -92,19 +93,22 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet2.class)
 	public void testGraphJFaceSnippet2() {
-		assertNode(graph.getNodes().get(0), "Paper");
-		assertNode(graph.getNodes().get(1), "Rock");
-		assertNode(graph.getNodes().get(2), "Scissors");
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getNode("Paper"));
+		assertNotNull(graphRobot.getNode("Rock"));
+		assertNotNull(graphRobot.getNode("Scissors"));
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		GraphConnection connection1 = graph.getConnections().get(0);
-		GraphConnection connection2 = graph.getConnections().get(1);
-		GraphConnection connection3 = graph.getConnections().get(2);
-		assertEquals(graph.getConnections().size(), 3);
+		SWTBotGraphConnection connection1 = graphRobot.getConnection(0);
+		SWTBotGraphConnection connection2 = graphRobot.getConnection(1);
+		SWTBotGraphConnection connection3 = graphRobot.getConnection(2);
+		assertEquals(graphRobot.getConnections().size(), 3);
 
-		assertConnection(connection1, "Paper", "Rock");
-		assertConnection(connection2, "Scissors", "Paper");
-		assertConnection(connection3, "Rock", "Scissors");
+		assertEquals(connection1.getSource().getText(), "Paper");
+		assertEquals(connection1.getDestination().getText(), "Rock");
+		assertEquals(connection2.getSource().getText(), "Scissors");
+		assertEquals(connection2.getDestination().getText(), "Paper");
+		assertEquals(connection3.getSource().getText(), "Rock");
+		assertEquals(connection3.getDestination().getText(), "Scissors");
 
 		assertEquals(connection1.getText(), "Rock2Paper");
 		assertEquals(connection2.getText(), "Paper2Scissors");
@@ -118,8 +122,8 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Snippet(type = GraphJFaceSnippet3.class)
 	public void testGraphJFaceSnippet3() {
 		// Explicitly checking 30 nodes and 29 connections is just busy work...
-		assertEquals(graph.getNodes().size(), 30);
-		assertEquals(graph.getConnections().size(), 29);
+		assertEquals(graphRobot.getNodes().size(), 30);
+		assertEquals(graphRobot.getConnections().size(), 29);
 	}
 
 	/**
@@ -128,19 +132,22 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet4.class)
 	public void testGraphJFaceSnippet4() {
-		assertNode(graph.getNodes().get(0), "Paper");
-		assertNode(graph.getNodes().get(1), "Rock");
-		assertNode(graph.getNodes().get(2), "Scissors");
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getNode("Paper"));
+		assertNotNull(graphRobot.getNode("Rock"));
+		assertNotNull(graphRobot.getNode("Scissors"));
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		GraphConnection connection1 = graph.getConnections().get(0);
-		GraphConnection connection2 = graph.getConnections().get(1);
-		GraphConnection connection3 = graph.getConnections().get(2);
-		assertEquals(graph.getConnections().size(), 3);
+		SWTBotGraphConnection connection1 = graphRobot.getConnection(0);
+		SWTBotGraphConnection connection2 = graphRobot.getConnection(1);
+		SWTBotGraphConnection connection3 = graphRobot.getConnection(2);
+		assertEquals(graphRobot.getConnections().size(), 3);
 
-		assertConnection(connection1, "Paper", "Rock");
-		assertConnection(connection2, "Scissors", "Paper");
-		assertConnection(connection3, "Rock", "Scissors");
+		assertEquals(connection1.getSource().getText(), "Paper");
+		assertEquals(connection1.getDestination().getText(), "Rock");
+		assertEquals(connection2.getSource().getText(), "Scissors");
+		assertEquals(connection2.getDestination().getText(), "Paper");
+		assertEquals(connection3.getSource().getText(), "Rock");
+		assertEquals(connection3.getDestination().getText(), "Scissors");
 
 		assertEquals(connection1.getText(), "Rock2Paper");
 		assertEquals(connection2.getText(), "Paper2Scissors");
@@ -154,8 +161,8 @@ public class GraphJFaceTests extends AbstractGraphTest {
 			selection.set(data);
 		});
 
-		for (GraphNode node : graph.getNodes()) {
-			robot.select(node);
+		for (SWTBotGraphNode node : graphRobot.getNodes()) {
+			graphRobot.select(node);
 			assertEquals(node.getData(), selection.get());
 		}
 	}
@@ -166,19 +173,19 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet5.class)
 	public void testGraphJFaceSnippet5() {
-		assertConnection(graph.getConnections().get(0), "Paper", "Rock");
-		assertConnection(graph.getConnections().get(1), "Scissors", "Paper");
-		assertConnection(graph.getConnections().get(2), "Rock", "Scissors");
-		assertEquals(graph.getConnections().size(), 3);
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getConnection("Paper", "Rock"));
+		assertNotNull(graphRobot.getConnection("Scissors", "Paper"));
+		assertNotNull(graphRobot.getConnection("Rock", "Scissors"));
+		assertEquals(graphRobot.getConnections().size(), 3);
+		assertEquals(graphRobot.getNodes().size(), 3);
 
 		robot.button("Refresh").click();
 
-		assertConnection(graph.getConnections().get(0), "Paper", "Rock");
-		assertConnection(graph.getConnections().get(1), "Scissors", "Paper");
-		assertConnection(graph.getConnections().get(2), "Rock", "Scissors");
-		assertEquals(graph.getConnections().size(), 3);
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getConnection("Paper", "Rock"));
+		assertNotNull(graphRobot.getConnection("Scissors", "Paper"));
+		assertNotNull(graphRobot.getConnection("Rock", "Scissors"));
+		assertEquals(graphRobot.getConnections().size(), 3);
+		assertEquals(graphRobot.getNodes().size(), 3);
 	}
 
 	/**
@@ -187,23 +194,23 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet6.class)
 	public void testGraphJFaceSnippet6() {
-		assertNode(graph.getNodes().get(0), "First");
-		assertNode(graph.getNodes().get(1), "Second");
-		assertNode(graph.getNodes().get(2), "Third");
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getNode("First"));
+		assertNotNull(graphRobot.getNode("Second"));
+		assertNotNull(graphRobot.getNode("Third"));
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		GraphContainer container = (GraphContainer) graph.getNodes().get(0);
-		assertNode(container.getNodes().get(0), "Rock");
-		assertNode(container.getNodes().get(1), "Paper");
-		assertNode(container.getNodes().get(2), "Scissors");
+		SWTBotGraphContainer container = (SWTBotGraphContainer) graphRobot.getNode(0);
+		container.getNode("Rock");
+		container.getNode("Paper");
+		container.getNode("Scissors");
 		assertEquals(container.getNodes().size(), 3);
 
-		assertConnection(graph.getConnections().get(0), "Rock", "Paper");
-		assertConnection(graph.getConnections().get(1), "Second", "Third");
-		assertConnection(graph.getConnections().get(2), "Second", "Rock");
-		assertConnection(graph.getConnections().get(3), "Third", "First");
-		assertConnection(graph.getConnections().get(4), "First", "Second");
-		assertEquals(graph.getConnections().size(), 5);
+		assertNotNull(graphRobot.getConnection("Rock", "Paper"));
+		assertNotNull(graphRobot.getConnection("Second", "Third"));
+		assertNotNull(graphRobot.getConnection("Second", "Rock"));
+		assertNotNull(graphRobot.getConnection("Third", "First"));
+		assertNotNull(graphRobot.getConnection("First", "Second"));
+		assertEquals(graphRobot.getConnections().size(), 5);
 	}
 
 	/**
@@ -212,9 +219,9 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet7.class)
 	public void testGraphJFaceSnippet7() {
-		GraphNode node1 = graph.getNodes().get(0);
-		GraphNode node2 = graph.getNodes().get(1);
-		GraphNode node3 = graph.getNodes().get(2);
+		SWTBotGraphNode node1 = graphRobot.getNode(0);
+		SWTBotGraphNode node2 = graphRobot.getNode(1);
+		SWTBotGraphNode node3 = graphRobot.getNode(2);
 
 		assertInstanceOf(node1.getNodeFigure(), ContainerFigure.class);
 		assertInstanceOf(node2.getNodeFigure(), UMLClassFigure.class);
@@ -227,27 +234,31 @@ public class GraphJFaceTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = GraphJFaceSnippet8.class)
 	public void testGraphJFaceSnippet8() throws ReflectiveOperationException {
-		assertNode(graph.getNodes().get(0), "First");
-		assertNode(graph.getNodes().get(1), "Second");
-		assertNode(graph.getNodes().get(2), "Third");
-		assertEquals(graph.getNodes().size(), 3);
+		assertNotNull(graphRobot.getNode("First"));
+		assertNotNull(graphRobot.getNode("Second"));
+		assertNotNull(graphRobot.getNode("Third"));
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		GraphConnection connection1 = graph.getConnections().get(0);
-		GraphConnection connection2 = graph.getConnections().get(1);
-		GraphConnection connection3 = graph.getConnections().get(2);
-		GraphConnection connection4 = graph.getConnections().get(3);
-		assertEquals(graph.getConnections().size(), 4);
+		SWTBotGraphConnection connection1 = graphRobot.getConnection(0);
+		SWTBotGraphConnection connection2 = graphRobot.getConnection(1);
+		SWTBotGraphConnection connection3 = graphRobot.getConnection(2);
+		SWTBotGraphConnection connection4 = graphRobot.getConnection(3);
+		assertEquals(graphRobot.getConnections().size(), 4);
 
-		assertConnection(connection1, "Third", "Second");
-		assertConnection(connection2, "Second", "Third");
-		assertConnection(connection3, "First", "First");
-		assertConnection(connection4, "First", "Second");
+		assertEquals(connection1.getSource().getText(), "Third");
+		assertEquals(connection1.getDestination().getText(), "Second");
+		assertEquals(connection2.getSource().getText(), "Second");
+		assertEquals(connection2.getDestination().getText(), "Third");
+		assertEquals(connection3.getSource().getText(), "First");
+		assertEquals(connection3.getDestination().getText(), "First");
+		assertEquals(connection4.getSource().getText(), "First");
+		assertEquals(connection4.getDestination().getText(), "Second");
 
 		assertCurve(connection1, 20);
 		assertCurve(connection2, 20);
 		assertCurve(connection3, 40);
 		assertCurve(connection4, 0);
 
-		assertNoOverlap(graph);
+		assertNoOverlap(graphRobot);
 	}
 }

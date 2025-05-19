@@ -19,11 +19,11 @@ import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.invoke.VarHandle;
 
 import org.eclipse.zest.core.widgets.Graph;
-import org.eclipse.zest.core.widgets.GraphContainer;
-import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.internal.ContainerFigure;
 import org.eclipse.zest.examples.uml.UMLClassFigure;
 import org.eclipse.zest.examples.uml.UMLExample;
+import org.eclipse.zest.tests.utils.SWTBotGraphContainer;
+import org.eclipse.zest.tests.utils.SWTBotGraphNode;
 import org.eclipse.zest.tests.utils.Snippet;
 
 import org.junit.jupiter.api.Test;
@@ -58,24 +58,24 @@ public class GraphUMLTests extends AbstractGraphTest {
 	@Test
 	@Snippet(type = UMLExample.class)
 	public void testUMLExample() {
-		GraphNode node1 = graph.getNodes().get(0);
-		GraphNode node2 = graph.getNodes().get(1);
-		GraphNode node3 = graph.getNodes().get(2);
-		assertEquals(graph.getNodes().size(), 3);
+		SWTBotGraphNode node1 = graphRobot.getNode(0);
+		SWTBotGraphNode node2 = graphRobot.getNode(1);
+		SWTBotGraphNode node3 = graphRobot.getNode(2);
+		assertEquals(graphRobot.getNodes().size(), 3);
 
-		assertNode(node1, "A UML Container");
-		assertNode(node2, "");
-		assertNode(node3, "");
+		assertEquals(node1.getText(), "A UML Container");
+		assertEquals(node2.getText(), "");
+		assertEquals(node3.getText(), "");
 
 		assertInstanceOf(node1.getNodeFigure(), ContainerFigure.class);
 		assertInstanceOf(node2.getNodeFigure(), UMLClassFigure.class);
 		assertInstanceOf(node3.getNodeFigure(), UMLClassFigure.class);
 
-		GraphContainer graphContainer = (GraphContainer) node1;
-		GraphNode node4 = graphContainer.getNodes().get(0);
+		SWTBotGraphContainer graphContainer = (SWTBotGraphContainer) graphRobot.getNode(0);
+		SWTBotGraphNode node4 = graphContainer.getNode(0);
 		assertEquals(graphContainer.getNodes().size(), 1);
 
-		assertNode(node4, "");
+		assertEquals(node4.getText(), "");
 		assertInstanceOf(node4.getNodeFigure(), UMLClassFigure.class);
 	}
 }

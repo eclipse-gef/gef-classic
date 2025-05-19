@@ -16,6 +16,7 @@ package org.eclipse.zest.tests.examples;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
@@ -32,14 +33,18 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
-import org.eclipse.zest.core.widgets.IContainer;
 import org.eclipse.zest.core.widgets.internal.GraphLabel;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 import org.eclipse.zest.tests.examples.AbstractGraphTest.SWTBotExtension;
-import org.eclipse.zest.tests.utils.GraphicalRobot;
+import org.eclipse.zest.tests.utils.ISWTBotGraphContainer;
+import org.eclipse.zest.tests.utils.SWTBotGraph;
+import org.eclipse.zest.tests.utils.SWTBotGraphConnection;
+import org.eclipse.zest.tests.utils.SWTBotGraphNode;
 import org.eclipse.zest.tests.utils.Snippet;
 
 import org.eclipse.draw2d.EventDispatcher;
@@ -53,6 +58,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.InvocationInterceptor;
@@ -64,8 +70,10 @@ import org.junit.jupiter.api.extension.ReflectiveInvocationContext;
  */
 @ExtendWith(SWTBotExtension.class)
 public abstract class AbstractGraphTest {
-	protected Graph graph;
-	protected GraphicalRobot robot;
+	private Graph graph;
+	private Shell shell;
+	protected SWTBot robot;
+	protected SWTBotGraph graphRobot;
 
 	public static class SWTBotExtension implements InvocationInterceptor {
 		@Override
@@ -78,6 +86,13 @@ public abstract class AbstractGraphTest {
 				Objects.requireNonNull(annotation, "Test is missing @Snippet annotation."); //$NON-NLS-1$
 				testObject.doTest(annotation, invocation);
 			}
+		}
+	}
+
+	@AfterEach
+	public void tearDown() {
+		if (shell != null) {
+			UIThreadRunnable.syncExec(shell::dispose);
 		}
 	}
 
@@ -95,6 +110,13 @@ public abstract class AbstractGraphTest {
 	 * @throws Throwable If the example could not be instantiated.
 	 */
 	private void doTest(Snippet annotation, Invocation<Void> statement) throws Throwable {
+		if (Display.getCurrent() != null) {
+			fail("""
+					SWTBot test needs to run in a non-UI thread.
+					Make sure that "Run in UI thread" is unchecked in your launch configuration or that useUIThread is set to false in the pom.xml
+					"""); //$NON-NLS-1$
+		}
+
 		Class<?> clazz = annotation.type();
 
 		Semaphore lock = new Semaphore(0);
@@ -107,43 +129,48 @@ public abstract class AbstractGraphTest {
 		// Fail early, otherwise the example might block indefinitely
 		Assert.isTrue(hasGraph(lookup, annotation), "Graph object not found for " + clazz); //$NON-NLS-1$
 
-		// The actual test has to be executed asynchronously, so that it is run as part
-		// of the readAndDispatch() call. Otherwise we end up in a deadlock, as both
-		// snippet and test run in the UI thread.
-		Display.getCurrent().asyncExec(() -> {
-			Shell shell = null;
-			try {
-				graph = getGraph(lookup, annotation);
+		// Create snippet
+		Display.getDefault().asyncExec(() -> {
+			// Non-Blocking! Executed after the widget has been created
+			Display.getCurrent().asyncExec(() -> {
+				try {
+					graph = getGraph(lookup, annotation);
 
-				// Make sure the layout is reproducible
-				if (graph.getLayoutAlgorithm() instanceof SpringLayoutAlgorithm springLayout) {
-					springLayout.setRandom(annotation.random());
+					// Make sure the layout is reproducible
+					if (graph.getLayoutAlgorithm() instanceof SpringLayoutAlgorithm springLayout) {
+						springLayout.setRandom(annotation.random());
+					}
+
+					graphRobot = new SWTBotGraph(graph);
+					shell = graph.getShell();
+					robot = new SWTBot(shell);
+					// Wait for layout to be applied
+					waitEventLoop(10);
+				} catch (Throwable e) {
+					throwable.set(e);
+				} finally {
+					lock.release();
 				}
-
-				robot = new GraphicalRobot(graph);
-				shell = graph.getShell();
-				// Wait for layout to be applied
-				waitEventLoop(10);
-				// Run the actual test
-				statement.proceed();
+			});
+			// Blocking! Creates the snippet
+			try {
+				methodHandle.invoke(null);
 			} catch (Throwable e) {
 				throwable.set(e);
 			} finally {
-				// Close the snippet
-				if (shell != null) {
-					shell.dispose();
-				}
 				lock.release();
 			}
 		});
 
-		methodHandle.invoke(null);
-		// Wait for asynchronous test execution
+		// Wait for shell to be created
 		lock.acquire();
 		// Propagate any errors
 		if (throwable.get() != null) {
 			throw throwable.get();
 		}
+
+		// Run the actual test
+		statement.proceed();
 	}
 
 	/**
@@ -174,7 +201,7 @@ public abstract class AbstractGraphTest {
 	 *
 	 * @return The Euclidean length of the given {@code connection}.
 	 */
-	protected static double getLength(GraphConnection connection) {
+	protected static double getLength(SWTBotGraphConnection connection) {
 		Point c1 = getCenter(connection.getSource());
 		Point c2 = getCenter(connection.getDestination());
 		int x = c1.x - c2.x;
@@ -197,7 +224,7 @@ public abstract class AbstractGraphTest {
 	 *
 	 * @return The center of the given {@code node}.
 	 */
-	protected static Point getCenter(GraphNode node) {
+	protected static Point getCenter(SWTBotGraphNode node) {
 		Point location = node.getLocation();
 		Dimension size = node.getSize();
 		return new Rectangle(location, size).getCenter();
@@ -264,28 +291,29 @@ public abstract class AbstractGraphTest {
 	 * Asserts that the given {@code connection} uses a {@link PolylineConnection}
 	 * with given {@code curveDepth}.
 	 *
-	 * @param connection The graph connection to validate.
+	 * @param bot        The graph connection to validate.
 	 * @param curveDepth The expected curveDepth of the connection
 	 */
-	protected static void assertCurve(GraphConnection connection, int curveDepth) throws ReflectiveOperationException {
+	protected static void assertCurve(SWTBotGraphConnection bot, int curveDepth) throws ReflectiveOperationException {
+		GraphConnection connection = bot.widget;
 		MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(connection.getClass(), MethodHandles.lookup());
 		VarHandle field = lookup.findVarHandle(connection.getClass(), "curveDepth", int.class); //$NON-NLS-1$
 		assertEquals(curveDepth, field.get(connection), "Unexpected connection curve"); //$NON-NLS-1$
 	}
 
 	/**
-	 * Asserts that no graph nodes in the given {@link IContainer} intersect with
-	 * one another. This method doesn't check nested containers.
+	 * Asserts that no graph nodes in the given {@link ISWTBotGraphContainer}
+	 * intersect with one another. This method doesn't check nested containers.
 	 *
-	 * @param container The {@link IContainer} to validate.
+	 * @param container The {@link ISWTBotGraphContainer} to validate.
 	 */
-	protected static void assertNoOverlap(IContainer container) {
-		List<? extends GraphNode> nodes = container.getNodes();
+	protected static void assertNoOverlap(ISWTBotGraphContainer container) {
+		List<SWTBotGraphNode> nodes = container.getNodes();
 		for (int i = 0; i < nodes.size(); ++i) {
 			for (int j = i + 1; j < nodes.size(); ++j) {
-				GraphNode node1 = nodes.get(i);
+				SWTBotGraphNode node1 = nodes.get(i);
 				Rectangle bounds1 = new Rectangle(node1.getLocation(), node1.getSize());
-				GraphNode node2 = nodes.get(j);
+				SWTBotGraphNode node2 = nodes.get(j);
 				Rectangle bounds2 = new Rectangle(node2.getLocation(), node2.getSize());
 				assertFalse(bounds1.intersects(bounds2));
 			}
@@ -307,7 +335,7 @@ public abstract class AbstractGraphTest {
 	 * Pumps the event loop for the given number of milliseconds. At least one
 	 * events loop will be executed.
 	 */
-	protected static void waitEventLoop(int time) {
+	private static void waitEventLoop(int time) {
 		long start = System.currentTimeMillis();
 		do {
 			while (Display.getCurrent().readAndDispatch()) {
