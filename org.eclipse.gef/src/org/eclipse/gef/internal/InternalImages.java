@@ -141,7 +141,16 @@ public class InternalImages {
 	 * by SWT.
 	 */
 	public static ImageDescriptor createDescriptor(String filename) {
-		return ImageDescriptor.createFromFile(InternalImages.class, ImageUtils.getEffectiveFileName(filename));
+		return createDescriptor(InternalImages.class, filename);
+	}
+
+	/**
+	 * Creates and returns an image descriptor from the given file. If the file is
+	 * an SVG, it will be automatically swapped out with a PNG if not yet supported
+	 * by SWT.
+	 */
+	public static ImageDescriptor createDescriptor(Class<?> clazz, String filename) {
+		return ImageDescriptor.createFromFile(clazz, ImageUtils.getEffectiveFileName(filename));
 	}
 
 	/**
