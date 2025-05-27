@@ -18,7 +18,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 import org.eclipse.draw2d.Cursors;
 
-import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 
 /**
@@ -46,16 +45,15 @@ public class SharedCursors extends Cursors {
 	public static final Cursor CURSOR_TREE_MOVE;
 
 	static {
-		CURSOR_PLUG = createCursor("icons/plug-cursor.svg"); //$NON-NLS-1$
-		CURSOR_PLUG_NOT = createCursor("icons/plugnot-cursor.svg"); //$NON-NLS-1$
-		CURSOR_TREE_ADD = createCursor("icons/tree_add-cursor.svg"); //$NON-NLS-1$
-		CURSOR_TREE_MOVE = createCursor("icons/tree_move-cursor.svg"); //$NON-NLS-1$
+		CURSOR_PLUG = createCursor("icons/plug-cursor.png"); //$NON-NLS-1$
+		CURSOR_PLUG_NOT = createCursor("icons/plugnot-cursor.png"); //$NON-NLS-1$
+		CURSOR_TREE_ADD = createCursor("icons/tree_add-cursor.png"); //$NON-NLS-1$
+		CURSOR_TREE_MOVE = createCursor("icons/tree_move-cursor.png"); //$NON-NLS-1$
 	}
 
 	private static Cursor createCursor(String sourceName) {
 		ImageDescriptor src = InternalImages.createDescriptor(sourceName);
-		int deviceZoom = InternalGEFPlugin.getOrDefaultDeviceZoom();
-		return new Cursor(null, InternalGEFPlugin.scaledImageData(src, deviceZoom), 0, 0);
+		return new Cursor(null, src.getImageData(100), 0, 0);
 	}
 
 }
