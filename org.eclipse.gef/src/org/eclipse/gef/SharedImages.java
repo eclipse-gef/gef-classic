@@ -73,8 +73,8 @@ public class SharedImages {
 	public static final ImageDescriptor DESC_MARQUEE_TOOL_CONNECTIONS_24;
 
 	static {
-		DESC_SELECTION_TOOL_16 = InternalImages.createDescriptor("icons/arrow16.svg"); //$NON-NLS-1$
-		DESC_SELECTION_TOOL_24 = InternalImages.createDescriptor("icons/arrow24.svg"); //$NON-NLS-1$
+		DESC_SELECTION_TOOL_16 = InternalImages.createDescriptor("icons/arrow16.gif"); //$NON-NLS-1$
+		DESC_SELECTION_TOOL_24 = InternalImages.createDescriptor("icons/arrow24.gif"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_16 = InternalImages.createDescriptor("icons/marquee16.svg"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_24 = InternalImages.createDescriptor("icons/marquee24.svg"); //$NON-NLS-1$
 		DESC_MARQUEE_TOOL_NODES_16 = InternalImages.createDescriptor("icons/marquee_nodes16.svg"); //$NON-NLS-1$
