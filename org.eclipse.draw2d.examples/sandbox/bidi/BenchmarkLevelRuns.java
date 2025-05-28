@@ -12,6 +12,7 @@
  *******************************************************************************/
 package bidi;
 
+import java.security.SecureRandom;
 import java.text.Bidi;
 import java.util.Random;
 
@@ -32,7 +33,7 @@ public class BenchmarkLevelRuns {
 		"\u0629\u0633\u0645\u0643\u0643\u0649" }; //$NON-NLS-1$
 
 		StringBuffer buffer = new StringBuffer();
-		Random rand = new Random();
+		Random rand = new SecureRandom();
 		for (int i = 0; i < 1000; i++) {
 			buffer.append(words[rand.nextInt(words.length)] + " "); //$NON-NLS-1$
 		}
