@@ -62,7 +62,7 @@ public abstract class DirectEditManager {
 	private IFigure cellEditorFrame;
 	private ICellEditorListener cellEditorListener;
 	private boolean showingFeedback;
-	private boolean dirty;
+	private boolean customDirtyState;
 	private DirectEditRequest request;
 	private CellEditorLocator locator;
 	private GraphicalEditPart source;
@@ -121,7 +121,7 @@ public abstract class DirectEditManager {
 			setCellEditor(null);
 		}
 		request = null;
-		dirty = false;
+		customDirtyState = false;
 	}
 
 	/**
@@ -260,7 +260,10 @@ public abstract class DirectEditManager {
 	}
 
 	protected void handleValueChanged() {
-		setDirty(true);
+		CellEditor cellEditor = getCellEditor();
+		if (cellEditor == null) {
+			setDirty(true);
+		}
 		showFeedback();
 		placeCellEditor();
 	}
@@ -332,7 +335,11 @@ public abstract class DirectEditManager {
 	 * @return <code>true</code> if the cell editor is dirty
 	 */
 	protected boolean isDirty() {
-		return dirty;
+		CellEditor cellEditor = getCellEditor();
+		if (cellEditor == null) {
+			return customDirtyState;
+		}
+		return cellEditor.isDirty();
 	}
 
 	private void placeCellEditorFrame() {
@@ -368,7 +375,7 @@ public abstract class DirectEditManager {
 	 * @param value the dirty property
 	 */
 	protected void setDirty(boolean value) {
-		dirty = value;
+		customDirtyState = value;
 	}
 
 	/**
