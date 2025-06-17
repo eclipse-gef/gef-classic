@@ -1581,6 +1581,7 @@ public class FlyoutPaletteComposite extends Composite {
 		 * @param code the code
 		 * @return the cursor
 		 */
+		@SuppressWarnings("removal") // Still required for 2024-06
 		public static Cursor getCursor(int code) {
 			if (cursors[code] == null) {
 				switch (code) {

@@ -628,7 +628,8 @@ public class TagCloud extends Canvas {
 		this.regionOffset = new Point(r.x, r.y);
 		tmpImage.dispose();
 		gc.dispose();
-		selectionLayerImage = new Image(getDisplay(), textLayerImage.getBounds());
+		Rectangle textLayerBounds = textLayerImage.getBounds();
+		selectionLayerImage = new Image(getDisplay(), textLayerBounds.width, textLayerBounds.height);
 		gc = new GC(selectionLayerImage);
 		gc.drawImage(textLayerImage, 0, 0);
 		gc.dispose();
