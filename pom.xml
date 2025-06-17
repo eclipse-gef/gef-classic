@@ -16,7 +16,7 @@
 		<cbi-plugins.version>1.5.2</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.23.0</comparator.repo>
+		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.24.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
 		<asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.5.0</jruby.version>
@@ -55,6 +55,8 @@
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<timestampProvider>jgit</timestampProvider>
+					<jgit.dirtyWorkingTree>warning</jgit.dirtyWorkingTree>
 					<sourceReferences>
 						<generate>true</generate>
 					</sourceReferences>
@@ -66,6 +68,11 @@
 					<dependency>
 						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-sourceref-jgit</artifactId>
+						<version>${tycho-version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-buildtimestamp-jgit</artifactId>
 						<version>${tycho-version}</version>
 					</dependency>
 				</dependencies>
