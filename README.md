@@ -9,7 +9,7 @@ The code base of the GEF components implemented in JavaFX is located in the [ecl
 
 # Requirements:
 
-- Eclipse 2024-06 or later
+- Eclipse 2024-06 (Draw2D/Zest), Eclipse 2024-09 (GEF) or later
 - Java 17 or later
 
 # Update sites:

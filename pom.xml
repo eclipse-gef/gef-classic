@@ -363,9 +363,9 @@
 				<id>master</id>
 			</profile>
 			<profile>
-				<id>baseline</id>
+				<id>2024-09</id>
 				<properties>
-					<target-platform>../org.eclipse.gef.baseline/gef-classic-3.20.0.target</target-platform>
+					<target-platform>../org.eclipse.gef.baseline/gef-classic-3.21.0.target</target-platform>
 					<execution-environment>JavaSE-17</execution-environment>
 					<tycho.p2.baseline.skip>true</tycho.p2.baseline.skip>
 				</properties>
