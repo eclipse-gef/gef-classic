@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,13 +20,14 @@ import java.io.ObjectOutputStream;
 import org.eclipse.swt.widgets.Composite;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
+
+import org.eclipse.gef.internal.InternalImages;
 
 import org.eclipse.gef.examples.flow.FlowPlugin;
 import org.eclipse.gef.examples.flow.model.Activity;
@@ -49,7 +50,7 @@ public class FlowWizardPage1 extends WizardNewFileCreationPage {
 		super("sampleFlowPage1", selection); //$NON-NLS-1$
 		this.setTitle("Create Flow Example File"); //$NON-NLS-1$
 		this.setDescription("Create a new flow file resource"); //$NON-NLS-1$
-		this.setImageDescriptor(ImageDescriptor.createFromFile(FlowPlugin.class, "images/flowbanner.gif")); //$NON-NLS-1$
+		this.setImageDescriptor(InternalImages.createDescriptor(FlowPlugin.class, "images/flowbanner.svg")); //$NON-NLS-1$
 		this.workbench = aWorkbench;
 	}
 

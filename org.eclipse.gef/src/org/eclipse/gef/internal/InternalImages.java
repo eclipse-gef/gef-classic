@@ -19,6 +19,8 @@ import org.eclipse.swt.graphics.Image;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 
+import org.eclipse.draw2d.internal.ImageUtils;
+
 public class InternalImages {
 
 	public static final ImageDescriptor DESC_ZOOM_IN;
@@ -139,11 +141,16 @@ public class InternalImages {
 	 * by SWT.
 	 */
 	public static ImageDescriptor createDescriptor(String filename) {
-		// If the SWT version doesn't yet support SVGs, fall back to PNG
-		if (!InternalGEFPlugin.isSvgSupported() && filename.endsWith(".svg")) { //$NON-NLS-1$
-			filename = filename.replaceFirst("\\.svg$", ".png"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		return ImageDescriptor.createFromFile(InternalImages.class, filename);
+		return createDescriptor(InternalImages.class, filename);
+	}
+
+	/**
+	 * Creates and returns an image descriptor from the given file. If the file is
+	 * an SVG, it will be automatically swapped out with a PNG if not yet supported
+	 * by SWT.
+	 */
+	public static ImageDescriptor createDescriptor(Class<?> clazz, String filename) {
+		return ImageDescriptor.createFromFile(clazz, ImageUtils.getEffectiveFileName(filename));
 	}
 
 	/**
