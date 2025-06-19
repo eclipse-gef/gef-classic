@@ -1581,22 +1581,18 @@ public class FlyoutPaletteComposite extends Composite {
 		 * @param code the code
 		 * @return the cursor
 		 */
-		@SuppressWarnings("removal") // Still required for 2024-06
 		public static Cursor getCursor(int code) {
 			if (cursors[code] == null) {
 				switch (code) {
 				case LEFT:
-					cursors[LEFT] = createCursor(ISharedImages.IMG_OBJS_DND_LEFT_SOURCE,
-							ISharedImages.IMG_OBJS_DND_LEFT_MASK);
+					cursors[LEFT] = createCursor(ISharedImages.IMG_OBJS_DND_LEFT);
 					break;
 				case RIGHT:
-					cursors[RIGHT] = createCursor(ISharedImages.IMG_OBJS_DND_RIGHT_SOURCE,
-							ISharedImages.IMG_OBJS_DND_RIGHT_MASK);
+					cursors[RIGHT] = createCursor(ISharedImages.IMG_OBJS_DND_RIGHT);
 					break;
 				default:
 				case INVALID:
-					cursors[INVALID] = createCursor(ISharedImages.IMG_OBJS_DND_INVALID_SOURCE,
-							ISharedImages.IMG_OBJS_DND_INVALID_MASK);
+					cursors[INVALID] = createCursor(ISharedImages.IMG_OBJS_DND_INVALID);
 					break;
 				}
 			}
@@ -1610,17 +1606,15 @@ public class FlyoutPaletteComposite extends Composite {
 		 * The strings passed as arguments must belong to the source and mask ids of a
 		 * cursor contributed by {@link ISharedImages}.
 		 */
-		private static Cursor createCursor(String sourceName, String maskName) {
+		private static Cursor createCursor(String sourceName) {
 			ImageDescriptor source = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(sourceName);
-			ImageDescriptor mask = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(maskName);
 			int deviceZoom = InternalGEFPlugin.getOrDefaultDeviceZoom();
 			// Scales the image if the display is using neither 100% nor 200% zoom
 			ImageData sourceData = InternalGEFPlugin.scaledImageData(source, deviceZoom);
-			ImageData maskData = InternalGEFPlugin.scaledImageData(mask, deviceZoom);
 			// Hotspot should be the center of the image. e.g. (16, 16) on 100% zoom
 			int hotspotX = sourceData.width / 2;
 			int hotspotY = sourceData.height / 2;
-			return new Cursor(null, sourceData, maskData, hotspotX, hotspotY);
+			return new Cursor(null, sourceData, hotspotX, hotspotY);
 		}
 	}
 }

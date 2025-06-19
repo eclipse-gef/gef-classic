@@ -4,6 +4,8 @@
 
 ## GEF
 
+ - Raised minimum requirement to Eclipse 2024-09
+
 ## Zest
 
 # GEF Classic 3.24.0

@@ -15,7 +15,7 @@ jobs:
           - java: 21
             target: master
           - java: 17
-            target: baseline
+            target: 2024-09
     runs-on: ${{ matrix.os }} 
     name: OS ${{ matrix.os }} Target ${{ matrix.target }} compile
     steps:
