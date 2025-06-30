@@ -34,7 +34,6 @@ import org.eclipse.swt.events.MouseTrackListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Canvas;
@@ -1608,13 +1607,10 @@ public class FlyoutPaletteComposite extends Composite {
 		 */
 		private static Cursor createCursor(String sourceName) {
 			ImageDescriptor source = PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(sourceName);
-			int deviceZoom = InternalGEFPlugin.getOrDefaultDeviceZoom();
-			// Scales the image if the display is using neither 100% nor 200% zoom
-			ImageData sourceData = InternalGEFPlugin.scaledImageData(source, deviceZoom);
 			// Hotspot should be the center of the image. e.g. (16, 16) on 100% zoom
-			int hotspotX = sourceData.width / 2;
-			int hotspotY = sourceData.height / 2;
-			return new Cursor(null, sourceData, hotspotX, hotspotY);
+			int hotspotX = source.getImageData(100).width / 2;
+			int hotspotY = source.getImageData(100).height / 2;
+			return InternalGEFPlugin.createCursor(source, hotspotX, hotspotY);
 		}
 	}
 }
