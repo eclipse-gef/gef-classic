@@ -15,9 +15,12 @@ package org.eclipse.gef;
 import org.eclipse.swt.graphics.Cursor;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.viewers.DecorationOverlayIcon;
+import org.eclipse.jface.viewers.IDecoration;
 
 import org.eclipse.draw2d.Cursors;
 
+import org.eclipse.gef.internal.InternalCursor;
 import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 
@@ -53,6 +56,12 @@ public class SharedCursors extends Cursors {
 	}
 
 	private static Cursor createCursor(String sourceName) {
+		if (InternalGEFPlugin.isSvgSupported()) {
+			ImageDescriptor src1 = InternalImages.createDescriptor(sourceName);
+			ImageDescriptor src2 = InternalCursor.getCursorDescriptor();
+			ImageDescriptor src = new DecorationOverlayIcon(src1, src2, IDecoration.TOP_LEFT);
+			return new Cursor(null, src.getImageData(100), 0, 0);
+		}
 		ImageDescriptor src = InternalImages.createDescriptor(sourceName);
 		return InternalGEFPlugin.createCursor(src, 0, 0);
 	}
