@@ -100,12 +100,4 @@
       </g>
     </g>
   </g>
-  <g
-     id="layer2"
-     style="display:inline">
-    <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 0.1322915,0.31937993 V 4.8172967 L 1.1906248,3.49438 l 0.79375,1.8520834 c 0,0 0.1493518,0.2168528 0.2645834,0.2645833 0.081481,0.033751 0.1831023,0.033751 0.2645833,0 0.1152316,-0.047731 0.2168529,-0.1493517 0.2645834,-0.2645833 0.033751,-0.081481 0,-0.2645834 0,-0.2645834 L 1.9843748,3.49438 V 3.2297967 h 1.0583334 z"
-       id="path3819" />
-  </g>
 </svg>
