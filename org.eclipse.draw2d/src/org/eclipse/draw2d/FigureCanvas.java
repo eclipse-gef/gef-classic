@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -86,6 +86,10 @@ public class FigureCanvas extends Canvas {
 		getHorizontalBar().setValues(model.getValue() + hBarOffset, model.getMinimum() + hBarOffset,
 				model.getMaximum() + hBarOffset, model.getExtent(), Math.max(1, model.getExtent() / 20),
 				Math.max(1, model.getExtent() * 3 / 4));
+		// Repaint whole canvas to fix visual artifacts caused by HighDPI rounding errors
+		if (RangeModel.PROPERTY_VALUE.equals(event.getPropertyName())) {
+			viewport.repaint(viewport.getClientArea(Rectangle.SINGLETON).setLocation(0, 0));
+		}
 	};
 
 	private final PropertyChangeListener verticalChangeListener = event -> {
@@ -94,6 +98,10 @@ public class FigureCanvas extends Canvas {
 		getVerticalBar().setValues(model.getValue() + vBarOffset, model.getMinimum() + vBarOffset,
 				model.getMaximum() + vBarOffset, model.getExtent(), Math.max(1, model.getExtent() / 20),
 				Math.max(1, model.getExtent() * 3 / 4));
+		// Repaint whole canvas to fix visual artifacts caused by HighDPI rounding errors
+		if (RangeModel.PROPERTY_VALUE.equals(event.getPropertyName())) {
+			viewport.repaint(viewport.getClientArea(Rectangle.SINGLETON).setLocation(0, 0));
+		}
 	};
 
 	private final LightweightSystem lws;
