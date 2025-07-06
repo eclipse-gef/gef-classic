@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024, CHISEL Group, University of Victoria, Victoria,
- *                            BC, Canada and others.
+ * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -90,7 +90,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	// CLASS CONSTANTS
 	public static final int ANIMATION_TIME = 500;
 	public static final int FISHEYE_ANIMATION_TIME = 100;
-	private static final Image BACK_ARROW = FileImageDataProvider.createImage(Graph.class, "/icons/back_arrow.png"); //$NON-NLS-1$
+	private static final Image BACK_ARROW = FileImageDataProvider.createImage(Graph.class, "/icons/back_arrow.svg"); //$NON-NLS-1$
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up
