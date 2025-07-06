@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2025 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -43,7 +43,7 @@ public class FileImageDataProvider implements ImageDataProvider {
 
 	@Override
 	public ImageData getImageData(int zoom) {
-		if (zoom == 100) {
+		if (zoom == 100 || "svg".equals(fileExtension)) { //$NON-NLS-1$
 			return createImageData(basePath + '.' + fileExtension);
 		}
 		if (zoom == 200) {
@@ -67,6 +67,6 @@ public class FileImageDataProvider implements ImageDataProvider {
 	 * at an appropriate time.
 	 */
 	public static Image createImage(Class<?> clazz, String name) {
-		return new Image(null, new FileImageDataProvider(clazz, name));
+		return new Image(null, new FileImageDataProvider(clazz, ImageUtils.getEffectiveFileName(name)));
 	}
 }
