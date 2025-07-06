@@ -13,20 +13,14 @@
 
 package org.eclipse.gef.internal;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.StandardCharsets;
 
-import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageDataProvider;
-import org.eclipse.swt.graphics.ImageLoader;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -45,7 +39,6 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
-	private static Boolean isSvgSupported;
 
 	public InternalGEFPlugin() {
 		singleton = this;
@@ -123,33 +116,6 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 		} finally {
 			image.dispose();
 		}
-	}
-
-	/**
-	 * Convenience method to check whether SVGs are supported by the current
-	 * application. This method returns {@code true}, if there is at least one
-	 * active bundle that satisfies the (optional) {@code (image.format=svg)}
-	 * capability.
-	 */
-	public static boolean isSvgSupported() {
-		if (isSvgSupported != null) {
-			return isSvgSupported;
-		}
-		String svg = """
-				<?xml version="1.0" encoding="UTF-8"?>
-				<svg width="1" height="1" version="1.1" viewBox="0 0 0 0" xmlns="http://www.w3.org/2000/svg"></svg>
-				"""; //$NON-NLS-1$
-		try (InputStream is = new ByteArrayInputStream(svg.getBytes(StandardCharsets.UTF_8))) {
-			new ImageLoader().load(is);
-			isSvgSupported = true;
-		} catch (IOException ignore) {
-			// Should never happen
-			isSvgSupported = false;
-		} catch (SWTException e) {
-			// SVGs unsupported
-			isSvgSupported = false;
-		}
-		return isSvgSupported;
 	}
 
 	/**
