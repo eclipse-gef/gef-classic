@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -23,41 +22,31 @@ public class LEDFeedbackFigure extends LEDFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		g.setXORMode(true);
-		g.setForegroundColor(ColorConstants.white);
+		g.setBackgroundColor(LogicColorConstants.feedbackOutline);
 
 		Rectangle r = getBounds().getCopy();
 		g.translate(r.getLocation());
 
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
-		g.fillRectangle(0, 4, r.width, r.height - 8);
+		Rectangle mainBody = new Rectangle(0, 2, r.width, r.height - 4);
+		g.fillRoundRectangle(mainBody, CORNER_RADIUS, CORNER_RADIUS);
+		drawConnectors(g, r);
 
-		int right = r.width - 1;
-		g.drawLine(0, Y1, right, Y1);
-		g.drawLine(0, Y1, 0, Y2);
-		g.drawLine(0, Y2, right, Y2);
-		g.drawLine(right, Y1, right, Y2);
+		// Draw display
+		g.setBackgroundColor(LogicColorConstants.feedbackFill);
+		g.fillRoundRectangle(displayRectangle, CORNER_RADIUS, CORNER_RADIUS);
 
-		g.drawPoint(0, Y1);
-		g.drawPoint(right, Y1);
-		g.drawPoint(0, Y2);
-		g.drawPoint(right, Y2);
+	}
 
-		// Draw the gaps for the connectors
+	private static void drawConnectors(Graphics g, Rectangle r) {
 		for (int i = 0; i < 4; i++) {
-			g.drawLine(GAP_CENTERS_X[i] - 4, Y1, GAP_CENTERS_X[i] + 6, Y1);
-			g.drawLine(GAP_CENTERS_X[i] - 4, Y2, GAP_CENTERS_X[i] + 6, Y2);
-		}
 
-		// Draw the connectors
-		for (int i = 0; i < 4; i++) {
 			connector.translate(GAP_CENTERS_X[i], 0);
-			g.drawPolygon(connector);
+			g.fillPolygon(connector);
 			connector.translate(-GAP_CENTERS_X[i], 0);
 
 			bottomConnector.translate(GAP_CENTERS_X[i], r.height - 1);
-			g.drawPolygon(bottomConnector);
-			bottomConnector.translate(-GAP_CENTERS_X[i], -r.height + 1);
+			g.fillPolygon(bottomConnector);
+			bottomConnector.translate(-GAP_CENTERS_X[i], -(r.height - 1));
 		}
 	}
 
