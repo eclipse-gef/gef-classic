@@ -21,7 +21,6 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.LineAttributes;
 import org.eclipse.swt.printing.Printer;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * A scalable graphics object used to print to a printer.
@@ -33,6 +32,8 @@ public class PrinterGraphics extends ScaledGraphics {
 	Map<Image, Image> imageCache = new HashMap<>();
 
 	Printer printer;
+
+	private final float FRACTION_TO_PERCENT = 100.0f;
 
 	/**
 	 * Creates a new PrinterGraphics with Graphics g, using Printer p
@@ -93,7 +94,7 @@ public class PrinterGraphics extends ScaledGraphics {
 
 	@Override
 	int zoomFontHeight(int height) {
-		return (int) (height * zoom * Display.getCurrent().getDPI().y / printer.getDPI().y + 0.0000001);
+		return (int) (height * zoom * 100 / printer.getDPI().y + 0.0000001);
 	}
 
 	/**
@@ -113,7 +114,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	public void setLineAttributes(LineAttributes attributes) {
 		if (attributes.style == SWT.LINE_CUSTOM && attributes.dash != null && attributes.dash.length > 0) {
 			float[] newDashes = new float[attributes.dash.length];
-			float printerDot = (float) printer.getDPI().y / Display.getCurrent().getDPI().y + 0.0000001f;
+			float printerDot = printer.getDPI().y / FRACTION_TO_PERCENT + 0.0000001f;
 			for (int i = 0; i < attributes.dash.length; i++) {
 				newDashes[i] = attributes.dash[i] * printerDot;
 			}

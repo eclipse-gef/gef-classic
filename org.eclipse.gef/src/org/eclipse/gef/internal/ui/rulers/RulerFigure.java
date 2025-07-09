@@ -13,7 +13,6 @@
 package org.eclipse.gef.internal.ui.rulers;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
@@ -52,6 +51,7 @@ public class RulerFigure extends Figure {
 	 * paintFigure(Graphics) method.
 	 */
 	private static final int BORDER_WIDTH = 3;
+	private final float FRACTION_TO_PERCENT = 100.0f;
 
 	private boolean horizontal;
 	private int unit;
@@ -78,7 +78,7 @@ public class RulerFigure extends Figure {
 			case RulerProvider.UNIT_PIXELS -> dpu = 1.0;
 			case RulerProvider.UNIT_CUSTOM -> dpu = rulerProvider.getCustomRulerDPU();
 			default -> {
-				dpu = transposer.t(new Dimension(Display.getCurrent().getDPI())).height;
+				dpu = FRACTION_TO_PERCENT;
 				if (getUnit() == RulerProvider.UNIT_CENTIMETERS) {
 					dpu = dpu / 2.54;
 				}
