@@ -22,6 +22,11 @@
 		<jruby.version>9.4.5.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
 		<execution-environment>JavaSE-21</execution-environment>
+		<!-- SonarQube configuration -->
+		<sonar.exclusion>**/.tycho-consumer-pom.xml</sonar.exclusion>
+		<sonar.projectKey>gef-classic</sonar.projectKey>
+		<sonar.java.binaries>${project.build.outputDirectory}</sonar.java.binaries>
+		<sonar.organization>eclipse</sonar.organization>
 	</properties>
 
 	<build>
@@ -315,7 +320,7 @@
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
-					<version>5.0.0.4389</version>
+					<version>5.1.0.4751</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
