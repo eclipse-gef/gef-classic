@@ -143,14 +143,10 @@ def void mvn() {
            --no-transfer-progress \
            -DapiBaselineTargetDirectory=${WORKSPACE} \
            -Dmaven.repo.local=$WORKSPACE/.m2/repository \
-           -Dproject.build.sourceEncoding=UTF-8 \
            -Dbuild.id=${BUILD_TIMESTAMP} \
            -Dcommit.id=$GIT_COMMIT \
            -Dbuild.type=$BUILD_TYPE \
            -Dorg.eclipse.justj.p2.manager.build.url=$JOB_URL \
-           -Dsonar.exclusions=**/.tycho-consumer-pom.xml \
-           -Dsonar.projectKey=gef-classic \
-           -Dsonar.organization=eclipse \
            clean \
            verify \
            sonar:sonar
