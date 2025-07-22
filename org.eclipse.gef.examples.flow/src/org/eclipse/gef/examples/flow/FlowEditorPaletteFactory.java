@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+
+import org.eclipse.draw2d.internal.ImageUtils;
 
 import org.eclipse.gef.palette.CombinedTemplateCreationEntry;
 import org.eclipse.gef.palette.ConnectionCreationToolEntry;
@@ -56,20 +58,26 @@ public final class FlowEditorPaletteFactory {
 
 		CombinedTemplateCreationEntry combined = new CombinedTemplateCreationEntry("Activity", //$NON-NLS-1$
 				"Create a new Activity Node", Activity.class, new SimpleFactory<>(Activity.class), //$NON-NLS-1$
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/gear16.gif"), //$NON-NLS-1$
-				ImageDescriptor.createFromFile(Activity.class, "images/gear16.gif")); //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/gear16.svg")), //$NON-NLS-1$
+				ImageDescriptor.createFromFile(Activity.class,
+						ImageUtils.getEffectiveFileName("images/gear24.svg"))); //$NON-NLS-1$
 		entries.add(combined);
 
 		combined = new CombinedTemplateCreationEntry("Sequential Activity", "Create a Sequential Activity", //$NON-NLS-1$ //$NON-NLS-2$
 				SequentialActivity.class, new SimpleFactory<>(SequentialActivity.class),
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/sequence16.gif"), //$NON-NLS-1$
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/sequence16.gif")); //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/sequence16.svg")), //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/sequence24.svg"))); //$NON-NLS-1$
 		entries.add(combined);
 
 		combined = new CombinedTemplateCreationEntry("Parallel Activity", "Create a  Parallel Activity", //$NON-NLS-1$ //$NON-NLS-2$
 				ParallelActivity.class, new SimpleFactory<>(ParallelActivity.class),
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/parallel16.gif"), //$NON-NLS-1$
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/parallel16.gif")); //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/parallel16.svg")), //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/parallel24.svg"))); //$NON-NLS-1$
 		entries.add(combined);
 
 		drawer.addAll(entries);
@@ -93,8 +101,10 @@ public final class FlowEditorPaletteFactory {
 		entries.add(sep);
 
 		tool = new ConnectionCreationToolEntry("Connection Creation", "Creating connections", null, //$NON-NLS-1$ //$NON-NLS-2$
-				ImageDescriptor.createFromFile(FlowPlugin.class, "images/connection16.gif"), //$NON-NLS-1$
-				ImageDescriptor.createFromFile(Activity.class, "images/connection16.gif")); //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/connection16.svg")), //$NON-NLS-1$
+				ImageDescriptor.createFromFile(FlowPlugin.class,
+						ImageUtils.getEffectiveFileName("images/connection24.svg"))); //$NON-NLS-1$
 		entries.add(tool);
 		controlGroup.addAll(entries);
 		return controlGroup;
