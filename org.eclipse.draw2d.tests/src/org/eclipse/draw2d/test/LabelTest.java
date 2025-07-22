@@ -135,7 +135,7 @@ public class LabelTest extends BaseTestCase {
 		assertSame(size2, label.getPreferredSize());
 		//
 		// check calc preferred size if font is changed
-		label.setFont(new Font(null, "", 100, SWT.NONE)); //$NON-NLS-1$
+		label.setFont(testFont);
 		assertNotSame(size2, label.getPreferredSize());
 		assertTextSize(label);
 		//
