@@ -20,7 +20,7 @@
             default="true"
             name="GEF Flow Example"
             extensions="flow"
-            icon="view.gif"
+            icon="view.png"
             class="org.eclipse.gef.examples.flow.ui.FlowEditor"
             contributorClass="org.eclipse.gef.examples.flow.actions.FlowActionBarContributor"
             id="GEF Flow Editor">
@@ -35,7 +35,7 @@
       </category>
       <wizard
             name="Flow Diagram"
-            icon="view.gif"
+            icon="view.png"
             category="org.eclipse.ui.Examples/org.eclipse.gef.examples"
             class="org.eclipse.gef.examples.flow.ui.FlowCreationWizard"
             id="org.eclipse.gef.examples.flow.wizard.new.file">
