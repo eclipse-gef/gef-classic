@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2024 IBM Corporation and others.
+ * Copyright (c) 2006, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,50 +27,14 @@ import org.eclipse.ui.IPropertyListener;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PartInitException;
 
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
-
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gef.test.utils.TestGraphicalEditPart;
 import org.eclipse.gef.tools.DragEditPartsTracker;
 
 import org.junit.jupiter.api.Test;
 
 public class DragEditPartsTrackerTest {
-
-	private static class TestGraphicalEditPart extends AbstractGraphicalEditPart {
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractEditPart#register()
-		 */
-		@Override
-		protected void register() {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-		 */
-		@Override
-		protected IFigure createFigure() {
-			return new Figure();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-		 */
-		@Override
-		protected void createEditPolicies() {
-			// do nothing
-		}
-	}
 
 	private class DummyEditorPart implements org.eclipse.ui.IEditorPart {
 

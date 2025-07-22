@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2024 IBM Corporation and others.
+ * Copyright (c) 2006, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,58 +15,13 @@ package org.eclipse.gef.test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
-
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gef.test.utils.TestGraphicalEditPart;
 import org.eclipse.gef.tools.ToolUtilities;
 
 import org.junit.jupiter.api.Test;
 
 public class ToolUtilitiesTest {
-
-	private static class TestGraphicalEditPart extends AbstractGraphicalEditPart {
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#activate()
-		 */
-		public void addChild(EditPart ep) {
-			addChild(ep, 0);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractEditPart#register()
-		 */
-		@Override
-		protected void register() {
-			// do nothing
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-		 */
-		@Override
-		protected IFigure createFigure() {
-			return new Figure();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-		 */
-		@Override
-		protected void createEditPolicies() {
-			// do nothing
-		}
-	}
 
 	@SuppressWarnings("static-method")
 	@Test

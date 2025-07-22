@@ -440,10 +440,14 @@ public abstract class DirectEditManager {
 	 * Unhooks listeners. Called from {@link #bringDown()}.
 	 */
 	protected void unhookListeners() {
-		getEditPart().getFigure().removeAncestorListener(ancestorListener);
-		getEditPart().removeEditPartListener(editPartListener);
-		ancestorListener = null;
-		editPartListener = null;
+		if (ancestorListener != null) {
+			getEditPart().getFigure().removeAncestorListener(ancestorListener);
+			ancestorListener = null;
+		}
+		if (editPartListener != null) {
+			getEditPart().removeEditPartListener(editPartListener);
+			editPartListener = null;
+		}
 
 		if (getCellEditor() == null) {
 			return;
