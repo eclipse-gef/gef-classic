@@ -4,8 +4,7 @@ endif::[]
 
 = Draw2d Guide
 
-== Draw2d Programmer's Guide +
-org.eclipse.draw2d +
+== Draw2d Programmer's Guide
 
 * xref:overview.adoc[Overview] - the big picture
 * xref:painting.adoc[Painting] - details of the paint process and how

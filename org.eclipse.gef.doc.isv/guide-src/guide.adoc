@@ -4,8 +4,7 @@ endif::[]
 
 = GEF Developer's Guide
 
-== GEF Programmer's Guide +
-org.eclipse.gef
+== GEF Programmer's Guide
 
 * xref:#overview[Overview] - Description of the "big picture"
 * xref:#when-can-i-use-gef[When to Use] - How can GEF and the Eclipse Platform
