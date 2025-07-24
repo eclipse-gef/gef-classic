@@ -4,8 +4,7 @@ endif::[]
 
 = org.eclipse.gef Programmer's Guide
 
-== GEF Programmer's Guide +
-org.eclipse.gef
+== GEF Programmer's Guide
 
 Draw2d focuses on efficient painting and layout of figures. The GEF
 plug-in adds an editing layer on top of Draw2d. The purpose of this

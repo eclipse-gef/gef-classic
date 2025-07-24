@@ -7,13 +7,13 @@
 	<anchor id="draw2d" />
 	<anchor id="zest" />
 	<topic label="GEF (MVC)" href="guide/guide.html">
-		<topic label="Overview" href="guide/guide.html#Overview"/>
-		<topic label="When and Where to Use GEF" href="guide/guide.html#When"/>
-		<topic label="EditParts" href="guide/guide.html#EditParts"/>
-		<topic label="Creating a Graphical View" href="guide/guide.html#GraphicalView"/>
-		<topic label="Editing and EditPolicies" href="guide/guide.html#Editing"/>
-		<topic label="The EditPart Lifecycle" href="guide/guide.html#Lifecycle"/>
-		<topic label="Tools and the Palette" href="guide/guide.html#ToolPalette"/>
-		<topic label="Types of Interactions" href="guide/guide.html#Interactions"/>
+		<topic label="Overview" href="guide/guide.html#overview"/>
+		<topic label="When and Where to Use GEF" href="guide/guide.html#when-can-i-use-gef"/>
+		<topic label="EditParts" href="guide/guide.html#an-introduction-to-editparts"/>
+		<topic label="Creating a Graphical View" href="guide/guide.html#creating-a-graphical-view-of-a-model"/>
+		<topic label="Editing and EditPolicies" href="guide/guide.html#editing-and-editpolicies"/>
+		<topic label="The EditPart Lifecycle" href="guide/guide.html#the-editpart-lifecycle"/>
+		<topic label="Tools and the Palette" href="guide/guide.html#tools-and-the-palette"/>
+		<topic label="Types of Interactions" href="guide/guide.html#types-of-interactions-in-gef"/>
 	</topic>
 </toc>
