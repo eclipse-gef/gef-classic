@@ -1,3 +1,7 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = Painting
 
 == Painting of Figures
@@ -61,4 +65,4 @@ image:images/paintclip.gif[image,width=616,height=186]
 
 === See Also
 
-* link:hittest.html[Hit Testing]
+* xref:hittest.adoc[Hit Testing]
