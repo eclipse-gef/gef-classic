@@ -1,3 +1,7 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = Layout
 
 == Layout
@@ -84,7 +88,7 @@ in SWT.
 
 In some cases, the top-down process is modified. A common example is
 figures whose bounds must wrap around the bounds of their children.
-link:connections.html[Connections]
+xref:connections.adoc[Connections]
 
 The other special layout case is found in the text package. Text figures
 must layout in two steps. First, they contribute fragments into

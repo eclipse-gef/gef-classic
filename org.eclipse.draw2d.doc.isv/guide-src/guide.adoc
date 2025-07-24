@@ -1,19 +1,23 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = Draw2d Guide
 
 == Draw2d Programmer's Guide +
 org.eclipse.draw2d +
 
-* link:overview.html[Overview] - the big picture
-* link:painting.html[Painting] - details of the paint process and how
+* xref:overview.adoc[Overview] - the big picture
+* xref:painting.adoc[Painting] - details of the paint process and how
 nesting affects painting
-* link:layout.html[Layout] - preferred size, layout, validating figures
-* link:hittest.html[Hit Testing] - finding figures, correcting
+* xref:layout.adoc[Layout] - preferred size, layout, validating figures
+* xref:hittest.adoc[Hit Testing] - finding figures, correcting
 coordinates, modifying the space occupied by a figure
-* link:connections.html[Connections and Routing] - connections, anchors,
+* xref:connections.adoc[Connections and Routing] - connections, anchors,
 decorations, and routing
-* link:coordinates.html[Coordinate Systems] - absolute and relative
+* xref:coordinates.adoc[Coordinate Systems] - absolute and relative
 coordinates, working with absolute coordinates
-* link:extensions.html[User-specific Extensions] - customize runtime
+* xref:extensions.adoc[User-specific Extensions] - customize runtime
 behavior
-* link:migration-guide.html[Plug-in Migration Guide] - changes between
+* xref:migration-guide.adoc[Plug-in Migration Guide] - changes between
 individual releases

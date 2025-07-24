@@ -1,22 +1,28 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = GEF Developer's Guide
 
 == GEF Programmer's Guide +
 org.eclipse.gef
 
-* link:#Overview[Overview] - Description of the "big picture"
-* link:#When[When to Use] - How can GEF and the Eclipse Platform be used
-* link:#EditParts[EditParts] - An introduction to primary building block
-of GEF
-* link:#GraphicalView[Graphical View] - How to create a Graphical View
-of your Model
-* link:#Editing[Editing and Edit Policies] - Adding editing support to
-your Graphical View
-* link:#Lifecycle[Editpart Lifecycle] - Interesting events to know about
-* link:#ToolPalette[Tools and Palette]
-* link:#Interactions[Interactions] - the GEF interactions and the
-players involved
+* xref:#overview[Overview] - Description of the "big picture"
+* xref:#when-can-i-use-gef[When to Use] - How can GEF and the Eclipse Platform
+  be used
+* xref:#an-introduction-to-editparts[EditParts] - An introduction to primary
+  building block of GEF
+* xref:#creating-a-graphical-view-of-a-model[Graphical View] - How to create a
+  Graphical View of your Model
+* xref:#editing-and-editpolicies[Editing and Edit Policies] - Adding editing
+  support to your Graphical View
+* xref:#the-editpart-lifecycle[Editpart Lifecycle] - Interesting events to know
+  about
+* xref:#tools-and-the-palette[Tools and Palette]
+* xref:#types-of-interactions-in-gef[Interactions] - the GEF interactions and
+  the players involved
 
-=== [#Overview]#Overview#
+=== [#overview]#Overview#
 
 Draw2d focuses on efficient painting and layout of figures. The GEF
 plug-in adds editing on top of Draw2d. The purpose of this framework is
@@ -78,7 +84,7 @@ JFace viewers in that they manage an SWT Control. Viewers are also a
 selection provider, and the unit of selection is the EditPart.
 ____
 
-=== [#When]#When can I use GEF?#
+=== [#when-can-i-use-gef]#When can I use GEF?#
 
 GEF can be used anywhere that you can use an SWT Control inside a
 Workbench. It could be an editor, a view, a wizard page, etc. Most
@@ -88,7 +94,7 @@ outline page.
 GEF requires the Eclipse Rich Client Platform (RCP) and the "views"
 plug-in (`org.eclipse.ui.views`), which provides property sheet support.
 
-=== [#EditParts]#An Introduction to EditParts#
+=== [#an-introduction-to-editparts]#An Introduction to EditParts#
 
 Editparts associate their view and model, but they also form their own
 structure. An editpart maintains children. Usually this corresponds to a
@@ -139,7 +145,7 @@ As the name implies, editparts must support editing the model. But first
 we will focus on the initial steps of building an application, which is
 to display the initial model.
 
-=== [#GraphicalView]#Creating a Graphical View of a Model#
+=== [#creating-a-graphical-view-of-a-model]#Creating a Graphical View of a Model#
 
 Once you have a model and some figures with which to view it, the next
 step is to put the pieces together. This means creating the editparts
@@ -256,7 +262,7 @@ model elements for which children editparts should be created.
 elements returned here indicate connections for which the editpart is
 the source or target.
 
-=== [#Editing]#Editing and EditPolicies#
+=== [#editing-and-editpolicies]#Editing and EditPolicies#
 
 Once you have some editparts displayed it's time to start editing.
 Editing is usually the most complex task an editpart performs. Editing
@@ -344,7 +350,7 @@ removed or swapped out. The rest of the time it is just a good habit.
 GEF also provides several policies for use with these roles. Many of
 these policies must be extended to fill in the missing pieces that work
 with the application's model. EditPolicies are discussed in more detail
-in the section on link:#Interactions[interactions].
+in the section on xref:#types-of-interactions-in-gef[interactions].
 | image:images/editing2.gif[image] 
 |===
 
@@ -356,7 +362,7 @@ encapsulate and combine changes to the application's model.
 An application has a single command stack. Commands must be executed
 using the command stack rather than directly calling execute.
 
-=== [#Lifecycle]#The EditPart Lifecycle#
+=== [#the-editpart-lifecycle]#The EditPart Lifecycle#
 
 With respect to lifecycle, editpart implementations typically only have
 to worry about extending activation and deactivation, which is when the
@@ -448,7 +454,7 @@ editparts should not contain any important state that must be restored
 on undo.
 |===
 
-=== [#ToolPalette]#Tools and the Palette#
+=== [#tools-and-the-palette]#Tools and the Palette#
 
 A tool handles most events from a viewer. The `EditDomain` keeps track
 of the currently active tool. Applications may use the palette
@@ -470,7 +476,7 @@ A tool is activated by setting it on the EditDomain. There is only one
 active tool for all viewers in the domain. If a palette is being used,
 selecting a tool in the palette will activate that tool.
 
-==== [#Tools/Selection]#The Selection Tool#
+==== [#the-selection-tool]#The Selection Tool#
 
 The Selection Tool is the primary tool used in GEF and is often the
 default for an application. The selection tool is unique in its ability
@@ -495,7 +501,7 @@ selection gesture, it modifies the viewer's selection. Trackers even
 handle events like double-click.
 
 For more on the selection tool and trackers, see the section on
-link:#Interactions/Selection[Selection Interaction].
+xref:#selection[Selection Interaction].
 
 ==== Palette
 
@@ -517,13 +523,13 @@ The PaletteViewer displays a Palette model, which starts with the
 which open and close, or groups, which do not. Each grouping element
 then contains Palette Entries. An Entry defines either a tool or
 template for the User. Templates are described below in
-link:#Interactions/Creation[Creation].
+xref:#creation[Creation].
 
 The Palette provides several display modes, such as icon-only. You can
 also provide a customizer to allow the user to modify or create palette
 content.
 
-=== [#Interactions]#Types of Interactions in GEF#
+=== [#types-of-interactions-in-gef]#Types of Interactions in GEF#
 
 This section discusses the various types of interactions that are
 included in the framework, and which parts of the framework are involved
@@ -551,7 +557,7 @@ These are just constants defined on the EditPolicy interface.
 * Any EditPolicy implementations provided in GEF for use with the
 interaction.
 
-==== [#Interactions/Selection]#Selection#
+==== [#selection]#Selection#
 
 [.custom,width="100%",cols="25%,25%,25%,25%",options="header"]
 |===
@@ -573,7 +579,7 @@ No interaction is more basic or universal than selecting items in a
 viewer. Most of the interactions discussed here operate on what is
 currently selected. Yet, selection is a complex topic and there are
 several steps involved. The Selection Tool was
-link:#Tools/Selection[briefly discussed] in the above section on tools.
+xref:#the-selection-tool[briefly discussed] in the above section on tools.
 
 Let's first define selection. Selection is a List of EditParts
 maintained by an EditPartViewer. Changes to the selection are made by
@@ -736,7 +742,7 @@ deleted as part of multiple selection. The logic example's delete
 command addresses all of these concerns.
 |===
 
-==== [#Interactions/Creation]#Creation#
+==== [#creation]#Creation#
 
 [.custom,width="100%",cols="25%,25%,25%,25%",options="header",]
 |===

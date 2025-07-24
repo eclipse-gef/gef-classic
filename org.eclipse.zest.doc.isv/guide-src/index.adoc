@@ -1,6 +1,10 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = Zest Guide
 
 == Zest Programmer's Guide
 
-* link:overview.html[Overview] - the big picture
-* link:graph.html[Graph] - graphs, nodes and connections
+* xref:overview.adoc[Overview] - the big picture
+* xref:graph.adoc[Graph] - graphs, nodes and connections

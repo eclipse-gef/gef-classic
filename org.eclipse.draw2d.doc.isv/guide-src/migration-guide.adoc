@@ -1,14 +1,18 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
 = Plug-in Migration Guide
 
 == Contents
 
-* link:#3.15[Migrating from 3.14 to 3.15]
+* xref:#migrating-from-314-to-315[Migrating from 3.14 to 3.15]
 
-=== [#3.15]#Migrating from 3.14 to 3.15#
+=== [#migrating-from-314-to-315]#Migrating from 3.14 to 3.15#
 
 Draw2D has dropped ICU as the default Java implementation for *`Bidi`* and
 *`BreakIterator`*. If clients require a different behavior, they may contribute
-their own implementation as described in link:extensions.html[User-specific extensions].
+their own implementation as described in xref:extensions.adoc[User-specific extensions].
 
 The selection, stack and property `Actions` of the `GraphicalEditor` can only
 hold Strings and no longer support objects of type IAction. Clients can convert
