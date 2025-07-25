@@ -15,5 +15,15 @@
 		<topic label="User-specific Extensions" href="guide/extensions.html" />
   <topic href="guide/migration-guide.html" label="Plug-in Migration Guide">
   </topic>
+  <topic href="guide/demos/index.html" label="Examples">
+     <topic href="guide/demos/demo1.html" label="Hello World">
+     </topic>
+     <topic href="guide/demos/demo2.html" label="Layout Managers">
+     </topic>
+     <topic href="guide/demos/demo3.html" label="Clicking and Scrolling">
+     </topic>
+     <topic href="guide/demos/demo4.html" label="Connections and Anchors">
+     </topic>
+  </topic>
 	</topic>
 </toc>

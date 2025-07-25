@@ -306,6 +306,7 @@
 						</attributes>
 						<sourceDirectory>guide-src</sourceDirectory>
 						<outputDirectory>guide</outputDirectory>
+						<preserveDirectories>true</preserveDirectories>
 					</configuration>
 					<executions>
 						<execution>

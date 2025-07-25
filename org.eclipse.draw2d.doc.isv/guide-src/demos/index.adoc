@@ -1,0 +1,10 @@
+ifdef::env-github[]
+:imagesdir: ../../guide/demos/
+endif::[]
+
+= Draw2d Examples
+
+- xref:demo1.adoc[Hello World]
+- xref:demo2.adoc[Layout Managers]
+- xref:demo3.adoc[Clicking and Scrolling]
+- xref:demo4.adoc[Connections and Anchors]

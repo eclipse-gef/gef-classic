@@ -1,0 +1,70 @@
+ifdef::env-github[]
+:imagesdir: ../../guide/demos/
+endif::[]
+
+= Example 3 - Clicking and Scrolling
+
+image:images/demo3.gif[image]
+
+In this example, a Button is used to create CheckBoxes inside a ScrollPane.
+
+The button and scrollpane are placed absolutely inside the contents figure by
+simply setting their bounds; no layout manager is used there. However, the
+_view_ must have a Layout, or its preferred size will not get calculated, and
+scrolling will not work correctly.
+
+The button's action listener will get called each time the user clicks on the
+button. The _listener_ will create a new CheckBox and add it to the view. A
+vertical scrollbar will appear when the checkboxes cannot all be displayed at
+once in the pane.
+
+[source,java]
+----
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.draw2d.*;
+import org.eclipse.draw2d.geometry.*;
+
+public class Demo3 {
+
+	static int count = 1;
+
+	public static void main(String args[]) {
+		Shell shell = new Shell();
+		shell.setSize(350,350);
+		shell.open();
+		shell.setText("Demo 3");
+		LightweightSystem lws = new LightweightSystem(shell);
+		IFigure panel = new Figure();
+		lws.setContents(panel);
+		ScrollPane scrollpane = new ScrollPane();
+		scrollpane.setBounds(new Rectangle(30,30,210,200));
+		scrollpane.getViewport().setBorder(new GroupBoxBorder("Viewport"));
+		scrollpane.setBorder(new GroupBoxBorder("ScrollPane"));
+
+		final Figure view = new Figure();
+		view.setBorder(new GroupBoxBorder("The View"));
+		view.setLayoutManager(new FlowLayout(false));
+		scrollpane.setContents(view);
+
+		Clickable button = new Button("Create checkbox");
+		button.setBounds(new Rectangle(30,250,140,35));
+
+		button.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				view.add(new CheckBox("Checkbox "+count++));
+			}
+		});
+
+		panel.add(button);
+		panel.add(scrollpane);
+
+		Display display = Display.getDefault();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep ();
+			}
+		}
+	}
+}
+----
