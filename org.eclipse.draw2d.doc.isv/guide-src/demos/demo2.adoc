@@ -1,0 +1,55 @@
+ifdef::env-github[]
+:imagesdir: ../../guide/demos/
+endif::[]
+
+= Example 2 - Layout Managers
+
+image:images/demo2.gif[image]
+
+In this example, a panel is created with a FlowLayout for its layout manager.
+
+A flow layout positions children left-to-right in rows going from top-to-bottom.
+
+The children are sized according to their preferred size.
+
+[source,java]
+----
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.draw2d.*;
+
+public class Demo2 {
+	public static void main(String args[]){
+		Shell shell = new Shell();
+		shell.open();
+		shell.setText("Draw2d");
+		LightweightSystem lws = new LightweightSystem(shell);
+		IFigure panel = new Figure();
+		panel.setLayoutManager(new FlowLayout());
+		lws.setContents(panel);
+
+		Clickable button = new Button("Click me");
+		Clickable checkbox = new CheckBox("Check box");
+
+		Shape ellipse = new Ellipse();
+		ellipse.setBackgroundColor(ColorConstants.yellow);
+		ellipse.setSize(64, 36);
+
+		Shape rectangle = new RectangleFigure();
+		rectangle.setBackgroundColor(ColorConstants.lightBlue);
+		rectangle.setSize(64, 36);
+
+		panel.add(button);
+		panel.add(checkbox);
+		panel.add(ellipse);
+		panel.add(rectangle);
+
+		Display display = Display.getDefault();
+		while (!shell.isDisposed ()) {
+			if (!display.readAndDispatch ()) {
+				display.sleep ();
+			}
+		}
+	}
+}
+----

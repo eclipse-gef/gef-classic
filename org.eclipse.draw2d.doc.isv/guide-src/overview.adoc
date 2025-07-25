@@ -13,7 +13,7 @@ composed via a parent-child relationship. Every figure has a rectangular
 *_bounds_* inside which it, and its children, paint. A layout manager
 can be used to place children based on their index and/or constraint.
 
-image:images/system.gif[image]
+image:images/draw2d.gif[image]
 
 A `LightweightSystem` associates a figure composition with an SWT
 Canvas. The lightweight system hooks listeners for most SWT events, and

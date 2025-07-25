@@ -1,0 +1,34 @@
+ifdef::env-github[]
+:imagesdir: ../../guide/demos/
+endif::[]
+
+= Example 1 - Hello World
+
+image:images/helloworld.gif[image]
+
+In this example, a simple label is created that covers the whole canvas.
+
+[source,java]
+----
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.draw2d.*;
+
+public class HelloWorld {
+	public static void main(String args[]){
+		Shell shell = new Shell();
+		shell.open();
+		shell.setText("Draw2d Hello World");
+		LightweightSystem lws = new LightweightSystem(shell);
+		Label label = new Label("Hello World");
+		lws.setContents(label);
+
+		Display display = Display.getDefault();
+		while (!shell.isDisposed ()) {
+			if (!display.readAndDispatch ()) {
+				display.sleep ();
+			}
+		}
+	}
+}
+----
