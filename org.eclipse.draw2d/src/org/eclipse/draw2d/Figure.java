@@ -100,33 +100,38 @@ public class Figure implements IFigure {
 	protected Dimension maxSize;
 
 	/**
-	 * @deprecated access using {@link #getLocalFont()}
+	 * @deprecated access using {@link #getLocalFont()}. This field will be made
+	 *             private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected Font font;
 
 	/**
-	 * @deprecated access using {@link #getLocalBackgroundColor()}.
+	 * @deprecated access using {@link #getLocalBackgroundColor()}. This field will
+	 *             be made private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected Color bgColor;
 
 	/**
-	 * @deprecated access using {@link #getLocalForegroundColor()}.
+	 * @deprecated access using {@link #getLocalForegroundColor()}. This field will
+	 *             be made private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected Color fgColor;
 
 	/**
-	 * @deprecated access using {@link #getBorder()}
+	 * @deprecated access using {@link #getBorder()} This field will be made private
+	 *             after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected Border border;
 
 	/**
-	 * @deprecated access using {@link #getToolTip()}
+	 * @deprecated access using {@link #getToolTip()} This field will be made
+	 *             private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected IFigure toolTip;
 
 	private AncestorHelper ancestorHelper;
@@ -2201,9 +2206,10 @@ public class Figure implements IFigure {
 	/**
 	 * Iterates over a Figure's children in reverse order.
 	 *
-	 * @deprecated use ReverseFigureChildrenIterator instead
+	 * @deprecated use ReverseFigureChildrenIterator instead. This class will be
+	 *             removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static class FigureIterator {
 		private final List<? extends IFigure> list;
 		private int index;

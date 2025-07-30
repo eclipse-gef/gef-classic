@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -28,9 +28,10 @@ public abstract class Shape extends Figure {
 	 * The width of this shape's outline.
 	 *
 	 * @deprecated Use {@link #setLineWidth(int)} or
-	 *             {@link #setLineWidthFloat(float)} instead.
+	 *             {@link #setLineWidthFloat(float)} instead. This field will be
+	 *             made private with the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int lineWidth;
 
 	/**
@@ -47,9 +48,10 @@ public abstract class Shape extends Figure {
 	/**
 	 * The line style to be used for this shape's outline.
 	 *
-	 * @deprecated Use {@link #setLineStyle(int)} instead.
+	 * @deprecated Use {@link #setLineStyle(int)} instead. This field will be made
+	 *             private with the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int lineStyle;
 
 	/**

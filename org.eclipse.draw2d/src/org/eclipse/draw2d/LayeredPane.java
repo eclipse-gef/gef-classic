@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -130,11 +130,12 @@ public class LayeredPane extends Layer {
 	/**
 	 * Removes the given layer from this layered pane.
 	 *
-	 * @deprecated call {@link IFigure#remove(IFigure)} instead
+	 * @deprecated call {@link IFigure#remove(IFigure)} instead. This method will be
+	 *             removed after the 2027-09 release.
 	 * @param layer the layer to be removed
 	 * @since 2.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public void removeLayer(IFigure layer) {
 		remove(layer);
 	}

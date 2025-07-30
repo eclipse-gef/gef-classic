@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 IBM Corporation and others.
+ * Copyright (c) 2011, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -34,35 +34,37 @@ public abstract class OrderedLayout extends AbstractHintLayout {
 	 * Constant to specify components should be layed out horizontally
 	 *
 	 * @deprecated Pulled up from derived layout manager and deprecated here because
-	 *             unused.
+	 *             unused. This field will be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final boolean HORIZONTAL = true;
 	/**
 	 * Constant to specify components should be layed out vertically
 	 *
 	 * @deprecated Pulled up from derived layout manager and deprecated here because
-	 *             unused.
+	 *             unused. This field will be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final boolean VERTICAL = false;
 
 	/**
 	 * The horizontal property.
 	 *
 	 * @deprecated Use {@link #setHorizontal(boolean)} and {@link #isHorizontal()}
-	 *             instead.
+	 *             instead. This field will be made private after the 2027-09
+	 *             release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected boolean horizontal;
 
 	/**
 	 * The alignment along the minor axis.
 	 *
 	 * @deprecated Use {@link #getMinorAlignment()} and
-	 *             {@link #setMinorAlignment(int)} instead.
+	 *             {@link #setMinorAlignment(int)} instead. This field will be made
+	 *             private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int minorAlignment;
 
 	/**
