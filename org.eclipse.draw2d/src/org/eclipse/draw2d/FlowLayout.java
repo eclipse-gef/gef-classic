@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -42,17 +42,19 @@ public class FlowLayout extends OrderedLayout {
 	/**
 	 * Constant to specify components to be aligned on the left/top
 	 *
-	 * @deprecated Use {@link OrderedLayout#ALIGN_TOPLEFT} instead.
+	 * @deprecated Use {@link OrderedLayout#ALIGN_TOPLEFT} instead. This field will
+	 *             be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final int ALIGN_LEFTTOP = ALIGN_TOPLEFT;
 
 	/**
 	 * Constant to specify components to be aligned on the right/bottom
 	 *
-	 * @deprecated Use {@link OrderedLayout#ALIGN_BOTTOMRIGHT} instead.
+	 * @deprecated Use {@link OrderedLayout#ALIGN_BOTTOMRIGHT} instead. This field
+	 *             will be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final int ALIGN_RIGHTBOTTOM = ALIGN_BOTTOMRIGHT;
 
 	protected WorkingData data = null;
@@ -62,36 +64,40 @@ public class FlowLayout extends OrderedLayout {
 	 * row/column should be filled by the last item in that row/column.
 	 *
 	 * @deprecated Use {@link OrderedLayout#setStretchMinorAxis(boolean)} and
-	 *             {@link OrderedLayout#isStretchMinorAxis()} instead.
+	 *             {@link OrderedLayout#isStretchMinorAxis()} instead. This field
+	 *             will be made private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected boolean fill;
 
 	/**
 	 * The alignment along the major axis.
 	 *
 	 * @deprecated Use {@link #getMajorAlignment()} and
-	 *             {@link #setMajorAlignment(int)} instead.
+	 *             {@link #setMajorAlignment(int)} instead. This field will be made
+	 *             private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int majorAlignment = ALIGN_TOPLEFT;
 
 	/**
 	 * The spacing along the major axis.
 	 *
 	 * @deprecated Use {@link #getMajorSpacing()} and {@link #setMajorSpacing(int)}
-	 *             instead.
+	 *             instead. This field will be made private after the 2027-09
+	 *             release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int majorSpacing = 5;
 
 	/**
 	 * The spacing along the minor axis.
 	 *
 	 * @deprecated Use {@link #getMinorSpacing()} and {@link #setMinorSpacing(int)}
-	 *             instead.
+	 *             instead. This field will be made private after the 2027-09
+	 *             release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int minorSpacing = 5;
 
 	/**

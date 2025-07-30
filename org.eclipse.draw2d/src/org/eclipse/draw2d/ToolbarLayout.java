@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,34 +31,36 @@ public class ToolbarLayout extends OrderedLayout {
 	/**
 	 * Constant for horizontal alignment
 	 *
-	 * @deprecated Unused.
+	 * @deprecated Unused. This field will be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final boolean HORIZONTAL = true;
 
 	/**
 	 * Constant for vertical alignment
 	 *
-	 * @deprecated Unused.
+	 * @deprecated Unused. This field will be removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public static final boolean VERTICAL = false;
 
 	/**
 	 * Sets whether children should "stretch" with their container
 	 *
 	 * @deprecated Use {@link OrderedLayout#setStretchMinorAxis(boolean)} and
-	 *             {@link OrderedLayout#isStretchMinorAxis()} instead.
+	 *             {@link OrderedLayout#isStretchMinorAxis()} instead. This field
+	 *             will be made private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected boolean matchWidth;
 
 	/**
 	 * Space in pixels between Figures
 	 *
 	 * @deprecated Use {@link #getSpacing()} and {@link #setSpacing(int)} instead.
+	 *             This field will be made private after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected int spacing;
 
 	/**
@@ -252,9 +254,10 @@ public class ToolbarLayout extends OrderedLayout {
 	 * value is false.
 	 *
 	 * @return <code>true</code> if stretch minor axis is enabled
-	 * @deprecated Use {@link #isStretchMinorAxis()} instead.
+	 * @deprecated Use {@link #isStretchMinorAxis()} instead. This method will be
+	 *             removed after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public boolean getStretchMinorAxis() {
 		return isStretchMinorAxis();
 	}
@@ -387,11 +390,12 @@ public class ToolbarLayout extends OrderedLayout {
 	 * Sets children's width (if vertically oriented) or height (if horizontally
 	 * oriented) to stretch with their container.
 	 *
-	 * @deprecated use {@link #setStretchMinorAxis(boolean)}
+	 * @deprecated use {@link #setStretchMinorAxis(boolean)}. This method will be
+	 *             removed after the 2027-09 release.
 	 * @param match whether to stretch children
 	 * @since 2.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public void setMatchWidth(boolean match) {
 		matchWidth = match;
 	}
@@ -423,9 +427,10 @@ public class ToolbarLayout extends OrderedLayout {
 	 * @param flag whether the orientation should be vertical
 	 * @since 2.0
 	 * @deprecated Use {@link #setHorizontal(boolean)} with argument
-	 *             <code>false</code> instead.
+	 *             <code>false</code> instead. This method will be removed after the
+	 *             2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	public void setVertical(boolean flag) {
 		setHorizontal(!flag);
 	}

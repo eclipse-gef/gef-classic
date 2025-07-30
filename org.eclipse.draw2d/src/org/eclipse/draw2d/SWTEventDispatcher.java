@@ -32,9 +32,10 @@ public class SWTEventDispatcher extends EventDispatcher {
 	/**
 	 * Used to tell if any button is pressed without regard to the specific button.
 	 *
-	 * @deprecated Use {@link SWT#BUTTON_MASK} instead.
+	 * @deprecated Use {@link SWT#BUTTON_MASK} instead. This field will be removed
+	 *             after the 2027-09 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-09")
 	protected static final int ANY_BUTTON = SWT.BUTTON_MASK;
 
 	private boolean figureTraverse = true;
