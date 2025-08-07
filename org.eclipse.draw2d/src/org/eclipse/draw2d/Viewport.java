@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,6 +27,13 @@ public class Viewport extends Figure implements PropertyChangeListener {
 
 	/** ID for the view location property */
 	public static final String PROPERTY_VIEW_LOCATION = "viewLocation"; //$NON-NLS-1$
+	/**
+	 * ID for the contents property. An event with this ID is fired whenever the
+	 * content of this viewport is set.
+	 *
+	 * @see #setContents(IFigure)
+	 */
+	/* package */ static final String PROPERTY_CONTENTS = "contents"; //$NON-NLS-1$
 	private IFigure view;
 
 	private boolean useTranslate = false;
@@ -223,6 +230,7 @@ public class Viewport extends Figure implements PropertyChangeListener {
 		if (view == figure) {
 			return;
 		}
+		IFigure oldView = view;
 		if (view != null) {
 			remove(view);
 		}
@@ -230,6 +238,7 @@ public class Viewport extends Figure implements PropertyChangeListener {
 		if (view != null) {
 			add(figure);
 		}
+		firePropertyChange(PROPERTY_CONTENTS, oldView, view);
 	}
 
 	/**
