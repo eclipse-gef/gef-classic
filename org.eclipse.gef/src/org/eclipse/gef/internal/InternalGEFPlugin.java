@@ -13,6 +13,7 @@
 
 package org.eclipse.gef.internal;
 
+import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -30,12 +31,17 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import org.eclipse.draw2d.BasicColorProvider;
 import org.eclipse.draw2d.ColorProvider;
+import org.eclipse.draw2d.ScalableFigure;
 
+import org.eclipse.gef.EditPart;
+import org.eclipse.gef.EditPartListener;
 import org.eclipse.gef.GEFColorProvider;
 
 import org.osgi.framework.BundleContext;
 
 public class InternalGEFPlugin extends AbstractUIPlugin {
+	/** Monitor scale property */
+	public static final String MONITOR_SCALE_PROPERTY = "monitorScale"; //$NON-NLS-1$
 
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
@@ -126,5 +132,32 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException("Failed to instantiate Cursor", e); //$NON-NLS-1$
 		}
+	}
+
+	public static EditPartListener createAutoscaleEditPartListener(ScalableFigure figure) {
+		final PropertyChangeListener autoScaleListener = evt -> {
+			if (InternalGEFPlugin.MONITOR_SCALE_PROPERTY.equals(evt.getPropertyName()) && evt.getNewValue() != null) {
+				double newValue = (double) evt.getNewValue();
+				figure.setScale(newValue);
+			}
+		};
+
+		return new EditPartListener.Stub() {
+			@Override
+			public void partActivated(EditPart editpart) {
+				editpart.getViewer().addPropertyChangeListener(autoScaleListener);
+				try {
+					double scale = (double) editpart.getViewer().getProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY);
+					figure.setScale(scale);
+				} catch (NullPointerException | ClassCastException e) {
+					// no value available
+				}
+			}
+
+			@Override
+			public void partDeactivated(EditPart editpart) {
+				editpart.getViewer().removePropertyChangeListener(autoScaleListener);
+			}
+		};
 	}
 }

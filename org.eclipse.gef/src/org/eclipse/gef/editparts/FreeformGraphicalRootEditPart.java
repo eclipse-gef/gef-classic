@@ -20,6 +20,7 @@ import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
+import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -30,6 +31,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -86,7 +88,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  */
 public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements LayerConstants, LayerManager {
 
-	private LayeredPane innerLayers;
+	private ScalableFreeformLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private final PropertyChangeListener gridListener = evt -> {
 		String property = evt.getPropertyName();
@@ -102,7 +104,8 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	@Override
 	protected IFigure createFigure() {
 		FreeformViewport viewport = new FreeformViewport();
-		innerLayers = new FreeformLayeredPane();
+		innerLayers = new ScalableFreeformLayeredPane();
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;

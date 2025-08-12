@@ -32,6 +32,7 @@ import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -121,7 +122,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 
 	}
 
-	private LayeredPane innerLayers;
+	private ScalableLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private ScalableLayeredPane scaledLayers;
 	private final PropertyChangeListener gridListener = (PropertyChangeEvent evt) -> {
@@ -174,7 +175,8 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	protected IFigure createFigure() {
 		Viewport viewport = createViewport();
 
-		innerLayers = new LayeredPane();
+		innerLayers = new ScalableLayeredPane();
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
 		createLayers(innerLayers);
 
 		viewport.setContents(innerLayers);

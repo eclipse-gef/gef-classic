@@ -21,6 +21,7 @@ import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
@@ -52,7 +53,9 @@ public class ScrollingGraphicalViewer extends GraphicalViewerImpl {
 	 */
 	@Override
 	public final Control createControl(Composite parent) {
-		setControl(new FigureCanvas(parent, getLightweightSystem()));
+		FigureCanvas control = new FigureCanvas(parent, getLightweightSystem());
+		InternalDraw2dUtils.configureForAutoscalingMode(control);
+		setControl(control);
 		hookRootFigure();
 		return getControl();
 	}
