@@ -20,6 +20,7 @@ import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
+import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -30,6 +31,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -86,7 +88,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  */
 public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements LayerConstants, LayerManager {
 
-	private LayeredPane innerLayers;
+	private ScalableFreeformLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private final PropertyChangeListener gridListener = evt -> {
 		String property = evt.getPropertyName();
@@ -96,13 +98,31 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 		}
 	};
 
+	private final PropertyChangeListener autoScaleListener = evt -> {
+		if (InternalGEFPlugin.MONITOR_SCALE_PROPERTY.equals(evt.getPropertyName()) && evt.getNewValue() != null) {
+			double newValue = (double) evt.getNewValue();
+			innerLayers.setScale(newValue);
+		}
+	};
+
+	@Override
+	public void activate() {
+		try {
+			double scale = (double) getViewer().getProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY);
+			innerLayers.setScale(scale);
+		} catch (NullPointerException | ClassCastException e) {
+			// no value available
+		}
+		super.activate();
+	}
+
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
 	@Override
 	protected IFigure createFigure() {
 		FreeformViewport viewport = new FreeformViewport();
-		innerLayers = new FreeformLayeredPane();
+		innerLayers = new ScalableFreeformLayeredPane();
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;
@@ -260,6 +280,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 			getViewer().addPropertyChangeListener(gridListener);
 			refreshGridLayer();
 		}
+		getViewer().addPropertyChangeListener(autoScaleListener);
 	}
 
 	/**
@@ -267,6 +288,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 */
 	@Override
 	protected void unregister() {
+		getViewer().removePropertyChangeListener(autoScaleListener);
 		getViewer().removePropertyChangeListener(gridListener);
 		super.unregister();
 	}
@@ -276,5 +298,4 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 			setEnabled(false);
 		}
 	}
-
 }

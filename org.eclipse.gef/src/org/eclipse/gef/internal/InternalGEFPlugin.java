@@ -36,6 +36,8 @@ import org.eclipse.gef.GEFColorProvider;
 import org.osgi.framework.BundleContext;
 
 public class InternalGEFPlugin extends AbstractUIPlugin {
+	/** Monitor scale property */
+	public static final String MONITOR_SCALE_PROPERTY = "monitorScale"; //$NON-NLS-1$
 
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
