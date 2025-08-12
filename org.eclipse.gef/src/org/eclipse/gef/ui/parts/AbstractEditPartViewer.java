@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
 import org.eclipse.swt.dnd.DropTarget;
@@ -46,6 +47,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditDomain;
@@ -55,6 +57,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.SelectionManager;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
  * The base implementation for EditPartViewer.
@@ -484,6 +487,11 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (contextMenu != null) {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
 		}
+		if (InternalDraw2dUtils.disableAutoscale) {
+			control.addListener(SWT.ZoomChanged,
+					e -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, e.detail / 100.0));
+		}
+		setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, calculateScale());
 	}
 
 	/**
@@ -855,4 +863,10 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	public void unregisterAccessibleEditPart(AccessibleEditPart acc) {
 	}
 
+	private double calculateScale() {
+		if (!InternalDraw2dUtils.disableAutoscale || control == null) {
+			return 1.0;
+		}
+		return control.getMonitor().getZoom() / 100.0;
+	}
 }
