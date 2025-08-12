@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * Provides miscellaneous Figure operations.
@@ -73,7 +74,9 @@ public class FigureUtilities {
 	@Deprecated
 	protected static GC getGC() {
 		if (gc == null) {
-			gc = new GC(new Shell());
+			Shell shell = new Shell();
+			InternalDraw2dUtils.configureForAutoscalingMode(shell);
+			gc = new GC(shell);
 			appliedFont = gc.getFont();
 		}
 		return gc;
@@ -424,5 +427,4 @@ public class FigureUtilities {
 		}
 		return !figBounds.isEmpty();
 	}
-
 }

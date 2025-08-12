@@ -31,7 +31,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.editparts.SimpleRootEditPart;
+import org.eclipse.gef.internal.SimpleAutoscaledRootEditPart;
 import org.eclipse.gef.internal.ui.palette.PaletteSelectionTool;
 import org.eclipse.gef.internal.ui.palette.editparts.DrawerEditPart;
 import org.eclipse.gef.internal.ui.palette.editparts.PaletteStackEditPart;
@@ -127,7 +127,7 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	 */
 	@Override
 	protected void createDefaultRoot() {
-		setRootEditPart(new SimpleRootEditPart());
+		setRootEditPart(new SimpleAutoscaledRootEditPart());
 	}
 
 	private void disposeFont() {
