@@ -32,6 +32,7 @@ import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.MonitorAwareZoomManager;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -202,7 +203,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	 */
 	protected void createLayers(LayeredPane layeredPane) {
 		layeredPane.add(getScaledLayers(), SCALABLE_LAYERS);
-		layeredPane.add(new Layer() {
+		layeredPane.add(new ScalableLayeredPane() {
 			@Override
 			public Dimension getPreferredSize(int wHint, int hHint) {
 				return new Dimension();
@@ -389,6 +390,14 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 		if (getLayer(GRID_LAYER) != null) {
 			getViewer().addPropertyChangeListener(gridListener);
 			refreshGridLayer();
+		}
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			IFigure handleLayer = getLayer(HANDLE_LAYER);
+			if (handleLayer instanceof ScalableFigure scalableLayer) {
+				monitorAwareZoomManager.registerPane(scalableLayer);
+			}
 		}
 	}
 

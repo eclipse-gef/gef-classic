@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.draw2d.FigureCanvas;
+import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -52,7 +53,9 @@ public class ScrollingGraphicalViewer extends GraphicalViewerImpl {
 	 */
 	@Override
 	public final Control createControl(Composite parent) {
-		setControl(new FigureCanvas(parent, getLightweightSystem()));
+		FigureCanvas control = new FigureCanvas(parent, getLightweightSystem());
+		FigureUtilities.configureAutoscaleMode(control);
+		setControl(control);
 		hookRootFigure();
 		return getControl();
 	}

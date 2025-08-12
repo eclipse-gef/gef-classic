@@ -20,7 +20,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontMetrics;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
@@ -30,8 +34,10 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.text.FlowPage;
+import org.eclipse.draw2d.text.FlowUtilities;
 import org.eclipse.draw2d.text.TextFlow;
 
 import org.eclipse.gef.AccessibleEditPart;
@@ -129,10 +135,69 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 		};
 		fp.setOpaque(true);
 		fp.setBorder(TOOLTIP_BORDER);
-		TextFlow tf = new TextFlow();
+		TextFlow tf = new PaletteTooltipTextFlow();
 		tf.setText(message);
 		fp.add(tf);
 		return fp;
+	}
+
+	private class PaletteTooltipTextFlow extends TextFlow {
+
+		private final TextUtilities textUtilities = new PaletteTextUtilities();
+
+		@Override
+		protected FlowUtilities getFlowUtilities() {
+			return new FlowUtilities() {
+				@Override
+				protected TextUtilities getTextUtilities() {
+					return textUtilities;
+				}
+			};
+		}
+
+		@Override
+		protected TextUtilities getTextUtilities() {
+			return textUtilities;
+		}
+	}
+
+	public class PaletteTextUtilities extends TextUtilities {
+
+		private <T> T withGc(Font font, Function<GC, T> function) {
+			GC gc = new GC(getRoot().getViewer().getControl().getShell());
+			try {
+				gc.setFont(font);
+				return function.apply(gc);
+			} finally {
+				gc.dispose();
+			}
+		}
+
+		@Override
+		public int getAscent(Font font) {
+			FontMetrics fm = withGc(font, GC::getFontMetrics);
+			return fm.getHeight() - fm.getDescent();
+		}
+
+		@Override
+		public int getDescent(Font font) {
+			return withGc(font, GC::getFontMetrics).getDescent();
+		}
+
+		@Override
+		public int getLargestSubstringConfinedTo(String s, Font f, int availableWidth) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Dimension getTextExtents(String s, Font f) {
+			return withGc(f, gc -> new Dimension(gc.textExtent(s)));
+		}
+
+		@Override
+		public Dimension getStringExtents(String s, Font f) {
+			return withGc(f, gc -> new Dimension(gc.stringExtent(s)));
+		}
 	}
 
 	/**

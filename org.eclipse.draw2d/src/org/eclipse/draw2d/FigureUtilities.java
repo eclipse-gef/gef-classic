@@ -19,10 +19,12 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * Provides miscellaneous Figure operations.
@@ -73,7 +75,9 @@ public class FigureUtilities {
 	@Deprecated
 	protected static GC getGC() {
 		if (gc == null) {
-			gc = new GC(new Shell());
+			Shell shell = new Shell();
+			configureAutoscaleMode(shell);
+			gc = new GC(shell);
 			appliedFont = gc.getFont();
 		}
 		return gc;
@@ -425,4 +429,9 @@ public class FigureUtilities {
 		return !figBounds.isEmpty();
 	}
 
+	public static void configureAutoscaleMode(Control control) {
+		if (control != null && InternalDraw2dUtils.disableAutoscale) {
+			control.setData("AUTOSCALE_DISABLED", true); //$NON-NLS-1$
+		}
+	}
 }

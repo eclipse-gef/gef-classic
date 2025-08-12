@@ -20,6 +20,7 @@ import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
+import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -30,6 +31,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.MonitorAwareZoomManager;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -259,6 +261,14 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 		if (getLayer(GRID_LAYER) != null) {
 			getViewer().addPropertyChangeListener(gridListener);
 			refreshGridLayer();
+		}
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			IFigure handleLayer = getLayer(HANDLE_LAYER);
+			if (handleLayer instanceof ScalableFigure scalableLayer) {
+				monitorAwareZoomManager.registerPane(scalableLayer);
+			}
 		}
 	}
 
