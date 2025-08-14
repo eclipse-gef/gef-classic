@@ -65,9 +65,9 @@ class BufferedGraphicsSource implements GraphicsSource {
 		 * The imageBuffer may be null if double-buffering was not successful.
 		 */
 		if (imageBuffer != null) {
-			imageGC.dispose();
 			controlGC.drawImage(getImage(), 0, 0, inUse.width, inUse.height, inUse.x, inUse.y, inUse.width,
 					inUse.height);
+			imageGC.dispose();
 			imageBuffer.dispose();
 			imageBuffer = null;
 			imageGC = null;
