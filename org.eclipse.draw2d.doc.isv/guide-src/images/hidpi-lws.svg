@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="99.196518mm"
+   height="64.822914mm"
+   viewBox="0 0 99.196518 64.822919"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker9086"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="4.0606599"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path9084"
+         transform="rotate(180,0.125,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1940"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path1938"
+         transform="rotate(180,0.125,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       refX="-3"
+       refY="0"
+       orient="auto"
+       id="EmptyDiamond"
+       markerWidth="11"
+       markerHeight="7"
+       viewBox="0 0 7.6367532 7.6367533"
+       preserveAspectRatio="none"
+       markerUnits="strokeWidth">
+      <path
+         style="fill:context-fill;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.9"
+         d="M -7.9200087e-8,-3.1819846 -3.1819903,0 -7.9200087e-8,3.1819765 3.1819707,0 Z"
+         id="path108" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker10335"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path10333"
+         transform="rotate(180,0.125,0)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path5057"
+         transform="rotate(180,0.125,0)" />
+    </marker>
+    <rect
+       x="183.31523"
+       y="106.20882"
+       width="133.50412"
+       height="18.155708"
+       id="rect9727" />
+    <rect
+       x="275.39487"
+       y="135.28937"
+       width="121.27882"
+       height="23.642803"
+       id="rect5234" />
+    <rect
+       x="49.652241"
+       y="49.258175"
+       width="199.79115"
+       height="26.796446"
+       id="rect4491" />
+    <rect
+       x="48.736794"
+       y="50.259815"
+       width="201.03928"
+       height="26.652933"
+       id="rect4469" />
+    <rect
+       x="49.70977"
+       y="50.893333"
+       width="199.22705"
+       height="26.784908"
+       id="rect4361" />
+    <marker
+       style="overflow:visible"
+       id="Arrow1-0"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path5057-4"
+         transform="rotate(180,0.125,0)" />
+    </marker>
+    <rect
+       x="183.31523"
+       y="106.20882"
+       width="66.60553"
+       height="14.401196"
+       id="rect9727-7" />
+    <rect
+       x="49.652241"
+       y="49.258175"
+       width="199.79115"
+       height="26.796446"
+       id="rect4491-3" />
+    <rect
+       x="49.652241"
+       y="49.258175"
+       width="199.79115"
+       height="26.796446"
+       id="rect4491-3-5" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(26.458334,-13.229164)">
+    <rect
+       style="fill:#e4e4e4;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+       id="rect223"
+       width="52.652084"
+       height="34.131248"
+       x="13.361458"
+       y="13.361456" />
+    <path
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1-0)"
+       d="M 33.072916,31.749997 V 51.329164"
+       id="path9932-8" />
+    <g
+       id="g9650"
+       transform="translate(-59.531252,23.812497)">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+         id="rect4504-4"
+         width="26.19375"
+         height="5.0270839"
+         x="79.507294"
+         y="2.7781248" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,3.6220935,-32.603431)"
+         id="text5232"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;white-space:pre;shape-inside:url(#rect5234);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"><tspan
+           x="303.5142"
+           y="146.20756"
+           id="tspan12505">Root Figure</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker10335);marker-end:url(#EmptyDiamond);paint-order:normal"
+       d="m 53.181249,52.916663 h 6.35 v -2.778124"
+       id="path10265" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,9.0812412,24.287296)"
+       id="text9725-1"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;white-space:pre;shape-inside:url(#rect9727-7);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:2, 1;stroke-dashoffset:0;stroke-opacity:1"><tspan
+         x="192.1012"
+         y="117.12749"
+         id="tspan12507">contents
+</tspan></text>
+    <g
+       id="g4502">
+      <rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;text-anchor:middle;white-space:pre;shape-inside:url(#rect4491);fill:#fcfc9c;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+         id="rect113"
+         width="52.652084"
+         height="6.3500004"
+         x="13.361458"
+         y="13.361458" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,0.09422491,1.4403086)"
+         id="text4489"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;white-space:pre;shape-inside:url(#rect4491);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"><tspan
+           x="55.431892"
+           y="60.176315"
+           id="tspan12509">MonitorAwareLightweightSystem</tspan></text>
+    </g>
+    <g
+       id="g701"
+       style="display:inline">
+      <rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;text-anchor:middle;white-space:pre;shape-inside:url(#rect4491-3);fill:#fcfc9c;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+         id="rect113-7"
+         width="26.19375"
+         height="6.3500004"
+         x="-26.326042"
+         y="29.897913" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,-52.879588,17.940248)"
+         id="text4489-5"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;white-space:pre;shape-inside:url(#rect4491-3);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"><tspan
+           x="111.59186"
+           y="60.176315"
+           id="tspan12511">FigureCanvas</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.529166, 0.264583;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1940)"
+       d="M -3.9687505,36.380205 V 59.531247 H 12.964583"
+       id="path915" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.529166, 0.264583;stroke-dashoffset:0;stroke-opacity:1;marker-end:;marker-start:url(#marker9086)"
+       d="M 12.964584,33.072914 H 2.253988e-7"
+       id="path917" />
+    <g
+       id="g8815">
+      <rect
+         style="fill:#e4e4e4;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+         id="rect223-1"
+         width="39.422916"
+         height="26.19375"
+         x="13.361458"
+         y="51.72604" />
+      <rect
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;text-anchor:middle;white-space:pre;shape-inside:url(#rect4491-3-5);fill:#fcfc9c;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+         id="rect113-7-2"
+         width="39.422916"
+         height="6.3500004"
+         x="13.361458"
+         y="51.72604" />
+      <text
+         xml:space="preserve"
+         transform="matrix(0.26458333,0,0,0.26458333,-6.6140238,39.768376)"
+         id="text4489-5-9"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:0px;white-space:pre;shape-inside:url(#rect4491-3-5);display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"><tspan
+           x="84.195885"
+           y="60.176315"
+           id="tspan12513">MonitorAwareViewport</tspan></text>
+      <g
+         id="g9665"
+         transform="translate(-63.500002,52.916664)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4504-6"
+           width="26.19375"
+           height="5.0270839"
+           x="79.507294"
+           y="16.007292" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.175px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+           x="92.604164"
+           y="19.711458"
+           id="text5240"><tspan
+             id="tspan5238"
+             style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="92.604164"
+             y="19.711458">Scalable Pane</tspan></text>
+      </g>
+      <g
+         id="g9655"
+         transform="translate(-63.500002,37.041664)">
+        <rect
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+           id="rect4504"
+           width="26.19375"
+           height="5.0270839"
+           x="79.507294"
+           y="23.944792" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.175px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1"
+           x="92.639091"
+           y="27.247322"
+           id="text5244"><tspan
+             id="tspan5242"
+             style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+             x="92.639091"
+             y="27.247322">Viewport</tspan></text>
+      </g>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker9086)"
+       d="m 29.104168,66.145832 v 2.381251"
+       id="path10741" />
+  </g>
+</svg>

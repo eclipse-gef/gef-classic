@@ -20,3 +20,4 @@ coordinates, working with absolute coordinates
 behavior
 * xref:migration-guide.adoc[Plug-in Migration Guide] - changes between
 individual releases
+* xref:hidpi.adoc[High-DPI Support] - taming the native display zoom

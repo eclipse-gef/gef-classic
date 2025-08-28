@@ -60,7 +60,8 @@ import org.junit.platform.suite.api.Suite;
 	InsetsTest.class,
 	DirectedGraphLayoutTest.class,
 	ScrollPaneTests.class,
-	LabelTest.class
+	LabelTest.class,
+	HiDPITest.class
 })
 public class Draw2dTestSuite {
 }

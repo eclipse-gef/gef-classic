@@ -1,0 +1,44 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
+= High-DPI Support
+
+Modern versions of SWT automatically scale the Draw2D figures by the native display zoom. In Draw2D, this feature is
+enabled by default. If clients require more control over the scaling behavior, this functionality may be configured by
+passing a link:../reference/api/org/eclipse/draw2d/MonitorAwareLightweightSystem.html[`MonitorAwareLightweightSystem`],
+when creating a new link:../reference/api/org/eclipse/draw2d/FigureCanvas.html[`FigureCanvas`] instance.
+
+[source,java]
+----
+FigureCanvas figureCanvas = new FigureCanvas(shell, new MonitorAwareLightweightSystem());
+----
+
+This custom lightweight-system performs three actions:
+
+1) It disables the auto-scaling that would normally be done by SWT, by setting the widget-defined `AUTOSCALE_DISABLED`
+   property.
+
+2) It creates a link:../reference/api/org/eclipse/draw2d/internal/MonitorAwareViewport.html[`MonitorAwareViewport`] that is used
+   to inject a link:../reference/api/org/eclipse/draw2d/ScalableLayeredPane.html[`ScalableLayeredPane`] between the root figure
+   and the contents of the viewport.
+
+3) It hooks a listener to the canvas that updates the scale of the scalable pane, whenever the native zoom of the widget
+   is changed.
+
+image:images/hidpi-lws.png[Figure Hierarchy of the MonitorAwareLightweightSystem]
+
+Clients may optionally set the `draw2d.autoScale` system property to define a scaling that is independent from the display zoom.
+Similar to the SWT system property, the value must be a positive integer.
+
+Example: 100, 125, 200, which correlate to 100%, 125% and 200%.
+
+In order to use this custom LightweightSystem in a GEF view, override the `createLightweightSystem()` method of the
+`GraphicalViewerImpl`.
+
+[source,java]
+----
+protected LightweightSystem createLightweightSystem() {
+	return new MonitorAwareLightweightSystem();
+}
+----

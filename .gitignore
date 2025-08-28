@@ -1,6 +1,7 @@
 **/bin/
 **/target/
 **/guide/**/*.html
+**/guide/**/*.svg
 /gef-updates
 *~
 *.rej
