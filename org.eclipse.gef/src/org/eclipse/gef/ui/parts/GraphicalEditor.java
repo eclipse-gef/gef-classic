@@ -178,7 +178,7 @@ public abstract class GraphicalEditor extends EditorPart
 	 */
 	@Override
 	public void dispose() {
-		getCommandStack().removeCommandStackListener(this);
+		getCommandStack().removeCommandStackEventListener(this);
 		getSite().getWorkbenchWindow().getSelectionService().removeSelectionListener(this);
 		getEditDomain().setActiveTool(null);
 		getActionRegistry().dispose();
@@ -354,7 +354,7 @@ public abstract class GraphicalEditor extends EditorPart
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		setSite(site);
 		setInput(input);
-		getCommandStack().addCommandStackListener(this);
+		getCommandStack().addCommandStackEventListener(this);
 		getSite().getWorkbenchWindow().getSelectionService().addSelectionListener(this);
 		initializeActionRegistry();
 	}
