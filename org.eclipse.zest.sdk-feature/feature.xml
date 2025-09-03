@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.zest.sdk"
       label="%featureName"
-      version="3.25.0.qualifier"
+      version="3.26.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.zest.core"
       license-feature="org.eclipse.license"
@@ -44,15 +44,6 @@
    <includes
          id="org.eclipse.draw2d"
          version="0.0.0"/>
-         
-   <includes
-         id="org.eclipse.draw2d.source"
-         version="0.0.0"/>         
-         
-   <includes
-         id="org.eclipse.zest.source"
-         version="0.0.0"/>         
-
    <plugin
          id="org.eclipse.zest.doc.isv"
          download-size="0"

@@ -3,19 +3,10 @@
    <feature id="org.eclipse.gef">
       <category name="gef"/>
    </feature>
-   <feature id="org.eclipse.gef.source">
-      <category name="gef"/>
-   </feature>
    <feature id="org.eclipse.draw2d">
       <category name="draw2d"/>
    </feature>
-   <feature id="org.eclipse.draw2d.source">
-      <category name="draw2d"/>
-   </feature>
    <feature id="org.eclipse.zest">
-      <category name="zest"/>
-   </feature>
-   <feature id="org.eclipse.zest.source">
       <category name="zest"/>
    </feature>
    <feature id="org.eclipse.zest.sdk">
@@ -25,9 +16,6 @@
       <category name="gef"/>
    </feature>
    <feature id="org.eclipse.gef.examples">
-      <category name="gef"/>
-   </feature>
-   <feature id="org.eclipse.gef.examples.source">
       <category name="gef"/>
    </feature>
    <feature id="org.eclipse.draw2d.sdk">

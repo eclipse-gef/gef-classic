@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.gef.examples.flow; singleton:=true
-Bundle-Version: 3.16.500.qualifier
+Bundle-Version: 3.16.600.qualifier
 Bundle-Activator: org.eclipse.gef.examples.flow.FlowPlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
