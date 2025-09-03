@@ -159,31 +159,19 @@
       <requirement
           name="org.eclipse.draw2d.feature.group"/>
       <requirement
-          name="org.eclipse.draw2d.source.feature.group"/>
-      <requirement
           name="org.eclipse.draw2d.examples"/>
-      <requirement
-          name="org.eclipse.draw2d.examples.source"/>
       <requirement
           name="org.eclipse.draw2d.sdk.feature.group"/>
       <requirement
           name="org.eclipse.gef.feature.group"/>
       <requirement
-          name="org.eclipse.gef.source.feature.group"/>
-      <requirement
           name="org.eclipse.gef.examples.feature.group"/>
-      <requirement
-          name="org.eclipse.gef.examples.source.feature.group"/>
       <requirement
           name="org.eclipse.gef.sdk.feature.group"/>
       <requirement
           name="org.eclipse.zest.feature.group"/>
       <requirement
-          name="org.eclipse.zest.source.feature.group"/>
-      <requirement
           name="org.eclipse.zest.examples"/>
-      <requirement
-          name="org.eclipse.zest.examples.source"/>
       <requirement
           name="org.eclipse.zest.sdk.feature.group"/>
       <repositoryList>

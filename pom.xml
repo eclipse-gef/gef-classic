@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.gef_root</groupId>
 	<artifactId>org.eclipse.gef.releng</artifactId>
-	<version>3.23.0-SNAPSHOT</version>
+	<version>3.26.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
@@ -16,9 +16,9 @@
 		<cbi-plugins.version>1.5.2</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.24.0</comparator.repo>
+		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.25.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
-		<asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
+		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.5.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
 		<execution-environment>JavaSE-21</execution-environment>
@@ -84,6 +84,15 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<repositoryName>GEF Classic ${build.id}</repositoryName>
+					<includeAllSources>true</includeAllSources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<executions>
@@ -92,24 +101,6 @@
 						<goals>
 							<goal>plugin-source</goal>
 						</goals>
-					</execution>
-					<execution>
-						<id>feature-source</id>
-						<goals>
-							<goal>feature-source</goal>
-						</goals>
-						<configuration>
-							<excludes>
-								<!-- provide plug-ins not containing any source code -->
-								<plugin id="org.eclipse.draw2d.doc.isv" />
-								<plugin id="org.eclipse.gef.doc.isv" />
-								<plugin id="org.eclipse.zest.doc.isv" />
-								<!-- also possible to exclude feature-->
-								<feature id="org.eclipse.draw2d.source" />
-								<feature id="org.eclipse.gef.source" />
-								<feature id="org.eclipse.zest.source" />
-							</excludes>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -284,7 +275,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>3.6.0</version>
+					<version>3.6.1</version>
 				</plugin>
 				<plugin>
 					<groupId>org.asciidoctor</groupId>
@@ -321,7 +312,7 @@
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
-					<version>5.1.0.4751</version>
+					<version>5.2.0.4988</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

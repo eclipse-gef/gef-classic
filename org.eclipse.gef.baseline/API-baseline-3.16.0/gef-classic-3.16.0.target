@@ -13,16 +13,10 @@
 <unit id="org.eclipse.gef.examples.feature.group" version="3.16.0.202306071707"/>
 <repository location="https://download.eclipse.org/tools/gef/classic/releases/3.16.0"/>
 	<unit id="org.eclipse.draw2d.examples" version="3.14.200.202306071707"/>
-	<unit id="org.eclipse.draw2d.examples.source" version="3.14.200.202306071707"/>
 	<unit id="org.eclipse.draw2d.feature.group" version="3.16.0.202306071707"/>
-	<unit id="org.eclipse.draw2d.source.feature.group" version="3.16.0.202306071707"/>
-	<unit id="org.eclipse.gef.examples.source.feature.group" version="3.16.0.202306071707"/>
 	<unit id="org.eclipse.gef.feature.group" version="3.16.0.202306071707"/>
-	<unit id="org.eclipse.gef.source.feature.group" version="3.16.0.202306071707"/>
 	<unit id="org.eclipse.zest.examples" version="3.15.0.202306071707"/>
-	<unit id="org.eclipse.zest.examples.source" version="3.15.0.202306071707"/>
 	<unit id="org.eclipse.zest.feature.group" version="3.16.0.202306071707"/>
-	<unit id="org.eclipse.zest.source.feature.group" version="3.16.0.202306071707"/>
 </location>
 </locations>
 </target>

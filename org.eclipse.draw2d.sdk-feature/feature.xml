@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.draw2d.sdk"
       label="%featureName"
-      version="3.25.0.qualifier"
+      version="3.26.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.draw2d"
       license-feature="org.eclipse.license"
@@ -41,10 +41,6 @@
          id="org.eclipse.draw2d"
          version="0.0.0"/>
          
-  <includes
-         id="org.eclipse.draw2d.source"
-         version="0.0.0"/>         
-
    <plugin
          id="org.eclipse.draw2d.doc.isv"
          download-size="0"

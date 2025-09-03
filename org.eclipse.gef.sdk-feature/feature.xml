@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.gef.sdk"
       label="%featureName"
-      version="3.25.0.qualifier"
+      version="3.26.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.gef"
       license-feature="org.eclipse.license"
@@ -44,15 +44,6 @@
    <includes
          id="org.eclipse.draw2d"
          version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.draw2d.source"
-         version="0.0.0"/>         
-
-   <includes
-         id="org.eclipse.gef.source"
-         version="0.0.0"/>
-   	
 
    <plugin
          id="org.eclipse.gef.doc.isv"
