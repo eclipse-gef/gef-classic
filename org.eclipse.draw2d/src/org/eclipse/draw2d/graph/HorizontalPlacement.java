@@ -309,7 +309,7 @@ class HorizontalPlacement extends SpanningTreeVisitor {
 	}
 
 	private void findAllClusters() {
-		Node root = prime.nodes.get(0);
+		Node root = prime.nodes.getFirst();
 		NodeCluster cluster = new NodeCluster();
 		allClusters = new ArrayList<>();
 		allClusters.add(cluster);
