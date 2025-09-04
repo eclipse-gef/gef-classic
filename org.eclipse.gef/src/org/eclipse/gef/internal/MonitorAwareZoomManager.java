@@ -29,9 +29,7 @@ public class MonitorAwareZoomManager {
 	private final Set<ScalableFigure> scalablePanes;
 	private final EditPartViewer viewer;
 	private Control control;
-	private final Listener zoomChangedListener = event -> {
-		refreshZoom();
-	};
+	private final Listener zoomChangedListener = event -> refreshZoom(false);
 
 	public enum ScaleMode {
 		AUTO_SCALE, NATIVE_SCALE;
@@ -43,10 +41,10 @@ public class MonitorAwareZoomManager {
 		}
 		this.scalablePanes = new HashSet<>();
 		this.viewer = viewer;
-		updateZoomManager(this.viewer.getProperty(ZoomManager.class.toString()));
+		updateZoomManager(this.viewer.getProperty(ZoomManager.class.toString()), true);
 		this.viewer.addPropertyChangeListener(evt -> {
 			if (ZoomManager.class.toString().equals(evt.getPropertyName())) {
-				updateZoomManager(evt.getNewValue());
+				updateZoomManager(evt.getNewValue(), true);
 			}
 		});
 	}
@@ -58,23 +56,23 @@ public class MonitorAwareZoomManager {
 		this.control = control;
 		if (control != null) {
 			control.addListener(SWT.ZoomChanged, zoomChangedListener);
-			refreshZoom();
+			refreshZoom(true);
 		}
 	}
 
 	public void registerPane(ScalableFigure scalableFigure) {
 		this.scalablePanes.add(scalableFigure);
-		refreshZoom();
+		refreshZoom(true);
 	}
 
-	private void refreshZoom() {
+	private void refreshZoom(boolean asyncUpdate) {
 		this.scalablePanes.forEach(scalablePane -> scalablePane.setScale(calculateScale()));
-		updateZoomManager(this.viewer.getProperty(ZoomManager.class.toString()));
+		updateZoomManager(this.viewer.getProperty(ZoomManager.class.toString()), asyncUpdate);
 	}
 
-	private void updateZoomManager(Object value) {
+	private void updateZoomManager(Object value, boolean asyncUpdate) {
 		if (value instanceof ZoomManager zoomManager) {
-			zoomManager.setMonitorMultiplier(calculateScale());
+			zoomManager.setMonitorMultiplier(calculateScale(), asyncUpdate);
 		}
 	}
 
