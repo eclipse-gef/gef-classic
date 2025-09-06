@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,6 +26,7 @@ class RouteEdges extends GraphVisitor {
 	 * @see GraphVisitor#visit(DirectedGraph)
 	 */
 	@Override
+	@SuppressWarnings("removal")
 	public void revisit(DirectedGraph g) {
 		for (Edge edge : g.edges) {
 			edge.start = new Point(edge.getSourceOffset() + edge.source.x, edge.source.y + edge.source.height);
@@ -47,6 +48,7 @@ class RouteEdges extends GraphVisitor {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	static void routeLongEdge(Edge edge, DirectedGraph g) {
 		ShortestPathRouter router = new ShortestPathRouter();
 		Path path = new Path(edge.start, edge.end);

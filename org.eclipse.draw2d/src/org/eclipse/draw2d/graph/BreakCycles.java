@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -176,6 +176,7 @@ class BreakCycles extends GraphVisitor {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	private static void invertEdges(DirectedGraph g) {
 		for (Edge e : g.edges) {
 			if (getOrderIndex(e.source) > getOrderIndex(e.target)) {

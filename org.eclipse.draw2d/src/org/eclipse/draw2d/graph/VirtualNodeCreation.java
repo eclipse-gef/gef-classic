@@ -85,6 +85,7 @@ class VirtualNodeCreation extends RevertableChange {
 	}
 
 	@Override
+	@SuppressWarnings("removal")
 	void revert() {
 		edge.start = edges[0].start;
 		edge.end = edges[edges.length - 1].end;
