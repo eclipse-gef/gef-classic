@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -56,26 +56,29 @@ public class Edge {
 	 * The minimum rank separation between the source and target nodes. The default
 	 * value is 1.
 	 *
-	 * @deprecated use accessors instead
+	 * @deprecated use accessors instead. This field will be made private after the
+	 *             2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public int delta = 1;
 
 	/**
 	 * The ending point.
 	 *
-	 * @deprecated use {@link #getPoints()}
+	 * @deprecated use {@link #getPoints()}. This field will be made package-private
+	 *             after the 2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public Point end;
 
 	boolean flag;
 
 	/**
 	 * @deprecated INTERNAL field, use accessor method Indicates an edge was
-	 *             inverted during the layout
+	 *             inverted during the layout. This field will be made
+	 *             package-private after the 2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public boolean isFeedback = false;
 
 	/**
@@ -83,9 +86,10 @@ public class Edge {
 	 * -1, which indicates that the edge should use the node's default
 	 * {@link Node#getOffsetOutgoing() outgoing} attachment point.
 	 *
-	 * @deprecated use accessors instead
+	 * @deprecated use accessors instead. This field will be made package-private
+	 *             after the 2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public int offsetSource = -1;
 
 	/**
@@ -93,18 +97,20 @@ public class Edge {
 	 * -1, which indicates that the edge should use the node's default
 	 * {@link Node#getOffsetIncoming() incoming} attachment point.
 	 *
-	 * @deprecated use accessors instead
+	 * @deprecated use accessors instead. This field will be made package-private
+	 *             after the 2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public int offsetTarget = -1;
 
 	/**
 	 * The minimum amount of space to leave on both the left and right sides of the
 	 * edge.
 	 *
-	 * @deprecated use accessors instead
+	 * @deprecated use accessors instead. This field will be made private after the
+	 *             2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public int padding = 10;
 
 	private PointList points;
@@ -116,9 +122,10 @@ public class Edge {
 	/**
 	 * The starting point.
 	 *
-	 * @deprecated use {@link #getPoints()}
+	 * @deprecated use {@link #getPoints()}. This field will be made package-private
+	 *             after the 2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public Point start;
 
 	/**
@@ -143,9 +150,10 @@ public class Edge {
 	public int weight = 1;
 
 	/**
-	 * @deprecated use accessors instead
+	 * @deprecated use accessors instead. This field will be made private after the
+	 *             2027-12 release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public int width = 1;
 
 	/**
