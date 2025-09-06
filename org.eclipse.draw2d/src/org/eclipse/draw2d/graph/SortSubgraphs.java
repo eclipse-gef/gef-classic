@@ -87,6 +87,7 @@ class SortSubgraphs extends GraphVisitor {
 		} while (cycleRoot != null);
 	}
 
+	@SuppressWarnings("removal")
 	private void buildSubgraphOrderingGraph() {
 		RankList ranks = g.ranks;
 		nestingTrees = new NestingTree[ranks.size()];
@@ -134,6 +135,7 @@ class SortSubgraphs extends GraphVisitor {
 	 * Runs in approximately linear time with respect to the number of nodes,
 	 * including virtual nodes.
 	 */
+	@SuppressWarnings("removal")
 	private void calculateSortValues() {
 		RankList ranks = g.ranks;
 
@@ -164,6 +166,7 @@ class SortSubgraphs extends GraphVisitor {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	private void repopulateRanks() {
 		for (int i = 0; i < nestingTrees.length; i++) {
 			Rank rank = g.ranks.getRank(i);
@@ -195,6 +198,7 @@ class SortSubgraphs extends GraphVisitor {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	void init() {
 		g.ranks.forEach(rank -> rank.forEach(n -> n.workingData[0] = new NodeList()));
 		for (Node element : g.subgraphs) {

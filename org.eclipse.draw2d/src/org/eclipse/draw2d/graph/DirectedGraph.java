@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -49,9 +49,10 @@ public class DirectedGraph {
 	/**
 	 * For internal use only. The list of rows which makeup the final graph layout.
 	 *
-	 * @deprecated
+	 * @deprecated This field will be made package-private after the 2027-12
+	 *             release.
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	public RankList ranks = new RankList();
 
 	Node forestRoot;

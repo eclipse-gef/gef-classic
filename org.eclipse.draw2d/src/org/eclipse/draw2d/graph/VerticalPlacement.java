@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,6 +24,7 @@ import org.eclipse.draw2d.geometry.Insets;
 class VerticalPlacement extends GraphVisitor {
 
 	@Override
+	@SuppressWarnings("removal")
 	void visit(DirectedGraph g) {
 		Insets pad;
 		int currentY = g.getMargin().top;

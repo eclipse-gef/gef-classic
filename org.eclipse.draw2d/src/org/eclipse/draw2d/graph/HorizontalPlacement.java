@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -254,6 +254,7 @@ class HorizontalPlacement extends SpanningTreeVisitor {
 	// return false;
 	// }
 
+	@SuppressWarnings("removal")
 	void buildGPrime() {
 		RankList ranks = graph.ranks;
 		buildRankSeparators(ranks);
@@ -293,6 +294,7 @@ class HorizontalPlacement extends SpanningTreeVisitor {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	private void calculateCellLocations() {
 		graph.cellLocations = new int[graph.ranks.size() + 1][];
 		for (int row = 0; row < graph.ranks.size(); row++) {

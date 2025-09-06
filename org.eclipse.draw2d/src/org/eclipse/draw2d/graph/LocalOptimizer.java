@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -89,6 +89,7 @@ class LocalOptimizer extends GraphVisitor {
 	 * @see GraphVisitor#visit(org.eclipse.draw2d.graph.DirectedGraph)
 	 */
 	@Override
+	@SuppressWarnings("removal")
 	public void visit(DirectedGraph g) {
 		boolean flag;
 		do {
