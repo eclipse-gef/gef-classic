@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 itemis AG and others.
+ * Copyright (c) 2010, 2025 itemis AG and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@
 package org.eclipse.draw2d.geometry;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * A Utilities class for precise geometry calculations.
@@ -27,7 +28,7 @@ public class PrecisionGeometry {
 	 * Precise calculations on doubles are performed based on BigDecimals,
 	 * converting to 16 digits scale, so there are no undesired rounding effects.
 	 */
-	private static final int ROUNDING = BigDecimal.ROUND_HALF_EVEN;
+	private static final RoundingMode ROUNDING = RoundingMode.HALF_EVEN;
 	private static final int SCALE = 16;
 
 	protected static final double preciseAdd(double d1, double d2) {
@@ -55,9 +56,7 @@ public class PrecisionGeometry {
 	}
 
 	protected static final BigDecimal doubleToBigDecimal(double d) {
-		// may not use BigDecimal.valueOf due to J2SE-1.4 backwards
-		// compatibility
-		return new BigDecimal(Double.toString(d));
+		return BigDecimal.valueOf(d);
 	}
 
 	/**
