@@ -32,6 +32,7 @@ import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.MonitorAwareZoomManager;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -121,7 +122,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 
 	}
 
-	private LayeredPane innerLayers;
+	private ScalableLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private ScalableLayeredPane scaledLayers;
 	private final PropertyChangeListener gridListener = (PropertyChangeEvent evt) -> {
@@ -174,7 +175,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	protected IFigure createFigure() {
 		Viewport viewport = createViewport();
 
-		innerLayers = new LayeredPane();
+		innerLayers = new ScalableLayeredPane();
 		createLayers(innerLayers);
 
 		viewport.setContents(innerLayers);
@@ -390,6 +391,11 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 			getViewer().addPropertyChangeListener(gridListener);
 			refreshGridLayer();
 		}
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			monitorAwareZoomManager.registerPane(innerLayers);
+		}
 	}
 
 	/**
@@ -397,6 +403,11 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	 */
 	@Override
 	protected void unregister() {
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			monitorAwareZoomManager.unregisterPane(innerLayers);
+		}
 		getViewer().removePropertyChangeListener(gridListener);
 		super.unregister();
 		getViewer().setProperty(ZoomManager.class.toString(), null);
