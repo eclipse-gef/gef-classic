@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.zest.core" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter id="927989779">
-            <message_arguments>
-                <message_argument value="1.16.0"/>
-                <message_argument value="org.eclipse.draw2d"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/zest/core/widgets/Graph.java" type="org.eclipse.zest.core.widgets.Graph">
         <filter id="576725006">
             <message_arguments>
