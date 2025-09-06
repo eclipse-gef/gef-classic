@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,7 +15,6 @@ package org.eclipse.gef.palette;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import org.eclipse.gef.Tool;
@@ -29,7 +28,7 @@ public abstract class ToolEntry extends PaletteEntry {
 	public static final Object PALETTE_TYPE_TOOL = "$Palette Tool";//$NON-NLS-1$
 
 	private Map<Object, Object> map;
-	private Class toolClass;
+	private Class<? extends Tool> toolClass;
 
 	/**
 	 * Creates a new ToolEntry. Any parameter can be <code>null</code>.
@@ -55,7 +54,7 @@ public abstract class ToolEntry extends PaletteEntry {
 	 * @since 3.1
 	 */
 	public ToolEntry(String label, String description, ImageDescriptor iconSmall, ImageDescriptor iconLarge,
-			Class tool) {
+			Class<? extends Tool> tool) {
 		super(label, description, iconSmall, iconLarge, PALETTE_TYPE_TOOL);
 		setToolClass(tool);
 	}
@@ -74,10 +73,8 @@ public abstract class ToolEntry extends PaletteEntry {
 		}
 		Tool tool;
 		try {
-			tool = (Tool) toolClass.newInstance();
-		} catch (IllegalAccessException iae) {
-			return null;
-		} catch (InstantiationException ie) {
+			tool = toolClass.getDeclaredConstructor().newInstance();
+		} catch (ReflectiveOperationException e) {
 			return null;
 		}
 		tool.setProperties(getToolProperties());
@@ -115,10 +112,7 @@ public abstract class ToolEntry extends PaletteEntry {
 	 * @param toolClass the type of tool to be created by this entry
 	 * @since 3.1
 	 */
-	public void setToolClass(Class toolClass) {
-		if (toolClass != null) {
-			Assert.isTrue(Tool.class.isAssignableFrom(toolClass));
-		}
+	public void setToolClass(Class<? extends Tool> toolClass) {
 		this.toolClass = toolClass;
 	}
 
