@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -83,6 +83,7 @@ class GraphUtilities {
 	 * @param graph the graph whose crossed edges are counted
 	 * @return the number of edge crossings in the graph
 	 */
+	@SuppressWarnings("removal")
 	public static int numberOfCrossingsInGraph(DirectedGraph graph) {
 		int crossings = 0;
 		for (Rank rank : graph.ranks) {

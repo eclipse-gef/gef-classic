@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,6 +31,7 @@ class RankSorter {
 	double progress;
 	DirectedGraph g;
 
+	@SuppressWarnings("removal")
 	protected void assignIncomingSortValues() {
 		rankSize = rank.total;
 		prevRankSize = g.ranks.getRank(currentRow - 1).total;
@@ -43,6 +44,7 @@ class RankSorter {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	protected void assignOutgoingSortValues() {
 		rankSize = rank.total;
 		prevRankSize = g.ranks.getRank(currentRow + 1).total;
@@ -152,6 +154,7 @@ class RankSorter {
 		postSort();
 	}
 
+	@SuppressWarnings("removal")
 	public void init(DirectedGraph g) {
 		this.g = g;
 		for (int i = 0; i < g.ranks.size(); i++) {
