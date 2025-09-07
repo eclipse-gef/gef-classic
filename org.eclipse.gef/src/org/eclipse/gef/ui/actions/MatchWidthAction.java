@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -17,6 +17,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 
 import org.eclipse.gef.internal.GEFMessages;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 
 /**
@@ -35,7 +36,9 @@ public class MatchWidthAction extends MatchSizeAction {
 		super(part);
 		setText(GEFMessages.MatchWidthAction_Label);
 		setImageDescriptor(InternalImages.DESC_MATCH_WIDTH);
-		setDisabledImageDescriptor(InternalImages.DESC_MATCH_WIDTH_DIS);
+		if (InternalGEFPlugin.requiresDisabledIcon()) {
+			setDisabledImageDescriptor(InternalImages.DESC_MATCH_WIDTH_DIS);
+		}
 		setToolTipText(GEFMessages.MatchWidthAction_Tooltip);
 		setId(GEFActionConstants.MATCH_WIDTH);
 	}

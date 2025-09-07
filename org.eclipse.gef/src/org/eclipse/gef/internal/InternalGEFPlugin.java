@@ -17,6 +17,7 @@ import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
@@ -38,6 +39,8 @@ import org.eclipse.gef.EditPartListener;
 import org.eclipse.gef.GEFColorProvider;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.Version;
 
 public class InternalGEFPlugin extends AbstractUIPlugin {
 	/** Monitor scale property */
@@ -45,6 +48,7 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
+	private static Boolean requiresDisabledIcons;
 
 	public InternalGEFPlugin() {
 		singleton = this;
@@ -159,5 +163,17 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 				editpart.getViewer().removePropertyChangeListener(autoScaleListener);
 			}
 		};
+	}
+
+	/**
+	 * With Eclipse 4.36 (and therefore SWT 3.130.0), it is no longer necessary to
+	 * set a "disabled" icon in e.g. {@code Actions}.
+	 */
+	public static boolean requiresDisabledIcon() {
+		if (requiresDisabledIcons == null) {
+			Version minVersion = new Version(3, 130, 0);
+			requiresDisabledIcons = FrameworkUtil.getBundle(SWT.class).getVersion().compareTo(minVersion) < 0;
+		}
+		return requiresDisabledIcons;
 	}
 }
