@@ -102,20 +102,20 @@ public class InternalImages {
 		DESC_ZOOM_IN = createDescriptor("icons/zoom_in.svg"); //$NON-NLS-1$
 		DESC_ZOOM_OUT = createDescriptor("icons/zoom_out.svg"); //$NON-NLS-1$
 
-		DESC_MATCH_SIZE = createDescriptor("icons/matchsize.png"); //$NON-NLS-1$
-		DESC_MATCH_WIDTH = createDescriptor("icons/matchwidth.png"); //$NON-NLS-1$
-		DESC_MATCH_HEIGHT = createDescriptor("icons/matchheight.png"); //$NON-NLS-1$
+		DESC_MATCH_SIZE = createDescriptor("icons/matchsize.svg"); //$NON-NLS-1$
+		DESC_MATCH_WIDTH = createDescriptor("icons/matchwidth.svg"); //$NON-NLS-1$
+		DESC_MATCH_HEIGHT = createDescriptor("icons/matchheight.svg"); //$NON-NLS-1$
 
 		DESC_MATCH_SIZE_DIS = createDescriptor("icons/matchsize_d.png"); //$NON-NLS-1$
 		DESC_MATCH_WIDTH_DIS = createDescriptor("icons/matchwidth_d.png"); //$NON-NLS-1$
 		DESC_MATCH_HEIGHT_DIS = createDescriptor("icons/matchheight_d.png"); //$NON-NLS-1$
 
-		DESC_VERT_ALIGN_BOTTOM = createDescriptor("icons/alignbottom.png"); //$NON-NLS-1$
-		DESC_HORZ_ALIGN_CENTER = createDescriptor("icons/aligncenter.png"); //$NON-NLS-1$
-		DESC_HORZ_ALIGN_LEFT = createDescriptor("icons/alignleft.png"); //$NON-NLS-1$
-		DESC_VERT_ALIGN_MIDDLE = createDescriptor("icons/alignmid.png"); //$NON-NLS-1$
-		DESC_HORZ_ALIGN_RIGHT = createDescriptor("icons/alignright.png"); //$NON-NLS-1$
-		DESC_VERT_ALIGN_TOP = createDescriptor("icons/aligntop.png"); //$NON-NLS-1$
+		DESC_VERT_ALIGN_BOTTOM = createDescriptor("icons/alignbottom.svg"); //$NON-NLS-1$
+		DESC_HORZ_ALIGN_CENTER = createDescriptor("icons/aligncenter.svg"); //$NON-NLS-1$
+		DESC_HORZ_ALIGN_LEFT = createDescriptor("icons/alignleft.svg"); //$NON-NLS-1$
+		DESC_VERT_ALIGN_MIDDLE = createDescriptor("icons/alignmid.svg"); //$NON-NLS-1$
+		DESC_HORZ_ALIGN_RIGHT = createDescriptor("icons/alignright.svg"); //$NON-NLS-1$
+		DESC_VERT_ALIGN_TOP = createDescriptor("icons/aligntop.svg"); //$NON-NLS-1$
 
 		DESC_VERT_ALIGN_BOTTOM_DIS = createDescriptor("icons/alignbottom_d.png"); //$NON-NLS-1$
 		DESC_HORZ_ALIGN_CENTER_DIS = createDescriptor("icons/aligncenter_d.png"); //$NON-NLS-1$
