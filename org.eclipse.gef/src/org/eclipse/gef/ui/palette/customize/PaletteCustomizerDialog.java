@@ -70,6 +70,7 @@ import org.eclipse.ui.part.PageBook;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.widgets.MultiLineLabel;
 
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 import org.eclipse.gef.internal.ui.palette.ToolbarDropdownContributionItem;
 import org.eclipse.gef.palette.PaletteEntry;
@@ -1070,7 +1071,9 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 			setText(PaletteMessages.DELETE_LABEL);
 			ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 			setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
-			setDisabledImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
+			}
 		}
 
 		@Override
@@ -1097,7 +1100,9 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 			setEnabled(false);
 			setText(PaletteMessages.MOVE_DOWN_LABEL);
 			setImageDescriptor(InternalImages.createDescriptor("icons/next_nav.svg"));//$NON-NLS-1$
-			setDisabledImageDescriptor(InternalImages.createDescriptor("icons/move_down_disabled.svg"));//$NON-NLS-1$
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.createDescriptor("icons/move_down_disabled.svg"));//$NON-NLS-1$
+			}
 		}
 
 		@Override
@@ -1124,7 +1129,9 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 			setEnabled(false);
 			setText(PaletteMessages.MOVE_UP_LABEL);
 			setImageDescriptor(InternalImages.createDescriptor("icons/prev_nav.svg"));//$NON-NLS-1$
-			setDisabledImageDescriptor(InternalImages.createDescriptor("icons/move_up_disabled.svg")); //$NON-NLS-1$
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.createDescriptor("icons/move_up_disabled.svg")); //$NON-NLS-1$
+			}
 		}
 
 		@Override
@@ -1160,7 +1167,9 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 
 			setText(PaletteMessages.NEW_LABEL);
 			setImageDescriptor(InternalImages.createDescriptor("icons/add.svg")); //$NON-NLS-1$
-			setDisabledImageDescriptor(InternalImages.createDescriptor("icons/add-disabled.svg")); //$NON-NLS-1$
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.createDescriptor("icons/add-disabled.svg")); //$NON-NLS-1$
+			}
 		}
 
 		private void addActionToMenu(Menu parent, IAction action) {

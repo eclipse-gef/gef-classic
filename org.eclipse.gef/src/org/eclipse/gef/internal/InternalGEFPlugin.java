@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2024 IBM Corporation and others.
+ * Copyright (c) 2006, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -16,6 +16,7 @@ package org.eclipse.gef.internal;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
@@ -34,11 +35,14 @@ import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.gef.GEFColorProvider;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.Version;
 
 public class InternalGEFPlugin extends AbstractUIPlugin {
 
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
+	private static Boolean requiresDisabledIcons;
 
 	public InternalGEFPlugin() {
 		singleton = this;
@@ -135,5 +139,17 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException("Failed to instantiate Cursor", e); //$NON-NLS-1$
 		}
+	}
+
+	/**
+	 * With Eclipse 4.36 (and therefore SWT 3.130.0), it is no longer necessary to
+	 * set a "disabled" icon in e.g. {@code Actions}.
+	 */
+	public static boolean requiresDisabledIcon() {
+		if (requiresDisabledIcons == null) {
+			Version minVersion = new Version(3, 130, 0);
+			requiresDisabledIcons = FrameworkUtil.getBundle(SWT.class).getVersion().compareTo(minVersion) < 0;
+		}
+		return requiresDisabledIcons;
 	}
 }
