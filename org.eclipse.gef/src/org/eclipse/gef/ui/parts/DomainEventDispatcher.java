@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,7 @@ package org.eclipse.gef.ui.parts;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.accessibility.ACC;
 import org.eclipse.swt.accessibility.AccessibleControlEvent;
 import org.eclipse.swt.accessibility.AccessibleControlListener;
@@ -28,7 +29,6 @@ import org.eclipse.swt.widgets.Event;
 
 import org.eclipse.draw2d.EventDispatcher;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.InputEvent;
 import org.eclipse.draw2d.SWTEventDispatcher;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -409,7 +409,7 @@ public class DomainEventDispatcher extends SWTEventDispatcher {
 			}
 		}
 		if (okToDispatch()) {
-			if ((me.stateMask & InputEvent.ANY_BUTTON) != 0) {
+			if ((me.stateMask & SWT.BUTTON_MASK) != 0) {
 				domain.mouseDrag(me, viewer);
 			} else {
 				domain.mouseMove(me, viewer);

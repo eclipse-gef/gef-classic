@@ -296,7 +296,7 @@ public class PaletteCustomizerDialog extends Dialog implements EntryPageContaine
 		widgets.put(Integer.valueOf(id), button);
 
 		if (descriptor != null) {
-			button.setImage(new Image(parent.getDisplay(), descriptor.getImageData()));
+			button.setImage(descriptor.createImage(parent.getDisplay()));
 			button.addDisposeListener(e -> {
 				Image img = ((Button) e.getSource()).getImage();
 				if (img != null && !img.isDisposed()) {
