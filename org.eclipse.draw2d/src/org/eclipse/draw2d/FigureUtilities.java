@@ -77,6 +77,9 @@ public class FigureUtilities {
 			Shell shell = new Shell();
 			InternalDraw2dUtils.configureForAutoscalingMode(shell);
 			gc = new GC(shell);
+			if (InternalDraw2dUtils.disableAutoscale) {
+				gc.setAdvanced(true);
+			}
 			appliedFont = gc.getFont();
 		}
 		return gc;
