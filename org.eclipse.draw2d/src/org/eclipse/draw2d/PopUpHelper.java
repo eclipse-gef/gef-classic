@@ -15,10 +15,12 @@ package org.eclipse.draw2d;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * Provides abstract support for classes that manage popups. Popups in Draw2d
@@ -62,7 +64,7 @@ public abstract class PopUpHelper {
 	 */
 	protected PopUpHelper(Control c, int shellStyle) {
 		control = c;
-		this.shellStyle = shellStyle | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE;
+		this.shellStyle = shellStyle | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED;
 	}
 
 	/**
@@ -72,9 +74,8 @@ public abstract class PopUpHelper {
 	 * @return the newly created LightweightSystem
 	 * @since 2.0
 	 */
-	@SuppressWarnings("static-method")
 	protected LightweightSystem createLightweightSystem() {
-		return new LightweightSystem();
+		return InternalDraw2dUtils.disableAutoscale ? new PopupHelperLightweightSystem() : new LightweightSystem();
 	}
 
 	/**
@@ -219,4 +220,73 @@ public abstract class PopUpHelper {
 		tipShowing = true;
 	}
 
+	private class PopupHelperLightweightSystem extends LightweightSystem {
+
+		/**
+		 * Data that can be set to scale this widget at 100%.
+		 */
+		private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
+
+		/**
+		 * Internal flag for fetching the shell zoom
+		 */
+		private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
+
+		/**
+		 * Returns the zoom of the monitor this widget is assigned to.
+		 *
+		 * @return 1.0 at 100%, 1.25 at 125% etc.
+		 */
+		private static double getMonitorZoomScale(Control c) {
+			int shellZooom;
+			try {
+				shellZooom = (int) c.getData(DATA_SHELL_ZOOM);
+			} catch (ClassCastException | NullPointerException e) {
+				shellZooom = 100;
+			}
+			return shellZooom / 100.0;
+		}
+
+		/**
+		 * The scalable pane that is injected between the root figure and the contents
+		 * of this viewport.
+		 */
+		private final ScalableLayeredPane scalablePane;
+
+		private PopupHelperLightweightSystem() {
+			scalablePane = new ScalableLayeredPane(true);
+			scalablePane.setLayoutManager(new StackLayout());
+			getRootFigure().add(scalablePane);
+		}
+
+		/**
+		 * Updates the scale factor of the scalable pane to the given value.
+		 *
+		 * @param scale The new scale factor.
+		 */
+		private void setScale(double scale) {
+			scalablePane.setScale(scale);
+		}
+
+		@Override
+		public void setControl(Canvas c) {
+			if (c == null) {
+				return;
+			}
+
+			c.setData(DATA_AUTOSCALE_DISABLED, true);
+			c.addListener(SWT.ZoomChanged, e -> setScale(e.detail / 100.0));
+			setScale(getMonitorZoomScale(c));
+
+			super.setControl(c);
+		}
+
+		@Override
+		public void setContents(IFigure figure) {
+			scalablePane.removeAll();
+			if (figure != null) {
+				scalablePane.add(figure);
+			}
+		}
+	}
 }

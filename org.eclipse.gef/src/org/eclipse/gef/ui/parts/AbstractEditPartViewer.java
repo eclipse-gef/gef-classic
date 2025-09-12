@@ -119,6 +119,11 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	private PropertyChangeSupport changeSupport;
 
 	/**
+	 * Internal flag for fetching the shell zoom
+	 */
+	private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
+
+	/**
 	 * Constructs the viewer and calls {@link #init()}.
 	 */
 	public AbstractEditPartViewer() {
@@ -867,6 +872,12 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (!InternalDraw2dUtils.disableAutoscale || control == null) {
 			return 1.0;
 		}
-		return control.getMonitor().getZoom() / 100.0;
+		int shellZooom;
+		try {
+			shellZooom = (int) control.getData(DATA_SHELL_ZOOM);
+		} catch (ClassCastException | NullPointerException e) {
+			shellZooom = 100;
+		}
+		return shellZooom / 100.0;
 	}
 }
