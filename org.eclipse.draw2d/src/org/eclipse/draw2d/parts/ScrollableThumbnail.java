@@ -66,8 +66,7 @@ public class ScrollableThumbnail extends Thumbnail {
 			Dimension selectorCenter = selector.getBounds().getSize().scale(0.5f);
 			Point scrollPoint = me.getLocation().getTranslated(getLocation().getNegated())
 					.translate(selectorCenter.negate()).scale(1.0f / getViewportScaleX(), 1.0f / getViewportScaleY())
-					.translate(viewport.getHorizontalRangeModel().getMinimum(),
-							viewport.getVerticalRangeModel().getMinimum());
+					.translate(getSourceRectangle().x, getSourceRectangle().y);
 			viewport.setViewLocation(scrollPoint);
 			syncher.mousePressed(me);
 			dragTransfer = true;
