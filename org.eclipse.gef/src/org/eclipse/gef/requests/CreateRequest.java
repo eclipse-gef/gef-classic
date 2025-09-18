@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,19 +13,17 @@
 package org.eclipse.gef.requests;
 
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.RequestConstants;
 
 /**
  * A Request to create a new object.
  */
-public class CreateRequest extends org.eclipse.gef.Request implements DropRequest {
+public class CreateRequest extends LocationRequest implements DropRequest {
 
 	private Object newObject;
 
 	private Dimension size;
-	private Point location;
 	private int flags = 0;
 	private static final int SNAP_TO = 1;
 
@@ -54,16 +52,6 @@ public class CreateRequest extends org.eclipse.gef.Request implements DropReques
 	 */
 	protected CreationFactory getFactory() {
 		return creationFactory;
-	}
-
-	/**
-	 * Returns the location of the object to be created.
-	 *
-	 * @return the location
-	 */
-	@Override
-	public Point getLocation() {
-		return location;
 	}
 
 	/**
@@ -120,15 +108,6 @@ public class CreateRequest extends org.eclipse.gef.Request implements DropReques
 	 */
 	public void setFactory(CreationFactory factory) {
 		creationFactory = factory;
-	}
-
-	/**
-	 * Sets the location where the new object will be placed.
-	 *
-	 * @param location the location
-	 */
-	public void setLocation(Point location) {
-		this.location = location;
 	}
 
 	/**
