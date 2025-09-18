@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -25,6 +25,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.ui.IMemento;
 
 import org.eclipse.draw2d.Border;
@@ -58,6 +59,11 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	 */
 	public static final String XML_NAME = "entry"; //$NON-NLS-1$
 	private static final Border TOOLTIP_BORDER = new MarginBorder(0, 2, 1, 0);
+	/**
+	 * @deprecated Use {@code getViewer().getResourceManager()} instead. This field
+	 *             will be removed after the 2025-12 release.
+	 */
+	@Deprecated(forRemoval = true, since = "2025-12")
 	private static ImageCache globalImageCache;
 	private AccessibleEditPart acc;
 	private final PropertyChangeListener childListener = evt -> {
@@ -206,7 +212,10 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	 * the same image in different palettes is only ever created once.
 	 *
 	 * @return the image cache.
+	 * @deprecated Use {@code getViewer().getResourceManager()} instead. This method
+	 *             will be removed after the 2025-12 release.
 	 */
+	@Deprecated(forRemoval = true, since = "2025-12")
 	protected static ImageCache getImageCache() {
 		ImageCache cache = globalImageCache;
 		if (cache == null) {
@@ -419,8 +428,12 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 		if (desc == imgDescriptor) {
 			return;
 		}
+		ResourceManager resourceManager = getViewer().getResourceManager();
+		if (imgDescriptor != null) {
+			resourceManager.destroy(imgDescriptor);
+		}
 		imgDescriptor = desc;
-		setImageInFigure(getImageCache().getImage(imgDescriptor));
+		setImageInFigure(resourceManager.create(imgDescriptor));
 	}
 
 	/**
@@ -450,7 +463,11 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 
 	/**
 	 * The image cache for this edit part.
+	 *
+	 * @deprecated Use {@code getViewer().getResourceManager()} instead. This class
+	 *             will be removed after the 2025-12 release.
 	 */
+	@Deprecated(forRemoval = true, since = "2025-12")
 	protected static class ImageCache {
 		/** Map from ImageDescriptor to Image */
 		private final Map<ImageDescriptor, Image> images = new HashMap<>(11);
