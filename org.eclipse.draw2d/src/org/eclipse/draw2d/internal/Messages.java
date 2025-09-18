@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2025 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -28,4 +28,5 @@ public class Messages {
 	}
 
 	public static final String LayoutManager_InvalidConstraint = BUNDLE.getString("LayoutManager_InvalidConstraint"); //$NON-NLS-1$
+	public static final String AbstractZoomManager_PercentFormat = BUNDLE.getString("AbstractZoomManager_PercentFormat"); //$NON-NLS-1$
 }
