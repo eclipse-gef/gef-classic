@@ -55,6 +55,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.SelectionManager;
+import org.eclipse.gef.internal.MonitorAwareZoomManager;
 
 /**
  * The base implementation for EditPartViewer.
@@ -114,6 +115,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	private KeyHandler keyHandler;
 	private PropertyChangeSupport changeSupport;
+
+	private MonitorAwareZoomManager monitorAwareZoomManager;
 
 	/**
 	 * Constructs the viewer and calls {@link #init()}.
@@ -484,6 +487,9 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (contextMenu != null) {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
 		}
+		if (monitorAwareZoomManager != null) {
+			monitorAwareZoomManager.setControl(control);
+		}
 	}
 
 	/**
@@ -506,6 +512,8 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * Called from the constructor. Subclasses may extend this method.
 	 */
 	protected void init() {
+		monitorAwareZoomManager = new MonitorAwareZoomManager(this);
+		setProperty(MonitorAwareZoomManager.class.toString(), monitorAwareZoomManager);
 	}
 
 	private void primDeselectAll() {

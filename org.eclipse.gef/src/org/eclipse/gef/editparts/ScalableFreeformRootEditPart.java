@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.gef.editparts;
 
-import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.ScalableFigure;
@@ -125,7 +124,7 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 	@Override
 	protected void createLayers(LayeredPane layeredPane) {
 		layeredPane.add(getScaledLayers(), SCALABLE_LAYERS);
-		layeredPane.add(new FreeformLayer(), HANDLE_LAYER);
+		layeredPane.add(new ScalableFreeformLayeredPane(), HANDLE_LAYER);
 		layeredPane.add(new FeedbackLayer(), FEEDBACK_LAYER);
 		layeredPane.add(new GuideLayer(), GUIDE_LAYER);
 	}

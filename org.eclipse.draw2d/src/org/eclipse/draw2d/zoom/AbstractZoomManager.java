@@ -58,6 +58,8 @@ public abstract class AbstractZoomManager {
 	private final List<ZoomListener> listeners = new CopyOnWriteArrayList<>();
 
 	private double multiplier = 1.0;
+	private double monitorMultiplier = 1.0;
+	private double toBeSetMonitorMultiplier = 1.0;
 	private final ScalableFigure pane;
 	private final Viewport viewport;
 	private double zoom = 1.0;
@@ -346,9 +348,12 @@ public abstract class AbstractZoomManager {
 	 * @param zoom the new zoom level
 	 */
 	protected void primSetZoom(double zoom) {
-		Point newLocation = scrollPolicy.calcNewViewLocation(getViewport(), this.zoom, zoom);
+		double newZoom = zoom * toBeSetMonitorMultiplier;
+		double oldZoom = this.zoom * this.monitorMultiplier;
+		Point newLocation = scrollPolicy.calcNewViewLocation(getViewport(), oldZoom, newZoom);
 		this.zoom = zoom;
-		pane.setScale(zoom);
+		this.monitorMultiplier = toBeSetMonitorMultiplier;
+		pane.setScale(newZoom);
 		fireZoomChanged();
 		getViewport().validate();
 		setViewLocation(newLocation);
@@ -370,6 +375,17 @@ public abstract class AbstractZoomManager {
 		this.multiplier = multiplier;
 	}
 
+	public void setMonitorMultiplier(double multiplier, boolean asyncRefresh) {
+		if (this.monitorMultiplier != multiplier) {
+			this.toBeSetMonitorMultiplier = multiplier;
+			if (asyncRefresh) {
+				Display.getCurrent().asyncExec(() -> setZoom(this.zoom));
+			} else {
+				setZoom(this.zoom);
+			}
+		}
+	}
+
 	/**
 	 * Sets the Viewport's view associated with this ZoomManager to the passed Point
 	 *
@@ -389,7 +405,7 @@ public abstract class AbstractZoomManager {
 	public void setZoom(double zoom) {
 		zoom = Math.min(getMaxZoom(), zoom);
 		zoom = Math.max(getMinZoom(), zoom);
-		if (this.zoom != zoom) {
+		if (this.zoom != zoom || this.monitorMultiplier != this.toBeSetMonitorMultiplier) {
 			primSetZoom(zoom);
 		}
 	}
