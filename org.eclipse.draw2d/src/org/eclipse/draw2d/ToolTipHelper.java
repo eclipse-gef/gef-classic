@@ -121,7 +121,7 @@ public class ToolTipHelper extends PopUpHelper {
 			Point displayPoint = computeWindowLocation(tip, eventX, eventY);
 			Dimension shellSize = getLightweightSystem().getRootFigure().getPreferredSize()
 					.getExpanded(getShellTrimSize());
-			setShellBounds(displayPoint.x, displayPoint.y, shellSize.width, shellSize.height);
+			setShellBounds(displayPoint.x, displayPoint.y, shellSize.width + 1, shellSize.height);
 			show();
 			// Moving an invisible shell might not be supported by the operating system. Try
 			// again once it has become visible...
