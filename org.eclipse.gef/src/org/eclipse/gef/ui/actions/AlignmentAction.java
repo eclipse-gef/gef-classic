@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -30,6 +30,7 @@ import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.internal.GEFMessages;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 import org.eclipse.gef.requests.AlignmentRequest;
 import org.eclipse.gef.tools.ToolUtilities;
@@ -193,6 +194,7 @@ public final class AlignmentAction extends SelectionAction {
 	/**
 	 * Initializes the actions UI presentation.
 	 */
+	@SuppressWarnings("deprecation")
 	protected void initUI() {
 		switch (alignment) {
 		case PositionConstants.LEFT:
@@ -200,7 +202,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignLeftAction_Label);
 			setToolTipText(GEFMessages.AlignLeftAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT_DIS);
+			}
 			break;
 
 		case PositionConstants.RIGHT:
@@ -208,7 +212,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignRightAction_Label);
 			setToolTipText(GEFMessages.AlignRightAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT_DIS);
+			}
 			break;
 
 		case PositionConstants.TOP:
@@ -216,7 +222,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignTopAction_Label);
 			setToolTipText(GEFMessages.AlignTopAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP_DIS);
+			}
 			break;
 
 		case PositionConstants.BOTTOM:
@@ -224,7 +232,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignBottomAction_Label);
 			setToolTipText(GEFMessages.AlignBottomAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM_DIS);
+			}
 			break;
 
 		case PositionConstants.CENTER:
@@ -232,7 +242,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignCenterAction_Label);
 			setToolTipText(GEFMessages.AlignCenterAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER_DIS);
+			}
 			break;
 
 		case PositionConstants.MIDDLE:
@@ -240,7 +252,9 @@ public final class AlignmentAction extends SelectionAction {
 			setText(GEFMessages.AlignMiddleAction_Label);
 			setToolTipText(GEFMessages.AlignMiddleAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE_DIS);
+			}
 			break;
 		default:
 			break;
