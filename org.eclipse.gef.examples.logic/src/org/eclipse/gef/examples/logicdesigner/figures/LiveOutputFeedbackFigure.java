@@ -12,7 +12,8 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.swt.SWT;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -23,12 +24,17 @@ public class LiveOutputFeedbackFigure extends LiveOutputFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		g.setXORMode(true);
-		g.setForegroundColor(ColorConstants.white);
-
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
-
 		Rectangle r = getBounds().getCopy();
+
+		g.setBackgroundColor(LogicColorConstants.feedbackFill);
+		g.setForegroundColor(LogicColorConstants.feedbackOutline);
+		g.setAntialias(SWT.ON);
+		g.setLineWidth(2);
+
+		r.x += 1;
+		r.y += 1;
+		r.width -= 2;
+		r.height -= 2;
 
 		g.fillOval(r);
 		r.height--;
@@ -39,12 +45,10 @@ public class LiveOutputFeedbackFigure extends LiveOutputFigure {
 		// Draw the "V"
 		g.drawLine(6, 8, 10, 18);
 		g.drawLine(10, 18, 14, 8);
-		g.drawLine(10, 16, 10, 18);
 
 		// Draw the "+"
 		g.drawLine(18, 14, 18, 22);
 		g.drawLine(14, 18, 22, 18);
-		g.drawPoint(18, 18);
 	}
 
 }
