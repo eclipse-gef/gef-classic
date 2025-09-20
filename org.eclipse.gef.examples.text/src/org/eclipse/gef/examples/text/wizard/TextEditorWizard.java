@@ -17,19 +17,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
@@ -50,7 +43,7 @@ import org.eclipse.ui.ide.IDE;
  */
 public class TextEditorWizard extends Wizard implements INewWizard {
 	private NewFileWizardPage page;
-	private ISelection selection;
+	private IStructuredSelection selection;
 
 	/**
 	 * Constructor for TextEditorWizard.
@@ -74,11 +67,10 @@ public class TextEditorWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public boolean performFinish() {
-		final String containerName = page.getContainerName();
-		final String fileName = page.getFileName();
+		final IFile file = page.createNewFile();
 		IRunnableWithProgress op = monitor -> {
 			try {
-				doFinish(containerName, fileName, monitor);
+				doFinish(file, monitor);
 			} catch (CoreException e) {
 				throw new InvocationTargetException(e);
 			} finally {
@@ -101,26 +93,18 @@ public class TextEditorWizard extends Wizard implements INewWizard {
 	 * The worker method. It will find the container, create the file if missing or
 	 * just replace its contents, and open the editor on the newly created file.
 	 */
-	private void doFinish(String containerName, String fileName, IProgressMonitor monitor) throws CoreException {
+	private void doFinish(IFile file, IProgressMonitor monitor) throws CoreException {
 		// create a sample file
-		monitor.beginTask("Creating " + fileName, 2); //$NON-NLS-1$
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IResource resource = root.findMember(new Path(containerName));
-		if (!resource.exists() || !(resource instanceof IContainer)) {
-			throwCoreException("Container \"" + containerName + "\" does not exist."); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-		IContainer container = (IContainer) resource;
-		final IFile file = container.getFile(new Path(fileName));
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Creating " + file.getName(), 2); //$NON-NLS-1$
 		try (InputStream stream = openContentStream()) {
 			if (file.exists()) {
-				file.setContents(stream, true, true, monitor);
+				file.setContents(stream, true, true, subMonitor.split(1));
 			} else {
-				file.create(stream, true, monitor);
+				file.create(stream, true, subMonitor.split(1));
 			}
 		} catch (IOException e) {
 		}
-		monitor.worked(1);
-		monitor.setTaskName("Opening file for editing..."); //$NON-NLS-1$
+		subMonitor.subTask("Opening file for editing..."); //$NON-NLS-1$
 		getShell().getDisplay().asyncExec(() -> {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			try {
@@ -128,16 +112,11 @@ public class TextEditorWizard extends Wizard implements INewWizard {
 			} catch (PartInitException e) {
 			}
 		});
-		monitor.worked(1);
+		monitor.done();
 	}
 
 	private static InputStream openContentStream() {
 		return new ByteArrayInputStream(new byte[0]);
-	}
-
-	private static void throwCoreException(String message) throws CoreException {
-		IStatus status = new Status(IStatus.ERROR, "org.eclipse.gef.examples.text", IStatus.OK, message, null); //$NON-NLS-1$
-		throw new CoreException(status);
 	}
 
 	/**
