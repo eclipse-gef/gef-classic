@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -512,7 +512,7 @@ public class RulerComposite extends Composite {
 		 */
 		@Override
 		protected void handleFocusGained(FocusEvent fe) {
-			if (focusPart == null) {
+			if (!getFocusEditPart().hasFocus()) {
 				setFocus(getContents());
 			}
 			super.handleFocusGained(fe);
@@ -525,7 +525,7 @@ public class RulerComposite extends Composite {
 		@Override
 		protected void handleFocusLost(FocusEvent fe) {
 			super.handleFocusLost(fe);
-			if (focusPart == getContents()) {
+			if (getFocusEditPart() == getContents()) {
 				setFocus(null);
 			}
 		}
