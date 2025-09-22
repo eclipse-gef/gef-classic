@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -57,25 +57,8 @@ public class DeferredUpdateManager extends UpdateManager {
 
 	private boolean updating;
 	private boolean validating;
-	private RunnableChain afterUpdate;
+	private List<Runnable> afterUpdate = new ArrayList<>();
 	private int refreshRate = -1;
-
-	private static class RunnableChain {
-		RunnableChain next;
-		Runnable run;
-
-		RunnableChain(Runnable run, RunnableChain next) {
-			this.run = run;
-			this.next = next;
-		}
-
-		void run() {
-			if (next != null) {
-				next.run();
-			}
-			run.run();
-		}
-	}
 
 	/**
 	 * Empty constructor.
@@ -195,11 +178,11 @@ public class DeferredUpdateManager extends UpdateManager {
 			performValidation();
 			updateQueued = false;
 			repairDamage();
-			if (afterUpdate != null) {
-				RunnableChain chain = afterUpdate;
-				afterUpdate = null;
-				chain.run(); // chain may queue additional Runnable.
-				if (afterUpdate != null) {
+			if (!afterUpdate.isEmpty()) {
+				List<Runnable> chain = afterUpdate;
+				afterUpdate = new ArrayList<>();
+				chain.forEach(Runnable::run); // chain may queue additional Runnable.
+				if (!afterUpdate.isEmpty()) {
 					queueWork();
 				}
 			}
@@ -330,7 +313,7 @@ public class DeferredUpdateManager extends UpdateManager {
 	 */
 	@Override
 	public synchronized void runWithUpdate(Runnable runnable) {
-		afterUpdate = new RunnableChain(runnable, afterUpdate);
+		afterUpdate.add(runnable);
 		if (!updating) {
 			queueWork();
 		}
