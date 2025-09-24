@@ -30,10 +30,7 @@ public interface IScalablePane extends ScalableFigure {
 
 	public default Rectangle getScaledRect(Rectangle rect) {
 		double scale = getScale();
-		rect.width /= scale;
-		rect.height /= scale;
-		rect.x /= scale;
-		rect.y /= scale;
+		rect.scale(1 / scale);
 		return rect;
 	}
 
