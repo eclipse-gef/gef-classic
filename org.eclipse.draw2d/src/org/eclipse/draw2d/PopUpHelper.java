@@ -243,7 +243,7 @@ public abstract class PopUpHelper {
 		private final ScalableLayeredPane scalablePane;
 
 		private PopupHelperLightweightSystem() {
-			scalablePane = new ScalableLayeredPane(false);
+			scalablePane = new ScalableLayeredPane(true);
 			scalablePane.setLayoutManager(new StackLayout());
 			getRootFigure().add(scalablePane);
 		}
