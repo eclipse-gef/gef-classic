@@ -1126,6 +1126,17 @@ public class FlyoutPaletteComposite extends Composite {
 		}
 
 		@Override
+		protected Dimension calculateTextSize() {
+			GC gc = new GC(paletteContainer);
+			try {
+				gc.setFont(getFont());
+				return new Dimension(gc.textExtent(getText()));
+			} finally {
+				gc.dispose();
+			}
+		}
+
+		@Override
 		public IFigure getToolTip() {
 			if (isTextTruncated()) {
 				return super.getToolTip();

@@ -20,6 +20,7 @@ import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
+import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -30,6 +31,7 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.LayerConstants;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.internal.MonitorAwareZoomManager;
 import org.eclipse.gef.tools.MarqueeDragTracker;
 
 /**
@@ -86,7 +88,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  */
 public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements LayerConstants, LayerManager {
 
-	private LayeredPane innerLayers;
+	private ScalableFreeformLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private final PropertyChangeListener gridListener = evt -> {
 		String property = evt.getPropertyName();
@@ -102,7 +104,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	@Override
 	protected IFigure createFigure() {
 		FreeformViewport viewport = new FreeformViewport();
-		innerLayers = new FreeformLayeredPane();
+		innerLayers = new ScalableFreeformLayeredPane();
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;
@@ -260,6 +262,11 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 			getViewer().addPropertyChangeListener(gridListener);
 			refreshGridLayer();
 		}
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			monitorAwareZoomManager.registerPane(innerLayers);
+		}
 	}
 
 	/**
@@ -267,6 +274,11 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 */
 	@Override
 	protected void unregister() {
+		MonitorAwareZoomManager monitorAwareZoomManager = (MonitorAwareZoomManager) getViewer()
+				.getProperty(MonitorAwareZoomManager.class.toString());
+		if (monitorAwareZoomManager != null) {
+			monitorAwareZoomManager.unregisterPane(innerLayers);
+		}
 		getViewer().removePropertyChangeListener(gridListener);
 		super.unregister();
 	}
