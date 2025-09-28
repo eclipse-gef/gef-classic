@@ -1168,7 +1168,7 @@ public class FlyoutPaletteComposite extends Composite {
 		private LightweightSystem lws;
 
 		public ButtonCanvas(Composite parent) {
-			super(parent, SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND);
+			super(parent, SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND | SWT.DOUBLE_BUFFERED);
 			init();
 			provideAccSupport();
 		}
@@ -1314,7 +1314,7 @@ public class FlyoutPaletteComposite extends Composite {
 		private LightweightSystem lws;
 
 		public TitleCanvas(Composite parent, boolean horizontal) {
-			super(parent, SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND);
+			super(parent, SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND | SWT.DOUBLE_BUFFERED);
 			init(horizontal);
 			provideAccSupport();
 		}
