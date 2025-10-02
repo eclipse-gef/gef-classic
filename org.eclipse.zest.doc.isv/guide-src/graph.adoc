@@ -104,15 +104,16 @@ The `*Figures*` used for visualization of the `*GraphItems*` are painted
 using absolute coordinates. In combination with fractional scaling, this may
 result in rounding errors, causing visual glitches in the graph.
 
-By setting the `*draw2d.disableAutoscale*` system property to `*true*`, the
+By setting the `*draw2d.enableAutoscale*` system property to `*true*`, the
 native scaling capability of the underlying `*Graph*`, which is normally
-provided by SWT, is disabled and instead done by Draw2D.
+provided by SWT, is replaced by a Draw2D-based scaling.
 
 When a `*Graph*` is created, a `*ZoomChanged*` listener is registered. The
-current monitor zoom (and any changes to it) are used as scale for the
+current monitor zoom (and any changes to it) is used as scale for the
 `*RootLayer*`.
 
 image:images/highdpi.svg[Relation between the FigureCanvas, EditPartViewer and RootEditPart with respect to the device zoom]
 
-NOTE: Fractional scaling is currently only supported for Windows. On Linux and
-MacOS, this system property is ignored.
+NOTE: Fractional scaling is currently only supported for Windows, where this
+system property is enabled by default. On Linux and MacOS, this system property
+is ignored.

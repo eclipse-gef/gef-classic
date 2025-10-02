@@ -7,7 +7,11 @@
 
 ## Zest
 
+## General
 
+- Experimental: The native HighDPI scaling provided by SWT can be replaced with a Draw2D-based scaling may by setting
+                the `*draw2d.enableAutoscale*` to `*true*`. Doing so avoids visual artifacts that result from
+                fractional scaling. This property is only available on Windows and enabled by default.
 
 # GEF Classic 3.25.0
 
