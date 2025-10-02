@@ -20,6 +20,7 @@ endif::[]
 * xref:#tools-and-the-palette[Tools and Palette]
 * xref:#types-of-interactions-in-gef[Interactions] - the GEF interactions and
   the players involved
+* xref:#highdpi-support[HighDPI Support]
 
 === [#overview]#Overview#
 
@@ -1069,3 +1070,20 @@ bendpoints are labeled with the index that the BendpointRequest will
 contain. The index is the same as the current (or eventual) index of the
 bendpoint in the routing constraint's List.
 |===
+
+=== [#highdpi-support]#HighDPI Support#
+
+The `*Figures*` used for visualization of the `*EditParts*` are painted using absolute coordinates. When used in
+combination with fractional scaling, the resulting rounding errors may cause glitches and other visual artifacts in the
+editor. GEF provides an experimental mode, where the scaling is not done by SWT, but rather by Draw2D. 
+
+By setting the `*draw2d.enableAutoscale*` system property, the native auto-scaling functionality of the `*Canvas*`,
+which is normally provided by SWT, is replaced by a Draw2D-based scaling. A `*ZoomChanged*` is hooked to the 
+`*EditPartViewer*`, listening to changes to the `*monitorScale*` of the underlying `*Control*` and setting the current
+zoom as property of the viewer. The `*RootEditPart*` listens to changes of this property and updates the scale of its 
+`*ScalableFigure*`.
+
+image:images/highdpi.svg[Relation between the FigureCanvas, EditPartViewer and RootEditPart with respect to the device zoom]
+
+image:images/important.gif[image] Fractional scaling is currently only supported for Windows, where this system property
+is enabled by default. On Linux and MacOS, this system property is ignored.
