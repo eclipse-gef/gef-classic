@@ -74,6 +74,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.internal.FileImageDataProvider;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * Holds the nodes and connections for the graph.
@@ -238,6 +239,12 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		this.subgraphFigures = new HashSet<>();
 		this.zoomListener = new ZoomGestureListener();
 		this.rotateListener = new RotateGestureListener();
+
+		if (InternalDraw2dUtils.disableAutoscale) {
+			InternalDraw2dUtils.configureForAutoscalingMode(this);
+			addListener(SWT.ZoomChanged, event -> rootlayer.setScale(event.detail / 100.0));
+			rootlayer.setScale(InternalDraw2dUtils.calculateScale(this));
+		}
 
 		this.addPaintListener(event -> {
 			if (shouldSheduleLayout) {
