@@ -29,6 +29,11 @@ public class InternalDraw2dUtils {
 	 */
 	private static final String DRAW2D_DISABLE_AUTOSCALE = "draw2d.disableAutoscale"; //$NON-NLS-1$
 
+	/**
+	 * Internal flag for fetching the shell zoom
+	 */
+	private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
+
 	public static boolean disableAutoscale;
 
 	static {
@@ -40,5 +45,18 @@ public class InternalDraw2dUtils {
 		if (control != null && disableAutoscale) {
 			control.setData("AUTOSCALE_DISABLED", true); //$NON-NLS-1$
 		}
+	}
+
+	public static double calculateScale(Control control) {
+		if (!InternalDraw2dUtils.disableAutoscale || control == null) {
+			return 1.0;
+		}
+		int shellZooom;
+		try {
+			shellZooom = (int) control.getData(InternalDraw2dUtils.DATA_SHELL_ZOOM);
+		} catch (ClassCastException | NullPointerException e) {
+			shellZooom = 100;
+		}
+		return shellZooom / 100.0;
 	}
 }

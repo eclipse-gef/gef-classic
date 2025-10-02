@@ -97,3 +97,22 @@ Draw2D.
 NOTE: Graph connections are always added to the _Graph_, regardless of whether
 the node are inside a sub-graph. This means that it is possible to e.g. connect
 two vertices in separate sub-graphs.
+
+== HighDPI Support
+
+The `*Figures*` used for visualization of the `*GraphItems*` are painted
+using absolute coordinates. In combination with fractional scaling, this may
+result in rounding errors, causing visual glitches in the graph.
+
+By setting the `*draw2d.disableAutoscale*` system property to `*true*`, the
+native scaling capability of the underlying `*Graph*`, which is normally
+provided by SWT, is disabled and instead done by Draw2D.
+
+When a `*Graph*` is created, a `*ZoomChanged*` listener is registered. The
+current monitor zoom (and any changes to it) are used as scale for the
+`*RootLayer*`.
+
+image:images/highdpi.svg[Relation between the FigureCanvas, EditPartViewer and RootEditPart with respect to the device zoom]
+
+NOTE: Fractional scaling is currently only supported for Windows. On Linux and
+MacOS, this system property is ignored.
