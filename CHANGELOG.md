@@ -7,7 +7,11 @@
 
 ## Zest
 
+## General
 
+- Experimental: HighDPI scaling may be done via Draw2D instead of SWT by using the `*draw2d.disableAutoscale*`. This
+                property is disabled by default but may be used to deal with visual artifacts. This property is only
+                available on Windows.
 
 # GEF Classic 3.25.0
 

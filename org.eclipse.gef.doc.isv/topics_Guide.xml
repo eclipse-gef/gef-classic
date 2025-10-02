@@ -15,5 +15,6 @@
 		<topic label="The EditPart Lifecycle" href="guide/guide.html#the-editpart-lifecycle"/>
 		<topic label="Tools and the Palette" href="guide/guide.html#tools-and-the-palette"/>
 		<topic label="Types of Interactions" href="guide/guide.html#types-of-interactions-in-gef"/>
+		<topic label="HighDPI Support" href="guide/guide.html#highdpi-support"/>
 	</topic>
 </toc>
