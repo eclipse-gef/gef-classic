@@ -19,7 +19,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.util.EventObject;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -48,6 +47,7 @@ import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
@@ -118,9 +118,9 @@ public class ShapesEditor extends GraphicalEditorWithFlyoutPalette {
 	 * .EventObject)
 	 */
 	@Override
-	public void commandStackChanged(EventObject event) {
+	public void stackChanged(CommandStackEvent event) {
 		firePropertyChange(IEditorPart.PROP_DIRTY);
-		super.commandStackChanged(event);
+		super.stackChanged(event);
 	}
 
 	private void createOutputStream(OutputStream os) throws IOException {
