@@ -20,7 +20,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.EventObject;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
@@ -94,6 +93,7 @@ import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.SnapToGeometry;
 import org.eclipse.gef.SnapToGrid;
+import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
@@ -427,9 +427,9 @@ public class LogicEditor extends GraphicalEditorWithFlyoutPalette {
 	}
 
 	@Override
-	public void commandStackChanged(EventObject event) {
+	public void stackChanged(CommandStackEvent event) {
 		firePropertyChange(IEditorPart.PROP_DIRTY);
-		super.commandStackChanged(event);
+		super.stackChanged(event);
 	}
 
 	@Override

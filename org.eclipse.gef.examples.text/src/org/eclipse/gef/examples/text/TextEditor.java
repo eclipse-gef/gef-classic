@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,7 +19,6 @@ import java.io.EOFException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.EventObject;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -47,6 +46,7 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.commands.CommandStack;
+import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
 import org.eclipse.gef.tools.SelectionTool;
 import org.eclipse.gef.ui.actions.ActionRegistry;
@@ -130,9 +130,9 @@ public class TextEditor extends GraphicalEditor {
 	}
 
 	@Override
-	public void commandStackChanged(EventObject event) {
+	public void stackChanged(CommandStackEvent event) {
 		firePropertyChange(PROP_DIRTY);
-		super.commandStackChanged(event);
+		super.stackChanged(event);
 	}
 
 	/**
