@@ -240,7 +240,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		this.zoomListener = new ZoomGestureListener();
 		this.rotateListener = new RotateGestureListener();
 
-		if (InternalDraw2dUtils.disableAutoscale) {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			InternalDraw2dUtils.configureForAutoscalingMode(this, rootlayer::setScale);
 		}
 

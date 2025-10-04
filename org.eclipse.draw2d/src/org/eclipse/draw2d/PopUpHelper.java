@@ -77,7 +77,7 @@ public abstract class PopUpHelper {
 	 * @since 2.0
 	 */
 	protected LightweightSystem createLightweightSystem() {
-		return InternalDraw2dUtils.disableAutoscale ? new PopupHelperLightweightSystem() : new LightweightSystem();
+		return InternalDraw2dUtils.isAutoScaleEnabled() ? new PopupHelperLightweightSystem() : new LightweightSystem();
 	}
 
 	/**
