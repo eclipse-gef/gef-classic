@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -17,6 +17,7 @@ import org.eclipse.ui.actions.LabelRetargetAction;
 import org.eclipse.draw2d.PositionConstants;
 
 import org.eclipse.gef.internal.GEFMessages;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 
 /**
@@ -41,42 +42,54 @@ public class AlignmentRetargetAction extends LabelRetargetAction {
 			setText(GEFMessages.AlignBottomAction_Label);
 			setToolTipText(GEFMessages.AlignBottomAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_BOTTOM_DIS);
+			}
 			break;
 		case PositionConstants.CENTER:
 			setId(GEFActionConstants.ALIGN_CENTER);
 			setText(GEFMessages.AlignCenterAction_Label);
 			setToolTipText(GEFMessages.AlignCenterAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_CENTER_DIS);
+			}
 			break;
 		case PositionConstants.LEFT:
 			setId(GEFActionConstants.ALIGN_LEFT);
 			setText(GEFMessages.AlignLeftAction_Label);
 			setToolTipText(GEFMessages.AlignLeftAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_LEFT_DIS);
+			}
 			break;
 		case PositionConstants.MIDDLE:
 			setId(GEFActionConstants.ALIGN_MIDDLE);
 			setText(GEFMessages.AlignMiddleAction_Label);
 			setToolTipText(GEFMessages.AlignMiddleAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_MIDDLE_DIS);
+			}
 			break;
 		case PositionConstants.RIGHT:
 			setId(GEFActionConstants.ALIGN_RIGHT);
 			setText(GEFMessages.AlignRightAction_Label);
 			setToolTipText(GEFMessages.AlignRightAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT);
-			setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_HORZ_ALIGN_RIGHT_DIS);
+			}
 			break;
 		case PositionConstants.TOP:
 			setId(GEFActionConstants.ALIGN_TOP);
 			setText(GEFMessages.AlignTopAction_Label);
 			setToolTipText(GEFMessages.AlignTopAction_Tooltip);
 			setImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP);
-			setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP_DIS);
+			if (InternalGEFPlugin.requiresDisabledIcon()) {
+				setDisabledImageDescriptor(InternalImages.DESC_VERT_ALIGN_TOP_DIS);
+			}
 			break;
 		}
 	}

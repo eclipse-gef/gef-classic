@@ -30,8 +30,23 @@ public class InternalImages {
 	public static final ImageDescriptor DESC_MATCH_WIDTH;
 	public static final ImageDescriptor DESC_MATCH_HEIGHT;
 
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_MATCH_SIZE_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_MATCH_WIDTH_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_MATCH_HEIGHT_DIS;
 
 	public static final ImageDescriptor DESC_HORZ_ALIGN_CENTER;
@@ -42,12 +57,42 @@ public class InternalImages {
 	public static final ImageDescriptor DESC_VERT_ALIGN_TOP;
 	public static final ImageDescriptor DESC_VERT_ALIGN_BOTTOM;
 
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_HORZ_ALIGN_CENTER_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_HORZ_ALIGN_LEFT_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_HORZ_ALIGN_RIGHT_DIS;
 
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_VERT_ALIGN_MIDDLE_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_VERT_ALIGN_TOP_DIS;
+	/**
+	 * @deprecated No longer needed with SWT 3.130.0. Can be removed once this is
+	 *             the minimum supported version.
+	 */
+	@Deprecated
 	public static final ImageDescriptor DESC_VERT_ALIGN_BOTTOM_DIS;
 
 	public static final ImageDescriptor DESC_SEPARATOR;
