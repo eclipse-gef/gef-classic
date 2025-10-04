@@ -486,7 +486,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (contextMenu != null) {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
 		}
-		if (InternalDraw2dUtils.disableAutoscale) {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			InternalDraw2dUtils.configureForAutoscalingMode(control,
 					scale -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, scale));
 		}

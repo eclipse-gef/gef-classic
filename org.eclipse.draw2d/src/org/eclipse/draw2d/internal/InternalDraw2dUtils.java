@@ -19,17 +19,20 @@ import org.eclipse.swt.widgets.Control;
 
 public class InternalDraw2dUtils {
 	/**
-	 * System property that controls the disablement of any autoScale functionality.
+	 * System property that controls the enabled of the Draw2D autoScale
+	 * functionality (replacing the native SWT autoScale functionality).
+	 * <p>
 	 * Currently it only has effects when executed on Windows.
+	 * </p>
 	 *
 	 * <ul>
-	 * <li><b>false</b>: autoScale functionality is enabled</li>
-	 * <li><b>true</b>: autoScale functionality is disabled<</li>
+	 * <li><b>true</b>: autoScale functionality is enabled</li>
+	 * <li><b>false</b>: autoScale functionality is disabled<</li>
 	 *
 	 * </ul>
-	 * The current default is "false".
+	 * The current default is "true".
 	 */
-	private static final String DRAW2D_DISABLE_AUTOSCALE = "draw2d.disableAutoscale"; //$NON-NLS-1$
+	private static final String DRAW2D_ENABLE_AUTOSCALE = "draw2d.enableAutoscale"; //$NON-NLS-1$
 
 	/**
 	 * Internal flag for fetching the shell zoom
@@ -41,15 +44,15 @@ public class InternalDraw2dUtils {
 	 */
 	private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
 
-	public static boolean disableAutoscale;
+	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
+			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()));
 
-	static {
-		disableAutoscale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
-				&& Boolean.parseBoolean(System.getProperty(DRAW2D_DISABLE_AUTOSCALE));
+	public static boolean isAutoScaleEnabled() {
+		return enableAutoScale;
 	}
 
 	public static void configureForAutoscalingMode(Control control, Consumer<Double> zoomConsumer) {
-		if (control == null || !disableAutoscale) {
+		if (control == null || !isAutoScaleEnabled()) {
 			return;
 		}
 		control.setData(InternalDraw2dUtils.DATA_AUTOSCALE_DISABLED, true);
