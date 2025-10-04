@@ -492,7 +492,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		if (contextMenu != null) {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
 		}
-		if (InternalDraw2dUtils.disableAutoscale) {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			control.addListener(SWT.ZoomChanged,
 					e -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, e.detail / 100.0));
 		}
@@ -869,7 +869,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	}
 
 	private double calculateScale() {
-		if (!InternalDraw2dUtils.disableAutoscale || control == null) {
+		if (!InternalDraw2dUtils.isAutoScaleEnabled() || control == null) {
 			return 1.0;
 		}
 		int shellZooom;
