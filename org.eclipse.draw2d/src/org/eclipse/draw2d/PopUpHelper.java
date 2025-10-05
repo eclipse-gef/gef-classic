@@ -223,31 +223,6 @@ public abstract class PopUpHelper {
 	private class PopupHelperLightweightSystem extends LightweightSystem {
 
 		/**
-		 * Data that can be set to scale this widget at 100%.
-		 */
-		private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
-
-		/**
-		 * Internal flag for fetching the shell zoom
-		 */
-		private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
-
-		/**
-		 * Returns the zoom of the monitor this widget is assigned to.
-		 *
-		 * @return 1.0 at 100%, 1.25 at 125% etc.
-		 */
-		private static double getMonitorZoomScale(Control c) {
-			int shellZooom;
-			try {
-				shellZooom = (int) c.getData(DATA_SHELL_ZOOM);
-			} catch (ClassCastException | NullPointerException e) {
-				shellZooom = 100;
-			}
-			return shellZooom / 100.0;
-		}
-
-		/**
 		 * The scalable pane that is injected between the root figure and the contents
 		 * of this viewport.
 		 */
@@ -274,9 +249,7 @@ public abstract class PopUpHelper {
 				return;
 			}
 
-			c.setData(DATA_AUTOSCALE_DISABLED, true);
-			c.addListener(SWT.ZoomChanged, e -> setScale(e.detail / 100.0));
-			setScale(getMonitorZoomScale(c));
+			InternalDraw2dUtils.configureForAutoscalingMode(c, this::setScale);
 
 			super.setControl(c);
 		}
