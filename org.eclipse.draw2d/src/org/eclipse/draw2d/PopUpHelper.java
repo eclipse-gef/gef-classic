@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -222,43 +222,57 @@ public abstract class PopUpHelper {
 
 	private class PopupHelperLightweightSystem extends LightweightSystem {
 
-		/**
-		 * The scalable pane that is injected between the root figure and the contents
-		 * of this viewport.
-		 */
-		private final ScalableLayeredPane scalablePane;
-
-		private PopupHelperLightweightSystem() {
-			scalablePane = new ScalableLayeredPane(true);
-			scalablePane.setLayoutManager(new StackLayout());
-			getRootFigure().add(scalablePane);
-		}
-
-		/**
-		 * Updates the scale factor of the scalable pane to the given value.
-		 *
-		 * @param scale The new scale factor.
-		 */
-		private void setScale(double scale) {
-			scalablePane.setScale(scale);
-		}
-
 		@Override
 		public void setControl(Canvas c) {
 			if (c == null) {
 				return;
 			}
 
-			InternalDraw2dUtils.configureForAutoscalingMode(c, this::setScale);
+			InternalDraw2dUtils.configureForAutoscalingMode(c, getRootFigure()::setScale);
 
 			super.setControl(c);
 		}
 
 		@Override
-		public void setContents(IFigure figure) {
-			scalablePane.removeAll();
-			if (figure != null) {
-				scalablePane.add(figure);
+		protected RootFigure createRootFigure() {
+			RootFigure f = new ScalableRootFigure();
+			f.addNotify();
+			f.setOpaque(true);
+			f.setLayoutManager(new StackLayout());
+			return f;
+		}
+
+		@Override
+		public ScalableFigure getRootFigure() {
+			return (ScalableFigure) super.getRootFigure();
+		}
+
+		private class ScalableRootFigure extends RootFigure implements ScalableFigure {
+			/**
+			 * The scalable pane that is injected between the root figure and the contents
+			 * of this viewport.
+			 */
+			private final ScalableLayeredPane scalablePane;
+
+			private ScalableRootFigure() {
+				scalablePane = new ScalableLayeredPane(true);
+				scalablePane.setLayoutManager(new StackLayout());
+				super.add(scalablePane, null, 0);
+			}
+
+			@Override
+			public void add(IFigure figure, Object constraint, int index) {
+				scalablePane.add(figure, constraint, index);
+			}
+
+			@Override
+			public double getScale() {
+				return scalablePane.getScale();
+			}
+
+			@Override
+			public void setScale(double scale) {
+				scalablePane.setScale(scale);
 			}
 		}
 	}
