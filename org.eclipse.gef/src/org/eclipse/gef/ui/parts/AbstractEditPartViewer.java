@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
 import org.eclipse.swt.dnd.DropTarget;
@@ -488,10 +487,9 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
 		}
 		if (InternalDraw2dUtils.disableAutoscale) {
-			control.addListener(SWT.ZoomChanged,
-					e -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, e.detail / 100.0));
+			InternalDraw2dUtils.configureForAutoscalingMode(control,
+					scale -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, scale));
 		}
-		setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, InternalDraw2dUtils.calculateScale(control));
 	}
 
 	/**
