@@ -79,9 +79,6 @@ public class FigureUtilities {
 				// ignored
 			});
 			gc = new GC(shell);
-			if (InternalDraw2dUtils.disableAutoscale) {
-				gc.setAdvanced(true);
-			}
 			appliedFont = gc.getFont();
 		}
 		return gc;
