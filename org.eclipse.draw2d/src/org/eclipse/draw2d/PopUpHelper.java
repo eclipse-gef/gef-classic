@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
+import java.util.List;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Rectangle;
@@ -263,6 +265,11 @@ public abstract class PopUpHelper {
 			@Override
 			public void add(IFigure figure, Object constraint, int index) {
 				scalablePane.add(figure, constraint, index);
+			}
+
+			@Override
+			public List<? extends IFigure> getChildren() {
+				return scalablePane.getChildren();
 			}
 
 			@Override
