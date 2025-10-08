@@ -281,6 +281,12 @@ public abstract class PopUpHelper {
 			public void setScale(double scale) {
 				scalablePane.setScale(scale);
 			}
+
+			@Override
+			public void remove(IFigure figure) {
+				scalablePane.remove(figure);
+			}
+
 		}
 	}
 }
