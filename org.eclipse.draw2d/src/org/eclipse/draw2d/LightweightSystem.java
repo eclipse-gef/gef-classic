@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -39,6 +39,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.DrawableTextUtilities;
 
 /**
  * The LightweightSystem is the link between SWT and Draw2d. It is the component
@@ -55,6 +56,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public class LightweightSystem {
 
+	private DrawableTextUtilities textUtilities;
 	private Canvas canvas;
 	IFigure contents;
 	private IFigure root;
@@ -236,6 +238,8 @@ public class LightweightSystem {
 		getEventDispatcher().setControl(c);
 		addListeners();
 
+		textUtilities = new DrawableTextUtilities(canvas);
+
 		// Size the root figure and contents to the current control's size
 		Rectangle r = new Rectangle(canvas.getClientArea());
 		r.setLocation(0, 0);
@@ -350,6 +354,13 @@ public class LightweightSystem {
 		@Override
 		public boolean isShowing() {
 			return true;
+		}
+
+		/* package */ TextUtilities getTextUtilities() {
+			if (textUtilities == null) {
+				return TextUtilities.INSTANCE;
+			}
+			return textUtilities;
 		}
 	}
 

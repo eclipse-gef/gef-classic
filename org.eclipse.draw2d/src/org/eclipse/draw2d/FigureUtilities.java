@@ -179,6 +179,16 @@ public class FigureUtilities {
 	}
 
 	/**
+	 * @since 3.21
+	 */
+	public static TextUtilities getTextUtilities(IFigure figure) {
+		if (getRoot(figure) instanceof LightweightSystem.RootFigure rootFigure) {
+			return rootFigure.getTextUtilities();
+		}
+		return TextUtilities.INSTANCE;
+	}
+
+	/**
 	 * Returns a Color the same as the passed color in a lighter hue.
 	 *
 	 * @param rgb the color
