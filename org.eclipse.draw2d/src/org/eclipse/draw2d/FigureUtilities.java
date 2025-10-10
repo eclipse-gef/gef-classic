@@ -32,6 +32,7 @@ public class FigureUtilities {
 
 	private static final float RGB_VALUE_MULTIPLIER = 0.6f;
 	private static GC gc;
+	private static Shell shell;
 	private static Font appliedFont;
 	private static FontMetrics metrics;
 	private static Color ghostFillColor = new Color(null, 31, 31, 31);
@@ -59,7 +60,7 @@ public class FigureUtilities {
 	public static FontMetrics getFontMetrics(Font f) {
 		setFont(f);
 		if (metrics == null) {
-			metrics = getGC().getFontMetrics();
+			metrics = gc.getFontMetrics();
 		}
 		return metrics;
 	}
@@ -74,14 +75,20 @@ public class FigureUtilities {
 	@Deprecated
 	protected static GC getGC() {
 		if (gc == null) {
-			Shell shell = new Shell();
-			InternalDraw2dUtils.configureForAutoscalingMode(shell, event -> {
-				// ignored
-			});
-			gc = new GC(shell);
+			gc = new GC(getShell());
 			appliedFont = gc.getFont();
 		}
 		return gc;
+	}
+
+	private static Shell getShell() {
+		if (shell == null) {
+			shell = new Shell();
+			InternalDraw2dUtils.configureForAutoscalingMode(shell, event -> {
+				// ignored
+			});
+		}
+		return shell;
 	}
 
 	/**
@@ -95,7 +102,7 @@ public class FigureUtilities {
 	 */
 	protected static org.eclipse.swt.graphics.Point getTextDimension(String s, Font f) {
 		setFont(f);
-		return getGC().textExtent(s);
+		return gc.textExtent(s);
 	}
 
 	/**
@@ -123,7 +130,7 @@ public class FigureUtilities {
 	 */
 	protected static org.eclipse.swt.graphics.Point getStringDimension(String s, Font f) {
 		setFont(f);
-		return getGC().stringExtent(s);
+		return gc.stringExtent(s);
 	}
 
 	/**
@@ -341,10 +348,14 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	protected static void setFont(Font f) {
-		if (appliedFont == f || (f != null && f.equals(appliedFont))) {
+		if ((appliedFont == null && f == null && gc != null) || (f != null && f.equals(appliedFont))) {
 			return;
 		}
-		getGC().setFont(f);
+		if (gc != null && !gc.isDisposed()) {
+			gc.dispose();
+		}
+		gc = new GC(getShell());
+		gc.setFont(f);
 		appliedFont = f;
 		metrics = null;
 	}
