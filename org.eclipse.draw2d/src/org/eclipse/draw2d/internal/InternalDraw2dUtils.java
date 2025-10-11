@@ -52,7 +52,11 @@ public class InternalDraw2dUtils {
 	}
 
 	public static void configureForAutoscalingMode(Control control, Consumer<Double> zoomConsumer) {
-		if (control == null || !isAutoScaleEnabled()) {
+		// The SHELL_ZOOM key was only added with the 2025-12 release. On older
+		// releases, GEF would disable auto-scaling of the canvas and paint everything
+		// at 100%. This check can be removed once the 2025-12 becomes the minimum
+		// supported version.
+		if (control == null || control.getData(DATA_SHELL_ZOOM) == null || !isAutoScaleEnabled()) {
 			return;
 		}
 		control.setData(InternalDraw2dUtils.DATA_AUTOSCALE_DISABLED, true);
@@ -61,12 +65,9 @@ public class InternalDraw2dUtils {
 	}
 
 	private static double calculateScale(Control control) {
-		int shellZoom;
-		try {
-			shellZoom = (int) control.getData(InternalDraw2dUtils.DATA_SHELL_ZOOM);
-		} catch (ClassCastException | NullPointerException e) {
-			shellZoom = 100;
+		if (control.getData(InternalDraw2dUtils.DATA_SHELL_ZOOM) instanceof Integer shellZoom) {
+			return shellZoom / 100.0;
 		}
-		return shellZoom / 100.0;
+		return 1.0;
 	}
 }
