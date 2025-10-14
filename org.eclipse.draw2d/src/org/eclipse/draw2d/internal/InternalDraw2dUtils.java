@@ -45,7 +45,8 @@ public class InternalDraw2dUtils {
 	private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
 
 	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
-			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()));
+			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()))
+			&& SWT.getVersion() >= 4971; // SWT 2025-12 release or higher
 
 	public static boolean isAutoScaleEnabled() {
 		return enableAutoScale;
