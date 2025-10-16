@@ -61,7 +61,7 @@ public class SharedCursors extends Cursors {
 			ImageDescriptor src1 = InternalImages.createDescriptor(sourceName);
 			ImageDescriptor src2 = InternalCursor.getCursorDescriptor();
 			ImageDescriptor src = new DecorationOverlayIcon(src1, src2, IDecoration.TOP_LEFT);
-			return new Cursor(null, src.getImageData(100), 0, 0);
+			return InternalGEFPlugin.createCursor(src, 0, 0);
 		}
 		ImageDescriptor src = InternalImages.createDescriptor(sourceName);
 		return InternalGEFPlugin.createCursor(src, 0, 0);
