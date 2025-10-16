@@ -12,12 +12,9 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.List;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
@@ -76,8 +73,9 @@ public abstract class PopUpHelper {
 	 * @return the newly created LightweightSystem
 	 * @since 2.0
 	 */
+	@SuppressWarnings("static-method")
 	protected LightweightSystem createLightweightSystem() {
-		return InternalDraw2dUtils.isAutoScaleEnabled() ? new PopupHelperLightweightSystem() : new LightweightSystem();
+		return InternalDraw2dUtils.isAutoScaleEnabled() ? new ScalableLightweightSystem() : new LightweightSystem();
 	}
 
 	/**
@@ -220,73 +218,5 @@ public abstract class PopUpHelper {
 	protected void show() {
 		getShell().setVisible(true);
 		tipShowing = true;
-	}
-
-	private class PopupHelperLightweightSystem extends LightweightSystem {
-
-		@Override
-		public void setControl(Canvas c) {
-			if (c == null) {
-				return;
-			}
-
-			InternalDraw2dUtils.configureForAutoscalingMode(c, getRootFigure()::setScale);
-
-			super.setControl(c);
-		}
-
-		@Override
-		protected RootFigure createRootFigure() {
-			RootFigure f = new ScalableRootFigure();
-			f.addNotify();
-			f.setOpaque(true);
-			f.setLayoutManager(new StackLayout());
-			return f;
-		}
-
-		@Override
-		public ScalableFigure getRootFigure() {
-			return (ScalableFigure) super.getRootFigure();
-		}
-
-		private class ScalableRootFigure extends RootFigure implements ScalableFigure {
-			/**
-			 * The scalable pane that is injected between the root figure and the contents
-			 * of this viewport.
-			 */
-			private final ScalableLayeredPane scalablePane;
-
-			private ScalableRootFigure() {
-				scalablePane = new ScalableLayeredPane(true);
-				scalablePane.setLayoutManager(new StackLayout());
-				super.add(scalablePane, null, 0);
-			}
-
-			@Override
-			public void add(IFigure figure, Object constraint, int index) {
-				scalablePane.add(figure, constraint, index);
-			}
-
-			@Override
-			public List<? extends IFigure> getChildren() {
-				return scalablePane.getChildren();
-			}
-
-			@Override
-			public double getScale() {
-				return scalablePane.getScale();
-			}
-
-			@Override
-			public void setScale(double scale) {
-				scalablePane.setScale(scale);
-			}
-
-			@Override
-			public void remove(IFigure figure) {
-				scalablePane.remove(figure);
-			}
-
-		}
 	}
 }
