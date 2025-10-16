@@ -12,16 +12,15 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
-import java.util.List;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.geometry.Translatable;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
@@ -127,7 +126,7 @@ public abstract class PopUpHelper {
 	 * @since 3.1
 	 */
 	protected Dimension getShellTrimSize() {
-		Rectangle trim = shell.computeTrim(0, 0, 0, 0);
+		org.eclipse.swt.graphics.Rectangle trim = shell.computeTrim(0, 0, 0, 0);
 		return new Dimension(trim.width, trim.height);
 	}
 
@@ -249,44 +248,65 @@ public abstract class PopUpHelper {
 			return (ScalableFigure) super.getRootFigure();
 		}
 
-		private class ScalableRootFigure extends RootFigure implements ScalableFigure {
-			/**
-			 * The scalable pane that is injected between the root figure and the contents
-			 * of this viewport.
-			 */
-			private final ScalableLayeredPane scalablePane;
-
-			private ScalableRootFigure() {
-				scalablePane = new ScalableLayeredPane(true);
-				scalablePane.setLayoutManager(new StackLayout());
-				super.add(scalablePane, null, 0);
-			}
+		private class ScalableRootFigure extends RootFigure implements IScalablePane {
+			private double scale = 1.0;
 
 			@Override
-			public void add(IFigure figure, Object constraint, int index) {
-				scalablePane.add(figure, constraint, index);
-			}
-
-			@Override
-			public List<? extends IFigure> getChildren() {
-				return scalablePane.getChildren();
+			public void setScale(double scale) {
+				if (this.scale == scale) {
+					return;
+				}
+				this.scale = scale;
+				fireFigureMoved();
+				fireCoordinateSystemChanged();
+				revalidate();
+				repaint();
 			}
 
 			@Override
 			public double getScale() {
-				return scalablePane.getScale();
+				return scale;
 			}
 
 			@Override
-			public void setScale(double scale) {
-				scalablePane.setScale(scale);
+			public boolean useScaledGraphics() {
+				return true;
 			}
 
 			@Override
-			public void remove(IFigure figure) {
-				scalablePane.remove(figure);
+			public boolean optimizeClip() {
+				return super.optimizeClip();
 			}
 
+			@Override
+			public Rectangle getClientArea(Rectangle rect) {
+				return IScalablePaneHelper.getClientArea(this, super::getClientArea, rect);
+			}
+
+			@Override
+			public Dimension getMinimumSize(int wHint, int hHint) {
+				return IScalablePaneHelper.getMinimumSize(this, super::getMinimumSize, wHint, hHint);
+			}
+
+			@Override
+			public Dimension getPreferredSize(int wHint, int hHint) {
+				return IScalablePaneHelper.getPreferredSize(this, super::getPreferredSize, wHint, hHint);
+			}
+
+			@Override
+			protected void paintClientArea(Graphics graphics) {
+				IScalablePaneHelper.paintClientArea(this, super::paintClientArea, graphics);
+			}
+
+			@Override
+			public void translateToParent(Translatable t) {
+				IScalablePaneHelper.translateToParent(this, t);
+			}
+
+			@Override
+			public void translateFromParent(Translatable t) {
+				IScalablePaneHelper.translateFromParent(this, t);
+			}
 		}
 	}
 }
