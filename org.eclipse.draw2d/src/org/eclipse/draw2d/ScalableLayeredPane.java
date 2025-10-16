@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,8 +11,6 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.draw2d;
-
-import org.eclipse.swt.SWT;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -46,27 +44,19 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	/** @see IFigure#getClientArea(Rectangle) */
 	@Override
 	public Rectangle getClientArea(Rectangle rect) {
-		return getScaledRect(super.getClientArea(rect));
+		return IScalablePaneHelper.getClientArea(this, super::getClientArea, rect);
 	}
 
 	/** @see Figure#getMinimumSize(int, int) */
 	@Override
 	public Dimension getMinimumSize(int wHint, int hHint) {
-		Dimension d = super.getMinimumSize(wHint != SWT.DEFAULT ? (int) (wHint / getScale()) : SWT.DEFAULT,
-				hHint != SWT.DEFAULT ? (int) (hHint / getScale()) : SWT.DEFAULT);
-		int w = getInsets().getWidth();
-		int h = getInsets().getHeight();
-		return d.getExpanded(-w, -h).scale(scale).expand(w, h);
+		return IScalablePaneHelper.getMinimumSize(this, super::getMinimumSize, wHint, hHint);
 	}
 
 	/** @see Figure#getPreferredSize(int, int) */
 	@Override
 	public Dimension getPreferredSize(int wHint, int hHint) {
-		Dimension d = super.getPreferredSize(wHint != SWT.DEFAULT ? (int) (wHint / getScale()) : SWT.DEFAULT,
-				hHint != SWT.DEFAULT ? (int) (hHint / getScale()) : SWT.DEFAULT);
-		int w = getInsets().getWidth();
-		int h = getInsets().getHeight();
-		return d.getExpanded(-w, -h).scale(scale).expand(w, h);
+		return IScalablePaneHelper.getPreferredSize(this, super::getPreferredSize, wHint, hHint);
 	}
 
 	/**
@@ -82,17 +72,7 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	/** @see org.eclipse.draw2d.Figure#paintClientArea(Graphics) */
 	@Override
 	protected void paintClientArea(Graphics graphics) {
-		if (getChildren().isEmpty()) {
-			return;
-		}
-
-		if (scale == 1.0) {
-			super.paintClientArea(graphics);
-		} else {
-			Graphics graphicsToUse = IScalablePaneHelper.prepareScaledGraphics(graphics, this);
-			paintChildren(graphicsToUse);
-			IScalablePaneHelper.cleanupScaledGraphics(graphics, graphicsToUse);
-		}
+		IScalablePane.IScalablePaneHelper.paintClientArea(this, super::paintClientArea, graphics);
 	}
 
 	/**
@@ -132,13 +112,13 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	/** @see org.eclipse.draw2d.Figure#translateToParent(Translatable) */
 	@Override
 	public void translateToParent(Translatable t) {
-		t.performScale(getScale());
+		IScalablePaneHelper.translateToParent(this, t);
 	}
 
 	/** @see org.eclipse.draw2d.Figure#translateFromParent(Translatable) */
 	@Override
 	public void translateFromParent(Translatable t) {
-		t.performScale(1 / getScale());
+		IScalablePaneHelper.translateFromParent(this, t);
 	}
 
 	/** @see org.eclipse.draw2d.IFigure#isCoordinateSystem() */

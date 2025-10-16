@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -41,7 +41,7 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 	/** @see org.eclipse.draw2d.Figure#getClientArea() */
 	@Override
 	public Rectangle getClientArea(Rectangle rect) {
-		return getScaledRect(super.getClientArea(rect));
+		return IScalablePaneHelper.getClientArea(this, super::getClientArea, rect);
 	}
 
 	/**
@@ -65,17 +65,7 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 	/** @see org.eclipse.draw2d.Figure#paintClientArea(Graphics) */
 	@Override
 	protected void paintClientArea(final Graphics graphics) {
-		if (getChildren().isEmpty()) {
-			return;
-		}
-
-		if (scale == 1.0) {
-			super.paintClientArea(graphics);
-		} else {
-			Graphics graphicsToUse = IScalablePaneHelper.prepareScaledGraphics(graphics, this);
-			paintChildren(graphicsToUse);
-			IScalablePaneHelper.cleanupScaledGraphics(graphics, graphicsToUse);
-		}
+		IScalablePaneHelper.paintClientArea(this, super::paintClientArea, graphics);
 	}
 
 	/**
@@ -115,13 +105,13 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 	/** @see org.eclipse.draw2d.Figure#translateToParent(Translatable) */
 	@Override
 	public void translateToParent(Translatable t) {
-		t.performScale(getScale());
+		IScalablePaneHelper.translateToParent(this, t);
 	}
 
 	/** @see org.eclipse.draw2d.Figure#translateFromParent(Translatable) */
 	@Override
 	public void translateFromParent(Translatable t) {
-		t.performScale(1 / getScale());
+		IScalablePaneHelper.translateFromParent(this, t);
 	}
 
 }
