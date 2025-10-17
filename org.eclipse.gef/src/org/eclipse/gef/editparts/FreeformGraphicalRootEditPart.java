@@ -104,7 +104,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 */
 	@Override
 	protected IFigure createFigure() {
-		FreeformViewport viewport = new FreeformViewport();
+		FreeformViewport viewport = createViewport();
 		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			ScalableFreeformLayeredPane innerScalableLayers = new ScalableFreeformLayeredPane();
 			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers));
@@ -156,6 +156,17 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 		layeredPane.add(new FreeformLayer(), PRIMARY_LAYER);
 		layeredPane.add(new ConnectionLayer(), CONNECTION_LAYER);
 		return layeredPane;
+	}
+
+	/**
+	 * Create the viewport to be used for this root EditPart. Subclasses can
+	 * override this method to customize the viewport for their needs.
+	 *
+	 * @since 3.24
+	 */
+	@SuppressWarnings("static-method") // allow subclasses to override
+	protected FreeformViewport createViewport() {
+		return new FreeformViewport();
 	}
 
 	/**
