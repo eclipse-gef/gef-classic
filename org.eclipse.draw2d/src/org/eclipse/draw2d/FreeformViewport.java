@@ -24,10 +24,10 @@ public class FreeformViewport extends Viewport {
 	class FreeformViewportLayout extends ViewportLayout {
 		@Override
 		protected Dimension calculatePreferredSize(IFigure parent, int wHint, int hHint) {
-			getContents().validate();
+			view.validate();
 			wHint = Math.max(0, wHint);
 			hHint = Math.max(0, hHint);
-			return ((FreeformFigure) getContents()).getFreeformExtent().getExpanded(getInsets()).union(0, 0)
+			return ((FreeformFigure) view).getFreeformExtent().getExpanded(getInsets()).union(0, 0)
 					.union(wHint - 1, hHint - 1).getSize();
 		}
 
@@ -66,13 +66,12 @@ public class FreeformViewport extends Viewport {
 	 */
 	@Override
 	protected void readjustScrollBars() {
-		if (getContents() == null) {
+		if (view == null) {
 			return;
 		}
-		if (!(getContents() instanceof FreeformFigure)) {
+		if (!(view instanceof FreeformFigure ff)) {
 			return;
 		}
-		FreeformFigure ff = (FreeformFigure) getContents();
 		Rectangle clientArea = getClientArea();
 		Rectangle bounds = ff.getFreeformExtent().getCopy();
 		bounds.union(0, 0, clientArea.width, clientArea.height);
