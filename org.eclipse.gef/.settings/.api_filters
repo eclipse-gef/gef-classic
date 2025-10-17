@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.gef" version="2">
+    <resource path="src/org/eclipse/gef/editparts/FreeformGraphicalRootEditPart.java" type="org.eclipse.gef.editparts.FreeformGraphicalRootEditPart">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="AutoscaleFreeformViewport(boolean)"/>
+                <message_argument value="FreeformGraphicalRootEditPart"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/editparts/ScalableFreeformRootEditPart.java" type="org.eclipse.gef.editparts.ScalableFreeformRootEditPart">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="AutoscaleFreeformViewport(boolean)"/>
+                <message_argument value="ScalableFreeformRootEditPart"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/actions/AlignmentRetargetAction.java" type="org.eclipse.gef.ui.actions.AlignmentRetargetAction">
         <filter id="571473929">
             <message_arguments>
