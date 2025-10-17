@@ -14,13 +14,13 @@ package org.eclipse.gef.editparts;
 
 import java.beans.PropertyChangeListener;
 
+import org.eclipse.draw2d.AutoscaleFreeformViewport;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
-import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
@@ -105,13 +105,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	@Override
 	protected IFigure createFigure() {
 		FreeformViewport viewport = createViewport();
-		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
-			ScalableFreeformLayeredPane innerScalableLayers = new ScalableFreeformLayeredPane();
-			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers));
-			innerLayers = innerScalableLayers;
-		} else {
-			innerLayers = new FreeformLayeredPane();
-		}
+		innerLayers = new FreeformLayeredPane();
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;
@@ -164,8 +158,12 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 *
 	 * @since 3.24
 	 */
-	@SuppressWarnings("static-method") // allow subclasses to override
 	protected FreeformViewport createViewport() {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			AutoscaleFreeformViewport viewport = new AutoscaleFreeformViewport(false);
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewport));
+			return viewport;
+		}
 		return new FreeformViewport();
 	}
 
