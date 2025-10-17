@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,7 +20,6 @@ import org.eclipse.swt.graphics.TextLayout;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -724,18 +723,6 @@ public class TextFlow extends InlineFlow {
 	@SuppressWarnings("static-method")
 	protected FlowUtilities getFlowUtilities() {
 		return FlowUtilities.INSTANCE;
-	}
-
-	/**
-	 * Gets the <code>TextUtilities</code> instance to be used in measurement
-	 * calculations.
-	 *
-	 * @return a <code>TextUtilities</code> instance
-	 * @since 3.4
-	 */
-	@SuppressWarnings("static-method")
-	protected TextUtilities getTextUtilities() {
-		return TextUtilities.INSTANCE;
 	}
 
 }
