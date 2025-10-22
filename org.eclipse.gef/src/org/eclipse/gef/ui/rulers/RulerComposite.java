@@ -34,10 +34,13 @@ import org.eclipse.draw2d.DefaultRangeModel;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RangeModel;
+import org.eclipse.draw2d.ScalableLightweightSystem;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditDomain;
@@ -456,6 +459,11 @@ public class RulerComposite extends Composite {
 		 */
 		public RulerViewer() {
 			init();
+		}
+
+		@Override
+		protected LightweightSystem createLightweightSystem() {
+			return InternalDraw2dUtils.isAutoScaleEnabled() ? new ScalableLightweightSystem() : new LightweightSystem();
 		}
 
 		/**

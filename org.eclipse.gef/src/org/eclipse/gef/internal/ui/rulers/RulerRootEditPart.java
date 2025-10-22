@@ -21,6 +21,8 @@ import org.eclipse.draw2d.RangeModel;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.AutoexposeHelper;
@@ -28,6 +30,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 import org.eclipse.gef.editparts.ViewportAutoexposeHelper;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
  * RootEditPart for a ruler.
@@ -41,6 +44,7 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 	private static final Insets HORIZONTAL_THRESHOLD = new Insets(0, 18, 0, 18);
 
 	private final boolean horizontal;
+	private double monitorScale = 1.0;
 
 	/**
 	 * Constructor
@@ -48,8 +52,8 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 	 * @param isHorzontal whether or not the corresponding model ruler is horizontal
 	 */
 	public RulerRootEditPart(boolean isHorzontal) {
-		super();
 		horizontal = isHorzontal;
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(newScale -> this.monitorScale = newScale));
 	}
 
 	/**
@@ -244,6 +248,12 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 			if (this.getContents() != null) {
 				doLayout(true);
 			}
+		}
+
+		@Override
+		public Point getViewLocation() {
+			return new PrecisionPoint(getHorizontalRangeModel().getValue() / monitorScale,
+					getVerticalRangeModel().getValue() / monitorScale);
 		}
 
 		/**
