@@ -15,6 +15,8 @@ package org.eclipse.gef.ui.parts;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
+
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.palette.PaletteViewer;
@@ -58,6 +60,8 @@ public abstract class GraphicalEditorWithPalette extends GraphicalEditor {
 	@Override
 	public void createPartControl(Composite parent) {
 		Splitter splitter = new Splitter(parent, SWT.HORIZONTAL);
+		InternalDraw2dUtils.configureForAutoscalingMode(splitter, scale -> {
+		});
 		createPaletteViewer(splitter);
 		createGraphicalViewer(splitter);
 		splitter.maintainSize(getPaletteViewer().getControl());

@@ -81,10 +81,12 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.ScalableLightweightSystem;
 import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.Triangle;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.internal.DrawableTextUtilities;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.dnd.TemplateTransfer;
@@ -188,6 +190,8 @@ public class FlyoutPaletteComposite extends Composite {
 	public FlyoutPaletteComposite(Composite parent, int style, IWorkbenchPage page, PaletteViewerProvider pvProvider,
 			FlyoutPreferences preferences) {
 		super(parent, style | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED);
+		InternalDraw2dUtils.configureForAutoscalingMode(this, scale -> {
+		});
 		provider = pvProvider;
 		prefs = preferences;
 		sash = createSash();
@@ -1217,7 +1221,7 @@ public class FlyoutPaletteComposite extends Composite {
 
 		private void init() {
 			setCursor(Cursors.ARROW);
-			lws = new LightweightSystem();
+			lws = InternalDraw2dUtils.isAutoScaleEnabled() ? new ScalableLightweightSystem() : new LightweightSystem();
 			lws.setControl(this);
 			final ArrowButton b = new ArrowButton(getArrowDirection());
 			b.setRolloverEnabled(true);
@@ -1356,7 +1360,7 @@ public class FlyoutPaletteComposite extends Composite {
 				}
 			});
 
-			lws = new LightweightSystem();
+			lws = InternalDraw2dUtils.isAutoScaleEnabled() ? new ScalableLightweightSystem() : new LightweightSystem();
 			lws.setControl(this);
 			lws.setContents(contents);
 			setCursor(Cursors.SIZEALL);
