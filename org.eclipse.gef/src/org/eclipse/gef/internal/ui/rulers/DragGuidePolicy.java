@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.draw2d.Cursors;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -89,10 +90,12 @@ public class DragGuidePolicy extends GraphicalEditPolicy {
 			cmd = getGuideEditPart().getRulerProvider().getDeleteGuideCommand(getHost().getModel());
 		} else {
 			int pDelta;
+			Dimension moveDelta = new Dimension(req.getMoveDelta().x, req.getMoveDelta().y);
+			getHostFigure().translateToRelative(moveDelta);
 			if (getGuideEditPart().isHorizontal()) {
-				pDelta = req.getMoveDelta().y;
+				pDelta = moveDelta.height;
 			} else {
-				pDelta = req.getMoveDelta().x;
+				pDelta = moveDelta.width;
 			}
 			if (isMoveValid(getGuideEditPart().getZoomedPosition() + pDelta)) {
 				ZoomManager zoomManager = getGuideEditPart().getZoomManager();
@@ -217,10 +220,13 @@ public class DragGuidePolicy extends GraphicalEditPolicy {
 			eraseAttachedPartsFeedback(request);
 		} else {
 			int newPosition;
+
+			Dimension moveDelta = new Dimension(req.getMoveDelta().x, req.getMoveDelta().y);
+			getHostFigure().translateToRelative(moveDelta);
 			if (getGuideEditPart().isHorizontal()) {
-				newPosition = getGuideEditPart().getZoomedPosition() + req.getMoveDelta().y;
+				newPosition = getGuideEditPart().getZoomedPosition() + moveDelta.height;
 			} else {
-				newPosition = getGuideEditPart().getZoomedPosition() + req.getMoveDelta().x;
+				newPosition = getGuideEditPart().getZoomedPosition() + moveDelta.width;
 			}
 			getHostFigure().setVisible(true);
 			getGuideEditPart().getGuideLineFigure().setVisible(true);

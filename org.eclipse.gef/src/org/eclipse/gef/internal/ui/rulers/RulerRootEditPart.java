@@ -21,6 +21,7 @@ import org.eclipse.draw2d.RangeModel;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.AutoexposeHelper;
@@ -244,6 +245,13 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 			if (this.getContents() != null) {
 				doLayout(true);
 			}
+		}
+
+		@Override
+		public Point getViewLocation() {
+			Point viewLocation = new Point(getHorizontalRangeModel().getValue(), getVerticalRangeModel().getValue());
+			getFigure().translateToRelative(viewLocation);
+			return viewLocation;
 		}
 
 		/**
