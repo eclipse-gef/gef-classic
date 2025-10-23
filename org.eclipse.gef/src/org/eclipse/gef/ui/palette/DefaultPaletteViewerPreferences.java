@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -154,17 +154,13 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 	 * @return The corresponding layout code
 	 */
 	public static int convertPreferenceNameToLayout(String preference) {
-		int layout = -1;
-		if (preference.equals(PREFERENCE_DETAILS_ICON_SIZE)) {
-			layout = LAYOUT_DETAILS;
-		} else if (preference.equals(PREFERENCE_COLUMNS_ICON_SIZE)) {
-			layout = LAYOUT_COLUMNS;
-		} else if (preference.equals(PREFERENCE_ICONS_ICON_SIZE)) {
-			layout = LAYOUT_ICONS;
-		} else if (preference.equals(PREFERENCE_LIST_ICON_SIZE)) {
-			layout = LAYOUT_LIST;
-		}
-		return layout;
+		return switch (preference) {
+		case PREFERENCE_DETAILS_ICON_SIZE -> LAYOUT_DETAILS;
+		case PREFERENCE_COLUMNS_ICON_SIZE -> LAYOUT_COLUMNS;
+		case PREFERENCE_ICONS_ICON_SIZE -> LAYOUT_ICONS;
+		case PREFERENCE_LIST_ICON_SIZE -> LAYOUT_LIST;
+		default -> -1;
+		};
 	}
 
 	/**
@@ -227,16 +223,22 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 	 *                 preference store
 	 */
 	protected void handlePreferenceStorePropertyChanged(String property) {
-		if (property.equals(PREFERENCE_LAYOUT)) {
+		switch (property) {
+		case PREFERENCE_LAYOUT:
 			firePropertyChanged(property, Integer.valueOf(getLayoutSetting()));
-		} else if (property.equals(PREFERENCE_AUTO_COLLAPSE)) {
+			break;
+		case PREFERENCE_AUTO_COLLAPSE:
 			firePropertyChanged(property, Integer.valueOf(getAutoCollapseSetting()));
-		} else if (property.equals(PREFERENCE_FONT)) {
+			break;
+		case PREFERENCE_FONT:
 			firePropertyChanged(property, getFontData());
-		} else if (property.equals(PREFERENCE_SCROLLBARS_MODE)) {
+			break;
+		case PREFERENCE_SCROLLBARS_MODE:
 			firePropertyChanged(property, getScrollbarsMode());
-		} else {
+			break;
+		default:
 			firePropertyChanged(property, Boolean.valueOf(useLargeIcons(convertPreferenceNameToLayout(property))));
+			break;
 		}
 	}
 

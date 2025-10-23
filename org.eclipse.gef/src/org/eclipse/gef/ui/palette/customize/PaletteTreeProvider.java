@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -117,16 +117,24 @@ class PaletteTreeProvider implements ITreeContentProvider {
 	protected void handlePropertyChanged(PropertyChangeEvent evt) {
 		PaletteEntry entry = ((PaletteEntry) evt.getSource());
 		String property = evt.getPropertyName();
-		if (property.equals(PaletteEntry.PROPERTY_LABEL) || property.equals(PaletteEntry.PROPERTY_SMALL_ICON)) {
+		switch (property) {
+		case PaletteEntry.PROPERTY_LABEL:
+		case PaletteEntry.PROPERTY_SMALL_ICON:
 			viewer.update(entry, null);
-		} else if (property.equals(PaletteEntry.PROPERTY_VISIBLE)) {
+			break;
+		case PaletteEntry.PROPERTY_VISIBLE:
 			viewer.refresh(entry);
-		} else if (property.equals(PaletteContainer.PROPERTY_CHILDREN)) {
+			break;
+		case PaletteContainer.PROPERTY_CHILDREN: {
 			viewer.refresh(entry);
 			@SuppressWarnings("unchecked")
 			List<PaletteEntry> oldChildren = (List<PaletteEntry>) evt.getOldValue();
 			oldChildren.forEach(child -> traverseModel(child, false));
 			traverseModel(entry, true);
+			break;
+		}
+		default:
+			break;
 		}
 	}
 

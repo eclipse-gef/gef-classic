@@ -318,15 +318,23 @@ public class RulerComposite extends Composite {
 
 		propertyListener = evt -> {
 			String property = evt.getPropertyName();
-			if (RulerProvider.PROPERTY_HORIZONTAL_RULER.equals(property)) {
-				setRuler((RulerProvider) diagramViewer.getProperty(RulerProvider.PROPERTY_HORIZONTAL_RULER),
-						PositionConstants.NORTH);
-			} else if (RulerProvider.PROPERTY_VERTICAL_RULER.equals(property)) {
-				setRuler((RulerProvider) diagramViewer.getProperty(RulerProvider.PROPERTY_VERTICAL_RULER),
-						PositionConstants.WEST);
-			} else if (RulerProvider.PROPERTY_RULER_VISIBILITY.equals(property)) {
-				setRulerVisibility(((Boolean) diagramViewer.getProperty(RulerProvider.PROPERTY_RULER_VISIBILITY))
-						.booleanValue());
+			if (property != null) {
+				switch (property) {
+				case RulerProvider.PROPERTY_HORIZONTAL_RULER:
+					setRuler((RulerProvider) diagramViewer.getProperty(RulerProvider.PROPERTY_HORIZONTAL_RULER),
+							PositionConstants.NORTH);
+					break;
+				case RulerProvider.PROPERTY_VERTICAL_RULER:
+					setRuler((RulerProvider) diagramViewer.getProperty(RulerProvider.PROPERTY_VERTICAL_RULER),
+							PositionConstants.WEST);
+					break;
+				case RulerProvider.PROPERTY_RULER_VISIBILITY:
+					setRulerVisibility(((Boolean) diagramViewer.getProperty(RulerProvider.PROPERTY_RULER_VISIBILITY))
+							.booleanValue());
+					break;
+				default:
+					break;
+				}
 			}
 		};
 		diagramViewer.addPropertyChangeListener(propertyListener);
