@@ -3,6 +3,10 @@
 
 ## Draw2D
 
+- The `getTextUtilities()` method has been moved from the `Label` and `TextFlow` class to the `IFigure` interface. By
+  default, this method returns a `DrawableFigureCanvas` rather than `TextUtilities.INSTANCE`, which is an object created
+  for the `FigureCanvas` containing the given figure.
+
 ## GEF
 
 ## Zest
