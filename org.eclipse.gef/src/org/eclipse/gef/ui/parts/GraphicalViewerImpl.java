@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -38,6 +38,7 @@ import org.eclipse.draw2d.ExclusionSearch;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditDomain;
@@ -53,6 +54,7 @@ import org.eclipse.gef.MouseWheelHelper;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gef.editparts.ScalableRootEditPart;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
  * An EditPartViewer implementation based on {@link org.eclipse.draw2d.IFigure
@@ -291,6 +293,10 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 				handleFocusLost(e);
 			}
 		});
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			InternalDraw2dUtils.configureForAutoscalingMode(getControl(),
+					scale -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, scale));
+		}
 	}
 
 	/**
