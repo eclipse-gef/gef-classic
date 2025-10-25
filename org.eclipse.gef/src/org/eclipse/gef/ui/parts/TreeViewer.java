@@ -35,6 +35,7 @@ import org.eclipse.jface.util.TransferDragSourceListener;
 import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.StructuredSelection;
 
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.EditPart;
@@ -147,7 +148,7 @@ public class TreeViewer extends AbstractEditPartViewer {
 	 *      EditPartViewer.Conditional)
 	 */
 	@Override
-	public EditPart findObjectAtExcluding(Point pt, Collection exclude, Conditional condition) {
+	public EditPart findObjectAtExcluding(Point pt, Collection<IFigure> exclude, Conditional condition) {
 		if (getControl() == null) {
 			return null;
 		}
@@ -167,7 +168,7 @@ public class TreeViewer extends AbstractEditPartViewer {
 			result = (EditPart) tree.getData();
 		}
 		while (result != null) {
-			if ((condition == null || condition.evaluate(result)) && !exclude.contains(result)) {
+			if ((condition == null || condition.evaluate(result))) {
 				return result;
 			}
 			result = result.getParent();
