@@ -46,7 +46,6 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
-import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditDomain;
@@ -56,7 +55,6 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.KeyHandler;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.SelectionManager;
-import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
  * The base implementation for EditPartViewer.
@@ -485,10 +483,6 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 		refreshDropTargetAdapter();
 		if (contextMenu != null) {
 			control.setMenu(contextMenu.createContextMenu(getControl()));
-		}
-		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
-			InternalDraw2dUtils.configureForAutoscalingMode(control,
-					scale -> setProperty(InternalGEFPlugin.MONITOR_SCALE_PROPERTY, scale));
 		}
 	}
 
