@@ -27,10 +27,7 @@ public class Viewport extends Figure implements PropertyChangeListener {
 
 	/** ID for the view location property */
 	public static final String PROPERTY_VIEW_LOCATION = "viewLocation"; //$NON-NLS-1$
-	/**
-	 * @since 3.21
-	 */
-	protected IFigure view;
+	private IFigure view;
 
 	private boolean useTranslate = false;
 	private boolean trackWidth = false;
@@ -209,11 +206,11 @@ public class Viewport extends Figure implements PropertyChangeListener {
 	 * @since 2.0
 	 */
 	protected void readjustScrollBars() {
-		if (view == null) {
+		if (getContents() == null) {
 			return;
 		}
-		getVerticalRangeModel().setAll(0, getClientArea().height, view.getBounds().height);
-		getHorizontalRangeModel().setAll(0, getClientArea().width, view.getBounds().width);
+		getVerticalRangeModel().setAll(0, getClientArea().height, getContents().getBounds().height);
+		getHorizontalRangeModel().setAll(0, getClientArea().width, getContents().getBounds().width);
 	}
 
 	/**

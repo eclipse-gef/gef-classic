@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Johannes Kepler University Linz.
+ * Copyright (c) 2025 Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,7 +14,11 @@
 package org.eclipse.draw2d;
 
 /**
- * @since 3.21
+ * <b>IMPORTANT:</b> This class is <em>not</em> part of the GEF public API. It
+ * is marked public only so that it can be by other GEF plugins and should never
+ * be accessed from application code.
+ *
+ * @noreference This class is not intended to be referenced by clients.
  */
 public class AutoscaleFreeformViewport extends FreeformViewport implements ScalableFigure {
 
@@ -52,4 +56,8 @@ public class AutoscaleFreeformViewport extends FreeformViewport implements Scala
 		getAutoScaleLayerPane().setScale(scale);
 	}
 
+	@Override
+	protected FreeformFigure getFreeformFigure() {
+		return getAutoScaleLayerPane();
+	}
 }

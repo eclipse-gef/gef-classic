@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,10 +24,10 @@ public class FreeformViewport extends Viewport {
 	class FreeformViewportLayout extends ViewportLayout {
 		@Override
 		protected Dimension calculatePreferredSize(IFigure parent, int wHint, int hHint) {
-			view.validate();
+			getFreeformFigure().validate();
 			wHint = Math.max(0, wHint);
 			hHint = Math.max(0, hHint);
-			return ((FreeformFigure) view).getFreeformExtent().getExpanded(getInsets()).union(0, 0)
+			return getFreeformFigure().getFreeformExtent().getExpanded(getInsets()).union(0, 0)
 					.union(wHint - 1, hHint - 1).getSize();
 		}
 
@@ -66,10 +66,8 @@ public class FreeformViewport extends Viewport {
 	 */
 	@Override
 	protected void readjustScrollBars() {
-		if (view == null) {
-			return;
-		}
-		if (!(view instanceof FreeformFigure ff)) {
+		FreeformFigure ff = getFreeformFigure();
+		if (ff == null) {
 			return;
 		}
 		Rectangle clientArea = getClientArea();
@@ -91,4 +89,16 @@ public class FreeformViewport extends Viewport {
 		return true;
 	}
 
+	/**
+	 * Returns the {@link FreeformFigure} that is the contents of this viewport or
+	 * {@code null}, if the contents is not set or not a {@link FreeformFigure}.
+	 *
+	 * @since 3.21
+	 */
+	protected FreeformFigure getFreeformFigure() {
+		if (getContents() instanceof FreeformFigure ff) {
+			return ff;
+		}
+		return null;
+	}
 }
