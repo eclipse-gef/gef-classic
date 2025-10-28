@@ -14,6 +14,7 @@ package org.eclipse.draw2d;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -82,8 +83,14 @@ public class FigureUtilities {
 	}
 
 	private static Shell getShell() {
-		if (shell == null) {
+		if (shell == null || shell.isDisposed()) {
 			shell = new Shell();
+			shell.addDisposeListener(event -> {
+				if (gc != null) {
+					gc.dispose();
+					gc = null;
+				}
+			});
 			InternalDraw2dUtils.configureForAutoscalingMode(shell, event -> {
 				// ignored
 			});
@@ -348,7 +355,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	protected static void setFont(Font f) {
-		if ((appliedFont == null && f == null && gc != null) || (f != null && f.equals(appliedFont))) {
+		if (gc != null && !gc.isDisposed() && Objects.equals(appliedFont, f)) {
 			return;
 		}
 		if (gc != null && !gc.isDisposed()) {
