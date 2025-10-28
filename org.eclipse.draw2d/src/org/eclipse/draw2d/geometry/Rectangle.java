@@ -900,12 +900,10 @@ public class Rectangle implements Cloneable, java.io.Serializable, Translatable 
 	 * @since 2.0
 	 */
 	public Rectangle scale(double scaleX, double scaleY) {
-		int oldX = x;
-		int oldY = y;
-		x = (int) (Math.floor(x * scaleX));
-		y = (int) (Math.floor(y * scaleY));
-		width = (int) (Math.ceil((oldX + width) * scaleX)) - x;
-		height = (int) (Math.ceil((oldY + height) * scaleY)) - y;
+		x = (int) Math.floor(x * scaleX);
+		y = (int) Math.floor(y * scaleY);
+		width = (int) Math.ceil(width * scaleX);
+		height = (int) Math.ceil(height * scaleY);
 		return this;
 	}
 

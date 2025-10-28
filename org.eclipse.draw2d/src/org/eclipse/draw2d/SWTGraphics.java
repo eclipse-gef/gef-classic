@@ -116,10 +116,10 @@ public class SWTGraphics extends Graphics {
 
 		@Override
 		public Rectangle getBoundingBox(Rectangle rect) {
-			rect.x = (int) left;
-			rect.y = (int) top;
-			rect.width = (int) Math.ceil(right) - rect.x;
-			rect.height = (int) Math.ceil(bottom) - rect.y;
+			rect.x = (int) Math.floor(left);
+			rect.y = (int) Math.floor(top);
+			rect.width = (int) Math.ceil(right - left);
+			rect.height = (int) Math.ceil(bottom - top);
 			return rect;
 		}
 
