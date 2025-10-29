@@ -219,7 +219,7 @@ public class TextFlowWrapTest extends BaseTestCase {
 		doTest2("foo4 ", " bar4", "foo4 ", new String[] { "foo4 ", "", "bar4", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 		doTest2("wwww ", " bar", "wwww", new String[] { "wwww", "", " bar", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 		doTest2("foo5 ", "bar5", "foo5 ", new String[] { "foo5", NEWLINE, "", "bar5", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
-		doTest2("foot bar", "xyz", "barxyz", new String[] { "foot", "bar", SAMELINE, "xyz", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+		doTest2("foot bar", "xyz", "booxyz", new String[] { "foot", "bar", SAMELINE, "xyz", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
 		doTest2("foo\n", " bar6", null, new String[] { "foo", NEWLINE, "", SAMELINE, " bar6", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 		// doTest2("foo7-bar7", "mo", "foo7-ba", new String[] {"foo7-", NEWLINE,
 		// "bar7", SAMELINE, "mo", TERMINATE});
@@ -260,8 +260,8 @@ public class TextFlowWrapTest extends BaseTestCase {
 	}
 
 	protected void runTruncatedWrappingTests() {
-		doTest("Flowing  Container", "Flo...", new String[] { "Flo", NEWLINE, "Co", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		doTest("Flowing C", "Flo...", new String[] { "Flo", "C", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		doTest("Flowing  Container", "Flo ...", new String[] { "Flo", NEWLINE, "Co", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		doTest("Flowing C", "Flo ...", new String[] { "Flo", "C", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		doTest("Fooooooo", "...", new String[] { "", TRUNCATED, TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		doTest("WWW", "|...", new String[] { "", TRUNCATED, TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		doTest(" Foo", "Foo", new String[] { "", "Foo", TERMINATE }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$

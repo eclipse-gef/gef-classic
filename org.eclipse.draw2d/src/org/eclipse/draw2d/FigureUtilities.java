@@ -77,6 +77,7 @@ public class FigureUtilities {
 	protected static GC getGC() {
 		if (gc == null) {
 			gc = new GC(getShell());
+			gc.setAdvanced(true);
 			appliedFont = gc.getFont();
 		}
 		return gc;
@@ -362,6 +363,7 @@ public class FigureUtilities {
 			gc.dispose();
 		}
 		gc = new GC(getShell());
+		gc.setAdvanced(true);
 		gc.setFont(f);
 		appliedFont = f;
 		metrics = null;
