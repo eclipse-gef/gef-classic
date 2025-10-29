@@ -147,6 +147,7 @@ public class LabelTest extends BaseTestCase {
 	private static final void assertTextSize(Label label) throws Exception {
 		// create calc GC
 		GC gc = new GC(Display.getDefault());
+		gc.setAdvanced(true);
 		// set label font
 		gc.setFont(label.getFont());
 		// calc text size
