@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -23,6 +23,7 @@ import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.AutoexposeHelper;
 import org.eclipse.gef.DragTracker;
@@ -88,7 +89,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  */
 public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements LayerConstants, LayerManager {
 
-	private ScalableFreeformLayeredPane innerLayers;
+	private FreeformLayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private final PropertyChangeListener gridListener = evt -> {
 		String property = evt.getPropertyName();
@@ -104,8 +105,13 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	@Override
 	protected IFigure createFigure() {
 		FreeformViewport viewport = new FreeformViewport();
-		innerLayers = new ScalableFreeformLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			ScalableFreeformLayeredPane innerScalableLayers = new ScalableFreeformLayeredPane();
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers));
+			innerLayers = innerScalableLayers;
+		} else {
+			innerLayers = new FreeformLayeredPane();
+		}
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;
