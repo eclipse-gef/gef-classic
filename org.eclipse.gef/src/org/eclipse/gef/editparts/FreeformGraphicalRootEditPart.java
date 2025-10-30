@@ -105,7 +105,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	protected IFigure createFigure() {
 		FreeformViewport viewport = new FreeformViewport();
 		innerLayers = new ScalableFreeformLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers::setScale));
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;

@@ -176,7 +176,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 		Viewport viewport = createViewport();
 
 		innerLayers = new ScalableLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers::setScale));
 		createLayers(innerLayers);
 
 		viewport.setContents(innerLayers);

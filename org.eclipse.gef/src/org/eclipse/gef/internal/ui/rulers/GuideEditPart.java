@@ -36,6 +36,7 @@ import org.eclipse.gef.Request;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.editpolicies.SelectionEditPolicy;
+import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.rulers.RulerChangeListener;
 import org.eclipse.gef.rulers.RulerProvider;
 import org.eclipse.gef.tools.DragEditPartsTracker;
@@ -53,6 +54,7 @@ public class GuideEditPart extends AbstractGraphicalEditPart {
 	private GuideLineFigure guideLineFig;
 	private Cursor cursor = null;
 	private final ZoomListener zoomListener = zoom -> handleZoomChanged();
+	private double monitorScale = 1.0;
 
 	private final RulerChangeListener listener = new RulerChangeListener.Stub() {
 		@Override
@@ -72,6 +74,10 @@ public class GuideEditPart extends AbstractGraphicalEditPart {
 
 	public GuideEditPart(Object model) {
 		setModel(model);
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(newScale -> {
+			this.monitorScale = newScale;
+			updateLocationOfFigures(getZoomedPosition());
+		}));
 	}
 
 	/*
@@ -293,6 +299,7 @@ public class GuideEditPart extends AbstractGraphicalEditPart {
 	}
 
 	public void updateLocationOfFigures(int position) {
+		position = (int) Math.floor(position / monitorScale);
 		getParent().setLayoutConstraint(this, getFigure(), Integer.valueOf(position));
 		Point guideFeedbackLocation = getGuideLineFigure().getBounds().getLocation();
 		if (isHorizontal()) {
