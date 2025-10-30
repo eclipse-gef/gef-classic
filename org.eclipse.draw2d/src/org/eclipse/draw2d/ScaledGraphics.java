@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 Yatta and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     Yatta - initial implementation
  *******************************************************************************/
 package org.eclipse.draw2d;
 
@@ -273,8 +273,20 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawLine(int, int, int, int) */
 	@Override
 	public void drawLine(int x1, int y1, int x2, int y2) {
-		graphics.drawLine((int) (Math.floor((x1 * zoom + fractionalX))), (int) (Math.floor((y1 * zoom + fractionalY))),
-				(int) (Math.floor((x2 * zoom + fractionalX))), (int) (Math.floor((y2 * zoom + fractionalY))));
+		drawLine((double) x1, y1, x2, y2);
+	}
+
+	private void drawLine(double x1, double y1, double x2, double y2) {
+		double scaledX1 = x1 * zoom + fractionalX;
+		double scaledY1 = y1 * zoom + fractionalY;
+		double scaledX2 = x2 * zoom + fractionalX;
+		double scaledY2 = y2 * zoom + fractionalY;
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			scaledGraphics.drawLine(scaledX1, scaledY1, scaledX2, scaledY2);
+		} else {
+			graphics.drawLine((int) Math.floor(scaledX1), (int) Math.floor((scaledY1)), (int) Math.floor(scaledX2),
+					(int) Math.floor(scaledY2));
+		}
 	}
 
 	/** @see Graphics#drawOval(int, int, int, int) */
@@ -994,7 +1006,7 @@ public class ScaledGraphics extends Graphics {
 
 		if (zoomWidth < -1 || zoomWidth == 0) {
 			return null;
-		} 
+		}
 
 		TextLayout zoomed = new TextLayout(Display.getCurrent());
 		zoomed.setText(layout.getText());
