@@ -33,7 +33,6 @@ public class FigureUtilities {
 
 	private static final float RGB_VALUE_MULTIPLIER = 0.6f;
 	private static GC gc;
-	private static Shell shell;
 	private static Font appliedFont;
 	private static FontMetrics metrics;
 	private static Color ghostFillColor = new Color(null, 31, 31, 31);
@@ -61,7 +60,7 @@ public class FigureUtilities {
 	public static FontMetrics getFontMetrics(Font f) {
 		setFont(f);
 		if (metrics == null) {
-			metrics = gc.getFontMetrics();
+			metrics = getGC().getFontMetrics();
 		}
 		return metrics;
 	}
@@ -76,27 +75,15 @@ public class FigureUtilities {
 	@Deprecated
 	protected static GC getGC() {
 		if (gc == null) {
-			gc = new GC(getShell());
+			Shell shell = new Shell();
+			InternalDraw2dUtils.configureForAutoscalingMode(shell, event -> {
+				// ignored
+			});
+			gc = new GC(shell);
 			gc.setAdvanced(true);
 			appliedFont = gc.getFont();
 		}
 		return gc;
-	}
-
-	private static Shell getShell() {
-		if (shell == null || shell.isDisposed()) {
-			shell = new Shell();
-			shell.addDisposeListener(event -> {
-				if (gc != null) {
-					gc.dispose();
-					gc = null;
-				}
-			});
-			InternalDraw2dUtils.configureForAutoscalingMode(shell, event -> {
-				// ignored
-			});
-		}
-		return shell;
 	}
 
 	/**
@@ -110,7 +97,7 @@ public class FigureUtilities {
 	 */
 	protected static org.eclipse.swt.graphics.Point getTextDimension(String s, Font f) {
 		setFont(f);
-		return gc.textExtent(s);
+		return getGC().textExtent(s);
 	}
 
 	/**
@@ -138,7 +125,7 @@ public class FigureUtilities {
 	 */
 	protected static org.eclipse.swt.graphics.Point getStringDimension(String s, Font f) {
 		setFont(f);
-		return gc.stringExtent(s);
+		return getGC().stringExtent(s);
 	}
 
 	/**
@@ -356,15 +343,10 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	protected static void setFont(Font f) {
-		if (gc != null && !gc.isDisposed() && Objects.equals(appliedFont, f)) {
+		if (Objects.equals(appliedFont, f)) {
 			return;
 		}
-		if (gc != null && !gc.isDisposed()) {
-			gc.dispose();
-		}
-		gc = new GC(getShell());
-		gc.setAdvanced(true);
-		gc.setFont(f);
+		getGC().setFont(f);
 		appliedFont = f;
 		metrics = null;
 	}
