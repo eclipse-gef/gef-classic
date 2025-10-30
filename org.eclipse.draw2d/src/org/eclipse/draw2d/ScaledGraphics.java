@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
@@ -135,6 +136,7 @@ public class ScaledGraphics extends Graphics {
 
 	private static int[][] intArrayCache = new int[8][];
 	private final Rectangle tempRECT = new Rectangle();
+	private final PrecisionRectangle tempPrecisionRECT = new PrecisionRectangle();
 
 	static {
 		for (int i = 0; i < intArrayCache.length; i++) {
@@ -171,7 +173,17 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#clipRect(Rectangle) */
 	@Override
 	public void clipRect(Rectangle r) {
-		graphics.clipRect(zoomClipRect(r));
+		clipRect(r.x(), r.y(), r.width(), r.height());
+	}
+
+	private void clipRect(double x, double y, double width, double height) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle rectangle = zoomPrecision(x, y, width, height);
+			scaledGraphics.clipRect(rectangle.preciseX(), rectangle.preciseY(), rectangle.preciseWidth(),
+					rectangle.preciseHeight());
+		} else {
+			graphics.clipRect(zoomClipRect(x, y, width, height));
+		}
 	}
 
 	@SuppressWarnings("static-method")
@@ -237,50 +249,118 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawArc(int, int, int, int, int, int) */
 	@Override
 	public void drawArc(int x, int y, int w, int h, int offset, int sweep) {
-		Rectangle z = zoomRect(x, y, w, h);
-		if (z.isEmpty() || sweep == 0) {
+		if (sweep == 0) {
 			return;
 		}
-		graphics.drawArc(z, offset, sweep);
+		drawArc((double) x, y, w, h, offset, sweep);
+	}
+
+	private void drawArc(double x, double y, double w, double h, int offset, int sweep) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			scaledGraphics.drawArc(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight(), offset, sweep);
+		} else {
+			Rectangle z = zoomRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.drawArc(z, offset, sweep);
+		}
 	}
 
 	/** @see Graphics#drawFocus(int, int, int, int) */
 	@Override
 	public void drawFocus(int x, int y, int w, int h) {
-		graphics.drawFocus(zoomRect(x, y, w, h));
+		drawFocus((double) x, y, w, h);
+	}
+
+	private void drawFocus(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, w, h);
+			scaledGraphics.drawFocus(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight());
+		} else {
+			graphics.drawFocus(zoomRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawImage(Image, int, int) */
 	@Override
 	public void drawImage(Image srcImage, int x, int y) {
 		org.eclipse.swt.graphics.Rectangle size = srcImage.getBounds();
-		graphics.drawImage(srcImage, 0, 0, size.width, size.height, (int) (Math.floor((x * zoom + fractionalX))),
-				(int) (Math.floor((y * zoom + fractionalY))), (int) (Math.floor((size.width * zoom + fractionalX))),
-				(int) (Math.floor((size.height * zoom + fractionalY))));
+		drawImage(srcImage, size.width, size.height, x, y, size.width, size.height);
+	}
+
+	private void drawImage(Image srcImage, int sw, int sh, double x, double y, double tw, double th) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, tw, th);
+			scaledGraphics.drawImage(srcImage, 0, 0, sw, sh, z.preciseX(), z.preciseY(), z.preciseWidth(),
+					z.preciseHeight());
+		} else {
+			Rectangle z = zoomRect(x, y, tw, th);
+			graphics.drawImage(srcImage, 0, 0, sw, sh, z.x, z.y, z.width, z.height);
+		}
 	}
 
 	/** @see Graphics#drawImage(Image, int, int, int, int, int, int, int, int) */
 	@Override
 	public void drawImage(Image srcImage, int sx, int sy, int sw, int sh, int tx, int ty, int tw, int th) {
 		// "t" == target rectangle, "s" = source
+		drawImage(srcImage, sx, sy, sw, sh, (double) tx, ty, tw, th);
+	}
 
-		Rectangle t = zoomRect(tx, ty, tw, th);
-		if (!t.isEmpty()) {
-			graphics.drawImage(srcImage, sx, sy, sw, sh, t.x, t.y, t.width, t.height);
+	private void drawImage(Image srcImage, int sx, int sy, int sw, int sh, double tx, double ty, double tw, double th) {
+		// "t" == target rectangle, "s" = source
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(tx, ty, tw, th);
+			if (z.isEmpty()) {
+				return;
+			}
+			scaledGraphics.drawImage(srcImage, sx, sy, sw, sh, z.preciseX(), z.preciseY(), z.preciseWidth(),
+					z.preciseHeight());
+		} else {
+			Rectangle z = zoomRect(tx, ty, tw, th);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.drawImage(srcImage, sx, sy, sw, sh, z.x, z.y, z.width, z.height);
 		}
 	}
 
 	/** @see Graphics#drawLine(int, int, int, int) */
 	@Override
 	public void drawLine(int x1, int y1, int x2, int y2) {
-		graphics.drawLine((int) (Math.floor((x1 * zoom + fractionalX))), (int) (Math.floor((y1 * zoom + fractionalY))),
-				(int) (Math.floor((x2 * zoom + fractionalX))), (int) (Math.floor((y2 * zoom + fractionalY))));
+		drawLine((double) x1, y1, x2, y2);
+	}
+
+	private void drawLine(double x1, double y1, double x2, double y2) {
+		double scaledX1 = x1 * zoom + fractionalX;
+		double scaledY1 = y1 * zoom + fractionalY;
+		double scaledX2 = x2 * zoom + fractionalX;
+		double scaledY2 = y2 * zoom + fractionalY;
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			scaledGraphics.drawLine(scaledX1, scaledY1, scaledX2, scaledY2);
+		} else {
+			graphics.drawLine((int) Math.floor(scaledX1), (int) Math.floor((scaledY1)), (int) Math.floor(scaledX2),
+					(int) Math.floor(scaledY2));
+		}
 	}
 
 	/** @see Graphics#drawOval(int, int, int, int) */
 	@Override
 	public void drawOval(int x, int y, int w, int h) {
-		graphics.drawOval(zoomRect(x, y, w, h));
+		drawOval((double) x, y, w, h);
+	}
+
+	private void drawOval(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, w, h);
+			scaledGraphics.drawOval(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight());
+		} else {
+			graphics.drawOval(zoomRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawPath(Path) */
@@ -297,7 +377,17 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawPoint(int, int) */
 	@Override
 	public void drawPoint(int x, int y) {
-		graphics.drawPoint((int) Math.floor(x * zoom + fractionalX), (int) Math.floor(y * zoom + fractionalY));
+		drawPoint((double) x, y);
+	}
+
+	private void drawPoint(double x, double y) {
+		double scaledX1 = x * zoom + fractionalX;
+		double scaledY1 = y * zoom + fractionalY;
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			scaledGraphics.drawPoint(scaledX1, scaledY1);
+		} else {
+			graphics.drawPoint((int) Math.floor(scaledX1), (int) Math.floor(scaledY1));
+		}
 	}
 
 	/**
@@ -331,14 +421,34 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawRectangle(int, int, int, int) */
 	@Override
 	public void drawRectangle(int x, int y, int w, int h) {
-		graphics.drawRectangle(zoomRect(x, y, w, h));
+		drawRectangle((double) x, y, w, h);
+	}
+
+	private void drawRectangle(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, w, h);
+			scaledGraphics.drawRectangle(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight());
+		} else {
+			graphics.drawRectangle(zoomRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawRoundRectangle(Rectangle, int, int) */
 	@Override
 	public void drawRoundRectangle(Rectangle r, int arcWidth, int arcHeight) {
-		graphics.drawRoundRectangle(zoomRect(r.x, r.y, r.width, r.height), (int) (arcWidth * zoom),
-				(int) (arcHeight * zoom));
+		drawRoundRectangle(r.x, r.y, r.width, r.height, arcWidth, arcHeight);
+	}
+
+	private void drawRoundRectangle(double x, double y, double w, double h, double arcWidth, double arcHeight) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomPrecision(x, y, w, h);
+			double scaledArcWidth = arcWidth * zoom;
+			double scaledArcHeight = arcHeight * zoom;
+			scaledGraphics.drawRoundRectangle(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight(),
+					scaledArcWidth, scaledArcHeight);
+		} else {
+			graphics.drawRoundRectangle(zoomRect(x, y, w, h), (int) (arcWidth * zoom), (int) (arcHeight * zoom));
+		}
 	}
 
 	/** @see Graphics#drawString(String, int, int) */
@@ -389,23 +499,64 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#fillArc(int, int, int, int, int, int) */
 	@Override
 	public void fillArc(int x, int y, int w, int h, int offset, int sweep) {
-		Rectangle z = zoomFillRect(x, y, w, h);
-		if (z.isEmpty() || sweep == 0) {
+		if (sweep == 0) {
 			return;
 		}
-		graphics.fillArc(z, offset, sweep);
+		fillArc((double) x, y, w, h, offset, sweep);
+	}
+
+	private void fillArc(double x, double y, double w, double h, int offset, int sweep) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomFillPrecision(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			scaledGraphics.fillArc(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight(), offset, sweep);
+		} else {
+			Rectangle z = zoomFillRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.fillArc(z, offset, sweep);
+		}
 	}
 
 	/** @see Graphics#fillGradient(int, int, int, int, boolean) */
 	@Override
 	public void fillGradient(int x, int y, int w, int h, boolean vertical) {
-		graphics.fillGradient(zoomFillRect(x, y, w, h), vertical);
+		fillGradient((double) x, y, w, h, vertical);
+	}
+
+	private void fillGradient(double x, double y, double w, double h, boolean vertical) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomFillPrecision(x, y, w, h);
+			scaledGraphics.fillGradient(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight(), vertical);
+		} else {
+			Rectangle z = zoomFillRect(x, y, w, h);
+			graphics.fillGradient(z, vertical);
+		}
 	}
 
 	/** @see Graphics#fillOval(int, int, int, int) */
 	@Override
 	public void fillOval(int x, int y, int w, int h) {
-		graphics.fillOval(zoomFillRect(x, y, w, h));
+		fillOval((double) x, y, w, h);
+	}
+
+	private void fillOval(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomFillPrecision(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			scaledGraphics.fillOval(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight());
+		} else {
+			Rectangle z = zoomFillRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.fillOval(z);
+		}
 	}
 
 	/** @see Graphics#fillPath(Path) */
@@ -436,14 +587,48 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#fillRectangle(int, int, int, int) */
 	@Override
 	public void fillRectangle(int x, int y, int w, int h) {
-		graphics.fillRectangle(zoomFillRect(x, y, w, h));
+		fillRectangle((double) x, y, w, h);
+	}
+
+	private void fillRectangle(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomFillPrecision(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			scaledGraphics.fillRectangle(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight());
+		} else {
+			Rectangle z = zoomFillRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.fillRectangle(z);
+		}
 	}
 
 	/** @see Graphics#fillRoundRectangle(Rectangle, int, int) */
 	@Override
 	public void fillRoundRectangle(Rectangle r, int arcWidth, int arcHeight) {
-		graphics.fillRoundRectangle(zoomFillRect(r.x, r.y, r.width, r.height), (int) (arcWidth * zoom),
-				(int) (arcHeight * zoom));
+		fillRoundRectangle(r.x, r.y, r.width, r.height, arcWidth, arcHeight);
+	}
+
+	private void fillRoundRectangle(double x, double y, double w, double h, double arcWidth, double arcHeight) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle z = zoomFillPrecision(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			double scaledArcWidth = arcWidth * zoom;
+			double scaledArcHeight = arcHeight * zoom;
+			scaledGraphics.fillRoundRectangle(z.preciseX(), z.preciseY(), z.preciseWidth(), z.preciseHeight(),
+					scaledArcWidth, scaledArcHeight);
+		} else {
+			Rectangle z = zoomFillRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.fillRoundRectangle(z, (int) (arcWidth * zoom), (int) (arcHeight * zoom));
+		}
 	}
 
 	/** @see Graphics#fillString(String, int, int) */
@@ -511,21 +696,30 @@ public class ScaledGraphics extends Graphics {
 
 	/** @see Graphics#getClip(Rectangle) */
 	@Override
-	public Rectangle getClip(Rectangle rect) {
-		graphics.getClip(rect);
-		int x = (int) (rect.x / zoom);
-		int y = (int) (rect.y / zoom);
+	public Rectangle getClip(Rectangle rectangle) {
+		Rectangle rect = getClip();
+		int x = (int) (rect.preciseX() / zoom);
+		int y = (int) (rect.preciseY() / zoom);
 		/*
 		 * If the clip rectangle is queried, perform an inverse zoom, and take the
 		 * ceiling of the resulting double. This is necessary because forward scaling
 		 * essentially performs a floor() function. Without this, figures will think
 		 * that they don't need to paint when actually they do.
 		 */
-		rect.width = (int) Math.ceil(rect.right() / zoom) - x;
-		rect.height = (int) Math.ceil(rect.bottom() / zoom) - y;
-		rect.x = x;
-		rect.y = y;
-		return rect;
+		rectangle.width = (int) Math.ceil((rect.preciseX() + rect.preciseWidth()) / zoom) - x;
+		rectangle.height = (int) Math.ceil((rect.preciseY() + rect.preciseHeight()) / zoom) - y;
+		rectangle.x = x;
+		rectangle.y = y;
+		return rectangle;
+	}
+
+	private Rectangle getClip() {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle rect = scaledGraphics.getClip();
+			rect.scale(1 / scaledGraphics.zoom);
+			return rect;
+		}
+		return graphics.getClip(tempPrecisionRECT);
 	}
 
 	/**
@@ -738,7 +932,17 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#setClip(Rectangle) */
 	@Override
 	public void setClip(Rectangle r) {
-		graphics.setClip(zoomClipRect(r));
+		setClip(r.x(), r.y(), r.width(), r.height());
+	}
+
+	private void setClip(double x, double y, double width, double height) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			Rectangle rectangle = zoomPrecision(x, y, width, height);
+			scaledGraphics.setClip(rectangle.preciseX(), rectangle.preciseY(), rectangle.preciseWidth(),
+					rectangle.preciseHeight());
+		} else {
+			graphics.setClip(zoomClipRect(x, y, width, height));
+		}
 	}
 
 	/**
@@ -911,19 +1115,35 @@ public class ScaledGraphics extends Graphics {
 		graphics.translate((int) Math.floor(dxFloat), (int) Math.floor(dyFloat));
 	}
 
-	private Rectangle zoomClipRect(Rectangle r) {
-		tempRECT.x = (int) (Math.floor(r.x * zoom + fractionalX));
-		tempRECT.y = (int) (Math.floor(r.y * zoom + fractionalY));
-		tempRECT.width = (int) (Math.ceil(((r.x + r.width) * zoom + fractionalX))) - tempRECT.x;
-		tempRECT.height = (int) (Math.ceil(((r.y + r.height) * zoom + fractionalY))) - tempRECT.y;
+	private Rectangle zoomPrecision(double x, double y, double width, double height) {
+		tempPrecisionRECT.setPreciseX(x * zoom + fractionalX);
+		tempPrecisionRECT.setPreciseY(y * zoom + fractionalY);
+		tempPrecisionRECT.setPreciseWidth(width * zoom);
+		tempPrecisionRECT.setPreciseHeight(height * zoom);
+		return tempPrecisionRECT;
+	}
+
+	private Rectangle zoomFillPrecision(double x, double y, double width, double height) {
+		tempPrecisionRECT.setPreciseX(x * zoom + fractionalX);
+		tempPrecisionRECT.setPreciseY(y * zoom + fractionalY);
+		tempPrecisionRECT.setPreciseWidth((x + width - 1) * zoom + fractionalX - tempPrecisionRECT.preciseX() + 1);
+		tempPrecisionRECT.setPreciseHeight((y + height - 1) * zoom + fractionalY - tempPrecisionRECT.preciseY() + 1);
+		return tempPrecisionRECT;
+	}
+
+	private Rectangle zoomClipRect(double x, double y, double width, double height) {
+		tempRECT.x = (int) (Math.floor(x * zoom + fractionalX));
+		tempRECT.y = (int) (Math.floor(y * zoom + fractionalY));
+		tempRECT.width = (int) (Math.ceil(((x + width) * zoom + fractionalX))) - tempRECT.x;
+		tempRECT.height = (int) (Math.ceil(((y + height) * zoom + fractionalY))) - tempRECT.y;
 		return tempRECT;
 	}
 
-	private Rectangle zoomFillRect(int x, int y, int w, int h) {
-		tempRECT.x = (int) (Math.floor((x * zoom + fractionalX)));
-		tempRECT.y = (int) (Math.floor((y * zoom + fractionalY)));
-		tempRECT.width = (int) (Math.floor(((x + w - 1) * zoom + fractionalX))) - tempRECT.x + 1;
-		tempRECT.height = (int) (Math.floor(((y + h - 1) * zoom + fractionalY))) - tempRECT.y + 1;
+	private Rectangle zoomFillRect(double x, double y, double w, double h) {
+		tempRECT.x = (int) (Math.floor(x * zoom + fractionalX));
+		tempRECT.y = (int) (Math.floor(y * zoom + fractionalY));
+		tempRECT.width = (int) (Math.floor((x + w - 1) * zoom + fractionalX)) - tempRECT.x + 1;
+		tempRECT.height = (int) (Math.floor((y + h - 1) * zoom + fractionalY)) - tempRECT.y + 1;
 		return tempRECT;
 	}
 
@@ -977,7 +1197,7 @@ public class ScaledGraphics extends Graphics {
 		return scaled;
 	}
 
-	private Rectangle zoomRect(int x, int y, int w, int h) {
+	private Rectangle zoomRect(double x, double y, double w, double h) {
 		tempRECT.x = (int) (Math.floor(x * zoom + fractionalX));
 		tempRECT.y = (int) (Math.floor(y * zoom + fractionalY));
 		tempRECT.width = (int) (Math.floor(((x + w) * zoom + fractionalX))) - tempRECT.x;
@@ -994,7 +1214,7 @@ public class ScaledGraphics extends Graphics {
 
 		if (zoomWidth < -1 || zoomWidth == 0) {
 			return null;
-		} 
+		}
 
 		TextLayout zoomed = new TextLayout(Display.getCurrent());
 		zoomed.setText(layout.getText());
