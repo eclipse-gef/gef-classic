@@ -14,13 +14,13 @@ package org.eclipse.gef.editparts;
 
 import java.beans.PropertyChangeListener;
 
+import org.eclipse.draw2d.AutoscaleFreeformViewport;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.FreeformLayer;
 import org.eclipse.draw2d.FreeformLayeredPane;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
-import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 
@@ -88,7 +88,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  */
 public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements LayerConstants, LayerManager {
 
-	private ScalableFreeformLayeredPane innerLayers;
+	private LayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private final PropertyChangeListener gridListener = evt -> {
 		String property = evt.getPropertyName();
@@ -103,9 +103,8 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	 */
 	@Override
 	protected IFigure createFigure() {
-		FreeformViewport viewport = new FreeformViewport();
-		innerLayers = new ScalableFreeformLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
+		FreeformViewport viewport = createViewport();
+		innerLayers = new FreeformLayeredPane();
 		createLayers(innerLayers);
 		viewport.setContents(innerLayers);
 		return viewport;
@@ -150,6 +149,18 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 		layeredPane.add(new FreeformLayer(), PRIMARY_LAYER);
 		layeredPane.add(new ConnectionLayer(), CONNECTION_LAYER);
 		return layeredPane;
+	}
+
+	/**
+	 * Create the viewport to be used for this root EditPart. Subclasses can
+	 * override this method to customize the viewport for their needs.
+	 *
+	 * @since 3.24
+	 */
+	protected FreeformViewport createViewport() {
+		AutoscaleFreeformViewport viewPort = new AutoscaleFreeformViewport();
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewPort));
+		return viewPort;
 	}
 
 	/**
