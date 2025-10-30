@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,10 +27,12 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.draw2d.ColorProvider.SystemColorFactory;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
+import org.eclipse.gef.editparts.SimpleRootEditPart;
 import org.eclipse.gef.internal.SimpleAutoscaledRootEditPart;
 import org.eclipse.gef.internal.ui.palette.PaletteSelectionTool;
 import org.eclipse.gef.internal.ui.palette.editparts.DrawerEditPart;
@@ -127,7 +129,8 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	 */
 	@Override
 	protected void createDefaultRoot() {
-		setRootEditPart(new SimpleAutoscaledRootEditPart());
+		setRootEditPart(InternalDraw2dUtils.isAutoScaleEnabled() ? new SimpleAutoscaledRootEditPart()
+				: new SimpleRootEditPart());
 	}
 
 	private void disposeFont() {

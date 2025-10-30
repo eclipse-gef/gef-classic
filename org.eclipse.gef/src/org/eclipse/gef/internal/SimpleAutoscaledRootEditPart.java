@@ -12,12 +12,23 @@
  *******************************************************************************/
 package org.eclipse.gef.internal;
 
+import org.eclipse.core.runtime.Assert;
+
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.ScalableLayeredPane;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 
+/**
+ * <b>Important:</b> This edit part should only be used when the Draw2D-based
+ * auto-scaling is enabled. Otherwise scaling might be applied twice; Once by
+ * Draw2D and once by SWT.
+ */
 public final class SimpleAutoscaledRootEditPart extends SimpleRootEditPart {
+	public SimpleAutoscaledRootEditPart() {
+		Assert.isTrue(InternalDraw2dUtils.isAutoScaleEnabled());
+	}
 
 	@Override
 	protected final ScalableFigure createFigure() {

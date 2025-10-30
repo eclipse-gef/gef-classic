@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,6 +26,7 @@ import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.AutoexposeHelper;
 import org.eclipse.gef.DragTracker;
@@ -122,7 +123,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 
 	}
 
-	private ScalableLayeredPane innerLayers;
+	private LayeredPane innerLayers;
 	private LayeredPane printableLayers;
 	private ScalableLayeredPane scaledLayers;
 	private final PropertyChangeListener gridListener = (PropertyChangeEvent evt) -> {
@@ -175,8 +176,13 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	protected IFigure createFigure() {
 		Viewport viewport = createViewport();
 
-		innerLayers = new ScalableLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerLayers));
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			ScalableLayeredPane innerScalableLayers = new ScalableLayeredPane(useScaledGraphics);
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers));
+			innerLayers = innerScalableLayers;
+		} else {
+			innerLayers = new LayeredPane();
+		}
 		createLayers(innerLayers);
 
 		viewport.setContents(innerLayers);
