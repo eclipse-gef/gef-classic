@@ -189,7 +189,7 @@ public abstract class Graphics {
 	/**
 	 * @see #drawLine(int, int, int, int)
 	 */
-	public final void drawLine(Point p1, Point p2) {
+	public void drawLine(Point p1, Point p2) {
 		drawLine(p1.x, p1.y, p2.x, p2.y);
 	}
 
