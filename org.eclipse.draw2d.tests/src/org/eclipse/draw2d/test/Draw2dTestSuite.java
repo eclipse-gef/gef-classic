@@ -61,7 +61,8 @@ import org.junit.platform.suite.api.Suite;
 	DirectedGraphLayoutTest.class,
 	ScrollPaneTests.class,
 	LabelTest.class,
-	PrecisionTests.class
+	PrecisionTests.class,
+	ScaledGraphicsTest.class
 })
 public class Draw2dTestSuite {
 }
