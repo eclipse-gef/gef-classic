@@ -12,12 +12,17 @@
  *******************************************************************************/
 package org.eclipse.gef.editparts;
 
+import org.eclipse.draw2d.AutoscaleFreeformViewport;
 import org.eclipse.draw2d.FreeformLayer;
+import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.Viewport;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
+
+import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
  * Adds Zoom support to the standard FreeformGraphicalRootEditPart. This root is
@@ -141,6 +146,16 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 		layers.add(getPrintableLayers(), PRINTABLE_LAYERS);
 		layers.add(new FeedbackLayer(), SCALED_FEEDBACK_LAYER);
 		return layers;
+	}
+
+	@Override
+	protected FreeformViewport createViewport() {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			AutoscaleFreeformViewport viewPort = new AutoscaleFreeformViewport(useScaledGraphics);
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewPort));
+			return viewPort;
+		}
+		return super.createViewport();
 	}
 
 	/**
