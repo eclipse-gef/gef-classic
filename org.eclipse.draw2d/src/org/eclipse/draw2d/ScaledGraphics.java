@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
@@ -270,11 +271,19 @@ public class ScaledGraphics extends Graphics {
 		}
 	}
 
+	@Override
+	public void drawLine(Point p1, Point p2) {
+		p1.scale(zoom);
+		p2.scale(zoom);
+		p1.translate(fractionalX, fractionalY);
+		p2.translate(fractionalX, fractionalY);
+		graphics.drawLine(p1, p2);
+	}
+
 	/** @see Graphics#drawLine(int, int, int, int) */
 	@Override
 	public void drawLine(int x1, int y1, int x2, int y2) {
-		graphics.drawLine((int) (Math.floor((x1 * zoom + fractionalX))), (int) (Math.floor((y1 * zoom + fractionalY))),
-				(int) (Math.floor((x2 * zoom + fractionalX))), (int) (Math.floor((y2 * zoom + fractionalY))));
+		drawLine(new PrecisionPoint(x1, y1), new PrecisionPoint(x2, y2));
 	}
 
 	/** @see Graphics#drawOval(int, int, int, int) */
