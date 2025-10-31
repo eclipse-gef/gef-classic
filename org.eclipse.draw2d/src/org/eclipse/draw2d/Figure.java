@@ -909,6 +909,17 @@ public class Figure implements IFigure {
 	}
 
 	/**
+	 * @see IFigure#getTextUtilities()
+	 */
+	@Override
+	public TextUtilities getTextUtilities() {
+		if (getParent() != null) {
+			return getParent().getTextUtilities();
+		}
+		return TextUtilities.INSTANCE;
+	}
+
+	/**
 	 * @see IFigure#getToolTip()
 	 */
 	@Override

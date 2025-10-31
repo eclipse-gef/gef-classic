@@ -460,6 +460,15 @@ public interface IFigure {
 	Dimension getSize();
 
 	/**
+	 * Gets the {@link TextUtilities} instance to be used in measurement
+	 * calculations.
+	 *
+	 * @return a {@link TextUtilities} instance
+	 * @since 3.21
+	 */
+	TextUtilities getTextUtilities();
+
+	/**
 	 * Returns a IFigure that is the tooltip for this IFigure.
 	 *
 	 * @return This IFigure's tooltip
