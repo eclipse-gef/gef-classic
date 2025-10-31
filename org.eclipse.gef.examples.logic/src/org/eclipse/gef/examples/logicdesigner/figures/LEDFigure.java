@@ -44,7 +44,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	protected static Point valuePoint = new Point(24, 15);
 	private static final int HORIZONTAL_PADDING = 3;
 	private static final int VERTICAL_OFFSET = -1;
-	private static final int CORNER_RADIUS = 6;
+	protected static final int CORNER_RADIUS = 6;
 
 	static {
 		connector.addPoint(-3, 0);
