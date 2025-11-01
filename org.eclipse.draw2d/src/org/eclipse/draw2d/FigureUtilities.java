@@ -67,12 +67,14 @@ public class FigureUtilities {
 
 	/**
 	 * Returns the GC used for various utilities. Advanced graphics must not be
-	 * switched on by clients using this GC.
+	 * switched off by clients using this GC.
 	 *
-	 * @deprecated do not mess with this GC
+	 * @deprecated do not mess with this GC. This method will be removed after the
+	 *             2027-12 release. The calling methods should create a local GC
+	 *             instance, rather than relying on a static field.
 	 * @return the GC
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true, since = "2025-12")
 	protected static GC getGC() {
 		if (gc == null) {
 			Shell shell = new Shell();
