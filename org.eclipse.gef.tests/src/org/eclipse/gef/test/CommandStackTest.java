@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 itemis AG and others.
+ * Copyright (c) 2015, 2025 itemis AG and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,7 @@ package org.eclipse.gef.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -114,7 +115,7 @@ public class CommandStackTest {
 		stack.flush();
 
 		assertEquals(2, commandStackEvents.size());
-		assertEquals(null, commandStackEvents.get(0).getCommand());
+		assertNull(commandStackEvents.get(0).getCommand());
 		assertTrue(commandStackEvents.get(0).isPreChangeEvent());
 		assertFalse(commandStackEvents.get(0).isPostChangeEvent());
 		assertEquals(stack, commandStackEvents.get(0).getSource());
@@ -122,7 +123,7 @@ public class CommandStackTest {
 		assertNotEquals(0, commandStackEvents.get(0).getDetail() & CommandStack.PRE_MASK);
 		assertEquals(0, commandStackEvents.get(0).getDetail() & CommandStack.POST_MASK);
 
-		assertEquals(null, commandStackEvents.get(1).getCommand());
+		assertNull(commandStackEvents.get(1).getCommand());
 		assertFalse(commandStackEvents.get(1).isPreChangeEvent());
 		assertTrue(commandStackEvents.get(1).isPostChangeEvent());
 		assertEquals(stack, commandStackEvents.get(1).getSource());
@@ -137,7 +138,7 @@ public class CommandStackTest {
 		stack.markSaveLocation();
 
 		assertEquals(2, commandStackEvents.size());
-		assertEquals(null, commandStackEvents.get(0).getCommand());
+		assertNull(commandStackEvents.get(0).getCommand());
 		assertTrue(commandStackEvents.get(0).isPreChangeEvent());
 		assertFalse(commandStackEvents.get(0).isPostChangeEvent());
 		assertEquals(stack, commandStackEvents.get(0).getSource());
@@ -145,7 +146,7 @@ public class CommandStackTest {
 		assertNotEquals(0, commandStackEvents.get(0).getDetail() & CommandStack.PRE_MASK);
 		assertEquals(0, commandStackEvents.get(0).getDetail() & CommandStack.POST_MASK);
 
-		assertEquals(null, commandStackEvents.get(1).getCommand());
+		assertNull(commandStackEvents.get(1).getCommand());
 		assertFalse(commandStackEvents.get(1).isPreChangeEvent());
 		assertTrue(commandStackEvents.get(1).isPostChangeEvent());
 		assertEquals(stack, commandStackEvents.get(1).getSource());
