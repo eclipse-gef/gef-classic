@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2010 IBM Corporation and others.
+ * Copyright (c) 2006, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@
 package org.eclipse.draw2d.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.draw2d.geometry.Insets;
@@ -104,4 +105,16 @@ public class PrecisionRectangleTest {
 		assertTrue(r.contains(-9.486614173228347 + 41.99055118110235, -34.431496062992125 + 25.92755905511810));
 	}
 	// contains
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testScale() {
+		// check work scale(double) with rounding errors
+		PrecisionRectangle r = new PrecisionRectangle(10, 10, 52, 52);
+		assertSame(r, r.scale(1.75));
+		assertEquals(17.5, r.preciseX(), 0);
+		assertEquals(17.5, r.preciseY(), 0);
+		assertEquals(91, r.preciseWidth(), 0);
+		assertEquals(91, r.preciseHeight(), 0);
+	}
 }

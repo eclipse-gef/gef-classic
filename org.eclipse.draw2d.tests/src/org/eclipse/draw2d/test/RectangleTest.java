@@ -468,6 +468,11 @@ public class RectangleTest extends BaseTestCase {
 		template = new Rectangle(10, 10, 20, 20);
 		assertSame(template, template.scale(0.5, 0.5));
 		assertEquals(5, 5, 10, 10, template);
+
+		// check work scale(double) with rounding errors
+		template = new Rectangle(10, 10, 52, 52);
+		assertSame(template, template.scale(1.75));
+		assertEquals(17, 17, 92, 92, template);
 	}
 
 	@SuppressWarnings("static-method")
