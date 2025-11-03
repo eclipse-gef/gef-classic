@@ -22,6 +22,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Interval;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.jupiter.api.Assertions;
@@ -93,6 +94,19 @@ public abstract class BaseTestCase extends Assertions {
 	public static void assertEquals(int begin, int length, Interval interval) {
 		assertEquals(begin, interval.begin());
 		assertEquals(length, interval.length());
+	}
+
+	/**
+	 * Asserts that two objects are equal. Expected objects
+	 * <code>(x, y) pairs</code>. Actual object <code>{@link PointList}</code>. If
+	 * they are not an AssertionFailedError is thrown.
+	 */
+	public static void assertEquals(int[] points, PointList pointList) {
+		int[] actualPoints = pointList.toIntArray();
+		assertEquals(points.length, actualPoints.length);
+		for (int i = 0; i < points.length; ++i) {
+			assertEquals(points[i], actualPoints[i]);
+		}
 	}
 
 	/**
