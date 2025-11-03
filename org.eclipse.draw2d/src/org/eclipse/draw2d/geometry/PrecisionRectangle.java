@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -433,6 +433,18 @@ public final class PrecisionRectangle extends Rectangle {
 	private PrecisionRectangle resizePrecise(double w, double h) {
 		setPreciseWidth(preciseWidth() + w);
 		setPreciseHeight(preciseHeight() + h);
+		return this;
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.geometry.Rectangle#scale(double, double)
+	 */
+	@Override
+	public Rectangle scale(double scaleX, double scaleY) {
+		setPreciseX(preciseX() * scaleX);
+		setPreciseY(preciseY() * scaleY);
+		setPreciseWidth(preciseWidth() * scaleX);
+		setPreciseHeight(preciseHeight() * scaleY);
 		return this;
 	}
 
