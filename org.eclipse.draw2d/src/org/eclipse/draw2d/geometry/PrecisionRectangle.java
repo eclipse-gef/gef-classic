@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -261,12 +261,28 @@ public final class PrecisionRectangle extends Rectangle {
 	}
 
 	/**
+	 * @see org.eclipse.draw2d.geometry.Rectangle#getLocation()
+	 */
+	@Override
+	public Point getLocation() {
+		return new PrecisionPoint(preciseX(), preciseY());
+	}
+
+	/**
 	 * Returns a precise copy of this.
 	 *
 	 * @return a precise copy
 	 */
 	public PrecisionRectangle getPreciseCopy() {
 		return new PrecisionRectangle(preciseX(), preciseY(), preciseWidth(), preciseHeight());
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.geometry.Rectangle#getSize()
+	 */
+	@Override
+	public Dimension getSize() {
+		return new PrecisionDimension(preciseWidth(), preciseHeight());
 	}
 
 	/**

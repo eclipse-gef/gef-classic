@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
 
@@ -66,7 +67,7 @@ public class Figure implements IFigure {
 	/**
 	 * The rectangular area that this Figure occupies.
 	 */
-	protected Rectangle bounds = new Rectangle(0, 0, 0, 0);
+	protected Rectangle bounds = new PrecisionRectangle(0, 0, 0, 0);
 
 	private LayoutManager layoutManager;
 

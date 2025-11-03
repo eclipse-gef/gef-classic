@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2010 IBM Corporation and others.
+ * Copyright (c) 2008, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@ package org.eclipse.draw2d;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionPointList;
 
 /**
  * Base superclass for all polylines/polygons
@@ -22,7 +23,7 @@ import org.eclipse.draw2d.geometry.PointList;
  */
 public abstract class AbstractPointListShape extends Shape {
 
-	PointList points = new PointList();
+	PointList points = new PrecisionPointList();
 
 	/**
 	 * @see org.eclipse.draw2d.IFigure#containsPoint(int, int)

@@ -428,7 +428,20 @@ public class PointList implements java.io.Serializable, Translatable {
 	 * @since 2.0
 	 */
 	public final void translate(Point pt) {
-		translate(pt.x, pt.y);
+		translate(pt.preciseX(), pt.preciseY());
+	}
+
+	/**
+	 * Moves the origin (0,0) of the coordinate system of all the points to the
+	 * Point (x,y). This updates the position of all the points in this PointList.
+	 *
+	 * @param x Amount by which all the points will be shifted on the X axis.
+	 * @param y Amount by which all the points will be shifted on the Y axis.
+	 * @see #translate(Point)
+	 * @since 3.21
+	 */
+	public void translate(double x, double y) {
+		translate((int) x, (int) y);
 	}
 
 	/**
