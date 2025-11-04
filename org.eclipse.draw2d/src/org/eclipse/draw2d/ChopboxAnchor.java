@@ -58,8 +58,7 @@ public class ChopboxAnchor extends AbstractConnectionAnchor {
 		float centerX = r.x + 0.5f * r.width;
 		float centerY = r.y + 0.5f * r.height;
 
-		if (r.isEmpty() || (reference.x == (int) centerX && reference.y == (int) centerY))
-		 {
+		if (r.isEmpty() || (reference.x == (int) centerX && reference.y == (int) centerY)) {
 			return new Point((int) centerX, (int) centerY); // This avoids
 															// divide-by-zero
 		}

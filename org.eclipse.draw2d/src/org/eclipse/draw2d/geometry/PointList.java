@@ -183,8 +183,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 * @since 2.0
 	 */
 	public Point getPoint(int index) {
-		if (index < 0 || index >= size)
-		 {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + //$NON-NLS-1$
 					", Size: " + size); //$NON-NLS-1$
 		}
@@ -203,8 +202,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 * @since 2.0
 	 */
 	public Point getPoint(Point p, int index) {
-		if (index < 0 || index >= size)
-		 {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + //$NON-NLS-1$
 					", Size: " + size); //$NON-NLS-1$
 		}
@@ -227,8 +225,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (bounds != null && !bounds.contains(p)) {
 			bounds = null;
 		}
-		if (index > size || index < 0)
-		 {
+		if (index > size || index < 0) {
 			throw new IndexOutOfBoundsException("Index: " + index + //$NON-NLS-1$
 					", Size: " + size); //$NON-NLS-1$
 		}
@@ -325,8 +322,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public Point removePoint(int index) {
 		bounds = null;
-		if (index < 0 || index >= size)
-		 {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + //$NON-NLS-1$
 					", Size: " + size); //$NON-NLS-1$
 		}
@@ -365,8 +361,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 * @since 2.0
 	 */
 	public void setPoint(Point pt, int index) {
-		if (index < 0 || index >= size)
-		 {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Index: " + index + //$NON-NLS-1$
 					", Size: " + size); //$NON-NLS-1$
 		}
