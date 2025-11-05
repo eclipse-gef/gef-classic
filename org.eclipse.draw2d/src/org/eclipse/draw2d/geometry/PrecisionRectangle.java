@@ -346,10 +346,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 */
 	@Override
 	public void performScale(double factor) {
-		setPreciseX(preciseX() * factor);
-		setPreciseY(preciseY() * factor);
-		setPreciseWidth(preciseWidth() * factor);
-		setPreciseHeight(preciseHeight() * factor);
+		scale(factor, factor);
 	}
 
 	/**
@@ -459,10 +456,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 */
 	@Override
 	public Rectangle scale(double scaleX, double scaleY) {
-		setPreciseX(preciseX() * scaleX);
-		setPreciseY(preciseY() * scaleY);
-		setPreciseWidth(preciseWidth() * scaleX);
-		setPreciseHeight(preciseHeight() * scaleY);
+		setPreciseBounds(preciseX() * scaleX, preciseY() * scaleY, preciseWidth() * scaleX, preciseHeight() * scaleY);
 		return this;
 	}
 
@@ -972,7 +966,16 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Updates the height integer field using the value of preciseHeight.
 	 */
 	private final void updateHeightInt() {
-		height = PrecisionGeometry.doubleToInteger(preciseHeight);
+		height = getHeightInt();
+	}
+
+	/**
+	 * Calculates the int-height of this rectangle using the same algorithm as used
+	 * by AWT in {@link java.awt.geom.RectangularShape#getBounds()
+	 * RectangularShape#getBounds()}
+	 */
+	private int getHeightInt() {
+		return PrecisionGeometry.doubleToInteger((Math.ceil(preciseY + preciseHeight) - Math.floor(preciseY)));
 	}
 
 	/**
@@ -1000,7 +1003,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Updates the preciseHeight double field using the value of height.
 	 */
 	private final void updatePreciseHeightDouble() {
-		if (height != PrecisionGeometry.doubleToInteger(preciseHeight)) {
+		if (height != getHeightInt()) {
 			preciseHeight = height;
 		}
 	}
@@ -1009,7 +1012,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Updates the preciseWidth double field using the value of width.
 	 */
 	private final void updatePreciseWidthDouble() {
-		if (width != PrecisionGeometry.doubleToInteger(preciseWidth)) {
+		if (width != getWidthInt()) {
 			preciseWidth = width;
 		}
 	}
@@ -1036,7 +1039,16 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Updates the width integer field using the value of preciseWidth.
 	 */
 	private final void updateWidthInt() {
-		width = PrecisionGeometry.doubleToInteger(preciseWidth);
+		width = getWidthInt();
+	}
+
+	/**
+	 * Calculates the int-height of this rectangle using the same algorithm as used
+	 * by AWT in {@link java.awt.geom.RectangularShape#getBounds()
+	 * RectangularShape#getBounds()}
+	 */
+	private int getWidthInt() {
+		return PrecisionGeometry.doubleToInteger(Math.ceil(preciseX + preciseWidth) - Math.floor(preciseX));
 	}
 
 	/**
