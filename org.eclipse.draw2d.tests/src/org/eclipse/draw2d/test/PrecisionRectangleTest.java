@@ -117,4 +117,20 @@ public class PrecisionRectangleTest {
 		assertEquals(91, r.preciseWidth(), 0);
 		assertEquals(91, r.preciseHeight(), 0);
 	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testScaleLocation() {
+		// check work scale(double) with rounding errors
+		PrecisionRectangle r = new PrecisionRectangle(-9.47, -34.43, 41.95, 25.92);
+		assertEquals(r.getPreciseCopy().getLocation().scale(1.153), r.getPreciseCopy().scale(1.153).getLocation());
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testScaleDimension() {
+		// check work scale(double) with rounding errors
+		PrecisionRectangle r = new PrecisionRectangle(-9.47, -34.43, 41.95, 25.92);
+		assertEquals(r.getPreciseCopy().getSize().scale(1.153), r.getPreciseCopy().scale(1.153).getSize());
+	}
 }
