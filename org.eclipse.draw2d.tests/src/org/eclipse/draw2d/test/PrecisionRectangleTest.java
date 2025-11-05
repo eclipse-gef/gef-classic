@@ -13,10 +13,6 @@
 
 package org.eclipse.draw2d.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -27,7 +23,7 @@ import org.junit.jupiter.api.Test;
  * @author sshaw
  *
  */
-public class PrecisionRectangleTest {
+public class PrecisionRectangleTest extends BaseTestCase {
 
 	@SuppressWarnings("static-method")
 	@Test
@@ -58,6 +54,10 @@ public class PrecisionRectangleTest {
 
 		r = new PrecisionRectangle(-9.486614173228347, -34.431496062992125, 41.99055118110236, 25.92755905511811);
 		r.performScale(26.458333333333332);
+		assertEquals(-251.0, r.preciseX(), 0);
+		assertEquals(-910.9999999999999, r.preciseY(), 0);
+		assertEquals(1111.0, r.preciseWidth(), 0);
+		assertEquals(686.0, r.preciseHeight(), 0);
 		r.performScale(1.0 / 26.458333333333332);
 		assertEquals(-9.486614173228347, r.preciseX(), 0);
 		assertEquals(-34.431496062992125, r.preciseY(), 0);
@@ -116,6 +116,8 @@ public class PrecisionRectangleTest {
 		assertEquals(17.5, r.preciseY(), 0);
 		assertEquals(91, r.preciseWidth(), 0);
 		assertEquals(91, r.preciseHeight(), 0);
+		// Different rounding behavior between Rectangle and PrecisionRectangle.
+		assertEquals(17, 17, 92, 92, r);
 	}
 
 	@SuppressWarnings("static-method")
