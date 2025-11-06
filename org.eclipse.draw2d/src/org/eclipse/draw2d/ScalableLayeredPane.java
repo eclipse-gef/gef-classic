@@ -127,4 +127,13 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 		return true;
 	}
 
+	/**
+	 * @since 3.21
+	 * @see org.eclipse.draw2d.Figure#useDoublePrecision()
+	 */
+	@Override
+	protected boolean useDoublePrecision() {
+		return true;
+	}
+
 }

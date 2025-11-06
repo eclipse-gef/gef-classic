@@ -116,5 +116,10 @@ public class ScalableLightweightSystem extends LightweightSystem {
 		public void translateFromParent(Translatable t) {
 			IScalablePaneHelper.translateFromParent(this, t);
 		}
+
+		@Override
+		protected boolean useDoublePrecision() {
+			return true;
+		}
 	}
 }
