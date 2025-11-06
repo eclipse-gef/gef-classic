@@ -33,6 +33,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
 
@@ -2046,8 +2049,10 @@ public class Figure implements IFigure {
 	@Override
 	public final void translateToAbsolute(Translatable t) {
 		if (getParent() != null) {
-			getParent().translateToParent(t);
-			getParent().translateToAbsolute(t);
+			Translatable tPrecise = toPreciseShape(t);
+			getParent().translateToParent(tPrecise);
+			getParent().translateToAbsolute(tPrecise);
+			fromPreciseShape(tPrecise, t);
 		}
 	}
 
@@ -2067,8 +2072,55 @@ public class Figure implements IFigure {
 	@Override
 	public final void translateToRelative(Translatable t) {
 		if (getParent() != null) {
-			getParent().translateToRelative(t);
-			getParent().translateFromParent(t);
+			Translatable tPrecise = toPreciseShape(t);
+			getParent().translateToRelative(tPrecise);
+			getParent().translateFromParent(tPrecise);
+			fromPreciseShape(tPrecise, t);
+		}
+	}
+
+	/**
+	 * Converts the given shape using integer-precision into a compatible shape
+	 * using double-precision. Does nothing if the conversion to double-precision is
+	 * disabled via {@link #useDoublePrecision()} or if the given
+	 * {@link Translatable} is already using double-precision.
+	 *
+	 * @param source integer-precision shape
+	 * @return double-precision geometry
+	 */
+	private Translatable toPreciseShape(Translatable source) {
+		if (getParent() instanceof Figure parentFigure && parentFigure.useDoublePrecision()) {
+			if (source instanceof Point p && !(source instanceof PrecisionPoint)) {
+				return new PrecisionPoint(p);
+			} else if (source instanceof Dimension d && !(source instanceof PrecisionDimension)) {
+				return new PrecisionDimension(d);
+			} else if (source instanceof Rectangle r && !(source instanceof PrecisionRectangle)) {
+				return new PrecisionRectangle(r);
+			}
+		}
+		// is already precise or doesn't have a precise variant
+		return source;
+	}
+
+	/**
+	 * Converts the double-precision values of {@code source} into integer-precision
+	 * values and stores them in {@code target}. Does nothing if the conversion to
+	 * double-precision is disabled via {@link #useDoublePrecision()}, if
+	 * {@code source == target} or if {@code source} is not a double-precision
+	 * shape.
+	 *
+	 * @param source double-precision shape
+	 * @param target integer-precision shape
+	 */
+	private void fromPreciseShape(Translatable source, Translatable target) {
+		if (source != target && getParent() instanceof Figure parentFigure && parentFigure.useDoublePrecision()) {
+			if (source instanceof PrecisionPoint p1 && target instanceof Point p2) {
+				p2.setLocation(p1.x, p1.y);
+			} else if (source instanceof PrecisionDimension d1 && target instanceof Dimension d2) {
+				d2.setSize(d1.width, d1.height);
+			} else if (source instanceof PrecisionRectangle r1 && target instanceof Rectangle r2) {
+				r2.setBounds(r1.x, r1.y, r1.width, r1.height);
+			}
 		}
 	}
 
@@ -2081,6 +2133,24 @@ public class Figure implements IFigure {
 	 */
 	@SuppressWarnings("static-method")
 	protected boolean useLocalCoordinates() {
+		return false;
+	}
+
+	/**
+	 * Returns {@code true} if this Figure should use double-precision arithmetic
+	 * when translating a {@link Translatable}. This method should not be called or
+	 * overridden by clients. This method is overridden by classes dealing with
+	 * (fractional) scaling (implementing the {@link ScalableFigure}).
+	 *
+	 * @return {@code false}.
+	 * @since 3.21
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by
+	 *             clients.
+	 */
+	@SuppressWarnings("static-method")
+	protected boolean useDoublePrecision() {
+		// This method should only be used internally and is not part of the interface
 		return false;
 	}
 

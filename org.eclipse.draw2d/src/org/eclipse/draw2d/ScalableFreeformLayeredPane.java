@@ -114,4 +114,12 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 		IScalablePaneHelper.translateFromParent(this, t);
 	}
 
+	/**
+	 * @since 3.21
+	 * @see org.eclipse.draw2d.Figure#useDoublePrecision()
+	 */
+	@Override
+	protected boolean useDoublePrecision() {
+		return true;
+	}
 }
