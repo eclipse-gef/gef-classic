@@ -161,7 +161,7 @@ public class FreeformGraphicalRootEditPart extends SimpleRootEditPart implements
 	protected FreeformViewport createViewport() {
 		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			AutoscaleFreeformViewport viewport = new AutoscaleFreeformViewport(false);
-			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewport));
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewport::setScale));
 			return viewport;
 		}
 		return new FreeformViewport();

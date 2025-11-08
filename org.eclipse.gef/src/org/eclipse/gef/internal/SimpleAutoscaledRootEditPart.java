@@ -33,7 +33,7 @@ public final class SimpleAutoscaledRootEditPart extends SimpleRootEditPart {
 	@Override
 	protected final ScalableFigure createFigure() {
 		ScalableFigure scalableFigure = new ScalableLayeredPane();
-		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(scalableFigure));
+		this.addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(scalableFigure::setScale));
 		return scalableFigure;
 	}
 

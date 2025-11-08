@@ -152,7 +152,7 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 	protected FreeformViewport createViewport() {
 		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			AutoscaleFreeformViewport viewPort = new AutoscaleFreeformViewport(useScaledGraphics);
-			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewPort));
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(viewPort::setScale));
 			return viewPort;
 		}
 		return super.createViewport();

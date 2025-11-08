@@ -178,7 +178,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 
 		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
 			ScalableLayeredPane innerScalableLayers = new ScalableLayeredPane(useScaledGraphics);
-			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers));
+			addEditPartListener(InternalGEFPlugin.createAutoscaleEditPartListener(innerScalableLayers::setScale));
 			innerLayers = innerScalableLayers;
 		} else {
 			innerLayers = new LayeredPane();

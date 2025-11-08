@@ -7,12 +7,26 @@
                 <message_argument value="FreeformGraphicalRootEditPart"/>
             </message_arguments>
         </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AutoscaleFreeformViewport"/>
+                <message_argument value="FreeformGraphicalRootEditPart"/>
+                <message_argument value="setScale(double)"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src/org/eclipse/gef/editparts/ScalableFreeformRootEditPart.java" type="org.eclipse.gef.editparts.ScalableFreeformRootEditPart">
         <filter id="640708718">
             <message_arguments>
                 <message_argument value="AutoscaleFreeformViewport(boolean)"/>
                 <message_argument value="ScalableFreeformRootEditPart"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AutoscaleFreeformViewport"/>
+                <message_argument value="ScalableFreeformRootEditPart"/>
+                <message_argument value="setScale(double)"/>
             </message_arguments>
         </filter>
     </resource>

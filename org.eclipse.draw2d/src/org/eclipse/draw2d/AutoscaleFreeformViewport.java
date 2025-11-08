@@ -20,7 +20,7 @@ package org.eclipse.draw2d;
  *
  * @noreference This class is not intended to be referenced by clients.
  */
-public class AutoscaleFreeformViewport extends FreeformViewport implements ScalableFigure {
+public class AutoscaleFreeformViewport extends FreeformViewport {
 
 	public AutoscaleFreeformViewport(boolean useScaledGraphics) {
 		super.setContents(new ScalableFreeformLayeredPane(useScaledGraphics));
@@ -37,11 +37,6 @@ public class AutoscaleFreeformViewport extends FreeformViewport implements Scala
 	}
 
 	@Override
-	public double getScale() {
-		return getAutoScaleLayerPane().getScale();
-	}
-
-	@Override
 	public void setContents(IFigure figure) {
 		ScalableFreeformLayeredPane autoScaleLayerPane = getAutoScaleLayerPane();
 		if (!autoScaleLayerPane.getChildren().isEmpty()) {
@@ -51,7 +46,6 @@ public class AutoscaleFreeformViewport extends FreeformViewport implements Scala
 		autoScaleLayerPane.add(figure);
 	}
 
-	@Override
 	public void setScale(double scale) {
 		getAutoScaleLayerPane().setScale(scale);
 	}
