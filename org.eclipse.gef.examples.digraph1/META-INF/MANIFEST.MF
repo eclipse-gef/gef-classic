@@ -11,9 +11,9 @@ Require-Bundle: org.eclipse.gef;bundle-version="[3.18.0,4.0.0)";visibility:=reex
  org.eclipse.core.resources;bundle-version="[3.3.0,4.0.0)";visibility:=reexport
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: org.eclipse.gef.examples.digraph1.editor;x-internal:=true,
- org.eclipse.gef.examples.digraph1.editpart;x-internal:=true,
- org.eclipse.gef.examples.digraph1.figure;x-internal:=true,
- org.eclipse.gef.examples.digraph1.model;x-internal:=true,
- org.eclipse.gef.examples.digraph1.policy;x-internal:=true
+Export-Package: org.eclipse.gef.examples.digraph1.editor;x-friends:="org.eclipse.gef.examples.digraph2",
+ org.eclipse.gef.examples.digraph1.editpart;x-friends:="org.eclipse.gef.examples.digraph2",
+ org.eclipse.gef.examples.digraph1.figure;x-friends:="org.eclipse.gef.examples.digraph2",
+ org.eclipse.gef.examples.digraph1.model;x-friends:="org.eclipse.gef.examples.digraph2",
+ org.eclipse.gef.examples.digraph1.policy;x-friends:="org.eclipse.gef.examples.digraph2"
 Automatic-Module-Name: org.eclipse.gef.examples.digraph1
