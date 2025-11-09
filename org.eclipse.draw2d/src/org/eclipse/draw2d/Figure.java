@@ -33,8 +33,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
+import org.eclipse.draw2d.geometry.PrecisionPointList;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
@@ -2096,6 +2098,8 @@ public class Figure implements IFigure {
 				return new PrecisionDimension(d);
 			} else if (source instanceof Rectangle r && !(source instanceof PrecisionRectangle)) {
 				return new PrecisionRectangle(r);
+			} else if (source instanceof PointList p && !(source instanceof PrecisionPointList)) {
+				return new PrecisionPointList(p);
 			}
 		}
 		// is already precise or doesn't have a precise variant
@@ -2120,6 +2124,8 @@ public class Figure implements IFigure {
 				d2.setSize(d1.width, d1.height);
 			} else if (source instanceof PrecisionRectangle r1 && target instanceof Rectangle r2) {
 				r2.setBounds(r1.x, r1.y, r1.width, r1.height);
+			} else if (source instanceof PrecisionPointList p1 && target instanceof PointList p2) {
+				System.arraycopy(p1.toIntArray(), 0, p2.toIntArray(), 0, p2.size() * 2);
 			}
 		}
 	}

@@ -17,6 +17,8 @@ import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ScalableLayeredPane;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionPointList;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -85,5 +87,25 @@ public class PrecisionTests extends BaseTestCase {
 		assertEquals(r1.y, r2.y);
 		assertEquals(r1.width, r2.width);
 		assertEquals(r1.height, r2.height);
+	}
+
+	@Test
+	public void testPreciseTranslateToAbsolute_PointList() {
+		PointList p1 = new PointList(new int[] { 13, 29, 32, 5 });
+		PointList p2 = new PrecisionPointList(new int[] { 13, 29, 32, 5 });
+		fig.translateToAbsolute(p1);
+		fig.translateToAbsolute(p2);
+		assertArrayEquals(p1.toIntArray(), new int[] { 493, 1100, 1214, 189 });
+		assertArrayEquals(p1.toIntArray(), p2.toIntArray());
+	}
+
+	@Test
+	public void testPreciseTranslateToRelative_PointList() {
+		PointList p1 = new PointList(new int[] { 518, 628, 715, 313 });
+		PointList p2 = new PrecisionPointList(new int[] { 518, 628, 715, 313 });
+		fig.translateToRelative(p1);
+		fig.translateToRelative(p2);
+		assertArrayEquals(p1.toIntArray(), new int[] { 13, 16, 18, 8 });
+		assertArrayEquals(p1.toIntArray(), p2.toIntArray());
 	}
 }
