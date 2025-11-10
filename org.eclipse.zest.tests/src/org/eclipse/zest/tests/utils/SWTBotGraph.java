@@ -27,6 +27,7 @@ import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.HideNodeHelper;
+import org.eclipse.zest.core.widgets.internal.GraphLabel;
 
 import org.eclipse.draw2d.Clickable;
 import org.eclipse.draw2d.IFigure;
@@ -236,6 +237,20 @@ public class SWTBotGraph extends AbstractSWTBotControl<Graph> implements ISWTBot
 	 */
 	public IFigure getFigureAt(int x, int y) {
 		return syncExec(() -> widget.getFigureAt(x, y));
+	}
+
+	/**
+	 * Returns the fish-eye figure at the given coordinates. Note that those figures
+	 * are on a separate layer.
+	 *
+	 * @param x The x coordinate of the fish-eye figure.
+	 * @param y The x coordinate of the fish-eye figure.
+	 */
+	public GraphLabel getFishEyeFigureAt(int x, int y) {
+		return syncExec(() -> {
+			IFigure fishEyeLayer = widget.getRootLayer().getChildren().get(1);
+			return (GraphLabel) fishEyeLayer.findFigureAt(x, y);
+		});
 	}
 
 	/**

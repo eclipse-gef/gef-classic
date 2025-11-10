@@ -339,7 +339,7 @@ public class GraphSWTTests extends AbstractGraphTest {
 			assertEquals(figure.getText(), "");
 
 			graphRobot.mouseMove(location.x + 1, location.y + 1);
-			GraphLabel fishEyeFigure = getFishEyeFigure(location.x + 1, location.y + 1);
+			GraphLabel fishEyeFigure = graphRobot.getFishEyeFigureAt(location.x + 1, location.y + 1);
 			assertEquals(fishEyeFigure.getText(), labels.get(i));
 		}
 	}
@@ -725,7 +725,7 @@ public class GraphSWTTests extends AbstractGraphTest {
 		nodeFigure.translateToAbsolute(location);
 
 		graphRobot.mouseMove(location.x, location.y);
-		GraphLabel fishEyeFigure = getFishEyeFigure(location.x + 1, location.y + 1);
+		GraphLabel fishEyeFigure = graphRobot.getFishEyeFigureAt(location.x + 1, location.y + 1);
 		assertEquals(fishEyeFigure.getText(), "SomeClass.java");
 	}
 }

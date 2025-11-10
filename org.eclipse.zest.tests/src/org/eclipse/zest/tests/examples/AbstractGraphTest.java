@@ -38,7 +38,6 @@ import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
-import org.eclipse.zest.core.widgets.internal.GraphLabel;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 import org.eclipse.zest.tests.examples.AbstractGraphTest.SWTBotExtension;
 import org.eclipse.zest.tests.utils.ISWTBotGraphContainer;
@@ -250,18 +249,6 @@ public abstract class AbstractGraphTest {
 		LightweightSystem lws = (LightweightSystem) getter2.invoke(toolTipHelper);
 
 		return lws.getRootFigure().getChildren().get(0);
-	}
-
-	/**
-	 * Returns the fish-eye figure at the given coordinates. Note that those figures
-	 * are on a separate layer.
-	 *
-	 * @param x The x coordinate of the fish-eye figure.
-	 * @param y The x coordinate of the fish-eye figure.
-	 */
-	protected GraphLabel getFishEyeFigure(int x, int y) {
-		IFigure fishEyeLayer = graph.getRootLayer().getChildren().get(1);
-		return (GraphLabel) fishEyeLayer.findFigureAt(x, y);
 	}
 
 	/**
