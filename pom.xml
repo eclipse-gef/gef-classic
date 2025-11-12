@@ -19,7 +19,7 @@
 		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.25.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
 		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
-		<jruby.version>9.4.5.0</jruby.version>
+		<jruby.version>9.4.14.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
 		<execution-environment>JavaSE-21</execution-environment>
 		<!-- SonarQube configuration -->
