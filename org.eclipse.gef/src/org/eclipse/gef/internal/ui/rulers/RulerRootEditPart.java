@@ -250,7 +250,7 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 		@Override
 		public Point getViewLocation() {
 			Point viewLocation = new Point(getHorizontalRangeModel().getValue(), getVerticalRangeModel().getValue());
-			getFigure().translateToRelative(viewLocation);
+			translateToRelative(viewLocation);
 			return viewLocation;
 		}
 
