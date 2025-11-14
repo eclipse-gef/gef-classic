@@ -262,7 +262,19 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawFocus(int, int, int, int) */
 	@Override
 	public void drawFocus(int x, int y, int w, int h) {
-		graphics.drawFocus(zoomRect(x, y, w, h));
+		drawFocus((double) x, y, w, h);
+	}
+
+	private void drawFocus(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			double scaledX = x * zoom + fractionalX;
+			double scaledY = y * zoom + fractionalY;
+			double scaledWidth = w * zoom;
+			double scaledHeight = h * zoom;
+			scaledGraphics.drawFocus(scaledX, scaledY, scaledWidth, scaledHeight);
+		} else {
+			graphics.drawFocus(zoomPrecisionRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawImage(Image, int, int) */

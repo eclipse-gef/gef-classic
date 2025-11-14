@@ -181,6 +181,48 @@ public class ScaledGraphicsTest {
 				.drawArc(new Rectangle(source, source, source, source + 20), source, source));
 	}
 
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawFocusForRegression() {
+		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawFocus(5, 7, 9, 25));
+		validateDrawFocus(swtGraphics, new Rectangle(30, 40, 45, 125));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawFocusWithInt(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(scaledGraphics -> scaledGraphics.drawFocus(source, source, source, source + 5));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawFocusWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawFocus(source, source, source, source + 10));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawFocusWithRectangle(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(
+				scaledGraphics -> scaledGraphics.drawFocus(new Rectangle(source, source, source, source + 15)));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawFocusWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(
+				scaledGraphics -> scaledGraphics.drawFocus(new Rectangle(source, source, source, source + 20)));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -209,6 +251,7 @@ public class ScaledGraphicsTest {
 			validateDrawLine(graphics2, graphics1.drawLine1);
 			validateDrawOval(graphics2, graphics1.drawOval);
 			validateDrawArc(graphics2, graphics1.drawArc);
+			validateDrawFocus(graphics2, graphics1.drawFocus);
 		}
 	}
 
@@ -242,6 +285,18 @@ public class ScaledGraphicsTest {
 				String.format("drawArc: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
 		assertEquals(expected.height, graphics.drawArc.height,
 				String.format("drawArc: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawFocus(RecordingSwtGraphics graphics, Rectangle expected) {
+		// check drawOval
+		assertEquals(expected.x, graphics.drawFocus.x,
+				String.format("drawFocus: Scaled value for x must match %s", expected.x)); //$NON-NLS-1$
+		assertEquals(expected.y, graphics.drawFocus.y,
+				String.format("drawFocus: Scaled value for y must match scaled value %s", expected.y)); //$NON-NLS-1$
+		assertEquals(expected.width, graphics.drawFocus.width,
+				String.format("drawFocus: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
+		assertEquals(expected.height, graphics.drawFocus.height,
+				String.format("drawFocus: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -320,6 +375,7 @@ public class ScaledGraphicsTest {
 
 		Point translation = new Point();
 		Rectangle drawArc = new Rectangle();
+		Rectangle drawFocus = new Rectangle();
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
 
@@ -339,6 +395,14 @@ public class ScaledGraphicsTest {
 			drawArc.setY(y + translation.y);
 			drawArc.setWidth(width);
 			drawArc.setHeight(height);
+		}
+
+		@Override
+		public void drawFocus(int x, int y, int w, int h) {
+			drawFocus.setX(x + translation.x);
+			drawFocus.setY(y + translation.y);
+			drawFocus.setWidth(w);
+			drawFocus.setHeight(h);
 		}
 
 		@Override
