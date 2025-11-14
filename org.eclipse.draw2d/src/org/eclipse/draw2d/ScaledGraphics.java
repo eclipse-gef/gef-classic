@@ -400,8 +400,23 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawRoundRectangle(Rectangle, int, int) */
 	@Override
 	public void drawRoundRectangle(Rectangle r, int arcWidth, int arcHeight) {
-		graphics.drawRoundRectangle(zoomRect(r.x, r.y, r.width, r.height), (int) (arcWidth * zoom),
-				(int) (arcHeight * zoom));
+		drawRoundRectangle(r.x, r.y, r.width, r.height, arcWidth, arcHeight);
+	}
+
+	private void drawRoundRectangle(double x, double y, double w, double h, double arcWidth, double arcHeight) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			double scaledX = x * zoom + fractionalX;
+			double scaledY = y * zoom + fractionalY;
+			double scaledWidth = w * zoom;
+			double scaledHeight = h * zoom;
+			double scaledArcWidth = arcWidth * zoom;
+			double scaledArcHeight = arcHeight * zoom;
+			scaledGraphics.drawRoundRectangle(scaledX, scaledY, scaledWidth, scaledHeight, scaledArcWidth,
+					scaledArcHeight);
+		} else {
+			graphics.drawRoundRectangle(zoomPrecisionRect(x, y, w, h), (int) (arcWidth * zoom),
+					(int) (arcHeight * zoom));
+		}
 	}
 
 	/** @see Graphics#drawString(String, int, int) */

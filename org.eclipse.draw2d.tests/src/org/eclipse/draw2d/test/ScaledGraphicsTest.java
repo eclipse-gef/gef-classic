@@ -330,6 +330,32 @@ public class ScaledGraphicsTest {
 				scaledGraphics -> scaledGraphics.drawRectangle(new Rectangle(source, source, source, source + 20)));
 	}
 
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawRoundRectangleForRegression() {
+		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawRoundRectangle(new Rectangle(5, 7, 9, 25), 5, 5));
+		validateDrawRoundRectangle(swtGraphics, new Rectangle(30, 40, 45, 125), new Point(25, 25));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRoundRectangle(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(scaledGraphics -> scaledGraphics
+				.drawRoundRectangle(new Rectangle(source, source, source, source + 15), 5, 5));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRoundRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(scaledGraphics -> scaledGraphics
+				.drawRoundRectangle(new Rectangle(source, source, source, source + 20), 5, 5));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -362,6 +388,7 @@ public class ScaledGraphicsTest {
 			validateDrawPath(graphics2, graphics1.pathData);
 			validateDrawPolygon(graphics2, graphics1.polygon);
 			validateDrawRectangle(graphics2, graphics1.drawRectangle);
+			validateDrawRoundRectangle(graphics2, graphics1.drawRoundRectangle, graphics1.drawRoundRectangleArc);
 		}
 	}
 
@@ -431,6 +458,23 @@ public class ScaledGraphicsTest {
 				String.format("drawRectangle: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
 		assertEquals(expected.height, graphics.drawRectangle.height,
 				String.format("drawRectangle: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawRoundRectangle(RecordingSwtGraphics graphics, Rectangle expected,
+			Point expectedArc) {
+		// check drawOval
+		assertEquals(expected.x, graphics.drawRoundRectangle.x,
+				String.format("drawRoundRectangle: Scaled value for x must match %s", expected.x)); //$NON-NLS-1$
+		assertEquals(expected.y, graphics.drawRoundRectangle.y,
+				String.format("drawRoundRectangle: Scaled value for y must match scaled value %s", expected.y)); //$NON-NLS-1$
+		assertEquals(expected.width, graphics.drawRoundRectangle.width,
+				String.format("drawRoundRectangle: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
+		assertEquals(expected.height, graphics.drawRoundRectangle.height, String
+				.format("drawRoundRectangle: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
+		assertEquals(expectedArc.x, graphics.drawRoundRectangleArc.x, String
+				.format("drawRoundRectangle: Scaled value for arc width must match scaled value %s", expectedArc.x)); //$NON-NLS-1$
+		assertEquals(expectedArc.y, graphics.drawRoundRectangleArc.y, String
+				.format("drawRoundRectangle: Scaled value for arc height must match scaled value %s", expectedArc.y)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -513,6 +557,8 @@ public class ScaledGraphicsTest {
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
 		Rectangle drawRectangle = new Rectangle();
+		Rectangle drawRoundRectangle = new Rectangle();
+		Point drawRoundRectangleArc = new Point();
 		PathData pathData = new PathData();
 		int[] polygon = {};
 
@@ -573,6 +619,16 @@ public class ScaledGraphicsTest {
 			drawRectangle.setY(y + translation.y);
 			drawRectangle.setWidth(width);
 			drawRectangle.setHeight(height);
+		}
+
+		@Override
+		public void drawRoundRectangle(Rectangle r, int arcWidth, int arcHeight) {
+			drawRoundRectangle.setX(r.x + translation.x);
+			drawRoundRectangle.setY(r.y + translation.y);
+			drawRoundRectangle.setWidth(r.width);
+			drawRoundRectangle.setHeight(r.height);
+			drawRoundRectangleArc.setX(arcWidth);
+			drawRoundRectangleArc.setY(arcHeight);
 		}
 	}
 }
