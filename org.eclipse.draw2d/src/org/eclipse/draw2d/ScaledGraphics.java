@@ -237,11 +237,26 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawArc(int, int, int, int, int, int) */
 	@Override
 	public void drawArc(int x, int y, int w, int h, int offset, int sweep) {
-		Rectangle z = zoomRect(x, y, w, h);
-		if (z.isEmpty() || sweep == 0) {
+		if (sweep == 0) {
 			return;
 		}
-		graphics.drawArc(z, offset, sweep);
+		drawArc((double) x, y, w, h, offset, sweep);
+	}
+
+	private void drawArc(double x, double y, double w, double h, int offset, int sweep) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			double scaledX = x * zoom + fractionalX;
+			double scaledY = y * zoom + fractionalY;
+			double scaledWidth = w * zoom;
+			double scaledHeight = h * zoom;
+			scaledGraphics.drawArc(scaledX, scaledY, scaledWidth, scaledHeight, offset, sweep);
+		} else {
+			Rectangle z = zoomPrecisionRect(x, y, w, h);
+			if (z.isEmpty()) {
+				return;
+			}
+			graphics.drawArc(zoomPrecisionRect(x, y, w, h), offset, sweep);
+		}
 	}
 
 	/** @see Graphics#drawFocus(int, int, int, int) */
@@ -292,7 +307,7 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawOval(int, int, int, int) */
 	@Override
 	public void drawOval(int x, int y, int w, int h) {
-			drawOval((double) x, y, w, h);
+		drawOval((double) x, y, w, h);
 	}
 
 	private void drawOval(double x, double y, double w, double h) {

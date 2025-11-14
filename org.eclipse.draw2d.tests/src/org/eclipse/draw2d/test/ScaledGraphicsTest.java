@@ -129,6 +129,58 @@ public class ScaledGraphicsTest {
 				scaledGraphics -> scaledGraphics.drawOval(new Rectangle(source, source, source, source + 20)));
 	}
 
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawArcForRegression() {
+		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawArc(5, 7, 9, 25, 12, 18));
+		validateDrawArc(swtGraphics, new Rectangle(30, 40, 45, 125));
+
+		swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawArc(0, 0, 0, 0, 12, 18));
+		validateDrawArc(swtGraphics, new Rectangle(0, 0, 0, 0));
+
+		swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawArc(5, 7, 9, 25, 12, 0));
+		validateDrawArc(swtGraphics, new Rectangle(0, 0, 0, 0));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawArcWithInt(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation
+				.execute(scaledGraphics -> scaledGraphics.drawArc(source, source, source, source + 5, source, source));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawArcWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(
+				scaledGraphics -> scaledGraphics.drawArc(source, source, source, source + 10, source, source));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawArcWithRectangle(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(scaledGraphics -> scaledGraphics.drawArc(new Rectangle(source, source, source, source + 15),
+				source, source));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawArcWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(scaledGraphics -> scaledGraphics
+				.drawArc(new Rectangle(source, source, source, source + 20), source, source));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -156,6 +208,7 @@ public class ScaledGraphicsTest {
 		private static void validate(RecordingSwtGraphics graphics1, RecordingSwtGraphics graphics2) {
 			validateDrawLine(graphics2, graphics1.drawLine1);
 			validateDrawOval(graphics2, graphics1.drawOval);
+			validateDrawArc(graphics2, graphics1.drawArc);
 		}
 	}
 
@@ -177,6 +230,18 @@ public class ScaledGraphicsTest {
 				String.format("drawOval: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
 		assertEquals(expected.height, graphics.drawOval.height,
 				String.format("drawOval: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawArc(RecordingSwtGraphics graphics, Rectangle expected) {
+		// check drawArc
+		assertEquals(expected.x, graphics.drawArc.x,
+				String.format("drawArc: Scaled value for x must match %s", expected.x)); //$NON-NLS-1$
+		assertEquals(expected.y, graphics.drawArc.y,
+				String.format("drawArc: Scaled value for y must match scaled value %s", expected.y)); //$NON-NLS-1$
+		assertEquals(expected.width, graphics.drawArc.width,
+				String.format("drawArc: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
+		assertEquals(expected.height, graphics.drawArc.height,
+				String.format("drawArc: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -254,6 +319,7 @@ public class ScaledGraphicsTest {
 	private static class RecordingSwtGraphics extends SWTGraphics {
 
 		Point translation = new Point();
+		Rectangle drawArc = new Rectangle();
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
 
@@ -265,6 +331,14 @@ public class ScaledGraphicsTest {
 		public void translate(int dx, int dy) {
 			translation.setX(dx);
 			translation.setY(dy);
+		}
+
+		@Override
+		public void drawArc(int x, int y, int width, int height, int offset, int length) {
+			drawArc.setX(x + translation.x);
+			drawArc.setY(y + translation.y);
+			drawArc.setWidth(width);
+			drawArc.setHeight(height);
 		}
 
 		@Override
