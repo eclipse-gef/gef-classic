@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.jupiter.api.Test;
@@ -268,6 +269,24 @@ public class ScaledGraphicsTest {
 		path.dispose();
 	}
 
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawPolygon(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		int[] points = new int[8];
+		points[0] = source * 1 + 1;
+		points[1] = source * 2 + 2;
+		points[2] = source * 3 + 3;
+		points[3] = source * 4 + 4;
+		points[4] = source * 5 + 5;
+		points[5] = source * 6 + 6;
+		points[6] = source * 7 + 7;
+		points[7] = source * 8 + 8;
+		validation.execute(scaledGraphics -> scaledGraphics.drawPolygon(points));
+		validation.execute(scaledGraphics -> scaledGraphics.drawPolygon(new PointList(points)));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -298,6 +317,7 @@ public class ScaledGraphicsTest {
 			validateDrawArc(graphics2, graphics1.drawArc);
 			validateDrawFocus(graphics2, graphics1.drawFocus);
 			validateDrawPath(graphics2, graphics1.pathData);
+			validateDrawPolygon(graphics2, graphics1.polygon);
 		}
 	}
 
@@ -349,6 +369,12 @@ public class ScaledGraphicsTest {
 		// check drawOval
 		assertArrayEquals(pathData.points, graphics.pathData.points, 0.001f,
 				String.format("drawPath: Scaled value for path data must match %s", pathData.points)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawPolygon(RecordingSwtGraphics graphics, int[] polygon) {
+		// check drawOval
+		assertArrayEquals(polygon, graphics.polygon,
+				String.format("drawFocus: Scaled value for polygon must match %s", polygon)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -431,6 +457,7 @@ public class ScaledGraphicsTest {
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
 		PathData pathData = new PathData();
+		int[] polygon = {};
 
 		public RecordingSwtGraphics(GC gc) {
 			super(gc);
@@ -476,6 +503,11 @@ public class ScaledGraphicsTest {
 		@Override
 		public void drawPath(Path path) {
 			pathData = path.getPathData();
+		}
+
+		@Override
+		public void drawPolygon(int[] points) {
+			polygon = points;
 		}
 	}
 }
