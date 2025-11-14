@@ -292,7 +292,19 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawOval(int, int, int, int) */
 	@Override
 	public void drawOval(int x, int y, int w, int h) {
-		graphics.drawOval(zoomRect(x, y, w, h));
+			drawOval((double) x, y, w, h);
+	}
+
+	private void drawOval(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			double scaledX = x * zoom + fractionalX;
+			double scaledY = y * zoom + fractionalY;
+			double scaledWidth = w * zoom;
+			double scaledHeight = h * zoom;
+			scaledGraphics.drawOval(scaledX, scaledY, scaledWidth, scaledHeight);
+		} else {
+			graphics.drawOval(zoomPrecisionRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawPath(Path) */
@@ -990,6 +1002,14 @@ public class ScaledGraphics extends Graphics {
 	}
 
 	private Rectangle zoomRect(int x, int y, int w, int h) {
+		tempRECT.x = (int) (Math.floor(x * zoom + fractionalX));
+		tempRECT.y = (int) (Math.floor(y * zoom + fractionalY));
+		tempRECT.width = (int) (Math.floor(((x + w) * zoom + fractionalX))) - tempRECT.x;
+		tempRECT.height = (int) (Math.floor(((y + h) * zoom + fractionalY))) - tempRECT.y;
+		return tempRECT;
+	}
+
+	private Rectangle zoomPrecisionRect(double x, double y, double w, double h) {
 		tempRECT.x = (int) (Math.floor(x * zoom + fractionalX));
 		tempRECT.y = (int) (Math.floor(y * zoom + fractionalY));
 		tempRECT.width = (int) (Math.floor(((x + w) * zoom + fractionalX))) - tempRECT.x;
