@@ -287,6 +287,49 @@ public class ScaledGraphicsTest {
 		validation.execute(scaledGraphics -> scaledGraphics.drawPolygon(new PointList(points)));
 	}
 
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawRectangleForRegression() {
+		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawRectangle(5, 7, 9, 25));
+		validateDrawRectangle(swtGraphics, new Rectangle(30, 40, 45, 125));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRectangleWithInt(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(scaledGraphics -> scaledGraphics.drawRectangle(source, source, source, source + 5));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRectangleWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation
+				.executeTranslated(scaledGraphics -> scaledGraphics.drawRectangle(source, source, source, source + 10));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRectangleWithRectangle(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.execute(
+				scaledGraphics -> scaledGraphics.drawRectangle(new Rectangle(source, source, source, source + 15)));
+	}
+
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawRectangleWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+		validation.executeTranslated(
+				scaledGraphics -> scaledGraphics.drawRectangle(new Rectangle(source, source, source, source + 20)));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -318,6 +361,7 @@ public class ScaledGraphicsTest {
 			validateDrawFocus(graphics2, graphics1.drawFocus);
 			validateDrawPath(graphics2, graphics1.pathData);
 			validateDrawPolygon(graphics2, graphics1.polygon);
+			validateDrawRectangle(graphics2, graphics1.drawRectangle);
 		}
 	}
 
@@ -375,6 +419,18 @@ public class ScaledGraphicsTest {
 		// check drawOval
 		assertArrayEquals(polygon, graphics.polygon,
 				String.format("drawFocus: Scaled value for polygon must match %s", polygon)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawRectangle(RecordingSwtGraphics graphics, Rectangle expected) {
+		// check drawOval
+		assertEquals(expected.x, graphics.drawRectangle.x,
+				String.format("drawRectangle: Scaled value for x must match %s", expected.x)); //$NON-NLS-1$
+		assertEquals(expected.y, graphics.drawRectangle.y,
+				String.format("drawRectangle: Scaled value for y must match scaled value %s", expected.y)); //$NON-NLS-1$
+		assertEquals(expected.width, graphics.drawRectangle.width,
+				String.format("drawRectangle: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
+		assertEquals(expected.height, graphics.drawRectangle.height,
+				String.format("drawRectangle: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -456,6 +512,7 @@ public class ScaledGraphicsTest {
 		Rectangle drawFocus = new Rectangle();
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
+		Rectangle drawRectangle = new Rectangle();
 		PathData pathData = new PathData();
 		int[] polygon = {};
 
@@ -508,6 +565,14 @@ public class ScaledGraphicsTest {
 		@Override
 		public void drawPolygon(int[] points) {
 			polygon = points;
+		}
+
+		@Override
+		public void drawRectangle(int x, int y, int width, int height) {
+			drawRectangle.setX(x + translation.x);
+			drawRectangle.setY(y + translation.y);
+			drawRectangle.setWidth(width);
+			drawRectangle.setHeight(height);
 		}
 	}
 }

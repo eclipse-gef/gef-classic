@@ -382,7 +382,19 @@ public class ScaledGraphics extends Graphics {
 	/** @see Graphics#drawRectangle(int, int, int, int) */
 	@Override
 	public void drawRectangle(int x, int y, int w, int h) {
-		graphics.drawRectangle(zoomRect(x, y, w, h));
+		drawRectangle((double) x, y, w, h);
+	}
+
+	private void drawRectangle(double x, double y, double w, double h) {
+		if (graphics instanceof ScaledGraphics scaledGraphics) {
+			double scaledX = x * zoom + fractionalX;
+			double scaledY = y * zoom + fractionalY;
+			double scaledWidth = w * zoom;
+			double scaledHeight = h * zoom;
+			scaledGraphics.drawRectangle(scaledX, scaledY, scaledWidth, scaledHeight);
+		} else {
+			graphics.drawRectangle(zoomPrecisionRect(x, y, w, h));
+		}
 	}
 
 	/** @see Graphics#drawRoundRectangle(Rectangle, int, int) */
