@@ -13,14 +13,18 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Path;
+import org.eclipse.swt.graphics.PathData;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.SWTGraphics;
@@ -223,6 +227,47 @@ public class ScaledGraphicsTest {
 				scaledGraphics -> scaledGraphics.drawFocus(new Rectangle(source, source, source, source + 20)));
 	}
 
+	@ParameterizedTest
+	@MethodSource("drawSingleValueTestCombinations")
+	@SuppressWarnings("static-method")
+	public void testDrawPath(int source, int monitorZoom, int diagramZoom) {
+		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
+
+		PathData data = new PathData();
+		float[] points = new float[18];
+		byte[] types = new byte[7];
+		points[0] = source * 1.1f;
+		points[1] = source * 1.1f;
+		types[0] = SWT.PATH_MOVE_TO;
+		points[2] = source * 2.2f;
+		points[3] = source * 2.2f;
+		types[1] = SWT.PATH_LINE_TO;
+		points[4] = source * 3.3f;
+		points[5] = source * 3.3f;
+		types[2] = SWT.PATH_MOVE_TO;
+		points[6] = source * 4.4f;
+		points[7] = source * 4.4f;
+		points[8] = source * 4.4f;
+		points[9] = source * 4.4f;
+		types[3] = SWT.PATH_QUAD_TO;
+		points[10] = source * 5.5f;
+		points[11] = source * 5.5f;
+		types[4] = SWT.PATH_MOVE_TO;
+		points[12] = source * 6.6f;
+		points[13] = source * 6.6f;
+		points[14] = source * 6.6f;
+		points[15] = source * 6.6f;
+		points[16] = source * 6.6f;
+		points[17] = source * 6.6f;
+		types[5] = SWT.PATH_CUBIC_TO;
+		types[6] = SWT.PATH_CLOSE;
+		data.points = points;
+		data.types = types;
+		Path path = new Path(Display.getDefault(), data);
+		validation.execute(scaledGraphics -> scaledGraphics.drawPath(path));
+		path.dispose();
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -252,6 +297,7 @@ public class ScaledGraphicsTest {
 			validateDrawOval(graphics2, graphics1.drawOval);
 			validateDrawArc(graphics2, graphics1.drawArc);
 			validateDrawFocus(graphics2, graphics1.drawFocus);
+			validateDrawPath(graphics2, graphics1.pathData);
 		}
 	}
 
@@ -297,6 +343,12 @@ public class ScaledGraphicsTest {
 				String.format("drawFocus: Scaled value for width must match scaled value %s", expected.width)); //$NON-NLS-1$
 		assertEquals(expected.height, graphics.drawFocus.height,
 				String.format("drawFocus: Scaled value for height must match scaled value %s", expected.height)); //$NON-NLS-1$
+	}
+
+	private static void validateDrawPath(RecordingSwtGraphics graphics, PathData pathData) {
+		// check drawOval
+		assertArrayEquals(pathData.points, graphics.pathData.points, 0.001f,
+				String.format("drawPath: Scaled value for path data must match %s", pathData.points)); //$NON-NLS-1$
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -378,9 +430,11 @@ public class ScaledGraphicsTest {
 		Rectangle drawFocus = new Rectangle();
 		Point drawLine1 = new Point();
 		Rectangle drawOval = new Rectangle();
+		PathData pathData = new PathData();
 
 		public RecordingSwtGraphics(GC gc) {
 			super(gc);
+			pathData.points = new float[0];
 		}
 
 		@Override
@@ -417,6 +471,11 @@ public class ScaledGraphicsTest {
 			drawOval.setY(y + translation.y);
 			drawOval.setWidth(width);
 			drawOval.setHeight(height);
+		}
+
+		@Override
+		public void drawPath(Path path) {
+			pathData = path.getPathData();
 		}
 	}
 }
