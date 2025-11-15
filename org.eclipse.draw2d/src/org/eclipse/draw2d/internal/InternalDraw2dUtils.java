@@ -44,6 +44,12 @@ public class InternalDraw2dUtils {
 	 */
 	private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
 
+	/**
+	 * Data that can be set to make a control not propagate autoScale disabling to
+	 * children.
+	 */
+	private static final String DATA_PROPOGATE_AUTOSCALE_DISABLED = "PROPOGATE_AUTOSCALE_DISABLED"; //$NON-NLS-1$
+
 	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
 			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()))
 			&& SWT.getVersion() >= 4971; // SWT 2025-12 release or higher
@@ -59,6 +65,13 @@ public class InternalDraw2dUtils {
 		control.setData(InternalDraw2dUtils.DATA_AUTOSCALE_DISABLED, true);
 		control.addListener(SWT.ZoomChanged, e -> zoomConsumer.accept(e.detail / 100.0));
 		zoomConsumer.accept(InternalDraw2dUtils.calculateScale(control));
+	}
+
+	public static void setPropagateAutoScaleDisabled(Control control, boolean propagate) {
+		if (control == null || !isAutoScaleEnabled()) {
+			return;
+		}
+		control.setData(DATA_PROPOGATE_AUTOSCALE_DISABLED, propagate);
 	}
 
 	private static double calculateScale(Control control) {

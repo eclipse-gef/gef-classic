@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * A scrolling Canvas that contains {@link Figure Figures} viewed through a
@@ -172,6 +173,7 @@ public class FigureCanvas extends Canvas {
 	 */
 	public FigureCanvas(Composite parent, int style, LightweightSystem lws) {
 		this(style | DEFAULT_STYLES, parent, lws);
+		InternalDraw2dUtils.setPropagateAutoScaleDisabled(this, false);
 	}
 
 	private static int checkStyle(int style) {
