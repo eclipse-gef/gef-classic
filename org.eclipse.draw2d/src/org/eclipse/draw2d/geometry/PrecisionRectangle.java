@@ -952,12 +952,10 @@ public final class PrecisionRectangle extends Rectangle {
 	}
 
 	/**
-	 * Calculates the int-height of this rectangle using the same algorithm as used
-	 * by AWT in {@link java.awt.geom.RectangularShape#getBounds()
-	 * RectangularShape#getBounds()}
+	 * Calculates the int-height of this rectangle.
 	 */
 	private int getHeightInt() {
-		return PrecisionGeometry.doubleToInteger((Math.ceil(preciseY + preciseHeight) - Math.floor(preciseY)));
+		return PrecisionGeometry.doubleToInteger(preciseHeight);
 	}
 
 	/**
@@ -1025,12 +1023,10 @@ public final class PrecisionRectangle extends Rectangle {
 	}
 
 	/**
-	 * Calculates the int-height of this rectangle using the same algorithm as used
-	 * by AWT in {@link java.awt.geom.RectangularShape#getBounds()
-	 * RectangularShape#getBounds()}
+	 * Calculates the int-height of this rectangle.
 	 */
 	private int getWidthInt() {
-		return PrecisionGeometry.doubleToInteger(Math.ceil(preciseX + preciseWidth) - Math.floor(preciseX));
+		return PrecisionGeometry.doubleToInteger(preciseWidth);
 	}
 
 	/**
