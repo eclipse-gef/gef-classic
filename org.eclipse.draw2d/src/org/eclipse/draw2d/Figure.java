@@ -2092,14 +2092,19 @@ public class Figure implements IFigure {
 	 */
 	private Translatable toPreciseShape(Translatable source) {
 		if (getParent() instanceof Figure parentFigure && parentFigure.useDoublePrecision()) {
-			if (source instanceof Point p && !(source instanceof PrecisionPoint)) {
-				return new PrecisionPoint(p);
-			} else if (source instanceof Dimension d && !(source instanceof PrecisionDimension)) {
-				return new PrecisionDimension(d);
-			} else if (source instanceof Rectangle r && !(source instanceof PrecisionRectangle)) {
-				return new PrecisionRectangle(r);
-			} else if (source instanceof PointList p && !(source instanceof PrecisionPointList)) {
-				return new PrecisionPointList(p);
+			// Cannot check for instanceof as consumers might have custom specializations
+			// which might not be wrapped properly
+			if (source.getClass().equals(Point.class)) {
+				return new PrecisionPoint((Point) source);
+			}
+			if (source.getClass().equals(Dimension.class)) {
+				return new PrecisionDimension((Dimension) source);
+			}
+			if (source.getClass().equals(Rectangle.class)) {
+				return new PrecisionRectangle((Rectangle) source);
+			}
+			if (source.getClass().equals(PointList.class)) {
+				return new PrecisionPointList((PointList) source);
 			}
 		}
 		// is already precise or doesn't have a precise variant
