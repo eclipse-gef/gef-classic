@@ -69,7 +69,7 @@ public class PrecisionTests extends BaseTestCase {
 		Rectangle r2 = new PrecisionRectangle(13, 37, 163, 377);
 		fig.translateToAbsolute(r1);
 		fig.translateToAbsolute(r2);
-		assertEquals(493, 1404, 6187, 14309, r1);
+		assertEquals(493, 1404, 6186, 14307, r1);
 		assertEquals(r1.x, r2.x);
 		assertEquals(r1.y, r2.y);
 		assertEquals(r1.width, r2.width);
@@ -82,7 +82,7 @@ public class PrecisionTests extends BaseTestCase {
 		Rectangle r2 = new PrecisionRectangle(753, 891, 353, 564);
 		fig.translateToRelative(r1);
 		fig.translateToRelative(r2);
-		assertEquals(19, 23, 11, 16, r1);
+		assertEquals(19, 23, 9, 14, r1);
 		assertEquals(r1.x, r2.x);
 		assertEquals(r1.y, r2.y);
 		assertEquals(r1.width, r2.width);

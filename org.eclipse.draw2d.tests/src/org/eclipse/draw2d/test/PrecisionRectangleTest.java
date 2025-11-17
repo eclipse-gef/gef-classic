@@ -119,7 +119,7 @@ public class PrecisionRectangleTest extends BaseTestCase {
 		assertEquals(91, r.preciseWidth(), 0);
 		assertEquals(91, r.preciseHeight(), 0);
 		// Different rounding behavior between Rectangle and PrecisionRectangle.
-		assertEquals(17, 17, 92, 92, r);
+		assertEquals(17, 17, 91, 91, r);
 	}
 
 	@SuppressWarnings("static-method")
@@ -149,10 +149,29 @@ public class PrecisionRectangleTest extends BaseTestCase {
 
 	@SuppressWarnings("static-method")
 	@Test
+	public void testGetSize_Zero() {
+		PrecisionRectangle r = new PrecisionRectangle(0.5, 0.5, 0, 0);
+		assertEquals(r.width, r.getSize().width);
+		assertEquals(r.height, r.getSize().height);
+		assertEquals(0, r.getSize().width);
+		assertEquals(0, r.getSize().height);
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
 	public void testGetLocation() {
 		PrecisionRectangle r = new PrecisionRectangle(8.94, -34.37, 0, 0);
 		assertEquals(r.getLocation().getClass(), Point.class);
 		assertEquals(r.x, r.getLocation().x);
 		assertEquals(r.y, r.getLocation().y);
 	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testGetBottomRight() {
+		Rectangle rect = new PrecisionRectangle(100.5, 100.5, 250, 250);
+		assertEquals(rect.getBottomRight().x - rect.getTopLeft().x, rect.width);
+		assertEquals(rect.getBottomRight().y - rect.getTopLeft().y, rect.height);
+	}
+
 }
