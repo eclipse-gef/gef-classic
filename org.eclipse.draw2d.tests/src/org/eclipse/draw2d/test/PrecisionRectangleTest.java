@@ -13,7 +13,9 @@
 
 package org.eclipse.draw2d.test;
 
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -125,7 +127,7 @@ public class PrecisionRectangleTest extends BaseTestCase {
 	public void testScaleLocation() {
 		// check work scale(double) with rounding errors
 		PrecisionRectangle r = new PrecisionRectangle(-9.47, -34.43, 41.95, 25.92);
-		assertEquals(r.getPreciseCopy().getLocation().scale(1.153), r.getPreciseCopy().scale(1.153).getLocation());
+		assertEquals(r.getCopy().preciseLocation().scale(1.153), r.getCopy().scale(1.153).preciseLocation());
 	}
 
 	@SuppressWarnings("static-method")
@@ -133,6 +135,24 @@ public class PrecisionRectangleTest extends BaseTestCase {
 	public void testScaleDimension() {
 		// check work scale(double) with rounding errors
 		PrecisionRectangle r = new PrecisionRectangle(-9.47, -34.43, 41.95, 25.92);
-		assertEquals(r.getPreciseCopy().getSize().scale(1.153), r.getPreciseCopy().scale(1.153).getSize());
+		assertEquals(r.getCopy().preciseSize().scale(1.153), r.getCopy().scale(1.153).preciseSize());
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testGetSize() {
+		PrecisionRectangle r = new PrecisionRectangle(0, 0, 41.95, 25.92);
+		assertEquals(r.getSize().getClass(), Dimension.class);
+		assertEquals(r.width, r.getSize().width);
+		assertEquals(r.height, r.getSize().height);
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testGetLocation() {
+		PrecisionRectangle r = new PrecisionRectangle(8.94, -34.37, 0, 0);
+		assertEquals(r.getLocation().getClass(), Point.class);
+		assertEquals(r.x, r.getLocation().x);
+		assertEquals(r.y, r.getLocation().y);
 	}
 }

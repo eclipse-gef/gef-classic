@@ -824,6 +824,27 @@ public class Rectangle implements Cloneable, java.io.Serializable, Translatable 
 	}
 
 	/**
+	 * Returns the precise dimensions of this Rectangle.
+	 *
+	 * @return Size of this Rectangle as a PrecisionDimension
+	 * @since 3.21
+	 */
+	public final PrecisionDimension preciseSize() {
+		return new PrecisionDimension(preciseWidth(), preciseHeight());
+	}
+
+	/**
+	 * Returns the precise upper left hand corner of the rectangle.
+	 *
+	 * @return Precise location of the rectangle
+	 * @see #setLocation(Point)
+	 * @since 3.21
+	 */
+	public final PrecisionPoint preciseLocation() {
+		return new PrecisionPoint(preciseX(), preciseY());
+	}
+
+	/**
 	 * Resizes this Rectangle by the Dimension provided as input and returns this
 	 * for convenience. This Rectange's width will become this.width +
 	 * sizeDelta.width. Likewise for height.
