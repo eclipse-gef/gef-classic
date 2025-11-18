@@ -2091,7 +2091,7 @@ public class Figure implements IFigure {
 	 * @return double-precision geometry
 	 */
 	private Translatable toPreciseShape(Translatable source) {
-		if (getParent() instanceof Figure parentFigure && parentFigure.useDoublePrecision()) {
+		if (useDoublePrecision()) {
 			// Cannot check for instanceof as consumers might have custom specializations
 			// which might not be wrapped properly
 			if (source.getClass().equals(Point.class)) {
@@ -2122,7 +2122,7 @@ public class Figure implements IFigure {
 	 * @param target integer-precision shape
 	 */
 	private void fromPreciseShape(Translatable source, Translatable target) {
-		if (source != target && getParent() instanceof Figure parentFigure && parentFigure.useDoublePrecision()) {
+		if (source != target && useDoublePrecision()) {
 			if (source instanceof PrecisionPoint p1 && target instanceof Point p2) {
 				p2.setLocation(p1.x, p1.y);
 			} else if (source instanceof PrecisionDimension d1 && target instanceof Dimension d2) {
@@ -2159,10 +2159,9 @@ public class Figure implements IFigure {
 	 * @nooverride This method is not intended to be re-implemented or extended by
 	 *             clients.
 	 */
-	@SuppressWarnings("static-method")
 	protected boolean useDoublePrecision() {
 		// This method should only be used internally and is not part of the interface
-		return false;
+		return getParent() instanceof Figure figure ? figure.useDoublePrecision() : false;
 	}
 
 	/**
