@@ -18,8 +18,8 @@ import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ScalableLayeredPane;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.PrecisionPointList;
-import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -65,11 +65,13 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToAbsolute() {
+		PrecisionDimension scaleDimension = new PrecisionDimension(0, 1);
+		fig.translateToAbsolute(scaleDimension);
+		double fullScale = scaleDimension.preciseHeight();
 		Rectangle r1 = new Rectangle(13, 37, 163, 377);
-		Rectangle r2 = new PrecisionRectangle(13, 37, 163, 377);
 		fig.translateToAbsolute(r1);
-		fig.translateToAbsolute(r2);
-		assertEquals(493, 1404, 6186, 14307, r1);
+		Rectangle r2 = new Rectangle(13, 37, 163, 377).scale(fullScale);
+		assertEquals(493, 1404, 6187, 14309, r1);
 		assertEquals(r1.x, r2.x);
 		assertEquals(r1.y, r2.y);
 		assertEquals(r1.width, r2.width);
@@ -78,11 +80,13 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToRelative() {
+		PrecisionDimension scaleDimension = new PrecisionDimension(0, 1);
+		fig.translateToAbsolute(scaleDimension);
+		double fullScale = scaleDimension.preciseHeight();
 		Rectangle r1 = new Rectangle(753, 891, 353, 564);
-		Rectangle r2 = new PrecisionRectangle(753, 891, 353, 564);
 		fig.translateToRelative(r1);
-		fig.translateToRelative(r2);
-		assertEquals(19, 23, 9, 14, r1);
+		Rectangle r2 = new Rectangle(753, 891, 353, 564).scale(1 / fullScale);
+		assertEquals(19, 23, 11, 16, r1);
 		assertEquals(r1.x, r2.x);
 		assertEquals(r1.y, r2.y);
 		assertEquals(r1.width, r2.width);
@@ -107,5 +111,27 @@ public class PrecisionTests extends BaseTestCase {
 		fig.translateToRelative(p2);
 		assertArrayEquals(p1.toIntArray(), new int[] { 13, 16, 18, 8 });
 		assertArrayEquals(p1.toIntArray(), p2.toIntArray());
+	}
+
+	// Ensure that results are compatible with pre-existing behavior for translating
+	// a rectangle when only a single scaled layer is present
+	@SuppressWarnings("static-method")
+	@Test
+	public void testPreciseTranslateToAbsolute_singleLayerCompatibility() {
+		Figure figure = new Figure();
+		ScalableLayeredPane layer = createLayer(1.4);
+		IFigure root = new Figure();
+		root.add(layer);
+		layer.add(figure);
+		Rectangle customRectangle = new Rectangle(13, 37, 13, 377) {
+		};
+		Rectangle plainRectangle = new Rectangle(customRectangle);
+
+		figure.translateToAbsolute(customRectangle);
+		figure.translateToAbsolute(plainRectangle);
+		assertEquals(customRectangle.x, plainRectangle.x);
+		assertEquals(customRectangle.y, plainRectangle.y);
+		assertEquals(customRectangle.width, plainRectangle.width);
+		assertEquals(customRectangle.height, plainRectangle.height);
 	}
 }
