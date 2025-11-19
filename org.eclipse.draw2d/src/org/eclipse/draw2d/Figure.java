@@ -2128,9 +2128,7 @@ public class Figure implements IFigure {
 			} else if (source instanceof PrecisionDimension d1 && target instanceof Dimension d2) {
 				d2.setSize(d1.width, d1.height);
 			} else if (source instanceof PrecisionRectangle r1 && target instanceof Rectangle r2) {
-				r2.setBounds(r1.x, r1.y,
-						(int) (Math.ceil(r1.preciseX() + r1.preciseWidth()) - Math.floor(r1.preciseX())),
-						(int) (Math.ceil(r1.preciseY() + r1.preciseHeight()) - Math.floor(r1.preciseY())));
+				r2.setBounds(r1.getBounds());
 			} else if (source instanceof PrecisionPointList p1 && target instanceof PointList p2) {
 				System.arraycopy(p1.toIntArray(), 0, p2.toIntArray(), 0, p2.size() * 2);
 			}

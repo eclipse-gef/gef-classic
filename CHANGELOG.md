@@ -19,6 +19,7 @@
     - ScalableLayeredPane
     - ScalableRootEditPart
     - ScalableLightweightSystem
+- Added `Rectangle.getBounds()`
 
 ## GEF
 

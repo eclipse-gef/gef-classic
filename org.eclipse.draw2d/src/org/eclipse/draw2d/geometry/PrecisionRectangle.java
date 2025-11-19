@@ -106,6 +106,18 @@ public final class PrecisionRectangle extends Rectangle {
 	}
 
 	/**
+	 * @see Rectangle#getBounds()
+	 */
+	@Override
+	public Rectangle getBounds() {
+		int x1 = x;
+		int y1 = y;
+		int w1 = PrecisionGeometry.doubleToInteger(Math.ceil(preciseX() + preciseWidth()) - Math.floor(preciseX()));
+		int h1 = PrecisionGeometry.doubleToInteger(Math.ceil(preciseY() + preciseHeight()) - Math.floor(preciseY()));
+		return new Rectangle(x1, y1, w1, h1);
+	}
+
+	/**
 	 * @see org.eclipse.draw2d.geometry.Rectangle#contains(double, double)
 	 */
 	@Override
