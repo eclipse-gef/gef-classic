@@ -29,7 +29,7 @@ In order to develop graphical applications with GEF Classic, you should first se
 Having accomplished that, you might want to browse our [developer documentation](https://github.com/eclipse-gef/gef-classic/wiki#developer-documentation) to learn about the framework components in detail. At any time, if you get stuck, feel free to [contact us](https://projects.eclipse.org/projects/tools.gef/contact).
 
 ### Set up an Eclipse IDE
-1. Install a recent **Java SE Development Kit 17** as a prerequisite.
+1. Install a recent **Java SE Development Kit 21** as a prerequisite.
 2. Download an '[Eclipse IDE for Eclipse Committers ](http://www.eclipse.org/downloads/packages)' package and start it, pointing to an empty workspace folder. 
 
 ### Set up a Target Definition containing GEF Classic (development snapshot)
