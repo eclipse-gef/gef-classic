@@ -325,6 +325,16 @@ public class Rectangle implements Cloneable, java.io.Serializable, Translatable 
 	}
 
 	/**
+	 * Returns an integer {@link Rectangle} that completely encloses this shape.
+	 *
+	 * @return an integer {@code Rectangle} that completely encloses this shape.
+	 * @since 3.22
+	 */
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, width, height);
+	}
+
+	/**
 	 * Returns a new Rectangle which has the exact same parameters as this
 	 * Rectangle.
 	 *
