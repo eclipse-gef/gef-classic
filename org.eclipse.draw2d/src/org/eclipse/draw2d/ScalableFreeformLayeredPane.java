@@ -14,6 +14,7 @@ package org.eclipse.draw2d;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * @author hudsonr
@@ -120,6 +121,6 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 	 */
 	@Override
 	protected boolean useDoublePrecision() {
-		return true;
+		return InternalDraw2dUtils.isAutoScaleEnabled();
 	}
 }
