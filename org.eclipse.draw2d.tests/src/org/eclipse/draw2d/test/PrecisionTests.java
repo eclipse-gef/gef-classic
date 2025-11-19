@@ -13,6 +13,8 @@
 
 package org.eclipse.draw2d.test;
 
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.IFigure;
@@ -21,6 +23,7 @@ import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.PrecisionPointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,6 +68,7 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToAbsolute() {
+		assumeTrue(InternalDraw2dUtils.isAutoScaleEnabled());
 		PrecisionDimension scaleDimension = new PrecisionDimension(0, 1);
 		fig.translateToAbsolute(scaleDimension);
 		double fullScale = scaleDimension.preciseHeight();
@@ -80,6 +84,7 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToRelative() {
+		assumeTrue(InternalDraw2dUtils.isAutoScaleEnabled());
 		PrecisionDimension scaleDimension = new PrecisionDimension(0, 1);
 		fig.translateToAbsolute(scaleDimension);
 		double fullScale = scaleDimension.preciseHeight();
@@ -95,6 +100,7 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToAbsolute_PointList() {
+		assumeTrue(InternalDraw2dUtils.isAutoScaleEnabled());
 		PointList p1 = new PointList(new int[] { 13, 29, 32, 5 });
 		PointList p2 = new PrecisionPointList(new int[] { 13, 29, 32, 5 });
 		fig.translateToAbsolute(p1);
@@ -105,6 +111,7 @@ public class PrecisionTests extends BaseTestCase {
 
 	@Test
 	public void testPreciseTranslateToRelative_PointList() {
+		assumeTrue(InternalDraw2dUtils.isAutoScaleEnabled());
 		PointList p1 = new PointList(new int[] { 518, 628, 715, 313 });
 		PointList p2 = new PrecisionPointList(new int[] { 518, 628, 715, 313 });
 		fig.translateToRelative(p1);

@@ -15,6 +15,7 @@ package org.eclipse.draw2d;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * A non-freeform, scalable layered pane.
@@ -133,7 +134,7 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	 */
 	@Override
 	protected boolean useDoublePrecision() {
-		return true;
+		return InternalDraw2dUtils.isAutoScaleEnabled();
 	}
 
 }
