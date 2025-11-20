@@ -225,7 +225,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 */
 	@Override
 	public Point getBottom() {
-		return new PrecisionPoint(preciseX() + preciseWidth() / 2, bottom());
+		return new PrecisionPoint(preciseX() + preciseWidth() / 2, preciseY() + preciseHeight());
 	}
 
 	/**
