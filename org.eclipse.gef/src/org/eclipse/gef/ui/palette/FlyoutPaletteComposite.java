@@ -951,6 +951,7 @@ public class FlyoutPaletteComposite extends Composite {
 			if (paletteContainer.getVisible()) {
 				bounds = bounds.union(paletteContainer.getBounds());
 			}
+			final Point origSize = new Point(bounds.width, bounds.height);
 			final Rectangle origBounds = Display.getCurrent().map(flyout, null, bounds);
 			final Tracker tracker = new Tracker(Display.getDefault(), SWT.NULL);
 			tracker.setRectangles(new Rectangle[] { origBounds });
@@ -977,10 +978,10 @@ public class FlyoutPaletteComposite extends Composite {
 				Rectangle placeHolder = origBounds;
 				if (switchDock) {
 					if (dock == PositionConstants.EAST) {
-						placeHolder = new Rectangle(0, 0, origBounds.width, origBounds.height);
+						placeHolder = new Rectangle(0, 0, origSize.x, origSize.y);
 					} else {
-						placeHolder = new Rectangle(flyoutBounds.width - origBounds.width, 0, origBounds.width,
-								origBounds.height);
+						placeHolder = new Rectangle(flyoutBounds.width - origSize.x, flyoutBounds.height - origSize.y,
+								origSize.x, origSize.y);
 					}
 					placeHolder = Display.getCurrent().map(flyout, null, placeHolder);
 				}
