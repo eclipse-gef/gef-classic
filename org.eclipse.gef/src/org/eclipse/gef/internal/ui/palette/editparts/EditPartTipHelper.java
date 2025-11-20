@@ -76,6 +76,7 @@ class EditPartTipHelper extends org.eclipse.draw2d.PopUpHelper {
 			// Display the tip
 			EditPartTipHelper.setHelper(this);
 			getLightweightSystem().setContents(tip);
+			tip.translateToAbsolute(tipSize);
 			setShellBounds(tipPosX, tipPosY, tipSize.width, tipSize.height);
 			show();
 			getShell().setCapture(true);
