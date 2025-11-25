@@ -127,9 +127,18 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 	 */
 	public static Cursor createCursor(ImageDescriptor source, int hotspotX, int hotspotY) {
 		try {
+			ImageDataProvider provider = zoom -> {
+				if (zoom < 150) {
+					return source.getImageData(100);
+				}
+				if (zoom < 200) {
+					return source.getImageData(150);
+				}
+				return source.getImageData(200);
+			};
 			Constructor<Cursor> ctor = Cursor.class.getConstructor(Device.class, ImageDataProvider.class, int.class,
 					int.class);
-			return ctor.newInstance(null, (ImageDataProvider) source::getImageData, hotspotX, hotspotY);
+			return ctor.newInstance(null, provider, hotspotX, hotspotY);
 		} catch (NoSuchMethodException e) {
 			// SWT version < 3.131.0 (no ImageDataProvider-based constructor)
 			return new Cursor(null, source.getImageData(100), hotspotX, hotspotY); // older constructor

@@ -60,7 +60,13 @@ public class SharedCursors extends Cursors {
 		if (ImageUtils.isSvgSupported()) {
 			ImageDescriptor src1 = InternalImages.createDescriptor(sourceName);
 			ImageDescriptor src2 = InternalCursor.getCursorDescriptor();
-			ImageDescriptor src = new DecorationOverlayIcon(src1, src2, IDecoration.TOP_LEFT);
+			ImageDescriptor src = new DecorationOverlayIcon(src1, src2, IDecoration.TOP_LEFT) {
+				@Override
+				// Disabled by default due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=97506
+				protected boolean supportsZoomLevel(int zoomLevel) {
+					return true;
+				}
+			};
 			return InternalGEFPlugin.createCursor(src, 0, 0);
 		}
 		ImageDescriptor src = InternalImages.createDescriptor(sourceName);
