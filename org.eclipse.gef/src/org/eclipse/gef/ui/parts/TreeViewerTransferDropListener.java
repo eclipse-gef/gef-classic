@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@ package org.eclipse.gef.ui.parts;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.swt.dnd.DND;
@@ -141,6 +142,25 @@ class TreeViewerTransferDropListener extends AbstractTransferDropTargetListener 
 		ChangeBoundsRequest request = getTargetRequest();
 		request.setLocation(getDropLocation());
 		request.setType(getCommandName());
+	}
+
+	@Override
+	protected void updateTargetEditPart() {
+		setTargetEditPart(calculateTargetEditPart());
+	}
+
+	private EditPart calculateTargetEditPart() {
+		EditPart ep = getViewer().findObjectAtExcluding(getDropLocation(), Collections.emptyList(),
+				getTargetingConditional());
+		if (ep != null) {
+			ep = ep.getTargetEditPart(getTargetRequest());
+		}
+		return ep;
+	}
+
+	private EditPartViewer.Conditional getTargetingConditional() {
+		Collection<EditPart> excludes = getExclusionSet();
+		return editPart -> !excludes.contains(editPart) && editPart.getTargetEditPart(getTargetRequest()) != null;
 	}
 
 }
