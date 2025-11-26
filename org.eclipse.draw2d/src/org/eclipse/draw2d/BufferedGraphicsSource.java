@@ -21,9 +21,10 @@ import org.eclipse.swt.widgets.Caret;
 import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.Logger;
 
 class BufferedGraphicsSource implements GraphicsSource {
-
+	private static final Logger LOGGER = Logger.getLogger(BufferedGraphicsSource.class);
 	private Image imageBuffer;
 	private GC imageGC;
 	private GC controlGC;
@@ -66,8 +67,14 @@ class BufferedGraphicsSource implements GraphicsSource {
 		 */
 		if (imageBuffer != null) {
 			imageGC.dispose();
-			controlGC.drawImage(getImage(), 0, 0, inUse.width, inUse.height, inUse.x, inUse.y, inUse.width,
-					inUse.height);
+			try {
+				// Make sure the SWT resources are properly disposed in case of an error
+				// See https://github.com/eclipse-gef/gef-classic/issues/875
+				controlGC.drawImage(getImage(), 0, 0, inUse.width, inUse.height, inUse.x, inUse.y, inUse.width,
+						inUse.height);
+			} catch (IllegalArgumentException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
 			imageBuffer.dispose();
 			imageBuffer = null;
 			imageGC = null;
