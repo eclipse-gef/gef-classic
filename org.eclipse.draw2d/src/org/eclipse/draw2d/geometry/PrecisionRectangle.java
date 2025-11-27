@@ -221,6 +221,22 @@ public final class PrecisionRectangle extends Rectangle {
 	}
 
 	/**
+	 * @see org.eclipse.draw2d.geometry.Rectangle#getLeft()
+	 */
+	@Override
+	public Point getLeft() {
+		return new PrecisionPoint(preciseX(), preciseY() + preciseHeight() / 2);
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.geometry.Rectangle#getRight()
+	 */
+	@Override
+	public Point getRight() {
+		return new PrecisionPoint(preciseX() + preciseWidth(), preciseY() + preciseHeight() / 2);
+	}
+
+	/**
 	 * @see org.eclipse.draw2d.geometry.Rectangle#getBottom()
 	 */
 	@Override
