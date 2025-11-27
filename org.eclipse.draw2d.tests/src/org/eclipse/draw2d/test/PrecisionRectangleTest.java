@@ -189,4 +189,22 @@ public class PrecisionRectangleTest extends BaseTestCase {
 		assertEquals(rect.getTopRight().y, rect.getTop().y);
 		assertEquals(rect.getTopLeft().y, rect.getTop().y);
 	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testConsistencyGetLeft() {
+		Rectangle rect = new PrecisionRectangle(100.5, 100.5, 250.5, 250.5);
+		assertEquals(rect.getTopLeft().x, rect.getLeft().x);
+		assertEquals(rect.getBottomLeft().x, rect.getLeft().x);
+		assertEquals(rect.getRight().y, rect.getLeft().y);
+	}
+
+	@SuppressWarnings("static-method")
+	@Test
+	public void testConsistencyGetRight() {
+		Rectangle rect = new PrecisionRectangle(100.5, 100.5, 250.5, 250.5);
+		assertEquals(rect.getTopRight().x, rect.getRight().x);
+		assertEquals(rect.getBottomRight().x, rect.getRight().x);
+		assertEquals(rect.getLeft().y, rect.getRight().y);
+	}
 }
