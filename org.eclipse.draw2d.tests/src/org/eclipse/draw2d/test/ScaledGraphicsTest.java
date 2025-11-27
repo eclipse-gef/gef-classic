@@ -52,6 +52,32 @@ public class ScaledGraphicsTest {
 
 	@Test
 	@SuppressWarnings("static-method")
+	public void testTranlsationWithMulipleScaledLayers() {
+		Display display = Display.getDefault();
+		Image image = new Image(display, 100, 100);
+		GC gc = new GC(image);
+		RecordingSwtGraphics graphics = new RecordingSwtGraphics(gc);
+		ScaledGraphics scaledGraphics = new ScaledGraphics(graphics);
+		scaledGraphics.scale(1.5);
+		scaledGraphics.translate(1f, 1f);
+		ScaledGraphics scaledGraphics2 = new ScaledGraphics(scaledGraphics);
+		scaledGraphics2.scale(2.5);
+		scaledGraphics2.translate(1f, 1f);
+
+		scaledGraphics2.drawRectangle(0, 0, 10, 10);
+		assertEquals(5, graphics.translation.x);
+		assertEquals(5, graphics.translation.y);
+
+		validateDrawRectangle(graphics, new Rectangle(5, 5, 37, 37));
+		scaledGraphics2.dispose();
+		scaledGraphics.dispose();
+		graphics.dispose();
+		gc.dispose();
+		image.dispose();
+	}
+
+	@Test
+	@SuppressWarnings("static-method")
 	public void testDrawLineForRegression() {
 		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
 				scaledGraphics -> scaledGraphics.drawLine(new Point(5, 5), new Point(5, 5 + 20)));
@@ -1108,8 +1134,8 @@ public class ScaledGraphicsTest {
 
 		@Override
 		public void translate(int dx, int dy) {
-			translation.setX(dx);
-			translation.setY(dy);
+			translation.setX(translation.x + dx);
+			translation.setY(translation.y + dy);
 		}
 
 		@Override
