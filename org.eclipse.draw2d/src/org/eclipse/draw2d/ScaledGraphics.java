@@ -165,7 +165,14 @@ public class ScaledGraphics extends Graphics {
 	 * @param g the base graphics object
 	 */
 	public ScaledGraphics(Graphics g) {
-		graphics = g;
+		if (g instanceof ScaledGraphics scaledGraphics) {
+			graphics = scaledGraphics.graphics;
+			zoom = scaledGraphics.zoom;
+			fractionalX = scaledGraphics.fractionalX;
+			fractionalY = scaledGraphics.fractionalY;
+		} else {
+			graphics = g;
+		}
 		localFont = g.getFont();
 		localLineWidth = g.getLineWidthFloat();
 	}
