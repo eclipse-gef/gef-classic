@@ -36,19 +36,43 @@
       </wizard>
    </extension>
    <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            objectClass="org.eclipse.core.resources.IFile"
-            nameFilter="*.logic"
-            id="org.eclipse.gef.examples.logic">
-         <action
-               label="Print"
-               class="org.eclipse.gef.examples.logicdesigner.actions.LogicPrintAction"
-               menubarPath="additions"
-               enablesFor="1"
-               id="org.eclipse.gef.examples.logic.print">
-         </action>
-      </objectContribution>
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?before=additions">
+         <command
+               commandId="org.eclipse.gef.examples.logic.command.print"
+               icon="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.svg"
+               label="%print_name"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <and>
+                  <iterate
+                        ifEmpty="false">
+                     <adapt
+                           type="org.eclipse.core.resources.IFile">
+                        <test
+                              property="org.eclipse.core.resources.extension"
+                              value="logic">
+                        </test>
+                     </adapt>
+                  </iterate>
+                  <count
+                        value="1">
+                  </count>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.eclipse.gef.examples.logicdesigner.handlers.LogicPrintHandler"
+            id="org.eclipse.gef.examples.logic.command.print"
+            name="%print_name">
+      </command>
    </extension>
 
 </plugin>
