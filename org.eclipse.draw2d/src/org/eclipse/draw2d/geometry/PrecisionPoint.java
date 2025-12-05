@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
+
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * @author danlee
@@ -38,6 +40,16 @@ public class PrecisionPoint extends Point {
 	 */
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseY;
+
+	/**
+	 * Fractional part of X.
+	 */
+	private double fractX;
+
+	/**
+	 * Fractional part of Y.
+	 */
+	private double fractY;
 
 	/**
 	 * Constructor for PrecisionPoint.
@@ -163,7 +175,7 @@ public class PrecisionPoint extends Point {
 	@Override
 	public double preciseX() {
 		updatePreciseXDouble();
-		return preciseX;
+		return x + fractX;
 	}
 
 	/**
@@ -172,7 +184,7 @@ public class PrecisionPoint extends Point {
 	@Override
 	public double preciseY() {
 		updatePreciseYDouble();
-		return preciseY;
+		return y + fractY;
 	}
 
 	/**
@@ -230,26 +242,28 @@ public class PrecisionPoint extends Point {
 	/**
 	 * Sets the precise x value of this PrecisionPoint to the given value.
 	 *
-	 * @param x The new x value
+	 * @param preciseX The new x value
 	 * @return this for convenience
 	 * @since 3.7
 	 */
-	public PrecisionPoint setPreciseX(double x) {
-		preciseX = x;
+	public PrecisionPoint setPreciseX(double preciseX) {
+		this.preciseX = preciseX;
 		updateXInt();
+		fractX = preciseX - x;
 		return this;
 	}
 
 	/**
 	 * Sets the precise y value of this PrecisionPoint to the given value.
 	 *
-	 * @param y The new y value
+	 * @param preciseY The new y value
 	 * @return this for convenience
 	 * @since 3.7
 	 */
-	public PrecisionPoint setPreciseY(double y) {
-		preciseY = y;
+	public PrecisionPoint setPreciseY(double preciseY) {
+		this.preciseY = preciseY;
 		updateYInt();
+		fractY = preciseY - y;
 		return this;
 	}
 
@@ -363,6 +377,9 @@ public class PrecisionPoint extends Point {
 	private final void updatePreciseXDouble() {
 		if (x != PrecisionGeometry.doubleToInteger(preciseX)) {
 			preciseX = x;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractX = 0;
+			}
 		}
 	}
 
@@ -372,6 +389,9 @@ public class PrecisionPoint extends Point {
 	private final void updatePreciseYDouble() {
 		if (y != PrecisionGeometry.doubleToInteger(preciseY)) {
 			preciseY = y;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractY = 0;
+			}
 		}
 	}
 

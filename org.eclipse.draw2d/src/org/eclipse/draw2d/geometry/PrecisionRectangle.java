@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
+
 /**
  * A Rectangle implementation using floating point values which are truncated
  * into the inherited integer fields. The use of floating point prevents
@@ -63,6 +65,26 @@ public final class PrecisionRectangle extends Rectangle {
 	 */
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseY;
+
+	/**
+	 * Fractional part of the height.
+	 */
+	private double fractHeight;
+
+	/**
+	 * Fractional part of the width.
+	 */
+	private double fractWidth;
+
+	/**
+	 * Fractional part of X.
+	 */
+	private double fractX;
+
+	/**
+	 * Fractional part of Y.
+	 */
+	private double fractY;
 
 	/**
 	 * Constructs a new PrecisionRectangle with all values 0.
@@ -355,7 +377,7 @@ public final class PrecisionRectangle extends Rectangle {
 	@Override
 	public double preciseHeight() {
 		updatePreciseHeightDouble();
-		return preciseHeight;
+		return height + fractHeight;
 	}
 
 	/**
@@ -373,7 +395,7 @@ public final class PrecisionRectangle extends Rectangle {
 	@Override
 	public double preciseWidth() {
 		updatePreciseWidthDouble();
-		return preciseWidth;
+		return width + fractWidth;
 	}
 
 	/**
@@ -382,7 +404,7 @@ public final class PrecisionRectangle extends Rectangle {
 	@Override
 	public double preciseX() {
 		updatePreciseXDouble();
-		return preciseX;
+		return x + fractX;
 	}
 
 	/**
@@ -391,7 +413,7 @@ public final class PrecisionRectangle extends Rectangle {
 	@Override
 	public double preciseY() {
 		updatePreciseYDouble();
-		return preciseY;
+		return y + fractY;
 	}
 
 	/**
@@ -531,6 +553,7 @@ public final class PrecisionRectangle extends Rectangle {
 	public PrecisionRectangle setPreciseHeight(double value) {
 		preciseHeight = value;
 		updateHeightInt();
+		fractHeight = value - height;
 		return this;
 	}
 
@@ -598,6 +621,7 @@ public final class PrecisionRectangle extends Rectangle {
 	public PrecisionRectangle setPreciseWidth(double value) {
 		preciseWidth = value;
 		updateWidthInt();
+		fractWidth = value - width;
 		return this;
 	}
 
@@ -611,6 +635,7 @@ public final class PrecisionRectangle extends Rectangle {
 	public PrecisionRectangle setPreciseX(double value) {
 		preciseX = value;
 		updateXInt();
+		fractX = value - x;
 		return this;
 	}
 
@@ -624,6 +649,7 @@ public final class PrecisionRectangle extends Rectangle {
 	public PrecisionRectangle setPreciseY(double value) {
 		preciseY = value;
 		updateYInt();
+		fractY = value - y;
 		return this;
 	}
 
@@ -985,6 +1011,9 @@ public final class PrecisionRectangle extends Rectangle {
 	private final void updatePreciseHeightDouble() {
 		if (height != getHeightInt()) {
 			preciseHeight = height;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractHeight = 0;
+			}
 		}
 	}
 
@@ -994,6 +1023,9 @@ public final class PrecisionRectangle extends Rectangle {
 	private final void updatePreciseWidthDouble() {
 		if (width != getWidthInt()) {
 			preciseWidth = width;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractWidth = 0;
+			}
 		}
 	}
 
@@ -1003,6 +1035,9 @@ public final class PrecisionRectangle extends Rectangle {
 	private final void updatePreciseXDouble() {
 		if (x != PrecisionGeometry.doubleToInteger(preciseX)) {
 			preciseX = x;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractX = 0;
+			}
 		}
 	}
 
@@ -1012,6 +1047,9 @@ public final class PrecisionRectangle extends Rectangle {
 	private final void updatePreciseYDouble() {
 		if (y != PrecisionGeometry.doubleToInteger(preciseY)) {
 			preciseY = y;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractY = 0;
+			}
 		}
 	}
 

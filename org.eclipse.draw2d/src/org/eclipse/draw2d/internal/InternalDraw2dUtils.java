@@ -35,6 +35,20 @@ public class InternalDraw2dUtils {
 	private static final String DRAW2D_ENABLE_AUTOSCALE = "draw2d.enableAutoscale"; //$NON-NLS-1$
 
 	/**
+	 * System property that controls whether the decimal part in one of the precise
+	 * geometry classes is cleared if the integer field is modified.
+	 *
+	 * Example: <code>
+	 * PrecisionPoint p = new PrecisionPoint(1.5, 1.5);
+	 * p.x = 2;
+	 * System.out.println(p.preciseX()); // returns 2.0 and not 2.5
+	 * </code>
+	 *
+	 * The current default is "false".
+	 */
+	private static final String DRAW2D_CLEAR_DECIMAL_PART = "draw2d.clearDecimalPart"; //$NON-NLS-1$
+
+	/**
 	 * Internal flag for fetching the shell zoom
 	 */
 	private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
@@ -53,6 +67,12 @@ public class InternalDraw2dUtils {
 	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
 			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()))
 			&& SWT.getVersion() >= 4971; // SWT 2025-12 release or higher
+
+	private static final boolean clearDecimalPart = Boolean.getBoolean(DRAW2D_CLEAR_DECIMAL_PART);
+
+	public static final boolean isClearDecimalPart() {
+		return clearDecimalPart;
+	}
 
 	public static boolean isAutoScaleEnabled() {
 		return enableAutoScale;

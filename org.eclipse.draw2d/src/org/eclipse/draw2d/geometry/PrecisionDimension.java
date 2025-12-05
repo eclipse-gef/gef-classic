@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
+
+import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
  * @author Randy Hudson
@@ -38,6 +40,16 @@ public class PrecisionDimension extends Dimension {
 	 */
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseWidth;
+
+	/**
+	 * Fractional part of the height.
+	 */
+	private double fractHeight;
+
+	/**
+	 * Fractional part of the width.
+	 */
+	private double fractWidth;
 
 	/**
 	 * Constructs a new precision dimension.
@@ -176,7 +188,7 @@ public class PrecisionDimension extends Dimension {
 	@Override
 	public double preciseHeight() {
 		updatePreciseHeightDouble();
-		return preciseHeight;
+		return height + fractHeight;
 	}
 
 	/**
@@ -185,7 +197,7 @@ public class PrecisionDimension extends Dimension {
 	@Override
 	public double preciseWidth() {
 		updatePreciseWidthDouble();
-		return preciseWidth;
+		return width + fractWidth;
 	}
 
 	/**
@@ -209,13 +221,14 @@ public class PrecisionDimension extends Dimension {
 	/**
 	 * Sets the height.
 	 *
-	 * @param h the new height
+	 * @param preciseHeight the new height
 	 * @return this for convenience
 	 * @since 3.7
 	 */
-	public PrecisionDimension setPreciseHeight(double h) {
-		preciseHeight = h;
+	public PrecisionDimension setPreciseHeight(double preciseHeight) {
+		this.preciseHeight = preciseHeight;
 		updateHeightInt();
+		fractHeight = preciseHeight - height;
 		return this;
 	}
 
@@ -247,13 +260,14 @@ public class PrecisionDimension extends Dimension {
 	/**
 	 * Sets the width.
 	 *
-	 * @param w the new width
+	 * @param preciseWidth the new width
 	 * @return this for convenience
 	 * @since 3.7
 	 */
-	public PrecisionDimension setPreciseWidth(double w) {
-		preciseWidth = w;
+	public PrecisionDimension setPreciseWidth(double preciseWidth) {
+		this.preciseWidth = preciseWidth;
 		updateWidthInt();
+		fractWidth = preciseWidth - width;
 		return this;
 	}
 
@@ -378,6 +392,9 @@ public class PrecisionDimension extends Dimension {
 	private final void updatePreciseWidthDouble() {
 		if (width != PrecisionGeometry.doubleToInteger(preciseWidth)) {
 			preciseWidth = width;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractWidth = 0;
+			}
 		}
 	}
 
@@ -387,6 +404,9 @@ public class PrecisionDimension extends Dimension {
 	private final void updatePreciseHeightDouble() {
 		if (height != PrecisionGeometry.doubleToInteger(preciseHeight)) {
 			preciseHeight = height;
+			if (InternalDraw2dUtils.isClearDecimalPart()) {
+				fractHeight = 0;
+			}
 		}
 	}
 
