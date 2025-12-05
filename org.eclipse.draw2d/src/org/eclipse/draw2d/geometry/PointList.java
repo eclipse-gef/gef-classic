@@ -64,7 +64,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public void addAll(PointList source) {
 		ensureCapacity(size + source.size);
-		System.arraycopy(source.points, 0, points, size * 2, source.size * 2);
+		System.arraycopy(source.points, 0, points, arraySize(), source.arraySize());
 		size += source.size;
 	}
 
@@ -88,7 +88,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public void addPoint(int x, int y) {
 		bounds = null;
-		int index = size * 2;
+		int index = arraySize();
 		ensureCapacity(size + 1);
 		points[index] = x;
 		points[index + 1] = y;
@@ -100,7 +100,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (points.length < newSize) {
 			int old[] = points;
 			points = new int[Math.max(newSize, size * 4)];
-			System.arraycopy(old, 0, points, 0, size * 2);
+			System.arraycopy(old, 0, points, 0, arraySize());
 		}
 	}
 
@@ -114,7 +114,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (bounds != null) {
 			return bounds;
 		}
-		bounds = new Rectangle();
+		bounds = createBounds();
 		if (size > 0) {
 			bounds.setLocation(getPoint(0));
 			for (int i = 0; i < size; i++) {
@@ -124,6 +124,12 @@ public class PointList implements java.io.Serializable, Translatable {
 		return bounds;
 	}
 
+	@SuppressWarnings("static-method")
+	// overridden by PrecisionPointList
+	/* package */ Rectangle createBounds() {
+		return new Rectangle();
+	}
+
 	/**
 	 * Creates a copy
 	 *
@@ -131,7 +137,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public PointList getCopy() {
 		PointList result = new PointList(size);
-		System.arraycopy(points, 0, result.points, 0, size * 2);
+		System.arraycopy(points, 0, result.points, 0, arraySize());
 		result.size = size;
 		result.bounds = null;
 		return result;
@@ -256,7 +262,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (r.isEmpty()) {
 			return false;
 		}
-		for (int i = 0; i < size * 2; i += 2) {
+		for (int i = 0; i < arraySize(); i += 2) {
 			if (r.contains(points[i], points[i + 1])) {
 				return true;
 			}
@@ -290,7 +296,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	@Override
 	public void performTranslate(int dx, int dy) {
-		for (int i = 0; i < size * 2; i += 2) {
+		for (int i = 0; i < arraySize(); i += 2) {
 			points[i] += dx;
 			points[i + 1] += dy;
 		}
@@ -329,8 +335,8 @@ public class PointList implements java.io.Serializable, Translatable {
 
 		index *= 2;
 		Point pt = new Point(points[index], points[index + 1]);
-		if (index != size * 2 - 2) {
-			System.arraycopy(points, index + 2, points, index, size * 2 - index - 2);
+		if (index != arraySize() - 2) {
+			System.arraycopy(points, index + 2, points, index, arraySize() - index - 2);
 		}
 		size--;
 		return pt;
@@ -343,7 +349,7 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public void reverse() {
 		int temp;
-		for (int i = 0, j = size * 2 - 2; i < size; i += 2, j -= 2) {
+		for (int i = 0, j = arraySize() - 2; i < size; i += 2, j -= 2) {
 			temp = points[i];
 			points[i] = points[j];
 			points[j] = temp;
@@ -396,6 +402,10 @@ public class PointList implements java.io.Serializable, Translatable {
 		return size;
 	}
 
+	/* package */ int arraySize() {
+		return size * 2;
+	}
+
 	/**
 	 * Returns the contents of this PointList as an integer array. The returned
 	 * array is by reference. Any changes made to the array will also be changing
@@ -405,10 +415,10 @@ public class PointList implements java.io.Serializable, Translatable {
 	 * @since 2.0
 	 */
 	public int[] toIntArray() {
-		if (points.length != size * 2) {
+		if (points.length != arraySize()) {
 			int[] old = points;
-			points = new int[size * 2];
-			System.arraycopy(old, 0, points, 0, size * 2);
+			points = new int[arraySize()];
+			System.arraycopy(old, 0, points, 0, arraySize());
 		}
 		return points;
 	}
@@ -442,7 +452,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (bounds != null) {
 			bounds.translate(x, y);
 		}
-		for (int i = 0; i < size * 2; i += 2) {
+		for (int i = 0; i < arraySize(); i += 2) {
 			points[i] += x;
 			points[i + 1] += y;
 		}
@@ -458,7 +468,7 @@ public class PointList implements java.io.Serializable, Translatable {
 		if (bounds != null) {
 			bounds.transpose();
 		}
-		for (int i = 0; i < size * 2; i += 2) {
+		for (int i = 0; i < arraySize(); i += 2) {
 			temp = points[i];
 			points[i] = points[i + 1];
 			points[i + 1] = temp;

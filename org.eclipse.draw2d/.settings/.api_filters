@@ -80,4 +80,16 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/draw2d/geometry/PrecisionPointList.java" type="org.eclipse.draw2d.geometry.PrecisionPointList">
+        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
+            <message_arguments>
+                <message_argument value="PrecisionPointList()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
+            <message_arguments>
+                <message_argument value="PrecisionPointList(int)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

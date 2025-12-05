@@ -3,6 +3,9 @@
 
 ## Draw2D
 
+- Added new PrecisionPointList class. This class was created during the previous
+  release and has now been finalized.
+
 ## GEF
 
 ## Zest
