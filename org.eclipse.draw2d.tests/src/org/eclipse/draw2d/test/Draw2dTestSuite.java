@@ -44,6 +44,7 @@ import org.junit.platform.suite.api.Suite;
 	PointListTests.class,
 	PrecisionDimensionTest.class,
 	PrecisionPointTest.class,
+	PrecisionPointListTest.class,
 	PrecisionRectangleTest.class,
 	ThumbnailTest.class,
 	FigurePaintingTest.class,
