@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.draw2d.examples
-Bundle-Version: 3.16.500.qualifier
+Bundle-Version: 3.16.600.qualifier
 Export-Package: gef.bugs;x-friends:="org.eclipse.draw2d.tests"
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.draw2d;bundle-version="[3.16.0,4.0.0)"

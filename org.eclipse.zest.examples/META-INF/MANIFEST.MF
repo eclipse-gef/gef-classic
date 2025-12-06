@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.zest.examples
-Bundle-Version: 3.18.500.qualifier
+Bundle-Version: 3.18.600.qualifier
 Export-Package: org.eclipse.zest.examples.jface;x-friends:="org.eclipse.zest.tests",
  org.eclipse.zest.examples.swt;x-friends:="org.eclipse.zest.tests",
  org.eclipse.zest.examples.uml;x-friends:="org.eclipse.zest.tests"
