@@ -5,19 +5,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.gef_root</groupId>
 	<artifactId>org.eclipse.gef.releng</artifactId>
-	<version>3.26.0-SNAPSHOT</version>
+	<version>3.27.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+		<maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>		
-		<cbi-plugins.version>1.5.2</cbi-plugins.version>
+		<cbi-plugins.version>1.5.3</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.25.0</comparator.repo>
+		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.26.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
+		<sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
 		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.14.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
@@ -27,6 +29,8 @@
 		<sonar.projectKey>gef-classic</sonar.projectKey>
 		<sonar.java.binaries>${project.build.outputDirectory}</sonar.java.binaries>
 		<sonar.organization>eclipse</sonar.organization>
+		<!-- Explicitly enabled for plug-ins via profile -->
+		<sonar.skip>true</sonar.skip>
 	</properties>
 
 	<build>
@@ -103,25 +107,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<!-- This is needed for source feature generation, as outlined in bug 
-					#398250 -->
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>attach-p2-metadata</id>
-						<phase>package</phase>
-						<goals>
-							<goal>p2-metadata</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<defaultP2Metadata>false</defaultP2Metadata>
-				 </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -275,7 +260,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>3.6.1</version>
+					<version>${build-helper-maven-plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.asciidoctor</groupId>
@@ -312,7 +297,7 @@
 				<plugin>
 					<groupId>org.sonarsource.scanner.maven</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
-					<version>5.2.0.4988</version>
+					<version>${sonar-maven-plugin.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -367,6 +352,18 @@
 					<tycho.p2.baseline.skip>true</tycho.p2.baseline.skip>
 				</properties>
 			</profile>
+		<!-- Only scan plugin projects with SonarQube-->
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<file>
+					<exists>META-INF/MANIFEST.MF</exists>
+				</file>
+			</activation>
+			<properties>
+				<sonar.skip>false</sonar.skip>
+			</properties>
+		</profile>
 	</profiles>
 
 	<pluginRepositories>

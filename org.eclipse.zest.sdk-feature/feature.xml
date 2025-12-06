@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.zest.sdk"
       label="%featureName"
-      version="3.26.0.qualifier"
+      version="3.27.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.zest.core"
       license-feature="org.eclipse.license"
