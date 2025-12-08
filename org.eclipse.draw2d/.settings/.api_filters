@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.draw2d" version="2">
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.swt.svg.JSVGRasterizer">
+        <filter comment="The re-exported type org.eclipse.swt.svg.JSVGRasterizer in org.eclipse.draw2d_3.21.0 is no longer an API" id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.swt.svg.JSVGRasterizer"/>
+                <message_argument value="org.eclipse.draw2d_3.21.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/draw2d/AbstractImageFigure.java" type="org.eclipse.draw2d.AbstractImageFigure">
         <filter comment="AbstractImageFigure is the offical startpoint for IImageFigure therefore it is ok that it implements that interface" id="576725006">
             <message_arguments>
