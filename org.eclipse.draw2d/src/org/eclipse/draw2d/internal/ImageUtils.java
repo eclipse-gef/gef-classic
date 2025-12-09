@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ServiceConfigurationError;
 
 import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.ImageLoader;
@@ -67,8 +68,8 @@ public final class ImageUtils {
 		} catch (IOException ignore) {
 			// Should never happen
 			isSvgSupported = false;
-		} catch (SWTException e) {
-			// SVGs unsupported
+		} catch (SWTException | ServiceConfigurationError e) {
+			// SVGs unsupported / not in classpath
 			isSvgSupported = false;
 		}
 		return isSvgSupported;
