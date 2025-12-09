@@ -187,34 +187,20 @@ public class AspectRatioFreeformLayer extends FreeformLayer implements ScalableF
 			return;
 		}
 
-		XYScaledGraphics g = null;
-		boolean disposeGraphics = false;
-		if (graphics instanceof XYScaledGraphics) {
-			g = (XYScaledGraphics) graphics;
-		} else {
-			g = new XYScaledGraphics(graphics);
-			disposeGraphics = true;
-		}
-
 		if (!optimizeClip()) {
-			g.clipRect(getBounds().getShrinked(getInsets()));
+			graphics.clipRect(getBounds().getShrinked(getInsets()));
 		}
 
 		// g.translate((int)(getBounds().x + getInsets().left) ,
 		// (int)(getBounds().y + getInsets().top) );
 
-		g.scale(widthScale, heigthScale);
+		graphics.scale((float) widthScale, (float) heigthScale);
 		// g.scale(widthScale);
 
 		// g.scale(widthScale);
-		g.pushState();
-		paintChildren(g);
-		g.popState();
-		if (disposeGraphics) {
-			g.dispose();
-			graphics.restoreState();
-		}
-
+		graphics.pushState();
+		paintChildren(graphics);
+		graphics.popState();
 	}
 
 }
