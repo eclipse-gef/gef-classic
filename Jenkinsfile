@@ -17,6 +17,7 @@ pipeline {
   environment {
     BUILD_TIMESTAMP = sh(returnStdout: true, script: 'date +%Y%m%d%H%M').trim()
     MAIN_BRANCH = 'master'
+    MAINTENANCE_BRANCH = '^R\\d_\\d{2}_maintenance'
   }
 
   parameters {
@@ -50,8 +51,8 @@ pipeline {
       steps {
         script {
           env.BUILD_TYPE = params.BUILD_TYPE
-          if (env.BRANCH_NAME == env.MAIN_BRANCH) {
-            // Only sign the master branch.
+          if (env.BRANCH_NAME == env.MAIN_BRANCH || env.BRANCH_NAME ==~ /${MAINTENANCE_BRANCH}/) {
+            // Only sign the master/maintenance branch.
             //
             env.ECLIPSE_SIGN = params.ECLIPSE_SIGN
           } else {
