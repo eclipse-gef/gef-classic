@@ -5,6 +5,7 @@
 
 - Added new PrecisionPointList class. This class was created during the previous
   release and has now been finalized.
+- Added `Rectangle.getBounds()`
 
 ## GEF
 
