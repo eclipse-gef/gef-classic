@@ -19,6 +19,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.ScalableFreeformLayeredPane;
+import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
@@ -91,20 +92,28 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 	private ScalableFreeformLayeredPane scaledLayers;
 	private final ZoomManager zoomManager;
 
+	/**
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
+	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	private final boolean useScaledGraphics;
 
 	/**
 	 * Constructor for ScalableFreeformRootEditPart
 	 */
 	public ScalableFreeformRootEditPart() {
-		this(true);
+		this(false);
 	}
 
 	/**
 	 * Constructor which allows to configure if scaled graphics should be used.
 	 *
 	 * @since 3.14
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
 	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	public ScalableFreeformRootEditPart(boolean useScaledGraphics) {
 		this.useScaledGraphics = useScaledGraphics;
 		zoomManager = createZoomManager((ScalableFigure) getScaledLayers(), ((Viewport) getFigure()));
@@ -140,6 +149,7 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 	 *
 	 * @return a new freeform layered pane containing the scalable layers
 	 */
+	@SuppressWarnings("removal")
 	protected ScalableFreeformLayeredPane createScaledLayers() {
 		ScalableFreeformLayeredPane layers = new ScalableFreeformLayeredPane(useScaledGraphics);
 		layers.add(createGridLayer(), GRID_LAYER);

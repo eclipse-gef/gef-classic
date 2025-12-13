@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Display;
  *
  * @author danlee
  */
+@SuppressWarnings("removal")
 public class PrinterGraphics extends ScaledGraphics {
 
 	Map<Image, Image> imageCache = new HashMap<>();

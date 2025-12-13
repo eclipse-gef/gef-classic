@@ -22,6 +22,7 @@ package org.eclipse.draw2d;
  */
 public class AutoscaleFreeformViewport extends FreeformViewport {
 
+	@SuppressWarnings("removal")
 	public AutoscaleFreeformViewport(boolean useScaledGraphics) {
 		super.setContents(new ScalableFreeformLayeredPane(useScaledGraphics));
 	}

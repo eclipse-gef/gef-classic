@@ -40,6 +40,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  *
  * @author irbull
  */
+@SuppressWarnings("removal")
 public class XYScaledGraphics extends ScaledGraphics {
 
 	public static final double MAX_TEXT_SIZE = 0.45; // MAX size, when to stop

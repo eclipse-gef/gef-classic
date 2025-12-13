@@ -21,6 +21,7 @@ import org.eclipse.draw2d.Layer;
 import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.ScalableLayeredPane;
+import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -136,20 +137,28 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 
 	private final ZoomManager zoomManager;
 
+	/**
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
+	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	private final boolean useScaledGraphics;
 
 	/**
 	 * Constructor for ScalableRootEditPart
 	 */
 	public ScalableRootEditPart() {
-		this(true);
+		this(false);
 	}
 
 	/**
 	 * Constructor which allows to configure if scaled graphics should be used.
 	 *
 	 * @since 3.14
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
 	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	public ScalableRootEditPart(boolean useScaledGraphics) {
 		this.useScaledGraphics = useScaledGraphics;
 		zoomManager = createZoomManager((ScalableLayeredPane) getScaledLayers(), ((Viewport) getFigure()));
@@ -172,6 +181,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	/**
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
+	@SuppressWarnings("removal")
 	@Override
 	protected IFigure createFigure() {
 		Viewport viewport = createViewport();
@@ -246,6 +256,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	 *
 	 * @return a new <code>ScalableLayeredPane</code> containing the scalable layers
 	 */
+	@SuppressWarnings("removal")
 	protected ScalableLayeredPane createScaledLayers() {
 		ScalableLayeredPane layers = new ScalableLayeredPane(useScaledGraphics);
 		layers.add(createGridLayer(), GRID_LAYER);
