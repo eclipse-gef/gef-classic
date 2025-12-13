@@ -27,11 +27,16 @@ import org.eclipse.swt.widgets.Display;
  * A scalable graphics object used to print to a printer.
  *
  * @author danlee
+ * @deprecated will be deleted after the 2028-03 release (see
+ *             {@link ScaledGraphics}).
  */
+@Deprecated(forRemoval = true, since = "2026-03")
 public class PrinterGraphics extends ScaledGraphics {
 
+	@Deprecated
 	Map<Image, Image> imageCache = new HashMap<>();
 
+	@Deprecated
 	Printer printer;
 
 	/**
@@ -40,11 +45,13 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @param g Graphics object to draw with
 	 * @param p Printer to print to
 	 */
+	@Deprecated
 	public PrinterGraphics(Graphics g, Printer p) {
 		super(g);
 		printer = p;
 	}
 
+	@Deprecated
 	@Override
 	Font createFont(FontData data) {
 		return new Font(printer, data);
@@ -64,6 +71,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	/**
 	 * @see org.eclipse.draw2d.ScaledGraphics#dispose()
 	 */
+	@Deprecated
 	@Override
 	public void dispose() {
 		super.dispose();
@@ -78,6 +86,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	/**
 	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int)
 	 */
+	@Deprecated
 	@Override
 	public void drawImage(Image srcImage, int x, int y) {
 		super.drawImage(printerImage(srcImage), x, y);
@@ -86,11 +95,13 @@ public class PrinterGraphics extends ScaledGraphics {
 	/**
 	 * @see Graphics#drawImage(Image, int, int, int, int, int, int, int, int)
 	 */
+	@Deprecated
 	@Override
 	public void drawImage(Image srcImage, int sx, int sy, int sw, int sh, int tx, int ty, int tw, int th) {
 		super.drawImage(printerImage(srcImage), sx, sy, sw, sh, tx, ty, tw, th);
 	}
 
+	@Deprecated
 	@Override
 	int zoomFontHeight(int height) {
 		return (int) (height * zoom * Display.getCurrent().getDPI().y / printer.getDPI().y + 0.0000001);
@@ -99,6 +110,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	/**
 	 * @see org.eclipse.draw2d.ScaledGraphics#zoomLineWidth(float)
 	 */
+	@Deprecated
 	@Override
 	float zoomLineWidth(float w) {
 		return (float) (w * zoom);
@@ -109,6 +121,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 *
 	 * @see org.eclipse.draw2d.ScaledGraphics#setLineAttributes(org.eclipse.swt.graphics.LineAttributes)
 	 */
+	@Deprecated
 	@Override
 	public void setLineAttributes(LineAttributes attributes) {
 		if (attributes.style == SWT.LINE_CUSTOM && attributes.dash != null && attributes.dash.length > 0) {

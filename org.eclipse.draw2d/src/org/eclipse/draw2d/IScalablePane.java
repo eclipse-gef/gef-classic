@@ -32,6 +32,11 @@ import org.eclipse.draw2d.geometry.Translatable;
  */
 public interface IScalablePane extends ScalableFigure {
 
+	/**
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
+	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	boolean useScaledGraphics();
 
 	boolean optimizeClip();

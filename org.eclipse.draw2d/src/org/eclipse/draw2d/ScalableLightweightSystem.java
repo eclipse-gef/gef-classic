@@ -77,9 +77,14 @@ public class ScalableLightweightSystem extends LightweightSystem {
 			return scale;
 		}
 
+		/**
+		 * @deprecated will be deleted after the 2028-03 release (see
+		 *             {@link ScaledGraphics}).
+		 */
+		@Deprecated(forRemoval = true, since = "2026-03")
 		@Override
 		public boolean useScaledGraphics() {
-			return true;
+			return false;
 		}
 
 		@Override
