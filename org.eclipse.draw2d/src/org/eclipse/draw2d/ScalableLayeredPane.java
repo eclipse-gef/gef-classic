@@ -27,17 +27,25 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 
 	private double scale = 1.0;
 
+	/**
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
+	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	private final boolean useScaledGraphics;
 
 	public ScalableLayeredPane() {
-		this(true);
+		this(false);
 	}
 
 	/**
 	 * Constructor which allows to configure if scaled graphics should be used.
 	 *
 	 * @since 3.13
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
 	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	public ScalableLayeredPane(boolean useScaledGraphics) {
 		this.useScaledGraphics = useScaledGraphics;
 	}
@@ -104,7 +112,10 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 
 	/**
 	 * @since 3.13
+	 * @deprecated will be deleted after the 2028-03 release (see
+	 *             {@link ScaledGraphics}).
 	 */
+	@Deprecated(forRemoval = true, since = "2026-03")
 	@Override
 	public boolean useScaledGraphics() {
 		return useScaledGraphics;

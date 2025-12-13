@@ -290,7 +290,7 @@ public class Thumbnail extends Figure implements UpdateListener {
 			}
 		}
 
-		/** Create new GC, SWTGraphics, and ScaledGraphics instances */
+		/** Create new GC, and SWTGraphics instances */
 		private void createTileGraphics() {
 			// For the Mac fixe we have to create a new GC instance to flush the previous
 			// tile image...

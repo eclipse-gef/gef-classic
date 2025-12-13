@@ -5,6 +5,20 @@
 
 - Added new PrecisionPointList class. This class was created during the previous
   release and has now been finalized.
+- **Deprecated ScaledGraphics**  
+  *To be removed after 2028-03 release*   
+  All scaling needs for Draw2d can be handled by SWT natively and there are several issues in the implementation of 
+  ScaledGraphics. Therefore, use `SWTGraphics` instead.   
+  
+  As part of this deprecation also all methods and flags allowing to switch to between `SWTGraphics` and 
+  `ScaledGraphics` are deprecated and the default behavior is changed to use `SWTGraphics`.
+  
+  **Action Required:** If your application depends on `ScaledGraphics` you need to actively switch it on for the following classes:
+    - ScaleableFreeformLayeredPane
+    - ScalableFreeformRootEditPart
+    - ScalableLayeredPane
+    - ScalableRootEditPart
+    - ScalableLightweightSystem
 
 ## GEF
 
