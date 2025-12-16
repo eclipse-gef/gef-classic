@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,7 @@ package org.eclipse.gef.examples.logicdesigner.edit;
 import java.util.List;
 
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.EditPart;
@@ -58,14 +59,9 @@ public class LogicTreeContainerEditPolicy extends TreeContainerEditPolicy {
 		int index = findIndexOfTreeItemAt(request.getLocation());
 
 		for (EditPart child : request.getEditParts()) {
-			if (isAncestor(child, getHost())) {
-				command.add(UnexecutableCommand.INSTANCE);
-			} else {
-				LogicSubpart childModel = (LogicSubpart) child.getModel();
-				command.add(createCreateCommand(childModel,
-						new Rectangle(new org.eclipse.draw2d.geometry.Point(), childModel.getSize()), index,
-						"Reparent LogicSubpart"));//$NON-NLS-1$
-			}
+			LogicSubpart childModel = (LogicSubpart) child.getModel();
+			command.add(createCreateCommand(childModel, new Rectangle(new Point(), childModel.getSize()), index,
+					"Reparent LogicSubpart"));//$NON-NLS-1$
 		}
 		return command;
 	}
@@ -97,16 +93,6 @@ public class LogicTreeContainerEditPolicy extends TreeContainerEditPolicy {
 					tempIndex));
 		}
 		return command;
-	}
-
-	protected boolean isAncestor(EditPart source, EditPart target) {
-		if (source == target) {
-			return true;
-		}
-		if (target.getParent() != null) {
-			return isAncestor(source, target.getParent());
-		}
-		return false;
 	}
 
 }

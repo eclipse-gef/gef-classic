@@ -8,6 +8,20 @@
 
 ## GEF
 
+* Due to an oversight, the generic types of the following type had to be adapted:
+  * Map<~~IFigure~~?, EditPart> EditPartViewer.getVisualPartMap()`
+  * EditPartViewer.findObjectAtExcluding(Point, Collection<~~IFigure~~?>)
+  * EditPartViewer.findObjectAtExcluding(Point, Collection<~~IFigure~~?>, Conditional)
+
+While this change is binarily-compatible, consumers might experience compilation issues if:
+
+a) If the map returned by `getVisualPartMap()` is stored in a local variable.
+b) If `findObjectAtExcluding` is overridden by subclasses.
+
+Reason for this change is the `TreeViewer`, where the visual part of an `EditPart` is
+realized as a `Widget` and not an `IFigure`. For the `findObjectAtExcluding` method
+specifically, the `TreeViewer` is using `EditPart`'s as exclusion set.
+
 ## Zest
 
 ## General
