@@ -16,6 +16,9 @@ package org.eclipse.gef.internal;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Consumer;
 
 import org.eclipse.swt.SWT;
@@ -33,13 +36,17 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import org.eclipse.draw2d.BasicColorProvider;
 import org.eclipse.draw2d.ColorProvider;
+import org.eclipse.draw2d.ToolTipHelper;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartListener;
 import org.eclipse.gef.GEFColorProvider;
+import org.eclipse.gef.ui.parts.DomainEventDispatcher;
+import org.eclipse.gef.util.IToolTipHelperFactory;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
 
 public class InternalGEFPlugin extends AbstractUIPlugin {
@@ -49,6 +56,8 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 	private static BundleContext context;
 	private static AbstractUIPlugin singleton;
 	private static Boolean requiresDisabledIcons;
+	private static Collection<ServiceReference<IToolTipHelperFactory>> toolTipProviderRefs;
+	private static Collection<IToolTipHelperFactory> toolTipProviders;
 
 	public InternalGEFPlugin() {
 		singleton = this;
@@ -63,7 +72,21 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 				&& PlatformUI.isWorkbenchRunning() && !PlatformUI.getWorkbench().isClosing()) {
 			ColorProvider.SystemColorFactory.setColorProvider(new GEFColorProvider());
 		}
+		toolTipProviders = new ArrayList<>();
+		toolTipProviderRefs = bc.getServiceReferences(IToolTipHelperFactory.class, null);
+		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {
+			toolTipProviders.add(bc.getService(toolTipProviderRef));
+		}
 		Logger.setContext(new LoggerContext());
+	}
+
+	@Override
+	public void stop(BundleContext bc) throws Exception {
+		toolTipProviders.clear();
+		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {
+			bc.ungetService(toolTipProviderRef);
+		}
+		super.stop(bc);
 	}
 
 	@Override
@@ -97,6 +120,14 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 		} catch (NumberFormatException e) {
 			return 100;
 		}
+	}
+
+	/**
+	 * Returns all registered {@link ToolTipHelper} factories that can be used in
+	 * the {@link DomainEventDispatcher}.
+	 */
+	public static Collection<IToolTipHelperFactory> getToolTipHelperFactories() {
+		return Collections.unmodifiableCollection(toolTipProviders);
 	}
 
 	/**

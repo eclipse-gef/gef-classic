@@ -350,9 +350,20 @@ public class SWTEventDispatcher extends EventDispatcher {
 	 */
 	protected ToolTipHelper getToolTipHelper() {
 		if (toolTipHelper == null || toolTipHelper.getShell().isDisposed()) {
-			toolTipHelper = new ToolTipHelper(control);
+			toolTipHelper = createToolTipHelper();
 		}
 		return toolTipHelper;
+	}
+
+	/**
+	 * Creates a new {@link ToolTipHelper} instance to be used by
+	 * {@link #getToolTipHelper()}. May be sub-classed.
+	 *
+	 * @return the created ToolTipHelper. Never {@code null}.
+	 * @since 3.22
+	 */
+	protected ToolTipHelper createToolTipHelper() {
+		return new ToolTipHelper(control);
 	}
 
 	/**

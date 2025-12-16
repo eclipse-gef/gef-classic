@@ -30,12 +30,15 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.draw2d.EventDispatcher;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.SWTEventDispatcher;
+import org.eclipse.draw2d.ToolTipHelper;
 import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.internal.InternalGEFPlugin;
+import org.eclipse.gef.util.IToolTipHelperFactory;
 
 /**
  * A special event dispatcher that will route events to the {@link EditDomain}
@@ -245,6 +248,20 @@ public class DomainEventDispatcher extends SWTEventDispatcher {
 		domain = d;
 		viewer = v;
 		setEnableKeyTraversal(false);
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.SWTEventDispatcher#createToolTipHelper()
+	 */
+	@Override
+	protected ToolTipHelper createToolTipHelper() {
+		for (IToolTipHelperFactory factory : InternalGEFPlugin.getToolTipHelperFactories()) {
+			ToolTipHelper toolTipHelper = factory.create(control, getViewer());
+			if (toolTipHelper != null) {
+				return toolTipHelper;
+			}
+		}
+		return super.createToolTipHelper();
 	}
 
 	/**

@@ -6,7 +6,13 @@
       <view
             class="org.eclipse.gef.examples.palette.PaletteSnippet1"
             id="org.eclipse.gef.examples.view1"
-            name="%view.name"
+            name="%view1.name"
+            restorable="true">
+      </view>
+      <view
+            class="org.eclipse.gef.examples.palette.PaletteSnippet2"
+            id="org.eclipse.gef.examples.view2"
+            name="%view2.name"
             restorable="true">
       </view>
    </extension>

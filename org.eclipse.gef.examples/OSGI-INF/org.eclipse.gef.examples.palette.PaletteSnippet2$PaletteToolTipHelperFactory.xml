@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.eclipse.gef.examples.palette.PaletteSnippet2$PaletteToolTipHelperFactory">
+   <service>
+      <provide interface="org.eclipse.gef.util.IToolTipHelperFactory"/>
+   </service>
+   <implementation class="org.eclipse.gef.examples.palette.PaletteSnippet2$PaletteToolTipHelperFactory"/>
+</scr:component>
