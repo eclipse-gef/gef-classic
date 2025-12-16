@@ -418,7 +418,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 *
 	 * @return the visual part map
 	 */
-	Map<?, EditPart> getVisualPartMap();
+	<T> Map<T, EditPart> getVisualPartMap();
 
 	/**
 	 * Used for accessibility purposes.

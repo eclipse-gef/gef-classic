@@ -461,8 +461,9 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#getVisualPartMap()
 	 */
 	@Override
-	public Map<?, EditPart> getVisualPartMap() {
-		return mapVisualToEditPart;
+	@SuppressWarnings("unchecked")
+	public <T> Map<T, EditPart> getVisualPartMap() {
+		return (Map<T, EditPart>) mapVisualToEditPart;
 	}
 
 	/**

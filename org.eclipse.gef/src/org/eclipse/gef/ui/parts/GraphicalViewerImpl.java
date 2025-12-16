@@ -247,7 +247,7 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<IFigure, EditPart> getVisualPartMap() {
-		return (Map<IFigure, EditPart>) super.getVisualPartMap();
+		return super.getVisualPartMap();
 	}
 
 	/**
