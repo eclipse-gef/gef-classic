@@ -197,7 +197,7 @@ public class TreeViewer extends AbstractEditPartViewer {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<Widget, EditPart> getVisualPartMap() {
-		return (Map<Widget, EditPart>) super.getVisualPartMap();
+		return super.getVisualPartMap();
 	}
 
 	/**

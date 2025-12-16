@@ -9,7 +9,7 @@
 ## GEF
 
 * Due to an oversight, the generic types of the following type had to be adapted:
-  * Map<~~IFigure~~?, EditPart> EditPartViewer.getVisualPartMap()`
+  * <T> Map<~~IFigure~~T, EditPart> EditPartViewer.getVisualPartMap()`
   * EditPartViewer.findObjectAtExcluding(Point, Collection<~~IFigure~~?>)
   * EditPartViewer.findObjectAtExcluding(Point, Collection<~~IFigure~~?>, Conditional)
 

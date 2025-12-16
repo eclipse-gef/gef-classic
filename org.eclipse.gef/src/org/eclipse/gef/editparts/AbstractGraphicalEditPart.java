@@ -733,9 +733,8 @@ public abstract class AbstractGraphicalEditPart extends AbstractEditPart impleme
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#registerVisuals()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	protected void registerVisuals() {
-		((Map<IFigure, EditPart>) getViewer().getVisualPartMap()).put(getFigure(), this);
+		getViewer().getVisualPartMap().put(getFigure(), this);
 	}
 
 	/**
