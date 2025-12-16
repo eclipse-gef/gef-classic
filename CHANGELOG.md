@@ -22,6 +22,12 @@ Reason for this change is the `TreeViewer`, where the visual part of an `EditPar
 realized as a `Widget` and not an `IFigure`. For the `findObjectAtExcluding` method
 specifically, the `TreeViewer` is using `EditPart`'s as exclusion set.
 
+* Added new `IToolTipHelperFactory` interface that is used as factory in the
+  `DomainEventDispatcher` to create the `ToolTipHelper` instance. Clients may
+  contribute their own implementation via an OSGi service.
+  Alternatively, clients may inject a custom `ToolTipHelper` instance directly
+  by overriding `createToolTipHelper()` in `SWTEventDispatcher`.
+
 ## Zest
 
 ## General

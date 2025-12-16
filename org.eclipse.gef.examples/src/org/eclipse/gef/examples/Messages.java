@@ -19,6 +19,9 @@ public class Messages extends NLS {
 	public static String PaletteSnippet1_System;
 	public static String PaletteSnippet1_Drawer_Font;
 	public static String PaletteSnippet1_Entry_Font;
+	public static String PaletteSnippet2_System;
+	public static String PaletteSnippet2_System_Desc;
+	public static String PaletteSnippet2_Selection_Desc;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

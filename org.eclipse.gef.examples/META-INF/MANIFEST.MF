@@ -4,10 +4,11 @@ Bundle-Name: %Plugin.name
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.gef.examples;singleton:=true
-Bundle-Version: 1.0.400.qualifier
+Bundle-Version: 1.1.0.qualifier
 Require-Bundle: org.eclipse.gef;bundle-version="[3.21.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.31.100,4.0.0)",
  org.eclipse.ui;bundle-version="[3.206.0,4.0.0)"
 Automatic-Module-Name: org.eclipse.gef.examples
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
+Service-Component: OSGI-INF/org.eclipse.gef.examples.palette.PaletteSnippet2$PaletteToolTipHelperFactory.xml
