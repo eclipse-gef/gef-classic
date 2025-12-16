@@ -26,7 +26,6 @@ import org.eclipse.swt.dnd.TransferData;
 
 import org.eclipse.jface.util.TransferDropTargetListener;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.AutoexposeHelper;
@@ -87,9 +86,13 @@ public abstract class AbstractTransferDropTargetListener
 	}
 
 	private EditPart calculateTargetEditPart() {
-		List<IFigure> exclusionFigures = getExclusionSet().stream().filter(GraphicalEditPart.class::isInstance)
-				.map(ep -> ((GraphicalEditPart) ep).getFigure()).collect(Collectors.toList());
-		EditPart ep = getViewer().findObjectAtExcluding(getDropLocation(), exclusionFigures,
+		List<Object> exclusionSet = getExclusionSet().stream().map(o -> {
+			if (o instanceof GraphicalEditPart ep) {
+				return ep.getFigure();
+			}
+			return o;
+		}).collect(Collectors.toList());
+		EditPart ep = getViewer().findObjectAtExcluding(getDropLocation(), exclusionSet,
 				editpart -> editpart.getTargetEditPart(getTargetRequest()) != null);
 		if (ep != null) {
 			ep = ep.getTargetEditPart(getTargetRequest());

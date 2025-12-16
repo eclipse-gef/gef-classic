@@ -13,6 +13,7 @@
 package org.eclipse.gef.ui.parts;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
@@ -30,6 +31,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.eclipse.swt.widgets.Widget;
 
 import org.eclipse.jface.util.TransferDragSourceListener;
 import org.eclipse.jface.util.TransferDropTargetListener;
@@ -147,7 +149,7 @@ public class TreeViewer extends AbstractEditPartViewer {
 	 *      EditPartViewer.Conditional)
 	 */
 	@Override
-	public EditPart findObjectAtExcluding(Point pt, Collection exclude, Conditional condition) {
+	public EditPart findObjectAtExcluding(Point pt, Collection<?> exclude, Conditional condition) {
 		if (getControl() == null) {
 			return null;
 		}
@@ -190,6 +192,12 @@ public class TreeViewer extends AbstractEditPartViewer {
 	@Override
 	public Tree getControl() {
 		return (Tree) super.getControl();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<Widget, EditPart> getVisualPartMap() {
+		return (Map<Widget, EditPart>) super.getVisualPartMap();
 	}
 
 	/**

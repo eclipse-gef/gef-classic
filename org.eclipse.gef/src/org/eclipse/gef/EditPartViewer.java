@@ -28,7 +28,6 @@ import org.eclipse.jface.util.TransferDragSourceListener;
 import org.eclipse.jface.util.TransferDropTargetListener;
 import org.eclipse.jface.viewers.ISelection;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 
 /**
@@ -203,10 +202,10 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * {@link #findObjectAt(Point)}.
 	 *
 	 * @param location     The mouse location
-	 * @param exclusionSet The set of IFigures to be excluded
+	 * @param exclusionSet The set of parts to be excluded
 	 * @return <code>null</code> or an EditPart
 	 */
-	EditPart findObjectAtExcluding(Point location, Collection<IFigure> exclusionSet);
+	EditPart findObjectAtExcluding(Point location, Collection<?> exclusionSet);
 
 	/**
 	 * Returns <code>null</code> or the <code>EditPart</code> at the specified
@@ -214,11 +213,11 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * similarly to {@link #findObjectAt(Point)}.
 	 *
 	 * @param location     The mouse location
-	 * @param exclusionSet The set of IFigures to be excluded
+	 * @param exclusionSet The set of parts to be excluded
 	 * @param conditional  the Conditional used to evaluate a potential hit
 	 * @return <code>null</code> or an EditPart
 	 */
-	EditPart findObjectAtExcluding(Point location, Collection<IFigure> exclusionSet, Conditional conditional);
+	EditPart findObjectAtExcluding(Point location, Collection<?> exclusionSet, Conditional conditional);
 
 	/**
 	 * Flushes all pending updates to the Viewer.
@@ -419,7 +418,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 *
 	 * @return the visual part map
 	 */
-	Map<IFigure, EditPart> getVisualPartMap();
+	Map<?, EditPart> getVisualPartMap();
 
 	/**
 	 * Used for accessibility purposes.

@@ -15,6 +15,7 @@ package org.eclipse.gef.ui.parts;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DragSource;
@@ -163,7 +164,7 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 	 *      EditPartViewer.Conditional)
 	 */
 	@Override
-	public EditPart findObjectAtExcluding(Point pt, Collection<IFigure> exclude, final Conditional condition) {
+	public EditPart findObjectAtExcluding(Point pt, Collection<?> exclude, final Conditional condition) {
 		class ConditionalTreeSearch extends ExclusionSearch {
 			ConditionalTreeSearch(Collection<IFigure> coll) {
 				super(coll);
@@ -179,8 +180,9 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 				return editpart != null && (condition == null || condition.evaluate(editpart));
 			}
 		}
+		@SuppressWarnings("unchecked")
 		IFigure figure = getLightweightSystem().getRootFigure().findFigureAt(pt.x, pt.y,
-				new ConditionalTreeSearch(exclude));
+				new ConditionalTreeSearch((Collection<IFigure>) exclude));
 		EditPart part = null;
 		while (part == null && figure != null) {
 			part = getVisualPartMap().get(figure);
@@ -240,6 +242,12 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 	@Deprecated
 	protected IFigure getRootFigure() {
 		return rootFigure;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<IFigure, EditPart> getVisualPartMap() {
+		return (Map<IFigure, EditPart>) super.getVisualPartMap();
 	}
 
 	/**

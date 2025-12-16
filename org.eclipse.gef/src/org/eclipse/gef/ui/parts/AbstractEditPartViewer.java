@@ -44,7 +44,6 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.AccessibleEditPart;
@@ -98,7 +97,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 
 	private EditPartFactory factory;
 	private final Map<Object, EditPart> mapIDToEditPart = new HashMap<>();
-	private final Map<IFigure, EditPart> mapVisualToEditPart = new HashMap<>();
+	private final Map<?, EditPart> mapVisualToEditPart = new HashMap<>();
 	private Map<String, Object> properties;
 	private Control control;
 	private ResourceManager resources;
@@ -253,7 +252,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#findObjectAtExcluding(Point, Collection)
 	 */
 	@Override
-	public final EditPart findObjectAtExcluding(Point pt, Collection<IFigure> exclude) {
+	public final EditPart findObjectAtExcluding(Point pt, Collection<?> exclude) {
 		return findObjectAtExcluding(pt, exclude, null);
 	}
 
@@ -462,7 +461,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 * @see EditPartViewer#getVisualPartMap()
 	 */
 	@Override
-	public Map<IFigure, EditPart> getVisualPartMap() {
+	public Map<?, EditPart> getVisualPartMap() {
 		return mapVisualToEditPart;
 	}
 

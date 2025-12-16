@@ -24,7 +24,6 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.ui.PlatformUI;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
 
 import org.eclipse.gef.EditDomain;
@@ -146,7 +145,7 @@ public class DirectEditManagerTest {
 		public EditPartViewer getViewer() {
 			return new AbstractEditPartViewer() {
 				@Override
-				public EditPart findObjectAtExcluding(Point location, Collection<IFigure> exclusionSet,
+				public EditPart findObjectAtExcluding(Point location, Collection<?> exclusionSet,
 						Conditional conditional) {
 					return null;
 				}
