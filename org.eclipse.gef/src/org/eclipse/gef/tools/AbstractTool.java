@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,10 +18,8 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DragSourceEvent;
@@ -1480,15 +1478,11 @@ public abstract class AbstractTool extends org.eclipse.gef.util.FlagSupport impl
 	 * @see org.eclipse.gef.Tool#setProperties(java.util.Map)
 	 */
 	@Override
-	public void setProperties(Map properties) {
+	public void setProperties(Map<?, ?> properties) {
 		if (properties == null) {
 			return;
 		}
-		Iterator entries = properties.entrySet().iterator();
-		while (entries.hasNext()) {
-			Entry entry = (Entry) entries.next();
-			applyProperty(entry.getKey(), entry.getValue());
-		}
+		properties.forEach(this::applyProperty);
 	}
 
 	/**
