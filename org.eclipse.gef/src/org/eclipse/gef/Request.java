@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,7 +24,7 @@ import java.util.Map;
 public class Request {
 
 	private Object type;
-	private Map extendedData;
+	private Map<Object, Object> extendedData;
 
 	/**
 	 * Constructs an empty Request
@@ -47,9 +47,9 @@ public class Request {
 	 *
 	 * @return a map to store useful information
 	 */
-	public Map getExtendedData() {
+	public Map<Object, Object> getExtendedData() {
 		if (extendedData == null) {
-			extendedData = new HashMap();
+			extendedData = new HashMap<>();
 		}
 		return extendedData;
 	}
@@ -71,8 +71,9 @@ public class Request {
 	 *
 	 * @param map The new map
 	 */
-	public void setExtendedData(Map map) {
-		extendedData = map;
+	@SuppressWarnings("unchecked")
+	public void setExtendedData(Map<?, ?> map) {
+		extendedData = (Map<Object, Object>) map;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -222,7 +222,7 @@ public class SnapToGeometry extends SnapToHelper {
 	 * @param far          the right/bottom side of the rectangle
 	 * @return the correction amount or #getThreshold () if no correction was made
 	 */
-	protected double getCorrectionFor(Entry[] entries, Map extendedData, boolean vert, double near, double far) {
+	protected double getCorrectionFor(Entry[] entries, Map<Object, Object> extendedData, boolean vert, double near, double far) {
 		far -= 1.0;
 		double total = near + far;
 		// If the width is even (i.e., odd right now because we have reduced one
@@ -254,7 +254,7 @@ public class SnapToGeometry extends SnapToHelper {
 	 * @param side         which sides should be considered
 	 * @return the correction or #getThreshold () if no correction was made
 	 */
-	protected double getCorrectionFor(Entry[] entries, Map extendedData, boolean vert, double value, int side) {
+	protected double getCorrectionFor(Entry[] entries, Map<Object, Object> extendedData, boolean vert, double value, int side) {
 		double resultMag = getThreshold();
 		double result = getThreshold();
 
