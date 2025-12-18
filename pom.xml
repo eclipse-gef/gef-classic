@@ -56,6 +56,13 @@
 					<logDirectory>${project.build.directory}/ecj</logDirectory>
 					<showWarnings>true</showWarnings>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.jdt</groupId>
+						<artifactId>ecj</artifactId>
+						<version>${cbi-ecj-version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			
 			<plugin>

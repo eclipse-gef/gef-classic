@@ -50,6 +50,7 @@ public class DelegatingDragAdapter extends org.eclipse.jface.util.DelegatingDrag
 	 *             {@link #addDragSourceListener(org.eclipse.jface.util.TransferDragSourceListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.0", forRemoval = true)
 	public void addDragSourceListener(TransferDragSourceListener listener) {
 		super.addDragSourceListener(listener);
@@ -76,6 +77,7 @@ public class DelegatingDragAdapter extends org.eclipse.jface.util.DelegatingDrag
 	 *             {@link #removeDragSourceListener(org.eclipse.jface.util.TransferDragSourceListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.0", forRemoval = true)
 	public void removeDragSourceListener(TransferDragSourceListener listener) {
 		super.removeDragSourceListener(listener);

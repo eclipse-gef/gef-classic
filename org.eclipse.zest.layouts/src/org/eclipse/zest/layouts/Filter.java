@@ -27,7 +27,7 @@ package org.eclipse.zest.layouts;
  * @noimplement This interface is not intended to be implemented by clients.
  * @noreference This interface is not intended to be referenced by clients.
  */
-@SuppressWarnings("javadoc")
+@SuppressWarnings({ "javadoc", "removal" })
 @Deprecated(since = "2.0", forRemoval = true)
 public interface Filter {
 

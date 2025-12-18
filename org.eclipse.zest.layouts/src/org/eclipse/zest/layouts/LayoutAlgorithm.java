@@ -37,12 +37,12 @@ public interface LayoutAlgorithm {
 	 *
 	 * @since 2.0
 	 * @deprecated Use {@link LayoutAlgorithm} instead. This interface will be
-	 *             removed in a future release in accordance with the two year
-	 *             deprecation policy.
+	 *             removed after the 2026-12 release.
 	 * @noextend This interface is not intended to be extended by clients.
 	 * @noreference This interface is not intended to be referenced by clients.
 	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "2.0", forRemoval = true)
 	static interface Zest1 extends LayoutAlgorithm {
 

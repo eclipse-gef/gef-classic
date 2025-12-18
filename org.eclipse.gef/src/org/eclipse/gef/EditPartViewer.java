@@ -102,6 +102,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * @deprecated Use {@link #addDragSourceListener(TransferDragSourceListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.21", forRemoval = true)
 	void addDragSourceListener(org.eclipse.gef.dnd.TransferDragSourceListener listener);
 
@@ -123,6 +124,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * @deprecated Use {@link #addDragSourceListener(TransferDragSourceListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.21", forRemoval = true)
 	void addDropTargetListener(org.eclipse.gef.dnd.TransferDropTargetListener listener);
 
@@ -436,6 +438,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * @deprecated Use {@link #removeDragSourceListener(TransferDragSourceListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.0", forRemoval = true)
 	void removeDragSourceListener(org.eclipse.gef.dnd.TransferDragSourceListener listener);
 
@@ -457,6 +460,7 @@ public interface EditPartViewer extends org.eclipse.jface.viewers.ISelectionProv
 	 * @deprecated Use {@link #removeDropTargetListener(TransferDropTargetListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.0", forRemoval = true)
 	void removeDropTargetListener(org.eclipse.gef.dnd.TransferDropTargetListener listener);
 

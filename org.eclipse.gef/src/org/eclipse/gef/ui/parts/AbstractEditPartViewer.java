@@ -144,6 +144,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
 	@Override
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.21", forRemoval = true)
 	public void addDragSourceListener(org.eclipse.gef.dnd.TransferDragSourceListener listener) {
 		addDragSourceListener((TransferDragSourceListener) listener);
@@ -164,6 +165,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
 	@Override
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.21", forRemoval = true)
 	public void addDropTargetListener(org.eclipse.gef.dnd.TransferDropTargetListener listener) {
 		addDropTargetListener((TransferDropTargetListener) listener);
@@ -572,6 +574,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
 	@Deprecated(since = "3.0", forRemoval = true)
+	@SuppressWarnings("removal")
 	@Override
 	public void removeDragSourceListener(org.eclipse.gef.dnd.TransferDragSourceListener listener) {
 		removeDragSourceListener((TransferDragSourceListener) listener);
@@ -594,6 +597,7 @@ public abstract class AbstractEditPartViewer implements EditPartViewer {
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
 	@Deprecated(since = "3.0", forRemoval = true)
+	@SuppressWarnings("removal")
 	@Override
 	public void removeDropTargetListener(org.eclipse.gef.dnd.TransferDropTargetListener listener) {
 		removeDropTargetListener((TransferDropTargetListener) listener);

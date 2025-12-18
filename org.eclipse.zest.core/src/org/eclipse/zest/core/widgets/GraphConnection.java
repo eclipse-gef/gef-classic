@@ -86,8 +86,10 @@ public class GraphConnection extends GraphItem {
 
 	private boolean highlighted;
 	/**
-	 * @deprecated Not used in Zest 2.x. This class will be removed in a future
-	 *             release in accordance with the two year deprecation policy.
+	 * /**
+	 *
+	 * @deprecated Not used in Zest 2.x. This field will be removed after the
+	 *             2026-12 release.
 	 */
 	@Deprecated(since = "1.12", forRemoval = true)
 	private GraphLayoutConnection layoutConnection = null;
@@ -218,12 +220,13 @@ public class GraphConnection extends GraphItem {
 	/**
 	 * Gets a proxy to this connection that can be used with the Zest layout engine
 	 *
-	 * @deprecated Not used in Zest 2.x. This class will be removed in a future
-	 *             release in accordance with the two year deprecation policy.
+	 * @deprecated Not used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 * @nooverride This method is not intended to be re-implemented or extended by
 	 *             clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	public LayoutRelationship getLayoutRelationship() {
 		return this.layoutConnection;
@@ -233,9 +236,8 @@ public class GraphConnection extends GraphItem {
 	 * Gets the external connection object.
 	 *
 	 * @return Object
-	 * @deprecated Use {@link #getData()} instead. This class will be removed in a
-	 *             future release in accordance with the two year deprecation
-	 *             policy.
+	 * @deprecated Use {@link #getData()} instead. This method will be removed after
+	 *             the 2026-12 release.
 	 * @nooverride This method is not intended to be re-implemented or extended by
 	 *             clients.
 	 * @noreference This method is not intended to be referenced by clients.
@@ -761,9 +763,10 @@ public class GraphConnection extends GraphItem {
 	}
 
 	/**
-	 * @deprecated Not used in Zest 2.x. This class will be removed in a future
-	 *             release in accordance with the two year deprecation policy.
+	 * @deprecated Not used in Zest 2.x. This class will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	class GraphLayoutConnection implements LayoutRelationship {
 

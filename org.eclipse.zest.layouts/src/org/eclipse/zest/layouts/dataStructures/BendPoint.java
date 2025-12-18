@@ -25,6 +25,7 @@ import org.eclipse.zest.layouts.LayoutBendPoint;
  * @noreference This class is not intended to be referenced by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
+@SuppressWarnings("removal")
 @Deprecated(since = "2.0", forRemoval = true)
 public class BendPoint extends DisplayIndependentPoint implements LayoutBendPoint {
 

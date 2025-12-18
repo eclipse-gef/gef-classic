@@ -40,7 +40,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	 * @noreference This class is not intended to be referenced by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "removal" })
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Zest1 extends AbstractLayoutAlgorithm.Zest1 {
 
@@ -336,6 +336,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	 * @deprecated Since Zest 2.0, use {@link #GridLayoutAlgorithm()}.
 	 */
 	@Deprecated
+	@SuppressWarnings("removal")
 	public GridLayoutAlgorithm(int style) {
 		this();
 		setResizing(style != LayoutStyles.NO_LAYOUT_NODE_RESIZING);

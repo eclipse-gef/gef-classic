@@ -20,13 +20,13 @@ import org.eclipse.zest.layouts.dataStructures.DisplayIndependentRectangle;
 import org.eclipse.zest.layouts.dataStructures.InternalNode;
 
 /**
- * @deprecated No longer used in Zest 2.x. This class will be removed in a
- *             future release in accordance with the two year deprecation
- *             policy.
+ * @deprecated No longer used in Zest 2.x. This class will be removed after the
+ *             2026-12 release.
  * @noextend This class is not intended to be subclassed by clients.
  * @noreference This class is not intended to be referenced by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
+@SuppressWarnings("removal")
 @Deprecated(since = "2.0", forRemoval = true)
 public class DynamicScreen {
 
