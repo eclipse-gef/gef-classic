@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -155,7 +155,7 @@ public class SnapToGuides extends SnapToHelper {
 	 *                     <code>false</code> for horizontal.
 	 * @return the correction amount or getThreshold() if no correction was made
 	 */
-	protected double getCorrectionFor(int[] guides, double near, double far, Map extendedData, boolean isVertical) {
+	protected double getCorrectionFor(int[] guides, double near, double far, Map<Object, Object> extendedData, boolean isVertical) {
 		far -= 1.0;
 		double total = near + far;
 		// If the width is even, there is no middle pixel so favor the left -
@@ -189,7 +189,7 @@ public class SnapToGuides extends SnapToHelper {
 	 * @param side         the integer indicating which side is being snapped
 	 * @return a correction amount or getThreshold() if no correction was made
 	 */
-	protected double getCorrectionFor(int[] guides, double value, Map extendedData, boolean vert, int side) {
+	protected double getCorrectionFor(int[] guides, double value, Map<Object, Object> extendedData, boolean vert, int side) {
 		double resultMag = getThreshold();
 		double result = getThreshold();
 
