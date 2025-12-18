@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -121,7 +121,7 @@ public class RulerDragTracker extends SimpleDragTracker {
 			return false;
 		}
 		int position = getCurrentPosition();
-		Iterator guides = source.getRulerProvider().getGuides().iterator();
+		Iterator<?> guides = source.getRulerProvider().getGuides().iterator();
 		while (guides.hasNext()) {
 			int guidePos = source.getRulerProvider().getGuidePosition(guides.next());
 			if (Math.abs(guidePos - position) < GuideEditPart.MIN_DISTANCE_BW_GUIDES) {
