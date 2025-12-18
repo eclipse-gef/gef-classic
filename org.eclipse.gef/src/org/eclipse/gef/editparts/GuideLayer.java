@@ -45,7 +45,7 @@ public class GuideLayer extends FreeformLayer {
 	 * @return the Map of IFigures to their constraints (Booleans indicating whether
 	 *         or not they are horizontal guide lines)
 	 */
-	public Map getConstraints() {
+	public Map<IFigure, Object> getConstraints() {
 		if (constraints == null) {
 			constraints = new HashMap<>();
 		}
