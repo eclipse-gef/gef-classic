@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -106,11 +106,12 @@ public abstract class AbstractEditPart implements EditPart, RequestConstants, IA
 		/**
 		 * Constructs an Iterator for the given <code>List</code>.
 		 *
-		 * @deprecated this constructor should not be used
+		 * @deprecated this constructor should not be used. This constructor will be
+		 *             removed after the 2028-03 release.
 		 * @param list the list of policies.
 		 */
-		@Deprecated
-		public EditPolicyIterator(List list) {
+		@Deprecated(forRemoval = true, since = "2026-03")
+		public EditPolicyIterator(List<?> list) {
 			this(list.toArray());
 		}
 
