@@ -304,10 +304,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 * Adds a new constraint adapter to the list of constraint adapters
 	 *
 	 * @param constraintAdapter
-	 * @deprecated No longer used in Zest 2.x. This class will be removed in a
-	 *             future release in accordance with the two year deprecation
-	 *             policy.
+	 * @deprecated No longer used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "2.0", forRemoval = true)
 	public void addConstraintAdapter(ConstraintAdapter constraintAdapter) {
 		this.constraintAdapters.add(constraintAdapter);
@@ -317,10 +317,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 * Sets the constraint adapters on this model
 	 *
 	 * @param constraintAdapters
-	 * @deprecated No longer used in Zest 2.x. This class will be removed in a
-	 *             future release in accordance with the two year deprecation
-	 *             policy.
+	 * @deprecated No longer used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "2.0", forRemoval = true)
 	public void setConstraintAdapters(List<ConstraintAdapter> constraintAdapters) {
 		this.constraintAdapters = constraintAdapters;
@@ -1159,9 +1159,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	}
 
 	/**
-	 * @deprecated Not used in Zest 2.x. This method will be removed in a future
-	 *             release in accordance with the two year deprecation policy.
+	 * @deprecated Not used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	LayoutRelationship[] getConnectionsToLayout(List<GraphNode> nodesToLayout) {
 		// @tag zest.bug.156528-Filters.follows : make sure not to layout
@@ -1189,9 +1190,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	}
 
 	/**
-	 * @deprecated Not used in Zest 2.x. This method will be removed in a future
-	 *             release in accordance with the two year deprecation policy.
+	 * @deprecated Not used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	LayoutEntity[] getNodesToLayout(List<? extends GraphNode> nodes) {
 		// @tag zest.bug.156528-Filters.follows : make sure not to layout
@@ -1369,10 +1371,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 *
 	 * @param object
 	 * @param constraint
-	 * @deprecated No longer used in Zest 2.x. This class will be removed in a
-	 *             future release in accordance with the two year deprecation
-	 *             policy.
+	 * @deprecated No longer used in Zest 2.x. This method will be removed after the
+	 *             2026-12 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "2.0", forRemoval = true)
 	void invokeConstraintAdapters(Object object, LayoutConstraint constraint) {
 		if (constraintAdapters == null) {

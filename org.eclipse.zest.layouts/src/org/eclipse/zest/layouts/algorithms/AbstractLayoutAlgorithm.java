@@ -61,7 +61,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 	 * @noreference This class is not intended to be referenced by clients.
 	 * @since 2.0
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "removal" })
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static abstract class Zest1 implements LayoutAlgorithm.Zest1, Stoppable {
 

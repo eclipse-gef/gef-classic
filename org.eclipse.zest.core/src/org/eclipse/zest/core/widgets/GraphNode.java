@@ -80,6 +80,7 @@ public class GraphNode extends GraphItem {
 	 * @deprecated Not used in Zest 2.x. This class will be removed in a future
 	 *             release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	private LayoutEntity layoutEntity;
 
@@ -157,6 +158,7 @@ public class GraphNode extends GraphItem {
 	 * @deprecated Since Zest 2.0, use {@link #GraphNode(IContainer, int, IFigure)},
 	 *             {@link #setText(String)} and {@link #setImage(Image)}.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	public GraphNode(IContainer graphModel, int style, String text, Image image, Object data) {
 		super(graphModel.getGraph(), style, data);
@@ -230,6 +232,7 @@ public class GraphNode extends GraphItem {
 	 *             clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "1.12", forRemoval = true)
 	public LayoutEntity getLayoutEntity() {
 		return layoutEntity;

@@ -43,6 +43,7 @@ public class DelegatingDropAdapter extends org.eclipse.jface.util.DelegatingDrop
 	 *             {@link #addDropTargetListener(org.eclipse.jface.util.TransferDropTargetListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.0", forRemoval = true)
 	public void addDropTargetListener(TransferDropTargetListener listener) {
 		super.addDropTargetListener(listener);
@@ -67,6 +68,7 @@ public class DelegatingDropAdapter extends org.eclipse.jface.util.DelegatingDrop
 	 *             {@link #removeDropTargetListener(org.eclipse.jface.util.TransferDropTargetListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.21", forRemoval = true)
 	public void removeDropTargetListener(TransferDropTargetListener listener) {
 		super.removeDropTargetListener(listener);

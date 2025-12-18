@@ -135,6 +135,7 @@ public class CommandStack {
 	 *             {@link #notifyListeners()}. This field will be removed after the
 	 *             2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.11", forRemoval = true)
 	protected List<CommandStackListener> listeners = new CopyOnWriteArrayList<>();
 
@@ -173,6 +174,7 @@ public class CommandStack {
 	 *             {@link #addCommandStackEventListener(CommandStackEventListener)}
 	 *             instead. This method will be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.11", forRemoval = true)
 	public void addCommandStackListener(CommandStackListener listener) {
 		listeners.add(listener);
@@ -402,6 +404,7 @@ public class CommandStack {
 	 * @deprecated Use {@link CommandStackEventListener} instead. This method will
 	 *             be removed after the 2027-03 release.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "3.11", forRemoval = true)
 	public void removeCommandStackListener(CommandStackListener listener) {
 		listeners.remove(listener);

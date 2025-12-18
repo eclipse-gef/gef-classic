@@ -43,7 +43,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	 * @noreference This class is not intended to be referenced by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "removal" })
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Zest1 extends TreeLayoutAlgorithm.Zest1 {
 		private static final double MAX_DEGREES = Math.PI * 2;
@@ -186,6 +186,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	 * @deprecated Since Zest 2.0, use {@link #RadialLayoutAlgorithm()}.
 	 */
 	@Deprecated
+	@SuppressWarnings("removal")
 	public RadialLayoutAlgorithm(int style) {
 		this();
 		setResizing(style != LayoutStyles.NO_LAYOUT_NODE_RESIZING);

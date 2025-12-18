@@ -32,6 +32,7 @@ public class CompositeLayoutAlgorithm implements LayoutAlgorithm {
 	 * @noreference This class is not intended to be referenced by clients.
 	 * @noinstantiate This class is not intended to be instantiated by clients.
 	 */
+	@SuppressWarnings("removal")
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Zest1 extends AbstractLayoutAlgorithm.Zest1 {
 
