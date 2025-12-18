@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,7 +13,7 @@
 
 package swt.bugs;
 
-import java.lang.reflect.Method;
+import java.text.BreakIterator;
 
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.GC;
@@ -63,13 +63,7 @@ public class Bug54989 {
 		});
 
 		long time = System.currentTimeMillis();
-		try {
-			Class clazz = Class.forName("java.text.BreakIterator"); //$NON-NLS-1$
-			Method m = clazz.getMethod("getLineInstance", null); //$NON-NLS-1$
-			m.invoke(null, null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		BreakIterator.getLineInstance();
 		// BreakIterator.getLineInstance().setText("bogus");
 		System.out.println(System.currentTimeMillis() - time);
 
