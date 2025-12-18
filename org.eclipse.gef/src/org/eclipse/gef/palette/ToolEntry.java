@@ -85,7 +85,7 @@ public abstract class ToolEntry extends PaletteEntry {
 	 * @return the properties set in {@link #setToolProperty(Object, Object)}
 	 * @since 3.1
 	 */
-	protected Map getToolProperties() {
+	protected Map<Object, Object> getToolProperties() {
 		return map;
 	}
 
