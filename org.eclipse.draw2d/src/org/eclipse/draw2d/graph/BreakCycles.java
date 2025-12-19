@@ -206,6 +206,7 @@ class BreakCycles extends GraphVisitor {
 		n.workingInts[0] = index;
 	}
 
+	@SuppressWarnings("removal")
 	private static void sortedInsert(List<Node> list, Node node) {
 		int insert = 0;
 		while (insert < list.size() && (list.get(insert)).sortValue > node.sortValue) {

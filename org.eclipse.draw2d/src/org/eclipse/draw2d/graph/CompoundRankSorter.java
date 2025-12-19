@@ -102,6 +102,7 @@ class CompoundRankSorter extends RankSorter {
 		return map.get(new RowKey(row, s));
 	}
 
+	@SuppressWarnings("removal")
 	void copyConstraints(NestingTree tree) {
 		if (tree.subgraph != null) {
 			tree.sortValue = tree.subgraph.getRowConstraint();
