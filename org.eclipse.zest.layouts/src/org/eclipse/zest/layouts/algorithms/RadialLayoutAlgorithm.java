@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                           Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -55,12 +55,14 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Creates a radial layout with no style.
 		 */
+		@Deprecated
 		public Zest1() {
 			this(LayoutStyles.NONE);
 		}
 
 		// TODO: This is a really strange pattern. It extends tree layout and it
 		// contains a tree layout ?
+		@Deprecated
 		public Zest1(int styles) {
 			super(styles);
 			treeLayout = new TreeLayoutAlgorithm.Zest1(styles);
@@ -69,18 +71,22 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			throw new RuntimeException("Operation not implemented"); //$NON-NLS-1$
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 			return !continueous;
 		}
 
+		@Deprecated
 		DisplayIndependentRectangle layoutBounds = null;
 
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			layoutBounds = new DisplayIndependentRectangle(x, y, width, height);
@@ -88,6 +94,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 			roots = treeLayout.getRoots();
@@ -103,6 +110,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Set the range the radial layout will use when applyLayout is called. Both
 		 * values must be in radians.
 		 */
+		@Deprecated
 		public void setRangeToLayout(double startDegree, double endDegree) {
 			this.startDegree = startDegree;
 			this.endDegree = endDegree;
@@ -113,6 +121,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * each entity in terms of its percentage in the tree layout. Then apply that
 		 * percentage to the radius and distance from the center.
 		 */
+		@Deprecated
 		protected void computeRadialPositions(InternalNode[] entities, DisplayIndependentRectangle bounds2) {
 			DisplayIndependentRectangle bounds = new DisplayIndependentRectangle(getLayoutBounds(entities, true));
 			bounds.height = bounds2.height;
@@ -136,6 +145,7 @@ public class RadialLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * to include the center of each node.
 		 */
 		@Override
+		@Deprecated
 		protected DisplayIndependentRectangle getLayoutBounds(InternalNode[] entitiesToLayout, boolean includeNodeSize) {
 			DisplayIndependentRectangle layoutBounds = super.getLayoutBounds(entitiesToLayout, includeNodeSize);
 			DisplayIndependentPoint centerPoint = (roots != null) ? determineCenterPoint(roots)

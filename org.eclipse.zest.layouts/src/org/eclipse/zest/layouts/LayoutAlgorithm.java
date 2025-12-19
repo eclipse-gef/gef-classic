@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010 CHISEL Group, University of Victoria, Victoria,
- *                     BC, Canada and others.
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
+ *                           BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -63,6 +63,7 @@ public interface LayoutAlgorithm {
 		 *                                can place the entities.
 		 * @param asynchronous            Should the algorithm run Asynchronously
 		 */
+		@Deprecated
 		public void applyLayout(LayoutEntity[] entitiesToLayout, LayoutRelationship[] relationshipsToConsider, double x,
 				double y, double width, double height, boolean asynchronous, boolean continuous)
 				throws InvalidLayoutConfiguration;
@@ -72,6 +73,7 @@ public interface LayoutAlgorithm {
 		 *
 		 * @return True if a layout algorithm is currenly running, false otherwise
 		 */
+		@Deprecated
 		public boolean isRunning();
 
 		/**
@@ -79,11 +81,13 @@ public interface LayoutAlgorithm {
 		 * algorithms force a specific order, in which case this comparator will be
 		 * ignored.
 		 */
+		@Deprecated
 		public void setComparator(Comparator comparator);
 
 		/**
 		 * Filters the entities and relationships to apply the layout on
 		 */
+		@Deprecated
 		public void setFilter(Filter filter);
 
 		/**
@@ -91,6 +95,7 @@ public interface LayoutAlgorithm {
 		 * is responsible for ensuring this ratio is used. Note: By default the layout
 		 * will use a ratio of 1.0 for each entity.
 		 */
+		@Deprecated
 		public void setEntityAspectRatio(double ratio);
 
 		/**
@@ -98,6 +103,7 @@ public interface LayoutAlgorithm {
 		 * entities. Note: By default the layout will use a ratio of 1.0 for each
 		 * entity.
 		 */
+		@Deprecated
 		public double getEntityAspectRatio();
 
 		/**
@@ -105,17 +111,20 @@ public interface LayoutAlgorithm {
 		 * relieve some of the mystery, the layout algorithm will notify each
 		 * ProgressListener of its progress.
 		 */
+		@Deprecated
 		public void addProgressListener(ProgressListener listener);
 
 		/**
 		 * Removes the given progress listener, preventing it from receiving any more
 		 * updates.
 		 */
+		@Deprecated
 		public void removeProgressListener(ProgressListener listener);
 
 		/**
 		 * Makes a request to this layout algorithm to stop running.
 		 */
+		@Deprecated
 		public void stop();
 
 		/**
@@ -124,18 +133,25 @@ public interface LayoutAlgorithm {
 		 *
 		 * @param style
 		 */
+		@Deprecated
 		public void setStyle(int style);
 
+		@Deprecated
 		public int getStyle();
 
+		@Deprecated
 		public void addEntity(LayoutEntity entity);
 
+		@Deprecated
 		public void addRelationship(LayoutRelationship relationship);
 
+		@Deprecated
 		public void removeEntity(LayoutEntity entity);
 
+		@Deprecated
 		public void removeRelationship(LayoutRelationship relationship);
 
+		@Deprecated
 		public void removeRelationships(List<? extends LayoutRelationship> relationships);
 	}
 

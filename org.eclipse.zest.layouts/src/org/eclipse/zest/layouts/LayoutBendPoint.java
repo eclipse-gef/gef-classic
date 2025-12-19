@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2006, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2006, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -25,9 +25,12 @@ package org.eclipse.zest.layouts;
  */
 @Deprecated(since = "2.0", forRemoval = true)
 public interface LayoutBendPoint {
+	@Deprecated
 	public double getX();
 
+	@Deprecated
 	public double getY();
 
+	@Deprecated
 	public boolean getIsControlPoint();
 }

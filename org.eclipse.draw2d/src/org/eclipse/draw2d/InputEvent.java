@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,34 +26,42 @@ public abstract class InputEvent extends java.util.EventObject {
 	/**
 	 * @deprecated Use {@link SWT#ALT} instead.
 	 */
+	@Deprecated
 	public static final int ALT = SWT.ALT;
 	/**
 	 * @deprecated Use {@link SWT#CONTROL} instead.
 	 */
+	@Deprecated
 	public static final int CONTROL = SWT.CONTROL;
 	/**
 	 * @deprecated Use {@link SWT#SHIFT} instead.
 	 */
+	@Deprecated
 	public static final int SHIFT = SWT.SHIFT;
 	/**
 	 * @deprecated Use {@link SWT#BUTTON1} instead.
 	 */
+	@Deprecated
 	public static final int BUTTON1 = SWT.BUTTON1;
 	/**
 	 * @deprecated Use {@link SWT#BUTTON2} instead.
 	 */
+	@Deprecated
 	public static final int BUTTON2 = SWT.BUTTON2;
 	/**
 	 * @deprecated Use {@link SWT#BUTTON3} instead.
 	 */
+	@Deprecated
 	public static final int BUTTON3 = SWT.BUTTON3;
 	/**
 	 * @deprecated Use {@link SWT#BUTTON4} instead.
 	 */
+	@Deprecated
 	public static final int BUTTON4 = SWT.BUTTON4;
 	/**
 	 * @deprecated Use {@link SWT#BUTTON5} instead.
 	 */
+	@Deprecated
 	public static final int BUTTON5 = SWT.BUTTON5;
 	/**
 	 * A bitwise OR'ing of {@link #BUTTON1}, {@link #BUTTON2}, {@link #BUTTON3},
@@ -61,6 +69,7 @@ public abstract class InputEvent extends java.util.EventObject {
 	 *
 	 * @deprecated Use {@link SWT#BUTTON_MASK} instead.
 	 */
+	@Deprecated
 	public static final int ANY_BUTTON = SWT.BUTTON_MASK;
 
 	/**

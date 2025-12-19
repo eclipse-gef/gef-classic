@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -27,18 +27,21 @@ import org.eclipse.zest.layouts.algorithms.TreeLayoutAlgorithm;
 public interface LayoutStyles {
 
 	/** Default layout style constant. */
+	@Deprecated
 	public final static int NONE = 0x00;
 
 	/**
 	 * Layout constant indicating that the layout algorithm should NOT resize any of
 	 * the nodes.
 	 */
+	@Deprecated
 	public final static int NO_LAYOUT_NODE_RESIZING = 0x01;
 
 	/**
 	 * Some layouts may prefer to expand their bounds beyond those of the requested
 	 * bounds. This flag asks the layout not to do so.
 	 */
+	@Deprecated
 	public static final int ENFORCE_BOUNDS = 0X02;
 
 }

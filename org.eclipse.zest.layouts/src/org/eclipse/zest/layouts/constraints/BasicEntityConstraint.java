@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -25,15 +25,22 @@ package org.eclipse.zest.layouts.constraints;
 @Deprecated(since = "2.0", forRemoval = true)
 public class BasicEntityConstraint implements LayoutConstraint {
 
+	@Deprecated
 	public boolean hasPreferredLocation = false;
 
+	@Deprecated
 	public double preferredX;
+	@Deprecated
 	public double preferredY;
 
+	@Deprecated
 	public boolean hasPreferredSize = false;
+	@Deprecated
 	public double preferredWidth;
+	@Deprecated
 	public double preferredHeight;
 
+	@Deprecated
 	public BasicEntityConstraint() {
 		clear();
 	}
@@ -44,6 +51,7 @@ public class BasicEntityConstraint implements LayoutConstraint {
 	 * @see org.eclipse.zest.layouts.constraints.LayoutConstraint#clear()
 	 */
 	@Override
+	@Deprecated
 	public void clear() {
 		this.hasPreferredLocation = false;
 		this.hasPreferredSize = false;

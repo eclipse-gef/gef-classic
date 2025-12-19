@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Control;
 @Deprecated(since = "2.0", forRemoval = true)
 public interface RevealListener {
 
+	@Deprecated
 	public void revealed(Control c);
 
 }

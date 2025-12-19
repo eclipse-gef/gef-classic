@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -36,6 +36,7 @@ public class LayoutIterationEvent {
 	/**
 	 * Return the relationships used in this layout.
 	 */
+	@Deprecated
 	public List getRelationshipsToLayout() {
 		return relationshipsToLayout;
 	}
@@ -43,6 +44,7 @@ public class LayoutIterationEvent {
 	/**
 	 * Return the entities used in this layout.
 	 */
+	@Deprecated
 	public List getEntitiesToLayout() {
 		return entitiesToLayout;
 	}
@@ -50,6 +52,7 @@ public class LayoutIterationEvent {
 	/**
 	 * Return the iteration of the layout algorithm that was just completed.
 	 */
+	@Deprecated
 	public int getIterationCompleted() {
 		return iterationCompleted;
 	}

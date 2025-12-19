@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -65,20 +65,25 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static abstract class Zest1 implements LayoutAlgorithm.Zest1, Stoppable {
 
+		@Deprecated
 		public void removeRelationships(Collection<? extends LayoutRelationship> collection) {
 
 		}
 
+		@Deprecated
 		public static final int MIN_ENTITY_SIZE = 5;
 		private static final int MIN_TIME_DELAY_BETWEEN_PROGRESS_EVENTS = 1;
 
 		private Thread creationThread = null;
+		@Deprecated
 		protected Comparator comparator;
+		@Deprecated
 		protected Filter filter;
 		private final List<ProgressListener> progressListeners = new CopyOnWriteArrayList<>();
 		private Calendar lastProgressEventFired;
 		private double widthToHeightRatio;
 
+		@Deprecated
 		class InternalComparator implements Comparator<InternalNode> {
 			Comparator<LayoutEntity> externalComparator = null;
 
@@ -102,7 +107,9 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		private double internalY;
 		private double internalWidth;
 		private double internalHeight;
+		@Deprecated
 		protected boolean internalContinuous;
+		@Deprecated
 		protected boolean internalAsynchronous;
 
 		/*
@@ -119,11 +126,14 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		/** A list of LayoutRelationship objects to be added. */
 		private final List<LayoutRelationship> relationshipsToAdd = new ArrayList<>();
 
+		@Deprecated
 		protected boolean layoutStopped = true;
 
+		@Deprecated
 		protected int layout_styles = 0;
 
 		// Child classes can set to false to retain node shapes and sizes
+		@Deprecated
 		protected boolean resizeEntitiesAfterLayout = true;
 
 		/**
@@ -131,6 +141,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 *
 		 * @see LayoutStyles
 		 */
+		@Deprecated
 		public Zest1(int styles) {
 			this.creationThread = Thread.currentThread();
 			this.lastProgressEventFired = Calendar.getInstance();
@@ -146,6 +157,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param entity
 		 */
 		@Override
+		@Deprecated
 		public void addEntity(LayoutEntity entity) {
 			if ((entity != null) && !entitiesToAdd.contains(entity)) {
 				entitiesToAdd.add(entity);
@@ -159,6 +171,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param relationship
 		 */
 		@Override
+		@Deprecated
 		public void addRelationship(LayoutRelationship relationship) {
 			if ((relationship != null) && !relationshipsToAdd.contains(relationship)) {
 				relationshipsToAdd.add(relationship);
@@ -172,6 +185,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param entity The entity to remove
 		 */
 		@Override
+		@Deprecated
 		public void removeEntity(LayoutEntity entity) {
 			if ((entity != null) && !entitiesToRemove.contains(entity)) {
 				entitiesToRemove.add(entity);
@@ -185,6 +199,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param relationship The relationship to remove.
 		 */
 		@Override
+		@Deprecated
 		public void removeRelationship(LayoutRelationship relationship) {
 			if ((relationship != null) && !relationshipsToRemove.contains(relationship)) {
 				relationshipsToRemove.add(relationship);
@@ -197,6 +212,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param relationships
 		 */
 		@Override
+		@Deprecated
 		public void removeRelationships(List<? extends LayoutRelationship> relationships) {
 			// note we don't check if the relationshipsToRemove contains
 			// any of the objects in relationships.
@@ -210,6 +226,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param style
 		 */
 		@Override
+		@Deprecated
 		public void setStyle(int style) {
 			this.layout_styles = style;
 		}
@@ -220,10 +237,12 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @return the layout styles for this layout
 		 */
 		@Override
+		@Deprecated
 		public int getStyle() {
 			return this.layout_styles;
 		}
 
+		@Deprecated
 		public abstract void setLayoutArea(double x, double y, double width, double height);
 
 		/**
@@ -232,6 +251,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param asynchronous
 		 * @param continuous
 		 */
+		@Deprecated
 		protected abstract boolean isValidConfiguration(boolean asynchronous, boolean continuous);
 
 		/**
@@ -250,6 +270,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param boundsHeight            The height of the bounds in which the layout
 		 *                                can place the entities.
 		 */
+		@Deprecated
 		protected abstract void applyLayoutInternal(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider, double boundsX, double boundsY, double boundsWidth,
 				double boundsHeight);
@@ -261,6 +282,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param entities the current entities
 		 * @return the updated entities array
 		 */
+		@Deprecated
 		protected InternalNode[] updateEntities(InternalNode[] entities) {
 			if (!entitiesToRemove.isEmpty() || !entitiesToAdd.isEmpty()) {
 				List<InternalNode> internalNodesList = new ArrayList<>(Arrays.asList(entities));
@@ -308,6 +330,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param relationships the current relationships
 		 * @return the update relationships array
 		 */
+		@Deprecated
 		protected InternalRelationship[] updateRelationships(InternalRelationship[] relationships) {
 			if (!relationshipsToRemove.isEmpty() || !relationshipsToAdd.isEmpty()) {
 				List<InternalRelationship> internalRelsList = new ArrayList<>(Arrays.asList(relationships));
@@ -356,6 +379,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @return boolean if the layout algorithm is running
 		 */
 		@Override
+		@Deprecated
 		public synchronized boolean isRunning() {
 			return !layoutStopped;
 		}
@@ -365,6 +389,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * constantly check isLayoutRunning
 		 */
 		@Override
+		@Deprecated
 		public synchronized void stop() {
 			layoutStopped = true;
 			postLayoutAlgorithm(internalNodes, internalRelationships);
@@ -396,29 +421,34 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		/**
 		 * Code called before the layout algorithm starts
 		 */
+		@Deprecated
 		protected abstract void preLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider, double x, double y, double width, double height);
 
 		/**
 		 * Code called after the layout algorithm ends
 		 */
+		@Deprecated
 		protected abstract void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider);
 
 		/**
 		 * Gets the total number of steps in this layout
 		 */
+		@Deprecated
 		protected abstract int getTotalNumberOfLayoutSteps();
 
 		/**
 		 * Gets the current layout step
 		 */
+		@Deprecated
 		protected abstract int getCurrentLayoutStep();
 
 		/**
 		 * This actually applies the layout
 		 */
 		@Override
+		@Deprecated
 		public synchronized void applyLayout(final LayoutEntity[] entitiesToLayout,
 				final LayoutRelationship[] relationshipsToConsider, final double x, final double y, final double width,
 				final double height, boolean asynchronous, boolean continuous) throws InvalidLayoutConfiguration {
@@ -481,6 +511,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 *
 		 * @param relationshipsToConsider
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		protected void updateBendPoints(InternalRelationship[] relationshipsToConsider) {
 			for (InternalRelationship relationship : relationshipsToConsider) {
@@ -569,6 +600,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * Filters the entities and relationships to apply the layout on
 		 */
 		@Override
+		@Deprecated
 		public void setFilter(Filter filter) {
 			this.filter = filter;
 		}
@@ -578,6 +610,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * algorithms force a specific order.
 		 */
 		@Override
+		@Deprecated
 		public void setComparator(Comparator comparator) {
 			this.comparator = new InternalComparator(comparator);
 		}
@@ -587,6 +620,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * entitiesToLayout list. Allows other classes in this package to use this
 		 * method to verify the input
 		 */
+		@Deprecated
 		public static boolean verifyInput(LayoutEntity[] entitiesToLayout, LayoutRelationship[] relationshipsToConsider) {
 			boolean stillValid = true;
 			for (LayoutRelationship relationship : relationshipsToConsider) {
@@ -615,6 +649,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param x
 		 * @param y
 		 */
+		@Deprecated
 		protected DisplayIndependentPoint getLocalLocation(InternalNode[] entitiesToLayout, double x, double y,
 				DisplayIndependentRectangle realBounds) {
 
@@ -632,6 +667,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * Child classes should set flag reresizeEntitiesAfterLayout to false if they
 		 * want to preserve node sizes.
 		 */
+		@Deprecated
 		protected void defaultFitWithinBounds(InternalNode[] entitiesToLayout, DisplayIndependentRectangle realBounds) {
 			defaultFitWithinBounds(entitiesToLayout, new InternalRelationship[0], realBounds);
 		}
@@ -642,6 +678,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * Child classes should set flag reresizeEntitiesAfterLayout to false if they
 		 * want to preserve node sizes.
 		 */
+		@Deprecated
 		protected void defaultFitWithinBounds(InternalNode[] entitiesToLayout, InternalRelationship[] relationships,
 				DisplayIndependentRectangle realBounds) {
 
@@ -836,6 +873,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * nodes or not. If the size is not included, the bounds will only be guaranteed
 		 * to include the center of each node.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		protected DisplayIndependentRectangle getLayoutBounds(InternalNode[] entitiesToLayout, boolean includeNodeSize) {
 			double rightSide = Double.MIN_VALUE;
@@ -908,6 +946,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * Set the width to height ratio you want the entities to use
 		 */
 		@Override
+		@Deprecated
 		public void setEntityAspectRatio(double ratio) {
 			widthToHeightRatio = ratio;
 		}
@@ -917,6 +956,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * entities.
 		 */
 		@Override
+		@Deprecated
 		public double getEntityAspectRatio() {
 			return widthToHeightRatio;
 		}
@@ -927,6 +967,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * ProgressListener of its progress.
 		 */
 		@Override
+		@Deprecated
 		public void addProgressListener(ProgressListener listener) {
 			if (!progressListeners.contains(listener)) {
 				progressListeners.add(listener);
@@ -938,6 +979,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * updates.
 		 */
 		@Override
+		@Deprecated
 		public void removeProgressListener(ProgressListener listener) {
 			if (progressListeners.contains(listener)) {
 				progressListeners.remove(listener);
@@ -948,6 +990,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * Updates the layout locations so the external nodes know about the new
 		 * locations
 		 */
+		@Deprecated
 		protected void updateLayoutLocations(InternalNode[] nodes) {
 			for (InternalNode node : nodes) {
 				if (!node.hasPreferredLocation()) {
@@ -961,11 +1004,13 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 			}
 		}
 
+		@Deprecated
 		protected void fireProgressStarted(int totalNumberOfSteps) {
 			ProgressEvent event = new ProgressEvent(0, totalNumberOfSteps);
 			List.copyOf(progressListeners).forEach(listener -> listener.progressStarted(event));
 		}
 
+		@Deprecated
 		protected void fireProgressEnded(int totalNumberOfSteps) {
 			ProgressEvent event = new ProgressEvent(totalNumberOfSteps, totalNumberOfSteps);
 			List.copyOf(progressListeners).forEach(listener -> listener.progressEnded(event));
@@ -974,6 +1019,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		/**
 		 * @since 1.5
 		 */
+		@Deprecated
 		protected void fireProgressUpdated(int currentStep, int totalNumberOfSteps) {
 			ProgressEvent event = new ProgressEvent(currentStep, totalNumberOfSteps);
 			List.copyOf(progressListeners).forEach(listener -> listener.progressUpdated(event));
@@ -986,6 +1032,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @param currentStep        The current step completed.
 		 * @param totalNumberOfSteps The total number of steps in the algorithm.
 		 */
+		@Deprecated
 		protected void fireProgressEvent(int currentStep, int totalNumberOfSteps) {
 			// Update the layout locations to the external nodes
 			Calendar now = Calendar.getInstance();
@@ -997,6 +1044,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 			}
 		}
 
+		@Deprecated
 		protected int getNumberOfProgressListeners() {
 			return progressListeners.size();
 		}
@@ -1011,6 +1059,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @since 2.0
 		 */
 		@Override
+		@Deprecated
 		public void setLayoutContext(LayoutContext context) {
 			throw new UnsupportedOperationException("Not supported in Zest 1.x"); //$NON-NLS-1$
 		}
@@ -1019,6 +1068,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		 * @since 2.0
 		 */
 		@Override
+		@Deprecated
 		public void applyLayout(boolean clean) {
 			throw new UnsupportedOperationException("Not supported in Zest 1.x"); //$NON-NLS-1$
 		}

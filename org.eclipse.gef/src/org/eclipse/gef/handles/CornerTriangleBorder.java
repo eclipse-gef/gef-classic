@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -39,6 +39,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 *
 	 * @param isPrimary Determines this border's color.
 	 */
+	@Deprecated
 	public CornerTriangleBorder(boolean isPrimary) {
 		this.isPrimary = isPrimary;
 	}
@@ -49,6 +50,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 * @see org.eclipse.draw2d.Border#isOpaque()
 	 */
 	@Override
+	@Deprecated
 	public boolean isOpaque() {
 		return true;
 	}
@@ -57,6 +59,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 * @see org.eclipse.draw2d.Border#getInsets(org.eclipse.draw2d.IFigure)
 	 */
 	@Override
+	@Deprecated
 	public Insets getInsets(IFigure figure) {
 		return new Insets(1);
 	}
@@ -70,6 +73,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 * @param insets   The <code>Insets</code>.
 	 */
 	@Override
+	@Deprecated
 	public void paint(IFigure figure, Graphics graphics, Insets insets) {
 		// Don't paint the center of the figure.
 		int width = 1;
@@ -135,6 +139,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 *
 	 * @return The outline color.
 	 */
+	@Deprecated
 	protected Color getBorderColor() {
 		return (isPrimary()) ? ColorConstants.white : ColorConstants.black;
 	}
@@ -144,6 +149,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 *
 	 * @return The fill color.
 	 */
+	@Deprecated
 	protected Color getFillColor() {
 		return (isPrimary()) ? ColorConstants.black : ColorConstants.white;
 	}
@@ -154,6 +160,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 *
 	 * @return Whether or not this is a primary border.
 	 */
+	@Deprecated
 	public boolean isPrimary() {
 		return isPrimary;
 	}
@@ -164,6 +171,7 @@ public final class CornerTriangleBorder extends AbstractBorder {
 	 * @param isPrimary True if this border is for the primary object in the
 	 *                  selection.
 	 */
+	@Deprecated
 	public void setPrimary(boolean isPrimary) {
 		this.isPrimary = isPrimary;
 	}

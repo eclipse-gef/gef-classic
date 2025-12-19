@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -34,5 +34,6 @@ public interface Filter {
 	/**
 	 * Returns true if the object is filtered, or false if it's not filtered.
 	 */
+	@Deprecated
 	public boolean isObjectFiltered(LayoutItem object);
 }

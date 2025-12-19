@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -25,11 +25,16 @@ import org.eclipse.swt.widgets.Text;
 @Deprecated
 public final class GEF {
 
+	@Deprecated
 	static final String TAB = "  ";//$NON-NLS-1$
 
+	@Deprecated
 	static Text text;
+	@Deprecated
 	static int msgCount;
+	@Deprecated
 	static int tab;
+	@Deprecated
 	static NumberFormat formatter = new DecimalFormat();
 
 	/**
@@ -78,6 +83,7 @@ public final class GEF {
 	 *
 	 * @since 1.0
 	 */
+	@Deprecated
 	public static void clearConsole() {
 		if (text == null) {
 			return;
@@ -91,6 +97,7 @@ public final class GEF {
 	 * @since 1.0
 	 * @param textBox the text control for streaming
 	 */
+	@Deprecated
 	public static void setConsole(Text textBox) {
 		msgCount = 0;
 		formatter.setMinimumIntegerDigits(2);
@@ -103,6 +110,7 @@ public final class GEF {
 	 *
 	 * @since 2.0
 	 */
+	@Deprecated
 	public static void debugPop() {
 		tab--;
 	}
@@ -113,6 +121,7 @@ public final class GEF {
 	 * @since 2.0
 	 * @param heading the message describing the indented text to follow
 	 */
+	@Deprecated
 	public static void debugPush(String heading) {
 		debug(heading);
 		tab++;
@@ -124,6 +133,7 @@ public final class GEF {
 	 * @since 1.0
 	 * @param message a debug message
 	 */
+	@Deprecated
 	public static void debug(String message) {
 		String lineNumber = formatter.format(msgCount++);
 		msgCount %= 100;

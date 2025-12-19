@@ -2302,6 +2302,7 @@ public class Figure implements IFigure {
 		 *
 		 * @param figure The Figure whose children to iterate over
 		 */
+		@Deprecated
 		public FigureIterator(IFigure figure) {
 			list = figure.getChildren();
 			index = list.size();
@@ -2312,6 +2313,7 @@ public class Figure implements IFigure {
 		 *
 		 * @return The next Figure
 		 */
+		@Deprecated
 		public IFigure nextFigure() {
 			return list.get(--index);
 		}
@@ -2321,6 +2323,7 @@ public class Figure implements IFigure {
 		 *
 		 * @return <code>true</code> if there's another Figure to iterate over
 		 */
+		@Deprecated
 		public boolean hasNext() {
 			return index > 0;
 		}

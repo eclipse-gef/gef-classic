@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,8 +22,10 @@ package org.eclipse.draw2d.geometry;
 public final class Ray {
 
 	/** the X value */
+	@Deprecated
 	public int x;
 	/** the Y value */
+	@Deprecated
 	public int y;
 
 	/**
@@ -31,6 +33,7 @@ public final class Ray {
 	 *
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray() {
 	}
 
@@ -41,6 +44,7 @@ public final class Ray {
 	 * @param y Y value.
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -52,6 +56,7 @@ public final class Ray {
 	 * @param p the Point
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray(Point p) {
 		x = p.x;
 		y = p.y;
@@ -65,6 +70,7 @@ public final class Ray {
 	 * @param end   End Point
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray(Point start, Point end) {
 		x = end.x - start.x;
 		y = end.y - start.y;
@@ -77,6 +83,7 @@ public final class Ray {
 	 * @param end   The end Ray
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray(Ray start, Ray end) {
 		x = end.x - start.x;
 		y = end.y - start.y;
@@ -92,6 +99,7 @@ public final class Ray {
 	 * @see #similarity(Ray)
 	 * @since 2.0
 	 */
+	@Deprecated
 	public int assimilarity(Ray r) {
 		return Math.abs(x * r.y - y * r.x);
 	}
@@ -103,6 +111,7 @@ public final class Ray {
 	 * @return The dot product
 	 * @since 2.0
 	 */
+	@Deprecated
 	public int dotProduct(Ray r) {
 		return x * r.x + y * r.y;
 	}
@@ -115,6 +124,7 @@ public final class Ray {
 	 *         overflow
 	 * @since 3.4.1
 	 */
+	@Deprecated
 	long dotProductL(Ray r) {
 		return (long) x * r.x + (long) y * r.y;
 	}
@@ -123,6 +133,7 @@ public final class Ray {
 	 * @see java.lang.Object#equals(Object)
 	 */
 	@Override
+	@Deprecated
 	public boolean equals(Object obj) {
 		if (obj == this) {
 			return true;
@@ -140,6 +151,7 @@ public final class Ray {
 	 * @return a new Ray
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray getAdded(Ray r) {
 		return new Ray(r.x + x, r.y + y);
 	}
@@ -151,6 +163,7 @@ public final class Ray {
 	 * @return a new Ray
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray getAveraged(Ray r) {
 		return new Ray((x + r.x) / 2, (y + r.y) / 2);
 	}
@@ -162,6 +175,7 @@ public final class Ray {
 	 * @return a new Ray
 	 * @since 2.0
 	 */
+	@Deprecated
 	public Ray getScaled(int s) {
 		return new Ray(x * s, y * s);
 	}
@@ -170,6 +184,7 @@ public final class Ray {
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
+	@Deprecated
 	public int hashCode() {
 		return (x * y) ^ (x + y);
 	}
@@ -180,6 +195,7 @@ public final class Ray {
 	 * @return true if this Ray has a non-zero horizontal comonent
 	 * @since 2.0
 	 */
+	@Deprecated
 	public boolean isHorizontal() {
 		return x != 0;
 	}
@@ -190,6 +206,7 @@ public final class Ray {
 	 * @return Length of this Ray
 	 * @since 2.0
 	 */
+	@Deprecated
 	public double length() {
 		return Math.sqrt(dotProductL(this));
 	}
@@ -203,6 +220,7 @@ public final class Ray {
 	 * @see #assimilarity(Ray)
 	 * @since 2.0
 	 */
+	@Deprecated
 	public int similarity(Ray r) {
 		return Math.abs(dotProduct(r));
 	}
@@ -211,6 +229,7 @@ public final class Ray {
 	 * @return a String representation
 	 */
 	@Override
+	@Deprecated
 	public String toString() {
 		return "(" + x + "," + y + ")";//$NON-NLS-3$//$NON-NLS-2$//$NON-NLS-1$
 	}

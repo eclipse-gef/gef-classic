@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -42,6 +42,7 @@ import org.eclipse.gef.tools.MarqueeDragTracker;
  * @deprecated this class will be deleted, use ScrollingGraphicalViewer with
  *             ScalableRootEditPart instead
  */
+@Deprecated
 public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 		implements RootEditPart, LayerConstants, LayerManager {
 

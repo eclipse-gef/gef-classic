@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005.2010, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005.2010, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                           Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -61,46 +61,55 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * The default value for the spring layout number of interations.
 		 */
+		@Deprecated
 		public static final int DEFAULT_SPRING_ITERATIONS = 1000;
 
 		/**
 		 * the default value for the time algorithm runs.
 		 */
+		@Deprecated
 		public static final long MAX_SPRING_TIME = 10000;
 
 		/**
 		 * The default value for positioning nodes randomly.
 		 */
+		@Deprecated
 		public static final boolean DEFAULT_SPRING_RANDOM = true;
 
 		/**
 		 * The default value for ignoring unconnected nodes.
 		 */
+		@Deprecated
 		public static final boolean DEFAULT_SPRING_IGNORE_UNCON = true;
 
 		/**
 		 * The default value for separating connected components.
 		 */
+		@Deprecated
 		public static final boolean DEFAULT_SPRING_SEPARATE_COMPONENTS = true;
 
 		/**
 		 * The default value for the spring layout move-control.
 		 */
+		@Deprecated
 		public static final double DEFAULT_SPRING_MOVE = 1.0f;
 
 		/**
 		 * The default value for the spring layout strain-control.
 		 */
+		@Deprecated
 		public static final double DEFAULT_SPRING_STRAIN = 1.0f;
 
 		/**
 		 * The default value for the spring layout length-control.
 		 */
+		@Deprecated
 		public static final double DEFAULT_SPRING_LENGTH = 1.0f;
 
 		/**
 		 * The default value for the spring layout gravitation-control.
 		 */
+		@Deprecated
 		public static final double DEFAULT_SPRING_GRAVITATION = 1.0f;
 
 		/**
@@ -123,11 +132,13 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Minimum distance considered between nodes
 		 */
+		@Deprecated
 		protected static final double MIN_DISTANCE = 0.001d;
 
 		/**
 		 * An arbitrarily small value in mathematics.
 		 */
+		@Deprecated
 		protected static final double EPSILON = 0.001d;
 
 		/**
@@ -191,11 +202,13 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 
 		private DisplayIndependentRectangle bounds = null;
 
+		@Deprecated
 		Date date = null;
 
 		/**
 		 * Constructor.
 		 */
+		@Deprecated
 		public Zest1(int styles) {
 			super(styles);
 			srcDestToNumRelsMap = new HashMap<>();
@@ -207,11 +220,13 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Creates a sprint layout algoirthm with no style
 		 *
 		 */
+		@Deprecated
 		public Zest1() {
 			this(LayoutStyles.NONE);
 		}
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			bounds = new DisplayIndependentRectangle(x, y, width, height);
 		}
@@ -221,6 +236,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param move The move-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setSpringMove(double move) {
 			sprMove = move;
@@ -232,6 +248,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @return The move-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public double getSpringMove() {
 			return sprMove;
@@ -242,6 +259,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param strain The strain-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setSpringStrain(double strain) {
 			sprStrain = strain;
@@ -253,6 +271,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @return The strain-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public double getSpringStrain() {
 			return sprStrain;
@@ -263,6 +282,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param length The length-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setSpringLength(double length) {
 			sprLength = length;
@@ -271,6 +291,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Gets the max time this algorithm will run for
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public long getSpringTimeout() {
 			return maxTimeMS;
@@ -281,6 +302,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param timeout
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setSpringTimeout(long timeout) {
 			maxTimeMS = timeout;
@@ -292,6 +314,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @return The length-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public double getSpringLength() {
 			return sprLength;
@@ -302,6 +325,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param gravitation The gravitation-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setSpringGravitation(double gravitation) {
 			sprGravitation = gravitation;
@@ -313,6 +337,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @return The gravitation-control value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public double getSpringGravitation() {
 			return sprGravitation;
@@ -323,6 +348,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param iterations The number of iterations.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setIterations(int iterations) {
 			sprIterations = iterations;
@@ -333,6 +359,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @return The number of iterations.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public int getIterations() {
 			return sprIterations;
@@ -344,6 +371,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param random The random placement value.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setRandom(boolean random) {
 			sprRandom = random;
@@ -353,16 +381,19 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Returns whether or not this SpringLayoutAlgorithm will layout the nodes
 		 * randomly before beginning iterations.
 		 */
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public boolean getRandom() {
 			return sprRandom;
 		}
 
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public void setWeight(String relType, double weight) {
 			relTypeToWeightMap.put(relType, Double.valueOf(weight));
 		}
 
+		@Deprecated
 		@SuppressWarnings("static-method")
 		public double getWeight(String relType) {
 			Double weight = relTypeToWeightMap.get(relType);
@@ -372,6 +403,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Sets the default conditions.
 		 */
+		@Deprecated
 		public void setDefaultConditions() {
 			// sprMove = DEFAULT_SPRING_MOVE;
 			// sprStrain = DEFAULT_SPRING_STRAIN;
@@ -400,6 +432,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		private long startTime = 0;
 
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			// TODO: Filter out any non-wanted entities and relationships
@@ -427,6 +460,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 			reset(entitiesToLayout);
@@ -492,6 +526,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		// TODO: This is a complete Clone! (and not in a good way)
+		@Deprecated
 		protected DisplayIndependentRectangle getLayoutBoundsTemp(InternalNode[] entitiesToLayout,
 				boolean includeNodeSize) {
 			double rightSide = Double.MIN_VALUE;
@@ -511,6 +546,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 			return new DisplayIndependentRectangle(leftSide, topSide, rightSide - leftSide, bottomSide - topSide);
 		}
 
+		@Deprecated
 		protected void convertNodePositionsBack(int i, InternalNode entityToConvert, double px, double py,
 				double screenWidth, double screenHeight, DisplayIndependentRectangle layoutBounds) {
 
@@ -577,22 +613,26 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected boolean performAnotherNonContinuousIteration() {
 			setSprIterationsBasedOnTime();
 			return iteration <= sprIterations && largestMovement >= sprMove;
 		}
 
 		@Override
+		@Deprecated
 		protected int getCurrentLayoutStep() {
 			return iteration;
 		}
 
 		@Override
+		@Deprecated
 		protected int getTotalNumberOfLayoutSteps() {
 			return sprIterations;
 		}
 
 		@Override
+		@Deprecated
 		protected void computeOneIteration(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			if (bounds == null) {
@@ -616,6 +656,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Puts vertices in random places, all between (0,0) and (1,1).
 		 */
+		@Deprecated
 		public void placeRandomly(InternalNode[] entitiesToLayout) {
 			// If only one node in the data repository, put it in the middle
 			if (entitiesToLayout.length == 1) {
@@ -646,6 +687,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Computes the force for each node in this SpringLayoutAlgorithm. The computed
 		 * force will be stored in the data repository
 		 */
+		@Deprecated
 		protected void computeForces(InternalNode[] entitiesToLayout) {
 
 			// initialize all forces to zero
@@ -726,6 +768,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * computed position will be stored in the data repository. position = position
 		 * + sprMove * force
 		 */
+		@Deprecated
 		protected void computePositions(InternalNode[] entitiesToLayout) {
 			for (int i = 0; i < entitiesToLayout.length; i++) {
 				if (!anchors[i] || entitiesToLayout[i].hasPreferredLocation()) {
@@ -765,6 +808,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * coordinates in double precision. The computed positions will be still stored
 		 * in the data repository.
 		 */
+		@Deprecated
 		protected void convertToUnitCoordinates(InternalNode[] entitiesToLayout) {
 			double minX = Double.MAX_VALUE;
 			double maxX = Double.MIN_VALUE;
@@ -823,6 +867,7 @@ public class SpringLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 			return asynchronous || !continueous;
 		}

@@ -30,6 +30,7 @@ public interface CommandStackListener {
 	 *
 	 * @param event the event
 	 */
+	@Deprecated
 	void commandStackChanged(EventObject event);
 
 }

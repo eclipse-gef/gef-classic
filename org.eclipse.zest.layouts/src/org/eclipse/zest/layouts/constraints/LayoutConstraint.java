@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -30,5 +30,6 @@ public interface LayoutConstraint {
 	 * This method clears all the fields of the layout constraints. This should not
 	 * be called outside the layout package
 	 */
+	@Deprecated
 	public void clear();
 }

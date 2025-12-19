@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,6 +32,7 @@ public class CreationToolEntry extends ToolEntry {
 	 *             factory is being provided to the tool via the
 	 *             {@link ToolEntry#setToolProperty(Object, Object)} method.
 	 */
+	@Deprecated
 	protected final CreationFactory factory;
 
 	/**

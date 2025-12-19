@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -35,18 +35,22 @@ public class CompositeLayoutAlgorithm implements LayoutAlgorithm {
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Zest1 extends AbstractLayoutAlgorithm.Zest1 {
 
+		@Deprecated
 		LayoutAlgorithm.Zest1[] algorithms = null;
 
+		@Deprecated
 		public Zest1(int styles, LayoutAlgorithm.Zest1[] algoirthms) {
 			super(styles);
 			this.algorithms = algoirthms;
 		}
 
+		@Deprecated
 		public Zest1(LayoutAlgorithm.Zest1[] algoirthms) {
 			this(0, algoirthms);
 		}
 
 		@Override
+		@Deprecated
 		protected void applyLayoutInternal(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double boundsX, double boundsY, double boundsWidth, double boundsHeight) {
 
@@ -66,24 +70,28 @@ public class CompositeLayoutAlgorithm implements LayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected int getCurrentLayoutStep() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected int getTotalNumberOfLayoutSteps() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continuous) {
 			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 			// TODO Auto-generated method stub
@@ -91,6 +99,7 @@ public class CompositeLayoutAlgorithm implements LayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			// TODO Auto-generated method stub
@@ -98,6 +107,7 @@ public class CompositeLayoutAlgorithm implements LayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			// TODO Auto-generated method stub
 
