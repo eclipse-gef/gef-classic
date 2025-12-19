@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -34,6 +34,7 @@ public interface LayoutGraph {
 	 *
 	 * @param node The new node.
 	 */
+	@Deprecated
 	public void addEntity(LayoutEntity node);
 
 	/**
@@ -41,6 +42,7 @@ public interface LayoutGraph {
 	 *
 	 * @param relationship
 	 */
+	@Deprecated
 	public void addRelationship(LayoutRelationship relationship);
 
 	/**
@@ -49,6 +51,7 @@ public interface LayoutGraph {
 	 *
 	 * @return List A List of LayoutEntity objects.
 	 */
+	@Deprecated
 	public List getEntities();
 
 	/**
@@ -57,6 +60,7 @@ public interface LayoutGraph {
 	 *
 	 * @return List A List of LayoutRelationship objects.
 	 */
+	@Deprecated
 	public List getRelationships();
 
 	/**
@@ -64,6 +68,7 @@ public interface LayoutGraph {
 	 *
 	 * @return boolean If the graph is bidirectional.
 	 */
+	@Deprecated
 	public boolean isBidirectional();
 
 }

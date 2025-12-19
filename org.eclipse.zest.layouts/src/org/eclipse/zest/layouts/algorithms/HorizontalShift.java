@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2006, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2006, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -36,11 +36,13 @@ public class HorizontalShift extends AbstractLayoutAlgorithm.Zest1 {
 	private static final double DELTA = 10;
 	private static final double VSPACING = 2;
 
+	@Deprecated
 	public HorizontalShift(int styles) {
 		super(styles);
 	}
 
 	@Override
+	@Deprecated
 	protected void applyLayoutInternal(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 			double boundsX, double boundsY, double boundsWidth, double boundsHeight) {
 
@@ -93,30 +95,35 @@ public class HorizontalShift extends AbstractLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	protected int getCurrentLayoutStep() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
+	@Deprecated
 	protected int getTotalNumberOfLayoutSteps() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
+	@Deprecated
 	protected boolean isValidConfiguration(boolean asynchronous, boolean continuous) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
+	@Deprecated
 	protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 			InternalRelationship[] relationshipsToConsider) {
 		// TODO Auto-generated method stub
 	}
 
 	@Override
+	@Deprecated
 	protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 			double x, double y, double width, double height) {
 		// TODO Auto-generated method stub
@@ -124,6 +131,7 @@ public class HorizontalShift extends AbstractLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	public void setLayoutArea(double x, double y, double width, double height) {
 		// TODO Auto-generated method stub
 	}

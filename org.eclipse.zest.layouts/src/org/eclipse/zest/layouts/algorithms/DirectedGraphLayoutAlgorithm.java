@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -49,11 +49,13 @@ public class DirectedGraphLayoutAlgorithm extends AbstractLayoutAlgorithm {
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Zest1 extends AbstractLayoutAlgorithm.Zest1 {
 
+		@Deprecated
 		public Zest1(int styles) {
 			super(styles);
 		}
 
 		@Override
+		@Deprecated
 		protected void applyLayoutInternal(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double boundsX, double boundsY, double boundsWidth, double boundsHeight) {
 			Map<InternalNode, Node> mapping = new HashMap<>(entitiesToLayout.length);
@@ -87,24 +89,28 @@ public class DirectedGraphLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected int getCurrentLayoutStep() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected int getTotalNumberOfLayoutSteps() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continuous) {
 			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 			// TODO Auto-generated method stub
@@ -112,6 +118,7 @@ public class DirectedGraphLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			// TODO Auto-generated method stub
@@ -119,6 +126,7 @@ public class DirectedGraphLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			// TODO Auto-generated method stub
 

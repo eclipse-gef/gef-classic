@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -25,7 +25,9 @@ package org.eclipse.zest.layouts.constraints;
 public class LabelLayoutConstraint implements LayoutConstraint {
 
 	// These should be accessed directly
+	@Deprecated
 	public String label;
+	@Deprecated
 	public int pointSize;
 
 	/*
@@ -34,6 +36,7 @@ public class LabelLayoutConstraint implements LayoutConstraint {
 	 * @see org.eclipse.zest.layouts.constraints.LayoutConstraint#clear()
 	 */
 	@Override
+	@Deprecated
 	public void clear() {
 		label = null;
 		pointSize = 1;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -29,6 +29,7 @@ import org.eclipse.zest.layouts.LayoutStyles;
 @Deprecated(since = "2.0", forRemoval = true)
 public class HorizontalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 
+	@Deprecated
 	public HorizontalLayoutAlgorithm(int styles) {
 		super(styles);
 	}
@@ -36,6 +37,7 @@ public class HorizontalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	/**
 	 * Horizontal Layout Algorithm constructor. Sets the Style to none.
 	 */
+	@Deprecated
 	public HorizontalLayoutAlgorithm() {
 		this(LayoutStyles.NONE);
 	}
@@ -45,6 +47,7 @@ public class HorizontalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	 * the number of rows
 	 */
 	@Override
+	@Deprecated
 	protected int[] calculateNumberOfRowsAndCols(int numChildren, double boundX, double boundY, double boundWidth,
 			double boundHeight) {
 		int rows = 1;
@@ -54,6 +57,7 @@ public class HorizontalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 		if (asynchronous && continueous) {
 			return false;

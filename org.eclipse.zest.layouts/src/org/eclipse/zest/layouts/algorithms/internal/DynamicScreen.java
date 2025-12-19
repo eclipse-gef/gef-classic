@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -35,11 +35,16 @@ public class DynamicScreen {
 
 	private DisplayIndependentRectangle screenBounds = null;
 
+	@Deprecated
 	double minX = 0.0;
+	@Deprecated
 	double minY = 0.0;
+	@Deprecated
 	double maxX = 0.0;
+	@Deprecated
 	double maxY = 0.0;
 
+	@Deprecated
 	public void cleanScreen() {
 		minX = 0.0;
 		minY = 0.0;
@@ -47,6 +52,7 @@ public class DynamicScreen {
 		maxY = 0.0;
 	}
 
+	@Deprecated
 	class XComparator implements Comparator<InternalNode> {
 		@Override
 		public int compare(InternalNode n1, InternalNode n2) {
@@ -60,6 +66,7 @@ public class DynamicScreen {
 		}
 	}
 
+	@Deprecated
 	class YComparator implements Comparator<InternalNode> {
 		@Override
 		public int compare(InternalNode n1, InternalNode n2) {
@@ -74,20 +81,24 @@ public class DynamicScreen {
 		}
 	}
 
+	@Deprecated
 	public DynamicScreen(int x, int y, int width, int height) {
 		this.screenBounds = new DisplayIndependentRectangle(x, y, width, height);
 	}
 
+	@Deprecated
 	public void removeNode(InternalNode node) {
 		xCoords.remove(node);
 		yCoords.remove(node);
 	}
 
+	@Deprecated
 	public void addNode(InternalNode node) {
 		xCoords.add(node);
 		yCoords.add(node);
 	}
 
+	@Deprecated
 	public DisplayIndependentPoint getScreenLocation(InternalNode node) {
 
 		DisplayIndependentRectangle layoutBounds = calculateBounds();
@@ -101,6 +112,7 @@ public class DynamicScreen {
 		return new DisplayIndependentPoint(x, y);
 	}
 
+	@Deprecated
 	public DisplayIndependentPoint getVirtualLocation(DisplayIndependentPoint point) {
 
 		DisplayIndependentRectangle layoutBounds = calculateBounds();

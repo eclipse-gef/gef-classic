@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -48,6 +48,7 @@ public class CycleChecker {
 	 * @return <code>true</code> if there is a directed circle. Otherwise,
 	 *         <code>false</code>.
 	 */
+	@Deprecated
 	public static boolean hasDirectedCircles(LayoutEntity[] entities, LayoutRelationship[] relationships,
 			List<LayoutEntity> cycle) {
 		if (!AbstractLayoutAlgorithm.Zest1.verifyInput(entities, relationships)) {

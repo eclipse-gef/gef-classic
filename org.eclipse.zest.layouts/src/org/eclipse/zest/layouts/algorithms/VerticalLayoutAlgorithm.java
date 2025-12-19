@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -33,10 +33,12 @@ public class VerticalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	 * Veertical Layout Algorithm constructor with no styles.
 	 *
 	 */
+	@Deprecated
 	public VerticalLayoutAlgorithm() {
 		this(LayoutStyles.NONE);
 	}
 
+	@Deprecated
 	public VerticalLayoutAlgorithm(int styles) {
 		super(styles);
 	}
@@ -46,6 +48,7 @@ public class VerticalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	 * the number of rows
 	 */
 	@Override
+	@Deprecated
 	protected int[] calculateNumberOfRowsAndCols(int numChildren, double boundX, double boundY, double boundWidth,
 			double boundHeight) {
 		int cols = 1;
@@ -55,6 +58,7 @@ public class VerticalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 		if (asynchronous && continueous) {
 			return false;

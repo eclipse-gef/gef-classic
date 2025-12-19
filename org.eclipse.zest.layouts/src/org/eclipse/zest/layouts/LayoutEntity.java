@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -32,27 +32,38 @@ import org.eclipse.zest.layouts.interfaces.NodeLayout;
 @Deprecated(since = "2.0", forRemoval = true)
 public interface LayoutEntity extends Comparable, LayoutItem {
 
+	@Deprecated
 	public final static String ATTR_PREFERRED_WIDTH = "tree-preferred-width"; //$NON-NLS-1$
+	@Deprecated
 	public final static String ATTR_PREFERRED_HEIGHT = "tree-preferred-height"; //$NON-NLS-1$
 
+	@Deprecated
 	public void setLocationInLayout(double x, double y);
 
+	@Deprecated
 	public void setSizeInLayout(double width, double height);
 
+	@Deprecated
 	public double getXInLayout();
 
+	@Deprecated
 	public double getYInLayout();
 
+	@Deprecated
 	public double getWidthInLayout();
 
+	@Deprecated
 	public double getHeightInLayout();
 
+	@Deprecated
 	public Object getLayoutInformation();
 
+	@Deprecated
 	public void setLayoutInformation(Object internalEntity);
 
 	/**
 	 * Classes should update the specified layout constraint if recognized
 	 */
+	@Deprecated
 	public void populateLayoutConstraint(LayoutConstraint constraint);
 }

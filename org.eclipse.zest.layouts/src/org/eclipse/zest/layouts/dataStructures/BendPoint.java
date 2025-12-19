@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2006, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2006, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -30,34 +30,41 @@ public class BendPoint extends DisplayIndependentPoint implements LayoutBendPoin
 
 	private boolean isControlPoint = false; // is this a control point (for use in curves)
 
+	@Deprecated
 	public BendPoint(double x, double y) {
 		super(x, y);
 	}
 
+	@Deprecated
 	public BendPoint(double x, double y, boolean isControlPoint) {
 		this(x, y);
 		this.isControlPoint = isControlPoint;
 	}
 
 	@Override
+	@Deprecated
 	public double getX() {
 		return x;
 	}
 
 	@Override
+	@Deprecated
 	public double getY() {
 		return y;
 	}
 
+	@Deprecated
 	public void setX(double x) {
 		this.x = x;
 	}
 
+	@Deprecated
 	public void setY(double y) {
 		this.y = y;
 	}
 
 	@Override
+	@Deprecated
 	public boolean getIsControlPoint() {
 		return isControlPoint;
 	}

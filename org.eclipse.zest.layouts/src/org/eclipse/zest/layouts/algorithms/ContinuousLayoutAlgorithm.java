@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -29,8 +29,10 @@ import org.eclipse.zest.layouts.dataStructures.InternalRelationship;
 @Deprecated(since = "2.0", forRemoval = true)
 public abstract class ContinuousLayoutAlgorithm extends AbstractLayoutAlgorithm.Zest1 {
 
+	@Deprecated
 	double x, y, widht, height;
 
+	@Deprecated
 	public ContinuousLayoutAlgorithm(int styles) {
 		super(styles);
 	}
@@ -38,11 +40,13 @@ public abstract class ContinuousLayoutAlgorithm extends AbstractLayoutAlgorithm.
 	/**
 	 * The logic to determine if a layout should continue running or not
 	 */
+	@Deprecated
 	protected abstract boolean performAnotherNonContinuousIteration();
 
 	/**
 	 * Computes a single iteration of the layout algorithm
 	 */
+	@Deprecated
 	protected abstract void computeOneIteration(InternalNode[] entitiesToLayout,
 			InternalRelationship[] relationshipsToConsider, double x, double y, double width, double height);
 
@@ -57,15 +61,18 @@ public abstract class ContinuousLayoutAlgorithm extends AbstractLayoutAlgorithm.
 	}
 
 	@Override
+	@Deprecated
 	public void setLayoutArea(double x, double y, double width, double height) {
 		this.setBounds(x, y, width, height);
 
 	}
 
+	@Deprecated
 	public synchronized DisplayIndependentRectangle getBounds() {
 		return new DisplayIndependentRectangle(this.x, this.y, this.widht, this.height);
 	}
 
+	@Deprecated
 	public synchronized void setBounds(double x, double y, double width, double height) {
 		this.x = x;
 		this.y = y;
@@ -78,6 +85,7 @@ public abstract class ContinuousLayoutAlgorithm extends AbstractLayoutAlgorithm.
 	 * layout using the given relationships.
 	 */
 	@Override
+	@Deprecated
 	protected void applyLayoutInternal(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 			double x, double y, double width, double height) {
 

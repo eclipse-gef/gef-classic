@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -38,8 +38,10 @@ public class InternalRelationship implements LayoutRelationship {
 	private final InternalNode destination;
 	private Object layoutInfo;
 	private final List<BendPoint> bendPoints = new LinkedList<>();
+	@Deprecated
 	BasicEdgeConstraints basicEdgeConstraints = new BasicEdgeConstraints();
 
+	@Deprecated
 	public InternalRelationship(LayoutRelationship externalRelationship, InternalNode source,
 			InternalNode destination) {
 		this.externalRelationship = externalRelationship;
@@ -49,10 +51,12 @@ public class InternalRelationship implements LayoutRelationship {
 		this.externalRelationship.populateLayoutConstraint(basicEdgeConstraints);
 	}
 
+	@Deprecated
 	public LayoutRelationship getLayoutRelationship() {
 		return externalRelationship;
 	}
 
+	@Deprecated
 	public InternalNode getSource() {
 		if (this.source == null) {
 			throw new RuntimeException("Source is null"); //$NON-NLS-1$
@@ -60,6 +64,7 @@ public class InternalRelationship implements LayoutRelationship {
 		return this.source;
 	}
 
+	@Deprecated
 	public InternalNode getDestination() {
 		if (this.destination == null) {
 			throw new RuntimeException("Dest is null"); //$NON-NLS-1$
@@ -67,10 +72,12 @@ public class InternalRelationship implements LayoutRelationship {
 		return this.destination;
 	}
 
+	@Deprecated
 	public double getWeight() {
 		return this.basicEdgeConstraints.weight;
 	}
 
+	@Deprecated
 	public boolean isBidirectional() {
 		return this.basicEdgeConstraints.isBiDirectional;
 	}
@@ -81,6 +88,7 @@ public class InternalRelationship implements LayoutRelationship {
 	 * @param x
 	 * @param y
 	 */
+	@Deprecated
 	public void addBendPoint(double x, double y) {
 		bendPoints.add(new BendPoint(x, y));
 	}
@@ -93,62 +101,73 @@ public class InternalRelationship implements LayoutRelationship {
 	 * @param y
 	 * @param isControlPoint
 	 */
+	@Deprecated
 	public void addBendPoint(double x, double y, boolean isControlPoint) {
 		bendPoints.add(new BendPoint(x, y, isControlPoint));
 	}
 
+	@Deprecated
 	public List getBendPoints() {
 		return this.bendPoints;
 	}
 
 	@Override
+	@Deprecated
 	public void clearBendPoints() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Deprecated
 	public LayoutEntity getDestinationInLayout() {
 		// TODO Auto-generated method stub
 		return destination;
 	}
 
 	@Override
+	@Deprecated
 	public Object getLayoutInformation() {
 		// TODO Auto-generated method stub
 		return layoutInfo;
 	}
 
 	@Override
+	@Deprecated
 	public LayoutEntity getSourceInLayout() {
 		// TODO Auto-generated method stub
 		return source;
 	}
 
 	@Override
+	@Deprecated
 	public void populateLayoutConstraint(LayoutConstraint constraint) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Deprecated
 	public void setBendPoints(LayoutBendPoint[] bendPoints) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
+	@Deprecated
 	public void setLayoutInformation(Object layoutInformation) {
 		this.layoutInfo = layoutInformation;
 
 	}
 
 	@Override
+	@Deprecated
 	public Object getGraphData() {
 		return null;
 	}
 
 	@Override
+	@Deprecated
 	public void setGraphData(Object o) {
 
 	}

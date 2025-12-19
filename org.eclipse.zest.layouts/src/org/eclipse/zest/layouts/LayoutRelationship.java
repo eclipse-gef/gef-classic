@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -36,6 +36,7 @@ public interface LayoutRelationship extends LayoutItem {
 	 *
 	 * @return The sourceEntity.
 	 */
+	@Deprecated
 	public LayoutEntity getSourceInLayout();
 
 	/**
@@ -44,6 +45,7 @@ public interface LayoutRelationship extends LayoutItem {
 	 *
 	 * @return The destinationEntity of this SimpleRelation.
 	 */
+	@Deprecated
 	public LayoutEntity getDestinationInLayout();
 
 	/**
@@ -51,6 +53,7 @@ public interface LayoutRelationship extends LayoutItem {
 	 *
 	 * @param layoutInformation
 	 */
+	@Deprecated
 	public void setLayoutInformation(Object layoutInformation);
 
 	/**
@@ -58,6 +61,7 @@ public interface LayoutRelationship extends LayoutItem {
 	 *
 	 * @return Object
 	 */
+	@Deprecated
 	public Object getLayoutInformation();
 
 	/**
@@ -76,16 +80,19 @@ public interface LayoutRelationship extends LayoutItem {
 	 *                   positioning of bendpoints relative to the source and
 	 *                   destination points when drawing the graph.
 	 */
+	@Deprecated
 	public void setBendPoints(LayoutBendPoint[] bendPoints);
 
 	/**
 	 * Clear bend points and related bounds If you are updating an existing
 	 * application you can just implement this method to do nothing.
 	 */
+	@Deprecated
 	public void clearBendPoints();
 
 	/**
 	 * Classes should update the specified layout constraint if recognized
 	 */
+	@Deprecated
 	public void populateLayoutConstraint(LayoutConstraint constraint);
 }

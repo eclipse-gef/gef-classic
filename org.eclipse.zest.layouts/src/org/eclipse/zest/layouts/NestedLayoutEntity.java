@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -31,12 +31,15 @@ import org.eclipse.zest.layouts.interfaces.SubgraphLayout;
 public interface NestedLayoutEntity extends LayoutEntity {
 
 	/** Returns the parent entity. */
+	@Deprecated
 	NestedLayoutEntity getParent();
 
 	/** Returns the list of children. */
+	@Deprecated
 	List getChildren();
 
 	/** Returns true if this entity has children. */
+	@Deprecated
 	boolean hasChildren();
 
 }

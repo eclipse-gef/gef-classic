@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -27,6 +27,7 @@ public class EntityPriorityConstraint implements LayoutConstraint {
 
 	// A priority that can be set for nodes. This could be used
 	// for a treemap layout
+	@Deprecated
 	public double priority = 1.0;
 
 	/*
@@ -35,6 +36,7 @@ public class EntityPriorityConstraint implements LayoutConstraint {
 	 * @see org.eclipse.zest.layouts.constraints.LayoutConstraint#clear()
 	 */
 	@Override
+	@Deprecated
 	public void clear() {
 		this.priority = 1.0;
 	}

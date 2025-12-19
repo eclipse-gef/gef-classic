@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2010 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -25,11 +25,13 @@ public class VirtualNode extends Node {
 	/**
 	 * The next node.
 	 */
+	@Deprecated
 	public Node next;
 
 	/**
 	 * The previous node.
 	 */
+	@Deprecated
 	public Node prev;
 
 	/**
@@ -56,6 +58,7 @@ public class VirtualNode extends Node {
 	 * @param o      object
 	 * @param parent subgraph
 	 */
+	@Deprecated
 	public VirtualNode(Object o, Subgraph parent) {
 		super(o, parent);
 	}
@@ -65,6 +68,7 @@ public class VirtualNode extends Node {
 	 *
 	 * @return median
 	 */
+	@Deprecated
 	public double medianIncoming() {
 		return prev.index;
 	}
@@ -74,6 +78,7 @@ public class VirtualNode extends Node {
 	 *
 	 * @return outgoing
 	 */
+	@Deprecated
 	public double medianOutgoing() {
 		return next.index;
 	}
@@ -84,6 +89,7 @@ public class VirtualNode extends Node {
 	 *
 	 * @return the weighted weight, or omega
 	 */
+	@Deprecated
 	public int omega() {
 		Edge e = (Edge) data;
 		if (e.source.rank + 1 < rank && rank < e.target.rank) {
@@ -96,6 +102,7 @@ public class VirtualNode extends Node {
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
+	@Deprecated
 	public String toString() {
 		if (data instanceof Edge edge) {
 			return "VN[" + (edge.vNodes.indexOf(this) + 1) //$NON-NLS-1$

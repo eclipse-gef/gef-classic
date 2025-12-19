@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2006, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2006, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -36,6 +36,7 @@ public interface ConstraintAdapter {
 	 * @param object
 	 * @param constraint
 	 */
+	@Deprecated
 	public void populateConstraint(Object object, LayoutConstraint constraint);
 
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -39,14 +39,17 @@ public interface ProgressListener {
 	@Deprecated(since = "2.0", forRemoval = true)
 	public static class Stub implements ProgressListener {
 		@Override
+		@Deprecated
 		public void progressStarted(ProgressEvent e) {
 		}
 
 		@Override
+		@Deprecated
 		public void progressUpdated(ProgressEvent e) {
 		}
 
 		@Override
+		@Deprecated
 		public void progressEnded(ProgressEvent e) {
 		}
 	}
@@ -55,16 +58,19 @@ public interface ProgressListener {
 	 *
 	 * @param e
 	 */
+	@Deprecated
 	public void progressStarted(ProgressEvent e);
 
 	/**
 	 * Called when the progress of a layout changes
 	 */
+	@Deprecated
 	public void progressUpdated(ProgressEvent e);
 
 	/**
 	 *
 	 * @param e
 	 */
+	@Deprecated
 	public void progressEnded(ProgressEvent e);
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024, CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025, CHISEL Group, University of Victoria, Victoria,
  *                            BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -767,34 +767,41 @@ public class GraphConnection extends GraphItem {
 	@Deprecated(since = "1.12", forRemoval = true)
 	class GraphLayoutConnection implements LayoutRelationship {
 
+		@Deprecated
 		Object layoutInformation = null;
 
 		@Override
+		@Deprecated
 		public void clearBendPoints() {
 			connectionFigure.getPoints().removeAllPoints();
 		}
 
 		@Override
+		@Deprecated
 		public LayoutEntity getDestinationInLayout() {
 			return getDestination().getLayoutEntity();
 		}
 
 		@Override
+		@Deprecated
 		public Object getLayoutInformation() {
 			return layoutInformation;
 		}
 
 		@Override
+		@Deprecated
 		public LayoutEntity getSourceInLayout() {
 			return getSource().getLayoutEntity();
 		}
 
 		@Override
+		@Deprecated
 		public void populateLayoutConstraint(LayoutConstraint constraint) {
 			graphModel.invokeConstraintAdapters(GraphConnection.this, constraint);
 		}
 
 		@Override
+		@Deprecated
 		public void setBendPoints(LayoutBendPoint[] bendPoints) {
 			PointList points = new PointList();
 
@@ -815,16 +822,19 @@ public class GraphConnection extends GraphItem {
 		}
 
 		@Override
+		@Deprecated
 		public void setLayoutInformation(Object layoutInformation) {
 			this.layoutInformation = layoutInformation;
 		}
 
 		@Override
+		@Deprecated
 		public Object getGraphData() {
 			return GraphConnection.this;
 		}
 
 		@Override
+		@Deprecated
 		public void setGraphData(Object o) {
 
 		}

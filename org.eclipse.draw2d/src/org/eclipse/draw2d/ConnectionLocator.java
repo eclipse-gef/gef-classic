@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,11 +24,13 @@ import org.eclipse.draw2d.geometry.PointList;
 public class ConnectionLocator extends AbstractLocator {
 
 	/** @deprecated Use {@link #SOURCE} */
+	@Deprecated
 	public static final int START = 2;
 	/** The start (or source) of the Connection */
 	public static final int SOURCE = 2;
 
 	/** @deprecated Use {@link #TARGET} */
+	@Deprecated
 	public static final int END = 3;
 	/** The end (or target) of the Connection */
 	public static final int TARGET = 3;
@@ -37,6 +39,7 @@ public class ConnectionLocator extends AbstractLocator {
 	 * @deprecated Use {@link #MIDDLE} instead, since the location is not the
 	 *             midpoint of a line-segment, but the middle of a polyline.
 	 */
+	@Deprecated
 	public static final int MIDPOINT = 4;
 	/** The middle of the Connection */
 	public static final int MIDDLE = 4;

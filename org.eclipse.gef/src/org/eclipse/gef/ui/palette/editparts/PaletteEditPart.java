@@ -472,6 +472,7 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 		/** Map from ImageDescriptor to Image */
 		private final Map<ImageDescriptor, Image> images = new HashMap<>(11);
 
+		@Deprecated
 		Image getImage(ImageDescriptor desc) {
 			if (desc == null) {
 				return null;
@@ -479,10 +480,12 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 			return images.computeIfAbsent(desc, ImageDescriptor::createImage);
 		}
 
+		@Deprecated
 		Image getMissingImage() {
 			return getImage(ImageDescriptor.getMissingImageDescriptor());
 		}
 
+		@Deprecated
 		void dispose() {
 			images.values().forEach(Image::dispose);
 			images.clear();

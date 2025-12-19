@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -21,6 +21,7 @@ import org.eclipse.gef.internal.InternalGEFPlugin;
 /**
  * @deprecated The GEF plugin class must not be referenced by clients.
  */
+@Deprecated
 public final class GEFPlugin extends AbstractUIPlugin {
 
 	private static GEFPlugin singleton;
@@ -32,6 +33,7 @@ public final class GEFPlugin extends AbstractUIPlugin {
 	 * @param stack a command stack
 	 * @return the implementation for the entry
 	 */
+	@Deprecated
 	public static IPropertySheetEntry createUndoablePropertySheetEntry(CommandStack stack) {
 		return new org.eclipse.gef.ui.properties.UndoablePropertySheetEntry(stack);
 	}

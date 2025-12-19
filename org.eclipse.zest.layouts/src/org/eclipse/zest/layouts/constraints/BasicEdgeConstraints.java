@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -25,7 +25,9 @@ package org.eclipse.zest.layouts.constraints;
 public class BasicEdgeConstraints implements LayoutConstraint {
 
 	// These should all be accessed directly.
+	@Deprecated
 	public boolean isBiDirectional = false;
+	@Deprecated
 	public int weight = 1;
 
 	/*
@@ -34,6 +36,7 @@ public class BasicEdgeConstraints implements LayoutConstraint {
 	 * @see org.eclipse.zest.layouts.constraints.LayoutConstraint#clear()
 	 */
 	@Override
+	@Deprecated
 	public void clear() {
 		this.isBiDirectional = false;
 		this.weight = 1;

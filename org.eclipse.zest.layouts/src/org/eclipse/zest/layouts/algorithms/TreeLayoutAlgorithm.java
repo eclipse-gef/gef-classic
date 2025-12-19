@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria, BC,
- *                      Canada, Johannes Kepler University Linz and others.
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria, BC,
+ *                           Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -88,6 +88,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Constructs a new TreeLayoutAlgorithm object.
 		 */
+		@Deprecated
 		public Zest1(int styles) {
 			super(styles);
 		}
@@ -96,6 +97,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Tree layout algorithm Constructor with NO Style
 		 *
 		 */
+		@Deprecated
 		public Zest1() {
 			this(LayoutStyles.NONE);
 		}
@@ -105,16 +107,19 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/////////////////////////////////////////////////////////////////////////
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			throw new RuntimeException();
 		}
 
 		@Override
+		@Deprecated
 		protected int getCurrentLayoutStep() {
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected int getTotalNumberOfLayoutSteps() {
 			return 4;
 		}
@@ -140,6 +145,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *                          relationshipsToConsider
 		 */
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 			// Filter unwanted entities and relationships
@@ -166,6 +172,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void applyLayoutInternal(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double boundsX, double boundsY, double boundsWidth, double boundsHeight) {
 
@@ -184,6 +191,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 			updateLayoutLocations(entitiesToLayout);
@@ -193,6 +201,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Returns the last found roots
 		 */
+		@Deprecated
 		public List getRoots() {
 			return treeRoots;
 		}
@@ -593,6 +602,7 @@ public class TreeLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 			return !continueous;
 		}

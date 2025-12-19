@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -37,6 +37,7 @@ public class HorizontalTreeLayoutAlgorithm extends TreeLayoutAlgorithm.Zest1 {
 	/**
 	 * Creates a horizontal tree layout with no style
 	 */
+	@Deprecated
 	public HorizontalTreeLayoutAlgorithm() {
 		this(LayoutStyles.NONE);
 	}
@@ -44,11 +45,13 @@ public class HorizontalTreeLayoutAlgorithm extends TreeLayoutAlgorithm.Zest1 {
 	/**
 	 *
 	 */
+	@Deprecated
 	public HorizontalTreeLayoutAlgorithm(int styles) {
 		super(styles);
 	}
 
 	@Override
+	@Deprecated
 	protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 			double x, double y, double width, double height) {
 		// NOTE: width and height are swtiched here when calling super method
@@ -56,6 +59,7 @@ public class HorizontalTreeLayoutAlgorithm extends TreeLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 			InternalRelationship[] relationshipsToConsider) {
 		// swap x->y and width->height
@@ -67,6 +71,7 @@ public class HorizontalTreeLayoutAlgorithm extends TreeLayoutAlgorithm.Zest1 {
 	}
 
 	@Override
+	@Deprecated
 	protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 		if (asynchronous && continueous) {
 			return false;

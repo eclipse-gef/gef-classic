@@ -83,6 +83,7 @@ public class ZoomManager extends AbstractZoomManager {
 	 *                 ZoomManager
 	 * @param viewport The Viewport associated with this viewport
 	 */
+	@Deprecated
 	public ZoomManager(ScalableFreeformLayeredPane pane, Viewport viewport) {
 		super(pane, viewport);
 	}
@@ -104,6 +105,7 @@ public class ZoomManager extends AbstractZoomManager {
 	 * @deprecated Use {@link #getScalableFigure()} instead. Returns the pane.
 	 * @return the pane
 	 */
+	@Deprecated
 	public ScalableFreeformLayeredPane getPane() {
 		Assert.isTrue(super.getScalableFigure() instanceof ScalableFreeformLayeredPane);
 		return (ScalableFreeformLayeredPane) super.getScalableFigure();

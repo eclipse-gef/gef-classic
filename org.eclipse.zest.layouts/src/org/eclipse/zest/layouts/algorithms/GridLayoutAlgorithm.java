@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -46,16 +46,22 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 
 		private static final double PADDING_PERCENTAGE = 0.95;
 
+		@Deprecated
 		protected int rowPadding = 0;
 
 		@Override
+		@Deprecated
 		public void setLayoutArea(double x, double y, double width, double height) {
 			throw new RuntimeException("Operation not implemented"); //$NON-NLS-1$
 		}
 
+		@Deprecated
 		int rows, cols, numChildren;
+		@Deprecated
 		double colWidth, rowHeight, offsetX, offsetY;
+		@Deprecated
 		int totalProgress;
+		@Deprecated
 		double h, w;
 
 		/**
@@ -64,6 +70,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * @param styles
 		 * @see LayoutStyles
 		 */
+		@Deprecated
 		public Zest1(int styles) {
 			super(styles);
 		}
@@ -71,17 +78,20 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		/**
 		 * Inititalizes the grid layout with no style.
 		 */
+		@Deprecated
 		public Zest1() {
 			this(LayoutStyles.NONE);
 		}
 
 		@Override
+		@Deprecated
 		protected int getCurrentLayoutStep() {
 			// TODO: This isn't right
 			return 0;
 		}
 
 		@Override
+		@Deprecated
 		protected int getTotalNumberOfLayoutSteps() {
 			return totalProgress;
 		}
@@ -90,6 +100,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 */
 		@Override
+		@Deprecated
 		protected void preLayoutAlgorithm(InternalNode[] entitiesToLayout, InternalRelationship[] relationshipsToConsider,
 				double x, double y, double width, double height) {
 
@@ -150,6 +161,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *                          relationshipsToConsider
 		 */
 		@Override
+		@Deprecated
 		protected synchronized void applyLayoutInternal(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider, double boundsX, double boundsY, double boundsWidth,
 				double boundsHeight) {
@@ -173,6 +185,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected void postLayoutAlgorithm(InternalNode[] entitiesToLayout,
 				InternalRelationship[] relationshipsToConsider) {
 
@@ -182,6 +195,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 * Calculates and returns an array containing the number of columns, followed by
 		 * the number of rows
 		 */
+		@Deprecated
 		protected int[] calculateNumberOfRowsAndCols(int numChildren, double boundX, double boundY, double boundWidth,
 				double boundHeight) {
 			if (getEntityAspectRatio() == 1.0) {
@@ -191,6 +205,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 			}
 		}
 
+		@Deprecated
 		@SuppressWarnings("static-method")
 		protected int[] calculateNumberOfRowsAndCols_square(int numChildren, double boundX, double boundY,
 				double boundWidth, double boundHeight) {
@@ -241,6 +256,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 			return result;
 		}
 
+		@Deprecated
 		@SuppressWarnings("static-method")
 		protected int[] calculateNumberOfRowsAndCols_rectangular(int numChildren) {
 			int rows = Math.max(1, (int) Math.ceil(Math.sqrt(numChildren)));
@@ -249,6 +265,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 			return result;
 		}
 
+		@Deprecated
 		protected double[] calculateNodeSize(double colWidth, double rowHeight) {
 			double childW = Math.max(MIN_ENTITY_SIZE, PADDING_PERCENTAGE * colWidth);
 			double childH = Math.max(MIN_ENTITY_SIZE, PADDING_PERCENTAGE * (rowHeight - rowPadding));
@@ -267,6 +284,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		 *
 		 * @param rowPadding Value will not be set if less than 0.
 		 */
+		@Deprecated
 		public void setRowPadding(int rowPadding) {
 			if (rowPadding < 0) {
 				return;
@@ -275,6 +293,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		}
 
 		@Override
+		@Deprecated
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 			if (asynchronous && continueous) {
 				return false;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria,
  *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -27,7 +27,9 @@ package org.eclipse.zest.layouts.progress;
  */
 @Deprecated(since = "2.0", forRemoval = true)
 public class ProgressEvent {
+	@Deprecated
 	int stepsCompleted;
+	@Deprecated
 	int totalSteps;
 
 	/**
@@ -37,6 +39,7 @@ public class ProgressEvent {
 	 * @param totalNumberOfSteps The number used to indicate when the algorithm will
 	 *                           finish
 	 */
+	@Deprecated
 	public ProgressEvent(int stepsCompleted, int totalNumberOfSteps) {
 		this.stepsCompleted = stepsCompleted;
 		this.totalSteps = totalNumberOfSteps;
@@ -45,6 +48,7 @@ public class ProgressEvent {
 	/**
 	 * Returns the number of steps already completed.
 	 */
+	@Deprecated
 	public int getStepsCompleted() {
 		return stepsCompleted;
 	}
@@ -52,6 +56,7 @@ public class ProgressEvent {
 	/**
 	 * Returns the total number of steps to complete.
 	 */
+	@Deprecated
 	public int getTotalNumberOfSteps() {
 		return totalSteps;
 	}
