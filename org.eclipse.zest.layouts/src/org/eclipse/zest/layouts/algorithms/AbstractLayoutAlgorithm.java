@@ -85,12 +85,15 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 
 		@Deprecated
 		class InternalComparator implements Comparator<InternalNode> {
+			@Deprecated
 			Comparator<LayoutEntity> externalComparator = null;
 
+			@Deprecated
 			public InternalComparator(Comparator<LayoutEntity> externalComparator) {
 				this.externalComparator = externalComparator;
 			}
 
+			@Deprecated
 			@Override
 			public int compare(InternalNode internalNode1, InternalNode internalNode2) {
 				return this.externalComparator.compare(internalNode1.getLayoutEntity(), internalNode2.getLayoutEntity());

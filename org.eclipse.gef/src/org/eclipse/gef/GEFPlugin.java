@@ -43,6 +43,7 @@ public final class GEFPlugin extends AbstractUIPlugin {
 	 *
 	 * @return the default GEFPlugin singleton
 	 */
+	@Deprecated
 	public static GEFPlugin getDefault() {
 		if (singleton == null) {
 			singleton = new GEFPlugin();
@@ -50,6 +51,7 @@ public final class GEFPlugin extends AbstractUIPlugin {
 		return singleton;
 	}
 
+	@Deprecated
 	GEFPlugin() {
 		try {
 			start(InternalGEFPlugin.getContext());

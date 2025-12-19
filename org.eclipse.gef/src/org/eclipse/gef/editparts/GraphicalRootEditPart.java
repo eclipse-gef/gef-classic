@@ -49,10 +49,12 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	/**
 	 * The contents
 	 */
+	@Deprecated
 	protected EditPart contents;
 	/**
 	 * the viewer
 	 */
+	@Deprecated
 	protected EditPartViewer viewer;
 	private LayeredPane innerLayers;
 	private LayeredPane printableLayers;
@@ -61,6 +63,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 */
 	@Override
+	@Deprecated
 	protected void createEditPolicies() {
 	}
 
@@ -68,6 +71,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 */
 	@Override
+	@Deprecated
 	protected IFigure createFigure() {
 		innerLayers = new LayeredPane();
 		printableLayers = new LayeredPane();
@@ -103,6 +107,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.EditPart#getCommand(org.eclipse.gef.Request)
 	 */
 	@Override
+	@Deprecated
 	public Command getCommand(Request req) {
 		return UnexecutableCommand.INSTANCE;
 	}
@@ -111,6 +116,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.RootEditPart#getContents()
 	 */
 	@Override
+	@Deprecated
 	public EditPart getContents() {
 		return contents;
 	}
@@ -121,6 +127,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.EditPart#getDragTracker(org.eclipse.gef.Request)
 	 */
 	@Override
+	@Deprecated
 	public DragTracker getDragTracker(Request req) {
 		// The drawing cannot be dragged.
 		return new MarqueeDragTracker();
@@ -130,6 +137,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see LayerManager#getLayer(java.lang.Object)
 	 */
 	@Override
+	@Deprecated
 	public IFigure getLayer(Object key) {
 		if (innerLayers == null) {
 			return null;
@@ -148,6 +156,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.GraphicalEditPart#getContentPane()
 	 */
 	@Override
+	@Deprecated
 	public IFigure getContentPane() {
 		return getLayer(PRIMARY_LAYER);
 	}
@@ -156,6 +165,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.EditPart#getModel()
 	 */
 	@Override
+	@Deprecated
 	public Object getModel() {
 		return LayerManager.ID;
 	}
@@ -166,6 +176,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.EditPart#getRoot()
 	 */
 	@Override
+	@Deprecated
 	public RootEditPart getRoot() {
 		return this;
 	}
@@ -174,6 +185,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.EditPart#getViewer()
 	 */
 	@Override
+	@Deprecated
 	public EditPartViewer getViewer() {
 		return viewer;
 	}
@@ -184,6 +196,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see AbstractEditPart#refreshChildren()
 	 */
 	@Override
+	@Deprecated
 	protected void refreshChildren() {
 	}
 
@@ -191,6 +204,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.RootEditPart#setContents(org.eclipse.gef.EditPart)
 	 */
 	@Override
+	@Deprecated
 	public void setContents(EditPart editpart) {
 		if (contents != null) {
 			removeChild(contents);
@@ -205,6 +219,7 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 	 * @see org.eclipse.gef.RootEditPart#setViewer(org.eclipse.gef.EditPartViewer)
 	 */
 	@Override
+	@Deprecated
 	public void setViewer(EditPartViewer newViewer) {
 		if (viewer == newViewer) {
 			return;
@@ -218,7 +233,9 @@ public class GraphicalRootEditPart extends AbstractGraphicalEditPart
 		}
 	}
 
+	@Deprecated
 	class FeedbackLayer extends Layer {
+		@Deprecated
 		FeedbackLayer() {
 			setEnabled(false);
 		}

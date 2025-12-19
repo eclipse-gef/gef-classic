@@ -55,6 +55,7 @@ public class DynamicScreen {
 	@Deprecated
 	class XComparator implements Comparator<InternalNode> {
 		@Override
+		@Deprecated
 		public int compare(InternalNode n1, InternalNode n2) {
 			if (n1.getInternalX() > n2.getInternalX()) {
 				return +1;
@@ -69,6 +70,7 @@ public class DynamicScreen {
 	@Deprecated
 	class YComparator implements Comparator<InternalNode> {
 		@Override
+		@Deprecated
 		public int compare(InternalNode n1, InternalNode n2) {
 			if (n1.getInternalY() > n2.getInternalY()) {
 				return +1;

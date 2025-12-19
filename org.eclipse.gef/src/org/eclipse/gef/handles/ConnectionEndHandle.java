@@ -31,6 +31,7 @@ public final class ConnectionEndHandle extends ConnectionEndpointHandle {
 	 *
 	 * @param owner the ConnectionEditPart owner
 	 */
+	@Deprecated
 	public ConnectionEndHandle(ConnectionEditPart owner) {
 		super(owner, ConnectionLocator.TARGET);
 	}
@@ -42,6 +43,7 @@ public final class ConnectionEndHandle extends ConnectionEndpointHandle {
 	 * @param owner the ConnectionEditPart owner
 	 * @param fixed if true, handle cannot be dragged
 	 */
+	@Deprecated
 	public ConnectionEndHandle(ConnectionEditPart owner, boolean fixed) {
 		super(owner, fixed, ConnectionLocator.TARGET);
 	}
@@ -49,6 +51,7 @@ public final class ConnectionEndHandle extends ConnectionEndpointHandle {
 	/**
 	 * Creates a new ConnectionEndHandle.
 	 */
+	@Deprecated
 	public ConnectionEndHandle() {
 		super(ConnectionLocator.TARGET);
 	}
