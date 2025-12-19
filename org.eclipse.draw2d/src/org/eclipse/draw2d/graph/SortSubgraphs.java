@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2023 IBM Corporation and others.
+ * Copyright (c) 2003, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -34,6 +34,7 @@ class SortSubgraphs extends GraphVisitor {
 	Set<Node> orderingGraphNodes = new HashSet<>();
 	NodePair pair = new NodePair();
 
+	@SuppressWarnings("removal")
 	private void breakSubgraphCycles() {
 		// The stack of nodes which have no unmarked incoming edges
 		List<Node> noLefts = new ArrayList<>();
@@ -183,6 +184,7 @@ class SortSubgraphs extends GraphVisitor {
 		rightOf(left).add(right);
 	}
 
+	@SuppressWarnings("removal")
 	static void sortedInsert(List<Node> list, Node node) {
 		int insert = 0;
 		while (insert < list.size() && list.get(insert).sortValue > node.sortValue) {

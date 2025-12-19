@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -64,6 +64,7 @@ class NestingTree {
 		return nestingMap.get(null);
 	}
 
+	@SuppressWarnings("removal")
 	void calculateSortValues() {
 		int total = 0;
 		for (Object o : contents) {
@@ -82,6 +83,7 @@ class NestingTree {
 		sortValue = (double) total / size;
 	}
 
+	@SuppressWarnings("removal")
 	void getSortValueFromSubgraph() {
 		if (subgraph != null) {
 			sortValue = subgraph.sortValue;
@@ -129,6 +131,7 @@ class NestingTree {
 		}
 	}
 
+	@SuppressWarnings("removal")
 	boolean swap(int index) {
 		Object left = contents.get(index);
 		Object right = contents.get(index + 1);

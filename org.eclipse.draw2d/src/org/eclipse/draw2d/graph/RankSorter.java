@@ -191,6 +191,7 @@ class RankSorter {
 		} while (change);
 	}
 
+	@SuppressWarnings("removal")
 	boolean swap(int i) {
 		Node left = rank.get(i);
 		Node right = rank.get(i + 1);
@@ -214,6 +215,7 @@ class RankSorter {
 		postSort();
 	}
 
+	@SuppressWarnings("removal")
 	void sortValueIncoming() {
 		node.sortValue = evaluateNodeIncoming();
 		// $TODO restore this optimization
@@ -228,6 +230,7 @@ class RankSorter {
 		// node.sortValue += Math.random() * rankSize / (5 + 8 * progress);
 	}
 
+	@SuppressWarnings("removal")
 	void sortValueOutgoing() {
 		node.sortValue = evaluateNodeOutgoing();
 		// $TODO restore this optimization
