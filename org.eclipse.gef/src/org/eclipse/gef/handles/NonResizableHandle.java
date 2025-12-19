@@ -30,6 +30,7 @@ public class NonResizableHandle extends MoveHandle {
 	/**
 	 * The border
 	 */
+	@Deprecated
 	protected CornerTriangleBorder border;
 
 	/**
@@ -38,6 +39,7 @@ public class NonResizableHandle extends MoveHandle {
 	 *
 	 * @param owner The GraphicalEditPart to be moved by this handle.
 	 */
+	@Deprecated
 	public NonResizableHandle(GraphicalEditPart owner) {
 		this(owner, new MoveHandleLocator(owner.getFigure()));
 	}
@@ -49,6 +51,7 @@ public class NonResizableHandle extends MoveHandle {
 	 * @param owner The GraphicalEditPart to be moved by this handle.
 	 * @param loc   The Locator used to place the handle.
 	 */
+	@Deprecated
 	public NonResizableHandle(GraphicalEditPart owner, Locator loc) {
 		super(owner, loc);
 	}
@@ -58,6 +61,7 @@ public class NonResizableHandle extends MoveHandle {
 	 * DragCursor.
 	 */
 	@Override
+	@Deprecated
 	protected void initialize() {
 		setOpaque(false);
 		border = new CornerTriangleBorder(false);
@@ -70,6 +74,7 @@ public class NonResizableHandle extends MoveHandle {
 	 * Updates the handle's color by setting the border's primary attribute.
 	 */
 	@Override
+	@Deprecated
 	public void validate() {
 		border.setPrimary(getOwner().getSelected() == EditPart.SELECTED_PRIMARY);
 		super.validate();

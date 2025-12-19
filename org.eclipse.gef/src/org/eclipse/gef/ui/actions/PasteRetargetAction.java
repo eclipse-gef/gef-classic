@@ -29,6 +29,7 @@ public class PasteRetargetAction extends RetargetAction {
 	/**
 	 * Constructs a new PasteRetargetAction with the default ID, label and image.
 	 */
+	@Deprecated
 	public PasteRetargetAction() {
 		super(ActionFactory.PASTE.getId(), GEFMessages.PasteAction_Label);
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();

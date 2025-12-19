@@ -23,17 +23,20 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	/**
 	 * A root figure.
 	 */
+	@Deprecated
 	protected IFigure root;
 
 	/**
 	 * A graphics source
 	 */
+	@Deprecated
 	protected GraphicsSource graphicsSource;
 
 	/**
 	 * @see UpdateManager#addDirtyRegion(IFigure, int, int, int, int)
 	 */
 	@Override
+	@Deprecated
 	public void addDirtyRegion(IFigure f, int x, int y, int w, int h) {
 		if (getSuperior() == null) {
 			return;
@@ -45,6 +48,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 * @see UpdateManager#addInvalidFigure(IFigure)
 	 */
 	@Override
+	@Deprecated
 	public void addInvalidFigure(IFigure f) {
 		UpdateManager um = getSuperior();
 		if (um == null) {
@@ -58,6 +62,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 *
 	 * @return the host figure
 	 */
+	@Deprecated
 	protected abstract IFigure getHost();
 
 	/**
@@ -65,6 +70,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 *
 	 * @return the superior
 	 */
+	@Deprecated
 	protected UpdateManager getSuperior() {
 		if (getHost().getParent() == null) {
 			return null;
@@ -76,6 +82,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 * @see UpdateManager#performUpdate()
 	 */
 	@Override
+	@Deprecated
 	public void performUpdate() {
 		UpdateManager um = getSuperior();
 		if (um == null) {
@@ -88,6 +95,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 * @see UpdateManager#performUpdate(Rectangle)
 	 */
 	@Override
+	@Deprecated
 	public void performUpdate(Rectangle rect) {
 		UpdateManager um = getSuperior();
 		if (um == null) {
@@ -100,6 +108,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 * @see UpdateManager#setRoot(IFigure)
 	 */
 	@Override
+	@Deprecated
 	public void setRoot(IFigure f) {
 		root = f;
 	}
@@ -108,6 +117,7 @@ public abstract class SubordinateUpdateManager extends UpdateManager {
 	 * @see UpdateManager#setGraphicsSource(GraphicsSource)
 	 */
 	@Override
+	@Deprecated
 	public void setGraphicsSource(GraphicsSource gs) {
 		graphicsSource = gs;
 	}
