@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
  *                           BC, Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -24,7 +24,6 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.MarginBorder;
-import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -161,11 +160,7 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 
 		int safeBorderWidth = borderWidth > 0 ? borderWidth : 1;
 		graphics.pushState();
-		double scale = 1;
-
-		if (graphics instanceof ScaledGraphics) {
-			scale = ((ScaledGraphics) graphics).getAbsoluteScale();
-		}
+		double scale = graphics.getAbsoluteScale();
 		// Top part inside the border (as fillGradient does not allow to fill a
 		// rectangle with round corners).
 		Rectangle rect = getBounds().getCopy();

@@ -25,7 +25,6 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.SWTGraphics;
-import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -164,7 +163,7 @@ public abstract class CachedLabel extends Label implements ILabeledFigure {
 
 	@Override
 	protected void paintFigure(Graphics graphics) {
-		if (graphics instanceof ScaledGraphics sg && sg.getAbsoluteScale() < 0.30) {
+		if (graphics.getAbsoluteScale() < 0.30) {
 			return;
 		}
 		if (!cacheLabel) {
