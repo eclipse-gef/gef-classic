@@ -516,11 +516,31 @@ public abstract class AbstractZoomManager {
 	}
 
 	/**
-	 * Currently does nothing.
+	 * Zooms to maximize the given rectangle and center it in the view port.
 	 *
 	 * @param rect a rectangle
 	 */
 	public void zoomTo(Rectangle rect) {
+		final double oldZoom = zoom;
+		final Point oldViewLocation = getViewport().getViewLocation();
+		setZoom(getZoomFactor(rect));
+		setViewLocation(getScrollLocation(rect.getCopy(), oldZoom, oldViewLocation));
+	}
+
+	private double getZoomFactor(final Rectangle zoomBounds) {
+		final Dimension available = getViewport().getClientArea().getSize();
+		final double scaleX = Math.min(available.width * getZoom() / zoomBounds.width, getMaxZoom());
+		final double scaleY = Math.min(available.height * getZoom() / zoomBounds.height, getMaxZoom());
+		return Math.min(scaleX, scaleY);
+	}
+
+	private Point getScrollLocation(final Rectangle zoomBounds, double oldZoom, Point oldViewLocation) {
+		// correct rectangle for zoom dependent data
+		zoomBounds.performTranslate(oldViewLocation.x, oldViewLocation.y);
+		zoomBounds.scale(zoom / oldZoom);
+
+		final Dimension size = getViewport().getClientArea().getSize();
+		return zoomBounds.getCenter().translate(-size.width / 2, -size.height / 2);
 	}
 
 	// private void performAnimatedZoom(Rectangle rect, boolean zoomIn, int
