@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2023 IBM Corporation and others.
+ * Copyright (c) 2008, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,34 +15,25 @@ package org.eclipse.draw2d.examples.path;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.ScalableFigure;
-import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
 
 public class ZoomFigure extends Figure implements ScalableFigure {
 
-	public static final int NATIVE_SCALING = 0;
-	public static final int EMULATED_SCALING = 1;
-
 	private double scale = 1.0;
-	private int scaleMethod = EMULATED_SCALING;
 
 	/*
 	 * @see org.eclipse.draw2d.Figure#paintClientArea(Graphics)
 	 */
 	@Override
-	protected void paintClientArea(Graphics graphics) {
+	protected void paintClientArea(Graphics g) {
 		if (getChildren().isEmpty()) {
 			return;
 		}
-		if ((scale == 1.0) && (scaleMethod != EMULATED_SCALING)) {
-			super.paintClientArea(graphics);
+		if ((scale == 1.0)) {
+			super.paintClientArea(g);
 		} else {
-			Graphics g = graphics;
-			if (EMULATED_SCALING == scaleMethod) {
-				g = new ScaledGraphics(graphics);
-			}
 			if (!optimizeClip()) {
 				g.clipRect(getBounds().getShrinked(getInsets()));
 			}
@@ -50,12 +41,8 @@ public class ZoomFigure extends Figure implements ScalableFigure {
 			g.scale(scale);
 			g.pushState();
 			paintChildren(g);
-			if (EMULATED_SCALING == scaleMethod) {
-				g.dispose();
-			} else {
-				g.popState();
-			}
-			graphics.restoreState();
+			g.popState();
+			g.restoreState();
 		}
 	}
 
@@ -126,9 +113,4 @@ public class ZoomFigure extends Figure implements ScalableFigure {
 	protected boolean useLocalCoordinates() {
 		return true;
 	}
-
-	public void setScaleMethod(int scaleMethod) {
-		this.scaleMethod = scaleMethod;
-	}
-
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2023 IBM Corporation and others.
+ * Copyright (c) 2008, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Polyline;
-import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
@@ -68,7 +67,7 @@ public class PathFigure extends Polyline {
 
 		TextLayout textLayout = new TextLayout(Display.getDefault());
 		textLayout.setFont(g.getFont());
-		textLayout.setText("zoom" + (g instanceof ScaledGraphics ? "[e]" : "[n]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		textLayout.setText("zoom"); //$NON-NLS-1$
 		TextStyle textStyle = new TextStyle();
 		textStyle.underline = true;
 		textStyle.underlineColor = ColorConstants.blue;
