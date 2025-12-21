@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,7 +14,6 @@ package org.eclipse.draw2d.examples.zoom;
 
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -51,12 +50,10 @@ public class ZoomContainer extends Figure {
 	 * @see org.eclipse.draw2d.Figure#paintClientArea(Graphics)
 	 */
 	@Override
-	protected void paintClientArea(Graphics graphics) {
+	protected void paintClientArea(Graphics g) {
 		if (getChildren().isEmpty()) {
 			return;
 		}
-
-		ScaledGraphics g = new ScaledGraphics(graphics);
 
 		if (!optimizeClip()) {
 			g.clipRect(getBounds().getShrinked(getInsets()));
@@ -66,8 +63,7 @@ public class ZoomContainer extends Figure {
 		g.pushState();
 		paintChildren(g);
 		g.popState();
-		g.dispose();
-		graphics.restoreState();
+		g.restoreState();
 	}
 
 	public void setZoom(float zoom) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,6 +29,7 @@ import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.FileImageDataProvider;
 import org.eclipse.draw2d.parts.Thumbnail;
 
 /**
@@ -38,12 +39,17 @@ import org.eclipse.draw2d.parts.Thumbnail;
  */
 
 public class ZoomExample {
-
+	private static final Image IMG_CLASS = FileImageDataProvider.createImage(UMLClassFigure.class,
+			"images/class_obj.svg"); //$NON-NLS-1$
+	private static final Image IMG_FIELD_PRIVATE = FileImageDataProvider.createImage(UMLClassFigure.class,
+			"images/field_private_obj.svg"); //$NON-NLS-1$
+	private static final Image IMG_METHOD_PUBLIC = FileImageDataProvider.createImage(UMLClassFigure.class,
+			"images/methpub_obj.svg"); //$NON-NLS-1$
 	private static Figure contents;
 
 	public static void main(String[] args) {
-		Display d = new Display();
-		final Shell shell = new Shell(d);
+		final Shell shell = new Shell();
+		final Display d = shell.getDisplay();
 		shell.setSize(800, 800);
 		LightweightSystem lws = new LightweightSystem(shell);
 
@@ -77,20 +83,10 @@ public class ZoomExample {
 
 		lws.setContents(fig);
 
-		// overviewShell = new Shell(shell, SWT.TITLE| SWT.RESIZE | SWT.NO_REDRAW_RESIZE
-		// | SWT.NO_BACKGROUND);
-		// overviewShell.setText("Overview Shell");
-		// overviewShell.setLayout(new FillLayout());
-		// LightweightSystem overviewLWS = new LightweightSystem(overviewShell);
-		// overviewLWS.setContents(createThumbnail(getContents()));
-		// overviewShell.setSize(200, 200);
-
 		shell.open();
-		// overviewShell.open();
 		while (!shell.isDisposed()) {
 			while (!d.readAndDispatch()) {
 				d.sleep();
-				// overviewShell.dispose();
 			}
 		}
 	}
@@ -115,39 +111,29 @@ public class ZoomExample {
 		contents.setLayoutManager(layout);
 
 		Font classFont = new Font(null, "Arial", 12, SWT.BOLD); //$NON-NLS-1$
-		Label classLabel1 = new Label("Table", //$NON-NLS-1$
-				new Image(null, ZoomExample.class.getResourceAsStream("images/class_obj.gif"))); //$NON-NLS-1$
+		Label classLabel1 = new Label("Table", IMG_CLASS); //$NON-NLS-1$
 		classLabel1.setFont(classFont);
 
-		Label classLabel2 = new Label("Column", //$NON-NLS-1$
-				new Image(null, ZoomExample.class.getResourceAsStream("images/class_obj.gif"))); //$NON-NLS-1$
+		Label classLabel2 = new Label("Column", IMG_CLASS);//$NON-NLS-1$
 		classLabel2.setFont(classFont);
 
 		final UMLClassFigure classFigure = new UMLClassFigure(classLabel1);
 		final UMLClassFigure classFigure2 = new UMLClassFigure(classLabel2);
 
-		Label attribute1 = new Label("columns: Column[]", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/field_private_obj.gif"))); //$NON-NLS-1$
-		Label attribute2 = new Label("rows: Row[]", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/field_private_obj.gif"))); //$NON-NLS-1$
-		Label attribute3 = new Label("columnID: int", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/field_private_obj.gif"))); //$NON-NLS-1$
-		Label attribute4 = new Label("items: List", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/field_private_obj.gif"))); //$NON-NLS-1$
+		Label attribute1 = new Label("columns: Column[]", IMG_FIELD_PRIVATE); //$NON-NLS-1$
+		Label attribute2 = new Label("rows: Row[]", IMG_FIELD_PRIVATE); //$NON-NLS-1$
+		Label attribute3 = new Label("columnID: int", IMG_FIELD_PRIVATE);//$NON-NLS-1$
+		Label attribute4 = new Label("items: List", IMG_FIELD_PRIVATE);//$NON-NLS-1$
 
 		classFigure.getAttributesCompartment().add(attribute1);
 		classFigure.getAttributesCompartment().add(attribute2);
 		classFigure2.getAttributesCompartment().add(attribute3);
 		classFigure2.getAttributesCompartment().add(attribute4);
 
-		Label method1 = new Label("getColumns(): Column[]", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/methpub_obj.gif"))); //$NON-NLS-1$
-		Label method2 = new Label("getRows(): Row[]", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/methpub_obj.gif"))); //$NON-NLS-1$
-		Label method3 = new Label("getColumnID(): int", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/methpub_obj.gif"))); //$NON-NLS-1$
-		Label method4 = new Label("getItems(): List", //$NON-NLS-1$
-				new Image(null, UMLClassFigure.class.getResourceAsStream("images/methpub_obj.gif"))); //$NON-NLS-1$
+		Label method1 = new Label("getColumns(): Column[]", IMG_METHOD_PUBLIC); //$NON-NLS-1$
+		Label method2 = new Label("getRows(): Row[]", IMG_METHOD_PUBLIC); //$NON-NLS-1$
+		Label method3 = new Label("getColumnID(): int", IMG_METHOD_PUBLIC); //$NON-NLS-1$
+		Label method4 = new Label("getItems(): List", IMG_METHOD_PUBLIC); //$NON-NLS-1$
 
 		classFigure.getMethodsCompartment().add(method1);
 		classFigure.getMethodsCompartment().add(method2);

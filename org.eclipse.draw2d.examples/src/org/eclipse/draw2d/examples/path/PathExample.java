@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2023 IBM Corporation and others.
+ * Copyright (c) 2008, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,10 +13,7 @@
 package org.eclipse.draw2d.examples.path;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -65,27 +62,6 @@ public class PathExample {
 
 		zoomFigure.setLayoutManager(new BorderLayout());
 		zoomFigure.setScale(1);
-
-		final Button zoomMethodButton = new Button(shell, SWT.CHECK);
-		zoomMethodButton.setSelection(true);
-		zoomMethodButton.setText("EMULATED_SCALING"); //$NON-NLS-1$
-
-		zoomMethodButton.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if (zoomMethodButton.getSelection()) {
-					zoomFigure.setScaleMethod(ZoomFigure.EMULATED_SCALING);
-				} else {
-					zoomFigure.setScaleMethod(ZoomFigure.NATIVE_SCALING);
-				}
-				zoomFigure.revalidate();
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
 
 		PathFigure polyline = new PathFigure();
 		int w = 70;
