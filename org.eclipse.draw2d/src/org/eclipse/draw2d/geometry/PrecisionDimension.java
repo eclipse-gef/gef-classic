@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * @author Randy Hudson
  */
@@ -22,20 +24,20 @@ public class PrecisionDimension extends Dimension {
 	/**
 	 * The height in double precision.
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseHeight(double)} and
 	 *             {@link #preciseHeight()} instead. This field will become private
 	 *             in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseHeight;
 	/**
 	 * The width in double precision.
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseWidth(double)} and {@link #preciseWidth()}
 	 *             instead. This field will become private in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseWidth;
 
@@ -351,7 +353,6 @@ public class PrecisionDimension extends Dimension {
 	/**
 	 * Updates the integer fields using the precise versions.
 	 *
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated This method should not be accessed by clients any more (it will
 	 *             be made private in future releases). The update of integer and
 	 *             precision fields is performed automatically if
@@ -359,6 +360,7 @@ public class PrecisionDimension extends Dimension {
 	 *             not manipulated directly, but only via respective methods offered
 	 *             by this class.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public final void updateInts() {
 		updateWidthInt();

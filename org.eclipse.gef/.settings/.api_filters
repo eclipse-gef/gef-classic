@@ -30,6 +30,33 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/internal/ui/palette/editparts/PaletteStackEditPart.java" type="org.eclipse.gef.internal.ui.palette.editparts.PaletteStackEditPart">
+        <filter id="571519004">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.internal.ui.palette.editparts.PaletteStackEditPart.createFigure()"/>
+                <message_argument value="Container"/>
+            </message_arguments>
+        </filter>
+        <filter id="572522506">
+            <message_arguments>
+                <message_argument value="Container"/>
+                <message_argument value="PaletteStackEditPart"/>
+            </message_arguments>
+        </filter>
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="Container(LayoutManager)"/>
+                <message_argument value="PaletteStackEditPart"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="Figure"/>
+                <message_argument value="PaletteStackEditPart"/>
+                <message_argument value="getPreferredSize(int, int)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/actions/AlignmentRetargetAction.java" type="org.eclipse.gef.ui.actions.AlignmentRetargetAction">
         <filter id="571473929">
             <message_arguments>

@@ -15,6 +15,8 @@ package org.eclipse.draw2d.geometry;
 
 import java.util.Arrays;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * A PointList implementation using floating point values. The use of floating
  * point prevents rounding errors from accumulating. For the sake of
@@ -227,8 +229,8 @@ public final class PrecisionPointList extends PointList {
 	 * changing the original PointList.
 	 *
 	 * @return the double array of decimal fractions by reference
-	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@NoReference
 	public double[] toDoubleArray() {
 		int arraySize = arraySize();
 		if (decimalFractions.length != arraySize) {

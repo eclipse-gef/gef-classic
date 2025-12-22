@@ -13,6 +13,10 @@
 
 package org.eclipse.draw2d;
 
+import org.eclipse.pde.api.tools.annotations.NoExtend;
+import org.eclipse.pde.api.tools.annotations.NoInstantiate;
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * Lightweight Container which just draws the children according to the given
  * layout.
@@ -23,11 +27,13 @@ package org.eclipse.draw2d;
  *
  * A Container can not have any border and does not draw any background.
  *
- * This class is currently in development its API may
- * change: @noreference, @noextend and @noinstantiate
+ * This class is currently in development its API may change.
  *
  * @since 3.16
  */
+@NoExtend
+@NoReference
+@NoInstantiate
 public class Container extends Figure {
 
 	public Container(LayoutManager manager) {

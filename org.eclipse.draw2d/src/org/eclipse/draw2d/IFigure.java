@@ -20,6 +20,8 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Font;
 
+import org.eclipse.pde.api.tools.annotations.NoImplement;
+
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
@@ -30,9 +32,10 @@ import org.eclipse.draw2d.geometry.Translatable;
  * A lightweight graphical object. Figures are rendered to a {@link Graphics}
  * object. Figures can be composed to create complex graphics.
  *
- * @noimplement This interface is not intended to be implemented by clients. Use
- *              {@link Figure}.
+ * WARNING: This interface is not intended to be implemented by clients. Use
+ * {@link Figure}.
  */
+@NoImplement
 public interface IFigure {
 
 	/**

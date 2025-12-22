@@ -23,6 +23,8 @@ import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.graphics.TextLayout;
 
+import org.eclipse.pde.api.tools.annotations.NoExtend;
+
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -31,9 +33,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * The Graphics class allows you to draw to a surface. The drawXxx() methods
  * that pertain to shapes draw an outline of the shape, whereas the fillXxx()
  * methods fill in the shape. Also provides for drawing text, lines and images.
- *
- * @noextend This class is not intended to be subclassed by clients.
  */
+@NoExtend
 public abstract class Graphics {
 
 	/**

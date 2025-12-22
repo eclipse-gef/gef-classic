@@ -13,6 +13,8 @@
 
 package org.eclipse.draw2d;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 import org.eclipse.draw2d.geometry.Transposer;
 
 /**
@@ -71,9 +73,8 @@ public abstract class OrderedLayout extends AbstractHintLayout {
 	 * Transposer object that may be used in layout calculations. Will be
 	 * automatically enabled/disabled dependent on the default and the actual
 	 * orientation.
-	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 */
+	@NoReference
 	protected Transposer transposer = new Transposer();
 
 	/**

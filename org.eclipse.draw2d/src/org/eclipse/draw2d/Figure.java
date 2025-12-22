@@ -30,6 +30,9 @@ import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
 
+import org.eclipse.pde.api.tools.annotations.NoOverride;
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
@@ -2155,10 +2158,9 @@ public class Figure implements IFigure {
 	 *
 	 * @return {@code false}.
 	 * @since 3.21
-	 * @noreference This method is not intended to be referenced by clients.
-	 * @nooverride This method is not intended to be re-implemented or extended by
-	 *             clients.
 	 */
+	@NoOverride
+	@NoReference
 	@SuppressWarnings("static-method")
 	protected boolean useDoublePrecision() {
 		// This method should only be used internally and is not part of the interface

@@ -15,16 +15,18 @@ package org.eclipse.draw2d;
 
 import org.eclipse.swt.graphics.Image;
 
+import org.eclipse.pde.api.tools.annotations.NoImplement;
+
 /**
  * Interface for image figures
  *
  * <P>
  * WARNING: This interface is not intended to be implemented by clients. Extend
  * {@link AbstractImageFigure} instead.
- *
- * @noimplement
+ * 
  * @since 3.6
  */
+@NoImplement
 public interface IImageFigure extends IFigure {
 
 	/**

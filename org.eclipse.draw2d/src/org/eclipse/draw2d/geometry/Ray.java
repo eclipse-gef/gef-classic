@@ -10,14 +10,16 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * Represents a 2-dimensional directional Vector, or Ray.
  * {@link java.util.Vector} is commonly imported, so the name Ray was chosen.
  *
  * @deprecated Use {@link Vector} instead, which offers double precision instead
  *             of integer precision.
- * @noreference This class is not intended to be referenced by clients.
  */
+@NoReference
 @Deprecated(since = "3.5", forRemoval = true)
 public final class Ray {
 

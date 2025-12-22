@@ -13,13 +13,14 @@
 
 package org.eclipse.draw2d;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * <b>IMPORTANT:</b> This class is <em>not</em> part of the GEF public API. It
  * is marked public only so that it can be by other GEF plugins and should never
  * be accessed from application code.
- *
- * @noreference This class is not intended to be referenced by clients.
  */
+@NoReference
 public class AutoscaleFreeformViewport extends FreeformViewport {
 
 	@SuppressWarnings("removal")
