@@ -680,6 +680,26 @@ public class SWTGraphics extends Graphics {
 		return ((currentState.graphicHints & AA_MASK) >> AA_SHIFT) - AA_WHOLE_NUMBER;
 	}
 
+	private final float[] transformElements = new float[6];
+
+	/**
+	 * Returns a stable, direction-independent estimate of the current graphics
+	 * scaling, computed as the square root of the absolute determinant of the
+	 * transformation matrix.
+	 *
+	 * @see org.eclipse.draw2d.Graphics#getAbsoluteScale()
+	 */
+	@Override
+	public double getAbsoluteScale() {
+		if (transform == null) {
+			return super.getAbsoluteScale();
+		}
+		transform.getElements(transformElements);
+
+		return Math.sqrt(
+				Math.abs(transformElements[0] * transformElements[3] - transformElements[1] * transformElements[2]));
+	}
+
 	@Override
 	public boolean getAdvanced() {
 		return (currentState.graphicHints & ADVANCED_GRAPHICS_MASK) != 0;
