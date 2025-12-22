@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2010 IBM Corporation and others.
+ * Copyright (c) 2004, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,8 @@
  *******************************************************************************/
 
 package org.eclipse.draw2d.text;
+
+import org.eclipse.pde.api.tools.annotations.NoReference;
 
 import org.eclipse.draw2d.geometry.Translatable;
 
@@ -40,6 +42,7 @@ public class CaretInfo implements Translatable {
 	 * @param lineAscent  the ascent of the line on which the caret is placed
 	 * @param lineDescent the descent of the line on which the caret is placed
 	 */
+	@NoReference
 	protected CaretInfo(int x, int y, int ascent, int descent, int lineAscent, int lineDescent) {
 		this.x = x;
 		this.baseline = y + ascent;
