@@ -14,7 +14,7 @@ package org.eclipse.draw2d;
 
 import org.eclipse.swt.graphics.Image;
 
-import org.eclipse.draw2d.internal.FileImageDataProvider;
+import org.eclipse.draw2d.internal.FileImageFileNameProvider;
 
 /**
  * A Checkbox is a toggle figure which toggles between the checked and unchecked
@@ -24,8 +24,8 @@ import org.eclipse.draw2d.internal.FileImageDataProvider;
 public final class CheckBox extends Toggle {
 	private Label label = null;
 
-	static final Image UNCHECKED = FileImageDataProvider.createImage(CheckBox.class, "images/checkboxenabledoff.svg"); //$NON-NLS-1$
-	static final Image CHECKED = FileImageDataProvider.createImage(CheckBox.class, "images/checkboxenabledon.svg"); //$NON-NLS-1$
+	static final Image UNCHECKED = FileImageFileNameProvider.createImage(CheckBox.class, "images/checkboxenabledoff.svg"); //$NON-NLS-1$
+	static final Image CHECKED = FileImageFileNameProvider.createImage(CheckBox.class, "images/checkboxenabledon.svg"); //$NON-NLS-1$
 
 	/**
 	 * Constructs a CheckBox with no text.

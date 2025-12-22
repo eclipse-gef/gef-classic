@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -21,6 +21,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.LineAttributes;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.PathData;
@@ -416,7 +417,35 @@ public class SWTGraphics extends Graphics {
 	@Override
 	public void drawImage(Image srcImage, int x, int y) {
 		checkGC();
-		gc.drawImage(srcImage, x + translateX, y + translateY);
+		if (transform == null) {
+			gc.drawImage(srcImage, x + translateX, y + translateY);
+		} else {
+			float[] transformElements = new float[6];
+			transform.getElements(transformElements);
+
+			float scaleHor = transformElements[0];
+			float scaleVer = transformElements[3];
+
+			if (scaleHor == 1.0 && scaleVer == 1.0) {
+				gc.drawImage(srcImage, x + translateX, y + translateY);
+				return;
+			}
+
+			ImageData srcImageData = srcImage.getImageData(100);
+			int scaledX = (int) ((x + translateX) * scaleHor);
+			int scaledY = (int) ((y + translateY) * scaleVer);
+			int scaledWidth = (int) (srcImageData.width * scaleHor);
+			int scaledHeight = (int) (srcImageData.height * scaleVer);
+
+			transform.scale(1 / scaleHor, 1 / scaleVer);
+			gc.setTransform(transform);
+			try {
+				gc.drawImage(srcImage, scaledX, scaledY, scaledWidth, scaledHeight);
+			} finally {
+				transform.scale(scaleHor, scaleVer);
+				gc.setTransform(transform);
+			}
+		}
 	}
 
 	/**
