@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * Stores an integer width and height. This class provides various methods for
  * manipulating this Dimension or creating new derived Objects.
@@ -215,9 +217,9 @@ public class Dimension implements Cloneable, java.io.Serializable, Translatable 
 	 * @param p the Point supplying the dimensional values
 	 * @return <code>this</code> for convenience
 	 * @since 2.0
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #expand(int, int)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public Dimension expand(Point p) {
 		return expand(p.x(), p.y());
@@ -250,9 +252,9 @@ public class Dimension implements Cloneable, java.io.Serializable, Translatable 
 	 * @param d the dimension being compared
 	 * @return a new dimension representing the difference
 	 * @since 2.0
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #getShrinked(Dimension)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public Dimension getDifference(Dimension d) {
 		return getShrinked(d);

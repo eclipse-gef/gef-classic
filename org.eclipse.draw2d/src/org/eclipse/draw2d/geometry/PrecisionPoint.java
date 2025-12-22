@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * @author danlee
  */
@@ -22,20 +24,20 @@ public class PrecisionPoint extends Point {
 	/**
 	 * Double value for X
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseX(double)} and {@link #preciseX()} instead.
 	 *             This field will become private in future versions.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseX;
 
 	/**
 	 * Double value for Y
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseY(double)} and {@link #preciseY()} instead.
 	 *             This field will become private in future versions.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseY;
 
@@ -330,13 +332,13 @@ public class PrecisionPoint extends Point {
 	/**
 	 * Updates the integer fields using the precise versions.
 	 *
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated This method should not be accessed by clients any more (it will
 	 *             be made private in future releases). The update of integer and
 	 *             precision fields is performed automatically if {@link #preciseX}
 	 *             and {@link #preciseY} field values are not manipulated directly,
 	 *             but only via respective methods offered by this class.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public final void updateInts() {
 		updateXInt();

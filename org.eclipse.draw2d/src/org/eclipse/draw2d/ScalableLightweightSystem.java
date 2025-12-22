@@ -15,6 +15,8 @@ package org.eclipse.draw2d;
 
 import org.eclipse.swt.widgets.Canvas;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Translatable;
@@ -29,9 +31,8 @@ import org.eclipse.draw2d.internal.InternalDraw2dUtils;
  * the other GEF plugins. This class must <b>not</b> be used together with a
  * {@link Viewport}. Otherwise the scrollbar and content are always rendered as
  * if at 100% zoom (at least on Windows}.
- *
- * @noreference This class is not intended to be referenced by clients.
  */
+@NoReference
 public class ScalableLightweightSystem extends LightweightSystem {
 
 	@Override

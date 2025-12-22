@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * A Rectangle implementation using floating point values which are truncated
  * into the inherited integer fields. The use of floating point prevents
@@ -26,41 +28,41 @@ public final class PrecisionRectangle extends Rectangle {
 	/**
 	 * Double value for height
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseHeight(double)} and
 	 *             {@link #preciseHeight()} instead. This field will become private
 	 *             in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseHeight;
 
 	/**
 	 * Double value for width
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseWidth(double)} and {@link #preciseWidth()}
 	 *             instead. This field will become private in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseWidth;
 
 	/**
 	 * Double value for X
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseX(double)} and {@link #preciseX()} instead.
 	 *             This field will become private in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseX;
 
 	/**
 	 * Double value for Y
 	 *
-	 * @noreference This field is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseX(double)} and {@link #preciseY()} instead.
 	 *             This field will become private in the future.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public double preciseY;
 
@@ -487,9 +489,9 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Sets the height.
 	 *
 	 * @param value the new height
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseHeight(double)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public void setHeight(double value) {
 		setPreciseHeight(value);
@@ -663,9 +665,9 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Sets the width.
 	 *
 	 * @param value the new width
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseWidth(double)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public void setWidth(double value) {
 		setPreciseWidth(value);
@@ -683,9 +685,9 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Sets the x value.
 	 *
 	 * @param value the new x value
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseX(double)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public void setX(double value) {
 		setPreciseX(value);
@@ -703,9 +705,9 @@ public final class PrecisionRectangle extends Rectangle {
 	 * Sets the y value.
 	 *
 	 * @param value the new y value
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #setPreciseX(double)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public void setY(double value) {
 		setPreciseY(value);
@@ -886,9 +888,9 @@ public final class PrecisionRectangle extends Rectangle {
 	 * @since 3.0
 	 * @param rect the rectangle being unioned
 	 * @return <code>this</code> for convenience
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #union(Rectangle)} instead
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public PrecisionRectangle union(PrecisionRectangle rect) {
 		if (rect == null || rect.isEmpty()) {
@@ -977,7 +979,6 @@ public final class PrecisionRectangle extends Rectangle {
 	/**
 	 * Updates the integer values based on the current precise values.
 	 *
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated This method should not be accessed by clients any more (it will
 	 *             be made private in future releases). The update of integer and
 	 *             precision fields is performed automatically if {@link #preciseX},
@@ -987,6 +988,7 @@ public final class PrecisionRectangle extends Rectangle {
 	 *
 	 * @since 3.0
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public void updateInts() {
 		updateXInt();

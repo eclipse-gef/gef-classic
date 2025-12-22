@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 import org.eclipse.draw2d.PositionConstants;
 
 /**
@@ -74,9 +76,9 @@ public class Point implements Cloneable, java.io.Serializable, Translatable {
 	 * @param x x value
 	 * @param y y value
 	 * @since 2.0
-	 * @noreference This constructor is not intended to be referenced by clients.
 	 * @deprecated Use {@link PrecisionPoint} or {@link #Point(int, int)} instead.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public Point(double x, double y) {
 		this.x = (int) x;
@@ -197,9 +199,9 @@ public class Point implements Cloneable, java.io.Serializable, Translatable {
 	 * @param p The reference Point
 	 * @return distance<sup>2</sup>
 	 * @since 2.0
-	 * @noreference This method is not intended to be referenced by clients.
 	 * @deprecated Use {@link #getDistanceSquared(Point)}.
 	 */
+	@NoReference
 	@Deprecated(since = "3.7", forRemoval = true)
 	public int getDistance2(Point p) {
 		return getDistanceSquared(p);
