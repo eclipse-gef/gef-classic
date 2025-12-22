@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.draw2d.text;
 
+import org.eclipse.pde.api.tools.annotations.NoImplement;
+
 /**
  * The context that a {@link FlowFigureLayout} uses to perform its layout.
  *
@@ -19,6 +21,7 @@ package org.eclipse.draw2d.text;
  * WARNING: This interface is not intended to be implemented by clients. It
  * exists to define the API between the layout and its context.
  */
+@NoImplement
 public interface FlowContext {
 
 	/**

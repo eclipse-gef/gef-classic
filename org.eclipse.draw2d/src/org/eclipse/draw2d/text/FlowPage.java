@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  *     IBM Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.draw2d.text;
+
+import org.eclipse.pde.api.tools.annotations.NoExtend;
 
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -26,6 +28,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * <P>
  * WARNING: This class is not intended to be subclassed by clients.
  */
+@NoExtend
 public class FlowPage extends BlockFlow {
 
 	private final Dimension pageSize = new Dimension();

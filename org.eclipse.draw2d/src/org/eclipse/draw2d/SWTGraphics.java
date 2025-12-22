@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -30,6 +30,8 @@ import org.eclipse.swt.graphics.TextLayout;
 import org.eclipse.swt.graphics.Transform;
 import org.eclipse.swt.widgets.Display;
 
+import org.eclipse.pde.api.tools.annotations.NoExtend;
+
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -42,6 +44,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * <P>
  * WARNING: This class is not intended to be subclassed.
  */
+@NoExtend
 public class SWTGraphics extends Graphics {
 
 	/**

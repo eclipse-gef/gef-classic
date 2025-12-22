@@ -207,6 +207,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/ui/palette/editparts/PaletteEditPart.java" type="org.eclipse.gef.ui.palette.editparts.PaletteEditPart">
+        <filter id="571519004">
+            <message_arguments>
+                <message_argument value="org.eclipse.gef.ui.palette.editparts.PaletteEditPart.createToolTip()"/>
+                <message_argument value="FlowPage"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/properties/UndoablePropertySheetPage.java" type="org.eclipse.gef.ui.properties.UndoablePropertySheetPage">
         <filter id="571473929">
             <message_arguments>

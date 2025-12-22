@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2025 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -17,6 +17,8 @@ import java.util.List;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.TextLayout;
+
+import org.eclipse.pde.api.tools.annotations.NoExtend;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
@@ -36,6 +38,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  * @author Pratik Shah
  * @since 2.1
  */
+@NoExtend
 public class TextFlow extends InlineFlow {
 
 	static final String ELLIPSIS = "..."; //$NON-NLS-1$
