@@ -493,19 +493,19 @@ public class Label extends Figure implements PositionConstants {
 			super.paintFigure(graphics);
 		}
 		Rectangle bounds = getBounds();
-		graphics.translate(bounds.x, bounds.y);
 		if (icon != null) {
-			graphics.drawImage(icon, getIconLocation());
+			Point iconLoc = getIconLocation();
+			graphics.drawImage(icon, bounds.x + iconLoc.x, bounds.y + iconLoc.y);
 		}
+		Point curTextLocation = getTextLocation();
+		final int tx = bounds.x + curTextLocation.x;
+		final int ty = bounds.y + curTextLocation.y;
 		if (!isEnabled()) {
-			graphics.translate(1, 1);
 			graphics.setForegroundColor(ColorConstants.buttonLightest);
-			graphics.drawText(getSubStringText(), getTextLocation());
-			graphics.translate(-1, -1);
+			graphics.drawText(getSubStringText(), tx + 1, ty + 1);
 			graphics.setForegroundColor(ColorConstants.buttonDarker);
 		}
-		graphics.drawText(getSubStringText(), getTextLocation());
-		graphics.translate(-bounds.x, -bounds.y);
+		graphics.drawText(getSubStringText(), tx, ty);
 	}
 
 	/**
