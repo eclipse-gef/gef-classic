@@ -161,7 +161,7 @@ public class FigureCanvas extends Canvas {
 		this.lws = lws;
 		lws.setControl(this);
 		hook();
-		InternalDraw2dUtils.setPropagateAutoScaleDisabled(this, false);
+		InternalDraw2dUtils.setPropagateAutoScaleDisabled(this);
 	}
 
 	/**
