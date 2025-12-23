@@ -34,22 +34,6 @@ public class InternalDraw2dUtils {
 	 */
 	private static final String DRAW2D_ENABLE_AUTOSCALE = "draw2d.enableAutoscale"; //$NON-NLS-1$
 
-	/**
-	 * Internal flag for fetching the shell zoom
-	 */
-	private static final String DATA_SHELL_ZOOM = "SHELL_ZOOM"; //$NON-NLS-1$
-
-	/**
-	 * Data that can be set to scale this widget at 100%.
-	 */
-	private static final String DATA_AUTOSCALE_DISABLED = "AUTOSCALE_DISABLED"; //$NON-NLS-1$
-
-	/**
-	 * Data that can be set to make a control not propagate autoScale disabling to
-	 * children.
-	 */
-	private static final String DATA_PROPOGATE_AUTOSCALE_DISABLED = "PROPOGATE_AUTOSCALE_DISABLED"; //$NON-NLS-1$
-
 	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
 			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()))
 			&& SWT.getVersion() >= 4971; // SWT 2025-12 release or higher
@@ -62,16 +46,17 @@ public class InternalDraw2dUtils {
 		if (control == null || !isAutoScaleEnabled()) {
 			return;
 		}
-		control.setData(InternalDraw2dUtils.DATA_AUTOSCALE_DISABLED, true);
+		AutoscalingAccess.setAutoscaleDisabled(control);
+
 		control.addListener(SWT.ZoomChanged, e -> zoomConsumer.accept(e.detail / 100.0));
 		zoomConsumer.accept((double) InternalDraw2dUtils.calculateScale(control));
 	}
 
-	public static void setPropagateAutoScaleDisabled(Control control, boolean propagate) {
+	public static void setPropagateAutoScaleDisabled(Control control) {
 		if (control == null || !isAutoScaleEnabled()) {
 			return;
 		}
-		control.setData(DATA_PROPOGATE_AUTOSCALE_DISABLED, propagate);
+		AutoscalingAccess.disablePropagateAutoscale(control);
 	}
 
 	/**
@@ -81,12 +66,7 @@ public class InternalDraw2dUtils {
 	 * @return The shell zoom of the given control.
 	 */
 	public static float calculateScale(Control control) {
-		int shellZoom;
-		try {
-			shellZoom = (int) control.getData(InternalDraw2dUtils.DATA_SHELL_ZOOM);
-		} catch (ClassCastException | NullPointerException e) {
-			shellZoom = 100;
-		}
+		int shellZoom = AutoscalingAccess.getShellZoom(control);
 		// returning float allows us to round it to int via Math.round(...)
 		return shellZoom / 100.0f;
 	}
