@@ -416,4 +416,23 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 	}
 
+	@Test
+	public void testGetAbsoluteScale() {
+		g.pushState();
+		assertEquals(1.0, g.getAbsoluteScale());
+
+		g.scale(2.0);
+		assertEquals(2.0, g.getAbsoluteScale());
+		g.restoreState();
+
+		g.scale(2.0f, 1.5f);
+		g.rotate(45);
+		assertEquals(1.73, g.getAbsoluteScale(), 1e-2);
+		g.restoreState();
+
+		g.scale(7.79f, 1.3333f);
+		g.rotate(14.753f);
+		assertEquals(3.22, g.getAbsoluteScale(), 1e-2);
+		g.restoreState();
+	}
 }
