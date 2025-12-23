@@ -20,6 +20,10 @@
     - ScalableRootEditPart
     - ScalableLightweightSystem
 - Added `Rectangle.getBounds()`
+- Added `Graphics.drawImage(Image,int,int,int,int)` and `Graphics.drawImage(Image,Rectangle)` to draw scaled images and
+  is a convenience function for `Graphics.drawImage(Image,int,int,int,int,int,int,int,int)` in case the whole image
+  should be scaled.
+  Note: This method is able to properly scale SVG images.
 - Implemented AbstractZoomManager.zoomTo(Rectangle): This allows to implement features 
   as zoom to selection or any given bounding box (e.g., Marquee selected box). 
   This feature was originally request in [Bug 172463](https://bugs.eclipse.org/bugs/show_bug.cgi?id=172463)   
