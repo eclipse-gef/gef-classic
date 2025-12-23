@@ -224,21 +224,11 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 	 */
 	protected void handlePreferenceStorePropertyChanged(String property) {
 		switch (property) {
-		case PREFERENCE_LAYOUT:
-			firePropertyChanged(property, Integer.valueOf(getLayoutSetting()));
-			break;
-		case PREFERENCE_AUTO_COLLAPSE:
-			firePropertyChanged(property, Integer.valueOf(getAutoCollapseSetting()));
-			break;
-		case PREFERENCE_FONT:
-			firePropertyChanged(property, getFontData());
-			break;
-		case PREFERENCE_SCROLLBARS_MODE:
-			firePropertyChanged(property, getScrollbarsMode());
-			break;
-		default:
-			firePropertyChanged(property, Boolean.valueOf(useLargeIcons(convertPreferenceNameToLayout(property))));
-			break;
+		case PREFERENCE_LAYOUT -> firePropertyChanged(property, Integer.valueOf(getLayoutSetting()));
+		case PREFERENCE_AUTO_COLLAPSE -> firePropertyChanged(property, Integer.valueOf(getAutoCollapseSetting()));
+		case PREFERENCE_FONT -> firePropertyChanged(property, getFontData());
+		case PREFERENCE_SCROLLBARS_MODE -> firePropertyChanged(property, getScrollbarsMode());
+		default -> firePropertyChanged(property, Boolean.valueOf(useLargeIcons(convertPreferenceNameToLayout(property))));
 		}
 	}
 

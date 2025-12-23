@@ -1599,16 +1599,10 @@ public class FlyoutPaletteComposite extends Composite {
 		public static Cursor getCursor(int code) {
 			if (cursors[code] == null) {
 				switch (code) {
-				case LEFT:
-					cursors[LEFT] = createCursor(ISharedImages.IMG_OBJS_DND_LEFT);
-					break;
-				case RIGHT:
-					cursors[RIGHT] = createCursor(ISharedImages.IMG_OBJS_DND_RIGHT);
-					break;
-				default:
-				case INVALID:
-					cursors[INVALID] = createCursor(ISharedImages.IMG_OBJS_DND_INVALID);
-					break;
+				case LEFT -> cursors[LEFT] = createCursor(ISharedImages.IMG_OBJS_DND_LEFT);
+				case RIGHT -> cursors[RIGHT] = createCursor(ISharedImages.IMG_OBJS_DND_RIGHT);
+				case INVALID -> cursors[INVALID] = createCursor(ISharedImages.IMG_OBJS_DND_INVALID);
+				default -> cursors[INVALID] = createCursor(ISharedImages.IMG_OBJS_DND_INVALID);
 				}
 			}
 			return cursors[code];
