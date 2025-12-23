@@ -23,6 +23,8 @@
 - Implemented AbstractZoomManager.zoomTo(Rectangle): This allows to implement features 
   as zoom to selection or any given bounding box (e.g., Marquee selected box). 
   This feature was originally request in [Bug 172463](https://bugs.eclipse.org/bugs/show_bug.cgi?id=172463)   
+- Implemented `SWTGraphics.getAbsoluteScale()`
+  This feature was originally requested in [Bug 267462](https://bugs.eclipse.org/bugs/show_bug.cgi?id=267462)
 
 ## GEF
 
