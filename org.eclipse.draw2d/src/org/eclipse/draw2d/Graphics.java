@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -141,6 +141,23 @@ public abstract class Graphics {
 	public abstract void drawImage(Image srcImage, int x, int y);
 
 	/**
+	 * Draws the full source image into a specified rectangular area in the
+	 * receiver. The image will be stretched or shrunk as needed to exactly fit the
+	 * destination rectangle.
+	 *
+	 * @param image      the source image
+	 * @param destX      the x coordinate in the destination
+	 * @param destY      the y coordinate in the destination
+	 * @param destWidth  the width in points of the destination rectangle
+	 * @param destHeight the height in points of the destination rectangle
+	 * @since 3.22
+	 */
+	public void drawImage(Image image, int destX, int destY, int destWidth, int destHeight) {
+		org.eclipse.swt.graphics.Rectangle bounds = image.getBounds();
+		drawImage(image, bounds.x, bounds.y, bounds.width, bounds.height, destX, destY, destWidth, destHeight);
+	}
+
+	/**
 	 * Draws a rectangular section of the given Image to the specified rectangular
 	 * reagion on the canvas. The section of the image bounded by the rectangle
 	 * (x1,y1,w1,h1) is copied to the section of the canvas bounded by the rectangle
@@ -167,6 +184,20 @@ public abstract class Graphics {
 	 */
 	public final void drawImage(Image image, Point p) {
 		drawImage(image, p.x, p.y);
+	}
+
+	/**
+	 * Draws the full source image into a specified rectangular area in the
+	 * receiver. The image will be stretched or shrunk as needed to exactly fit the
+	 * destination rectangle.
+	 *
+	 * @param image the source image
+	 * @param dest  the destination rectangle
+	 * @see #drawImage(Image, int, int, int, int)
+	 * @since 3.22
+	 */
+	public final void drawImage(Image image, Rectangle dest) {
+		drawImage(image, dest.x, dest.y, dest.width, dest.height);
 	}
 
 	/**

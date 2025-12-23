@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -285,6 +285,14 @@ public class ScaledGraphics extends Graphics {
 		graphics.drawImage(srcImage, 0, 0, size.width, size.height, (int) (Math.floor((x * zoom + fractionalX))),
 				(int) (Math.floor((y * zoom + fractionalY))), (int) (Math.floor((size.width * zoom + fractionalX))),
 				(int) (Math.floor((size.height * zoom + fractionalY))));
+	}
+
+	/** @see Graphics#drawImage(Image, int, int, int, int) */
+	@Deprecated
+	@Override
+	public void drawImage(Image srcImage, int destX, int destY, int destWidth, int destHeight) {
+		Rectangle t = zoomRect(destX, destY, destWidth, destHeight);
+		graphics.drawImage(srcImage, t.x, t.y, t.width, t.height);
 	}
 
 	/** @see Graphics#drawImage(Image, int, int, int, int, int, int, int, int) */
