@@ -15,6 +15,7 @@ package org.eclipse.zest.core.widgets.internal;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
@@ -119,7 +120,6 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 	 */
 	protected void adjustBoundsToFit() {
 		String text = getText();
-		int safeBorderWidth = borderWidth > 0 ? borderWidth : 1;
 		if ((text != null)) {
 			Font font = getFont();
 			if (font != null) {
@@ -129,7 +129,7 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 					int expandHeight = Math.max(imageRect.height - minSize.height, 0);
 					minSize.expand(imageRect.width + 4, expandHeight);
 				}
-				minSize.expand(10 + (2 * safeBorderWidth), 4 + (2 * safeBorderWidth));
+				minSize.expand(10 + (2 * borderWidth), 4 + (2 * borderWidth));
 				setBounds(new Rectangle(getLocation(), minSize));
 			}
 		}
@@ -158,47 +158,34 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 		graphics.setForegroundColor(lightenColor);
 		graphics.setBackgroundColor(getBackgroundColor());
 
-		int safeBorderWidth = borderWidth > 0 ? borderWidth : 1;
 		graphics.pushState();
-		double scale = graphics.getAbsoluteScale();
-		// Top part inside the border (as fillGradient does not allow to fill a
-		// rectangle with round corners).
-		Rectangle rect = getBounds().getCopy();
-		rect.height /= 2;
-		graphics.setForegroundColor(getBackgroundColor());
-		graphics.setBackgroundColor(getBackgroundColor());
-		graphics.fillRoundRectangle(rect, arcWidth * safeBorderWidth, arcWidth * 2 * safeBorderWidth);
 
-		// Bottom part inside the border.
-		rect.y = rect.y + rect.height;
-		rect.height += 1; // Not sure why it is needed, but it is needed ;-)
-		graphics.setForegroundColor(lightenColor);
-		graphics.setBackgroundColor(lightenColor);
-		graphics.fillRoundRectangle(rect, arcWidth * safeBorderWidth, arcWidth * 2 * safeBorderWidth);
+		Rectangle bounds = getBounds().getCopy();
+		bounds.shrink(1, 1);
 
-		// Now fill the middle part of top and bottom part with a gradient.
-		rect = bounds.getCopy();
-		rect.height -= 2;
-		rect.y += (safeBorderWidth) / 2;
-		rect.y += (arcWidth / 2);
-		rect.height -= arcWidth / 2;
-		rect.height -= safeBorderWidth;
+		Path p = new Path(Display.getCurrent());
+		p.addArc(bounds.left(), bounds.top(), arcWidth, arcWidth, 90, 90);
+		p.addArc(bounds.left(), bounds.bottom() - arcWidth, arcWidth, arcWidth, 180, 90);
+		p.addArc(bounds.right() - arcWidth, bounds.bottom() - arcWidth, arcWidth, arcWidth, 270, 90);
+		p.addArc(bounds.right() - arcWidth, bounds.top(), arcWidth, arcWidth, 0, 90);
+		graphics.clipPath(p);
+
 		graphics.setBackgroundColor(lightenColor);
 		graphics.setForegroundColor(getBackgroundColor());
-		graphics.fillGradient(rect, true);
+		graphics.fillGradient(bounds, true);
 
 		// Paint the border
 		if (borderWidth > 0) {
-			rect = getBounds().getCopy();
-			rect.x += safeBorderWidth / 2;
-			rect.y += safeBorderWidth / 2;
-			rect.width -= safeBorderWidth;
-			rect.height -= safeBorderWidth;
+			graphics.setClip(getBounds());
 			graphics.setForegroundColor(borderColor);
 			graphics.setBackgroundColor(borderColor);
-			graphics.setLineWidth((int) (safeBorderWidth * scale));
-			graphics.drawRoundRectangle(rect, arcWidth, arcWidth);
+			graphics.setLineWidth(borderWidth);
+			graphics.drawRoundRectangle(bounds, arcWidth, arcWidth);
 		}
+
+		graphics.restoreState();
+
+		p.dispose();
 
 		super.paint(graphics);
 
