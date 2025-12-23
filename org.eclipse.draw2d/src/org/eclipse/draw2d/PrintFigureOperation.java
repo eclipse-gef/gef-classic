@@ -192,17 +192,10 @@ public class PrintFigureOperation extends PrintOperation {
 		double xScale = (double) printRegion.width / bounds.width;
 		double yScale = (double) printRegion.height / bounds.height;
 		switch (getPrintMode()) {
-		case FIT_PAGE:
-			graphics.scale(Math.min(xScale, yScale) * dpiScale);
-			break;
-		case FIT_WIDTH:
-			graphics.scale(xScale * dpiScale);
-			break;
-		case FIT_HEIGHT:
-			graphics.scale(yScale * dpiScale);
-			break;
-		default:
-			graphics.scale(dpiScale);
+		case FIT_PAGE -> graphics.scale(Math.min(xScale, yScale) * dpiScale);
+		case FIT_WIDTH -> graphics.scale(xScale * dpiScale);
+		case FIT_HEIGHT -> graphics.scale(yScale * dpiScale);
+		default -> graphics.scale(dpiScale);
 		}
 		graphics.setForegroundColor(figure.getForegroundColor());
 		graphics.setBackgroundColor(figure.getBackgroundColor());

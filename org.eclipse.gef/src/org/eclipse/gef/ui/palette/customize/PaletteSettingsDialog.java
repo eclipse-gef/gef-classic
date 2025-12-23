@@ -124,48 +124,20 @@ public class PaletteSettingsDialog extends Dialog {
 		Button b = getButton(buttonId);
 
 		switch (buttonId) {
-		case FONT_CHANGE_ID:
-			handleChangeFontPressed();
-			break;
-		case COLLAPSE_ALWAYS_ID:
-			handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_ALWAYS);
-			break;
-		case COLLAPSE_NEVER_ID:
-			handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_NEVER);
-			break;
-		case COLLAPSE_NEEDED_ID:
-			handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_AS_NEEDED);
-			break;
-		case LAYOUT_COLUMNS_VIEW_ID:
-			handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_COLUMNS);
-			break;
-		case LAYOUT_ICONS_VIEW_ID:
-			handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_ICONS);
-			break;
-		case LAYOUT_LIST_VIEW_ID:
-			handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_LIST);
-			break;
-		case LAYOUT_DETAILS_VIEW_ID:
-			handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_DETAILS);
-			break;
-		case LAYOUT_DETAILS_ICON_SIZE_ID:
-			handleIconSizeChanged(b.getSelection());
-			break;
-		case LAYOUT_COLUMNS_ICON_SIZE_ID:
-			handleIconSizeChanged(b.getSelection());
-			break;
-		case LAYOUT_ICONS_ICON_SIZE_ID:
-			handleIconSizeChanged(b.getSelection());
-			break;
-		case LAYOUT_LIST_ICON_SIZE_ID:
-			handleIconSizeChanged(b.getSelection());
-			break;
-		case DEFAULT_FONT_ID:
-			handleDefaultFontRequested();
-			break;
-		default:
-			super.buttonPressed(buttonId);
-			break;
+		case FONT_CHANGE_ID -> handleChangeFontPressed();
+		case COLLAPSE_ALWAYS_ID -> handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_ALWAYS);
+		case COLLAPSE_NEVER_ID -> handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_NEVER);
+		case COLLAPSE_NEEDED_ID -> handleAutoCollapseSettingChanged(PaletteViewerPreferences.COLLAPSE_AS_NEEDED);
+		case LAYOUT_COLUMNS_VIEW_ID -> handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_COLUMNS);
+		case LAYOUT_ICONS_VIEW_ID -> handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_ICONS);
+		case LAYOUT_LIST_VIEW_ID -> handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_LIST);
+		case LAYOUT_DETAILS_VIEW_ID -> handleLayoutSettingChanged(PaletteViewerPreferences.LAYOUT_DETAILS);
+		case LAYOUT_DETAILS_ICON_SIZE_ID -> handleIconSizeChanged(b.getSelection());
+		case LAYOUT_COLUMNS_ICON_SIZE_ID -> handleIconSizeChanged(b.getSelection());
+		case LAYOUT_ICONS_ICON_SIZE_ID -> handleIconSizeChanged(b.getSelection());
+		case LAYOUT_LIST_ICON_SIZE_ID -> handleIconSizeChanged(b.getSelection());
+		case DEFAULT_FONT_ID -> handleDefaultFontRequested();
+		default -> super.buttonPressed(buttonId);
 		}
 	}
 

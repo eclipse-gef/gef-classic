@@ -55,27 +55,17 @@ public class RelativeLocator implements Locator {
 	 */
 	public RelativeLocator(IFigure reference, int location) {
 		setReferenceFigure(reference);
-		switch (location & PositionConstants.NORTH_SOUTH) {
-		case PositionConstants.NORTH:
-			relativeY = 0;
-			break;
-		case PositionConstants.SOUTH:
-			relativeY = 1.0;
-			break;
-		default:
-			relativeY = 0.5;
-		}
+		relativeY = switch (location & PositionConstants.NORTH_SOUTH) {
+		case PositionConstants.NORTH -> 0;
+		case PositionConstants.SOUTH -> 1.0;
+		default -> 0.5;
+		};
 
-		switch (location & PositionConstants.EAST_WEST) {
-		case PositionConstants.WEST:
-			relativeX = 0;
-			break;
-		case PositionConstants.EAST:
-			relativeX = 1.0;
-			break;
-		default:
-			relativeX = 0.5;
-		}
+		relativeX = switch (location & PositionConstants.EAST_WEST) {
+		case PositionConstants.WEST -> 0;
+		case PositionConstants.EAST -> 1.0;
+		default -> 0.5;
+		};
 	}
 
 	/**

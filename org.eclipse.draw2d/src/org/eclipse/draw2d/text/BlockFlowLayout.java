@@ -73,17 +73,10 @@ public class BlockFlowLayout extends FlowContainerLayout {
 		}
 
 		switch (alignment) {
-		case PositionConstants.ALWAYS_RIGHT:
-			line.setX(blockBox.getRecommendedWidth() - line.getWidth());
-			break;
-		case PositionConstants.CENTER:
-			line.setX((blockBox.getRecommendedWidth() - line.getWidth()) / 2);
-			break;
-		case PositionConstants.ALWAYS_LEFT:
-			line.setX(0);
-			break;
-		default:
-			throw new RuntimeException("Unexpected state"); //$NON-NLS-1$
+		case PositionConstants.ALWAYS_RIGHT -> line.setX(blockBox.getRecommendedWidth() - line.getWidth());
+		case PositionConstants.CENTER -> line.setX((blockBox.getRecommendedWidth() - line.getWidth()) / 2);
+		case PositionConstants.ALWAYS_LEFT -> line.setX(0);
+		default -> throw new RuntimeException("Unexpected state"); //$NON-NLS-1$
 		}
 		blockBox.add(line);
 		previousLine = line;

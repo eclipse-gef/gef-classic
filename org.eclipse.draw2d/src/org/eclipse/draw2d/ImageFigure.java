@@ -102,28 +102,16 @@ public class ImageFigure extends AbstractImageFigure {
 
 		int x, y;
 		Rectangle area = getBounds().getShrinked(getInsets());
-		switch (alignment & PositionConstants.NORTH_SOUTH) {
-		case PositionConstants.NORTH:
-			y = area.y;
-			break;
-		case PositionConstants.SOUTH:
-			y = area.y + area.height - size.height;
-			break;
-		default:
-			y = (area.height - size.height) / 2 + area.y;
-			break;
-		}
-		switch (alignment & PositionConstants.EAST_WEST) {
-		case PositionConstants.EAST:
-			x = area.x + area.width - size.width;
-			break;
-		case PositionConstants.WEST:
-			x = area.x;
-			break;
-		default:
-			x = (area.width - size.width) / 2 + area.x;
-			break;
-		}
+		y = switch (alignment & PositionConstants.NORTH_SOUTH) {
+		case PositionConstants.NORTH -> area.y;
+		case PositionConstants.SOUTH -> area.y + area.height - size.height;
+		default -> (area.height - size.height) / 2 + area.y;
+		};
+		x = switch (alignment & PositionConstants.EAST_WEST) {
+		case PositionConstants.EAST -> area.x + area.width - size.width;
+		case PositionConstants.WEST -> area.x;
+		default -> (area.width - size.width) / 2 + area.x;
+		};
 		graphics.drawImage(getImage(), x, y);
 	}
 

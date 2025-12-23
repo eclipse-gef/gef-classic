@@ -423,65 +423,29 @@ public final class GridData {
 	public String toString() {
 
 		String hAlign = ""; //$NON-NLS-1$
-		switch (horizontalAlignment) {
-		case SWT.FILL:
-			hAlign = "SWT.FILL"; //$NON-NLS-1$
-			break;
-		case SWT.BEGINNING:
-			hAlign = "SWT.BEGINNING"; //$NON-NLS-1$
-			break;
-		case SWT.LEFT:
-			hAlign = "SWT.LEFT"; //$NON-NLS-1$
-			break;
-		case SWT.END:
-			hAlign = "SWT.END"; //$NON-NLS-1$
-			break;
-		case END:
-			hAlign = "GridData.END"; //$NON-NLS-1$
-			break;
-		case SWT.RIGHT:
-			hAlign = "SWT.RIGHT"; //$NON-NLS-1$
-			break;
-		case SWT.CENTER:
-			hAlign = "SWT.CENTER"; //$NON-NLS-1$
-			break;
-		case CENTER:
-			hAlign = "GridData.CENTER"; //$NON-NLS-1$
-			break;
-		default:
-			hAlign = "Undefined " + horizontalAlignment; //$NON-NLS-1$
-			break;
-		}
+		hAlign = switch (horizontalAlignment) {
+		case SWT.FILL -> "SWT.FILL"; //$NON-NLS-1$
+		case SWT.BEGINNING -> "SWT.BEGINNING"; //$NON-NLS-1$
+		case SWT.LEFT -> "SWT.LEFT"; //$NON-NLS-1$
+		case SWT.END -> "SWT.END"; //$NON-NLS-1$
+		case END -> "GridData.END"; //$NON-NLS-1$
+		case SWT.RIGHT -> "SWT.RIGHT"; //$NON-NLS-1$
+		case SWT.CENTER -> "SWT.CENTER"; //$NON-NLS-1$
+		case CENTER -> "GridData.CENTER"; //$NON-NLS-1$
+		default -> "Undefined " + horizontalAlignment; //$NON-NLS-1$
+		};
 		String vAlign = ""; //$NON-NLS-1$
-		switch (verticalAlignment) {
-		case SWT.FILL:
-			vAlign = "SWT.FILL"; //$NON-NLS-1$
-			break;
-		case SWT.BEGINNING:
-			vAlign = "SWT.BEGINNING"; //$NON-NLS-1$
-			break;
-		case SWT.TOP:
-			vAlign = "SWT.TOP"; //$NON-NLS-1$
-			break;
-		case SWT.END:
-			vAlign = "SWT.END"; //$NON-NLS-1$
-			break;
-		case END:
-			vAlign = "GridData.END"; //$NON-NLS-1$
-			break;
-		case SWT.BOTTOM:
-			vAlign = "SWT.BOTTOM"; //$NON-NLS-1$
-			break;
-		case SWT.CENTER:
-			vAlign = "SWT.CENTER"; //$NON-NLS-1$
-			break;
-		case CENTER:
-			vAlign = "GridData.CENTER"; //$NON-NLS-1$
-			break;
-		default:
-			vAlign = "Undefined " + verticalAlignment; //$NON-NLS-1$
-			break;
-		}
+		vAlign = switch (verticalAlignment) {
+		case SWT.FILL -> "SWT.FILL"; //$NON-NLS-1$
+		case SWT.BEGINNING -> "SWT.BEGINNING"; //$NON-NLS-1$
+		case SWT.TOP -> "SWT.TOP"; //$NON-NLS-1$
+		case SWT.END -> "SWT.END"; //$NON-NLS-1$
+		case END -> "GridData.END"; //$NON-NLS-1$
+		case SWT.BOTTOM -> "SWT.BOTTOM"; //$NON-NLS-1$
+		case SWT.CENTER -> "SWT.CENTER"; //$NON-NLS-1$
+		case CENTER -> "GridData.CENTER"; //$NON-NLS-1$
+		default -> "Undefined " + verticalAlignment; //$NON-NLS-1$
+		};
 		String string = getName() + " {"; //$NON-NLS-1$
 		string += "horizontalAlignment=" + hAlign + " "; //$NON-NLS-1$ //$NON-NLS-2$
 		if (horizontalIndent != 0) {
