@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,10 +12,14 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
@@ -250,6 +254,17 @@ public class SWTGraphics extends Graphics {
 				| ((SWT.DEFAULT + INTERPOLATION_WHOLE_NUMBER) << INTERPOLATION_SHIFT);
 	}
 
+	private static MethodHandle DRAW_IMAGE_HANDLE;
+	static {
+		try {
+			// Introduced with SWT 3.132
+			MethodType mt = MethodType.methodType(void.class, Image.class, int.class, int.class, int.class, int.class);
+			DRAW_IMAGE_HANDLE = MethodHandles.publicLookup().findVirtual(GC.class, "drawImage", mt); //$NON-NLS-1$
+		} catch (IllegalAccessException | NoSuchMethodException e) {
+			// ignore
+		}
+	}
+
 	private final LazyState appliedState = new LazyState();
 	private final State currentState = new State();
 
@@ -420,6 +435,21 @@ public class SWTGraphics extends Graphics {
 	public void drawImage(Image srcImage, int x, int y) {
 		checkGC();
 		gc.drawImage(srcImage, x + translateX, y + translateY);
+	}
+
+	@Override
+	public void drawImage(Image image, int destX, int destY, int destWidth, int destHeight) {
+		if (DRAW_IMAGE_HANDLE != null) {
+			try {
+				checkGC();
+				DRAW_IMAGE_HANDLE.invoke(gc, image, destX + translateX, destY + translateY, destWidth, destHeight);
+				return;
+			} catch (Throwable e) {
+				throw new SWTException(e.getMessage());
+			}
+		}
+		// fallback for older SWT versions
+		super.drawImage(image, destX, destY, destWidth, destHeight);
 	}
 
 	/**

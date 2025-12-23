@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -82,6 +82,14 @@ public class PrinterGraphics extends ScaledGraphics {
 	@Override
 	public void drawImage(Image srcImage, int x, int y) {
 		super.drawImage(printerImage(srcImage), x, y);
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int, int, int)
+	 */
+	@Override
+	public void drawImage(Image srcImage, int destX, int destY, int destWidth, int destHeight) {
+		super.drawImage(printerImage(srcImage), destX, destY, destWidth, destHeight);
 	}
 
 	/**
