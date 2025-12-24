@@ -73,7 +73,7 @@ import org.eclipse.draw2d.TreeSearch;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.draw2d.internal.FileImageDataProvider;
+import org.eclipse.draw2d.internal.FileImageFileNameProvider;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
@@ -91,7 +91,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	// CLASS CONSTANTS
 	public static final int ANIMATION_TIME = 500;
 	public static final int FISHEYE_ANIMATION_TIME = 100;
-	private static final Image BACK_ARROW = FileImageDataProvider.createImage(Graph.class, "/icons/back_arrow.svg"); //$NON-NLS-1$
+	private static final Image BACK_ARROW = FileImageFileNameProvider.createImage(Graph.class, "/icons/back_arrow.svg"); //$NON-NLS-1$
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up

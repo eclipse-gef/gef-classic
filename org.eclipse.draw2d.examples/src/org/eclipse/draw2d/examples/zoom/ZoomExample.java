@@ -29,7 +29,7 @@ import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.draw2d.internal.FileImageDataProvider;
+import org.eclipse.draw2d.internal.FileImageFileNameProvider;
 import org.eclipse.draw2d.parts.Thumbnail;
 
 /**
@@ -39,11 +39,11 @@ import org.eclipse.draw2d.parts.Thumbnail;
  */
 
 public class ZoomExample {
-	private static final Image IMG_CLASS = FileImageDataProvider.createImage(UMLClassFigure.class,
+	private static final Image IMG_CLASS = FileImageFileNameProvider.createImage(UMLClassFigure.class,
 			"images/class_obj.svg"); //$NON-NLS-1$
-	private static final Image IMG_FIELD_PRIVATE = FileImageDataProvider.createImage(UMLClassFigure.class,
+	private static final Image IMG_FIELD_PRIVATE = FileImageFileNameProvider.createImage(UMLClassFigure.class,
 			"images/field_private_obj.svg"); //$NON-NLS-1$
-	private static final Image IMG_METHOD_PUBLIC = FileImageDataProvider.createImage(UMLClassFigure.class,
+	private static final Image IMG_METHOD_PUBLIC = FileImageFileNameProvider.createImage(UMLClassFigure.class,
 			"images/methpub_obj.svg"); //$NON-NLS-1$
 	private static Figure contents;
 
