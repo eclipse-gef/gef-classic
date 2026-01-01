@@ -19,7 +19,6 @@ Export-Package: org.eclipse.draw2d,
  org.eclipse.draw2d.text,
  org.eclipse.draw2d.widgets,
  org.eclipse.draw2d.zoom
-Import-Package: org.eclipse.pde.api.tools.annotations;resolution:=optional
 Require-Bundle: org.eclipse.swt;bundle-version="[3.126.0,4.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
