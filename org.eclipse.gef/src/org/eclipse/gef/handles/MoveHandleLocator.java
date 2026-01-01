@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -61,8 +61,9 @@ public class MoveHandleLocator implements Locator {
 		} else {
 			bounds = getReference().getBounds();
 		}
-		bounds = new PrecisionRectangle(bounds.getResized(-1, -1));
+		bounds = new PrecisionRectangle(bounds);
 		getReference().translateToAbsolute(bounds);
+		bounds.resize(-1, -1);
 		target.translateToRelative(bounds);
 		bounds.translate(-insets.left, -insets.top);
 		bounds.resize(insets.getWidth() + 1, insets.getHeight() + 1);
