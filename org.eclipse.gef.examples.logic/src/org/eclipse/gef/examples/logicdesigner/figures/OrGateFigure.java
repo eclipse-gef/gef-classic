@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,15 +27,15 @@ public class OrGateFigure extends GateFigure {
 	protected static final PointList GATE_OUTLINE = new PointList();
 
 	static {
-		GATE_OUTLINE.addPoint(4, 20);
-		GATE_OUTLINE.addPoint(4, 4);
-		GATE_OUTLINE.addPoint(8, 8);
-		GATE_OUTLINE.addPoint(12, 10);
-		GATE_OUTLINE.addPoint(14, 10);
-		GATE_OUTLINE.addPoint(16, 10);
-		GATE_OUTLINE.addPoint(20, 8);
-		GATE_OUTLINE.addPoint(24, 4);
-		GATE_OUTLINE.addPoint(24, 20);
+		GATE_OUTLINE.addPoint(5, 20);
+		GATE_OUTLINE.addPoint(5, 4);
+		GATE_OUTLINE.addPoint(9, 8);
+		GATE_OUTLINE.addPoint(13, 10);
+		GATE_OUTLINE.addPoint(15, 10);
+		GATE_OUTLINE.addPoint(17, 10);
+		GATE_OUTLINE.addPoint(21, 8);
+		GATE_OUTLINE.addPoint(25, 4);
+		GATE_OUTLINE.addPoint(25, 20);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class OrGateFigure extends GateFigure {
 	@Override
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
-		r.translate(4, 4);
+		r.translate(5, 4);
 		r.setSize(22, 18);
 
 		g.setAntialias(SWT.ON);
@@ -71,19 +71,21 @@ public class OrGateFigure extends GateFigure {
 		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
 
 		// Draw the bottom arc of the gate
-		r.y += 8;
+		r.y += 7;
 
-		r.width--;
-		g.fillOval(r);
-		r.width--;
-		r.height--;
+		r.width -= 2;
+		g.setAlpha(getAlpha());
+		g.fillArc(r, 180, 180);
+		g.setAlpha(ALPHA_OPAQUE);
 
-		g.drawOval(r);
+		g.drawArc(r, 180, 180);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
 
 		// draw gate
 		g.translate(getLocation());
+		g.setAlpha(getAlpha());
 		g.fillPolygon(GATE_OUTLINE);
+		g.setAlpha(ALPHA_OPAQUE);
 		g.drawPolyline(GATE_OUTLINE);
 		g.translate(getLocation().getNegated());
 	}
