@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -34,7 +34,7 @@ public class FileImageDataProvider implements ImageDataProvider {
 	private final String basePath;
 	private final String fileExtension;
 
-	public FileImageDataProvider(Class<?> clazz, String path) {
+	private FileImageDataProvider(Class<?> clazz, String path) {
 		int separator = path.lastIndexOf("."); //$NON-NLS-1$
 		this.clazz = clazz;
 		this.basePath = path.substring(0, separator);
@@ -43,7 +43,7 @@ public class FileImageDataProvider implements ImageDataProvider {
 
 	@Override
 	public ImageData getImageData(int zoom) {
-		if (zoom == 100 || "svg".equals(fileExtension)) { //$NON-NLS-1$
+		if (zoom == 100) {
 			return createImageData(basePath + '.' + fileExtension);
 		}
 		if (zoom == 200) {
@@ -67,6 +67,27 @@ public class FileImageDataProvider implements ImageDataProvider {
 	 * at an appropriate time.
 	 */
 	public static Image createImage(Class<?> clazz, String name) {
-		return new Image(null, new FileImageDataProvider(clazz, ImageUtils.getEffectiveFileName(name)));
+		String fileName = ImageUtils.getEffectiveFileName(name);
+		if (fileName.endsWith(".svg")) { //$NON-NLS-1$
+			return createSvgImage(clazz, fileName);
+		}
+		return new Image(null, new FileImageDataProvider(clazz, fileName));
+	}
+
+	/**
+	 * When an SVG-based image is created, we should create pass the file as an
+	 * input stream and let SWT handle the scaling. Note that this currently only
+	 * works on Windows.
+	 *
+	 * @see <a href=
+	 *      "https://github.com/eclipse-platform/eclipse.platform.swt/issues/291">here</a>
+	 */
+	private static Image createSvgImage(Class<?> clazz, String name) {
+		try (InputStream stream = clazz.getResourceAsStream(name)) {
+			return new Image(null, stream);
+		} catch (IOException ioe) {
+			LOGGER.error(ioe.getLocalizedMessage(), ioe);
+			return null;
+		}
 	}
 }
