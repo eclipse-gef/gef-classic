@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -30,24 +30,24 @@ public class XOrGateFigure extends GateFigure {
 
 	static {
 		// setup gate outline
-		GATE_OUTLINE.addPoint(4, 20);
-		GATE_OUTLINE.addPoint(4, 8);
-		GATE_OUTLINE.addPoint(8, 12);
-		GATE_OUTLINE.addPoint(12, 14);
-		GATE_OUTLINE.addPoint(14, 14);
-		GATE_OUTLINE.addPoint(16, 14);
-		GATE_OUTLINE.addPoint(20, 12);
-		GATE_OUTLINE.addPoint(24, 8);
-		GATE_OUTLINE.addPoint(24, 20);
+		GATE_OUTLINE.addPoint(5, 20);
+		GATE_OUTLINE.addPoint(5, 8);
+		GATE_OUTLINE.addPoint(9, 12);
+		GATE_OUTLINE.addPoint(13, 14);
+		GATE_OUTLINE.addPoint(15, 14);
+		GATE_OUTLINE.addPoint(17, 14);
+		GATE_OUTLINE.addPoint(21, 12);
+		GATE_OUTLINE.addPoint(25, 8);
+		GATE_OUTLINE.addPoint(25, 20);
 
 		// setup top curve of gate
-		GATE_TOP.addPoint(4, 4);
-		GATE_TOP.addPoint(8, 8);
-		GATE_TOP.addPoint(12, 10);
-		GATE_TOP.addPoint(14, 10);
-		GATE_TOP.addPoint(16, 10);
-		GATE_TOP.addPoint(20, 8);
-		GATE_TOP.addPoint(24, 4);
+		GATE_TOP.addPoint(5, 4);
+		GATE_TOP.addPoint(9, 8);
+		GATE_TOP.addPoint(13, 10);
+		GATE_TOP.addPoint(15, 10);
+		GATE_TOP.addPoint(17, 10);
+		GATE_TOP.addPoint(21, 8);
+		GATE_TOP.addPoint(25, 4);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class XOrGateFigure extends GateFigure {
 	@Override
 	protected void paintFigure(Graphics g) {
 		Rectangle r = getBounds().getCopy();
-		r.translate(4, 4);
+		r.translate(5, 4);
 		r.setSize(22, 18);
 
 		g.setAntialias(SWT.ON);
@@ -82,32 +82,22 @@ public class XOrGateFigure extends GateFigure {
 		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
 		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
 
-		// Draw an oval that represents the bottom arc
-		r.y += 8;
+		// Draw the bottom arc
+		r.y += 7;
 
-		/*
-		 * Draw the bottom gate arc. This is done with an oval. The oval overlaps the
-		 * top arc of the gate, so this region is clipped.
-		 */
-		g.pushState();
-		Rectangle clipRect = r.getCopy();
-		clipRect.x -= 2;
-		clipRect.width += 2;
-		clipRect.y = r.y + 6;
-		g.clipRect(clipRect);
-		r.width--;
-
-		g.fillOval(r);
-		r.width--;
-		r.height--;
-		g.drawOval(r);
-		g.popState();
+		r.width -= 2;
+		g.setAlpha(getAlpha());
+		g.fillArc(r, 180, 180);
+		g.setAlpha(ALPHA_OPAQUE);
+		g.drawArc(r, 180, 180);
 		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
 
 		// Draw the gate outline and top curve
 		g.translate(getLocation());
 		g.drawPolyline(GATE_TOP);
+		g.setAlpha(getAlpha());
 		g.fillPolygon(GATE_OUTLINE);
+		g.setAlpha(ALPHA_OPAQUE);
 		g.drawPolyline(GATE_OUTLINE);
 		g.translate(getLocation().negate());
 	}
