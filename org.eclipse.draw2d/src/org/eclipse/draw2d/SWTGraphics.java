@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,10 +12,13 @@
  *******************************************************************************/
 package org.eclipse.draw2d;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
@@ -250,6 +253,16 @@ public class SWTGraphics extends Graphics {
 				| ((SWT.DEFAULT + INTERPOLATION_WHOLE_NUMBER) << INTERPOLATION_SHIFT);
 	}
 
+	private static Method DRAW_IMAGE_IIII;
+	static {
+		try {
+			// Introduced with SWT 3.132
+			DRAW_IMAGE_IIII = GC.class.getMethod("drawImage", Image.class, int.class, int.class, int.class, int.class); //$NON-NLS-1$
+		} catch (NoSuchMethodException e) {
+			// ignore
+		}
+	}
+
 	private final LazyState appliedState = new LazyState();
 	private final State currentState = new State();
 
@@ -420,6 +433,27 @@ public class SWTGraphics extends Graphics {
 	public void drawImage(Image srcImage, int x, int y) {
 		checkGC();
 		gc.drawImage(srcImage, x + translateX, y + translateY);
+	}
+
+	@Override
+	public void drawImage(Image image, int destX, int destY, int destWidth, int destHeight) {
+		if (DRAW_IMAGE_IIII != null) {
+			try {
+				checkGC();
+				DRAW_IMAGE_IIII.invoke(gc, image, destX + translateX, destY + translateY, destWidth, destHeight);
+				return;
+			} catch (IllegalAccessException e) {
+				// Should never happen. The method is only non-null if public
+			} catch (InvocationTargetException e) {
+				Throwable cause = e.getCause();
+				if (cause != null) {
+					throw new SWTException(cause.getMessage());
+				}
+				throw new SWTException(e.getMessage());
+			}
+		}
+		// fallback for older SWT versions
+		super.drawImage(image, destX, destY, destWidth, destHeight);
 	}
 
 	/**
