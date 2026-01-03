@@ -303,6 +303,15 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	}
 
 	/**
+	 * @see org.eclipse.gef.editparts.AbstractEditPart#getParent()
+	 * @since 3.25
+	 */
+	@Override
+	public PaletteEditPart getParent() {
+		return (PaletteEditPart) super.getParent();
+	}
+
+	/**
 	 * Get the palette viewer preferences for this palette edit part.
 	 *
 	 * @return the palette viewer preferences.
@@ -500,8 +509,8 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	 * @since 3.4
 	 */
 	protected int getLayoutSetting() {
-		if (getParent() instanceof PaletteEditPart palEP) {
-			return palEP.getLayoutSetting();
+		if (getParent() != null) {
+			return getParent().getLayoutSetting();
 		}
 		return getPreferenceSource().getLayoutSetting();
 	}
@@ -525,8 +534,8 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 	 * @since 3.4
 	 */
 	public boolean isToolbarItem() {
-		if (getParent() instanceof PaletteEditPart palEP) {
-			return palEP.isToolbarItem();
+		if (getParent() != null) {
+			return getParent().isToolbarItem();
 		}
 		return false;
 	}
