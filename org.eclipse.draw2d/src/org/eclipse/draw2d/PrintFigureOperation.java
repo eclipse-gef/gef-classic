@@ -16,7 +16,6 @@ package org.eclipse.draw2d;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.printing.Printer;
-import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -181,7 +180,7 @@ public class PrintFigureOperation extends PrintOperation {
 	 * @param figure   The IFigure used to setup graphics
 	 */
 	protected void setupPrinterGraphicsFor(Graphics graphics, IFigure figure) {
-		double dpiScale = (double) getPrinter().getDPI().x / Display.getCurrent().getDPI().x;
+		double dpiScale = (double) getPrinter().getDPI().x / 96;
 
 		Rectangle printRegion = getPrintRegion();
 		// put the print region in display coordinates
