@@ -29,6 +29,7 @@ import org.junit.platform.suite.api.Suite;
 	DragEditPartsTrackerTest.class,
 	CommandStackTest.class,
 	RulerLayoutTests.class,
+	RulerFigureTest.class,
 	GraphicalViewerTest.class,
 	PaletteColorProviderTest.class,
 	SWTBotTestSuite.class,
