@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.draw2d.svg
+Bundle-Vendor: %Bundle-Vendor
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.draw2d;bundle-version="3.22.0",
+ org.apache.batik.svggen;bundle-version="[1.17.0,2.0.0)",
+ org.apache.batik.awt.util;bundle-version="[1.17.0,2.0.0)"
+Automatic-Module-Name: org.eclipse.draw2d.svg
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: org.eclipse.draw2d.svg

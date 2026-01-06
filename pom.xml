@@ -383,6 +383,7 @@
 	<modules>
 		<!--plug-ins-->
 		<module>org.eclipse.draw2d</module>
+		<module>org.eclipse.draw2d.svg</module>
 		<module>org.eclipse.gef</module>
 		<module>org.eclipse.zest.cloudio</module>
 		<module>org.eclipse.zest.core</module>
