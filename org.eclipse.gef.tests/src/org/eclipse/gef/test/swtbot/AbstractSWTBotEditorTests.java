@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -54,56 +54,42 @@ public abstract class AbstractSWTBotEditorTests extends AbstractSWTBotTests {
 		IIntroManager im = wb.getIntroManager();
 		IIntroPart intro = wb.getIntroManager().getIntro();
 		if (intro != null) {
-			display.syncExec(() -> im.closeIntro(intro));
+			im.closeIntro(intro);
 		}
 		// Switch to the "Resource" perspective
-		display.syncCall(() -> {
-			IWorkbenchWindow ww = wb.getActiveWorkbenchWindow();
-			return wb.showPerspective("org.eclipse.ui.resourcePerspective", ww);
-		});
+		IWorkbenchWindow ww = wb.getActiveWorkbenchWindow();
+		wb.showPerspective("org.eclipse.ui.resourcePerspective", ww);
 		// Create & open new test project
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
-		display.syncCall(() -> {
-			if (!project.exists()) {
-				project.create(null);
-			}
-			project.open(null);
-			return null;
-		});
+		if (!project.exists()) {
+			project.create(null);
+		}
+		project.open(null);
 		// Create new example file
 		IWizardRegistry wr = wb.getNewWizardRegistry();
 		IWizardDescriptor wd = wr.findWizard(getWizardId());
-		display.syncCall(() -> {
-			IWorkbenchWizard wizard = wd.createWizard();
-			wizard.init(wb, new StructuredSelection(project));
-			WizardDialog wizardDialog = new WizardDialog(display.getActiveShell(), wizard);
-			wizardDialog.setBlockOnOpen(false);
-			wizardDialog.open();
-			WizardNewFileCreationPage wizardPage = (WizardNewFileCreationPage) wizardDialog.getCurrentPage();
-			wizardPage.setFileName(getFileName());
-			wizard.performFinish();
-			wizardDialog.close();
-			return null;
-		});
+		IWorkbenchWizard wizard = wd.createWizard();
+		wizard.init(wb, new StructuredSelection(project));
+		WizardDialog wizardDialog = new WizardDialog(display.getActiveShell(), wizard);
+		wizardDialog.setBlockOnOpen(false);
+		wizardDialog.open();
+		WizardNewFileCreationPage wizardPage = (WizardNewFileCreationPage) wizardDialog.getCurrentPage();
+		wizardPage.setFileName(getFileName());
+		wizard.performFinish();
+		wizardDialog.close();
 	}
 
 	@AfterEach
 	@Override
 	public void tearDown() throws Exception {
 		IWorkbench wb = PlatformUI.getWorkbench();
-		Display display = wb.getDisplay();
 		// Close all open editors
-		display.syncCall(() -> {
-			IWorkbenchWindow ww = wb.getActiveWorkbenchWindow();
-			IWorkbenchPage page = ww.getActivePage();
-			return page.closeAllEditors(false);
-		});
+		IWorkbenchWindow ww = wb.getActiveWorkbenchWindow();
+		IWorkbenchPage page = ww.getActivePage();
+		page.closeAllEditors(false);
 		// Delete test project
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
-		display.syncCall(() -> {
-			project.delete(true, null);
-			return null;
-		});
+		project.delete(true, null);
 		super.tearDown();
 	}
 

@@ -50,7 +50,7 @@
 						<include>**/GEFTestSuite.class</include>
 					</includes>
 					<useUIHarness>true</useUIHarness>
-					<useUIThread>false</useUIThread>
+					<useUIThread>true</useUIThread>
 					<argLine>${test.vmargs}</argLine>
 				</configuration>
 			</plugin>

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,18 +36,21 @@ public class FlowDiagramTests extends AbstractSWTBotEditorTests {
 		SWTBotGefEditor editor = bot.gefEditor("GEF Flow Example");
 
 		editor.activateTool("Parallel Activity");
+		waitEventLoop(0);
 		assertEquals(editor.getEditPart("Sleep.....").sourceConnections().size(), 1);
 		editor.getEditPart("Sleep.....").click();
 		waitForAnimation();
 		assertEquals(editor.getEditPart("Sleep.....").sourceConnections().size(), 2);
 
 		editor.activateTool("Sequential Activity");
+		waitEventLoop(0);
 		assertEquals(editor.getEditPart("a 12").children().size(), 0);
 		editor.getEditPart("a 12").click();
 		waitForAnimation();
 		assertEquals(editor.getEditPart("a 12").children().size(), 1);
 
 		editor.activateTool("Activity");
+		waitEventLoop(0);
 		assertEquals(editor.getEditPart("a 12").children().size(), 1);
 		editor.getEditPart("a 12").click();
 		waitForAnimation();
@@ -82,10 +84,12 @@ public class FlowDiagramTests extends AbstractSWTBotEditorTests {
 		SWTBotGefEditor editor = bot.gefEditor("GEF Flow Example");
 
 		editor.activateTool("Parallel Activity");
+		waitEventLoop(0);
 		assertEquals(editor.getEditPart("Sleep.....").sourceConnections().size(), 1);
 		assertEquals(editor.getEditPart("Wake up").targetConnections().size(), 1);
 
 		editor.activateTool("Connection Creation");
+		waitEventLoop(0);
 		editor.getEditPart("Sleep.....").click();
 		waitForAnimation();
 		editor.getEditPart("Wake up").click();
@@ -124,8 +128,9 @@ public class FlowDiagramTests extends AbstractSWTBotEditorTests {
 	public void testMarqueeSelection() {
 		SWTBotGefEditor editor = bot.gefEditor("GEF Flow Example");
 		editor.activateTool("Marquee");
+		waitEventLoop(0);
 
-		UIThreadRunnable.syncExec(() -> editor.drag(0, 0, 500, 500));
+		editor.drag(0, 0, 500, 500);
 		assertFalse(editor.selectedEditParts().isEmpty(), "At least one edit part should be selected");
 	}
 

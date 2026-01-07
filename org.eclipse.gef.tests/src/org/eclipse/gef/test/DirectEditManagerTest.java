@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Vector Informatik GmbH and others.
+ * Copyright (c) 2025, 2026 Vector Informatik GmbH and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -47,8 +47,7 @@ public class DirectEditManagerTest {
 
 	@BeforeEach
 	public void setUp() {
-		shell = PlatformUI.getWorkbench().getDisplay()
-				.syncCall(() -> PlatformUI.getWorkbench().getDisplay().getActiveShell());
+		shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		editDomain = new EditDomain();
 		throwables = new ArrayList<>();
 		editManager = null;
@@ -91,13 +90,11 @@ public class DirectEditManagerTest {
 	private void testWith(GraphicalEditPart editPart) {
 		editManager = new TestDirectEditManager(editPart);
 
-		PlatformUI.getWorkbench().getDisplay().syncExec(() -> {
-			editManager.show();
-			// Change value of combo cell editor
-			editManager.getCellEditor().setValue(0);
-			// Make combo cell editor lose focus to apply its value
-			shell.setFocus();
-		});
+		editManager.show();
+		// Change value of combo cell editor
+		editManager.getCellEditor().setValue(0);
+		// Make combo cell editor lose focus to apply its value
+		shell.setFocus();
 	}
 
 	private class TestDirectEditManager extends DirectEditManager {
