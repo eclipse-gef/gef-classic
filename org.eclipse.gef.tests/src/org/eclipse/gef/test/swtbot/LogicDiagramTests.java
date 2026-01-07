@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,7 +22,6 @@ import org.eclipse.swtbot.eclipse.gef.finder.matchers.IsInstanceOf;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefViewer;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Point;
@@ -50,6 +49,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 	@Test
 	public void testWithRulers() {
 		bot.menu("View").menu("Rulers").click();
+		waitEventLoop(0);
 
 		SWTBotGefEditor editor = bot.gefEditor("emptyModel1.logic");
 
@@ -59,30 +59,27 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		// Create a new guide and add it to the vertical ruler
 		guide.setPosition(200);
-		UIThreadRunnable.syncExec(() -> ruler.addGuide(guide));
+		ruler.addGuide(guide);
 
 		// Add a new edit part to the primary viewer
 		editor.activateTool("XOR Gate");
 		editor.click(50, 50);
+		waitEventLoop(0);
 
 		List<SWTBotGefEditPart> editParts = editor.mainEditPart().children();
 		assertEquals(editParts.size(), 1);
 		SWTBotGefEditPart editPart = editParts.get(0);
 
 		// Attach the edit part to the horizontal ruler line
-		UIThreadRunnable.syncExec(() -> {
-			editor.drag(editPart, 50, 200);
-			forceUpdate(editor.getSWTBotGefViewer());
-		});
+		editor.drag(editPart, 50, 200);
+		forceUpdate(editor.getSWTBotGefViewer());
 
 		IFigure figure = ((LogicEditPart) editPart.part()).getFigure();
 		assertEquals(figure.getLocation(), new Point(50, 200));
 
 		// TODO ptziegler: Create SWTBotGefViewer over RulerViewer and do a simple drag?
-		UIThreadRunnable.syncExec(() -> {
-			provider.getMoveGuideCommand(guide, -100).execute();
-			forceUpdate(editor.getSWTBotGefViewer());
-		});
+		provider.getMoveGuideCommand(guide, -100).execute();
+		forceUpdate(editor.getSWTBotGefViewer());
 
 		assertEquals(figure.getLocation(), new Point(50, 100));
 	}
@@ -98,6 +95,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		SWTBotGefEditor editor = bot.gefEditor("emptyModel1.logic");
 		editor.activateTool("LED");
 		editor.click(3, 3);
+		waitEventLoop(0);
 
 		List<SWTBotGefEditPart> editParts = editor.mainEditPart().children();
 		assertEquals(editParts.size(), 1);
@@ -106,10 +104,8 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		IFigure figure = ((LogicEditPart) editPart.part()).getFigure();
 		assertEquals(figure.getLocation(), new Point(3, 1));
 
-		UIThreadRunnable.syncExec(() -> {
-			editor.drag(editPart, 17, 17);
-			forceUpdate(editor.getSWTBotGefViewer());
-		});
+		editor.drag(editPart, 17, 17);
+		forceUpdate(editor.getSWTBotGefViewer());
 
 		assertEquals(figure.getLocation(), new Point(12, 21), "Part is not on grid line");
 	}
@@ -121,6 +117,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 	@Test
 	public void testWithSnapToGrid() {
 		bot.menu("View").menu("Snap to Geometry").click();
+		waitEventLoop(0);
 
 		SWTBotGefEditor editor = bot.gefEditor("emptyModel1.logic");
 		editor.activateTool("LED");
@@ -138,10 +135,8 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		IFigure figure = ((LogicEditPart) editParts.get(0).part()).getFigure();
 		assertEquals(figure.getLocation(), new Point(200, 200));
 
-		UIThreadRunnable.syncExec(() -> {
-			editor.drag(editPart, 200, 45);
-			forceUpdate(editor.getSWTBotGefViewer());
-		});
+		editor.drag(editPart, 200, 45);
+		forceUpdate(editor.getSWTBotGefViewer());
 
 		assertEquals(figure.getLocation(), new Point(200, 50), "Part didn't snap to LED");
 	}
@@ -183,6 +178,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		assertNotEquals(first.getSize().width, second.getSize().width);
 		assertNotEquals(first.getSize().height, second.getSize().height);
 		bot.toolbarButtonWithTooltip("Match Size of Selected Objects to the Primary Selection").click();
+		waitEventLoop(0);
 		assertEquals(first.getSize().width, second.getSize().width);
 		assertEquals(first.getSize().height, second.getSize().height);
 	}
@@ -200,6 +196,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		assertNotEquals(first.getSize().width, second.getSize().width);
 		assertNotEquals(first.getSize().height, second.getSize().height);
 		bot.toolbarButtonWithTooltip("Match Width of Selected Objects to the Primary Selection").click();
+		waitEventLoop(0);
 		assertEquals(first.getSize().width, second.getSize().width);
 		assertNotEquals(first.getSize().height, second.getSize().height);
 	}
@@ -217,6 +214,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 		assertNotEquals(first.getSize().width, second.getSize().width);
 		assertNotEquals(first.getSize().height, second.getSize().height);
 		bot.toolbarButtonWithTooltip("Match Height of Selected Objects to the Primary Selection").click();
+		waitEventLoop(0);
 		assertNotEquals(first.getSize().width, second.getSize().width);
 		assertEquals(first.getSize().height, second.getSize().height);
 	}
@@ -255,6 +253,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		assertNotEquals(first.getBounds().top(), second.getBounds().top());
 		bot.toolbarButtonWithTooltip("Align Top").click();
+		waitEventLoop(0);
 		assertEquals(first.getBounds().top(), second.getBounds().top());
 	}
 
@@ -270,6 +269,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		assertNotEquals(first.getBounds().getCenter().y, second.getBounds().getCenter().y);
 		bot.toolbarButtonWithTooltip("Align Middle").click();
+		waitEventLoop(0);
 		assertEquals(first.getBounds().getCenter().y, second.getBounds().getCenter().y, 1.0);
 	}
 
@@ -285,6 +285,7 @@ public class LogicDiagramTests extends AbstractSWTBotEditorTests {
 
 		assertNotEquals(first.getBounds().bottom(), second.getBounds().bottom());
 		bot.toolbarButtonWithTooltip("Align Bottom").click();
+		waitEventLoop(0);
 		assertEquals(first.getBounds().bottom(), second.getBounds().bottom());
 	}
 

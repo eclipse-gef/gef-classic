@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,7 +22,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotCheckBox;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.ui.PlatformUI;
@@ -45,19 +44,18 @@ public class PaletteSettingsDialogTests extends AbstractSWTBotTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		preferences = new DefaultPaletteViewerPreferences();
-		settingsDialog = UIThreadRunnable.syncExec(() -> {
-			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			PaletteSettingsDialog settings = new InternalPaletteSettingsDialog(shell, preferences);
-			settings.setBlockOnOpen(false);
-			settings.open();
-			return bot.shell("Palette Settings"); //$NON-NLS-1$
-		});
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		PaletteSettingsDialog settings = new InternalPaletteSettingsDialog(shell, preferences);
+		settings.setBlockOnOpen(false);
+		settings.open();
+		settingsDialog = bot.shell("Palette Settings"); //$NON-NLS-1$
 	}
 
 	@Override
 	@AfterEach
 	public void tearDown() throws Exception {
 		settingsDialog.close();
+		waitEventLoop(0);
 		super.tearDown();
 	}
 

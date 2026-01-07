@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,7 +14,6 @@
 package org.eclipse.gef.test.swtbot;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.swtbot.eclipse.gef.finder.SWTGefBot;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefViewer;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
 import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.FigureCanvas;
@@ -49,17 +47,11 @@ public abstract class AbstractSWTBotTests {
 
 	@BeforeEach
 	public void setUp() throws Exception {
-		if (Display.getCurrent() != null) {
-			fail("""
-					SWTBot test needs to run in a non-UI thread.
-					Make sure that "Run in UI thread" is unchecked in your launch configuration or that useUIThread is set to false in the pom.xml
-					""");
-		}
 		// Keep track of all unchecked exceptions
 		problems = new ArrayList<>();
 		problemListener = (status, plugin) -> {
 			Throwable exception = status.getException();
-			if (isRelevant(exception)) {
+			if (isRelevant(plugin, exception)) {
 				problems.add(exception);
 			}
 		};
@@ -73,18 +65,8 @@ public abstract class AbstractSWTBotTests {
 	 * GEF/Draw2D. This is to make sure that tests won't randomly fail due to
 	 * (unrelated) exceptions from e.g. the Eclipse IDE.
 	 */
-	private static final boolean isRelevant(Throwable throwable) {
-		if (throwable == null) {
-			return false;
-		}
-
-		for (StackTraceElement element : throwable.getStackTrace()) {
-			String className = element.getClassName();
-			if (className.matches("org.eclipse.(draw2d|gef).*")) {
-				return true;
-			}
-		}
-		return false;
+	private static final boolean isRelevant(String plugin, Throwable throwable) {
+		return throwable != null && plugin.matches("org.eclipse.(draw2d|gef).*");
 	}
 
 	@AfterEach
@@ -106,15 +88,30 @@ public abstract class AbstractSWTBotTests {
 		EditPart gefEditPart = editPart.part();
 		FigureCanvas figureCanvas = (FigureCanvas) gefEditPart.getViewer().getControl();
 		figureCanvas.getLightweightSystem().getUpdateManager().performUpdate();
+		waitEventLoop(0);
 	}
 
 	/**
 	 * Blocks until the current animation has finished.
 	 */
 	protected static void waitForAnimation() {
-		while (UIThreadRunnable.syncExec(() -> getAnimationState() != 0)) {
-			Thread.yield();
+		while (getAnimationState() != 0) {
+			waitEventLoop(0);
 		}
+	}
+
+	/**
+	 * Waits given number of milliseconds and pumps the SWT event queue.<br>
+	 * At least one events loop will be executed.
+	 */
+	protected static void waitEventLoop(int timeMillis) {
+		long start = System.currentTimeMillis();
+		do {
+			// One of the events might dispose the shell...
+			while (Display.getCurrent().readAndDispatch()) {
+				// dispatch all updates
+			}
+		} while (System.currentTimeMillis() - start < timeMillis);
 	}
 
 	private static final int getAnimationState() {

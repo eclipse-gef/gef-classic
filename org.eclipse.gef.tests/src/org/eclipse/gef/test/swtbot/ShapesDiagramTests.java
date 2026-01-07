@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
-import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 
 import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.Clickable;
@@ -50,6 +49,7 @@ public class ShapesDiagramTests extends AbstractSWTBotEditorTests {
 
 		editor.activateTool("Rectangle");
 		editor.click(5, 5);
+		waitEventLoop(0);
 
 		List<SWTBotGefEditPart> editParts = editor.mainEditPart().children();
 		assertEquals(editParts.size(), 1);
@@ -58,10 +58,8 @@ public class ShapesDiagramTests extends AbstractSWTBotEditorTests {
 		IFigure figure = ((GraphicalEditPart) editPart.part()).getFigure();
 		assertNotEquals(figure.getSize(), new Dimension(200, 200));
 
-		UIThreadRunnable.syncExec(() -> {
-			editPart.resize(PositionConstants.SOUTH_EAST, 200, 200);
-			forceUpdate(editor.getSWTBotGefViewer());
-		});
+		editPart.resize(PositionConstants.SOUTH_EAST, 200, 200);
+		forceUpdate(editor.getSWTBotGefViewer());
 
 		assertEquals(figure.getSize(), new Dimension(200, 200));
 	}
