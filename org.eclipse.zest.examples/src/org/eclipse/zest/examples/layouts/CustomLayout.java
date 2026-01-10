@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2025 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2026 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -61,7 +61,7 @@ public class CustomLayout {
 				EntityLayout[] entitiesToLayout = context.getEntities();
 				int totalSteps = entitiesToLayout.length;
 				double distance = context.getBounds().width / totalSteps;
-				int xLocation = 0;
+				double xLocation = 0;
 
 				for (EntityLayout layoutEntity : entitiesToLayout) {
 					layoutEntity.setLocation(xLocation, layoutEntity.getLocation().y);

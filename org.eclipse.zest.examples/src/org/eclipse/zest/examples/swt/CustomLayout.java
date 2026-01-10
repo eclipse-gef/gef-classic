@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2008, CHISEL Group, University of Victoria, Victoria,
- *                 BC, Canada and others.
+ * Copyright 2008, 2026 CHISEL Group, University of Victoria, Victoria,
+ *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -59,7 +59,7 @@ public class CustomLayout {
 				EntityLayout[] entitiesToLayout = context.getEntities();
 				int totalSteps = entitiesToLayout.length;
 				double distance = context.getBounds().width / totalSteps;
-				int xLocation = 0;
+				double xLocation = 0;
 				for (EntityLayout layoutEntity : entitiesToLayout) {
 					layoutEntity.setLocation(xLocation, layoutEntity.getLocation().y);
 					xLocation += distance;
