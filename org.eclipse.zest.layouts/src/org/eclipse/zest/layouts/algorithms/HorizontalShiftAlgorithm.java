@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005-2010, 2024 The Chisel Group and others.
+ * Copyright (c) 2005-2010, 2026 The Chisel Group and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -54,13 +54,13 @@ public class HorizontalShiftAlgorithm extends AbstractLayoutAlgorithm {
 
 		Comparator<EntityLayout> entityComparator = (o1, o2) -> (int) (o1.getLocation().y - o2.getLocation().y);
 		DisplayIndependentRectangle bounds = context.getBounds();
-		int heightSoFar = 0;
+		double heightSoFar = 0;
 
 		for (List<EntityLayout> currentRow : rowsList) {
 			Collections.sort(currentRow, entityComparator);
 
 			int i = 0;
-			int width = (int) (bounds.width / 2 - currentRow.size() * 75);
+			double width = bounds.width / 2 - currentRow.size() * 75;
 
 			heightSoFar += currentRow.get(0).getSize().height + VSPACING;
 			for (EntityLayout entity : currentRow) {

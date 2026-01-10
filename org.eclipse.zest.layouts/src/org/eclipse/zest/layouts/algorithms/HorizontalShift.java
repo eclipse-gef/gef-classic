@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2006, 2025 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2006, 2026 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada, Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
@@ -52,7 +52,7 @@ public class HorizontalShift extends AbstractLayoutAlgorithm.Zest1 {
 			addToRowList(element, row);
 		}
 
-		int heightSoFar = 0;
+		double heightSoFar = 0;
 
 		Collections.sort(row, (arg0, arg1) -> {
 			LayoutEntity node0 = arg0.get(0).getLayoutEntity();
@@ -64,7 +64,7 @@ public class HorizontalShift extends AbstractLayoutAlgorithm.Zest1 {
 			Collections.sort(currentRow, (arg0,
 					arg1) -> (int) (arg1.getLayoutEntity().getYInLayout() - arg0.getLayoutEntity().getYInLayout()));
 			int i = 0;
-			int width = (int) ((boundsWidth / 2) - currentRow.size() * 75);
+			double width = (boundsWidth / 2) - currentRow.size() * 75;
 
 			heightSoFar += currentRow.get(0).getLayoutEntity().getHeightInLayout() + VSPACING * 8;
 			for (InternalNode currentNode : currentRow) {
