@@ -56,7 +56,6 @@ public class ImageUtilities {
 		gc.fillRectangle(srcImage.getBounds());
 		gc.drawString(string, 0, 0);
 		Image result = createRotatedImage(srcImage);
-		gc.dispose();
 		srcImage.dispose();
 		return result;
 	}

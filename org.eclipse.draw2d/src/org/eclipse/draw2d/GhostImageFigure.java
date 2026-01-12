@@ -72,7 +72,6 @@ public class GhostImageFigure extends Figure {
 
 		offscreenImage.dispose();
 		swtGraphics.dispose();
-		gc.dispose();
 	}
 
 	/**
