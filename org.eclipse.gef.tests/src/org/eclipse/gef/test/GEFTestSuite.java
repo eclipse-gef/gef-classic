@@ -33,7 +33,8 @@ import org.junit.platform.suite.api.Suite;
 	PaletteColorProviderTest.class,
 	SWTBotTestSuite.class,
 	DirectEditManagerTest.class,
-	MoveHandleLocatorTests.class
+	MoveHandleLocatorTests.class,
+	PinnablePaletteStackEditPartTests.class
 })
 public class GEFTestSuite {
 }

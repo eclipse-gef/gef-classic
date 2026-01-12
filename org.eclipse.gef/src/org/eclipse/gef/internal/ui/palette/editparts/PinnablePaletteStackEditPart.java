@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2024 IBM Corporation and others.
+ * Copyright (c) 2008, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,8 @@ package org.eclipse.gef.internal.ui.palette.editparts;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
 
+import org.eclipse.draw2d.ActionListener;
+import org.eclipse.draw2d.Clickable;
 import org.eclipse.draw2d.IFigure;
 
 import org.eclipse.gef.EditPart;
@@ -46,6 +48,21 @@ public class PinnablePaletteStackEditPart extends PaletteEditPart implements IPa
 		}
 	};
 
+	private final ActionListener expandedStateListener = event -> {
+		if (!isExpanded()) {
+			IFigure expandablePane = getFigure().getContentPane();
+			for (IFigure toolEntryFigure : expandablePane.getChildren()) {
+				EditPart toolEntryEditPart = getViewer().getVisualPartMap().get(toolEntryFigure);
+				if (toolEntryEditPart != null) {
+					getViewer().deselect(toolEntryEditPart);
+				}
+			}
+			if (getActiveEntry() != null) {
+				getViewer().select(getActiveEntry());
+			}
+		}
+	};
+
 	/**
 	 * Creates a new PaletteStackEditPart with the given PaletteStack as its model.
 	 *
@@ -63,6 +80,7 @@ public class PinnablePaletteStackEditPart extends PaletteEditPart implements IPa
 		// in case the model is out of sync
 		checkActiveEntrySync();
 		getViewer().addPaletteListener(paletteListener);
+		getAdapter(Clickable.class).addActionListener(expandedStateListener);
 		super.activate();
 	}
 
@@ -115,6 +133,7 @@ public class PinnablePaletteStackEditPart extends PaletteEditPart implements IPa
 
 	@Override
 	public void deactivate() {
+		getAdapter(Clickable.class).removeActionListener(expandedStateListener);
 		getViewer().removePaletteListener(paletteListener);
 		super.deactivate();
 	}
@@ -230,6 +249,14 @@ public class PinnablePaletteStackEditPart extends PaletteEditPart implements IPa
 	@Override
 	public PaletteEditPart getActiveEntry() {
 		return (PaletteEditPart) getViewer().getEditPartForModel(getStack().getActiveEntry());
+	}
+
+	@Override
+	public <T> T getAdapter(final Class<T> key) {
+		if (key == Clickable.class) {
+			return key.cast(getFigure().getArrowFigure());
+		}
+		return super.getAdapter(key);
 	}
 
 }
