@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
 
@@ -26,12 +25,10 @@ import org.eclipse.ui.IMemento;
 
 import org.eclipse.draw2d.ColorProvider.SystemColorFactory;
 import org.eclipse.draw2d.FigureCanvas;
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.EditPart;
-import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.SimpleRootEditPart;
 import org.eclipse.gef.internal.SimpleAutoscaledRootEditPart;
 import org.eclipse.gef.internal.ui.palette.PaletteSelectionTool;
@@ -257,27 +254,6 @@ public class PaletteViewer extends ScrollingGraphicalViewer {
 	protected void handleDispose(DisposeEvent e) {
 		super.handleDispose(e);
 		disposeFont();
-	}
-
-	/**
-	 * @see org.eclipse.gef.ui.parts.GraphicalViewerImpl#handleFocusGained(FocusEvent)
-	 */
-	@Override
-	protected void handleFocusGained(FocusEvent fe) {
-		super.handleFocusGained(fe);
-		/*
-		 * Fix for Bug# 63297 When the palette gets focus, the LWS will take care of
-		 * setting focus on the correct figure. However, when the user clicks on an
-		 * entry, the focus is "thrown away." In that case, the LWS would set focus on
-		 * the first focusable figure. We override that here and set focus on the
-		 * correct/selected figure. Invoking getFocusEditPart().setFocus(true) does not
-		 * work because that editpart thinks it already has focus (it's not aware of
-		 * focus being thrown away) and does nothing.
-		 */
-		if (focusPart == null) {
-			IFigure fig = ((GraphicalEditPart) getFocusEditPart()).getFigure();
-			fig.internalGetEventDispatcher().requestFocus(fig);
-		}
 	}
 
 	/**
