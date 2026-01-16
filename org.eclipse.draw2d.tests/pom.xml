@@ -55,6 +55,7 @@
 						<configuration>
 							<includes>
 								<include>**/Draw2dTestSuite.class</include>
+								<include>**/Draw2dTestSuite_NonDefaultAutoScale.class</include>
 							</includes>
 							<useUIHarness>false</useUIHarness>
 							<useUIThread>false</useUIThread>
