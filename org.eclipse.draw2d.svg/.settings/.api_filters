@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.draw2d" version="2">
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.swt.svg.JSVGRasterizer">
+        <filter comment="The re-exported type org.eclipse.swt.svg.JSVGRasterizer in org.eclipse.draw2d_3.21.0 is no longer an API" id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.swt.svg.JSVGRasterizer"/>
+                <message_argument value="org.eclipse.draw2d_3.21.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/AbstractImageFigure.java" type="org.eclipse.draw2d.AbstractImageFigure">
+        <filter comment="AbstractImageFigure is the offical startpoint for IImageFigure therefore it is ok that it implements that interface" id="576725006">
+            <message_arguments>
+                <message_argument value="IImageFigure"/>
+                <message_argument value="AbstractImageFigure"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/Connection.java" type="org.eclipse.draw2d.Connection">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="Connection"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/Figure.java" type="org.eclipse.draw2d.Figure">
+        <filter id="576725006">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="Figure"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/FreeformFigure.java" type="org.eclipse.draw2d.FreeformFigure">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="FreeformFigure"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/IScrollableFigure.java" type="org.eclipse.draw2d.IScrollableFigure">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="IScrollableFigure"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/Orientable.java" type="org.eclipse.draw2d.Orientable">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="Orientable"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/RotatableDecoration.java" type="org.eclipse.draw2d.RotatableDecoration">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="RotatableDecoration"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/ScalableFigure.java" type="org.eclipse.draw2d.ScalableFigure">
+        <filter id="576720909">
+            <message_arguments>
+                <message_argument value="IFigure"/>
+                <message_argument value="ScalableFigure"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/ScaledGraphics.java" type="org.eclipse.draw2d.ScaledGraphics">
+        <filter id="576778288">
+            <message_arguments>
+                <message_argument value="Graphics"/>
+                <message_argument value="ScaledGraphics"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/geometry/PrecisionPointList.java" type="org.eclipse.draw2d.geometry.PrecisionPointList">
+        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
+            <message_arguments>
+                <message_argument value="PrecisionPointList()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
+            <message_arguments>
+                <message_argument value="PrecisionPointList(int)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
