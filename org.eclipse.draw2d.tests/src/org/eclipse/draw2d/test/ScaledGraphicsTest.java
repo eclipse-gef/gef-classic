@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Yatta and others.
+ * Copyright (c) 2025, 2026 Yatta and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -282,89 +282,105 @@ public class ScaledGraphicsTest {
 	@Test
 	@SuppressWarnings("static-method")
 	public void testDrawFullImageForRegression() {
+		Image image = new Image(Display.getDefault(), 9, 25);
 		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
-				scaledGraphics -> scaledGraphics.drawImage(new Image(Display.getDefault(), 9, 25), 5, 7));
+				scaledGraphics -> scaledGraphics.drawImage(image, 5, 7));
 		validateDrawImage(swtGraphics, new Rectangle(30, 40, 45, 125));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawFullImageWithInt(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), source, source + 5);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(scaledGraphics -> scaledGraphics
-				.drawImage(new Image(Display.getDefault(), source, source + 5), source, source + 5));
+		validation.execute(scaledGraphics -> scaledGraphics.drawImage(image, source, source + 5));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawFullImageWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), source, source + 10);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(scaledGraphics -> scaledGraphics
-				.drawImage(new Image(Display.getDefault(), source, source + 10), new Point(source, source + 10)));
+		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawImage(image, new Point(source, source + 10)));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawFullImageWithPoint(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), source, source + 20);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(scaledGraphics -> scaledGraphics
-				.drawImage(new Image(Display.getDefault(), source, source + 20), new Point(source, source + 20)));
+		validation.execute(scaledGraphics -> scaledGraphics.drawImage(image, new Point(source, source + 20)));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawFullImageWithPointTranslated(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), source, source + 15);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(scaledGraphics -> scaledGraphics
-				.drawImage(new Image(Display.getDefault(), source, source + 15), new Point(source, source + 15)));
+		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawImage(image, new Point(source, source + 15)));
+		image.dispose();
 	}
 
 	@Test
 	@SuppressWarnings("static-method")
 	public void testDrawImageForRegression() {
-		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250, scaledGraphics -> scaledGraphics
-				.drawImage(new Image(Display.getDefault(), 5, 5), 5, 5, 5, 5, 5, 7, 9, 25));
+		Image image = new Image(Display.getDefault(), 5, 5);
+		RecordingSwtGraphics swtGraphics = executeTranslatedWithOneLayer(200, 250,
+				scaledGraphics -> scaledGraphics.drawImage(image, 5, 5, 5, 5, 5, 7, 9, 25));
 		validateDrawImage(swtGraphics, new Rectangle(30, 40, 45, 125));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawImageWithInt(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), 5, 5);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(scaledGraphics -> scaledGraphics.drawImage(new Image(Display.getDefault(), 5, 5), 5, 5, 5, 5,
-				source, source, source, source + 5));
+		validation.execute(
+				scaledGraphics -> scaledGraphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 5));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawImageWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), 5, 5);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawImage(new Image(Display.getDefault(), 5, 5),
-				5, 5, 5, 5, source, source, source, source + 10));
+		validation.executeTranslated(
+				scaledGraphics -> scaledGraphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 10));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawImageWithRectangle(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), 5, 5);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(scaledGraphics -> scaledGraphics.drawImage(new Image(Display.getDefault(), 5, 5),
-				new Rectangle(5, 5, 5, 5), new Rectangle(source, source, source, source + 15)));
+		validation.execute(scaledGraphics -> scaledGraphics.drawImage(image, new Rectangle(5, 5, 5, 5),
+				new Rectangle(source, source, source, source + 15)));
+		image.dispose();
 	}
 
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	@SuppressWarnings("static-method")
 	public void testDrawImageWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+		Image image = new Image(Display.getDefault(), 5, 5);
 		ScaledGraphicsValidation validation = new ScaledGraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawImage(new Image(Display.getDefault(), 5, 5),
-				new Rectangle(5, 5, 5, 5), new Rectangle(source, source, source, source + 20)));
+		validation.executeTranslated(scaledGraphics -> scaledGraphics.drawImage(image, new Rectangle(5, 5, 5, 5),
+				new Rectangle(source, source, source, source + 20)));
+		image.dispose();
 	}
 
 	@ParameterizedTest
