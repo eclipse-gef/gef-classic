@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -63,6 +63,26 @@ public class FigureUtilities {
 			metrics = getGC().getFontMetrics();
 		}
 		return metrics;
+	}
+
+	/**
+	 * Returns the FontMetrics associated with the passed Font in relation to the
+	 * given graphics context. The same font might have different font metrics,
+	 * depending on the graphics context (e.g. when using different device zoom
+	 * levels).
+	 *
+	 * @param f the font
+	 * @param g the graphics context
+	 * @return the FontMetrics for the given font
+	 */
+	/* package */ static FontMetrics getFontMetrics(Font f, Graphics g) {
+		Font oldFont = g.getFont();
+		try {
+			g.setFont(f);
+			return g.getFontMetrics();
+		} finally {
+			g.setFont(oldFont);
+		}
 	}
 
 	/**
