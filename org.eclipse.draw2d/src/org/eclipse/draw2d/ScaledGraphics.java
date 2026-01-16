@@ -625,7 +625,7 @@ public class ScaledGraphics extends Graphics {
 	@Deprecated
 	@Override
 	public FontMetrics getFontMetrics() {
-		return FigureUtilities.getFontMetrics(localFont);
+		return FigureUtilities.getFontMetrics(localFont, graphics);
 	}
 
 	/** @see Graphics#getForegroundColor() */
@@ -1162,7 +1162,7 @@ public class ScaledGraphics extends Graphics {
 	private Point zoomTextPoint(int x, int y) {
 		if (localCache.font != localFont) {
 			// Font is different, re-calculate its height
-			FontMetrics metric = FigureUtilities.getFontMetrics(localFont);
+			FontMetrics metric = FigureUtilities.getFontMetrics(localFont, graphics);
 			localCache.height = metric.getHeight() - metric.getDescent();
 			localCache.font = localFont;
 		}
