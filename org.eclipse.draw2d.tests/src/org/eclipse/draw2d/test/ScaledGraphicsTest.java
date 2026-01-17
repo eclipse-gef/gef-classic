@@ -865,6 +865,38 @@ public class ScaledGraphicsTest {
 				scaledGraphics -> scaledGraphics.setClip(new Rectangle(source, source, source, source + 20)));
 	}
 
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawString() {
+		RecordingSwtGraphics swtGraphics = executeWithOneLayer(100, 100,
+				scaledGraphics -> scaledGraphics.drawString("Hello World", 0, 0)); //$NON-NLS-1$
+		validateDrawString(swtGraphics, new Point(0, 0));
+	}
+
+	@Test
+	@SuppressWarnings("static-method")
+	public void testDrawText() {
+		RecordingSwtGraphics swtGraphics = executeWithOneLayer(100, 100,
+				scaledGraphics -> scaledGraphics.drawText("Hello World", 0, 0)); //$NON-NLS-1$
+		validateDrawText(swtGraphics, new Point(0, 0));
+	}
+
+	@Test
+	@SuppressWarnings("static-method")
+	public void testFillString() {
+		RecordingSwtGraphics swtGraphics = executeWithOneLayer(100, 100,
+				scaledGraphics -> scaledGraphics.fillString("Hello World", 0, 0)); //$NON-NLS-1$
+		validateFillString(swtGraphics, new Point(0, 0));
+	}
+
+	@Test
+	@SuppressWarnings("static-method")
+	public void testFillText() {
+		RecordingSwtGraphics swtGraphics = executeWithOneLayer(100, 100,
+				scaledGraphics -> scaledGraphics.fillText("Hello World", 0, 0)); //$NON-NLS-1$
+		validateFillText(swtGraphics, new Point(0, 0));
+	}
+
 	private static class ScaledGraphicsValidation {
 
 		private final int monitorZoom;
@@ -902,6 +934,8 @@ public class ScaledGraphicsTest {
 			validateDrawPolygon(graphics2, graphics1.drawPolygon);
 			validateDrawRectangle(graphics2, graphics1.drawRectangle);
 			validateDrawRoundRectangle(graphics2, graphics1.drawRoundRectangle, graphics1.drawRoundRectangleArc);
+			validateDrawString(graphics2, graphics1.fillString);
+			validateDrawText(graphics2, graphics1.fillText);
 			validateFillArc(graphics2, graphics1.fillArc);
 			validateFillGradient(graphics2, graphics1.fillGradient);
 			validateFillOval(graphics2, graphics1.fillOval);
@@ -909,6 +943,8 @@ public class ScaledGraphicsTest {
 			validateFillPolygon(graphics2, graphics1.fillPolygon);
 			validateFillRectangle(graphics2, graphics1.fillRectangle);
 			validateFillRoundRectangle(graphics2, graphics1.fillRoundRectangle, graphics1.fillRoundRectangleArc);
+			validateFillString(graphics2, graphics1.fillString);
+			validateFillText(graphics2, graphics1.fillText);
 		}
 	}
 
@@ -981,6 +1017,14 @@ public class ScaledGraphicsTest {
 				String.format("drawRoundRectangle: Scaled value for arc height must match value %s", expectedArc.y)); //$NON-NLS-1$
 	}
 
+	private static void validateDrawString(RecordingSwtGraphics graphics, Point expected) {
+		validatePoint(graphics.drawString, expected);
+	}
+
+	private static void validateDrawText(RecordingSwtGraphics graphics, Point expected) {
+		validatePoint(graphics.drawText, expected);
+	}
+
 	private static void validateFillArc(RecordingSwtGraphics graphics, Rectangle expected) {
 		validateRect(graphics.fillArc, expected);
 	}
@@ -1016,6 +1060,14 @@ public class ScaledGraphicsTest {
 				String.format("fillRoundRectangle: Scaled value for arc width must match value %s", expectedArc.x)); //$NON-NLS-1$
 		assertEquals(expectedArc.y, graphics.fillRoundRectangleArc.y,
 				String.format("fillRoundRectangle: Scaled value for arc height must match value %s", expectedArc.y)); //$NON-NLS-1$
+	}
+
+	private static void validateFillString(RecordingSwtGraphics graphics, Point expected) {
+		validatePoint(graphics.fillString, expected);
+	}
+
+	private static void validateFillText(RecordingSwtGraphics graphics, Point expected) {
+		validatePoint(graphics.fillText, expected);
 	}
 
 	private static RecordingSwtGraphics executeWithOneLayer(int monitorZoom, int diagramZoom,
@@ -1134,6 +1186,8 @@ public class ScaledGraphicsTest {
 		Point drawRoundRectangleArc = new Point();
 		PathData drawPathData = new PathData();
 		int[] drawPolygon = {};
+		Point drawString = new Point();
+		Point drawText = new Point();
 		Rectangle fillArc = new Rectangle();
 		Rectangle fillGradient = new Rectangle();
 		Rectangle fillOval = new Rectangle();
@@ -1142,6 +1196,8 @@ public class ScaledGraphicsTest {
 		Point fillRoundRectangleArc = new Point();
 		PathData fillPathData = new PathData();
 		int[] fillPolygon = {};
+		Point fillString = new Point();
+		Point fillText = new Point();
 
 		public RecordingSwtGraphics(GC gc) {
 			super(gc);
@@ -1255,6 +1311,18 @@ public class ScaledGraphicsTest {
 		}
 
 		@Override
+		public void drawString(String s, int x, int y) {
+			drawString.x = x;
+			drawString.y = y;
+		}
+
+		@Override
+		public void drawText(String s, int x, int y) {
+			drawText.x = x;
+			drawText.y = y;
+		}
+
+		@Override
 		public void fillArc(int x, int y, int width, int height, int offset, int length) {
 			fillArc.setX(x + translation.x);
 			fillArc.setY(y + translation.y);
@@ -1304,6 +1372,18 @@ public class ScaledGraphicsTest {
 			fillRoundRectangle.setHeight(r.height);
 			fillRoundRectangleArc.setX(arcWidth);
 			fillRoundRectangleArc.setY(arcHeight);
+		}
+
+		@Override
+		public void fillString(String s, int x, int y) {
+			fillString.x = x;
+			fillString.y = y;
+		}
+
+		@Override
+		public void fillText(String s, int x, int y) {
+			fillText.x = x;
+			fillText.y = y;
 		}
 	}
 }
