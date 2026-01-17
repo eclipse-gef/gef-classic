@@ -378,6 +378,15 @@ public class SWTGraphics extends Graphics {
 		if (!appliedState.font.equals(currentState.font)) {
 			appliedState.font = currentState.font;
 			gc.setFont(appliedState.font);
+			// On Windows, font scaling doens't play nice with the Transform, which
+			// causes fonts do be drawn way too large. As a workaround, flush the font
+			// metrics while no Transform is set.
+			// See https://github.com/eclipse-platform/eclipse.platform.swt/issues/2978
+			if (transform != null && "win32".equals(SWT.getPlatform())) { //$NON-NLS-1$
+				gc.setTransform(null);
+				gc.getFontMetrics();
+				gc.setTransform(transform);
+			}
 		}
 	}
 
