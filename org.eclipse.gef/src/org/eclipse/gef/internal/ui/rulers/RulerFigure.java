@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -51,7 +51,7 @@ public class RulerFigure extends Figure {
 	 * paintFigure(Graphics) method.
 	 */
 	private static final int BORDER_WIDTH = 3;
-	private static final float DOTS_PER_INCH = 96.0f;
+	private static final float DOTS_PER_INCH = "cocoa".equals(SWT.getPlatform()) ? 72f : 96f; //$NON-NLS-1$ ;
 
 	private boolean horizontal;
 	private int unit;
