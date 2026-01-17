@@ -29,6 +29,9 @@
   This feature was originally request in [Bug 172463](https://bugs.eclipse.org/bugs/show_bug.cgi?id=172463)   
 - Implemented `SWTGraphics.getAbsoluteScale()`
   This feature was originally requested in [Bug 267462](https://bugs.eclipse.org/bugs/show_bug.cgi?id=267462)
+- The `getTextUtilities()` method has been moved from the `Label` and `TextFlow` class to the `Figure` class. By
+  default, this method returns a `DrawableFigureCanvas` rather than `TextUtilities.INSTANCE`, which is an object created
+  for the `FigureCanvas`, containing the given figure.
 
 ## GEF
 

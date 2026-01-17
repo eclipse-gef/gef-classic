@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -41,6 +41,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.pde.api.tools.annotations.NoOverride;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.DrawableTextUtilities;
 
 /**
  * The LightweightSystem is the link between SWT and Draw2d. It is the component
@@ -63,6 +64,7 @@ public class LightweightSystem {
 	private EventDispatcher dispatcher;
 	private UpdateManager manager = new DeferredUpdateManager();
 	private int ignoreResize;
+	private TextUtilities textUtilities;
 
 	/**
 	 * Constructs a LightweightSystem on Canvas <i>c</i>.
@@ -231,6 +233,7 @@ public class LightweightSystem {
 			return;
 		}
 		canvas = c;
+		textUtilities = new DrawableTextUtilities(canvas);
 		if ((c.getStyle() & SWT.DOUBLE_BUFFERED) != 0) {
 			getUpdateManager().setGraphicsSource(new NativeGraphicsSource(canvas));
 		} else {
@@ -327,6 +330,15 @@ public class LightweightSystem {
 				return canvas.getForeground();
 			}
 			return null;
+		}
+
+		/** @see Figure#getTextUtilities() */
+		@Override
+		public TextUtilities getTextUtilities() {
+			if (textUtilities != null) {
+				return textUtilities;
+			}
+			return TextUtilities.INSTANCE;
 		}
 
 		/** @see IFigure#getUpdateManager() */

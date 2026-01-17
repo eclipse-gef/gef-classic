@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -914,6 +914,20 @@ public class Figure implements IFigure {
 	@Override
 	public final Dimension getSize() {
 		return getBounds().getSize();
+	}
+
+	/**
+	 * Gets the {@link TextUtilities} instance to be used in measurement
+	 * calculations.
+	 *
+	 * @return a {@link TextUtilities} instance
+	 * @since 3.22
+	 */
+	public TextUtilities getTextUtilities() {
+		if (getParent() instanceof Figure parent) {
+			return parent.getTextUtilities();
+		}
+		return TextUtilities.INSTANCE;
 	}
 
 	/**

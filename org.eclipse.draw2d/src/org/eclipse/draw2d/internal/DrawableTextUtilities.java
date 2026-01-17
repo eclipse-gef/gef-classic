@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Yatta and others.
+ * Copyright (c) 2025, 2026 Yatta and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.text.FlowUtilities;
 
 /**
  * Provides miscellaneous text operations calculated with the zoom context of
@@ -27,9 +28,11 @@ import org.eclipse.draw2d.geometry.Dimension;
 public class DrawableTextUtilities extends TextUtilities {
 
 	private final DrawableFigureUtilities figureUtilities;
+	private final FlowUtilities flowUtilities;
 
 	public DrawableTextUtilities(Control source) {
 		figureUtilities = new DrawableFigureUtilities(source);
+		flowUtilities = new DrawableFlowUtilities();
 	}
 
 	/**
@@ -78,5 +81,21 @@ public class DrawableTextUtilities extends TextUtilities {
 	@Override
 	public int getDescent(Font font) {
 		return figureUtilities.getFontMetrics(font).getDescent();
+	}
+
+	/**
+	 * Gets the {@link FlowUtilities} using this instance for text calculations.
+	 *
+	 * @return a {@link FlowUtilities} instance
+	 */
+	public FlowUtilities getFlowUtilities() {
+		return flowUtilities;
+	}
+
+	private class DrawableFlowUtilities extends FlowUtilities {
+		@Override
+		protected TextUtilities getTextUtilities() {
+			return DrawableTextUtilities.this;
+		}
 	}
 }
