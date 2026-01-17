@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2025 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -82,10 +82,8 @@ import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.ScalableLightweightSystem;
-import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.Triangle;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.internal.DrawableTextUtilities;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 import org.eclipse.gef.GraphicalViewer;
@@ -1121,7 +1119,6 @@ public class FlyoutPaletteComposite extends Composite {
 	private class TitleLabel extends Label {
 		protected static final Border BORDER = new MarginBorder(4, 3, 4, 3);
 		protected static final Border TOOL_TIP_BORDER = new MarginBorder(0, 2, 0, 2);
-		private TextUtilities textUtilities;
 
 		public TitleLabel(boolean isHorizontal) {
 			super(GEFMessages.Palette_Label, InternalImages.get(InternalImages.IMG_PALETTE));
@@ -1131,14 +1128,6 @@ public class FlyoutPaletteComposite extends Composite {
 			tooltip.setBorder(TOOL_TIP_BORDER);
 			setToolTip(tooltip);
 			setForegroundColor(ColorConstants.listForeground);
-		}
-
-		@Override
-		public TextUtilities getTextUtilities() {
-			if (textUtilities == null) {
-				textUtilities = new DrawableTextUtilities(paletteContainer);
-			}
-			return textUtilities;
 		}
 
 		@Override
