@@ -64,7 +64,7 @@ public class InternalDraw2dUtils {
 		}
 		control.setData(InternalDraw2dUtils.DATA_AUTOSCALE_DISABLED, true);
 		control.addListener(SWT.ZoomChanged, e -> zoomConsumer.accept(e.detail / 100.0));
-		zoomConsumer.accept(InternalDraw2dUtils.calculateScale(control));
+		zoomConsumer.accept((double) InternalDraw2dUtils.calculateScale(control));
 	}
 
 	public static void setPropagateAutoScaleDisabled(Control control, boolean propagate) {
@@ -74,13 +74,20 @@ public class InternalDraw2dUtils {
 		control.setData(DATA_PROPOGATE_AUTOSCALE_DISABLED, propagate);
 	}
 
-	private static double calculateScale(Control control) {
+	/**
+	 * Returns the zoom of the given control or {@code 1.0}, if the control is
+	 * {@code null} or if the zoom can't be determined.
+	 *
+	 * @return The shell zoom of the given control.
+	 */
+	public static float calculateScale(Control control) {
 		int shellZoom;
 		try {
 			shellZoom = (int) control.getData(InternalDraw2dUtils.DATA_SHELL_ZOOM);
 		} catch (ClassCastException | NullPointerException e) {
 			shellZoom = 100;
 		}
-		return shellZoom / 100.0;
+		// returning float allows us to round it to int via Math.round(...)
+		return shellZoom / 100.0f;
 	}
 }

@@ -161,6 +161,7 @@ public class FlyoutPaletteComposite extends Composite {
 	private int cachedState = -1;
 	private int cachedLocation = -1;
 	private int cachedTitleHeight = 24; // give it a default value
+	private float scale;
 
 	private IPerspectiveListener perspectiveListener = new IPerspectiveListener() {
 		@Override
@@ -190,8 +191,8 @@ public class FlyoutPaletteComposite extends Composite {
 	public FlyoutPaletteComposite(Composite parent, int style, IWorkbenchPage page, PaletteViewerProvider pvProvider,
 			FlyoutPreferences preferences) {
 		super(parent, style | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED);
-		InternalDraw2dUtils.configureForAutoscalingMode(this, scale -> {
-		});
+		InternalDraw2dUtils.configureForAutoscalingMode(this, newScale -> scale = newScale.floatValue());
+		scale = InternalDraw2dUtils.calculateScale(this);
 		provider = pvProvider;
 		prefs = preferences;
 		sash = createSash();
@@ -360,6 +361,7 @@ public class FlyoutPaletteComposite extends Composite {
 		maxWidth = Math.max(maxWidth, minWidth);
 		pWidth = Math.max(pWidth, minWidth);
 		pWidth = Math.min(pWidth, maxWidth);
+		pWidth = Math.round(pWidth * scale);
 
 		/*
 		 * Fix for Bug# 65892 Laying out only when necessary helps reduce flicker on GTK
@@ -622,7 +624,7 @@ public class FlyoutPaletteComposite extends Composite {
 					restorePaletteState(pViewer, capturedPaletteState);
 				}
 				capturedPaletteState = null;
-				minWidth = Math.max(pViewer.getControl().computeSize(0, 0).x, MIN_PALETTE_SIZE);
+				minWidth = Math.round(Math.max(pViewer.getControl().computeSize(0, 0).x * scale, MIN_PALETTE_SIZE));
 			}
 			/*
 			 * Fix for Bug# 63901 When the flyout collapses, if the palette has focus, throw
@@ -785,6 +787,7 @@ public class FlyoutPaletteComposite extends Composite {
 		private void handleSashDragged(int shiftAmount) {
 			int newSize = paletteContainer.getBounds().width
 					+ (dock == PositionConstants.EAST ? -shiftAmount : shiftAmount);
+			newSize = Math.round(newSize / scale);
 			setPaletteWidth(newSize);
 		}
 
