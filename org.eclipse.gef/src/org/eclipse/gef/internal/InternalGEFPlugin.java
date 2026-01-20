@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2025 IBM Corporation and others.
+ * Copyright (c) 2006, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -31,16 +31,12 @@ import org.eclipse.swt.graphics.ImageDataProvider;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
-import org.eclipse.draw2d.BasicColorProvider;
-import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.ToolTipHelper;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartListener;
-import org.eclipse.gef.GEFColorProvider;
 import org.eclipse.gef.ui.parts.DomainEventDispatcher;
 import org.eclipse.gef.util.IToolTipHelperFactory;
 
@@ -67,11 +63,6 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 	public void start(BundleContext bc) throws Exception {
 		super.start(bc);
 		context = bc;
-		// Overloads the basic color provider with customizable one
-		if (ColorProvider.SystemColorFactory.getColorProvider() instanceof BasicColorProvider
-				&& PlatformUI.isWorkbenchRunning() && !PlatformUI.getWorkbench().isClosing()) {
-			ColorProvider.SystemColorFactory.setColorProvider(new GEFColorProvider());
-		}
 		toolTipProviders = new ArrayList<>();
 		toolTipProviderRefs = bc.getServiceReferences(IToolTipHelperFactory.class, null);
 		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {

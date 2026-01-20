@@ -40,4 +40,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.eclipse.gef
 Require-Capability: eclipse.swt;filter:="(image.format=svg)";resolution:=optional
+Service-Component: OSGI-INF/org.eclipse.gef.internal.ColorProviderService.xml
 
