@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006, 2025 IBM Corporation and others.
+ * Copyright (c) 2006, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -24,11 +24,9 @@ import java.util.function.Consumer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageDataProvider;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.PlatformUI;
@@ -103,51 +101,11 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Convenience method for getting the current zoom level of the active device.If
-	 * on MacOS or Linux (x11 window system) or if the device zoom couldn't
-	 * otherwise be determined, this method returns {@code 100} as default value.
-	 */
-	public static int getOrDefaultDeviceZoom() {
-		// On Mac and Linux X11 ImageData for cursors should always be created with 100%
-		// device zoom
-		if (Platform.getOS().equals(Platform.OS_MACOSX) || (Platform.getOS().equals(Platform.OS_LINUX)
-				&& "x11".equalsIgnoreCase(System.getenv("XDG_SESSION_TYPE")))) { //$NON-NLS-1$//$NON-NLS-2$
-			return 100;
-		}
-		String deviceZoom = System.getProperty("org.eclipse.swt.internal.deviceZoom", "100"); //$NON-NLS-1$ //$NON-NLS-2$
-		try {
-			return Integer.parseInt(deviceZoom);
-		} catch (NumberFormatException e) {
-			return 100;
-		}
-	}
-
-	/**
 	 * Returns all registered {@link ToolTipHelper} factories that can be used in
 	 * the {@link DomainEventDispatcher}.
 	 */
 	public static Collection<IToolTipHelperFactory> getToolTipHelperFactories() {
 		return Collections.unmodifiableCollection(toolTipProviders);
-	}
-
-	/**
-	 * Convenience method to get the image data for a given zoom level. If no image
-	 * for the requested zoom level exists, the image data may be an auto-scaled
-	 * version of the native image and may look blurred or mangled.
-	 */
-	public static ImageData scaledImageData(ImageDescriptor descriptor, int zoom) {
-		// Default case: Image in matching resolution has been found
-		ImageData data = descriptor.getImageData(zoom);
-		if (data != null) {
-			return data;
-		}
-		// Otherwise artifically scale the image
-		Image image = descriptor.createImage();
-		try {
-			return image.getImageData(zoom);
-		} finally {
-			image.dispose();
-		}
 	}
 
 	/**
