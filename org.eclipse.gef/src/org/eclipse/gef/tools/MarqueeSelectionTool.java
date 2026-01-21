@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.jface.viewers.StructuredSelection;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.Cursors;
 import org.eclipse.draw2d.Figure;
@@ -91,10 +91,10 @@ public class MarqueeSelectionTool extends AbstractTool {
 			Rectangle bounds = getBounds().getCopy();
 			graphics.translate(getLocation());
 
-			graphics.setXORMode(true);
-			graphics.setForegroundColor(ColorConstants.white);
-			graphics.setBackgroundColor(ColorConstants.black);
+			graphics.setForegroundColor(
+					ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected());
 			graphics.setLineStyle(Graphics.LINE_DOT);
+			graphics.setLineWidth(3);
 
 			int[] points = new int[6];
 
