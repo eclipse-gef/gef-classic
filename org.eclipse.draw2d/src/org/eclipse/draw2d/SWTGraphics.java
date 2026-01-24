@@ -182,6 +182,8 @@ public class SWTGraphics extends Graphics {
 		Pattern bgPattern;
 		int dx;
 		int dy;
+		float sx;
+		float sy;
 
 		Pattern fgPattern;
 
@@ -203,6 +205,8 @@ public class SWTGraphics extends Graphics {
 			lineAttributes = SWTGraphics.clone(state.lineAttributes);
 			dx = state.dx;
 			dy = state.dy;
+			sx = state.sx;
+			sy = state.sy;
 			bgPattern = state.bgPattern;
 			fgPattern = state.fgPattern;
 			font = state.font;
@@ -327,7 +331,8 @@ public class SWTGraphics extends Graphics {
 	protected final void checkPaint() {
 		checkGC();
 		if (!currentState.fgColor.equals(appliedState.fgColor) && currentState.fgPattern == null) {
-			gc.setForeground(appliedState.fgColor = currentState.fgColor);
+			appliedState.fgColor = currentState.fgColor;
+			gc.setForeground(appliedState.fgColor);
 		}
 
 		LineAttributes lineAttributes = currentState.lineAttributes;
@@ -715,14 +720,19 @@ public class SWTGraphics extends Graphics {
 	private final float[] transformElements = new float[6];
 
 	/**
-	 * Returns a stable, direction-independent estimate of the current graphics
-	 * scaling, computed as the square root of the absolute determinant of the
-	 * transformation matrix.
+	 * If scale value in x and y is the same this is returned. Otherwise it returns
+	 * a stable, direction-independent estimate of the current graphics scaling,
+	 * computed as the square root of the absolute determinant of the transformation
+	 * matrix.
 	 *
 	 * @see org.eclipse.draw2d.Graphics#getAbsoluteScale()
 	 */
 	@Override
 	public double getAbsoluteScale() {
+		if (currentState.sx == currentState.sy) {
+			return currentState.sx;
+		}
+
 		if (transform == null) {
 			return super.getAbsoluteScale();
 		}
@@ -894,6 +904,7 @@ public class SWTGraphics extends Graphics {
 
 		currentState.relativeClip = new RectangleClipping(gc.getClipping());
 		currentState.alpha = gc.getAlpha();
+		currentState.sx = currentState.sy = 1.0f;
 	}
 
 	private void initTransform(boolean force) {
@@ -1039,6 +1050,9 @@ public class SWTGraphics extends Graphics {
 
 		translateX = currentState.dx = s.dx;
 		translateY = currentState.dy = s.dy;
+
+		currentState.sx = s.sx;
+		currentState.sy = s.sy;
 	}
 
 	/**
@@ -1083,6 +1097,8 @@ public class SWTGraphics extends Graphics {
 
 		initTransform(true);
 		transform.scale(horizontal, vertical);
+		currentState.sx *= horizontal;
+		currentState.sy *= vertical;
 		gc.setTransform(transform);
 		elementsNeedUpdate = true;
 
