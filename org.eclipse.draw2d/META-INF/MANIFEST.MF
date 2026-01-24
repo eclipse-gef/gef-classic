@@ -16,6 +16,7 @@ Export-Package: org.eclipse.draw2d,
    org.eclipse.draw2d.tests,
    org.eclipse.gef.examples.flow",
  org.eclipse.draw2d.parts,
+ org.eclipse.draw2d.shadows,
  org.eclipse.draw2d.text,
  org.eclipse.draw2d.widgets,
  org.eclipse.draw2d.zoom
