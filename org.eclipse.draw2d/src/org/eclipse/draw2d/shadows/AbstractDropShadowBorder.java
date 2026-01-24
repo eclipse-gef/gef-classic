@@ -11,7 +11,7 @@
  *     Alois Zoitl - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.draw2d;
+package org.eclipse.draw2d.shadows;
 
 import org.eclipse.swt.graphics.Color;
 
@@ -19,16 +19,22 @@ import org.eclipse.pde.api.tools.annotations.NoExtend;
 import org.eclipse.pde.api.tools.annotations.NoInstantiate;
 import org.eclipse.pde.api.tools.annotations.NoReference;
 
+import org.eclipse.draw2d.AbstractBackground;
+import org.eclipse.draw2d.ColorProvider;
+import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
- * A versatile border that provides a CSS-style drop shadow effect for both
- * rectangular and rounded-rectangular figures.
+ * A base class for implementing CSS style drop shadow border figures.
  *
- * This border simulates visual depth by layering semi-transparent shapes using
- * multi-pass exponential decay. It is designed to work "out of the box" for
- * standard diagramming nodes while remaining highly tunable.
+ * The idea is that shadow consist of a halo and a drop shadow. This class
+ * features all base properties for such shadows consisting of the shadow color,
+ * alpha, softness, size of the halo and the drop shadow.
+ *
+ * Subclasses need to implement the exact drawing of the shadow (e.g., @see
+ * RectDropShadowBorder).
  *
  * This class is currently in development its API may change.
  *
@@ -37,67 +43,34 @@ import org.eclipse.draw2d.geometry.Rectangle;
 @NoExtend
 @NoReference
 @NoInstantiate
-public class RectangleDropShadowBorder extends AbstractBackground {
-
-	/**
-	 * The default value for the corner radius is suited for rectangles
-	 *
-	 */
-	private static final int DEFAULT_CORNER_START_RADIUS = 4;
+public abstract class AbstractDropShadowBorder extends AbstractBackground {
 
 	/**
 	 * default value for the drop shadow size as suited for a figure in an diagram
 	 *
 	 */
-	private static final int DEFAULT_DROP_SHADOW_SIZE = 6;
-
+	protected static final int DEFAULT_DROP_SHADOW_SIZE = 6;
 	/**
 	 * default value for the halo size as suited for a figure in an diagram
 	 *
 	 */
-	private static final int DEFAULT_HALO_SIZE = 3;
-
-	private static final int DEFAULT_SHADOW_ALPHA = 25;
-
-	private static final double DEFAULT_SOFTNESS = 4.0;
-
+	protected static final int DEFAULT_HALO_SIZE = 3;
+	protected static final int DEFAULT_SHADOW_ALPHA = 25;
+	protected static final double DEFAULT_SOFTNESS = 4.0;
 	/**
 	 * Per default the shadow insets are empty so that the shadow will be outside of
 	 * the figure
 	 */
 	private static final Insets DEFAULT_SHADOW_INSETS = new Insets();
-
 	private static final Rectangle CLIP_RECT_CACHE = new Rectangle();
-
-	private int cornerStartRadius;
-
 	private int dropShadowSize;
-
 	private int haloSize;
-
 	private Insets insets;
-
 	private int shadowAlpha;
-
 	private Color shadowColor;
-
 	private double softness;
 
-	/**
-	 * Default constructor that set everything for a rectangular shaped figure.
-	 */
-	public RectangleDropShadowBorder() {
-		this(DEFAULT_CORNER_START_RADIUS);
-
-	}
-
-	/**
-	 * Create a shadow border for a rounded rectangle with the given corner radius.
-	 *
-	 * @param cornerRadius The corner radius of the rounded rectangle
-	 */
-	public RectangleDropShadowBorder(int cornerRadius) {
-		cornerStartRadius = cornerRadius;
+	protected AbstractDropShadowBorder() {
 		dropShadowSize = DEFAULT_DROP_SHADOW_SIZE;
 		haloSize = DEFAULT_HALO_SIZE;
 		insets = DEFAULT_SHADOW_INSETS;
@@ -106,7 +79,7 @@ public class RectangleDropShadowBorder extends AbstractBackground {
 		softness = DEFAULT_SOFTNESS;
 	}
 
-	private int calcAlphaValue(final double progress) {
+	protected int calcAlphaValue(final double progress) {
 		return Math.max(1, (int) (shadowAlpha * Math.exp(-softness * progress)));
 	}
 
@@ -145,55 +118,9 @@ public class RectangleDropShadowBorder extends AbstractBackground {
 		graphics.clipRect(CLIP_RECT_CACHE);
 	}
 
-	private void paintDropShadow(final Graphics graphics, final Rectangle shadowRect, final int size) {
-		int bottomXStart = shadowRect.x + 1;
-		int bottomY = shadowRect.y + 1 + shadowRect.height;
-		final int bottomXEnd = shadowRect.x + shadowRect.width + 1 - cornerStartRadius;
+	protected abstract void paintDropShadow(final Graphics graphics, final Rectangle shadowRect, final int size);
 
-		int rightX = shadowRect.x + shadowRect.width + 1;
-		int rightYStart = shadowRect.y + 1;
-		final int rightYEnd = shadowRect.y + shadowRect.height + 1 - cornerStartRadius;
-		int cornerDiameter = 2 * cornerStartRadius;
-
-		for (int i = 0; i <= size; i++) {
-			final double progress = (double) i / size;
-			graphics.setAlpha(calcAlphaValue(progress));
-
-			graphics.drawLine(bottomXStart, bottomY, bottomXEnd, bottomY);
-			graphics.drawLine(rightX, rightYStart, rightX, rightYEnd);
-			graphics.drawArc(rightX - cornerDiameter, bottomY - cornerDiameter, cornerDiameter, cornerDiameter, 270,
-					90);
-
-			bottomXStart++;
-			bottomY++;
-			rightX++;
-			rightYStart++;
-			cornerDiameter += 2;
-		}
-	}
-
-	private void paintHalo(final Graphics graphics, final Rectangle shadowRect, final int size) {
-		final Rectangle r = shadowRect.getCopy();
-		int cornerRadius = cornerStartRadius;
-		for (int i = 0; i < size; i++) {
-			final double progress = (double) i / size;
-			graphics.setAlpha(calcAlphaValue(progress));
-			graphics.drawRoundRectangle(r, cornerRadius, cornerRadius);
-			cornerRadius += 2;
-			r.expand(1, 1);
-		}
-	}
-
-	/**
-	 * Set the corner radius for the drop shadow. The default value is suited for
-	 * rectangles for rounded rectangles it should be set to the corner radius of
-	 * the rounded rectangle this shadow is bounding.
-	 *
-	 * @param cornerRadius
-	 */
-	public void setCornerRadius(int cornerRadius) {
-		this.cornerStartRadius = cornerRadius;
-	}
+	protected abstract void paintHalo(final Graphics graphics, final Rectangle shadowRect, final int size);
 
 	/**
 	 * Sets the size of the directional shadow that simulates a light source.
@@ -217,7 +144,6 @@ public class RectangleDropShadowBorder extends AbstractBackground {
 	 * the Drop Shadow size.
 	 *
 	 * @param haloSize The size in pixels
-	 * @since 3.22
 	 */
 	public void setHaloSize(int haloSize) {
 		this.haloSize = haloSize;
