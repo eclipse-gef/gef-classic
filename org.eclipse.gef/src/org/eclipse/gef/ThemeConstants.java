@@ -33,6 +33,8 @@ public class ThemeConstants {
 	static final String CONFIG_COLOR_MENU_BACKGROUND_SELECTED = "org.eclipse.gef.color.menu.background.selected"; //$NON-NLS-1$
 	static final String CONFIG_COLOR_MENU_FOREGROUND_SELECTED = "org.eclipse.gef.color.menu.foreground.selected"; //$NON-NLS-1$
 
+	static final String CONFIG_COLOR_SHADOW = "org.eclipse.gef.color.shadow"; //$NON-NLS-1$
+
 	static final String CONFIG_COLOR_TITLE_BACKGROUND = "org.eclipse.gef.color.title.background"; //$NON-NLS-1$
 	static final String CONFIG_COLOR_TITLE_GRADIENT = "org.eclipse.gef.color.title.gradient"; //$NON-NLS-1$
 	static final String CONFIG_COLOR_TITLE_FOREGROUND = "org.eclipse.gef.color.title.foreground"; //$NON-NLS-1$

@@ -16,6 +16,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/draw2d/ColorProvider.java" type="org.eclipse.draw2d.ColorProvider">
+        <filter comment="added default method to color provider for shadow color" id="404000815">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.ColorProvider"/>
+                <message_argument value="getShadowColor()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/draw2d/Connection.java" type="org.eclipse.draw2d.Connection">
         <filter id="576720909">
             <message_arguments>
