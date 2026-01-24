@@ -8,5 +8,6 @@ IEclipsePreferences#org-eclipse-ui-workbench:org-eclipse-draw2d {
 		'org.eclipse.gef.color.menu.background=40,40,40'
 		'org.eclipse.gef.color.menu.foreground=224,224,224'
 		'org.eclipse.gef.color.menu.foreground.selected=105,105,105'
+		'org.eclipse.gef.color.shadow=90, 90, 115'
 		'org.eclipse.gef.color.button=64,64,64'
 }

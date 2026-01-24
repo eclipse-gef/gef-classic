@@ -138,6 +138,14 @@
 			<description>%colorDefinition.org.eclipse.gef.color.menu.foreground.selected.description</description>
 		</colorDefinition>
 		<colorDefinition
+				label="%colorDefinition.org.eclipse.gef.color.shadow.label"
+				categoryId="org.eclipse.gef"
+				id="org.eclipse.gef.color.shadow"
+				value="12, 12, 28"			
+                isEditable="false"><!--The shadow color is not a color to be set be a user -->
+			<description>%colorDefinition.org.eclipse.gef.color.shadow.description</description>
+		</colorDefinition>
+		<colorDefinition
 				label="%colorDefinition.org.eclipse.gef.color.title.background.label"
 				categoryId="org.eclipse.gef"
 				id="org.eclipse.gef.color.title.background"

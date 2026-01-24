@@ -91,6 +91,11 @@ public class GEFColorProvider implements ColorProvider {
 	}
 
 	@Override
+	public Color getShadowColor() {
+		return themeManager.getCurrentTheme().getColorRegistry().get(ThemeConstants.CONFIG_COLOR_SHADOW);
+	}
+
+	@Override
 	public Color getTitleBackground() {
 		return themeManager.getCurrentTheme().getColorRegistry().get(ThemeConstants.CONFIG_COLOR_TITLE_BACKGROUND);
 	}

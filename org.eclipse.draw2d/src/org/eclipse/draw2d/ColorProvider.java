@@ -44,6 +44,17 @@ public interface ColorProvider {
 
 	Color getMenuForegroundSelected();
 
+	/**
+	 * Color to be used for drawing shadows a round objects. Use a bluish dark grey.
+	 * This color works for light backgrounds. For darker backgrounds a lighter grey
+	 * is needed.
+	 *
+	 * @since 3.22
+	 */
+	default Color getShadowColor() {
+		return new Color(12, 12, 28);
+	}
+
 	Color getTitleBackground();
 
 	Color getTitleGradient();
