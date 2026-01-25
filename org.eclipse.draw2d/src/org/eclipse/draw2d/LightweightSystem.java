@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -39,8 +39,12 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
 import org.eclipse.pde.api.tools.annotations.NoOverride;
+import org.eclipse.pde.api.tools.annotations.NoReference;
 
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.internal.DrawableFlowUtilities;
+import org.eclipse.draw2d.internal.DrawableTextUtilities;
+import org.eclipse.draw2d.text.FlowUtilities;
 
 /**
  * The LightweightSystem is the link between SWT and Draw2d. It is the component
@@ -57,6 +61,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public class LightweightSystem {
 
+	private TextUtilities textUtilities = TextUtilities.INSTANCE;
+	private FlowUtilities flowUtilities = FlowUtilities.INSTANCE;
 	private Canvas canvas;
 	IFigure contents;
 	private IFigure root;
@@ -110,6 +116,7 @@ public class LightweightSystem {
 				LightweightSystem.this.controlResized();
 			}
 		});
+		canvas.addListener(SWT.ZoomChanged, event -> root.invalidateTree());
 		canvas.addListener(SWT.Paint, e -> paint(e.gc));
 	}
 
@@ -195,6 +202,24 @@ public class LightweightSystem {
 	}
 
 	/**
+	 * Returns the text utilities using the zoom context of the {@link FigureCanvas}
+	 * containing this figure.
+	 */
+	@NoReference
+	public TextUtilities internalGetTextUtilities() {
+		return textUtilities;
+	}
+
+	/**
+	 * Returns the flow utilities using the zoom context of the {@link FigureCanvas}
+	 * containing this figure.
+	 */
+	@NoReference
+	public FlowUtilities internalGetFlowUtilities() {
+		return flowUtilities;
+	}
+
+	/**
 	 * Invokes this LightweightSystem's {@link UpdateManager} to paint this
 	 * LightweightSystem's Canvas and contents.
 	 *
@@ -236,6 +261,8 @@ public class LightweightSystem {
 		} else {
 			getUpdateManager().setGraphicsSource(new BufferedGraphicsSource(canvas));
 		}
+		textUtilities = new DrawableTextUtilities(canvas);
+		flowUtilities = new DrawableFlowUtilities(textUtilities);
 		getEventDispatcher().setControl(c);
 		addListeners();
 
@@ -339,6 +366,15 @@ public class LightweightSystem {
 		@Override
 		public EventDispatcher internalGetEventDispatcher() {
 			return getEventDispatcher();
+		}
+
+		/**
+		 * @see org.eclipse.draw2d.Figure#internalGetLightweightSystem()
+		 */
+		@Override
+		@NoReference
+		protected LightweightSystem internalGetLightweightSystem() {
+			return LightweightSystem.this;
 		}
 
 		/**

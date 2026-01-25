@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -681,9 +681,12 @@ public class Label extends Figure implements PositionConstants {
 	 * @return a <code>TextUtilities</code> instance
 	 * @since 3.4
 	 */
-	@SuppressWarnings("static-method")
 	public TextUtilities getTextUtilities() {
-		return TextUtilities.INSTANCE;
+		LightweightSystem lws = internalGetLightweightSystem();
+		if (lws == null) {
+			return TextUtilities.INSTANCE;
+		}
+		return lws.internalGetTextUtilities();
 	}
 
 	/**
