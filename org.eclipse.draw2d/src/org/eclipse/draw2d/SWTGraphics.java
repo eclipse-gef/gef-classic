@@ -254,15 +254,17 @@ public class SWTGraphics extends Graphics {
 				| ((SWT.DEFAULT + INTERPOLATION_WHOLE_NUMBER) << INTERPOLATION_SHIFT);
 	}
 
-	private static MethodHandle DRAW_IMAGE_HANDLE;
-	static {
+	private static final MethodHandle DRAW_IMAGE_HANDLE = getDrawImageHandle();
+
+	private static MethodHandle getDrawImageHandle() {
 		try {
 			// Introduced with SWT 3.132
 			MethodType mt = MethodType.methodType(void.class, Image.class, int.class, int.class, int.class, int.class);
-			DRAW_IMAGE_HANDLE = MethodHandles.publicLookup().findVirtual(GC.class, "drawImage", mt); //$NON-NLS-1$
+			return MethodHandles.publicLookup().findVirtual(GC.class, "drawImage", mt); //$NON-NLS-1$
 		} catch (IllegalAccessException | NoSuchMethodException e) {
 			// ignore
 		}
+		return null;
 	}
 
 	private final LazyState appliedState = new LazyState();
