@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Yatta and others.
+ * Copyright (c) 2025, 2026 Yatta and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@ package org.eclipse.draw2d.internal;
 
 import java.util.Objects;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
@@ -28,7 +29,7 @@ import org.eclipse.draw2d.geometry.Dimension;
  * All GC related operations are mirrored from {@code FigureUtilities}
  */
 public class DrawableFigureUtilities {
-	private final GC gc;
+	private GC gc;
 	private Font appliedFont;
 	private FontMetrics metrics;
 
@@ -36,6 +37,11 @@ public class DrawableFigureUtilities {
 		gc = new GC(source);
 		source.addDisposeListener(e -> {
 			gc.dispose();
+		});
+		source.addListener(SWT.ZoomChanged, event -> {
+			gc.dispose();
+			gc = new GC(source);
+			metrics = null;
 		});
 		appliedFont = gc.getFont();
 	}

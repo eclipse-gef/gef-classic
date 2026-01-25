@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,6 +22,7 @@ import org.eclipse.pde.api.tools.annotations.NoExtend;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
@@ -724,9 +725,12 @@ public class TextFlow extends InlineFlow {
 	 * @return a <code>FlowUtilities</code> instance
 	 * @since 3.4
 	 */
-	@SuppressWarnings("static-method")
 	protected FlowUtilities getFlowUtilities() {
-		return FlowUtilities.INSTANCE;
+		LightweightSystem lws = internalGetLightweightSystem();
+		if (lws == null) {
+			return FlowUtilities.INSTANCE;
+		}
+		return lws.internalGetFlowUtilities();
 	}
 
 	/**
@@ -736,9 +740,12 @@ public class TextFlow extends InlineFlow {
 	 * @return a <code>TextUtilities</code> instance
 	 * @since 3.4
 	 */
-	@SuppressWarnings("static-method")
 	protected TextUtilities getTextUtilities() {
-		return TextUtilities.INSTANCE;
+		LightweightSystem lws = internalGetLightweightSystem();
+		if (lws == null) {
+			return TextUtilities.INSTANCE;
+		}
+		return lws.internalGetTextUtilities();
 	}
 
 }
