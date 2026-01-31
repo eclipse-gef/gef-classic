@@ -64,13 +64,13 @@ public class RectangleDropShadowBorder extends AbstractDropShadowBorder {
 
 	@Override
 	protected void paintDropShadow(final Graphics graphics, final Rectangle shadowRect, final int size) {
-		int bottomXStart = shadowRect.x + 1;
-		int bottomY = shadowRect.y + 1 + shadowRect.height;
-		final int bottomXEnd = shadowRect.x + shadowRect.width + 1 - cornerStartRadius;
+		int bottomXStart = shadowRect.x + cornerStartRadius;
+		int bottomY = shadowRect.y + 2 + shadowRect.height;
+		final int bottomXEnd = shadowRect.x + shadowRect.width + 2 - cornerStartRadius;
 
-		int rightX = shadowRect.x + shadowRect.width + 1;
-		int rightYStart = shadowRect.y + 1;
-		final int rightYEnd = shadowRect.y + shadowRect.height + 1 - cornerStartRadius;
+		int rightX = shadowRect.x + shadowRect.width + 2;
+		int rightYStart = shadowRect.y + cornerStartRadius;
+		final int rightYEnd = shadowRect.y + shadowRect.height + 2 - cornerStartRadius;
 		int cornerDiameter = 2 * cornerStartRadius;
 
 		for (int i = 0; i <= size; i++) {

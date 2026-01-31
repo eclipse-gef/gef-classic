@@ -44,9 +44,9 @@ public class EllipseDropShadowBorder extends AbstractDropShadowBorder {
 		for (int i = 0; i < size; i++) {
 			final double progress = (double) i / size;
 			graphics.setAlpha(calcAlphaValue(progress));
-			graphics.drawArc(r, 270, 90);
 			r.x++;
 			r.y++;
+			graphics.drawArc(r, 270, 90);
 		}
 	}
 
