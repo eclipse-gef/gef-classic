@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -23,7 +23,6 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.TextLayout;
 import org.eclipse.swt.widgets.Display;
 
-import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.TextUtilities;
 
 /**
@@ -99,12 +98,11 @@ public class FlowUtilities {
 	 *                 are true.
 	 * @return the average character width
 	 */
-	@SuppressWarnings("static-method")
 	protected float getAverageCharWidth(TextFragmentBox fragment, Font font) {
 		if (fragment.getWidth() > 0 && fragment.length != 0) {
 			return fragment.getWidth() / (float) fragment.length;
 		}
-		return (float) FigureUtilities.getFontMetrics(font).getAverageCharacterWidth();
+		return (float) getTextUtilities().getFontMetrics(font).getAverageCharacterWidth();
 	}
 
 	static int getBorderAscent(InlineFlow owner) {

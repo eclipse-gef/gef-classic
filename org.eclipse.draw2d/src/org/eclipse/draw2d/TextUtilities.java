@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2024 IBM Corporation and others.
+ * Copyright (c) 2007, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -16,7 +16,10 @@ package org.eclipse.draw2d;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
 
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.internal.DrawableTextUtilities;
 
 /**
  * Provides miscellaneous text operations. Clients may subclass this class if
@@ -63,9 +66,8 @@ public class TextUtilities {
 	 * @param font
 	 * @return the font's ascent
 	 */
-	@SuppressWarnings("static-method")
 	public int getAscent(Font font) {
-		FontMetrics fm = FigureUtilities.getFontMetrics(font);
+		FontMetrics fm = getFontMetrics(font);
 		return fm.getHeight() - fm.getDescent();
 	}
 
@@ -75,9 +77,8 @@ public class TextUtilities {
 	 * @param font
 	 * @return the font's descent
 	 */
-	@SuppressWarnings("static-method")
 	public int getDescent(Font font) {
-		return FigureUtilities.getFontMetrics(font).getDescent();
+		return getFontMetrics(font).getDescent();
 	}
 
 	/**
@@ -90,7 +91,7 @@ public class TextUtilities {
 	 * @return the largest substring that fits in the given width
 	 */
 	public int getLargestSubstringConfinedTo(String s, Font f, int availableWidth) {
-		FontMetrics metrics = FigureUtilities.getFontMetrics(f);
+		FontMetrics metrics = getFontMetrics(f);
 		int min = 0;
 		int max = s.length() + 1;
 		double avg = metrics.getAverageCharacterWidth();
@@ -123,5 +124,22 @@ public class TextUtilities {
 			}
 		}
 		return min;
+	}
+
+	/**
+	 * Returns the FontMetrics associated with the passed Font.
+	 * <p>
+	 * <strong>Important:</strong> This method is not intended to be called by
+	 * clients. It only exists to be overridden by {@link DrawableTextUtilities}.
+	 * </p>
+	 *
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @param font the font
+	 * @return the FontMetrics for the given font
+	 */
+	@NoReference
+	@SuppressWarnings("static-method")
+	public FontMetrics getFontMetrics(Font font) {
+		return FigureUtilities.getFontMetrics(font);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Yatta and others.
+ * Copyright (c) 2025, 2026 Yatta and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,7 @@ package org.eclipse.draw2d.internal;
 
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontMetrics;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Control;
 
 import org.eclipse.draw2d.TextUtilities;
@@ -58,25 +59,14 @@ public class DrawableTextUtilities extends TextUtilities {
 	}
 
 	/**
-	 * Gets the font's ascent.
+	 * Returns the FontMetrics associated with the passed Font.
 	 *
-	 * @param font
-	 * @return the font's ascent
+	 * @param f the font
+	 * @return the FontMetrics for the given font
+	 * @see GC#getFontMetrics()
 	 */
 	@Override
-	public int getAscent(Font font) {
-		FontMetrics fm = figureUtilities.getFontMetrics(font);
-		return fm.getHeight() - fm.getDescent();
-	}
-
-	/**
-	 * Gets the font's descent.
-	 *
-	 * @param font
-	 * @return the font's descent
-	 */
-	@Override
-	public int getDescent(Font font) {
-		return figureUtilities.getFontMetrics(font).getDescent();
+	public FontMetrics getFontMetrics(Font f) {
+		return figureUtilities.getFontMetrics(f);
 	}
 }
