@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2025 IBM Corporation and others.
+ * Copyright (c) 2003, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,11 +15,12 @@ package org.eclipse.draw2d.graph;
 import org.eclipse.draw2d.geometry.Insets;
 
 /**
- * @deprecated virtual nodes of an edge should be cast to Node.
+ * @deprecated virtual nodes of an edge should be cast to Node. This class will
+ *             be made package-private after the 2028-03 release.
  * @author Randy Hudson
  * @since 2.1.2
  */
-@Deprecated
+@Deprecated(forRemoval = true, since = "2026-03")
 public class VirtualNode extends Node {
 
 	/**

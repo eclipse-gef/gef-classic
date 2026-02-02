@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2025 IBM Corporation and others.
+ * Copyright (c) 2005, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -67,8 +67,7 @@ class TransposeMetrics extends GraphVisitor {
 			if (bends == null) {
 				continue;
 			}
-			for (Node bend : bends) {
-				VirtualNode vnode = (VirtualNode) bend;
+			for (Node vnode : bends) {
 				temp = vnode.y;
 				vnode.y = vnode.x;
 				vnode.x = temp;
