@@ -41,6 +41,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @param g Graphics object to draw with
 	 * @param p Printer to print to
 	 */
+	@SuppressWarnings("deprecation")
 	public PrinterGraphics(Graphics g, Printer p) {
 		super(g);
 		printer = p;
@@ -66,6 +67,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.ScaledGraphics#dispose()
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void dispose() {
 		super.dispose();
 
@@ -80,6 +82,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int x, int y) {
 		super.drawImage(printerImage(srcImage), x, y);
 	}
@@ -88,6 +91,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int, int, int)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int destX, int destY, int destWidth, int destHeight) {
 		super.drawImage(printerImage(srcImage), destX, destY, destWidth, destHeight);
 	}
@@ -96,11 +100,13 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see Graphics#drawImage(Image, int, int, int, int, int, int, int, int)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int sx, int sy, int sw, int sh, int tx, int ty, int tw, int th) {
 		super.drawImage(printerImage(srcImage), sx, sy, sw, sh, tx, ty, tw, th);
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	int zoomFontHeight(int height) {
 		return (int) (height * zoom * Display.getCurrent().getDPI().y / printer.getDPI().y + 0.0000001);
 	}
@@ -109,6 +115,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.ScaledGraphics#zoomLineWidth(float)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	float zoomLineWidth(float w) {
 		return (float) (w * zoom);
 	}
@@ -119,6 +126,7 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.ScaledGraphics#setLineAttributes(org.eclipse.swt.graphics.LineAttributes)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void setLineAttributes(LineAttributes attributes) {
 		if (attributes.style == SWT.LINE_CUSTOM && attributes.dash != null && attributes.dash.length > 0) {
 			float[] newDashes = new float[attributes.dash.length];
