@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -183,6 +183,7 @@ public class Viewport extends Figure implements PropertyChangeListener {
 	 * @param event the event
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getSource() instanceof RangeModel) {
 			if (RangeModel.PROPERTY_VALUE.equals(event.getPropertyName())) {

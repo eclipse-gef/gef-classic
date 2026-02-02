@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -100,6 +100,7 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	 * @param newZoom The new zoom level
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void setScale(double newZoom) {
 		if (scale == newZoom) {
 			return;
