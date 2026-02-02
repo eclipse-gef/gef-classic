@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2025 IBM Corporation and others.
+ * Copyright (c) 2003, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -55,8 +55,7 @@ class RouteEdges extends GraphVisitor {
 		router.addPath(path);
 		Rectangle o;
 		Insets padding;
-		for (Node element : edge.vNodes) {
-			VirtualNode node = (VirtualNode) element;
+		for (Node node : edge.vNodes) {
 			Node neighbor;
 			if (node.left != null) {
 				neighbor = node.left;

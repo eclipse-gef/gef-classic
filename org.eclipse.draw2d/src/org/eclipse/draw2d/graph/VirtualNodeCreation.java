@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2025 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -37,7 +37,7 @@ class VirtualNodeCreation extends RevertableChange {
 	 * @param edge  The edge to convert
 	 * @param graph the graph containing the edge
 	 */
-	@SuppressWarnings("removal")
+	@SuppressWarnings({ "removal", "deprecation" })
 	public VirtualNodeCreation(Edge edge, DirectedGraph graph) {
 		this.edge = edge;
 		this.graph = graph;
