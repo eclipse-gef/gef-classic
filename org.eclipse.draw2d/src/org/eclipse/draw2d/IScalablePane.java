@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Johannes Kepler University Linz and others.
+ * Copyright (c) 2022, 2026 Johannes Kepler University Linz and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -51,6 +51,7 @@ public interface IScalablePane extends ScalableFigure {
 	public static final class IScalablePaneHelper {
 
 		private static Graphics prepareScaledGraphics(final Graphics graphics, IScalablePane figurePane) {
+			@SuppressWarnings("deprecation")
 			Graphics graphicsToUse = (figurePane.useScaledGraphics()) ? new ScaledGraphics(graphics) : graphics;
 			if (!figurePane.optimizeClip()) {
 				graphicsToUse.clipRect(figurePane.getBounds().getShrinked(figurePane.getInsets()));
