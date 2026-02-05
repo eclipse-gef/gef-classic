@@ -103,7 +103,7 @@ public class ScalableFreeformRootEditPart extends FreeformGraphicalRootEditPart 
 	 * Constructor for ScalableFreeformRootEditPart
 	 */
 	public ScalableFreeformRootEditPart() {
-		this(false);
+		this(InternalDraw2dUtils.useScaledGraphicsByDefault());
 	}
 
 	/**

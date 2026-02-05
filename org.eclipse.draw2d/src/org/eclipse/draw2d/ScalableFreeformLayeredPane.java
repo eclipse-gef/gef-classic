@@ -32,7 +32,7 @@ public class ScalableFreeformLayeredPane extends FreeformLayeredPane implements 
 	private final boolean useScaledGraphics;
 
 	public ScalableFreeformLayeredPane() {
-		this(false);
+		this(InternalDraw2dUtils.useScaledGraphicsByDefault());
 	}
 
 	/**
