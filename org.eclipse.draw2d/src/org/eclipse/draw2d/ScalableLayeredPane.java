@@ -35,7 +35,7 @@ public class ScalableLayeredPane extends LayeredPane implements IScalablePane {
 	private final boolean useScaledGraphics;
 
 	public ScalableLayeredPane() {
-		this(false);
+		this(InternalDraw2dUtils.useScaledGraphicsByDefault());
 	}
 
 	/**
