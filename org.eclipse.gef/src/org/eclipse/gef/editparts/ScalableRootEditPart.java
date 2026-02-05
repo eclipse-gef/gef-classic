@@ -148,7 +148,7 @@ public class ScalableRootEditPart extends SimpleRootEditPart implements LayerCon
 	 * Constructor for ScalableRootEditPart
 	 */
 	public ScalableRootEditPart() {
-		this(false);
+		this(InternalDraw2dUtils.useScaledGraphicsByDefault());
 	}
 
 	/**

@@ -12,6 +12,9 @@
   
   As part of this deprecation also all methods and flags allowing to switch to between `SWTGraphics` and 
   `ScaledGraphics` are deprecated and the default behavior is changed to use `SWTGraphics`.
+  The default behavior can be switched back to use `ScaledGraphics` by setting the system property 
+  `draw2d.useScaledGraphicsByDefault` to `true`. Note that this is a temporary property that will
+  at latest be removed together with the `ScaledGraphics` itself.
   
   **Action Required:** If your application depends on `ScaledGraphics` you need to actively switch it on for the following classes:
     - ScaleableFreeformLayeredPane

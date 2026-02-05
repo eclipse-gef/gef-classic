@@ -34,12 +34,27 @@ public class InternalDraw2dUtils {
 	 */
 	private static final String DRAW2D_ENABLE_AUTOSCALE = "draw2d.enableAutoscale"; //$NON-NLS-1$
 
+	/**
+	 * System property that controls if ScaledGraphcis are supposed to be used
+	 * instead of SWTGraphics by default.
+	 * <p>
+	 * The current default is "false".
+	 */
+	private static final String DRAW2D_SCALEDGRAPHICS_BY_DEFAULT = "draw2d.useScaledGraphicsByDefault"; //$NON-NLS-1$
+
 	private static final boolean enableAutoScale = "win32".equals(SWT.getPlatform()) //$NON-NLS-1$
 			&& Boolean.parseBoolean(System.getProperty(DRAW2D_ENABLE_AUTOSCALE, Boolean.TRUE.toString()))
 			&& SWT.getVersion() >= 4971; // SWT 2025-12 release or higher
 
+	private static final boolean useScaledGraphicsByDefault = Boolean
+			.parseBoolean(System.getProperty(DRAW2D_SCALEDGRAPHICS_BY_DEFAULT, Boolean.FALSE.toString()));
+
 	public static boolean isAutoScaleEnabled() {
 		return enableAutoScale;
+	}
+
+	public static boolean useScaledGraphicsByDefault() {
+		return useScaledGraphicsByDefault;
 	}
 
 	public static void configureForAutoscalingMode(Control control, Consumer<Double> zoomConsumer) {
