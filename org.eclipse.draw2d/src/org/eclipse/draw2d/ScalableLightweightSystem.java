@@ -85,7 +85,7 @@ public class ScalableLightweightSystem extends LightweightSystem {
 		@Deprecated(forRemoval = true, since = "2026-03")
 		@Override
 		public boolean useScaledGraphics() {
-			return false;
+			return InternalDraw2dUtils.useScaledGraphicsByDefault();
 		}
 
 		@Override
