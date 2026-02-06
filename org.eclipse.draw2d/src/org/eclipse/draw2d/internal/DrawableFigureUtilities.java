@@ -35,12 +35,14 @@ public class DrawableFigureUtilities {
 
 	public DrawableFigureUtilities(Control source) {
 		gc = new GC(source);
+		gc.setAdvanced(true);
 		source.addDisposeListener(e -> {
 			gc.dispose();
 		});
 		source.addListener(SWT.ZoomChanged, event -> {
 			gc.dispose();
 			gc = new GC(source);
+			gc.setAdvanced(true);
 			metrics = null;
 		});
 		appliedFont = gc.getFont();
