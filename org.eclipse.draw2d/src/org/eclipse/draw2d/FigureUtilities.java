@@ -22,6 +22,7 @@ import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Shell;
 
+import org.eclipse.draw2d.colors.HSLColor;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
@@ -31,7 +32,6 @@ import org.eclipse.draw2d.internal.InternalDraw2dUtils;
  */
 public class FigureUtilities {
 
-	private static final float RGB_VALUE_MULTIPLIER = 0.6f;
 	private static GC gc;
 	private static Font appliedFont;
 	private static FontMetrics metrics;
@@ -45,8 +45,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color darker(Color color) {
-		return new Color(null, (int) (color.getRed() * RGB_VALUE_MULTIPLIER),
-				(int) (color.getGreen() * RGB_VALUE_MULTIPLIER), (int) (color.getBlue() * RGB_VALUE_MULTIPLIER));
+		return HSLColor.fromColor(color).darker(0.4).toColor();
 	}
 
 	/**
@@ -210,13 +209,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color lighter(Color rgb) {
-		int r = rgb.getRed();
-		int g = rgb.getGreen();
-		int b = rgb.getBlue();
-
-		return new Color(null, Math.max(2, Math.min((int) (r / RGB_VALUE_MULTIPLIER), 255)),
-				Math.max(2, Math.min((int) (g / RGB_VALUE_MULTIPLIER), 255)),
-				Math.max(2, Math.min((int) (b / RGB_VALUE_MULTIPLIER), 255)));
+		return HSLColor.fromColor(rgb).lighter(0.4).toColor();
 	}
 
 	/**
