@@ -13,11 +13,11 @@
 package org.eclipse.gef.examples.logicdesigner.figures;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Path;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
  * @author danlee
@@ -25,20 +25,21 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class XOrGateFigure extends GateFigure {
 
 	public static final Dimension SIZE = new Dimension(30, 34);
-	protected static final PointList GATE_OUTLINE = new PointList();
+	protected static final Path GATE_OUTLINE = new Path(null);
 	protected static final PointList GATE_TOP = new PointList();
 
 	static {
 		// setup gate outline
-		GATE_OUTLINE.addPoint(5, 20);
-		GATE_OUTLINE.addPoint(5, 8);
-		GATE_OUTLINE.addPoint(9, 12);
-		GATE_OUTLINE.addPoint(13, 14);
-		GATE_OUTLINE.addPoint(15, 14);
-		GATE_OUTLINE.addPoint(17, 14);
-		GATE_OUTLINE.addPoint(21, 12);
-		GATE_OUTLINE.addPoint(25, 8);
-		GATE_OUTLINE.addPoint(25, 20);
+		GATE_OUTLINE.moveTo(5, 20);
+		GATE_OUTLINE.lineTo(5, 8);
+		GATE_OUTLINE.lineTo(9, 12);
+		GATE_OUTLINE.lineTo(13, 14);
+		GATE_OUTLINE.lineTo(15, 14);
+		GATE_OUTLINE.lineTo(17, 14);
+		GATE_OUTLINE.lineTo(21, 12);
+		GATE_OUTLINE.lineTo(25, 8);
+		GATE_OUTLINE.lineTo(25, 20);
+		GATE_OUTLINE.addArc(5, 11, 20, 18, 0, -180);
 
 		// setup top curve of gate
 		GATE_TOP.addPoint(5, 4);
@@ -71,34 +72,20 @@ public class XOrGateFigure extends GateFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		Rectangle r = getBounds().getCopy();
-		r.translate(5, 4);
-		r.setSize(22, 18);
-
 		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
-		// Draw terminals, 2 at top
-		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
-		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
-
-		// Draw the bottom arc
-		r.y += 7;
-
-		r.width -= 2;
-		g.setAlpha(getAlpha());
-		g.fillArc(r, 180, 180);
-		g.setAlpha(ALPHA_OPAQUE);
-		g.drawArc(r, 180, 180);
-		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
-
-		// Draw the gate outline and top curve
+		// Draw terminals, 2 at top and one at bottom
 		g.translate(getLocation());
-		g.drawPolyline(GATE_TOP);
+		g.drawLine(9, 0, 9, 8);
+		g.drawLine(21, 0, 21, 8);
+		g.drawLine(15, 29, 15, 33);
+
 		g.setAlpha(getAlpha());
-		g.fillPolygon(GATE_OUTLINE);
+		g.fillPath(GATE_OUTLINE);
 		g.setAlpha(ALPHA_OPAQUE);
-		g.drawPolyline(GATE_OUTLINE);
+		g.drawPolyline(GATE_TOP);
+		g.drawPath(GATE_OUTLINE);
 		g.translate(getLocation().negate());
 	}
 
