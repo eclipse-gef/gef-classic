@@ -13,29 +13,29 @@
 package org.eclipse.gef.examples.logicdesigner.figures;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Path;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
  * @author danlee
  */
 public class OrGateFigure extends GateFigure {
 	public static final Dimension SIZE = new Dimension(30, 34);
-	protected static final PointList GATE_OUTLINE = new PointList();
+	private static final Path GATE_OUTLINE = new Path(null);
 
 	static {
-		GATE_OUTLINE.addPoint(5, 20);
-		GATE_OUTLINE.addPoint(5, 4);
-		GATE_OUTLINE.addPoint(9, 8);
-		GATE_OUTLINE.addPoint(13, 10);
-		GATE_OUTLINE.addPoint(15, 10);
-		GATE_OUTLINE.addPoint(17, 10);
-		GATE_OUTLINE.addPoint(21, 8);
-		GATE_OUTLINE.addPoint(25, 4);
-		GATE_OUTLINE.addPoint(25, 20);
+		GATE_OUTLINE.moveTo(5, 20);
+		GATE_OUTLINE.lineTo(5, 4);
+		GATE_OUTLINE.lineTo(9, 8);
+		GATE_OUTLINE.lineTo(13, 10);
+		GATE_OUTLINE.lineTo(15, 10);
+		GATE_OUTLINE.lineTo(17, 10);
+		GATE_OUTLINE.lineTo(21, 8);
+		GATE_OUTLINE.lineTo(25, 4);
+		GATE_OUTLINE.lineTo(25, 20);
+		GATE_OUTLINE.addArc(5, 11, 20, 18, 0, -180);
 	}
 
 	/**
@@ -59,34 +59,19 @@ public class OrGateFigure extends GateFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		Rectangle r = getBounds().getCopy();
-		r.translate(5, 4);
-		r.setSize(22, 18);
-
 		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
-		// Draw terminals, 2 at top
-		g.drawLine(r.x + 4, r.y + 4, r.x + 4, r.y - 4);
-		g.drawLine(r.right() - 6, r.y + 4, r.right() - 6, r.y - 4);
-
-		// Draw the bottom arc of the gate
-		r.y += 7;
-
-		r.width -= 2;
-		g.setAlpha(getAlpha());
-		g.fillArc(r, 180, 180);
-		g.setAlpha(ALPHA_OPAQUE);
-
-		g.drawArc(r, 180, 180);
-		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
-
-		// draw gate
+		// Draw terminals, 2 at top and one at bottom
 		g.translate(getLocation());
+		g.drawLine(9, 0, 9, 8);
+		g.drawLine(21, 0, 21, 8);
+		g.drawLine(15, 29, 15, 33);
+
 		g.setAlpha(getAlpha());
-		g.fillPolygon(GATE_OUTLINE);
+		g.fillPath(GATE_OUTLINE);
 		g.setAlpha(ALPHA_OPAQUE);
-		g.drawPolyline(GATE_OUTLINE);
+		g.drawPath(GATE_OUTLINE);
 		g.translate(getLocation().getNegated());
 	}
 

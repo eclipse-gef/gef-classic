@@ -13,17 +13,26 @@
 package org.eclipse.gef.examples.logicdesigner.figures;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Path;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
  * @author danlee
  */
 public class AndGateFigure extends GateFigure {
-	private static final int CORNER_ARC = 6; // Must be divisible by 2 to be symmetric
 	public static final Dimension SIZE = new Dimension(30, 34);
+	private static final Path GATE_OUTLINE = new Path(null);
+
+	static {
+		GATE_OUTLINE.addArc(4, 5, 6, 6, 180, -90);
+		GATE_OUTLINE.lineTo(20, 5);
+		GATE_OUTLINE.addArc(20, 5, 6, 6, 90, -90);
+		GATE_OUTLINE.lineTo(26, 11);
+		GATE_OUTLINE.addArc(4, 11, 22, 18, 0, -180);
+		GATE_OUTLINE.lineTo(4, 8);
+	}
 
 	/**
 	 * Constructor for AndGateFigure.
@@ -46,41 +55,20 @@ public class AndGateFigure extends GateFigure {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
-		Rectangle r = getBounds().getCopy();
-		r.translate(4, 5);
-		r.setSize(22, 18);
-
 		g.setAntialias(SWT.ON);
 		g.setLineWidth(2);
 
-		// Draw terminals, 2 at top
-		g.drawLine(r.x + 4, r.y, r.x + 4, r.y - 6);
-		g.drawLine(r.right() - 5, r.y, r.right() - 5, r.y - 5);
+		// Draw terminals, 2 at top and 1 at bottom
+		g.translate(getLocation());
+		g.drawLine(8, 0, 8, 5);
+		g.drawLine(22, 0, 22, 5);
+		g.drawLine(15, 29, 15, 29 + 4);
 
-		r.height = 15;
-		// draw main area
 		g.setAlpha(getAlpha());
-		g.fillArc(r.x, r.y, CORNER_ARC, CORNER_ARC, 180, -90);
-		g.fillArc(r.right() - CORNER_ARC, r.y, CORNER_ARC, CORNER_ARC, 90, -90);
-		g.fillRectangle(r.x + CORNER_ARC / 2, r.y, r.width - CORNER_ARC, CORNER_ARC / 2);
-		g.fillRectangle(r.x, r.y + CORNER_ARC / 2, r.width, r.height - CORNER_ARC / 2);
+		g.fillPath(GATE_OUTLINE);
 		g.setAlpha(ALPHA_OPAQUE);
-
-		// outline main area
-		g.drawArc(r.x, r.y, CORNER_ARC, CORNER_ARC, 180, -90);
-		g.drawArc(r.right() - CORNER_ARC, r.y, CORNER_ARC, CORNER_ARC, 90, -90);
-		g.drawLine(r.x + CORNER_ARC / 2, r.y, r.right() - CORNER_ARC / 2, r.y);
-		g.drawLine(r.x, r.y + CORNER_ARC / 2, r.x, r.bottom());
-		g.drawLine(r.right(), r.y + CORNER_ARC / 2, r.right(), r.bottom());
-
-		// draw and outline the arc
-		r.y += 6;
-		r.height = 18;
-		g.setAlpha(getAlpha());
-		g.fillArc(r, 180, 180);
-		g.setAlpha(ALPHA_OPAQUE);
-		g.drawArc(r, 180, 180);
-		g.drawLine(r.x + r.width / 2, r.bottom(), r.x + r.width / 2, r.bottom() + 4);
+		g.drawPath(GATE_OUTLINE);
+		g.translate(getLocation().getNegated());
 	}
 
 }
