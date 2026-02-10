@@ -30,7 +30,7 @@ public class XOrGateFigure extends GateFigure {
 
 	static {
 		// setup gate outline
-		GATE_OUTLINE.moveTo(5, 20);
+		GATE_OUTLINE.moveTo(5, 10);
 		GATE_OUTLINE.lineTo(5, 8);
 		GATE_OUTLINE.lineTo(9, 12);
 		GATE_OUTLINE.lineTo(13, 14);
@@ -40,6 +40,7 @@ public class XOrGateFigure extends GateFigure {
 		GATE_OUTLINE.lineTo(25, 8);
 		GATE_OUTLINE.lineTo(25, 20);
 		GATE_OUTLINE.addArc(5, 11, 20, 18, 0, -180);
+		GATE_OUTLINE.lineTo(5, 10);
 
 		// setup top curve of gate
 		GATE_TOP.addPoint(5, 4);
