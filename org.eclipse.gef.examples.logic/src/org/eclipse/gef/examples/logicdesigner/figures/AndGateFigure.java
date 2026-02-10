@@ -26,12 +26,14 @@ public class AndGateFigure extends GateFigure {
 	private static final Path GATE_OUTLINE = new Path(null);
 
 	static {
+		GATE_OUTLINE.moveTo(4, 9.5f);
+		GATE_OUTLINE.lineTo(4, 8);
 		GATE_OUTLINE.addArc(4, 5, 6, 6, 180, -90);
 		GATE_OUTLINE.lineTo(20, 5);
 		GATE_OUTLINE.addArc(20, 5, 6, 6, 90, -90);
 		GATE_OUTLINE.lineTo(26, 11);
 		GATE_OUTLINE.addArc(4, 11, 22, 18, 0, -180);
-		GATE_OUTLINE.lineTo(4, 8);
+		GATE_OUTLINE.lineTo(4, 9.5f);
 	}
 
 	/**

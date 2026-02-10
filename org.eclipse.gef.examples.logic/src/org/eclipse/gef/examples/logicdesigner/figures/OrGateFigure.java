@@ -26,7 +26,7 @@ public class OrGateFigure extends GateFigure {
 	private static final Path GATE_OUTLINE = new Path(null);
 
 	static {
-		GATE_OUTLINE.moveTo(5, 20);
+		GATE_OUTLINE.moveTo(5, 10);
 		GATE_OUTLINE.lineTo(5, 4);
 		GATE_OUTLINE.lineTo(9, 8);
 		GATE_OUTLINE.lineTo(13, 10);
@@ -36,6 +36,7 @@ public class OrGateFigure extends GateFigure {
 		GATE_OUTLINE.lineTo(25, 4);
 		GATE_OUTLINE.lineTo(25, 20);
 		GATE_OUTLINE.addArc(5, 11, 20, 18, 0, -180);
+		GATE_OUTLINE.lineTo(5, 10);
 	}
 
 	/**
