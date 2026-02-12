@@ -11,6 +11,7 @@
 			<unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.swtbot.eclipse.gef.feature.group" version="0.0.0"/>
 			<unit id="org.eclipse.zest.feature.group" version="0.0.0"/>
+			<unit id="org.apache.batik.svggen" version="0.0.0"/>
 		</location>
 	</locations>
 </target>
