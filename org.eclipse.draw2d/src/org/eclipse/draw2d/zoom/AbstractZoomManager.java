@@ -26,6 +26,7 @@ import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PrecisionDimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.internal.Messages;
 
@@ -154,14 +155,18 @@ public abstract class AbstractZoomManager {
 		desired.width -= fig.getInsets().getWidth();
 		desired.height -= fig.getInsets().getHeight();
 
+		Dimension desiredAbsolute = new PrecisionDimension(desired);
+		fig.translateToAbsolute(desiredAbsolute);
+
 		while (fig != getViewport()) {
 			available.width -= fig.getInsets().getWidth();
 			available.height -= fig.getInsets().getHeight();
 			fig = fig.getParent();
 		}
 
-		double scaleX = Math.min(available.width * zoom / desired.width, getMaxZoom());
-		double scaleY = Math.min(available.height * zoom / desired.height, getMaxZoom());
+		double scaleX = Math.min(available.width * zoom / desiredAbsolute.preciseWidth(), getMaxZoom());
+		double scaleY = Math.min(available.height * zoom / desiredAbsolute.preciseHeight(), getMaxZoom());
+
 		if (which == 0) {
 			return scaleX;
 		}
