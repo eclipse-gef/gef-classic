@@ -19,7 +19,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ServiceConfigurationError;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 
 /**
@@ -73,5 +78,32 @@ public final class ImageUtils {
 			isSvgSupported = false;
 		}
 		return isSvgSupported;
+	}
+
+	/**
+	 * Scales the {@link ImageData} by the given factor using anti-alias and
+	 * interpolation.
+	 *
+	 * @param device The device to draw on.
+	 * @param data   The image data to scale.
+	 * @param scale  The factor by which the image is scaled.
+	 */
+	public static ImageData smoothScaleTo(Device device, ImageData data, double scale) {
+		int scaledWidth = Math.max(1, (int) (data.width * scale));
+		int scaledHeight = Math.max(1, (int) (data.height * scale));
+
+		Image source = new Image(device, data);
+		Image target = new Image(device, scaledWidth, scaledHeight);
+		GC gc = new GC(target);
+		try {
+			gc.setAntialias(SWT.ON);
+			gc.setInterpolation(SWT.HIGH);
+			gc.drawImage(source, 0, 0, data.width, data.height, 0, 0, scaledWidth, scaledHeight);
+			gc.dispose();
+			return target.getImageData(100);
+		} finally {
+			target.dispose();
+			source.dispose();
+		}
 	}
 }
