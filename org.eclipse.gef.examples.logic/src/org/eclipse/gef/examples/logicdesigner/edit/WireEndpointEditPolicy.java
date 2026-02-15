@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,22 +14,31 @@ package org.eclipse.gef.examples.logicdesigner.edit;
 
 import org.eclipse.draw2d.PolylineConnection;
 
-public class WireEndpointEditPolicy extends org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy {
+import org.eclipse.gef.editpolicies.ConnectionEndpointEditPolicy;
+
+import org.eclipse.gef.examples.logicdesigner.figures.FigureFactory;
+
+public class WireEndpointEditPolicy extends ConnectionEndpointEditPolicy {
 
 	@Override
 	protected void addSelectionHandles() {
 		super.addSelectionHandles();
-		getConnectionFigure().setLineWidth(4);
+		getConnectionFigure().setLineWidth(getConnectionFigure().getLineWidth() + 1);
 	}
 
-	protected PolylineConnection getConnectionFigure() {
-		return (PolylineConnection) getHost().getFigure();
+	private PolylineConnection getConnectionFigure() {
+		return getHost().getFigure();
+	}
+
+	@Override
+	public WireEditPart getHost() {
+		return (WireEditPart) super.getHost();
 	}
 
 	@Override
 	protected void removeSelectionHandles() {
 		super.removeSelectionHandles();
-		getConnectionFigure().setLineWidth(2);
+		FigureFactory.updateWireLook(getHost().getModel(), getConnectionFigure());
 	}
 
 }

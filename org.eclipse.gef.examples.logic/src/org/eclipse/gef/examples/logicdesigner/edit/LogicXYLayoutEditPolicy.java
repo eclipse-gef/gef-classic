@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2001, 2024 IBM Corporation and others.
+ * Copyright (c) 2001, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -35,7 +35,7 @@ import org.eclipse.gef.rulers.RulerProvider;
 import org.eclipse.gef.examples.logicdesigner.LogicMessages;
 import org.eclipse.gef.examples.logicdesigner.figures.CircuitFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.LabelFeedbackFigure;
-import org.eclipse.gef.examples.logicdesigner.figures.LogicColorConstants;
+import org.eclipse.gef.examples.logicdesigner.figures.LogicEditorColors;
 import org.eclipse.gef.examples.logicdesigner.figures.LogicFlowFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.model.Circuit;
 import org.eclipse.gef.examples.logicdesigner.model.LED;
@@ -225,7 +225,7 @@ public class LogicXYLayoutEditPolicy extends org.eclipse.gef.editpolicies.XYLayo
 			figure = new RectangleFigure();
 			((RectangleFigure) figure).setXOR(true);
 			((RectangleFigure) figure).setFill(true);
-			figure.setBackgroundColor(LogicColorConstants.ghostFillColor);
+			figure.setBackgroundColor(LogicEditorColors.INSTANCE.getGhostFill());
 			figure.setForegroundColor(ColorConstants.white);
 		}
 

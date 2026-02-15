@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,7 +20,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
 
-import org.eclipse.gef.examples.logicdesigner.figures.LogicColorConstants;
+import org.eclipse.gef.examples.logicdesigner.figures.LogicEditorColors;
 
 /**
  */
@@ -56,7 +56,7 @@ public class ContainerHighlightEditPolicy extends org.eclipse.gef.editpolicies.G
 	protected void showHighlight() {
 		if (revertColor == null) {
 			revertColor = getContainerBackground();
-			setContainerBackground(LogicColorConstants.logicBackgroundBlue);
+			setContainerBackground(LogicEditorColors.INSTANCE.getLogicBackground());
 		}
 	}
 

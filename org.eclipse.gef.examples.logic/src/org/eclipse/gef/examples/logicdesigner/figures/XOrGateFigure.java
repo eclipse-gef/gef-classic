@@ -56,8 +56,8 @@ public class XOrGateFigure extends GateFigure {
 	 * Constructor for XOrGateFigure.
 	 */
 	public XOrGateFigure() {
-		setBackgroundColor(LogicColorConstants.xorGate);
-		setForegroundColor(LogicColorConstants.outlineColor);
+		setBackgroundColor(LogicEditorColors.INSTANCE.getXorGate());
+		setForegroundColor(LogicEditorColors.INSTANCE.getOutline());
 	}
 
 	/**

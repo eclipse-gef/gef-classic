@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
-
      <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -74,5 +73,96 @@
             name="%print_name">
       </command>
    </extension>
-
+   <extension point="org.eclipse.ui.themes">
+     <themeElementCategory
+         id="org.eclipse.gef.examples.logic.theme"
+         label="%logic_editor_theme_name">
+       <description>
+          %logic_editor_theme_description
+       </description>
+     </themeElementCategory>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.andGate"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_ANDGate"
+         value="200,80,80"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.orGate"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_ORGate"
+         value="70,140,255"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.xorGate"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_ORGate"
+         value="255,204,0"/>
+     <colorDefinition
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         id="org.eclipse.gef.examples.logic.theme.outline"
+         label="%ColorName_Outline"
+         value="64,64,64">
+     </colorDefinition>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.outputFigure"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_OutputFigure"
+         value="218,165,32"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.logic"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_Logic"
+         value="53,94,59"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.logicHighlight"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_LogicHighlight"
+         value="255,187,51"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.connector"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_Connector"
+         value="40,120,80"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.logicBackground"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_LogicBackground"
+         value="200,200,240"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.ghostFill"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_GhostFill"
+         value="60,60,60"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.displayTextLED"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_DisplayTextLED"
+         value="255,187,51"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.feedbackFill"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_FeedbackFill"
+         value="120,120,120"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.feedbackOutline"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_FeedbackOutline"
+         value="70,70,70"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.wireTrue"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_WireTrue"
+         value="67,160,120"/>
+     <colorDefinition
+         id="org.eclipse.gef.examples.logic.theme.wireFalse"
+         categoryId="org.eclipse.gef.examples.logic.theme"
+         label="%ColorName_WireFalse"
+         value="30,30,30"/>
+   </extension>
+   <extension
+       point="org.eclipse.e4.ui.css.swt.theme">
+     <stylesheet
+          uri="css/logic_dark.css">
+       <themeid refid="org.eclipse.e4.ui.css.theme.e4_dark"/>
+     </stylesheet>
+   </extension>
 </plugin>
