@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -130,7 +130,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 		Rectangle r = getBounds().getCopy();
 		g.translate(r.getLocation());
 
-		g.setBackgroundColor(LogicColorConstants.logicGreen);
+		g.setBackgroundColor(LogicEditorColors.INSTANCE.getLogic());
 		Rectangle mainBody = new Rectangle(0, 2, r.width, r.height - 4);
 		g.fillRoundRectangle(mainBody, CORNER_RADIUS, CORNER_RADIUS);
 		drawConnectors(g, r);
@@ -152,8 +152,8 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 			g.setForegroundColor(ColorConstants.listBackground);
 
 			// Draw the connectors
-			g.setForegroundColor(LogicColorConstants.connectorGreen);
-			g.setBackgroundColor(LogicColorConstants.connectorGreen);
+			g.setForegroundColor(LogicEditorColors.INSTANCE.getConnector());
+			g.setBackgroundColor(LogicEditorColors.INSTANCE.getConnector());
 
 			connector.translate(GAP_CENTERS_X[i], 0);
 			g.fillPolygon(connector);
@@ -173,7 +173,7 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 		int y = displayRectangle.y + (displayRectangle.height - textExtents.height) / 2;
 
 		// Draw the value
-		g.setForegroundColor(LogicColorConstants.displayTextLED);
+		g.setForegroundColor(LogicEditorColors.INSTANCE.getDisplayTextLed());
 		g.drawText(value, x, y);
 	}
 

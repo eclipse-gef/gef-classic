@@ -1,0 +1,18 @@
+IEclipsePreferences#org-eclipse-ui-workbench:org-eclipse-gef-examples-logic {
+	preferences:
+		'org.eclipse.gef.examples.logic.theme.andGate=220,100,100'
+		'org.eclipse.gef.examples.logic.theme.orGate=100,180,255'
+		'org.eclipse.gef.examples.logic.theme.xorGate=255,220,100'
+		'org.eclipse.gef.examples.logic.theme.outline=180,180,180'
+		'org.eclipse.gef.examples.logic.theme.outputFigure=120, 95, 35'
+		'org.eclipse.gef.examples.logic.theme.logic=80,160,100'
+		'org.eclipse.gef.examples.logic.theme.logicHighlight=200,140,40'
+		'org.eclipse.gef.examples.logic.theme.connector=60,150,100'
+		'org.eclipse.gef.examples.logic.theme.logicBackground=40,40,60'
+		'org.eclipse.gef.examples.logic.theme.ghostFill=50,50,50'
+		'org.eclipse.gef.examples.logic.theme.displayTextLED=255,200,100'
+		'org.eclipse.gef.examples.logic.theme.feedbackFill=150,150,150'
+		'org.eclipse.gef.examples.logic.theme.feedbackOutline=160,160,160'
+		'org.eclipse.gef.examples.logic.theme.wireTrue=100,200,150'
+		'org.eclipse.gef.examples.logic.theme.wireFalse=180,180,180'
+}

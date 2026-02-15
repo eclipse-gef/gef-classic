@@ -40,8 +40,8 @@ public class AndGateFigure extends GateFigure {
 	 * Constructor for AndGateFigure.
 	 */
 	public AndGateFigure() {
-		setBackgroundColor(LogicColorConstants.andGate);
-		setForegroundColor(LogicColorConstants.outlineColor);
+		setBackgroundColor(LogicEditorColors.INSTANCE.getAndGate());
+		setForegroundColor(LogicEditorColors.INSTANCE.getOutline());
 	}
 
 	/**

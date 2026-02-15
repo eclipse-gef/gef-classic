@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.accessibility.AccessibleEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.IFigure;
@@ -44,13 +42,10 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 
 	AccessibleEditPart acc;
 
-	public static final Color alive = new Color(Display.getDefault(), 30, 144, 255);
-	public static final Color dead = new Color(Display.getDefault(), 30, 30, 30);
-
 	@Override
 	public void activate() {
 		super.activate();
-		getWire().addPropertyChangeListener(this);
+		getModel().addPropertyChangeListener(this);
 	}
 
 	@Override
@@ -61,7 +56,6 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 		 * its router to change.
 		 */
 		getFigure().addPropertyChangeListener(Connection.PROPERTY_CONNECTION_ROUTER, this);
-		((PolylineConnection) getFigure()).setLineWidth(3);
 	}
 
 	/**
@@ -83,12 +77,12 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 	 */
 	@Override
 	protected IFigure createFigure() {
-		return FigureFactory.createNewBendableWire(getWire());
+		return FigureFactory.createNewBendableWire(getModel());
 	}
 
 	@Override
 	public void deactivate() {
-		getWire().removePropertyChangeListener(this);
+		getModel().removePropertyChangeListener(this);
 		super.deactivate();
 	}
 
@@ -111,13 +105,9 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 		return acc;
 	}
 
-	/**
-	 * Returns the model of this represented as a Wire.
-	 *
-	 * @return Model of this as <code>Wire</code>
-	 */
-	protected Wire getWire() {
-		return (Wire) getModel();
+	@Override
+	public Wire getModel() {
+		return (Wire) super.getModel();
 	}
 
 	/**
@@ -125,8 +115,9 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 	 *
 	 * @return Figure of this.
 	 */
-	protected IFigure getWireFigure() {
-		return getFigure();
+	@Override
+	public PolylineConnection getFigure() {
+		return (PolylineConnection) super.getFigure();
 	}
 
 	/**
@@ -157,7 +148,7 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 		if (getConnectionFigure().getConnectionRouter() instanceof ManhattanConnectionRouter) {
 			return;
 		}
-		List<WireBendpoint> modelConstraint = getWire().getBendpoints();
+		List<WireBendpoint> modelConstraint = getModel().getBendpoints();
 		List<RelativeBendpoint> figureConstraint = new ArrayList<>();
 		for (int i = 0; i < modelConstraint.size(); i++) {
 			WireBendpoint wbp = modelConstraint.get(i);
@@ -185,11 +176,7 @@ public class WireEditPart extends AbstractConnectionEditPart implements Property
 	@Override
 	protected void refreshVisuals() {
 		refreshBendpoints();
-		if (getWire().getValue()) {
-			getWireFigure().setForegroundColor(alive);
-		} else {
-			getWireFigure().setForegroundColor(dead);
-		}
+		FigureFactory.updateWireLook(getModel(), getFigure());
 	}
 
 }

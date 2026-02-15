@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -44,7 +44,7 @@ public class CircuitBorder extends AbstractBorder {
 	}
 
 	private static void drawConnectors(Graphics g, Rectangle rec) {
-		g.setBackgroundColor(LogicColorConstants.connectorGreen);
+		g.setBackgroundColor(LogicEditorColors.INSTANCE.getConnector());
 		for (int i = 0; i < 4; i++) {
 			int x1 = rec.x + (2 * i + 1) * rec.width / 8;
 
@@ -53,14 +53,14 @@ public class CircuitBorder extends AbstractBorder {
 			g.drawLine(x1 - 2, rec.y + 2, x1 + 3, rec.y + 2);
 
 			// Draw the connectors
-			g.setForegroundColor(LogicColorConstants.connectorGreen);
+			g.setForegroundColor(LogicEditorColors.INSTANCE.getConnector());
 			connector.translate(x1, rec.y);
 			g.fillPolygon(connector);
 			g.drawPolygon(connector);
 			connector.translate(-x1, -rec.y);
 			g.setForegroundColor(ColorConstants.listBackground);
 			g.drawLine(x1 - 2, rec.bottom() - 3, x1 + 3, rec.bottom() - 3);
-			g.setForegroundColor(LogicColorConstants.connectorGreen);
+			g.setForegroundColor(LogicEditorColors.INSTANCE.getConnector());
 			bottomConnector.translate(x1, rec.bottom());
 			g.fillPolygon(bottomConnector);
 			g.drawPolygon(bottomConnector);
@@ -77,8 +77,8 @@ public class CircuitBorder extends AbstractBorder {
 	public void paint(IFigure figure, Graphics g, Insets in) {
 		Rectangle r = figure.getBounds().getShrinked(in);
 
-		g.setForegroundColor(LogicColorConstants.logicGreen);
-		g.setBackgroundColor(LogicColorConstants.logicGreen);
+		g.setForegroundColor(LogicEditorColors.INSTANCE.getLogic());
+		g.setBackgroundColor(LogicEditorColors.INSTANCE.getLogic());
 
 		// Draw top and bottom
 		Rectangle topBorder = new Rectangle(r.x, r.y + 4, r.width, 12);

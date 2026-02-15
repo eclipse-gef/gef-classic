@@ -14,8 +14,8 @@ package org.eclipse.gef.examples.logicdesigner.figures;
 
 public class OrGateFeedbackFigure extends OrGateFigure {
 	public OrGateFeedbackFigure() {
-		setBackgroundColor(LogicColorConstants.feedbackFill);
-		setForegroundColor(LogicColorConstants.feedbackOutline);
+		setBackgroundColor(LogicEditorColors.INSTANCE.getFeedbackFill());
+		setForegroundColor(LogicEditorColors.INSTANCE.getFeedbackOutline());
 		setAlpha(ALPHA_FEEDBACK);
 	}
 

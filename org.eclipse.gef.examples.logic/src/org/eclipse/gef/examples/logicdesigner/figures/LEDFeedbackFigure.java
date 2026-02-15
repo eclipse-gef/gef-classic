@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,7 +29,7 @@ public class LEDFeedbackFigure extends LEDFigure {
 		Rectangle r = getBounds().getCopy();
 		g.translate(r.getLocation());
 
-		g.setBackgroundColor(LogicColorConstants.ghostFillColor);
+		g.setBackgroundColor(LogicEditorColors.INSTANCE.getGhostFill());
 		g.fillRectangle(0, 4, r.width, r.height - 8);
 
 		int right = r.width - 1;
