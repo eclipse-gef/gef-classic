@@ -17,8 +17,14 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 
+import org.eclipse.pde.api.tools.annotations.NoExtend;
+import org.eclipse.pde.api.tools.annotations.NoInstantiate;
+import org.eclipse.pde.api.tools.annotations.NoReference;
+
 /**
  * Represents a color in the HSL (Hue, Saturation, Lightness) color space.
+ *
+ * This class is currently in development its API may change.
  *
  * @param h The color hue in degrees, in the range {@code [0.0, 360.0)}. 0 is
  *          red, 120 is green, and 240 is blue.
@@ -27,8 +33,11 @@ import org.eclipse.swt.graphics.RGB;
  * @param l The brightness of the color, in the range {@code [0.0, 1.0]}. 0.0 is
  *          black, 0.5 is the pure color, and 1.0 is white.
  *
- * @since 3.22
+ * @since 3.22 (provisional)
  */
+@NoExtend
+@NoReference
+@NoInstantiate
 public record HSLColor(double h, double s, double l) {
 
 	private static final double MAX_RGB_VALUE = 255.0;
