@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,7 +19,11 @@ import java.util.List;
 
 import org.eclipse.swt.accessibility.AccessibleControlEvent;
 import org.eclipse.swt.accessibility.AccessibleEvent;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+
+import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
 
 import org.eclipse.draw2d.ConnectionAnchor;
 import org.eclipse.draw2d.IFigure;
@@ -30,7 +34,6 @@ import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditPolicy;
 
 import org.eclipse.gef.examples.logicdesigner.LogicMessages;
-import org.eclipse.gef.examples.logicdesigner.figures.FigureFactory;
 import org.eclipse.gef.examples.logicdesigner.figures.LEDFigure;
 import org.eclipse.gef.examples.logicdesigner.model.LED;
 
@@ -41,6 +44,7 @@ public class LEDEditPart extends LogicEditPart {
 
 	private static Image LED_SEL_PRIM_BG;
 	private static Image LED_SEL_SECD_BG;
+	private static FontDescriptor ledDisplayFontDescriptor = null;
 
 	private static Image createImage(String name) {
 		try (InputStream stream = LEDFigure.class.getResourceAsStream(name)) {
@@ -80,7 +84,9 @@ public class LEDEditPart extends LogicEditPart {
 	 */
 	@Override
 	protected IFigure createFigure() {
-		return FigureFactory.createNewLED();
+		IFigure ledFigure = new LEDFigure();
+		ledFigure.setFont(getLEDDisplayFont());
+		return ledFigure;
 	}
 
 	@Override
@@ -123,13 +129,20 @@ public class LEDEditPart extends LogicEditPart {
 		return null;
 	}
 
-	/**
-	 * Returns the Figure of this as a LEDFigure.
-	 *
-	 * @return LEDFigure of this.
-	 */
-	public LEDFigure getLEDFigure() {
-		return (LEDFigure) getFigure();
+	@Override
+	public LEDFigure getFigure() {
+		return (LEDFigure) super.getFigure();
+	}
+
+	private Font getLEDDisplayFont() {
+		return getViewer().getResourceManager().create(getLEDDisplayFontDescriptor());
+	}
+
+	private static FontDescriptor getLEDDisplayFontDescriptor() {
+		if (ledDisplayFontDescriptor == null) {
+			ledDisplayFontDescriptor = JFaceResources.getTextFontDescriptor().setHeight(24);
+		}
+		return ledDisplayFontDescriptor;
 	}
 
 	/**
@@ -156,7 +169,7 @@ public class LEDEditPart extends LogicEditPart {
 	 */
 	@Override
 	public void refreshVisuals() {
-		getLEDFigure().setValue(getLEDModel().getValue());
+		getFigure().setValue(getLEDModel().getValue());
 		super.refreshVisuals();
 	}
 
