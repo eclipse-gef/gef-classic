@@ -22,7 +22,7 @@ import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Shell;
 
-import org.eclipse.draw2d.colors.HSLColor;
+import org.eclipse.draw2d.colors.HSL;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
@@ -45,7 +45,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color darker(Color color) {
-		return HSLColor.fromColor(color).darker(0.4).toColor();
+		return HSL.fromColor(color).darker(0.4).toColor();
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color lighter(Color rgb) {
-		return HSLColor.fromColor(rgb).lighter(0.4).toColor();
+		return HSL.fromColor(rgb).lighter(0.4).toColor();
 	}
 
 	/**
