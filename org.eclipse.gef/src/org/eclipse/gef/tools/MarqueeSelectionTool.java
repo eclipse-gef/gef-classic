@@ -98,18 +98,18 @@ public class MarqueeSelectionTool extends AbstractTool {
 
 			int[] points = new int[6];
 
-			points[0] = 0 + offset;
-			points[1] = 0;
+			points[0] = 1 + offset;
+			points[1] = 1;
 			points[2] = bounds.width - 1;
-			points[3] = 0;
+			points[3] = 1;
 			points[4] = bounds.width - 1;
 			points[5] = bounds.height - 1;
 
 			graphics.drawPolyline(points);
 
-			points[0] = 0;
-			points[1] = 0 + offset;
-			points[2] = 0;
+			points[0] = 1;
+			points[1] = 1 + offset;
+			points[2] = 1;
 			points[3] = bounds.height - 1;
 			points[4] = bounds.width - 1;
 			points[5] = bounds.height - 1;
