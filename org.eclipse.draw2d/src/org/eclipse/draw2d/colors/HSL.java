@@ -22,7 +22,11 @@ import org.eclipse.pde.api.tools.annotations.NoInstantiate;
 import org.eclipse.pde.api.tools.annotations.NoReference;
 
 /**
- * Represents a color in the HSL (Hue, Saturation, Lightness) color space.
+ * Instances of this class are descriptions of colors in terms of the HSL (Hue,
+ * Saturation, Lightness) color space. A color may be described by its type
+ * (hue) on the color wheel (0° = red, 120° = green and 240° = blue), its
+ * saturation (0% = grey, 100% = full color) and its lightness (0% = black, 50%
+ * = normal, 100% = white).
  *
  * This class is currently in development its API may change.
  *
@@ -38,11 +42,11 @@ import org.eclipse.pde.api.tools.annotations.NoReference;
 @NoExtend
 @NoReference
 @NoInstantiate
-public record HSLColor(double h, double s, double l) {
+public record HSL(double h, double s, double l) {
 
 	private static final double MAX_RGB_VALUE = 255.0;
 
-	public HSLColor {
+	public HSL {
 		if (h < 0 || h > 360) {
 			SWT.error(SWT.ERROR_INVALID_ARGUMENT);
 		}
@@ -61,9 +65,9 @@ public record HSLColor(double h, double s, double l) {
 	 *                   (0.0..1.0).
 	 * @return The lighter color
 	 */
-	public HSLColor darker(double percentage) {
+	public HSL darker(double percentage) {
 		double newL = l * (1 - Math.max(0.0, Math.min(1.0, percentage)));
-		return new HSLColor(h, s, newL);
+		return new HSL(h, s, newL);
 	}
 
 	/**
@@ -85,9 +89,9 @@ public record HSLColor(double h, double s, double l) {
 	 *                   (0.0..1.0).
 	 * @return The lighter color
 	 */
-	public HSLColor lighter(double percentage) {
+	public HSL lighter(double percentage) {
 		double newL = l + (1.0 - l) * Math.max(0.0, Math.min(1.0, percentage));
-		return new HSLColor(h, s, newL);
+		return new HSL(h, s, newL);
 	}
 
 	/**
@@ -96,7 +100,7 @@ public record HSLColor(double h, double s, double l) {
 	 * @param col The RGB color to be transformed.
 	 * @return The color in HSL space.
 	 */
-	public static HSLColor fromColor(Color col) {
+	public static HSL fromColor(Color col) {
 		return fromRGB(col.getRed(), col.getGreen(), col.getBlue());
 	}
 
@@ -106,7 +110,7 @@ public record HSLColor(double h, double s, double l) {
 	 * @param rgb The RGB color to be transformed.
 	 * @return The color in HSL space.
 	 */
-	public static HSLColor fromRGB(RGB rgb) {
+	public static HSL fromRGB(RGB rgb) {
 		return fromRGB(rgb.red, rgb.green, rgb.blue);
 	}
 
@@ -123,7 +127,7 @@ public record HSLColor(double h, double s, double l) {
 	 * @param b The blue component of the source color (0..255).
 	 * @return The color in HSL color space.
 	 */
-	public static HSLColor fromRGB(int r, int g, int b) {
+	public static HSL fromRGB(int r, int g, int b) {
 		final double rRel = r / MAX_RGB_VALUE;
 		final double gRel = g / MAX_RGB_VALUE;
 		final double bRel = b / MAX_RGB_VALUE;
@@ -157,7 +161,7 @@ public record HSLColor(double h, double s, double l) {
 				h += 360.0;
 			}
 		}
-		return new HSLColor(h, s, l);
+		return new HSL(h, s, l);
 	}
 
 	/**

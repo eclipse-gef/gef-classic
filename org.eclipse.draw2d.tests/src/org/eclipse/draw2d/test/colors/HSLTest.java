@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 import org.eclipse.swt.graphics.RGB;
 
-import org.eclipse.draw2d.colors.HSLColor;
+import org.eclipse.draw2d.colors.HSL;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +28,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class HSLColorTest {
+public class HSLTest {
 
 	private static final double UNIT_EPSILON = 0.001;
 	private static final double HUE_EPSILON = 0.1;
@@ -62,7 +62,7 @@ public class HSLColorTest {
 	@MethodSource("colorProvider")
 	@SuppressWarnings("static-method")
 	void testfromRGB(int r, int g, int b, double h, double s, double l) {
-		HSLColor hsl = HSLColor.fromRGB(r, g, b);
+		HSL hsl = HSL.fromRGB(r, g, b);
 
 		assertAll(() -> assertEquals(h, hsl.h(), HUE_EPSILON, "Hue mismatch"), //$NON-NLS-1$
 				() -> assertEquals(s, hsl.s(), UNIT_EPSILON, "Saturation mismatch"), //$NON-NLS-1$
@@ -73,7 +73,7 @@ public class HSLColorTest {
 	@MethodSource("colorProvider")
 	@SuppressWarnings("static-method")
 	void testToRgb(int r, int g, int b, double h, double s, double l) {
-		HSLColor hsl = new HSLColor(h, s, l);
+		HSL hsl = new HSL(h, s, l);
 		RGB result = hsl.toRGB();
 
 		assertAll(() -> assertEquals(r, result.red, "Red mismatch"), //$NON-NLS-1$
@@ -87,7 +87,7 @@ public class HSLColorTest {
 	@SuppressWarnings("static-method")
 	void testFromRgbToRgbRoundtrip() {
 		RGB original = new RGB(255, 0, 0);
-		HSLColor hsl = HSLColor.fromRGB(original);
+		HSL hsl = HSL.fromRGB(original);
 		RGB backToRgb = hsl.toRGB();
 		assertEquals(original, backToRgb, "RGB -> HSL -> RGB should match exactly for primary colors"); //$NON-NLS-1$
 	}
@@ -95,8 +95,8 @@ public class HSLColorTest {
 	@Test
 	@SuppressWarnings("static-method")
 	void testHueWrap() {
-		HSLColor hueZero = new HSLColor(0.0, 1.0, 0.5);
-		HSLColor hueThreeSixty = new HSLColor(360.0, 1.0, 0.5);
+		HSL hueZero = new HSL(0.0, 1.0, 0.5);
+		HSL hueThreeSixty = new HSL(360.0, 1.0, 0.5);
 
 		RGB rgbZero = hueZero.toRGB();
 		RGB rgbThreeSixty = hueThreeSixty.toRGB();
@@ -112,8 +112,8 @@ public class HSLColorTest {
 	})
 	@SuppressWarnings("static-method")
 	void testLighterRelative(double initialL, double percentage, double expectedL) {
-		HSLColor color = new HSLColor(0, 1.0, initialL);
-		HSLColor lighter = color.lighter(percentage);
+		HSL color = new HSL(0, 1.0, initialL);
+		HSL lighter = color.lighter(percentage);
 
 		assertEquals(expectedL, lighter.l(), UNIT_EPSILON, "Lighter should move toward 1.0 relatively"); //$NON-NLS-1$
 	}
@@ -125,8 +125,8 @@ public class HSLColorTest {
 	})
 	@SuppressWarnings("static-method")
 	void testDarkerRelative(double initialL, double percentage, double expectedL) {
-		HSLColor color = new HSLColor(0, 1.0, initialL);
-		HSLColor darker = color.darker(percentage);
+		HSL color = new HSL(0, 1.0, initialL);
+		HSL darker = color.darker(percentage);
 
 		assertEquals(expectedL, darker.l(), UNIT_EPSILON, "Darker should scale toward 0.0"); //$NON-NLS-1$
 	}
@@ -134,9 +134,9 @@ public class HSLColorTest {
 	@Test
 	@SuppressWarnings("static-method")
 	void testHuePreservation() {
-		HSLColor color = new HSLColor(120.0, 0.8, 0.5); // A Green
-		HSLColor lighter = color.lighter(0.3);
-		HSLColor darker = color.darker(0.3);
+		HSL color = new HSL(120.0, 0.8, 0.5); // A Green
+		HSL lighter = color.lighter(0.3);
+		HSL darker = color.darker(0.3);
 
 		assertEquals(color.h(), lighter.h(), "Hue must not change when lightening"); //$NON-NLS-1$
 		assertEquals(color.h(), darker.h(), "Hue must not change when darkening"); //$NON-NLS-1$

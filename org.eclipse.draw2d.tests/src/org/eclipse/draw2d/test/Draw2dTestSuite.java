@@ -14,7 +14,7 @@
 package org.eclipse.draw2d.test;
 
 import org.eclipse.draw2d.graph.test.DirectedGraphLayoutTest;
-import org.eclipse.draw2d.test.colors.HSLColorTest;
+import org.eclipse.draw2d.test.colors.HSLTest;
 
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
@@ -65,7 +65,7 @@ import org.junit.platform.suite.api.Suite;
 	LabelTest.class,
 	PrecisionTests.class,
 	ScaledGraphicsTest.class,
-	HSLColorTest.class
+	HSLTest.class
 })
 public class Draw2dTestSuite {
 }
