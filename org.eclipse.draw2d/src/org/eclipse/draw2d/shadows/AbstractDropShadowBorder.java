@@ -83,6 +83,30 @@ public abstract class AbstractDropShadowBorder extends AbstractBackground {
 		return Math.max(1, (int) (shadowAlpha * Math.exp(-softness * progress)));
 	}
 
+	private void doHalo(Graphics graphics, final Rectangle shadowRect, double absScale) {
+		int shadowAlphaBuf = shadowAlpha;
+		int haloSizeToUse = haloSize;
+		if (absScale * haloSize < 1.0) {
+			// halo is to small draw just one darker shadow
+			haloSizeToUse = 1;
+			shadowAlpha = 3 * shadowAlpha;
+		}
+		paintHalo(graphics, shadowRect, haloSizeToUse);
+		shadowAlpha = shadowAlphaBuf;
+	}
+
+	public void doDropShadow(Graphics graphics, final Rectangle shadowRect, double absScale) {
+		int shadowAlphaBuf = shadowAlpha;
+		int dropShadowSizeUse = dropShadowSize;
+		if (absScale * dropShadowSize < 1.0) {
+			// dropshadow is to small draw just one darker shadow
+			dropShadowSizeUse = 1;
+			shadowAlpha = 3 * shadowAlpha;
+		}
+		paintDropShadow(graphics, shadowRect, dropShadowSizeUse);
+		shadowAlpha = shadowAlphaBuf;
+	}
+
 	@Override
 	public Insets getInsets(final IFigure figure) {
 		return insets;
@@ -106,11 +130,11 @@ public abstract class AbstractDropShadowBorder extends AbstractBackground {
 		graphics.setLineWidth(2);
 
 		final Rectangle shadowRect = getPaintRectangle(figure, getInsets(figure));
-
 		updateClip(graphics, shadowRect);
 
-		paintHalo(graphics, shadowRect, haloSize);
-		paintDropShadow(graphics, shadowRect, dropShadowSize);
+		double absScale = graphics.getAbsoluteScale();
+		doHalo(graphics, shadowRect, absScale);
+		doDropShadow(graphics, shadowRect, absScale);
 
 		graphics.setForegroundColor(foregroundColor);
 		graphics.setAlpha(alpha);
