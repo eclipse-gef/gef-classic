@@ -79,14 +79,10 @@ class AutoscalingAccess {
 
 	static void setAutoscaleDisabled(Control control) {
 		if (SET_AUTOSCALINGMODE_HANDLE != null) {
-			if (propagationDisabledControls.contains(control)) {
-				// When using the autoscale disablement API, disabling propagation has already
-				// disabled autoscaling itself. To avoid an unintended enabled of propagation,
-				// we must not change the disablement mode here again.
-				return;
-			}
+			Object disablementMode = propagationDisabledControls.contains(control) ? AUTOSCALING_MODE_DISABLED
+					: AUTOSCALING_MODE_DISABLED_INHERITED;
 			try {
-				SET_AUTOSCALINGMODE_HANDLE.invoke(control, AUTOSCALING_MODE_DISABLED_INHERITED);
+				SET_AUTOSCALINGMODE_HANDLE.invoke(control, disablementMode);
 			} catch (Throwable e) {
 				throw new SWTException(e.getMessage());
 			}
@@ -95,18 +91,17 @@ class AutoscalingAccess {
 		}
 	}
 
+	/**
+	 * After calling this, {@link #setAutoscaleDisabled(Control)} has to be called
+	 * on the same control to have an effect.
+	 */
 	static void disablePropagateAutoscale(Control control) {
 		if (SET_AUTOSCALINGMODE_HANDLE != null) {
-			try {
-				SET_AUTOSCALINGMODE_HANDLE.invoke(control, AUTOSCALING_MODE_DISABLED);
-			} catch (Throwable e) {
-				throw new SWTException(e.getMessage());
-			}
+			propagationDisabledControls.add(control);
+			control.addDisposeListener(e -> propagationDisabledControls.remove(control));
 		} else {
 			control.setData(DATA_PROPOGATE_AUTOSCALE_DISABLED, false);
 		}
-		propagationDisabledControls.add(control);
-		control.addDisposeListener(e -> propagationDisabledControls.remove(control));
 	}
 
 	static int getShellZoom(Control control) {
