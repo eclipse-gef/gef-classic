@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -112,8 +112,9 @@ public class RelativeLocator implements Locator {
 	@Override
 	public void relocate(IFigure target) {
 		IFigure reference = getReferenceFigure();
-		Rectangle targetBounds = new PrecisionRectangle(getReferenceBox().getResized(-1, -1));
+		Rectangle targetBounds = new PrecisionRectangle(getReferenceBox());
 		reference.translateToAbsolute(targetBounds);
+		targetBounds.resize(-1, -1);
 		target.translateToRelative(targetBounds);
 		targetBounds.resize(1, 1);
 
