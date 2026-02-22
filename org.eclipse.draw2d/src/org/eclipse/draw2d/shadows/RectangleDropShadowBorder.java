@@ -41,37 +41,39 @@ public class RectangleDropShadowBorder extends AbstractDropShadowBorder {
 	 * The default value for the corner radius is suited for rectangles
 	 *
 	 */
-	private static final int DEFAULT_CORNER_START_RADIUS = 4;
+	private static final int DEFAULT_CORNER_START_DIAMETER = 4;
 
-	private int cornerStartRadius;
+	private int startCornerArcSize;
 
 	/**
 	 * Default constructor that set everything for a rectangular shaped figure.
 	 */
 	public RectangleDropShadowBorder() {
-		this(DEFAULT_CORNER_START_RADIUS);
+		this(DEFAULT_CORNER_START_DIAMETER);
 
 	}
 
 	/**
-	 * Create a shadow border for a rounded rectangle with the given corner radius.
+	 * Create a shadow border for a rounded rectangle with the given corner arc
+	 * diamiter.
 	 *
-	 * @param cornerRadius The corner radius of the rounded rectangle
+	 * @param arcSize The corner arc diameter
 	 */
-	public RectangleDropShadowBorder(int cornerRadius) {
-		cornerStartRadius = cornerRadius;
+	public RectangleDropShadowBorder(int arcSize) {
+		startCornerArcSize = arcSize;
 	}
 
 	@Override
 	protected void paintDropShadow(final Graphics graphics, final Rectangle shadowRect, final int size) {
-		int bottomXStart = shadowRect.x + cornerStartRadius;
-		int bottomY = shadowRect.y + 2 + shadowRect.height;
-		final int bottomXEnd = shadowRect.x + shadowRect.width + 2 - cornerStartRadius;
+		int cornerRadius = startCornerArcSize / 2;
+		int bottomXStart = shadowRect.x + cornerRadius;
+		int bottomY = shadowRect.y + 1 + shadowRect.height;
+		final int bottomXEnd = shadowRect.x + shadowRect.width + 1 - cornerRadius;
 
-		int rightX = shadowRect.x + shadowRect.width + 2;
-		int rightYStart = shadowRect.y + cornerStartRadius;
-		final int rightYEnd = shadowRect.y + shadowRect.height + 2 - cornerStartRadius;
-		int cornerDiameter = 2 * cornerStartRadius;
+		int rightX = shadowRect.x + shadowRect.width + 1;
+		int rightYStart = shadowRect.y + cornerRadius;
+		final int rightYEnd = shadowRect.y + shadowRect.height + 1 - cornerRadius;
+		int cornerDiameter = startCornerArcSize;
 
 		for (int i = 0; i <= size; i++) {
 			final double progress = (double) i / size;
@@ -93,25 +95,25 @@ public class RectangleDropShadowBorder extends AbstractDropShadowBorder {
 	@Override
 	protected void paintHalo(final Graphics graphics, final Rectangle shadowRect, final int size) {
 		final Rectangle r = shadowRect.getCopy();
-		int cornerRadius = cornerStartRadius;
+		int cornerArcSize = startCornerArcSize;
 		for (int i = 0; i < size; i++) {
 			final double progress = (double) i / size;
 			graphics.setAlpha(calcAlphaValue(progress));
-			graphics.drawRoundRectangle(r, cornerRadius, cornerRadius);
-			cornerRadius += 2;
+			graphics.drawRoundRectangle(r, cornerArcSize, cornerArcSize);
+			cornerArcSize += 2;
 			r.expand(1, 1);
 		}
 	}
 
 	/**
-	 * Set the corner radius for the drop shadow. The default value is suited for
-	 * rectangles for rounded rectangles it should be set to the corner radius of
+	 * Set the corner arc size for the drop shadow. The default value is suited for
+	 * rectangles for rounded rectangles it should be set to the corner diameter of
 	 * the rounded rectangle this shadow is bounding.
 	 *
-	 * @param cornerRadius
+	 * @param cornerArcSize
 	 */
-	public void setCornerRadius(int cornerRadius) {
-		cornerStartRadius = cornerRadius;
+	public void setCornerArcSize(int cornerArcSize) {
+		startCornerArcSize = cornerArcSize;
 	}
 
 }
