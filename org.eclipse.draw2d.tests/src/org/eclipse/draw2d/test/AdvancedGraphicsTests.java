@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2025 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,6 +19,7 @@ import java.util.Deque;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontMetrics;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -32,9 +33,12 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.SWTGraphics;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +46,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 	static final int[] LINE = { 5, 5, 20, 20, 35, 5, 50, 5 };
 	static final int[] POLY = { 5, 5, 45, 15, 20, 30, 20, 20, 45, 35, 5, 45 };
+	static Font displayFont;
 	private SWTGraphics g;
 
 	private Image image;
@@ -102,6 +107,16 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 		displayImage();
 		assertImageEquality(100 * tests.length, 100);
+	}
+
+	@BeforeAll
+	public static void setUpAll() {
+		displayFont = new Font(null, "DialogInput", 24, SWT.NORMAL); //$NON-NLS-1$
+	}
+
+	@AfterAll
+	public static void tearDownAll() {
+		displayFont.dispose();
 	}
 
 	@BeforeEach
@@ -434,5 +449,29 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		g.rotate(14.753f);
 		assertEquals(3.22, g.getAbsoluteScale(), 1e-2);
 		g.restoreState();
+	}
+
+	@Test
+	public void testGetFontMetrics1() {
+		FontMetrics expected = FigureUtilities.getFontMetrics(displayFont);
+
+		g.setFont(displayFont);
+		g.scale(2.5);
+
+		FontMetrics actual = g.getFontMetrics();
+		assertEquals(expected.getHeight(), actual.getHeight());
+		assertEquals(expected.getAverageCharacterWidth(), actual.getAverageCharacterWidth());
+	}
+
+	@Test
+	public void testGetFontMetrics2() {
+		FontMetrics expected = FigureUtilities.getFontMetrics(displayFont);
+
+		g.scale(2.5);
+		g.setFont(displayFont);
+
+		FontMetrics actual = g.getFontMetrics();
+		assertEquals(expected.getHeight(), actual.getHeight());
+		assertEquals(expected.getAverageCharacterWidth(), actual.getAverageCharacterWidth());
 	}
 }
