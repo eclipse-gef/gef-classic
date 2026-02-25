@@ -67,7 +67,6 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.ScaledGraphics#dispose()
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public void dispose() {
 		super.dispose();
 
@@ -82,7 +81,6 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int x, int y) {
 		super.drawImage(printerImage(srcImage), x, y);
 	}
@@ -91,7 +89,6 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.Graphics#drawImage(Image, int, int, int, int)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int destX, int destY, int destWidth, int destHeight) {
 		super.drawImage(printerImage(srcImage), destX, destY, destWidth, destHeight);
 	}
@@ -100,7 +97,6 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see Graphics#drawImage(Image, int, int, int, int, int, int, int, int)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public void drawImage(Image srcImage, int sx, int sy, int sw, int sh, int tx, int ty, int tw, int th) {
 		super.drawImage(printerImage(srcImage), sx, sy, sw, sh, tx, ty, tw, th);
 	}
@@ -126,7 +122,6 @@ public class PrinterGraphics extends ScaledGraphics {
 	 * @see org.eclipse.draw2d.ScaledGraphics#setLineAttributes(org.eclipse.swt.graphics.LineAttributes)
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public void setLineAttributes(LineAttributes attributes) {
 		if (attributes.style == SWT.LINE_CUSTOM && attributes.dash != null && attributes.dash.length > 0) {
 			float[] newDashes = new float[attributes.dash.length];
