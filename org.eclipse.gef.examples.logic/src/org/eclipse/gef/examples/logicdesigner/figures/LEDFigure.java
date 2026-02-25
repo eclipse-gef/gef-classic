@@ -14,9 +14,6 @@ package org.eclipse.gef.examples.logicdesigner.figures;
 
 import static org.eclipse.draw2d.FigureUtilities.getTextExtents;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -35,7 +32,6 @@ import org.eclipse.gef.examples.logicdesigner.model.LED;
 public class LEDFigure extends NodeFigure implements HandleBounds {
 
 	public static final Dimension SIZE = new Dimension(92, 71);
-	protected static final Font DISPLAY_FONT = new Font(null, "DialogInput", 24, SWT.NORMAL); //$NON-NLS-1$
 	protected static PointList connector = new PointList();
 	protected static PointList bottomConnector = new PointList();
 	protected static Rectangle displayRectangle = new Rectangle(14, 17, 65, 38);
@@ -43,7 +39,6 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	protected static Rectangle displayHighlight = new Rectangle(14, 17, 66, 39);
 	protected static Point valuePoint = new Point(24, 15);
 	private static final int HORIZONTAL_PADDING = 3;
-	private static final int VERTICAL_OFFSET = -1;
 	private static final int CORNER_RADIUS = 6;
 
 	static {
@@ -109,7 +104,6 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 		c.topDown = false;
 		connectionAnchors.put(LED.TERMINAL_4_OUT, c);
 		outputConnectionAnchors.add(c);
-
 	}
 
 	/**
@@ -172,16 +166,15 @@ public class LEDFigure extends NodeFigure implements HandleBounds {
 	}
 
 	private void drawModernText(Graphics g) {
-		// Calculate centered position within display inlcuding padding
-		Dimension textExtents = getTextExtents(value, DISPLAY_FONT);
+		// Calculate centered position within display including padding
+		Dimension textExtents = getTextExtents(value, getFont());
 		int x = displayRectangle.x + HORIZONTAL_PADDING
 				+ ((displayRectangle.width - 2 * HORIZONTAL_PADDING) - textExtents.width) / 2;
-		int y = displayRectangle.y + (displayRectangle.height - textExtents.height) / 2 + VERTICAL_OFFSET;
+		int y = displayRectangle.y + (displayRectangle.height - textExtents.height) / 2;
 
 		// Draw the value
-		g.setFont(DISPLAY_FONT);
 		g.setForegroundColor(LogicColorConstants.displayTextLED);
-		g.drawText(value, new Point(x, y));
+		g.drawText(value, x, y);
 	}
 
 	/**

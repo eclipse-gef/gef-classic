@@ -58,10 +58,6 @@ public class FigureFactory {
 		return conn;
 	}
 
-	public static IFigure createNewLED() {
-		return new LEDFigure();
-	}
-
 	public static IFigure createNewCircuit() {
 		return new CircuitFigure();
 	}
