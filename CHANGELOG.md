@@ -32,6 +32,7 @@
   This feature was originally request in [Bug 172463](https://bugs.eclipse.org/bugs/show_bug.cgi?id=172463)   
 - Implemented `SWTGraphics.getAbsoluteScale()`
   This feature was originally requested in [Bug 267462](https://bugs.eclipse.org/bugs/show_bug.cgi?id=267462)
+  Added `ImagePrintFigureOperation` for painting a Figure on an Image.
 
 ## GEF
 
@@ -54,6 +55,8 @@ specifically, the `TreeViewer` is using `EditPart`'s as exclusion set.
   contribute their own implementation via an OSGi service.
   Alternatively, clients may inject a custom `ToolTipHelper` instance directly
   by overriding `createToolTipHelper()` in `SWTEventDispatcher`.
+  Added `ImagePrintGraphicalViewerOperation` for painting the printable layer
+  of a GraphicalViewer on an Image.
 
 ## Zest
 
