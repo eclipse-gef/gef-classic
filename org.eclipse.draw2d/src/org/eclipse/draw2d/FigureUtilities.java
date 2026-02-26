@@ -36,6 +36,7 @@ public class FigureUtilities {
 	private static Font appliedFont;
 	private static FontMetrics metrics;
 	private static Color ghostFillColor = new Color(null, 31, 31, 31);
+	private static final int ghostFillAlpha = 80;
 
 	/**
 	 * Returns a new Color the same as the passed color in a darker hue.
@@ -218,12 +219,33 @@ public class FigureUtilities {
 	 * @param s the shape
 	 * @return the ghosted shape
 	 * @since 2.0
+	 * @deprecated XOR is not fully supported on all operating systems.
 	 */
+	@Deprecated(since = "2026-06")
 	public static Shape makeGhostShape(Shape s) {
 		s.setBackgroundColor(ghostFillColor);
 		s.setFillXOR(true);
 		s.setOutlineXOR(true);
 		return s;
+	}
+
+	/**
+	 * Creates and returns a "ghost" rectangle figure featuring a dual-layered
+	 * border (black outer and white inner), to ensure visibility against both a
+	 * dark and light background, together with a gray, semi-transparent fill.
+	 *
+	 * @return the ghost rectangle
+	 * @since 3.22
+	 */
+	public static RectangleFigure makeHighContrastGhostRectangle() {
+		Border outerBorder = new LineBorder(ColorConstants.black, 1);
+		Border innerBorder = new LineBorder(ColorConstants.white, 1);
+
+		RectangleFigure r = new RectangleFigure();
+		r.setBorder(new CompoundBorder(outerBorder, innerBorder));
+		r.setBackgroundColor(ColorConstants.gray);
+		r.setAlpha(ghostFillAlpha);
+		return r;
 	}
 
 	/**
