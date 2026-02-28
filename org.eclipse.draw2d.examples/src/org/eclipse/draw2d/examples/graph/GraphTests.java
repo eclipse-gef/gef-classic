@@ -496,8 +496,7 @@ public class GraphTests {
 	 */
 	private static void shuffleConnections(int[] conns) {
 		for (int i = 0; i < conns.length; i += 2) {
-			int swap = (rand.nextInt() * conns.length % conns.length) / 2;
-			swap *= 2;
+			int swap = rand.nextInt(conns.length / 2) * 2;
 			int temp = conns[i];
 			conns[i] = conns[swap];
 			conns[swap] = temp;
