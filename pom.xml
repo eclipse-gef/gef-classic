@@ -13,7 +13,7 @@
 		<maven-antrun-plugin.version>3.2.0</maven-antrun-plugin.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>		
-		<cbi-plugins.version>1.5.3</cbi-plugins.version>
+		<cbi-plugins.version>1.5.4</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.26.0</comparator.repo>
