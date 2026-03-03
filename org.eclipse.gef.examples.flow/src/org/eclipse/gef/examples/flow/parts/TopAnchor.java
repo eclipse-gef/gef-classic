@@ -36,9 +36,8 @@ class TopAnchor extends AbstractConnectionAnchor {
 		}
 		if (r.contains(reference) || r.y < reference.y) {
 			return r.getBottomLeft().translate(off, -1);
-		} else {
-			return r.getTopLeft().translate(off, 0);
 		}
+		return r.getTopLeft().translate(off, 0);
 	}
 
 }

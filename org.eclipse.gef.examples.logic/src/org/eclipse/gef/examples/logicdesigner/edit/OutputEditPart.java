@@ -54,7 +54,8 @@ public class OutputEditPart extends LogicEditPart {
 		OutputFigure figure;
 		if (getModel() == null) {
 			return null;
-		} else if (getModel() instanceof LiveOutput) {
+		}
+		if (getModel() instanceof LiveOutput) {
 			figure = new LiveOutputFigure();
 		} else if (getModel() instanceof GroundOutput) {
 			figure = new GroundFigure();

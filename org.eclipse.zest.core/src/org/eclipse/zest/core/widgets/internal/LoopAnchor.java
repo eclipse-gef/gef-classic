@@ -33,11 +33,10 @@ public class LoopAnchor extends ChopboxAnchor {
 		// center. Only usefull for self-loops.
 		if (getOwner() == null) {
 			return null;
-		} else {
-			Point ref = getOwner().getBounds().getCenter();
-			ref.y = getOwner().getBounds().y;
-			getOwner().translateToAbsolute(ref);
-			return ref;
 		}
+		Point ref = getOwner().getBounds().getCenter();
+		ref.y = getOwner().getBounds().y;
+		getOwner().translateToAbsolute(ref);
+		return ref;
 	}
 }

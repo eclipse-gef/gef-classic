@@ -67,16 +67,15 @@ public class ViewportLayout extends AbstractHintLayout {
 
 		if (contents == null) {
 			return new Dimension(insets.getWidth(), insets.getHeight());
-		} else {
-			Dimension minSize = contents.getMinimumSize(wHint, hHint);
-			if (wHint > -1) {
-				wHint = Math.max(wHint, minSize.width);
-			}
-			if (hHint > -1) {
-				hHint = Math.max(hHint, minSize.height);
-			}
-			return contents.getPreferredSize(wHint, hHint).getExpanded(insets.getWidth(), insets.getHeight());
 		}
+		Dimension minSize = contents.getMinimumSize(wHint, hHint);
+		if (wHint > -1) {
+			wHint = Math.max(wHint, minSize.width);
+		}
+		if (hHint > -1) {
+			hHint = Math.max(hHint, minSize.height);
+		}
+		return contents.getPreferredSize(wHint, hHint).getExpanded(insets.getWidth(), insets.getHeight());
 
 		// Layout currently does not union border's preferred size.
 	}

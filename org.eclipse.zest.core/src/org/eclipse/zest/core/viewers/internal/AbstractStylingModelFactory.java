@@ -179,12 +179,11 @@ public abstract class AbstractStylingModelFactory implements IStylingGraphModelF
 		GraphNode sn = viewer.getGraphModelNode(source);
 		GraphNode dn = viewer.getGraphModelNode(dest);
 		if (oldConnection != null) {
-			if (sn != oldConnection.getSource() || dn != oldConnection.getDestination()) {
-				viewer.removeGraphModelConnection(oldConnection);
-			} else {
+			if ((sn == oldConnection.getSource()) && (dn == oldConnection.getDestination())) {
 				styleItem(oldConnection);
 				return oldConnection;
 			}
+			viewer.removeGraphModelConnection(oldConnection);
 		}
 		IFigureProvider figureProvider = null;
 		if (getLabelProvider() instanceof IFigureProvider) {

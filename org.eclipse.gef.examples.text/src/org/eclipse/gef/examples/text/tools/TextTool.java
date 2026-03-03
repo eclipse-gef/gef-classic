@@ -286,30 +286,28 @@ public class TextTool extends SelectionTool implements StyleProvider {
 	private boolean doBackspace() {
 		setTextInputMode(MODE_BS);
 		SelectionRange range = getSelectionRange();
-		if (range.isEmpty()) {
-			if (handleTextEdit(new TextRequest(TextRequest.REQ_BACKSPACE, range, pendingCommand))) {
-				return true;
-			}
-			doSelect(CaretRequest.COLUMN, false, false, null);
-			return false;
-		} else {
+		if (!range.isEmpty()) {
 			return handleTextEdit(new TextRequest(TextRequest.REQ_REMOVE_RANGE, range));
 		}
+		if (handleTextEdit(new TextRequest(TextRequest.REQ_BACKSPACE, range, pendingCommand))) {
+			return true;
+		}
+		doSelect(CaretRequest.COLUMN, false, false, null);
+		return false;
 	}
 
 	private boolean doDelete() {
 		setTextInputMode(MODE_DEL);
 		SelectionRange range = getSelectionRange();
 
-		if (range.isEmpty()) {
-			if (handleTextEdit(new TextRequest(TextRequest.REQ_DELETE, range, pendingCommand))) {
-				return true;
-			}
-			doSelect(CaretRequest.COLUMN, true, false, null);
-			return false;
-		} else {
+		if (!range.isEmpty()) {
 			return handleTextEdit(new TextRequest(TextRequest.REQ_REMOVE_RANGE, range));
 		}
+		if (handleTextEdit(new TextRequest(TextRequest.REQ_DELETE, range, pendingCommand))) {
+			return true;
+		}
+		doSelect(CaretRequest.COLUMN, true, false, null);
+		return false;
 	}
 
 	/**
@@ -318,12 +316,10 @@ public class TextTool extends SelectionTool implements StyleProvider {
 	private boolean doIndent() {
 		setTextInputMode(0);
 		SelectionRange range = getSelectionRange();
-		TextRequest edit;
-		if (range.isEmpty()) {
-			edit = new TextRequest(TextRequest.REQ_INDENT, range);
-		} else {
+		if (!range.isEmpty()) {
 			return false;
 		}
+		TextRequest edit = new TextRequest(TextRequest.REQ_INDENT, range);
 		return handleTextEdit(edit);
 	}
 
@@ -473,12 +469,10 @@ public class TextTool extends SelectionTool implements StyleProvider {
 	private boolean doUnindent() {
 		setTextInputMode(0);
 		SelectionRange range = getSelectionRange();
-		TextRequest edit;
-		if (range.isEmpty()) {
-			edit = new TextRequest(TextRequest.REQ_UNINDENT, range);
-		} else {
+		if (!range.isEmpty()) {
 			return false;
 		}
+		TextRequest edit = new TextRequest(TextRequest.REQ_UNINDENT, range);
 		return handleTextEdit(edit);
 	}
 

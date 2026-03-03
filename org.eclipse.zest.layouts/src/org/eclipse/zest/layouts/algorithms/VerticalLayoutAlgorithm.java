@@ -63,11 +63,14 @@ public class VerticalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 	protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 		if (asynchronous && continueous) {
 			return false;
-		} else if (asynchronous && !continueous) {
+		}
+		if (asynchronous && !continueous) {
 			return true;
-		} else if (!asynchronous && continueous) {
+		}
+		if (!asynchronous && continueous) {
 			return false;
-		} else if (!asynchronous && !continueous) {
+		}
+		if (!asynchronous && !continueous) {
 			return true;
 		}
 
