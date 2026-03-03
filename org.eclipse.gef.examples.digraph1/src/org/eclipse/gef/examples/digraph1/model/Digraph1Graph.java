@@ -32,7 +32,7 @@ public class Digraph1Graph {
 	/**
 	 * The list of nodes in the graph.
 	 */
-	private List<Digraph1Node> nodes = new ArrayList<Digraph1Node>();
+	private final List<Digraph1Node> nodes = new ArrayList<Digraph1Node>();
 
 	/**
 	 * Constructor for a Digraph1Graph.

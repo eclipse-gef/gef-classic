@@ -58,7 +58,7 @@ public class StickyNote extends FlowPage {
 		}
 	}
 
-	private TextFlow text = new TextFlow();
+	private final TextFlow text = new TextFlow();
 
 	public StickyNote() {
 		setBorder(new DogEar());

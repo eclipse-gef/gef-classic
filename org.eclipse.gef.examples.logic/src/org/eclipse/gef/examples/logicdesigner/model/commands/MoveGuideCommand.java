@@ -25,8 +25,8 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicSubpart;
  */
 public class MoveGuideCommand extends Command {
 
-	private int pDelta;
-	private LogicGuide guide;
+	private final int pDelta;
+	private final LogicGuide guide;
 
 	public MoveGuideCommand(LogicGuide guide, int positionDelta) {
 		super(LogicMessages.MoveGuideCommand_Label);

@@ -26,13 +26,13 @@ import org.eclipse.gef.examples.text.model.TextRun;
  */
 public class ApplyBooleanStyle extends MiniEdit {
 
-	private TextRun begin;
-	private int beginOffset;
+	private final TextRun begin;
+	private final int beginOffset;
 	private Container container;
-	private int endOffset;
+	private final int endOffset;
 	String[] keys;
 	private TextRun middle;
-	private Container parent;
+	private final Container parent;
 	private TextRun right;
 	Object[] values;
 

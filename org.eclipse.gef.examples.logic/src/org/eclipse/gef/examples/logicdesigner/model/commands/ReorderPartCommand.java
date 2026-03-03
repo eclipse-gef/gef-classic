@@ -20,9 +20,10 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicSubpart;
 
 public class ReorderPartCommand extends Command {
 
-	private int oldIndex, newIndex;
-	private LogicSubpart child;
-	private LogicDiagram parent;
+	private int oldIndex;
+	private final int newIndex;
+	private final LogicSubpart child;
+	private final LogicDiagram parent;
 
 	public ReorderPartCommand(LogicSubpart child, LogicDiagram parent, int newIndex) {
 		super(LogicMessages.ReorderPartCommand_Label);

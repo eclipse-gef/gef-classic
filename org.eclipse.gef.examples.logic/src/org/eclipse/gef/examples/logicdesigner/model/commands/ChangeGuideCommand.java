@@ -22,10 +22,10 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicSubpart;
  */
 public class ChangeGuideCommand extends Command {
 
-	private LogicSubpart part;
+	private final LogicSubpart part;
 	private LogicGuide oldGuide, newGuide;
 	private int oldAlign, newAlign;
-	private boolean horizontal;
+	private final boolean horizontal;
 
 	public ChangeGuideCommand(LogicSubpart part, boolean horizontalGuide) {
 		super();
