@@ -49,7 +49,8 @@ public class GraphJFaceSnippet2 {
 			}
 			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Paper;
-			} else if (Messages.Scissors2Rock.equals(rel)) {
+			}
+			if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Scissors;
 			}
 			return null;
@@ -67,7 +68,8 @@ public class GraphJFaceSnippet2 {
 			}
 			if (Messages.Paper2Scissors.equals(rel)) {
 				return Messages.Scissors;
-			} else if (Messages.Scissors2Rock.equals(rel)) {
+			}
+			if (Messages.Scissors2Rock.equals(rel)) {
 				return Messages.Rock;
 			}
 			return null;

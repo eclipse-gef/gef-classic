@@ -225,9 +225,8 @@ public class Straight {
 	public boolean equals(Object other) {
 		if (!(other instanceof Straight otherStraight)) {
 			return false;
-		} else {
-			return contains(otherStraight.position) && isParallelTo(otherStraight);
 		}
+		return contains(otherStraight.position) && isParallelTo(otherStraight);
 	}
 
 	/**

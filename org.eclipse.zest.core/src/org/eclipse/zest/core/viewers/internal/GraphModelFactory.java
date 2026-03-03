@@ -84,7 +84,8 @@ public class GraphModelFactory extends AbstractStylingModelFactory {
 						}
 					}
 					continue;
-				} else if (dest == null) {
+				}
+				if (dest == null) {
 					// just create the node for the source
 					if (source != null) {
 						if (figureProvider != null) {

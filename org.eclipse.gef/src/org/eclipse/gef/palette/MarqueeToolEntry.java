@@ -107,9 +107,8 @@ public class MarqueeToolEntry extends ToolEntry {
 		if (marqueeBehavior == MarqueeSelectionTool.BEHAVIOR_NODES_CONTAINED
 				|| marqueeBehavior == MarqueeSelectionTool.BEHAVIOR_NODES_TOUCHED) {
 			return SharedImages.DESC_MARQUEE_TOOL_NODES_24;
-		} else {
-			return SharedImages.DESC_MARQUEE_TOOL_24;
 		}
+		return SharedImages.DESC_MARQUEE_TOOL_24;
 	}
 
 	private int getMarqueeBehavior() {
@@ -140,9 +139,8 @@ public class MarqueeToolEntry extends ToolEntry {
 		if (marqueeBehavior == MarqueeSelectionTool.BEHAVIOR_NODES_CONTAINED
 				|| marqueeBehavior == MarqueeSelectionTool.BEHAVIOR_NODES_TOUCHED) {
 			return SharedImages.DESC_MARQUEE_TOOL_NODES_16;
-		} else {
-			return SharedImages.DESC_MARQUEE_TOOL_16;
 		}
+		return SharedImages.DESC_MARQUEE_TOOL_16;
 	}
 
 }

@@ -126,9 +126,8 @@ public class ChopboxAnchor extends AbstractConnectionAnchor {
 	public int hashCode() {
 		if (getOwner() != null) {
 			return getOwner().hashCode();
-		} else {
-			return super.hashCode();
 		}
+		return super.hashCode();
 	}
 
 }

@@ -144,9 +144,8 @@ public abstract class AbstractEditPolicy implements EditPolicy, RequestConstants
 		c = c.substring(c.lastIndexOf('.') + 1);
 		if (getHost() != null) {
 			return getHost().toString() + "." + c; //$NON-NLS-1$
-		} else {
-			return c + " (no host for EditPolicy set yet)"; //$NON-NLS-1$
 		}
+		return c + " (no host for EditPolicy set yet)"; //$NON-NLS-1$
 	}
 
 	/**

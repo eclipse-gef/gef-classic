@@ -97,9 +97,11 @@ public class LogicPlugin extends org.eclipse.ui.plugin.AbstractUIPlugin {
 		}
 		if (XORGate.class.equals(modelClass)) {
 			return XOrGateFigure.SIZE;
-		} else if (GroundOutput.class.isAssignableFrom(modelClass)) {
+		}
+		if (GroundOutput.class.isAssignableFrom(modelClass)) {
 			return GroundFigure.SIZE;
-		} else if (LiveOutput.class.equals(modelClass)) {
+		}
+		if (LiveOutput.class.equals(modelClass)) {
 			return LiveOutputFigure.SIZE;
 		}
 		return IFigure.MIN_DIMENSION;

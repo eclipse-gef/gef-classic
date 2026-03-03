@@ -88,7 +88,8 @@ public record Interval(int begin, int length) implements Serializable {
 	public int distance(int point) {
 		if (point < begin) {
 			return begin - point;
-		} else if (point > end()) {
+		}
+		if (point > end()) {
 			return point - end();
 		}
 		return 0;

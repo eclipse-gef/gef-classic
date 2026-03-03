@@ -68,12 +68,11 @@ class CollapsedEdges {
 			tightestEdge = candidate;
 			collapsedWeight += candidate.weight;
 			return temp;
-		} else {
-			int over = candidate.getSlack() - tightestEdge.getSlack();
-			unOverage += over;
-			overage += candidate.weight * over;
-			collapsedWeight += candidate.weight;
-			return candidate;
 		}
+		int over = candidate.getSlack() - tightestEdge.getSlack();
+		unOverage += over;
+		overage += candidate.weight * over;
+		collapsedWeight += candidate.weight;
+		return candidate;
 	}
 }

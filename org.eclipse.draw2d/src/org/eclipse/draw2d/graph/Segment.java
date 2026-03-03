@@ -82,9 +82,8 @@ class Segment {
 	double getSlope() {
 		if (end.x - start.x >= 0) {
 			return (end.y - start.y);
-		} else {
-			return -(end.y - start.y);
 		}
+		return -(end.y - start.y);
 	}
 
 	/**
