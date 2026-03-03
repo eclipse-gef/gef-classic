@@ -31,8 +31,8 @@ public class DeleteCommand extends Command {
 	private Activity child;
 	private StructuredActivity parent;
 	private int index = -1;
-	private List<Transition> sourceConnections = new ArrayList<>();
-	private List<Transition> targetConnections = new ArrayList<>();
+	private final List<Transition> sourceConnections = new ArrayList<>();
+	private final List<Transition> targetConnections = new ArrayList<>();
 
 	private void deleteConnections(Activity a) {
 		if (a instanceof StructuredActivity structAct) {

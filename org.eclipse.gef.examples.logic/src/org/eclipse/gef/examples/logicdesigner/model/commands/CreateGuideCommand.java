@@ -24,8 +24,8 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicRuler;
 public class CreateGuideCommand extends Command {
 
 	private LogicGuide guide;
-	private LogicRuler parent;
-	private int position;
+	private final LogicRuler parent;
+	private final int position;
 
 	public CreateGuideCommand(LogicRuler parent, int position) {
 		super(LogicMessages.CreateGuideCommand_Label);

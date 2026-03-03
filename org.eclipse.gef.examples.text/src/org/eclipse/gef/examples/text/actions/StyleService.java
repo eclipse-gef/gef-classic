@@ -26,9 +26,9 @@ public class StyleService {
 	public static final Object STATE_READ_ONLY = new Object();
 	public static final Object UNDEFINED = new Object();
 
-	private List<StyleListener> listeners = new CopyOnWriteArrayList<>();
+	private final List<StyleListener> listeners = new CopyOnWriteArrayList<>();
 	private StyleProvider provider;
-	private StyleListener providerListener = StyleService.this::propogateChange;
+	private final StyleListener providerListener = StyleService.this::propogateChange;
 
 	/**
 	 * Constructs a new StyleService object

@@ -73,7 +73,7 @@ public class TextTool extends SelectionTool implements StyleProvider {
 	private static final int MODE_DEL = 3;
 	private static final int MODE_TYPE = 1;
 	private static final String KEY_OVERWRITE = "gef.texttool.overwrite"; //$NON-NLS-1$
-	private CommandStackEventListener commandListener = event -> {
+	private final CommandStackEventListener commandListener = event -> {
 		if ((event.getDetail() & CommandStack.POST_MASK) != 0) {
 			fireStyleChanges();
 			discardCaretLocation();
@@ -81,12 +81,12 @@ public class TextTool extends SelectionTool implements StyleProvider {
 	};
 	private StyleListener listener;
 	private AppendableCommand pendingCommand;
-	private ISelectionChangedListener selectionListener = event -> {
+	private final ISelectionChangedListener selectionListener = event -> {
 		fireStyleChanges();
 		getCaret().setVisible(getSelectionRange() != null);
 		queueCaretRefresh(true);
 	};
-	private UpdateListener updateListener = new UpdateListener() {
+	private final UpdateListener updateListener = new UpdateListener() {
 		@Override
 		public void notifyPainting(Rectangle damage, Map<IFigure, Rectangle> dirtyRegions) {
 			queueCaretRefresh(false);
@@ -96,10 +96,10 @@ public class TextTool extends SelectionTool implements StyleProvider {
 		public void notifyValidating() {
 		}
 	};
-	private List<String> styleKeys = new ArrayList<>();
+	private final List<String> styleKeys = new ArrayList<>();
 	// @TODO:Pratik StyleService cannot be final
 	private final StyleService styleService;
-	private List<Object> styleValues = new ArrayList<>();
+	private final List<Object> styleValues = new ArrayList<>();
 	private CaretRefresh caretRefresh;
 	private int textInputMode, caretXLoc;
 	private boolean isMirrored, xCaptured, overwrite;

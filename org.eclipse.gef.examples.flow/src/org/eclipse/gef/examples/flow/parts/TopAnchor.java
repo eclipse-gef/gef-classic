@@ -19,7 +19,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 
 class TopAnchor extends AbstractConnectionAnchor {
 
-	private int offset;
+	private final int offset;
 
 	TopAnchor(IFigure source, int offset) {
 		super(source);

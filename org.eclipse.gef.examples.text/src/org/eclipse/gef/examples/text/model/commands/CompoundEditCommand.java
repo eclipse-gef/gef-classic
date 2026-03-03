@@ -31,7 +31,7 @@ public class CompoundEditCommand extends ExampleTextCommand implements Appendabl
 
 	private ModelLocation beginLocation;
 
-	private List<MiniEdit> edits = new ArrayList<>();
+	private final List<MiniEdit> edits = new ArrayList<>();
 
 	private ModelLocation endLocation;
 

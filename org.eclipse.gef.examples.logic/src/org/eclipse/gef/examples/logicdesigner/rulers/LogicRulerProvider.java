@@ -33,8 +33,8 @@ import org.eclipse.gef.examples.logicdesigner.model.commands.MoveGuideCommand;
  */
 public class LogicRulerProvider extends RulerProvider {
 
-	private LogicRuler ruler;
-	private PropertyChangeListener rulerListener = new PropertyChangeListener() {
+	private final LogicRuler ruler;
+	private final PropertyChangeListener rulerListener = new PropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 			if (evt.getPropertyName().equals(LogicRuler.PROPERTY_CHILDREN)) {
@@ -54,7 +54,7 @@ public class LogicRulerProvider extends RulerProvider {
 			}
 		}
 	};
-	private PropertyChangeListener guideListener = new PropertyChangeListener() {
+	private final PropertyChangeListener guideListener = new PropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 			if (evt.getPropertyName().equals(LogicGuide.PROPERTY_CHILDREN)) {

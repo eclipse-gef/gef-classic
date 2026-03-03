@@ -29,8 +29,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
  */
 public class RelativeLocator implements Locator {
 
-	private double relativeX;
-	private double relativeY;
+	private final double relativeX;
+	private final double relativeY;
 	private IFigure reference;
 
 	/**

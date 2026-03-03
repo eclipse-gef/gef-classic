@@ -20,8 +20,8 @@ public class ApplyMultiStyle extends MiniEdit {
 
 	private int oldValue;
 	private int newValue = -1;
-	private String styleID;
-	private Style style;
+	private final String styleID;
+	private final Style style;
 
 	public ApplyMultiStyle(Container c, String property, Object value) {
 		style = c.getStyle();

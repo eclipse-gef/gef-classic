@@ -94,7 +94,7 @@ public class PageNode extends Figure {
 		}
 	}
 
-	private Label label = new Label();
+	private final Label label = new Label();
 
 	public PageNode(String text) {
 		this();

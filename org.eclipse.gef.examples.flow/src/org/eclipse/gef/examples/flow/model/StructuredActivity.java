@@ -25,7 +25,7 @@ public class StructuredActivity extends Activity {
 
 	static final long serialVersionUID = 1;
 
-	private List<Activity> children = new ArrayList<>();
+	private final List<Activity> children = new ArrayList<>();
 
 	public void addChild(Activity child) {
 		addChild(child, -1);
