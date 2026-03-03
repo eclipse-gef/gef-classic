@@ -246,15 +246,12 @@ public class PolylineArcConnection extends PolylineConnection {
 		if (y > 0) {
 			if (x > 0) {
 				return 1;
-			} else {
-				return 2;
 			}
-		} else {
-			if (x > 0) {
-				return 4;
-			} else {
-				return 3;
-			}
+			return 2;
 		}
+		if (x > 0) {
+			return 4;
+		}
+		return 3;
 	}
 }

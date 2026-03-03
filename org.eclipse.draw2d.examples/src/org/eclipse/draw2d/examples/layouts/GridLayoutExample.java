@@ -598,9 +598,11 @@ public class GridLayoutExample extends AbstractExample {
 		}
 		if (align.equals("CENTER")) { //$NON-NLS-1$
 			return SWT.CENTER;
-		} else if (align.equals("END")) { //$NON-NLS-1$
+		}
+		if (align.equals("END")) { //$NON-NLS-1$
 			return SWT.END;
-		} else if (align.equals("FILL")) { //$NON-NLS-1$
+		}
+		if (align.equals("FILL")) { //$NON-NLS-1$
 			return SWT.FILL;
 		}
 		return -1;

@@ -39,12 +39,11 @@ public class Ellipse extends Shape {
 	public boolean containsPoint(int x, int y) {
 		if (!super.containsPoint(x, y)) {
 			return false;
-		} else {
-			Rectangle r = getBounds();
-			long ux = x - r.x - r.width / 2;
-			long uy = y - r.y - r.height / 2;
-			return ((ux * ux) << 10) / (r.width * r.width) + ((uy * uy) << 10) / (r.height * r.height) <= 256;
 		}
+		Rectangle r = getBounds();
+		long ux = x - r.x - r.width / 2;
+		long uy = y - r.y - r.height / 2;
+		return ((ux * ux) << 10) / (r.width * r.width) + ((uy * uy) << 10) / (r.height * r.height) <= 256;
 	}
 
 	/**

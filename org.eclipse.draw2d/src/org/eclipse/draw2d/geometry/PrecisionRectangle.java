@@ -348,9 +348,8 @@ public final class PrecisionRectangle extends Rectangle {
 		double y2 = Math.min(preciseY() + preciseHeight(), rect.preciseY() + rect.preciseHeight());
 		if (((x2 - x1) < 0) || ((y2 - y1) < 0)) {
 			return setPreciseBounds(0, 0, 0, 0); // no intersection
-		} else {
-			return setPreciseBounds(x1, y1, x2 - x1, y2 - y1);
 		}
+		return setPreciseBounds(x1, y1, x2 - x1, y2 - y1);
 	}
 
 	/**

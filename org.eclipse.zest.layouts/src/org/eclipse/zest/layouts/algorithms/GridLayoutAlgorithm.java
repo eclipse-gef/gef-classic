@@ -200,9 +200,8 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 				double boundHeight) {
 			if (getEntityAspectRatio() == 1.0) {
 				return calculateNumberOfRowsAndCols_square(numChildren, boundX, boundY, boundWidth, boundHeight);
-			} else {
-				return calculateNumberOfRowsAndCols_rectangular(numChildren);
 			}
+			return calculateNumberOfRowsAndCols_rectangular(numChildren);
 		}
 
 		@Deprecated
@@ -297,11 +296,14 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		protected boolean isValidConfiguration(boolean asynchronous, boolean continueous) {
 			if (asynchronous && continueous) {
 				return false;
-			} else if (asynchronous && !continueous) {
+			}
+			if (asynchronous && !continueous) {
 				return true;
-			} else if (!asynchronous && continueous) {
+			}
+			if (!asynchronous && continueous) {
 				return false;
-			} else if (!asynchronous && !continueous) {
+			}
+			if (!asynchronous && !continueous) {
 				return true;
 			}
 
