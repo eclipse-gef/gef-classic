@@ -30,11 +30,11 @@ import org.eclipse.gef.examples.shapes.model.ShapesDiagram;
 public class ShapeCreateCommand extends Command {
 
 	/** The new shape. */
-	private Shape newShape;
+	private final Shape newShape;
 	/** ShapeDiagram to add to. */
 	private final ShapesDiagram parent;
 	/** The bounds of the new Shape. */
-	private Rectangle bounds;
+	private final Rectangle bounds;
 
 	/**
 	 * Create a command that will add a new Shape to a ShapesDiagram.

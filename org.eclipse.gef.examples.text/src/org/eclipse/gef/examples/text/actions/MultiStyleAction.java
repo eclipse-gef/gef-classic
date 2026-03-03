@@ -14,7 +14,7 @@ package org.eclipse.gef.examples.text.actions;
 
 public class MultiStyleAction extends BooleanStyleAction {
 
-	private Object value;
+	private final Object value;
 
 	public MultiStyleAction(StyleService service, String styleID, String property, Object value) {
 		super(service, styleID, property);

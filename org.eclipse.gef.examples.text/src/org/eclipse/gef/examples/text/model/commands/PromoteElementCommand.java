@@ -27,10 +27,10 @@ import org.eclipse.gef.examples.text.model.TextRun;
  */
 public class PromoteElementCommand extends ExampleTextCommand {
 
-	private TextRun run;
-	private Container oldParent;
+	private final TextRun run;
+	private final Container oldParent;
 	int index;
-	private int caretOffset;
+	private final int caretOffset;
 
 	public PromoteElementCommand(TextEditPart part, int caretOffset) {
 		super("decrease indentation"); //$NON-NLS-1$

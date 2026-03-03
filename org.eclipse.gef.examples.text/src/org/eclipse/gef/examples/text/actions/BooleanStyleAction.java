@@ -26,7 +26,7 @@ public class BooleanStyleAction extends Action {
 
 	protected String property;
 	protected StyleService service;
-	private StyleListener styleListener = styleID -> {
+	private final StyleListener styleListener = styleID -> {
 		if (styleID == null || styleID.equals(getId())) {
 			refresh();
 		}

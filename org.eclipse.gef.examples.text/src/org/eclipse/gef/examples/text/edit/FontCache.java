@@ -61,9 +61,9 @@ public class FontCache {
 	}
 
 	private static final class Key {
-		private String fontName;
-		private int height;
-		private boolean isBold, isItalic;
+		private final String fontName;
+		private final int height;
+		private final boolean isBold, isItalic;
 
 		private Key(String fontName, int height, boolean isBold, boolean isItalic) {
 			this.fontName = fontName;

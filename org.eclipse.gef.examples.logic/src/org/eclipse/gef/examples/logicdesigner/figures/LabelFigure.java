@@ -25,7 +25,7 @@ import org.eclipse.draw2d.text.TextFlow;
 public class LabelFigure extends BentCornerFigure {
 
 	/** The inner TextFlow **/
-	private TextFlow textFlow;
+	private final TextFlow textFlow;
 
 	/**
 	 * Creates a new LabelFigure with a default MarginBorder size of

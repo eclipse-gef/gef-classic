@@ -23,7 +23,7 @@ public class Digraph1Node {
 	/**
 	 * The node knows what node number it is on the graph.
 	 */
-	private int number;
+	private final int number;
 
 	/**
 	 * Constructor for a Digraph1Node.

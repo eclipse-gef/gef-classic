@@ -28,9 +28,9 @@ public class Activity extends FlowElement {
 	}
 
 	static final long serialVersionUID = 1;
-	private List<Transition> inputs = new ArrayList<>();
+	private final List<Transition> inputs = new ArrayList<>();
 	private String name = "Activity"; //$NON-NLS-1$
-	private List<Transition> outputs = new ArrayList<>();
+	private final List<Transition> outputs = new ArrayList<>();
 	private int sortIndex;
 
 	public Activity() {

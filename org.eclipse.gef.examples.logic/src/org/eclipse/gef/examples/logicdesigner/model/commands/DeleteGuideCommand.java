@@ -27,8 +27,8 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicSubpart;
  */
 public class DeleteGuideCommand extends Command {
 
-	private LogicRuler parent;
-	private LogicGuide guide;
+	private final LogicRuler parent;
+	private final LogicGuide guide;
 	private Map<LogicSubpart, Integer> oldParts;
 
 	public DeleteGuideCommand(LogicGuide guide, LogicRuler parent) {

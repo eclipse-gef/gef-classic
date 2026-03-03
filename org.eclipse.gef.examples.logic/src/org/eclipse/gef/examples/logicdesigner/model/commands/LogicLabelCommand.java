@@ -19,7 +19,7 @@ import org.eclipse.gef.examples.logicdesigner.model.LogicLabel;
 public class LogicLabelCommand extends Command {
 
 	private String newName, oldName;
-	private LogicLabel label;
+	private final LogicLabel label;
 
 	public LogicLabelCommand(LogicLabel l, String s) {
 		label = l;

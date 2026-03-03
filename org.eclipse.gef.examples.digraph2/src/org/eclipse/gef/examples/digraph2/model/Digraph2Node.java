@@ -28,12 +28,12 @@ public class Digraph2Node extends Digraph1Node {
 	/**
 	 * The list of edges that have this node as the source.
 	 */
-	private List<Digraph2Edge> sourceEdges;
+	private final List<Digraph2Edge> sourceEdges;
 
 	/**
 	 * The list of edges that have this node as the target.
 	 */
-	private List<Digraph2Edge> targetEdges;
+	private final List<Digraph2Edge> targetEdges;
 
 	/**
 	 * Constructor for a Digraph2Node.

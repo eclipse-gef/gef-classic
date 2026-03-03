@@ -29,7 +29,7 @@ import org.eclipse.gef.ui.actions.GEFActionConstants;
 class ShapesEditorContextMenuProvider extends ContextMenuProvider {
 
 	/** The editor's action registry. */
-	private ActionRegistry actionRegistry;
+	private final ActionRegistry actionRegistry;
 
 	/**
 	 * Instantiate a new menu context provider for the specified EditPartViewer and

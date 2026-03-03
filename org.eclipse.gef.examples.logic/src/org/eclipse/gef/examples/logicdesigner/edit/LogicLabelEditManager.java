@@ -43,7 +43,7 @@ public class LogicLabelEditManager extends DirectEditManager {
 	private double cachedZoom = -1.0;
 	private Font scaledFont;
 
-	private ZoomListener zoomListener = LogicLabelEditManager.this::updateScaledFont;
+	private final ZoomListener zoomListener = LogicLabelEditManager.this::updateScaledFont;
 
 	public LogicLabelEditManager(GraphicalEditPart source, CellEditorLocator locator) {
 		super(source, null, locator);

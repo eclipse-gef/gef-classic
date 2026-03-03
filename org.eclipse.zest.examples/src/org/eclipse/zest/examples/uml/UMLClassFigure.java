@@ -20,8 +20,8 @@ import org.eclipse.draw2d.ToolbarLayout;
 
 public class UMLClassFigure extends Figure {
 
-	private CompartmentFigure attributeFigure = new CompartmentFigure();
-	private CompartmentFigure methodFigure = new CompartmentFigure();
+	private final CompartmentFigure attributeFigure = new CompartmentFigure();
+	private final CompartmentFigure methodFigure = new CompartmentFigure();
 
 	public UMLClassFigure(Label name) {
 		ToolbarLayout layout = new ToolbarLayout();

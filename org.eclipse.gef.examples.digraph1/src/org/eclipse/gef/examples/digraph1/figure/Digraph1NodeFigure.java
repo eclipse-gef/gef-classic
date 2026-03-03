@@ -33,12 +33,12 @@ public class Digraph1NodeFigure extends Figure {
 	/**
 	 * Label for name of the node.
 	 */
-	private Label label;
+	private final Label label;
 
 	/**
 	 * Rectangle for the node.
 	 */
-	private RectangleFigure rectangleFigure;
+	private final RectangleFigure rectangleFigure;
 
 	/**
 	 * Constructor for a Digraph1NodeFigure.
