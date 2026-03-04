@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -70,7 +70,7 @@ class BufferedGraphicsSource implements GraphicsSource {
 			try {
 				// Make sure the SWT resources are properly disposed in case of an error
 				// See https://github.com/eclipse-gef/gef-classic/issues/875
-				controlGC.drawImage(getImage(), 0, 0, inUse.width, inUse.height, inUse.x, inUse.y, inUse.width,
+				controlGC.drawImage(imageBuffer, 0, 0, inUse.width, inUse.height, inUse.x, inUse.y, inUse.width,
 						inUse.height);
 			} catch (IllegalArgumentException e) {
 				LOGGER.error(e.getMessage(), e);
@@ -133,26 +133,6 @@ class BufferedGraphicsSource implements GraphicsSource {
 
 		graphics.setClip(inUse);
 		return graphics;
-	}
-
-	/**
-	 * Returns the current image buffer or <code>null</code>.
-	 *
-	 * @since 2.1
-	 * @return the current image buffer
-	 */
-	protected Image getImage() {
-		return imageBuffer;
-	}
-
-	/**
-	 * Returns the current GC used on the buffer or <code>null</code>.
-	 *
-	 * @since 2.1
-	 * @return the GC for the image buffer
-	 */
-	protected GC getImageGC() {
-		return imageGC;
 	}
 
 }
