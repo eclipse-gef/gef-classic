@@ -66,7 +66,6 @@ class BufferedGraphicsSource implements GraphicsSource {
 		 * The imageBuffer may be null if double-buffering was not successful.
 		 */
 		if (imageBuffer != null) {
-			imageGC.dispose();
 			try {
 				// Make sure the SWT resources are properly disposed in case of an error
 				// See https://github.com/eclipse-gef/gef-classic/issues/875
