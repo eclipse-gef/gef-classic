@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.zest"
       label="%featureName"
-      version="3.27.0.qualifier"
+      version="3.28.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.zest.core"
       license-feature="org.eclipse.license"
@@ -50,17 +50,11 @@
 
    <plugin
          id="org.eclipse.zest.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.zest.layouts"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.zest.cloudio"
