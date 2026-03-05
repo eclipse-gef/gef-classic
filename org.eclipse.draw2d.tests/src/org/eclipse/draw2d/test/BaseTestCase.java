@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -79,6 +79,19 @@ public abstract class BaseTestCase extends Assertions {
 	 * thrown.
 	 */
 	public static void assertEquals(int x, int y, int width, int height, Rectangle rectangle) {
+		assertEquals(x, rectangle.x);
+		assertEquals(y, rectangle.y);
+		assertEquals(width, rectangle.width);
+		assertEquals(height, rectangle.height);
+	}
+
+	/**
+	 * Asserts that two objects are equal. Expected object
+	 * <code>(x, y, width, height)</code>. Actual object
+	 * <code>{@link Rectangle}</code>. If they are not an AssertionFailedError is
+	 * thrown.
+	 */
+	public static void assertEquals(int x, int y, int width, int height, org.eclipse.swt.graphics.Rectangle rectangle) {
 		assertEquals(x, rectangle.x);
 		assertEquals(y, rectangle.y);
 		assertEquals(width, rectangle.width);

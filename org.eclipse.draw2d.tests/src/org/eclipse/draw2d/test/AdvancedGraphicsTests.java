@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2025 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -27,6 +27,7 @@ import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Pattern;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.Resource;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -43,6 +44,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 	static final int[] LINE = { 5, 5, 20, 20, 35, 5, 50, 5 };
 	static final int[] POLY = { 5, 5, 45, 15, 20, 30, 20, 20, 45, 35, 5, 45 };
 	private SWTGraphics g;
+	private GC gc;
 
 	private Image image;
 	private final Deque<Resource> resources = new ArrayDeque<>();
@@ -119,13 +121,13 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		path2.close();
 
 		image = new Image(Display.getDefault(), 800, 600);
-		GC imageGC = new GC(image, SWT.NONE);
-		g = new SWTGraphics(imageGC);
+		gc = new GC(image, SWT.NONE);
+		g = new SWTGraphics(gc);
 
 		resources.push(path1);
 		resources.push(path2);
 		resources.push(image);
-		resources.push(imageGC);
+		resources.push(gc);
 	}
 
 	@AfterEach
@@ -134,6 +136,24 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		while (!resources.isEmpty()) {
 			resources.pop().dispose();
 		}
+	}
+
+	@Test
+	public void testPathClipping() {
+		Path p = new Path(Display.getDefault());
+		p.addRectangle(10, 20, 50, 100);
+		gc.setClipping(p);
+		p.dispose();
+
+		assertEquals(10, 20, 50, 100, gc.getClipping());
+	}
+
+	@Test
+	public void testRectangleClipping() {
+		Rectangle r = new Rectangle(10, 20, 50, 100);
+		gc.setClipping(r);
+
+		assertEquals(10, 20, 50, 100, gc.getClipping());
 	}
 
 	@Test
