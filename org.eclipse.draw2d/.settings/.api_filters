@@ -1,26 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.draw2d" version="2">
-    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.swt.svg.JSVGRasterizer">
-        <filter comment="The re-exported type org.eclipse.swt.svg.JSVGRasterizer in org.eclipse.draw2d_3.21.0 is no longer an API" id="305426566">
-            <message_arguments>
-                <message_argument value="org.eclipse.swt.svg.JSVGRasterizer"/>
-                <message_argument value="org.eclipse.draw2d_3.21.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/draw2d/AbstractImageFigure.java" type="org.eclipse.draw2d.AbstractImageFigure">
         <filter comment="AbstractImageFigure is the offical startpoint for IImageFigure therefore it is ok that it implements that interface" id="576725006">
             <message_arguments>
                 <message_argument value="IImageFigure"/>
                 <message_argument value="AbstractImageFigure"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/draw2d/ColorProvider.java" type="org.eclipse.draw2d.ColorProvider">
-        <filter comment="added default method to color provider for shadow color" id="404000815">
-            <message_arguments>
-                <message_argument value="org.eclipse.draw2d.ColorProvider"/>
-                <message_argument value="getShadowColor()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -85,18 +69,6 @@
             <message_arguments>
                 <message_argument value="Graphics"/>
                 <message_argument value="ScaledGraphics"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/draw2d/geometry/PrecisionPointList.java" type="org.eclipse.draw2d.geometry.PrecisionPointList">
-        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
-            <message_arguments>
-                <message_argument value="PrecisionPointList()"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Class has been marked as @noreference until 3.22" id="1143996420">
-            <message_arguments>
-                <message_argument value="PrecisionPointList(int)"/>
             </message_arguments>
         </filter>
     </resource>

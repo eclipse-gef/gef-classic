@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.gef.examples"
       label="%featureName"
-      version="3.27.0.qualifier"
+      version="3.28.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.gef.examples.logic"
       license-feature="org.eclipse.license"
@@ -43,31 +43,19 @@
 
    <plugin
          id="org.eclipse.gef.examples.logic"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.gef.examples.flow"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.gef.examples.text"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.gef.examples.shapes"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.gef.examples.digraph1"

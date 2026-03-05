@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.gef"
       label="%featureName"
-      version="3.27.0.qualifier"
+      version="3.28.0.qualifier"
       provider-name="%providerName"
       image="eclipse_update_120.jpg"
       license-feature="org.eclipse.license"
@@ -50,9 +50,6 @@
 
    <plugin
          id="org.eclipse.gef"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
