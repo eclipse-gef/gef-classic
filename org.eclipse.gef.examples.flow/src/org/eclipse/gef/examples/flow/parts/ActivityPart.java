@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2003, 2024 IBM Corporation and others.
+ * Copyright (c) 2003, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -183,14 +183,23 @@ public abstract class ActivityPart extends AbstractGraphicalEditPart implements 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
-		if (FlowElement.CHILDREN.equals(prop)) {
-			refreshChildren();
-		} else if (FlowElement.INPUTS.equals(prop)) {
-			refreshTargetConnections();
-		} else if (FlowElement.OUTPUTS.equals(prop)) {
-			refreshSourceConnections();
-		} else if (Activity.NAME.equals(prop)) {
-			refreshVisuals();
+		if (prop != null) {
+			switch (prop) {
+			case FlowElement.CHILDREN:
+				refreshChildren();
+				break;
+			case FlowElement.INPUTS:
+				refreshTargetConnections();
+				break;
+			case FlowElement.OUTPUTS:
+				refreshSourceConnections();
+				break;
+			case Activity.NAME:
+				refreshVisuals();
+				break;
+			default:
+				break;
+			}
 		}
 
 		// Causes Graph to re-layout

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -56,16 +56,24 @@ public class ApplyBooleanStyle extends MiniEdit {
 		container = new InlineContainer(Container.TYPE_INLINE);
 		for (int i = 0; i < keys.length; i++) {
 			String key = keys[i];
-			if (key.equals(Style.PROPERTY_BOLD)) {
+			switch (key) {
+			case Style.PROPERTY_BOLD:
 				container.getStyle().setBold(((Boolean) values[i]).booleanValue());
-			} else if (key.equals(Style.PROPERTY_FONT_SIZE)) {
+				break;
+			case Style.PROPERTY_FONT_SIZE:
 				container.getStyle().setFontHeight(((Integer) values[i]).intValue());
-			} else if (key.equals(Style.PROPERTY_ITALIC)) {
+				break;
+			case Style.PROPERTY_ITALIC:
 				container.getStyle().setItalic(((Boolean) values[i]).booleanValue());
-			} else if (key.equals(Style.PROPERTY_UNDERLINE)) {
+				break;
+			case Style.PROPERTY_UNDERLINE:
 				container.getStyle().setUnderline(((Boolean) values[i]).booleanValue());
-			} else if (key.equals(Style.PROPERTY_FONT)) {
+				break;
+			case Style.PROPERTY_FONT:
 				container.getStyle().setFontFamily((String) values[i]);
+				break;
+			default:
+				break;
 			}
 		}
 		container.add(middle);

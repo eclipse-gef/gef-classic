@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -183,20 +183,30 @@ public abstract class LogicEditPart extends org.eclipse.gef.editparts.AbstractGr
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String prop = evt.getPropertyName();
-		if (LogicElement.CHILDREN.equals(prop)) {
-			if (evt.getOldValue() instanceof Integer intVal) {
-				// new child
-				addChild(createChild(evt.getNewValue()), intVal.intValue());
-			} else {
-				// remove child
-				removeChild(getViewer().getEditPartForModel(evt.getOldValue()));
+		if (prop != null) {
+			switch (prop) {
+			case LogicElement.CHILDREN:
+				if (evt.getOldValue() instanceof Integer intVal) {
+					// new child
+					addChild(createChild(evt.getNewValue()), intVal.intValue());
+				} else {
+					// remove child
+					removeChild(getViewer().getEditPartForModel(evt.getOldValue()));
+				}
+				break;
+			case LogicElement.INPUTS:
+				refreshTargetConnections();
+				break;
+			case LogicElement.OUTPUTS:
+				refreshSourceConnections();
+				break;
+			case LogicSubpart.ID_SIZE:
+			case LogicSubpart.ID_LOCATION:
+				refreshVisuals();
+				break;
+			default:
+				break;
 			}
-		} else if (LogicElement.INPUTS.equals(prop)) {
-			refreshTargetConnections();
-		} else if (LogicElement.OUTPUTS.equals(prop)) {
-			refreshSourceConnections();
-		} else if (prop.equals(LogicSubpart.ID_SIZE) || prop.equals(LogicSubpart.ID_LOCATION)) {
-			refreshVisuals();
 		}
 	}
 
