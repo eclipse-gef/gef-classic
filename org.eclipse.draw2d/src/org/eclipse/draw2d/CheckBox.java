@@ -70,12 +70,9 @@ public final class CheckBox extends Toggle {
 	@Override
 	protected void init() {
 		super.init();
-		addChangeListener(new ChangeListener() {
-			@Override
-			public void handleStateChanged(ChangeEvent changeEvent) {
-				if (changeEvent.getPropertyName().equals(ButtonModel.SELECTED_PROPERTY)) {
-					handleSelectionChanged();
-				}
+		addChangeListener(changeEvent -> {
+			if (changeEvent.getPropertyName().equals(ButtonModel.SELECTED_PROPERTY)) {
+				handleSelectionChanged();
 			}
 		});
 	}

@@ -54,17 +54,14 @@ public class LogicRulerProvider extends RulerProvider {
 			}
 		}
 	};
-	private final PropertyChangeListener guideListener = new PropertyChangeListener() {
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			if (evt.getPropertyName().equals(LogicGuide.PROPERTY_CHILDREN)) {
-				for (RulerChangeListener listener : listeners) {
-					listener.notifyPartAttachmentChanged(evt.getNewValue(), evt.getSource());
-				}
-			} else {
-				for (RulerChangeListener listener : listeners) {
-					listener.notifyGuideMoved(evt.getSource());
-				}
+	private final PropertyChangeListener guideListener = evt -> {
+		if (evt.getPropertyName().equals(LogicGuide.PROPERTY_CHILDREN)) {
+			for (RulerChangeListener listener : listeners) {
+				listener.notifyPartAttachmentChanged(evt.getNewValue(), evt.getSource());
+			}
+		} else {
+			for (RulerChangeListener listener : listeners) {
+				listener.notifyGuideMoved(evt.getSource());
 			}
 		}
 	};
