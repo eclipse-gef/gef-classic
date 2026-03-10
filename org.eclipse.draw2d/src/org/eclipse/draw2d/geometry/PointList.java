@@ -21,7 +21,7 @@ package org.eclipse.draw2d.geometry;
  */
 public class PointList implements java.io.Serializable, Translatable {
 
-	private int[] points = new int[0];
+	private int[] points = {};
 	private Rectangle bounds;
 	private int size = 0;
 
