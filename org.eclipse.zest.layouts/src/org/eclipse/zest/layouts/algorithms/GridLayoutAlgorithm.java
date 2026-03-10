@@ -17,7 +17,6 @@ package org.eclipse.zest.layouts.algorithms;
 import java.util.Arrays;
 
 import org.eclipse.zest.layouts.LayoutStyles;
-import org.eclipse.zest.layouts.dataStructures.DisplayIndependentDimension;
 import org.eclipse.zest.layouts.dataStructures.DisplayIndependentRectangle;
 import org.eclipse.zest.layouts.dataStructures.InternalNode;
 import org.eclipse.zest.layouts.dataStructures.InternalRelationship;
