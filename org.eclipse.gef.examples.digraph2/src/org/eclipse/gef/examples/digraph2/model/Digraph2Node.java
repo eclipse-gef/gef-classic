@@ -42,8 +42,8 @@ public class Digraph2Node extends Digraph1Node {
 	 */
 	public Digraph2Node(int aNumber) {
 		super(aNumber);
-		this.sourceEdges = new ArrayList<Digraph2Edge>();
-		this.targetEdges = new ArrayList<Digraph2Edge>();
+		this.sourceEdges = new ArrayList<>();
+		this.targetEdges = new ArrayList<>();
 	}
 
 	/**
