@@ -13,8 +13,6 @@
 package org.eclipse.zest.examples.swt;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -58,17 +56,12 @@ public class GraphSnippet7 {
 		new GraphConnection(g, SWT.NONE, n3, n);
 		g.setLayoutAlgorithm(new SpringLayoutAlgorithm(), true);
 
-		g.addMouseMoveListener(new MouseMoveListener() {
-
-			@Override
-			public void mouseMove(MouseEvent e) {
-				// Get the figure at the current mouse location
-				Object o = g.getFigureAt(e.x, e.y);
-				if (o != null) {
-					System.out.println(Messages.bind(Messages.GraphSnippet7_SystemOut, new Object[] { o, e.x, e.y }));
-				}
+		g.addMouseMoveListener(e -> {
+			// Get the figure at the current mouse location
+			Object o = g.getFigureAt(e.x, e.y);
+			if (o != null) {
+				System.out.println(Messages.bind(Messages.GraphSnippet7_SystemOut, new Object[] { o, e.x, e.y }));
 			}
-
 		});
 
 		shell.open();

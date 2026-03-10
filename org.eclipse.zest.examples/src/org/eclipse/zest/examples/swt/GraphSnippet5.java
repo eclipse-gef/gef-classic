@@ -20,8 +20,6 @@ import java.util.Map;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
@@ -126,14 +124,11 @@ public class GraphSnippet5 {
 
 		});
 
-		g.addPaintListener(new PaintListener() {
-			@Override
-			public void paintControl(PaintEvent e) {
-				e.gc.setFont(font);
-				e.gc.setClipping((Region) null);
-				e.gc.setForeground(ColorConstants.black);
-				e.gc.drawText(stringBuffer.toString(), 50, 50, true);
-			}
+		g.addPaintListener(e -> {
+			e.gc.setFont(font);
+			e.gc.setClipping((Region) null);
+			e.gc.setForeground(ColorConstants.black);
+			e.gc.drawText(stringBuffer.toString(), 50, 50, true);
 		});
 
 		shell.open();
