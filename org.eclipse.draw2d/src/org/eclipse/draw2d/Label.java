@@ -721,4 +721,12 @@ public class Label extends Figure implements PositionConstants {
 	public int getLabelAlignment() {
 		return labelAlignment;
 	}
+
+	/**
+	 * @see Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[%s] %s".formatted(getClass().getSimpleName(), getText()); //$NON-NLS-1$
+	}
 }

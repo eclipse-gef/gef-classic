@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -92,8 +92,9 @@ public class Messages extends NLS {
 	public static String GraphSnippet5_Warning;
 	public static String GraphSnippet5_Error;
 	public static String GraphSnippet6_Title;
+	public static String GraphSnippet7_CursorLocation;
+	public static String GraphSnippet7_FigureUnderCursor;
 	public static String GraphSnippet7_Title;
-	public static String GraphSnippet7_SystemOut;
 	public static String GraphSnippet8_Title;
 	public static String GraphSnippet8_Node1;
 	public static String GraphSnippet8_Node2;

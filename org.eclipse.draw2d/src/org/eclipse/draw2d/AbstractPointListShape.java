@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2010 IBM Corporation and others.
+ * Copyright (c) 2008, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -191,6 +191,14 @@ public abstract class AbstractPointListShape extends Shape {
 		erase();
 		this.points = points;
 		repaint();
+	}
+
+	/**
+	 * @see Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[%s] Start: %s, End: %s ".formatted(getClass().getSimpleName(), getStart(), getEnd()); //$NON-NLS-1$
 	}
 
 }

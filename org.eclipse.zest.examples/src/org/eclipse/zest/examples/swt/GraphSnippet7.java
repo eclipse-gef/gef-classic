@@ -13,8 +13,10 @@
 package org.eclipse.zest.examples.swt;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.zest.core.widgets.Graph;
@@ -22,6 +24,8 @@ import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.examples.Messages;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
+
+import org.eclipse.draw2d.IFigure;
 
 /**
  * This snippet shows how to use the findFigureAt to get the figure under the
@@ -40,10 +44,11 @@ public class GraphSnippet7 {
 		Shell shell = new Shell();
 		Display d = shell.getDisplay();
 		shell.setText(Messages.GraphSnippet7_Title);
-		shell.setLayout(new FillLayout());
+		shell.setLayout(new GridLayout(2, true));
 		shell.setSize(400, 400);
 
 		g = new Graph(shell, SWT.NONE);
+		g.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 
 		GraphNode n = new GraphNode(g, SWT.NONE);
 		n.setText(Messages.Paper);
@@ -56,12 +61,19 @@ public class GraphSnippet7 {
 		new GraphConnection(g, SWT.NONE, n3, n);
 		g.setLayoutAlgorithm(new SpringLayoutAlgorithm(), true);
 
+		Label cursorLocation = new Label(shell, SWT.NONE);
+		cursorLocation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+		cursorLocation.setText(Messages.bind(Messages.GraphSnippet7_CursorLocation, -1, -1));
+
+		Label figureUnderCursor = new Label(shell, SWT.NONE);
+		figureUnderCursor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false));
+		figureUnderCursor.setText(Messages.bind(Messages.GraphSnippet7_FigureUnderCursor, (Object) null));
+
 		g.addMouseMoveListener(e -> {
+			cursorLocation.setText(Messages.bind(Messages.GraphSnippet7_CursorLocation, e.x, e.y));
 			// Get the figure at the current mouse location
-			Object o = g.getFigureAt(e.x, e.y);
-			if (o != null) {
-				System.out.println(Messages.bind(Messages.GraphSnippet7_SystemOut, new Object[] { o, e.x, e.y }));
-			}
+			IFigure o = g.getFigureAt(e.x, e.y);
+			figureUnderCursor.setText(Messages.bind(Messages.GraphSnippet7_FigureUnderCursor, o));
 		});
 
 		shell.open();
