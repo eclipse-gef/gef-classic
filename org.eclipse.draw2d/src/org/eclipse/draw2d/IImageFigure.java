@@ -23,7 +23,7 @@ import org.eclipse.pde.api.tools.annotations.NoImplement;
  * <P>
  * WARNING: This interface is not intended to be implemented by clients. Extend
  * {@link AbstractImageFigure} instead.
- * 
+ *
  * @since 3.6
  */
 @NoImplement
