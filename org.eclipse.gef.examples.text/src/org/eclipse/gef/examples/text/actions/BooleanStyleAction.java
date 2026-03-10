@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -46,32 +46,40 @@ public class BooleanStyleAction extends Action {
 	static void configureStyleAction(IAction a) {
 		String styleID = a.getId();
 		a.setActionDefinitionId(styleID);
-		if (styleID.equals(TextActionConstants.STYLE_BOLD)) {
+		switch (styleID) {
+		case TextActionConstants.STYLE_BOLD -> {
 			a.setText("Bold"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BOLD);
-		} else if (styleID.equals(TextActionConstants.STYLE_ITALIC)) {
+		}
+		case TextActionConstants.STYLE_ITALIC -> {
 			a.setText("Italics"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_ITALIC);
-		} else if (styleID.equals(TextActionConstants.STYLE_UNDERLINE)) {
+		}
+		case TextActionConstants.STYLE_UNDERLINE -> {
 			a.setText("Underline"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_UNDERLINE);
-		} else if (styleID.equals(TextActionConstants.BLOCK_ALIGN_CENTER)) {
+		}
+		case TextActionConstants.BLOCK_ALIGN_CENTER -> {
 			a.setText("Center"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BLOCK_ALIGN_CENTER);
-		} else if (styleID.equals(TextActionConstants.BLOCK_ALIGN_LEFT)) {
+		}
+		case TextActionConstants.BLOCK_ALIGN_LEFT -> {
 			a.setText("Left"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BLOCK_ALIGN_LEFT);
-		} else if (styleID.equals(TextActionConstants.BLOCK_ALIGN_RIGHT)) {
+		}
+		case TextActionConstants.BLOCK_ALIGN_RIGHT -> {
 			a.setText("Right"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BLOCK_ALIGN_RIGHT);
-		} else if (styleID.equals(TextActionConstants.BLOCK_LTR)) {
+		}
+		case TextActionConstants.BLOCK_LTR -> {
 			a.setText("Left to Right"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BLOCK_LTR);
-		} else if (styleID.equals(TextActionConstants.BLOCK_RTL)) {
+		}
+		case TextActionConstants.BLOCK_RTL -> {
 			a.setText("Right to Left"); //$NON-NLS-1$
 			a.setImageDescriptor(InternalImages.DESC_BLOCK_RTL);
-		} else {
-			throw new RuntimeException("The given style ID was not recognized"); //$NON-NLS-1$
+		}
+		default -> throw new RuntimeException("The given style ID was not recognized"); //$NON-NLS-1$
 		}
 	}
 

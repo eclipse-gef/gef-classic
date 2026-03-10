@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 Asim Ullah and others.
+ * Copyright (c) 2004, 2026 Asim Ullah and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -593,19 +593,18 @@ public class GridLayoutExample extends AbstractExample {
 	}
 
 	protected static int findAlignment(String align) {
-		if (align.equals("BEGINNING")) { //$NON-NLS-1$
+		switch (align) {
+		case "BEGINNING": //$NON-NLS-1$
 			return SWT.BEGINNING;
-		}
-		if (align.equals("CENTER")) { //$NON-NLS-1$
+		case "CENTER": //$NON-NLS-1$
 			return SWT.CENTER;
-		}
-		if (align.equals("END")) { //$NON-NLS-1$
+		case "END": //$NON-NLS-1$
 			return SWT.END;
-		}
-		if (align.equals("FILL")) { //$NON-NLS-1$
+		case "FILL": //$NON-NLS-1$
 			return SWT.FILL;
+		default:
+			return -1;
 		}
-		return -1;
 	}
 
 	/**
