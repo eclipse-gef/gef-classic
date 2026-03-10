@@ -178,8 +178,10 @@ public class Geometry {
 			int y0 = coordinates[n - 1];
 
 			for (int i = 0; i < n; x0 = x1, y0 = y1) {
-				x1 = coordinates[i++];
-				y1 = coordinates[i++];
+				x1 = coordinates[i];
+				i++;
+				y1 = coordinates[i];
+				i++;
 				if (!segmentContaintPoint(y0, y1, y)) {
 					// Current edge has no intersection with the point by Y
 					// coordinates
