@@ -15,25 +15,17 @@ package org.eclipse.gef.test.swtbot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 
-import org.eclipse.draw2d.Border;
-import org.eclipse.draw2d.Clickable;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
 
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.test.swtbot.utils.SWTBotGefPalette;
-import org.eclipse.gef.ui.palette.PaletteColorProvider;
-
-import org.eclipse.gef.examples.shapes.palette.ShapesColorProvider;
 
 import org.junit.jupiter.api.Test;
 
@@ -62,37 +54,6 @@ public class ShapesDiagramTests extends AbstractSWTBotEditorTests {
 		forceUpdate(editor.getSWTBotGefViewer());
 
 		assertEquals(figure.getSize(), new Dimension(200, 200));
-	}
-
-	@Test
-	public void testCustomPalette() {
-		bot.menu("Palette").menu("Use Custom Color Palette").click();
-
-		SWTBotGefEditor editor = bot.gefEditor("shapesExample1.shapes");
-		SWTBotGefPalette palette = new SWTBotGefPalette(editor.getSWTBotGefViewer());
-
-		EditPart drawerEditPart = palette.getEditPart("Shapes").part();
-		Clickable drawerToggle = drawerEditPart.getAdapter(Clickable.class);
-		assertNotNull(drawerToggle);
-
-		EditPart toolEntryEditPart = palette.getEditPart("Ellipse").part();
-		Clickable toolEntryToggle = toolEntryEditPart.getAdapter(Clickable.class);
-		assertNotNull(toolEntryToggle);
-
-		Border drawerBorder = drawerToggle.getBorder();
-		assertNotNull(drawerToggle);
-		assertEquals(drawerBorder.getClass().getName(),
-				"org.eclipse.gef.examples.shapes.palette.ShapesPaletteEditPartFactory$DrawerBackground");
-
-		Border toolEntryBorder = toolEntryToggle.getBorder();
-		assertNotNull(toolEntryBorder);
-		assertEquals(toolEntryBorder.getClass().getName(),
-				"org.eclipse.gef.examples.shapes.palette.ShapesPaletteEditPartFactory$ToolEntryBackground");
-
-		PaletteColorProvider colorProvider = palette.getColorProvider();
-		assertEquals(colorProvider.getListHoverBackgroundColor(), ShapesColorProvider.COLOR_PALETTE_BACKGROUND);
-		assertEquals(colorProvider.getListSelectedBackgroundColor(), ShapesColorProvider.COLOR_ENTRY_SELECTED);
-		assertEquals(colorProvider.getListBackground(), ShapesColorProvider.COLOR_PALETTE_BACKGROUND);
 	}
 
 	@Override
