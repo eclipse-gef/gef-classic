@@ -50,7 +50,7 @@ public class FreeformLayeredPane extends LayeredPane implements FreeformFigure {
 	 */
 	@Override
 	public void fireExtentChanged() {
-		getListenersIterable(FreeformListener.class).forEach(lst -> lst.notifyFreeformExtentChanged());
+		getListenersIterable(FreeformListener.class).forEach(FreeformListener::notifyFreeformExtentChanged);
 	}
 
 	/**
