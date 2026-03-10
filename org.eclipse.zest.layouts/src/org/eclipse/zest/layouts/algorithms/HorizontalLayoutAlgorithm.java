@@ -53,8 +53,7 @@ public class HorizontalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 			double boundHeight) {
 		int rows = 1;
 		int cols = numChildren;
-		int[] result = { cols, rows };
-		return result;
+		return new int[] { cols, rows };
 	}
 
 	@Override

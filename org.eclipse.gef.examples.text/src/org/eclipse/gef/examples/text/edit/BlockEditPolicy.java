@@ -62,20 +62,16 @@ public class BlockEditPolicy extends GraphicalEditPolicy {
 			return command;
 		}
 		if (prefix.equals("()")) { //$NON-NLS-1$
-			ConvertElementCommand command;
 			Container list = new Block(Container.TYPE_BULLETED_LIST);
 			TextRun bullet = new TextRun("", TextRun.TYPE_BULLET); //$NON-NLS-1$
 			list.add(bullet);
-			command = new ConvertElementCommand(run, 0, 2, list, new ModelLocation(bullet, 0));
-			return command;
+			return new ConvertElementCommand(run, 0, 2, list, new ModelLocation(bullet, 0));
 		}
 		if (prefix.equals("import")) { //$NON-NLS-1$
-			ConvertElementCommand command;
 			Container imports = new Block(Container.TYPE_IMPORT_DECLARATIONS);
 			TextRun statement = new TextRun("", TextRun.TYPE_IMPORT); //$NON-NLS-1$
 			imports.add(statement);
-			command = new ConvertElementCommand(run, 0, 6, imports, new ModelLocation(statement, 0));
-			return command;
+			return new ConvertElementCommand(run, 0, 6, imports, new ModelLocation(statement, 0));
 		}
 		return null;
 	}
