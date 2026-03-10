@@ -303,14 +303,11 @@ public class TreeBranch extends Figure {
 		}
 		this.style = style;
 		switch (style) {
-		case STYLE_HANGING:
-			setLayoutManager(new HangingLayout(this));
-			break;
-
-		default:
+		case STYLE_HANGING -> setLayoutManager(new HangingLayout(this));
+		default -> {
 			setLayoutManager(new NormalLayout(this));
 			contents.setLayoutManager(new TreeLayout());
-			break;
+		}
 		}
 	}
 

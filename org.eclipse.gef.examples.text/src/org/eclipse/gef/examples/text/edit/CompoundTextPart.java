@@ -16,7 +16,6 @@ package org.eclipse.gef.examples.text.edit;
 import java.beans.PropertyChangeEvent;
 import java.util.List;
 
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.text.BlockFlow;
@@ -56,26 +55,21 @@ public abstract class CompoundTextPart extends AbstractTextPart {
 
 	@Override
 	protected IFigure createFigure() {
-		Figure figure = null;
-		switch (getModel().getType()) {
-		case Container.TYPE_INLINE:
-			figure = new InlineFlow();
-			break;
-		case Container.TYPE_COMMENT:
-			figure = new CommentPage();
-			break;
-		case Container.TYPE_PARAGRAPH:
-			figure = new BlockFlow();
+		return switch (getModel().getType()) {
+		case Container.TYPE_INLINE -> new InlineFlow();
+		case Container.TYPE_COMMENT -> new CommentPage();
+		case Container.TYPE_PARAGRAPH -> {
+			IFigure figure = new BlockFlow();
 			figure.setBorder(new MarginBorder(4, 2, 4, 0));
-			break;
-		case Container.TYPE_ROOT:
-			figure = new FlowPage();
-			figure.setBorder(new MarginBorder(4));
-			break;
-		default:
-			throw new RuntimeException("unexpected container"); //$NON-NLS-1$
+			yield figure;
 		}
-		return figure;
+		case Container.TYPE_ROOT -> {
+			IFigure figure = new FlowPage();
+			figure.setBorder(new MarginBorder(4));
+			yield figure;
+		}
+		default -> throw new RuntimeException("unexpected container"); //$NON-NLS-1$
+		};
 	}
 
 	@Override

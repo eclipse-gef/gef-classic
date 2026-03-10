@@ -273,20 +273,11 @@ public class PaletteSnippet1 extends ViewPart {
 		@Override
 		protected void buttonPressed(int buttonId) {
 			switch (buttonId) {
-			case DRAWER_FONT_CHANGE_ID:
-				handleChangeFontPressed(PREFERENCE_DRAWER_FONT);
-				break;
-			case DRAWER_DEFAULT_FONT_ID:
-				handleDefaultFontRequested(PREFERENCE_DRAWER_FONT);
-				break;
-			case ENTRY_FONT_CHANGE_ID:
-				handleChangeFontPressed(PREFERENCE_ENTRY_FONT);
-				break;
-			case ENTRY_DEFAULT_FONT_ID:
-				handleDefaultFontRequested(PREFERENCE_ENTRY_FONT);
-				break;
-			default:
-				super.buttonPressed(buttonId);
+			case DRAWER_FONT_CHANGE_ID -> handleChangeFontPressed(PREFERENCE_DRAWER_FONT);
+			case DRAWER_DEFAULT_FONT_ID -> handleDefaultFontRequested(PREFERENCE_DRAWER_FONT);
+			case ENTRY_FONT_CHANGE_ID -> handleChangeFontPressed(PREFERENCE_ENTRY_FONT);
+			case ENTRY_DEFAULT_FONT_ID -> handleDefaultFontRequested(PREFERENCE_ENTRY_FONT);
+			default -> super.buttonPressed(buttonId);
 			}
 		}
 
