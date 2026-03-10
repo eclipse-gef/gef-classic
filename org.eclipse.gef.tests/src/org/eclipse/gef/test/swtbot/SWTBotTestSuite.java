@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -25,7 +25,8 @@ import org.junit.platform.suite.api.Suite;
 	FlowDiagramTests.class,
 	LogicDiagramTests.class,
 	ShapesDiagramTests.class,
-	PaletteSettingsDialogTests.class
+	PaletteSettingsDialogTests.class,
+	PaletteSnippetTests.class
 })
 public class SWTBotTestSuite {
 }

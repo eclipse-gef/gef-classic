@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,7 +26,11 @@ import org.eclipse.gef.ui.palette.PaletteViewer;
 public class SWTBotGefPalette extends SWTBotGefViewer {
 
 	public SWTBotGefPalette(SWTBotGefViewer gefViewer) throws WidgetNotFoundException {
-		super(getPaletteViewer(gefViewer));
+		this(getPaletteViewer(gefViewer));
+	}
+
+	public SWTBotGefPalette(PaletteViewer gefViewer) {
+		super(gefViewer);
 	}
 
 	private static PaletteViewer getPaletteViewer(SWTBotGefViewer gefViewer) {

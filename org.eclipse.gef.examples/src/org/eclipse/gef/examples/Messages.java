@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Patrick Ziegler and others.
+ * Copyright (c) 2025, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -22,6 +22,9 @@ public class Messages extends NLS {
 	public static String PaletteSnippet2_System;
 	public static String PaletteSnippet2_System_Desc;
 	public static String PaletteSnippet2_Selection_Desc;
+	public static String PaletteSnippet3_Shapes;
+	public static String PaletteSnippet3_System;
+	public static String PaletteSnippet3_Ellipse;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

@@ -15,5 +15,11 @@
             name="%view2.name"
             restorable="true">
       </view>
+      <view
+            class="org.eclipse.gef.examples.palette.PaletteSnippet3"
+            id="org.eclipse.gef.examples.view3"
+            name="%view3.name"
+            restorable="true">
+      </view>
    </extension>
 </plugin>
