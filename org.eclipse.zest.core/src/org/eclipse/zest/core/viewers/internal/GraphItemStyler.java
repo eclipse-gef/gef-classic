@@ -146,6 +146,7 @@ public class GraphItemStyler {
 		if (style != ZestStyles.NONE) {
 			conn.setConnectionStyle(style);
 		}
+		c = provider.getHighlightColor(rel);
 		// @tag bug(152530-Bezier(fix))
 		// @tat TODO curves bezier: Add back the bezier connection stuff
 		// if (ZestStyles.checkStyle(conn.getConnectionStyle(),
@@ -167,23 +168,24 @@ public class GraphItemStyler {
 		// conn.setEndLength(d);
 		// }
 		// }
-		if ((c = provider.getHighlightColor(rel)) != null) {
+		if (c != null) {
 			conn.setHighlightColor(c);
 		}
-		if ((c = provider.getColor(rel)) != null) {
+		c = provider.getColor(rel);
+		if (c != null) {
 			conn.setLineColor(c);
 		}
-		IFigure tooltip;
-		if ((tooltip = provider.getTooltip(rel)) != null) {
+		IFigure tooltip = provider.getTooltip(rel);
+		if (tooltip != null) {
 			conn.setTooltip(tooltip);
 		}
-		int w = -1;
-		if ((w = provider.getLineWidth(rel)) >= 0) {
+		int w = provider.getLineWidth(rel);
+		if (w >= 0) {
 			conn.setLineWidth(w);
 		}
 		if (provider instanceof IConnectionStyleProvider2 provider2) {
-			ConnectionRouter cr;
-			if ((cr = provider2.getRouter(rel)) != null) {
+			ConnectionRouter cr = provider2.getRouter(rel);
+			if (cr != null) {
 				conn.setRouter(cr);
 			}
 		}
@@ -204,6 +206,7 @@ public class GraphItemStyler {
 		if (style != ZestStyles.NONE) {
 			conn.setConnectionStyle(style);
 		}
+		c = provider.getColor(src, dest);
 		// @tag bug(152530-Bezier(fisx))
 		// @tag TODO curved connections bezier : add back the bezier connection
 		// stuff
@@ -226,25 +229,26 @@ public class GraphItemStyler {
 		// conn.setEndLength(d);
 		// }
 		// }
-		if ((c = provider.getColor(src, dest)) != null) {
+		if (c != null) {
 			conn.setLineColor(c);
 		}
-		if ((c = provider.getHighlightColor(src, dest)) != null) {
+		c = provider.getHighlightColor(src, dest);
+		if (c != null) {
 			conn.setHighlightColor(c);
 		}
 		if (provider instanceof IEntityConnectionStyleProvider2 provider2) {
-			IFigure tooltip;
-			if ((tooltip = provider2.getTooltip(src, dest)) != null) {
+			IFigure tooltip = provider2.getTooltip(src, dest);
+			if (tooltip != null) {
 				conn.setTooltip(tooltip);
 			}
 		}
-		int w = -1;
-		if ((w = provider.getLineWidth(src, dest)) >= 0) {
+		int w = provider.getLineWidth(src, dest);
+		if (w >= 0) {
 			conn.setLineWidth(w);
 		}
 		if (provider instanceof IEntityConnectionStyleProvider2 provider2) {
-			ConnectionRouter cr;
-			if ((cr = provider2.getRouter(src, dest)) != null) {
+			ConnectionRouter cr = provider2.getRouter(src, dest);
+			if (cr != null) {
 				conn.setRouter(cr);
 			}
 		}
@@ -267,25 +271,32 @@ public class GraphItemStyler {
 		if (provider.fisheyeNode(entity) == true) {
 			node.setNodeStyle(node.getNodeStyle() | ZestStyles.NODES_FISHEYE);
 		}
-		if ((c = provider.getBorderColor(entity)) != null) {
+		c = provider.getBorderColor(entity);
+		if (c != null) {
 			node.setBorderColor(c);
 		}
-		if ((c = provider.getBorderHighlightColor(entity)) != null) {
+		c = provider.getBorderHighlightColor(entity);
+		if (c != null) {
 			node.setBorderHighlightColor(c);
 		}
-		if ((c = provider.getNodeHighlightColor(entity)) != null) {
+		c = provider.getNodeHighlightColor(entity);
+		if (c != null) {
 			node.setHighlightColor(c);
 		}
-		if ((c = provider.getBackgroundColour(entity)) != null) {
+		c = provider.getBackgroundColour(entity);
+		if (c != null) {
 			node.setBackgroundColor(c);
 		}
-		if ((c = provider.getForegroundColour(entity)) != null) {
+		c = provider.getForegroundColour(entity);
+		if (c != null) {
 			node.setForegroundColor(c);
 		}
-		if ((width = provider.getBorderWidth(entity)) >= 0) {
+		width = provider.getBorderWidth(entity);
+		if (width >= 0) {
 			node.setBorderWidth(width);
 		}
-		if ((figure = provider.getTooltip(entity)) != null) {
+		figure = provider.getTooltip(entity);
+		if (figure != null) {
 			node.setTooltip(figure);
 		}
 
