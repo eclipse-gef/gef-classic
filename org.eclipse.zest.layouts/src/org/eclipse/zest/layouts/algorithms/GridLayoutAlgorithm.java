@@ -173,7 +173,8 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 						// find new position for child
 						double xmove = boundsX + j * colWidth + offsetX;
 						double ymove = boundsY + i * rowHeight + offsetY;
-						InternalNode sn = entitiesToLayout[index++];
+						InternalNode sn = entitiesToLayout[index];
+						index++;
 						sn.setInternalLocation(xmove, ymove);
 						sn.setInternalSize(Math.max(w, MIN_ENTITY_SIZE), Math.max(h, MIN_ENTITY_SIZE));
 					}

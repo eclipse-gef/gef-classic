@@ -115,12 +115,15 @@ public class BenchmarkLevelRuns {
 					levels = new int[(levels.length * 2) + 1];
 					System.arraycopy(temp, 0, levels, 0, temp.length);
 				}
-				levels[j++] = offset;
-				levels[j++] = newLevel;
+				levels[j] = offset;
+				j++;
+				levels[j] = newLevel;
+				j++;
 				prevLevel = newLevel;
 			}
 		}
-		levels[j++] = offset;
+		levels[j] = offset;
+		j++;
 
 		if (j != levels.length) {
 			int[] newLevels = new int[j];
