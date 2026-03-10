@@ -27,7 +27,6 @@ public class Toggle extends Clickable {
 	 * @since 2.0
 	 */
 	public Toggle() {
-		super();
 		setStyle(STYLE_TOGGLE);
 	}
 

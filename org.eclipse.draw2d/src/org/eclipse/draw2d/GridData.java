@@ -271,7 +271,6 @@ public final class GridData {
 	 * Constructs a new instance of GridData using default values.
 	 */
 	public GridData() {
-		super();
 	}
 
 	/**
@@ -281,7 +280,6 @@ public final class GridData {
 	 * @param style the GridData style
 	 */
 	public GridData(int style) {
-		super();
 		if ((style & VERTICAL_ALIGN_BEGINNING) != 0) {
 			verticalAlignment = BEGINNING;
 		}
@@ -347,7 +345,6 @@ public final class GridData {
 	 */
 	public GridData(int horizontalAlignment, int verticalAlignment, boolean grabExcessHorizontalSpace,
 			boolean grabExcessVerticalSpace, int horizontalSpan, int verticalSpan) {
-		super();
 		this.horizontalAlignment = horizontalAlignment;
 		this.verticalAlignment = verticalAlignment;
 		this.grabExcessHorizontalSpace = grabExcessHorizontalSpace;
@@ -366,7 +363,6 @@ public final class GridData {
 	 *
 	 */
 	public GridData(int width, int height) {
-		super();
 		this.widthHint = width;
 		this.heightHint = height;
 	}

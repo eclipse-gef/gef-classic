@@ -40,7 +40,6 @@ public class PuristicScrollPane extends ScrollPane {
 		 * @param isHorizontal whether this scroll bar is used as a horizontal one.
 		 */
 		public PuristicScrollBar(boolean isHorizontal) {
-			super();
 			setHorizontal(isHorizontal);
 			setOpaque(false);
 		}

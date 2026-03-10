@@ -26,7 +26,6 @@ public class Button extends Clickable {
 	 * @since 2.0
 	 */
 	public Button() {
-		super();
 		setStyle(STYLE_BUTTON);
 	}
 

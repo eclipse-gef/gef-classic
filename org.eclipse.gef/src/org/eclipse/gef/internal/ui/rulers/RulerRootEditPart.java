@@ -49,7 +49,6 @@ public class RulerRootEditPart extends SimpleRootEditPart {
 	 * @param isHorzontal whether or not the corresponding model ruler is horizontal
 	 */
 	public RulerRootEditPart(boolean isHorzontal) {
-		super();
 		horizontal = isHorzontal;
 	}
 

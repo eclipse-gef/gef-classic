@@ -27,7 +27,6 @@ public class GefExamplesPlugin extends AbstractUIPlugin {
 	 * Constructor.
 	 */
 	public GefExamplesPlugin() {
-		super();
 		fPlugin = this;
 	}
 

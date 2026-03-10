@@ -31,7 +31,6 @@ public class Digraph1Node {
 	 * @param aNumber the node number.
 	 */
 	public Digraph1Node(int aNumber) {
-		super();
 		this.number = aNumber;
 	}
 

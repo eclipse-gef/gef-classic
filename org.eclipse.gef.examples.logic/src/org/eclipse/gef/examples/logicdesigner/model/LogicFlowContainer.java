@@ -21,10 +21,6 @@ public class LogicFlowContainer extends LogicDiagram {
 
 	private static class LayoutLabelProvider extends org.eclipse.jface.viewers.LabelProvider {
 
-		public LayoutLabelProvider() {
-			super();
-		}
-
 		@Override
 		public String getText(Object element) {
 			if (element instanceof Integer integer) {
