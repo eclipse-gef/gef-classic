@@ -28,7 +28,6 @@ public class ChangeGuideCommand extends Command {
 	private final boolean horizontal;
 
 	public ChangeGuideCommand(LogicSubpart part, boolean horizontalGuide) {
-		super();
 		this.part = part;
 		horizontal = horizontalGuide;
 	}

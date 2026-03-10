@@ -51,7 +51,6 @@ public class GridLayer extends FreeformLayer {
 	 * Constructor Sets the default grid color: ColorConstants.lightGray
 	 */
 	public GridLayer() {
-		super();
 		setForegroundColor(ColorConstants.lineForeground);
 	}
 

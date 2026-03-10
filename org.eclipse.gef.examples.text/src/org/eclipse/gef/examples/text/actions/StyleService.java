@@ -29,13 +29,6 @@ public class StyleService {
 	private StyleProvider provider;
 	private final StyleListener providerListener = StyleService.this::propogateChange;
 
-	/**
-	 * Constructs a new StyleService object
-	 */
-	public StyleService() {
-		super();
-	}
-
 	public void addStyleListener(StyleListener listener) {
 		listeners.add(listener);
 	}

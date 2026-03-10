@@ -86,7 +86,6 @@ public abstract class StyleComboContributionItem extends ContributionItem {
 	};
 
 	public StyleComboContributionItem(IPartService service) {
-		super();
 		partService = service;
 		partService.addPartListener(partListener);
 	}

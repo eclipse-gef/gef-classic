@@ -32,7 +32,6 @@ public class SettingsAction extends Action {
 	 * @param palette The Palette which has to be customized when this action is run
 	 */
 	public SettingsAction(PaletteViewer palette) {
-		super();
 		setText(PaletteMessages.MENU_OPEN_SETTINGS_DIALOG);
 		paletteViewer = palette;
 	}

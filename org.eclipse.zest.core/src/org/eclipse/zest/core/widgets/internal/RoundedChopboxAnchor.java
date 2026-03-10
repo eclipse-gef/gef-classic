@@ -29,7 +29,6 @@ public class RoundedChopboxAnchor extends ChopboxAnchor {
 	private int shift = 7;
 
 	public RoundedChopboxAnchor(int arcRadius) {
-		super();
 		this.arcRadius = arcRadius;
 		this.shift = arcRadius - (int) (0.707 * arcRadius);
 	}

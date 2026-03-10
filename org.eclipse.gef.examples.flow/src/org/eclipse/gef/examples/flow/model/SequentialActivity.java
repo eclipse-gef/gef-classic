@@ -19,8 +19,4 @@ public class SequentialActivity extends StructuredActivity {
 
 	private static final long serialVersionUID = -9080401150957481095L;
 
-	public SequentialActivity() {
-		super();
-	}
-
 }
