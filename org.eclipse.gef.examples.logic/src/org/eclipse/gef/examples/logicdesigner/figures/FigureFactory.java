@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.gef.examples.logicdesigner.figures;
 
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.RoutingAnimator;
@@ -56,10 +55,6 @@ public class FigureFactory {
 		}
 		conn.setTargetDecoration(arrow);
 		return conn;
-	}
-
-	public static IFigure createNewCircuit() {
-		return new CircuitFigure();
 	}
 
 }

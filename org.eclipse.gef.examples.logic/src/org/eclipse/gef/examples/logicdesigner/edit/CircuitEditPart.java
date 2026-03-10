@@ -34,7 +34,6 @@ import org.eclipse.gef.editparts.ViewportMouseWheelHelper;
 import org.eclipse.gef.editpolicies.ScrollableSelectionFeedbackEditPolicy;
 
 import org.eclipse.gef.examples.logicdesigner.figures.CircuitFigure;
-import org.eclipse.gef.examples.logicdesigner.figures.FigureFactory;
 
 /**
  * Holds a circuit, which is a container capable of holding other
@@ -60,7 +59,7 @@ public class CircuitEditPart extends LogicContainerEditPart implements IScrollab
 	 */
 	@Override
 	protected IFigure createFigure() {
-		return FigureFactory.createNewCircuit();
+		return new CircuitFigure();
 	}
 
 	@Override
