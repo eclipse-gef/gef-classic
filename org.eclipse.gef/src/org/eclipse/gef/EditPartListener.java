@@ -61,7 +61,7 @@ public interface EditPartListener {
 		@Override
 		public void selectedStateChanged(EditPart part) {
 		}
-	};
+	}
 
 	/**
 	 * Called after a child EditPart has been added to its parent.
