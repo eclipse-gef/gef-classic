@@ -1077,7 +1077,7 @@ public abstract class AbstractLayoutAlgorithm implements LayoutAlgorithm {
 		}
 
 	}
-	
+
 	/**
 	 * @since 2.0
 	 */
