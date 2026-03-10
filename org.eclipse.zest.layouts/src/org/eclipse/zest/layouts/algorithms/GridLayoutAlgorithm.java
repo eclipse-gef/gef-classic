@@ -251,8 +251,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 					}
 				}
 			}
-			int[] result = { cols, rows };
-			return result;
+			return new int[] { cols, rows };
 		}
 
 		@Deprecated
@@ -260,8 +259,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 		protected int[] calculateNumberOfRowsAndCols_rectangular(int numChildren) {
 			int rows = Math.max(1, (int) Math.ceil(Math.sqrt(numChildren)));
 			int cols = Math.max(1, (int) Math.ceil(Math.sqrt(numChildren)));
-			int[] result = { cols, rows };
-			return result;
+			return new int[] { cols, rows };
 		}
 
 		@Deprecated
@@ -274,8 +272,7 @@ public class GridLayoutAlgorithm extends AbstractLayoutAlgorithm {
 			} else {
 				childW = childH * getEntityAspectRatio();
 			}
-			double[] result = { childW, childH };
-			return result;
+			return new double[] { childW, childH };
 		}
 
 		/**

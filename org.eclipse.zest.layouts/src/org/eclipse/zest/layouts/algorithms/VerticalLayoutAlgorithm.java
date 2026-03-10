@@ -54,8 +54,7 @@ public class VerticalLayoutAlgorithm extends GridLayoutAlgorithm.Zest1 {
 			double boundHeight) {
 		int cols = 1;
 		int rows = numChildren;
-		int[] result = { cols, rows };
-		return result;
+		return new int[] { cols, rows };
 	}
 
 	@Override
