@@ -43,8 +43,8 @@ public class OrGateFigure extends GateFigure {
 	 * Creates a new OrGateFigure
 	 */
 	public OrGateFigure() {
-		setBackgroundColor(LogicColorConstants.orGate);
-		setForegroundColor(LogicColorConstants.outlineColor);
+		setBackgroundColor(LogicEditorColors.INSTANCE.getOrGate());
+		setForegroundColor(LogicEditorColors.INSTANCE.getOutline());
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -34,7 +34,7 @@ import org.eclipse.gef.examples.logicdesigner.figures.GroundFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.LEDFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.LabelFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.LiveOutputFeedbackFigure;
-import org.eclipse.gef.examples.logicdesigner.figures.LogicColorConstants;
+import org.eclipse.gef.examples.logicdesigner.figures.LogicEditorColors;
 import org.eclipse.gef.examples.logicdesigner.figures.LogicFlowFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.OrGateFeedbackFigure;
 import org.eclipse.gef.examples.logicdesigner.figures.XOrGateFeedbackFigure;
@@ -116,7 +116,7 @@ public class LogicResizableEditPolicy extends ResizableEditPolicy {
 			figure = new RectangleFigure();
 			((RectangleFigure) figure).setXOR(true);
 			((RectangleFigure) figure).setFill(true);
-			figure.setBackgroundColor(LogicColorConstants.ghostFillColor);
+			figure.setBackgroundColor(LogicEditorColors.INSTANCE.getGhostFill());
 			figure.setForegroundColor(ColorConstants.white);
 		}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,22 +19,32 @@ import org.eclipse.draw2d.RoutingAnimator;
 import org.eclipse.gef.examples.logicdesigner.model.SimpleOutput;
 import org.eclipse.gef.examples.logicdesigner.model.Wire;
 
-public class FigureFactory {
+public final class FigureFactory {
+
+	private static final int WIRE_FIGURE_WIDTH = 2;
 
 	public static PolylineConnection createNewBendableWire(Wire wire) {
 		PolylineConnection conn = new PolylineConnection();
 		conn.addRoutingListener(RoutingAnimator.getDefault());
-		conn.setLineWidth(3);
-		// conn.setSourceDecoration(new PolygonDecoration());
-		// conn.setTargetDecoration(new PolylineDecoration());
+		updateWireLook(wire, conn);
 		return conn;
+	}
+
+	public static void updateWireLook(Wire wire, PolylineConnection conn) {
+		if (wire != null && wire.getValue()) {
+			conn.setForegroundColor(LogicEditorColors.INSTANCE.getWireTrue());
+			conn.setLineWidth(FigureFactory.WIRE_FIGURE_WIDTH + 1);
+			conn.setAlpha(200);
+		} else {
+			conn.setForegroundColor(LogicEditorColors.INSTANCE.getWireFalse());
+			conn.setLineWidth(FigureFactory.WIRE_FIGURE_WIDTH);
+			conn.setAlpha(255);
+		}
 	}
 
 	public static PolylineConnection createNewWire(Wire wire) {
 
-		PolylineConnection conn = new PolylineConnection();
-		conn.addRoutingListener(RoutingAnimator.getDefault());
-		conn.setLineWidth(3);
+		PolylineConnection conn = createNewBendableWire(wire);
 		PolygonDecoration arrow;
 
 		if (wire == null || wire.getSource() instanceof SimpleOutput) {

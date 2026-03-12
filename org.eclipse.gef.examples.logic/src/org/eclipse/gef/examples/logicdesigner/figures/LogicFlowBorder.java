@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2022 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -49,7 +49,7 @@ public class LogicFlowBorder extends org.eclipse.draw2d.LineBorder {
 
 		// Draw grab bar
 		Rectangle grabBar = new Rectangle(bounds.x, bounds.y, grabBarWidth, bounds.height);
-		graphics.setBackgroundColor(LogicColorConstants.logicGreen);
+		graphics.setBackgroundColor(LogicEditorColors.INSTANCE.getLogic());
 		graphics.fillRoundRectangle(grabBar, CORNER_RADIUS, CORNER_RADIUS);
 
 		// Fill right part
@@ -62,7 +62,7 @@ public class LogicFlowBorder extends org.eclipse.draw2d.LineBorder {
 		Rectangle mainBorder = bounds.getCopy();
 		mainBorder.width--;
 		mainBorder.height--;
-		graphics.setForegroundColor(LogicColorConstants.logicGreen);
+		graphics.setForegroundColor(LogicEditorColors.INSTANCE.getLogic());
 		graphics.drawRoundRectangle(mainBorder, CORNER_RADIUS, CORNER_RADIUS);
 	}
 
