@@ -23,7 +23,6 @@
 		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.14.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
-		<execution-environment>JavaSE-21</execution-environment>
 		<!-- SonarQube configuration -->
 		<sonar.exclusion>**/.tycho-consumer-pom.xml</sonar.exclusion>
 		<sonar.projectKey>gef-classic</sonar.projectKey>
@@ -224,7 +223,7 @@
 					<target>
 						<file>${target-platform}</file>
 					</target>
-					<executionEnvironment>${execution-environment}</executionEnvironment>
+					<executionEnvironment>JavaSE-21</executionEnvironment>
 					<environments>
 						<environment>
 							<os>linux</os>
@@ -348,7 +347,6 @@
 				<id>2024-09</id>
 				<properties>
 					<target-platform>../org.eclipse.gef.baseline/gef-classic-3.21.0.target</target-platform>
-					<execution-environment>JavaSE-17</execution-environment>
 					<tycho.p2.baseline.skip>true</tycho.p2.baseline.skip>
 				</properties>
 			</profile>

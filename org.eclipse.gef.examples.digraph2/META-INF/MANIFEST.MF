@@ -6,6 +6,6 @@ Bundle-SymbolicName: org.eclipse.gef.examples.digraph2;singleton:=true
 Bundle-Version: 1.2.900.qualifier
 Require-Bundle: org.eclipse.gef.examples.digraph1;bundle-version="[1.0.0,2.0.0)";visibility:=reexport
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.eclipse.gef.examples.digraph2
 
