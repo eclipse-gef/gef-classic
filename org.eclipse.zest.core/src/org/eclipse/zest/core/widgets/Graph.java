@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria,
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
  *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
@@ -550,7 +550,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	public Dimension getPreferredSize() {
 		if (preferredSize.width < 0 || preferredSize.height < 0) {
 			org.eclipse.swt.graphics.Point size = getSize();
-			double scale = getZoomManager().getZoom();
+			double scale = getZoomManager().getZoom() * InternalDraw2dUtils.calculateScale(this);
 			return new Dimension((int) (size.x / scale + 0.5), (int) (size.y / scale + 0.5));
 		}
 		return preferredSize;
