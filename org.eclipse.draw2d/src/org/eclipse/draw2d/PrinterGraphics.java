@@ -104,7 +104,8 @@ public class PrinterGraphics extends ScaledGraphics {
 	@Override
 	@SuppressWarnings("deprecation")
 	int zoomFontHeight(int height) {
-		return (int) (height * zoom * Display.getCurrent().getDPI().y / printer.getDPI().y + 0.0000001);
+		float dpiFactor = Display.getCurrent().getDPI().y / 96f;
+		return (int) (height * dpiFactor + 0.0000001);
 	}
 
 	/**
