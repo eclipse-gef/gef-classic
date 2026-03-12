@@ -7,6 +7,6 @@ Export-Package: gef.bugs;x-friends:="org.eclipse.draw2d.tests"
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.draw2d;bundle-version="[3.16.0,4.0.0)"
 Bundle-Vendor: %Plugin.providerName
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.eclipse.draw2d.examples
 

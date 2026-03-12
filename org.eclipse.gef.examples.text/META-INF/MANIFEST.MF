@@ -22,6 +22,6 @@ Require-Bundle: org.eclipse.gef;bundle-version="[3.18.0,4.0.0)",
  org.junit,
  org.eclipse.core.resources;bundle-version="[3.2.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Automatic-Module-Name: org.eclipse.gef.examples.text
 

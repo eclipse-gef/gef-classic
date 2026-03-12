@@ -7,7 +7,7 @@ Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Automatic-Module-Name: org.eclipse.zest.examples.layouts
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.zest.layouts.exampleStructures;x-internal:=true,
  org.eclipse.zest.layouts.exampleUses;x-internal:=true
 Require-Bundle: org.eclipse.zest.core;bundle-version="1.14.0",
