@@ -93,6 +93,9 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	public static final int FISHEYE_ANIMATION_TIME = 100;
 	private static final Image BACK_ARROW = FileImageDataProvider.createImage(Graph.class, "/icons/back_arrow.svg"); //$NON-NLS-1$
 
+	public static final String KEY_ANIMATION_TIME = "zest.animationTime"; //$NON-NLS-1$
+	public static final String KEY_FISHEYE_ANIMATION_TIME = "zest.fisheyeAnimationTime"; //$NON-NLS-1$
+
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up
 	public Color LIGHT_BLUE = null;
@@ -1442,7 +1445,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 						internalGetLayoutContext().applyLayout(scheduledLayoutClean);
 						layoutContext.flushChanges(false);
 					}
-					Animation.run(ANIMATION_TIME);
+					Animation.run(getData(KEY_ANIMATION_TIME) instanceof Integer val ? val : ANIMATION_TIME);
 					getLightweightSystem().getUpdateManager().performUpdate();
 					synchronized (Graph.this) {
 						scheduledLayoutRunnable = null;
@@ -1545,7 +1548,8 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		}
 
 		if (animate) {
-			Animation.run(FISHEYE_ANIMATION_TIME * 2);
+			Animation.run(
+					getData(KEY_FISHEYE_ANIMATION_TIME) instanceof Integer val ? val * 2 : FISHEYE_ANIMATION_TIME * 2);
 		}
 		this.getRootLayer().getUpdateManager().performUpdate();
 		fishEyeLayer.removeAll();
@@ -1617,7 +1621,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		}
 
 		if (animate) {
-			Animation.run(FISHEYE_ANIMATION_TIME);
+			Animation.run(getData(KEY_FISHEYE_ANIMATION_TIME) instanceof Integer val ? val : FISHEYE_ANIMATION_TIME);
 		}
 		this.getRootLayer().getUpdateManager().performUpdate();
 	}
