@@ -161,7 +161,7 @@ public class FlyoutPaletteComposite extends Composite {
 	private int cachedState = -1;
 	private int cachedLocation = -1;
 	private int cachedTitleHeight = 24; // give it a default value
-	private float scale;
+	private float scale = 1.0f;
 
 	private IPerspectiveListener perspectiveListener = new IPerspectiveListener() {
 		@Override
@@ -192,7 +192,6 @@ public class FlyoutPaletteComposite extends Composite {
 			FlyoutPreferences preferences) {
 		super(parent, style | SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED);
 		InternalDraw2dUtils.configureForAutoscalingMode(this, newScale -> scale = newScale.floatValue());
-		scale = InternalDraw2dUtils.calculateScale(this);
 		provider = pvProvider;
 		prefs = preferences;
 		sash = createSash();
