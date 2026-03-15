@@ -100,6 +100,14 @@ public class PaletteColorProvider extends GEFColorProvider {
 		return ColorConstants.listForeground;
 	}
 
+	public Color getTitleBackgroundStart() {
+		return getListForeground();
+	}
+
+	public Color getTitleBackgroundEnd() {
+		return getButton();
+	}
+
 	/**
 	 * Returns the mix of {@link #getButton()} with {@link #getButtonDarker()} with
 	 * weight {@code weight}. This weight must be within the interval [0, 1].
