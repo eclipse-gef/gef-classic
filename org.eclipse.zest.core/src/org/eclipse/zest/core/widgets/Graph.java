@@ -55,6 +55,7 @@ import org.eclipse.zest.layouts.interfaces.ExpandCollapseManager;
 import org.eclipse.zest.layouts.interfaces.LayoutContext;
 
 import org.eclipse.draw2d.Animation;
+import org.eclipse.draw2d.AutoscaleFreeformViewport;
 import org.eclipse.draw2d.Button;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.ConnectionRouter;
@@ -70,6 +71,7 @@ import org.eclipse.draw2d.ScalableFigure;
 import org.eclipse.draw2d.ScalableFreeformLayeredPane;
 import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.TreeSearch;
+import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -181,8 +183,6 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		DARK_BLUE = new Color(Display.getDefault(), 1, 70, 122);
 		LIGHT_YELLOW = new Color(Display.getDefault(), 255, 255, 206);
 
-		this.setViewport(new FreeformViewport());
-
 		this.getVerticalBar().addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -221,7 +221,9 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			}
 		});
 
-		this.setContents(createLayers());
+		IFigure contents = createLayers();
+		this.setViewport(createViewport());
+		this.setContents(contents);
 		GraphDragSupport dragSupport = createGraphDragSupport();
 		this.getLightweightSystem().getRootFigure().addMouseListener(dragSupport);
 		this.getLightweightSystem().getRootFigure().addMouseMotionListener(dragSupport);
@@ -239,10 +241,6 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		this.subgraphFigures = new HashSet<>();
 		this.zoomListener = new ZoomGestureListener();
 		this.rotateListener = new RotateGestureListener();
-
-		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
-			InternalDraw2dUtils.configureForAutoscalingMode(this, rootlayer::setScale);
-		}
 
 		this.addPaintListener(event -> {
 			if (shouldSheduleLayout) {
@@ -550,7 +548,10 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	public Dimension getPreferredSize() {
 		if (preferredSize.width < 0 || preferredSize.height < 0) {
 			org.eclipse.swt.graphics.Point size = getSize();
-			double scale = getZoomManager().getZoom() * InternalDraw2dUtils.calculateScale(this);
+			double scale = getZoomManager().getZoom();
+			if (getViewport() instanceof AutoscaleFreeformViewport vp) {
+				scale *= vp.getScale();
+			}
 			return new Dimension((int) (size.x / scale + 0.5), (int) (size.y / scale + 0.5));
 		}
 		return preferredSize;
@@ -697,6 +698,15 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 */
 	protected GraphDragSupport createGraphDragSupport() {
 		return new DragSupport();
+	}
+
+	/* package */ Viewport createViewport() {
+		if (InternalDraw2dUtils.isAutoScaleEnabled()) {
+			AutoscaleFreeformViewport viewport = new AutoscaleFreeformViewport(false);
+			InternalDraw2dUtils.configureForAutoscalingMode(this, viewport::setScale);
+			return viewport;
+		}
+		return new FreeformViewport();
 	}
 
 	// /////////////////////////////////////////////////////////////////////////////////
