@@ -54,7 +54,8 @@ public class HSLTest {
 				Arguments.of(40, 0, 0, 0.0, 1.0, 0.078), // Deep red, high saturation/low lightness
 				Arguments.of(255, 128, 0, 30.1, 1.0, 0.5), // Orange (Mid-segment)
 				Arguments.of(255, 254, 254, 0.0, 1.0, 0.998), // Tiny Delta Red
-				Arguments.of(127, 128, 127, 120.0, 0.004, 0.5) // Tiny Delta Green
+				Arguments.of(127, 128, 127, 120.0, 0.004, 0.5), // Tiny Delta Green
+				Arguments.of(255, 153, 153, 0.0, 1.0, 0.8) // #1066
 		);
 	}
 

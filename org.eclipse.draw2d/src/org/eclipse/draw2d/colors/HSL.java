@@ -161,7 +161,12 @@ public record HSL(double h, double s, double l) {
 				h += 360.0;
 			}
 		}
-		return new HSL(h, s, l);
+		return new HSL(clamp(h, 0, 360), clamp(s, 0, 1), clamp(l, 0, 1));
+	}
+
+	// TODO Use Math.clamp(value,min,max) with Java 21
+	private static double clamp(double value, double min, double max) {
+		return Math.min(max, Math.max(value, min));
 	}
 
 	/**
