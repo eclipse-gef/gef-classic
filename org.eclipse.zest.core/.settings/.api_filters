@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.zest.core" version="2">
     <resource path="src/org/eclipse/zest/core/widgets/Graph.java" type="org.eclipse.zest.core.widgets.Graph">
+        <filter id="336658481">
+            <message_arguments>
+                <message_argument value="org.eclipse.zest.core.widgets.Graph"/>
+                <message_argument value="KEY_ANIMATION_TIME"/>
+            </message_arguments>
+        </filter>
+        <filter id="336658481">
+            <message_arguments>
+                <message_argument value="org.eclipse.zest.core.widgets.Graph"/>
+                <message_argument value="KEY_FISHEYE_ANIMATION_TIME"/>
+            </message_arguments>
+        </filter>
         <filter id="576725006">
             <message_arguments>
                 <message_argument value="IContainer2"/>
