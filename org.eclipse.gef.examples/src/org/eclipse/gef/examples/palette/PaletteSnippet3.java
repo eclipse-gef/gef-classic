@@ -82,7 +82,7 @@ public class PaletteSnippet3 extends ViewPart {
 	 * Defines arbitrary colors that distinguish themselves from the default
 	 * palette.
 	 */
-	private static class ShapesColorProvider extends PaletteColorProvider {
+	public static class ShapesColorProvider extends PaletteColorProvider {
 		public static final Color COLOR_PALETTE_BACKGROUND = ColorConstants.button;
 		public static final Color COLOR_ENTRY_SELECTED = getShiftedColor(COLOR_PALETTE_BACKGROUND, 24);
 		public static final Color COLOR_DRAWER_GRAD_BEGIN = getShiftedColor(COLOR_PALETTE_BACKGROUND, -8);

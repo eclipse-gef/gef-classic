@@ -28,7 +28,7 @@ import org.eclipse.gef.ui.palette.PaletteColorProvider;
 import org.eclipse.gef.ui.palette.PaletteViewer;
 
 import org.eclipse.gef.examples.palette.PaletteSnippet3;
-import org.eclipse.gef.examples.shapes.palette.ShapesColorProvider;
+import org.eclipse.gef.examples.palette.PaletteSnippet3.ShapesColorProvider;
 
 import org.junit.jupiter.api.Test;
 
