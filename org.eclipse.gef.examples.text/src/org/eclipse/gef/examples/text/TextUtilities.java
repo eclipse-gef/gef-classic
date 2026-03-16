@@ -25,8 +25,7 @@ public class TextUtilities {
 		EditPart end = endLoc.part;
 		EditPart begin = beginLoc.part;
 
-		if (end == begin)
-		 {
+		if (end == begin) {
 			return endLoc.offset >= beginLoc.offset; // Bias towards forward
 		}
 		EditPart ancestor = ToolUtilities.findCommonAncestor(end, begin);
