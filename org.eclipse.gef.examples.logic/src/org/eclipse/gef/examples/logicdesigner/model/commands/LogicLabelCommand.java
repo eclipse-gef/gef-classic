@@ -25,8 +25,7 @@ public class LogicLabelCommand extends Command {
 		label = l;
 		if (s != null) {
 			newName = s;
-		}
-		else {
+		} else {
 			newName = ""; //$NON-NLS-1$
 		}
 	}

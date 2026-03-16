@@ -189,8 +189,7 @@ public abstract class StyleComboContributionItem extends ContributionItem {
 			}
 			Object style = styleService.getStyle(getProperty());
 			String value = style.toString();
-			if (StyleService.UNDEFINED.equals(style))
-			 {
+			if (StyleService.UNDEFINED.equals(style)) {
 				value = ""; //$NON-NLS-1$
 			}
 			int index = findIndexOf(value);

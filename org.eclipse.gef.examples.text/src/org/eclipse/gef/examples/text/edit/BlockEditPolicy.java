@@ -84,8 +84,7 @@ public class BlockEditPolicy extends GraphicalEditPolicy {
 		TextLocation where = request.getSelectionRange().begin;
 
 		CompoundEditCommand command = (CompoundEditCommand) request.getPreviousCommand();
-		if (command == null)
-		 {
+		if (command == null) {
 			command = new CompoundEditCommand("Backspace"); //$NON-NLS-1$
 		}
 
@@ -202,8 +201,7 @@ public class BlockEditPolicy extends GraphicalEditPolicy {
 		CompoundEditCommand command = null;
 		if (request.getPreviousCommand() instanceof CompoundEditCommand) {
 			command = (CompoundEditCommand) request.getPreviousCommand();
-		}
-		else {
+		} else {
 			command = new CompoundEditCommand("typing"); //$NON-NLS-1$
 		}
 		command.pendEdit(edit);
