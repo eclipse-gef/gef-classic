@@ -119,7 +119,8 @@ class InternalLayoutContext implements LayoutContext {
 			subgraph.applyLayoutChanges();
 		}
 		if (animationHint) {
-			Animation.run(Graph.ANIMATION_TIME);
+			Animation.run(container.getGraph().getData(Graph.KEY_ANIMATION_TIME) instanceof Integer val ? val
+					: Graph.ANIMATION_TIME);
 		}
 		eventsOn = true;
 	}
