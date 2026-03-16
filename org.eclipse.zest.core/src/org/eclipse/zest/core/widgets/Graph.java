@@ -95,7 +95,13 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	public static final int FISHEYE_ANIMATION_TIME = 100;
 	private static final Image BACK_ARROW = FileImageDataProvider.createImage(Graph.class, "/icons/back_arrow.svg"); //$NON-NLS-1$
 
+	/**
+	 * @since 1.18
+	 */
 	public static final String KEY_ANIMATION_TIME = "zest.animationTime"; //$NON-NLS-1$
+	/**
+	 * @since 1.18
+	 */
 	public static final String KEY_FISHEYE_ANIMATION_TIME = "zest.fisheyeAnimationTime"; //$NON-NLS-1$
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
