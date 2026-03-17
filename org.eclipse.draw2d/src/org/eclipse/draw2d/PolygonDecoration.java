@@ -16,6 +16,7 @@ import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Transform;
 
 /**
@@ -155,4 +156,8 @@ public class PolygonDecoration extends Polygon implements RotatableDecoration {
 		transform.setRotation(angle);
 	}
 
+	@Override
+	public Rectangle getBounds() {
+		return super.getBounds().getExpanded(1, 1);
+	}
 }
