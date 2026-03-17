@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.draw2d" version="2">
+    <resource path="src/org/eclipse/draw2d/AbstractBackground.java" type="org.eclipse.draw2d.AbstractBackground">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.AbstractBackground"/>
+                <message_argument value="getInsets(IFigure)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.AbstractBackground"/>
+                <message_argument value="paint(IFigure, Graphics, Insets)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.AbstractBackground"/>
+                <message_argument value="paintBackground(IFigure, Graphics, Insets)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/draw2d/AbstractImageFigure.java" type="org.eclipse.draw2d.AbstractImageFigure">
         <filter comment="AbstractImageFigure is the offical startpoint for IImageFigure therefore it is ok that it implements that interface" id="576725006">
             <message_arguments>
@@ -69,6 +89,13 @@
             <message_arguments>
                 <message_argument value="Graphics"/>
                 <message_argument value="ScaledGraphics"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/draw2d/shadows/AbstractDropShadowBorder.java" type="org.eclipse.draw2d.shadows.AbstractDropShadowBorder">
+        <filter id="338849923">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.shadows.AbstractDropShadowBorder"/>
             </message_arguments>
         </filter>
     </resource>
