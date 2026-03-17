@@ -19,7 +19,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
-import org.eclipse.draw2d.AbstractBackground;
 import org.eclipse.draw2d.Animation;
 import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.BorderLayout;
@@ -39,6 +38,7 @@ import org.eclipse.draw2d.SchemeBorder;
 import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.Toggle;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.backgrounds.AbstractBackgroundBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -100,7 +100,7 @@ public class DrawerFigure extends Figure {
 		}
 	}
 
-	private class DrawerBackground extends AbstractBackground {
+	private class DrawerBackground extends AbstractBackgroundBorder {
 		@Override
 		public void paintBackground(IFigure figure, Graphics g, Insets insets) {
 			Rectangle r = Rectangle.SINGLETON;
