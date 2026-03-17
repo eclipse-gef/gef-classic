@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.pde.api.tools.annotations.NoOverride;
 import org.eclipse.pde.api.tools.annotations.NoReference;
 
+import org.eclipse.draw2d.backgrounds.BackgroundBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
@@ -1385,8 +1386,8 @@ public class Figure implements IFigure {
 		if (isOpaque()) {
 			graphics.fillRectangle(getBounds());
 		}
-		if (getBorder() instanceof AbstractBackground abstractBackground) {
-			abstractBackground.paintBackground(this, graphics, NO_INSETS);
+		if (getBorder() instanceof BackgroundBorder background) {
+			background.paintBackground(this, graphics, NO_INSETS);
 		}
 	}
 

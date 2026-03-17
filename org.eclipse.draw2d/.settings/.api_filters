@@ -72,4 +72,11 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/draw2d/shadows/AbstractDropShadowBorder.java" type="org.eclipse.draw2d.shadows.AbstractDropShadowBorder">
+        <filter id="338849923">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.shadows.AbstractDropShadowBorder"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
