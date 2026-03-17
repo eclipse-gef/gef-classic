@@ -58,7 +58,7 @@ public class ToolbarEditPart extends GroupEditPart {
 
 		};
 		figure.setOpaque(true);
-		figure.setBackgroundColor(getColorProvider().getButton());
+		figure.setBackgroundColor(getColorProvider().getToolbarEditPartBackground());
 		figure.setBorder(new MarginBorder(2, 1, 1, 1));
 
 		return figure;
