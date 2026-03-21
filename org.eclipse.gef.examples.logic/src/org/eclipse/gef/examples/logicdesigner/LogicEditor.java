@@ -96,6 +96,8 @@ import org.eclipse.gef.SnapToGrid;
 import org.eclipse.gef.commands.CommandStackEvent;
 import org.eclipse.gef.dnd.TemplateTransferDragSourceListener;
 import org.eclipse.gef.dnd.TemplateTransferDropTargetListener;
+import org.eclipse.gef.editparts.GridLayer;
+import org.eclipse.gef.editparts.HierarchicalGridLayer;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -437,7 +439,12 @@ public class LogicEditor extends GraphicalEditorWithFlyoutPalette {
 		super.configureGraphicalViewer();
 		ScrollingGraphicalViewer viewer = (ScrollingGraphicalViewer) getGraphicalViewer();
 
-		ScalableFreeformRootEditPart rootEP = new ScalableFreeformRootEditPart();
+		ScalableFreeformRootEditPart rootEP = new ScalableFreeformRootEditPart() {
+			@Override
+			protected GridLayer createGridLayer() {
+				return new HierarchicalGridLayer();
+			}
+		};
 
 		// set clipping strategy for connection layer
 		ConnectionLayer connectionLayer = (ConnectionLayer) rootEP.getLayer(LayerConstants.CONNECTION_LAYER);
