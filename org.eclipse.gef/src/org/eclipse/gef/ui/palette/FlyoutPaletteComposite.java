@@ -1158,8 +1158,8 @@ public class FlyoutPaletteComposite extends Composite {
 			graphics.pushState();
 			org.eclipse.draw2d.geometry.Rectangle r = org.eclipse.draw2d.geometry.Rectangle.SINGLETON;
 			r.setBounds(getBounds());
-			graphics.setForegroundColor(getColorProvider().getListBackground());
-			graphics.setBackgroundColor(getColorProvider().getButton());
+			graphics.setForegroundColor(getColorProvider().getTitleForeground());
+			graphics.setBackgroundColor(getColorProvider().getTitleBackground());
 			graphics.fillGradient(r, true);
 
 			// draw bottom border
@@ -1316,8 +1316,8 @@ public class FlyoutPaletteComposite extends Composite {
 				graphics.pushState();
 				org.eclipse.draw2d.geometry.Rectangle r = org.eclipse.draw2d.geometry.Rectangle.SINGLETON;
 				r.setBounds(getBounds());
-				graphics.setForegroundColor(getColorProvider().getListBackground());
-				graphics.setBackgroundColor(getColorProvider().getButton());
+				graphics.setForegroundColor(getColorProvider().getTitleForeground());
+				graphics.setBackgroundColor(getColorProvider().getTitleBackground());
 				graphics.fillGradient(r, true);
 				graphics.popState();
 
