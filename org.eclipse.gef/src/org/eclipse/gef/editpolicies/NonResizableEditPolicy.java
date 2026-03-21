@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,11 +15,9 @@ package org.eclipse.gef.editpolicies;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Cursors;
 import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.FocusBorder;
-import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
@@ -66,11 +64,7 @@ public class NonResizableEditPolicy extends SelectionHandlesEditPolicy {
 	 * @return the new feedback figure
 	 */
 	protected IFigure createDragSourceFeedbackFigure() {
-		// Use a ghost rectangle for feedback
-		RectangleFigure r = new RectangleFigure();
-		FigureUtilities.makeGhostShape(r);
-		r.setLineStyle(Graphics.LINE_DOT);
-		r.setForegroundColor(ColorConstants.white);
+		RectangleFigure r = FigureUtilities.makeHighContrastGhostRectangle();
 		r.setBounds(getInitialFeedbackBounds());
 		r.validate();
 		addFeedback(r);
