@@ -20,13 +20,13 @@ import org.eclipse.swt.widgets.Composite;
 
 import org.eclipse.ui.part.ViewPart;
 
-import org.eclipse.draw2d.AbstractBackground;
 import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.ButtonModel;
 import org.eclipse.draw2d.Clickable;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.backgrounds.AbstractBackgroundBorder;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -136,7 +136,7 @@ public class PaletteSnippet3 extends ViewPart {
 			return editPart;
 		}
 
-		private static void updateFigure(EditPart editPart, Function<ButtonModel, AbstractBackground> factory) {
+		private static void updateFigure(EditPart editPart, Function<ButtonModel, AbstractBackgroundBorder> factory) {
 			Clickable toggle = editPart.getAdapter(Clickable.class);
 			if (toggle != null) {
 				ButtonModel toggleModel = toggle.getModel();
@@ -144,7 +144,7 @@ public class PaletteSnippet3 extends ViewPart {
 			}
 		}
 
-		private static class ToolEntryBackground extends AbstractBackground {
+		private static class ToolEntryBackground extends AbstractBackgroundBorder {
 			private final ButtonModel buttonModel;
 
 			public ToolEntryBackground(ButtonModel buttonModel) {
@@ -165,7 +165,7 @@ public class PaletteSnippet3 extends ViewPart {
 			}
 		}
 
-		private static class DrawerBackground extends AbstractBackground {
+		private static class DrawerBackground extends AbstractBackgroundBorder {
 			private final ButtonModel buttonModel;
 
 			public DrawerBackground(ButtonModel buttonModel) {

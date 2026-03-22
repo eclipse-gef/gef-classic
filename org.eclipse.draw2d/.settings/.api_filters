@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.draw2d" version="2">
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.draw2d.shadows.AbstractDropShadowBorder">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.shadows.AbstractDropShadowBorder"/>
+                <message_argument value="org.eclipse.draw2d_3.23.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.draw2d.shadows.EllipseDropShadowBorder">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.shadows.EllipseDropShadowBorder"/>
+                <message_argument value="org.eclipse.draw2d_3.23.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.draw2d.shadows.RectangleDropShadowBorder">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.draw2d.shadows.RectangleDropShadowBorder"/>
+                <message_argument value="org.eclipse.draw2d_3.23.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/draw2d/AbstractImageFigure.java" type="org.eclipse.draw2d.AbstractImageFigure">
         <filter comment="AbstractImageFigure is the offical startpoint for IImageFigure therefore it is ok that it implements that interface" id="576725006">
             <message_arguments>

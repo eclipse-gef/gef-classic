@@ -11,7 +11,7 @@
  *     Alois Zoitl - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.draw2d.shadows;
+package org.eclipse.draw2d.backgrounds.shadows;
 
 import org.eclipse.pde.api.tools.annotations.NoExtend;
 import org.eclipse.pde.api.tools.annotations.NoInstantiate;

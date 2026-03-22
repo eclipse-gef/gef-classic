@@ -11,7 +11,7 @@
  *     Alois Zoitl - initial API and implementation
  *******************************************************************************/
 
-package org.eclipse.draw2d.shadows;
+package org.eclipse.draw2d.backgrounds.shadows;
 
 import org.eclipse.swt.graphics.Color;
 
@@ -19,10 +19,10 @@ import org.eclipse.pde.api.tools.annotations.NoExtend;
 import org.eclipse.pde.api.tools.annotations.NoInstantiate;
 import org.eclipse.pde.api.tools.annotations.NoReference;
 
-import org.eclipse.draw2d.AbstractBackground;
 import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.backgrounds.AbstractBackgroundBorder;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -43,7 +43,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 @NoExtend
 @NoReference
 @NoInstantiate
-public abstract class AbstractDropShadowBorder extends AbstractBackground {
+public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder {
 
 	/**
 	 * default value for the drop shadow size as suited for a figure in an diagram

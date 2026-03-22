@@ -19,10 +19,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.backgrounds.shadows.EllipseDropShadowBorder;
+import org.eclipse.draw2d.backgrounds.shadows.RectangleDropShadowBorder;
 import org.eclipse.draw2d.examples.AbstractExample;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.draw2d.shadows.EllipseDropShadowBorder;
-import org.eclipse.draw2d.shadows.RectangleDropShadowBorder;
 
 public class ShadowsExample extends AbstractExample {
 

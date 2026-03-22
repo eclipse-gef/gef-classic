@@ -2,10 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.draw2d;singleton:=true
-Bundle-Version: 3.22.100.qualifier
+Bundle-Version: 3.23.0.qualifier
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.draw2d,
+ org.eclipse.draw2d.backgrounds,
+ org.eclipse.draw2d.backgrounds.shadows,
  org.eclipse.draw2d.colors,
  org.eclipse.draw2d.geometry,
  org.eclipse.draw2d.graph,
@@ -17,7 +19,6 @@ Export-Package: org.eclipse.draw2d,
    org.eclipse.draw2d.tests,
    org.eclipse.gef.examples.flow",
  org.eclipse.draw2d.parts,
- org.eclipse.draw2d.shadows,
  org.eclipse.draw2d.text,
  org.eclipse.draw2d.widgets,
  org.eclipse.draw2d.zoom
