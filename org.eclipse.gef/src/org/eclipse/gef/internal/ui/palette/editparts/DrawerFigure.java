@@ -317,7 +317,7 @@ public class DrawerFigure extends Figure {
 		scrollpane.setLayoutManager(new OverlayScrollPaneLayout());
 		scrollpane.setContents(new Figure());
 		scrollpane.getContents().setOpaque(true);
-		scrollpane.getContents().setBackgroundColor(colorProvider.getListBackground());
+		scrollpane.getContents().setBackgroundColor(colorProvider.getDrawerEditPartBackground());
 	}
 
 	@SuppressWarnings("static-method")

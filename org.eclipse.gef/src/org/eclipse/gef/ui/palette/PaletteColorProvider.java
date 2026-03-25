@@ -100,6 +100,32 @@ public class PaletteColorProvider extends GEFColorProvider {
 		return ColorConstants.listForeground;
 	}
 
+	@Override
+	public Color getTitleForeground() {
+		return getListBackground();
+	}
+
+	@Override
+	public Color getTitleBackground() {
+		return getButton();
+	}
+
+	public Color getToolbarEditPartBackground() {
+		return getButton();
+	}
+
+	public Color getGroupEditPartBackground() {
+		return getListBackground();
+	}
+
+	public Color getSliderPaletteEditPartBackground() {
+		return getListBackground();
+	}
+
+	public Color getDrawerEditPartBackground() {
+		return getListBackground();
+	}
+
 	/**
 	 * Returns the mix of {@link #getButton()} with {@link #getButtonDarker()} with
 	 * weight {@code weight}. This weight must be within the interval [0, 1].

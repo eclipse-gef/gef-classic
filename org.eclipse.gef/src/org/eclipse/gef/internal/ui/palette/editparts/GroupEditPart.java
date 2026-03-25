@@ -44,7 +44,7 @@ public class GroupEditPart extends PaletteEditPart {
 	public IFigure createFigure() {
 		Figure figure = new Figure();
 		figure.setOpaque(true);
-		figure.setBackgroundColor(getColorProvider().getListBackground());
+		figure.setBackgroundColor(getColorProvider().getGroupEditPartBackground());
 		return figure;
 	}
 
