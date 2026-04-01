@@ -263,6 +263,10 @@ public class LightweightSystem {
 		}
 		textUtilities = new DrawableTextUtilities(canvas);
 		flowUtilities = new DrawableFlowUtilities(textUtilities);
+		c.addDisposeListener(event -> {
+			textUtilities = TextUtilities.INSTANCE;
+			flowUtilities = FlowUtilities.INSTANCE;
+		});
 		getEventDispatcher().setControl(c);
 		addListeners();
 

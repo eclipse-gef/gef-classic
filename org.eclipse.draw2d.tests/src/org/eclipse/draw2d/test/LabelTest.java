@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Google, Inc. and others.
+ * Copyright (c) 2011, 2026 Google, Inc. and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -16,8 +16,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.draw2d.CompoundBorder;
+import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
@@ -144,7 +146,26 @@ public class LabelTest extends BaseTestCase {
 		assertTextSize(label);
 	}
 
-	private static final void assertTextSize(Label label) throws Exception {
+	/**
+	 * @see <a href=
+	 *      "https://github.com/eclipse-gef/gef-classic/issues/1079">here</a>
+	 */
+	@Test
+	@SuppressWarnings("static-method")
+	public void test_disposed() {
+		Shell shell = new Shell();
+		FigureCanvas canvas = new FigureCanvas(shell);
+		canvas.setFont(shell.getFont());
+
+		Label label = new Label("1234"); //$NON-NLS-1$
+		canvas.setContents(label);
+		canvas.dispose();
+
+		assertTextSize(label);
+		shell.dispose();
+	}
+
+	private static final void assertTextSize(Label label) {
 		// create calc GC
 		GC gc = new GC(Display.getDefault());
 		gc.setAdvanced(true);
