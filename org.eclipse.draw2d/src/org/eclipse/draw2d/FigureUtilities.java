@@ -35,6 +35,7 @@ public class FigureUtilities {
 	private static GC gc;
 	private static Font appliedFont;
 	private static FontMetrics metrics;
+	@Deprecated(forRemoval = true, since = "2026-06")
 	private static Color ghostFillColor = new Color(null, 31, 31, 31);
 
 	/**
@@ -219,6 +220,7 @@ public class FigureUtilities {
 	 * @return the ghosted shape
 	 * @since 2.0
 	 */
+	@Deprecated(forRemoval = true, since = "2026-06")
 	public static Shape makeGhostShape(Shape s) {
 		s.setBackgroundColor(ghostFillColor);
 		s.setFillXOR(true);

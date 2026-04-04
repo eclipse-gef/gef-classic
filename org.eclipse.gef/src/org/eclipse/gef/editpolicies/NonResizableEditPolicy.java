@@ -16,13 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Cursors;
-import org.eclipse.draw2d.FigureUtilities;
 import org.eclipse.draw2d.FocusBorder;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.colors.HSL;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -68,7 +69,10 @@ public class NonResizableEditPolicy extends SelectionHandlesEditPolicy {
 	protected IFigure createDragSourceFeedbackFigure() {
 		// Use a ghost rectangle for feedback
 		RectangleFigure r = new RectangleFigure();
-		FigureUtilities.makeGhostShape(r);
+		r.setBackgroundColor(
+				HSL.fromColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected())
+						.darker(0.3).toColor());
+		r.setAlpha(50);
 		r.setLineStyle(Graphics.LINE_DOT);
 		r.setForegroundColor(ColorConstants.white);
 		r.setBounds(getInitialFeedbackBounds());

@@ -13,11 +13,12 @@
 package org.eclipse.gef.editpolicies;
 
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.FigureUtilities;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
+import org.eclipse.draw2d.colors.HSL;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Translatable;
@@ -326,7 +327,10 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 	protected IFigure getSizeOnDropFeedback() {
 		if (sizeOnDropFeedback == null) {
 			sizeOnDropFeedback = new RectangleFigure();
-			FigureUtilities.makeGhostShape((Shape) sizeOnDropFeedback);
+			sizeOnDropFeedback.setBackgroundColor(
+					HSL.fromColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected())
+							.darker(0.3).toColor());
+			((Shape) sizeOnDropFeedback).setAlpha(50);
 			((Shape) sizeOnDropFeedback).setLineStyle(Graphics.LINE_DASHDOT);
 			sizeOnDropFeedback.setForegroundColor(ColorConstants.white);
 			addFeedback(sizeOnDropFeedback);
