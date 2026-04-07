@@ -110,18 +110,30 @@ public class PaletteColorProvider extends GEFColorProvider {
 		return getButton();
 	}
 
+	/**
+	 * @since 3.26
+	 */
 	public Color getToolbarEditPartBackground() {
 		return getButton();
 	}
 
+	/**
+	 * @since 3.26
+	 */
 	public Color getGroupEditPartBackground() {
 		return getListBackground();
 	}
 
+	/**
+	 * @since 3.26
+	 */
 	public Color getSliderPaletteEditPartBackground() {
 		return getListBackground();
 	}
 
+	/**
+	 * @since 3.26
+	 */
 	public Color getDrawerEditPartBackground() {
 		return getListBackground();
 	}
