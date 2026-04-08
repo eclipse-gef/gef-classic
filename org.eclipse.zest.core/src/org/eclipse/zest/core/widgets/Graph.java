@@ -43,6 +43,8 @@ import org.eclipse.zest.core.viewers.internal.ZoomManager;
 import org.eclipse.zest.core.widgets.gestures.RotateGestureListener;
 import org.eclipse.zest.core.widgets.gestures.ZoomGestureListener;
 import org.eclipse.zest.core.widgets.internal.ContainerFigure;
+import org.eclipse.zest.core.widgets.internal.GraphLightweightSystem;
+import org.eclipse.zest.core.widgets.internal.ImageRegistry;
 import org.eclipse.zest.core.widgets.internal.ZestRootLayer;
 import org.eclipse.zest.layouts.InvalidLayoutConfiguration;
 import org.eclipse.zest.layouts.LayoutAlgorithm;
@@ -183,7 +185,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 * @since 1.8
 	 */
 	public Graph(Composite parent, int style, boolean enableHideNodes) {
-		super(parent, style | SWT.DOUBLE_BUFFERED);
+		super(parent, style | SWT.DOUBLE_BUFFERED, new GraphLightweightSystem());
 		this.setBackground(ColorConstants.white);
 
 		LIGHT_BLUE = new Color(Display.getDefault(), 216, 228, 248);
@@ -206,6 +208,9 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			}
 		});
 
+		ImageRegistry registry = new ImageRegistry(getDisplay());
+		addDisposeListener(event -> registry.dispose());
+		((GraphLightweightSystem) getLightweightSystem()).setImageRegistry(registry);
 		// @tag CGraph.workaround : this allows me to handle mouse events
 		// outside of the canvas
 		this.getLightweightSystem().setEventDispatcher(new SWTEventDispatcher() {
