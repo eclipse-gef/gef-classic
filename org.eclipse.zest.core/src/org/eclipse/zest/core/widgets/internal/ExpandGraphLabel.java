@@ -201,7 +201,7 @@ public class ExpandGraphLabel extends Figure implements ActionListener {
 		int blue = (int) (baseColor.getBlue() * 0.8 + 0.5);
 		int red = (int) (baseColor.getRed() * 0.8 + 0.5);
 		int green = (int) (baseColor.getGreen() * 0.8 + 0.5);
-		Color darkerBackground = new Color(Display.getCurrent(), new RGB(red, green, blue));
+		Color darkerBackground = new Color(new RGB(red, green, blue));
 		graphics.setForegroundColor(darkerBackground);
 		graphics.setBackgroundColor(getBackgroundColor());
 

@@ -154,7 +154,7 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 		green = (int) (green - (green * 0.20));
 		green = green > 0 ? green : 0;
 
-		Color lightenColor = new Color(Display.getCurrent(), new RGB(red, green, blue));
+		Color lightenColor = new Color(new RGB(red, green, blue));
 		graphics.setForegroundColor(lightenColor);
 		graphics.setBackgroundColor(getBackgroundColor());
 
