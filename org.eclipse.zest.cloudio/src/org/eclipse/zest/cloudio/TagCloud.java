@@ -224,10 +224,10 @@ public class TagCloud extends Canvas {
 		this.accuracy = accuracy;
 		this.maxSize = maxSize;
 		cloudArea = new Rectangle(0, 0, maxSize, maxSize);
-		highlightColor = new Color(getDisplay(), Display.getDefault().getSystemColor(SWT.COLOR_RED).getRGB());
+		highlightColor = new Color(Display.getDefault().getSystemColor(SWT.COLOR_RED).getRGB());
 		gc = new GC(this);
 		layouter = new DefaultLayouter(accuracy, accuracy);
-		setBackground(new Color(getDisplay(), Display.getDefault().getSystemColor(SWT.COLOR_BLACK).getRGB()));
+		setBackground(new Color(Display.getDefault().getSystemColor(SWT.COLOR_BLACK).getRGB()));
 		initListeners();
 		textLayerImage = new Image(getDisplay(), 100, 100);
 		zoomFit();

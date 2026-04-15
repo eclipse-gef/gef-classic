@@ -51,7 +51,7 @@ public class InfoTextLayoutHitTest {
 		layout = new TextLayout(display);
 		layout.setFont(font);
 		layout.setText("GEF! @ This is a test for hit testing \ufeec\ufeeb\ufeed bidi"); ////$NON-NLS-1$
-		// layout.setStyle(new TextStyle(null, new Color(null, 100, 200, 150), null),
+		// layout.setStyle(new TextStyle(null, new Color(100, 200, 150), null),
 		// 10, 13);
 
 		int width = 290;
