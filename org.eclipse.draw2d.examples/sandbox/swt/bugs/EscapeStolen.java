@@ -58,7 +58,7 @@ public class EscapeStolen {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				canvas.setBackground(new Color(null, 30, 30, 255));
+				canvas.setBackground(new Color(30, 30, 255));
 			}
 
 			@Override

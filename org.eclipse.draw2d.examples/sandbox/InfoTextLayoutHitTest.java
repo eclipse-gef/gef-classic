@@ -40,13 +40,13 @@ public class InfoTextLayoutHitTest {
 		final Display display = Display.getDefault();
 		final Shell shell = new Shell();
 
-		wheel[0] = new Color(display, 255, 255, 100);
-		wheel[1] = new Color(display, 255, 160, 160);
-		wheel[2] = new Color(display, 255, 100, 255);
-		wheel[3] = new Color(display, 160, 160, 255);
-		wheel[4] = new Color(display, 100, 255, 255);
-		wheel[5] = new Color(display, 160, 255, 160);
-		defaultColor = new Color(display, 255, 50, 50);
+		wheel[0] = new Color(255, 255, 100);
+		wheel[1] = new Color(255, 160, 160);
+		wheel[2] = new Color(255, 100, 255);
+		wheel[3] = new Color(160, 160, 255);
+		wheel[4] = new Color(100, 255, 255);
+		wheel[5] = new Color(160, 255, 160);
+		defaultColor = new Color(255, 50, 50);
 
 		layout = new TextLayout(display);
 		layout.setFont(font);
@@ -77,7 +77,7 @@ public class InfoTextLayoutHitTest {
 				}
 			}
 		}
-		gc.setForeground(new Color(null, 0, 0, 0));
+		gc.setForeground(new Color(0, 0, 0));
 		layout.draw(gc, 20, 20);
 		gc.dispose();
 

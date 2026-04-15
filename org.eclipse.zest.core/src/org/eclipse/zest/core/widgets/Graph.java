@@ -186,11 +186,11 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
 		this.setBackground(ColorConstants.white);
 
-		LIGHT_BLUE = new Color(Display.getDefault(), 216, 228, 248);
-		LIGHT_BLUE_CYAN = new Color(Display.getDefault(), 213, 243, 255);
-		GREY_BLUE = new Color(Display.getDefault(), 139, 150, 171);
-		DARK_BLUE = new Color(Display.getDefault(), 1, 70, 122);
-		LIGHT_YELLOW = new Color(Display.getDefault(), 255, 255, 206);
+		LIGHT_BLUE = new Color(216, 228, 248);
+		LIGHT_BLUE_CYAN = new Color(213, 243, 255);
+		GREY_BLUE = new Color(139, 150, 171);
+		DARK_BLUE = new Color(1, 70, 122);
+		LIGHT_YELLOW = new Color(255, 255, 206);
 
 		this.getVerticalBar().addSelectionListener(new SelectionAdapter() {
 			@Override

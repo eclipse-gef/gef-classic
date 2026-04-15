@@ -49,7 +49,7 @@ public class CaretExample extends AbstractExample {
 		final FlowPage page = new FlowPage() {
 			@Override
 			protected void paintFigure(org.eclipse.draw2d.Graphics graphics) {
-				graphics.setBackgroundColor(new Color(null, 190, 220, 250));
+				graphics.setBackgroundColor(new Color(190, 220, 250));
 				graphics.fillRectangle(getBounds());
 			}
 		};

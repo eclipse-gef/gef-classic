@@ -213,7 +213,7 @@ public class TriangleSubgraph extends FigureSubgraph {
 				+ ((double) 255 - parameters.color.getGreen()) / avgNumOfChildrenInSugbraph);
 		int b = (int) (parameters.color.getBlue()
 				+ ((double) 255 - parameters.color.getBlue()) / avgNumOfChildrenInSugbraph);
-		figure.setBackgroundColor(new Color(parameters.color.getDevice(), r, g, b));
+		figure.setBackgroundColor(new Color(r, g, b));
 		figure.setForegroundColor(parameters.color);
 	}
 

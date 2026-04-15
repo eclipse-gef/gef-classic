@@ -45,7 +45,7 @@ public class TextSize extends AbstractSWTTransform {
 	@Override
 	protected Shell createShell(Display display) {
 		Shell shell = super.createShell(display);
-		shell.setBackground(new Color(null, 60, 100, 255));
+		shell.setBackground(new Color(60, 100, 255));
 		return shell;
 	}
 }

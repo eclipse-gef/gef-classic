@@ -36,7 +36,7 @@ public class FigureUtilities {
 	private static Font appliedFont;
 	private static FontMetrics metrics;
 	@Deprecated(forRemoval = true, since = "2026-06")
-	private static Color ghostFillColor = new Color(null, 31, 31, 31);
+	private static Color ghostFillColor = new Color(31, 31, 31);
 
 	/**
 	 * Returns a new Color the same as the passed color in a darker hue.
@@ -238,7 +238,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color mixColors(Color c1, Color c2, double weight) {
-		return new Color(null, (int) (c1.getRed() * weight + c2.getRed() * (1 - weight)),
+		return new Color((int) (c1.getRed() * weight + c2.getRed() * (1 - weight)),
 				(int) (c1.getGreen() * weight + c2.getGreen() * (1 - weight)),
 				(int) (c1.getBlue() * weight + c2.getBlue() * (1 - weight)));
 	}
@@ -252,7 +252,7 @@ public class FigureUtilities {
 	 * @since 2.0
 	 */
 	public static Color mixColors(Color c1, Color c2) {
-		return new Color(null, (c1.getRed() + c2.getRed()) / 2, (c1.getGreen() + c2.getGreen()) / 2,
+		return new Color((c1.getRed() + c2.getRed()) / 2, (c1.getGreen() + c2.getGreen()) / 2,
 				(c1.getBlue() + c2.getBlue()) / 2);
 	}
 

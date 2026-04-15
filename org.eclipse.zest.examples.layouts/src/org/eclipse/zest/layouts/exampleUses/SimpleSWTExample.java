@@ -58,15 +58,15 @@ import org.eclipse.zest.layouts.exampleStructures.SimpleRelationship;
  */
 public class SimpleSWTExample {
 
-	private static final Color BLACK = new Color(Display.getDefault(), 0, 0, 0);
-	private static final Color NODE_NORMAL_COLOR = new Color(Display.getDefault(), 225, 225, 255);
-	private static final Color NODE_SELECTED_COLOR = new Color(Display.getDefault(), 255, 125, 125);
-	private static final Color NODE_ADJACENT_COLOR = new Color(Display.getDefault(), 255, 200, 125);
-	private static final Color BORDER_NORMAL_COLOR = new Color(Display.getDefault(), 0, 0, 0);
-	private static final Color BORDER_SELECTED_COLOR = new Color(Display.getDefault(), 255, 0, 0);
-	private static final Color BORDER_ADJACENT_COLOR = new Color(Display.getDefault(), 255, 128, 0);
-	private static final Color RELATIONSHIP_COLOR = new Color(Display.getDefault(), 192, 192, 225);
-	private static final Color RELATIONSHIP_HIGHLIGHT_COLOR = new Color(Display.getDefault(), 255, 200, 125);
+	private static final Color BLACK = new Color(0, 0, 0);
+	private static final Color NODE_NORMAL_COLOR = new Color(225, 225, 255);
+	private static final Color NODE_SELECTED_COLOR = new Color(255, 125, 125);
+	private static final Color NODE_ADJACENT_COLOR = new Color(255, 200, 125);
+	private static final Color BORDER_NORMAL_COLOR = new Color(0, 0, 0);
+	private static final Color BORDER_SELECTED_COLOR = new Color(255, 0, 0);
+	private static final Color BORDER_ADJACENT_COLOR = new Color(255, 128, 0);
+	private static final Color RELATIONSHIP_COLOR = new Color(192, 192, 225);
+	private static final Color RELATIONSHIP_HIGHLIGHT_COLOR = new Color(255, 200, 125);
 
 	@SuppressWarnings("nls")
 	private static final String[] NAMES = { "Peggy", "Rob", "Ian", "Chris", "Simon", "Wendy", "Steven", "Kim", "Neil",
@@ -195,7 +195,7 @@ public class SimpleSWTExample {
 		mainComposite.setLayoutData(mainGridData);
 		mainComposite.addPaintListener(new GraphPaintListener());
 
-		mainComposite.setBackground(new Color(Display.getCurrent(), 255, 255, 255));
+		mainComposite.setBackground(new Color(255, 255, 255));
 		mainComposite.setLayout(null);
 
 		mainComposite.addMouseMoveListener(e -> {

@@ -47,7 +47,7 @@ import org.eclipse.gef.ui.palette.PaletteViewerPreferences;
 public class PinnablePaletteStackFigure extends Figure {
 
 	private static final Dimension EMPTY_DIMENSION = new Dimension(0, 0);
-	private static final Color ARROW_HOVER = new Color(null, 229, 229, 219);
+	private static final Color ARROW_HOVER = new Color(229, 229, 219);
 
 	static final int ARROW_WIDTH = 9;
 

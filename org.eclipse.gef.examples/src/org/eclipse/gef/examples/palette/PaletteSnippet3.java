@@ -111,7 +111,7 @@ public class PaletteSnippet3 extends ViewPart {
 			int r = Math.max(0, Math.min(color.getRed() + delta, 255));
 			int g = Math.max(0, Math.min(color.getGreen() + delta, 255));
 			int b = Math.max(0, Math.min(color.getBlue() + delta, 255));
-			return new Color(color.getDevice(), r, g, b);
+			return new Color(r, g, b);
 		}
 	}
 
