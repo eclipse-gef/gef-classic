@@ -119,11 +119,11 @@ public class BasicColorProvider implements ColorProvider {
 
 	@Override
 	public Color getListHoverBackgroundColor() {
-		return new Color(null, 252, 228, 179);
+		return new Color(252, 228, 179);
 	}
 
 	@Override
 	public Color getListSelectedBackgroundColor() {
-		return new Color(null, 207, 227, 250);
+		return new Color(207, 227, 250);
 	}
 }

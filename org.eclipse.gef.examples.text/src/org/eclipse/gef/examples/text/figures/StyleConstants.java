@@ -18,7 +18,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 
 public class StyleConstants {
-	public static final Color CODE_FG = new Color(null, 0, 0, 32);
+	public static final Color CODE_FG = new Color(0, 0, 32);
 	public static final Font COURIER = new Font(null, "Courier New", 10, 0); //$NON-NLS-1$
 	public static final Font COURIER_BOLD = new Font(null, "Courier New", 10, SWT.BOLD); //$NON-NLS-1$
 	public static final Font COMMENT = new Font(null, "Arial", 10, 0); //$NON-NLS-1$

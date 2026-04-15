@@ -27,7 +27,7 @@ import org.eclipse.gef.editpolicies.GraphicalEditPolicy;
 public class ActivityContainerHighlightEditPolicy extends GraphicalEditPolicy {
 
 	private Color revertColor;
-	private static Color highLightColor = new Color(null, 200, 200, 240);
+	private static Color highLightColor = new Color(200, 200, 240);
 
 	/**
 	 * @see org.eclipse.gef.EditPolicy#eraseTargetFeedback(org.eclipse.gef.Request)

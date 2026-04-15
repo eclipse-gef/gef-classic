@@ -37,8 +37,8 @@ import org.eclipse.gef.internal.ui.palette.editparts.PinFigure;
  * @since 3.20
  */
 public class PaletteColorProvider extends GEFColorProvider {
-	private static final Color HOVER_COLOR_HICONTRAST = new Color(null, 0, 128, 0);
-	private static final Color SELECTED_COLOR_HICONTRAST = new Color(null, 128, 0, 128);
+	private static final Color HOVER_COLOR_HICONTRAST = new Color(0, 128, 0);
+	private static final Color SELECTED_COLOR_HICONTRAST = new Color(128, 0, 128);
 	private final Map<Double, Color> mixedButtonDarker = new HashMap<>();
 	private final Map<Double, Color> mixedListBackground = new HashMap<>();
 	private Color hotspotColor;

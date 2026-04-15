@@ -35,7 +35,7 @@ public class DNDTest {
 		shell.setLayout(new FillLayout());
 
 		Canvas dragCanvas = new Canvas(shell, SWT.NONE);
-		dragCanvas.setBackground(new Color(null, 255, 255, 255));
+		dragCanvas.setBackground(new Color(255, 255, 255));
 		dragCanvas.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseDoubleClick(MouseEvent event) {
@@ -71,7 +71,7 @@ public class DNDTest {
 		});
 
 		Canvas dropCanvas = new Canvas(shell, SWT.NONE);
-		dropCanvas.setBackground(new Color(null, 128, 128, 128));
+		dropCanvas.setBackground(new Color(128, 128, 128));
 		DropTarget dt = new DropTarget(dropCanvas, DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_LINK);
 		dt.setTransfer(TextTransfer.getInstance());
 		dt.addDropListener(new DropTargetListener() {

@@ -26,7 +26,7 @@ import org.eclipse.draw2d.ToolbarLayout;
 public class UMLClassFigure extends Figure {
 
 	/** Background color of UMLFigure */
-	public static final Color CLASS_COLOR = new Color(null, 255, 255, 206);
+	public static final Color CLASS_COLOR = new Color(255, 255, 206);
 
 	/** CompartmentFigures */
 	private final CompartmentFigure attributeFigure = new CompartmentFigure();

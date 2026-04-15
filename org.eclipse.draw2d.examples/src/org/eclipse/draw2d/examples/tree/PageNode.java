@@ -35,12 +35,12 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class PageNode extends Figure {
 
 	private boolean selected;
-	static final Color gradient1 = new Color(null, 232, 232, 240);
-	static final Color gradient2 = new Color(null, 176, 184, 216);
-	static final Color corner1 = new Color(null, 200, 208, 223);
-	static final Color corner2 = new Color(null, 160, 172, 200);
-	static final Color blue = new Color(null, 152, 168, 200);
-	static final Color shadow = new Color(null, 202, 202, 202);
+	static final Color gradient1 = new Color(232, 232, 240);
+	static final Color gradient2 = new Color(176, 184, 216);
+	static final Color corner1 = new Color(200, 208, 223);
+	static final Color corner2 = new Color(160, 172, 200);
+	static final Color blue = new Color(152, 168, 200);
+	static final Color shadow = new Color(202, 202, 202);
 
 	static final int CORNER_SIZE = 10;
 	static final Border BORDER = new CompoundBorder(new FoldedPageBorder(), new MarginBorder(4, 4, 8, 3));

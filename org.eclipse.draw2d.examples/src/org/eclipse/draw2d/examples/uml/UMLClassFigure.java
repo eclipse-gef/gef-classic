@@ -30,7 +30,7 @@ import org.eclipse.draw2d.geometry.Insets;
 
 public class UMLClassFigure extends Figure {
 
-	static final Color BG = new Color(null, 242, 240, 255);
+	static final Color BG = new Color(242, 240, 255);
 
 	static Image classImage = new Image(null, UMLClassFigure.class.getResourceAsStream("class_obj.gif")); //$NON-NLS-1$
 

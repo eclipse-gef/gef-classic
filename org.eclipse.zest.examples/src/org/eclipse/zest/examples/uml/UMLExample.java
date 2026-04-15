@@ -106,7 +106,7 @@ public class UMLExample {
 		Display d = shell.getDisplay();
 		shell.setLayout(new FillLayout());
 		shell.setSize(400, 400);
-		classColor = new Color(null, 255, 255, 206);
+		classColor = new Color(255, 255, 206);
 
 		Font classFont = new Font(null, "Arial", 12, SWT.BOLD);
 		Image classImage = new Image(Display.getDefault(), UMLClassFigure.class.getResourceAsStream("class_obj.gif"));
