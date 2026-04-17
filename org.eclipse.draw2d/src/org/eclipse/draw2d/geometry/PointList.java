@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2023 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -10,8 +10,12 @@
  * Contributors:
  *     IBM Corporation - initial API and implementation
  *     Alexander Shatalin (Borland) - Contribution for Bug 238874
+ *     Malte Grave - Added Iterator and Iterable API
  *******************************************************************************/
 package org.eclipse.draw2d.geometry;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a List of Points. This class is used for building an
@@ -19,7 +23,7 @@ package org.eclipse.draw2d.geometry;
  * the client using {@link Point Points}. SWT uses integer arrays when painting
  * polylines and polygons.
  */
-public class PointList implements java.io.Serializable, Translatable {
+public class PointList implements java.io.Serializable, Translatable, Iterable<Point> {
 
 	private int[] points = {};
 	private Rectangle bounds;
@@ -55,6 +59,35 @@ public class PointList implements java.io.Serializable, Translatable {
 	 */
 	public PointList(int size) {
 		points = new int[size * 2];
+	}
+
+	/**
+	 * An {@link Iterator} implementation for {@link PointList}.
+	 * <p>
+	 * This iterator traverses the internal primitive array and returns each
+	 * coordinate pair as a new {@link Point} object.
+	 * </p>
+	 *
+	 * @see java.lang.Iterable#iterator()
+	 * @see org.eclipse.draw2d.geometry.PointList
+	 * @since 3.28
+	 */
+	class PointListIterator implements Iterator<Point> {
+		private int currentIndex;
+
+		@Override
+		public boolean hasNext() {
+			return currentIndex < size();
+		}
+
+		@Override
+		public Point next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			return getPoint(currentIndex++);
+		}
+
 	}
 
 	/**
@@ -278,6 +311,22 @@ public class PointList implements java.io.Serializable, Translatable {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Returns an iterator over the points in this list.
+	 * <p>
+	 * This implementation provides a {@link PointListIterator} that converts the
+	 * internal primitive coordinates into {@link Point} objects.
+	 * </p>
+	 *
+	 * @return an {@link Iterator} of {@link Point}s
+	 * @see java.lang.Iterable#iterator()
+	 * @since 3.28
+	 */
+	@Override
+	public Iterator<Point> iterator() {
+		return new PointListIterator();
 	}
 
 	/**
