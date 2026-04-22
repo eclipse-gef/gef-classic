@@ -154,6 +154,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 	private final ZoomGestureListener zoomListener;
 	private final RotateGestureListener rotateListener;
+	private final IFigureFactory figureFactory = new GraphFigureFactory();
 
 	/**
 	 * Constructor for a Graph. This widget represents the root of the graph, and
@@ -1780,5 +1781,9 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			zoomManager = new ZoomManager(getRootLayer(), getViewport());
 		}
 		return zoomManager;
+	}
+
+	/* package */ IFigureFactory getFigureFactory() {
+		return figureFactory;
 	}
 }

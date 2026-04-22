@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria, BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC, Canada.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -892,12 +892,10 @@ public class GraphNode extends GraphItem {
 	}
 
 	protected IFigure createFigureForModel() {
-		GraphNode node = this;
-		boolean cacheLabel = (this).cacheLabel();
-		GraphLabel label = new GraphLabel(node.getText(), node.getImage(), cacheLabel);
+		IFigure label = getGraphModel().getFigureFactory().createFigure(this);
 		label.setFont(this.font);
-		if (checkStyle(ZestStyles.NODES_HIDE_TEXT)) {
-			label.setText(""); //$NON-NLS-1$
+		if (label instanceof ILabeledFigure labelFigure && checkStyle(ZestStyles.NODES_HIDE_TEXT)) {
+			labelFigure.setText(""); //$NON-NLS-1$
 		}
 		updateFigureForModel(label);
 		label.addFigureListener(new FigureListener() {
