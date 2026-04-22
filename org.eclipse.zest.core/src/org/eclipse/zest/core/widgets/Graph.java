@@ -31,12 +31,10 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Item;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 
 import org.eclipse.zest.core.viewers.internal.ZoomManager;
@@ -883,98 +881,51 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 			GraphItem itemUnderMouse = figure2ItemMap.get(figureUnderMouse);
 			if (itemUnderMouse instanceof GraphContainer container) {
-				// GraphContainer under this mouse
-
-				Display display = Display.getCurrent();
-				Shell shell = display.getActiveShell();
-				shell.setLayout(new FillLayout());
-
-				String oldShellLabel = display.getActiveShell().getText();
-				StringBuilder labelBuilder = new StringBuilder();
-				IContainer currentContainer = container;
-				while (currentContainer instanceof GraphContainer current) {
-					labelBuilder.insert(0, current.getText());
-					labelBuilder.insert(0, '/');
-					currentContainer = current.getParent();
-				}
-				labelBuilder.insert(0, oldShellLabel);
-				shell.setText(labelBuilder.toString());
-
-				Graph g = new Graph(shell, SWT.NONE);
-				container.getGraph().setParent(new Shell()); // remove old graph from shell
-				shell.layout();
-
-				for (GraphNode node : container.getNodes()) {
-					container.graph.removeNode(node); // remove nodes from old graph
-					g.addNode(node); // add node to new graph
-					g.registerItem(node); // register figure in new graph
-					node.parent = g; // change parent and graph of node
-					node.graph = g;
-					node.setVisible(true); // make sure the nodes are visible
-					node.unhighlight();
-					HideNodeHelper hideNodeHelper = node.getHideNodeHelper();
-					if (hideNodeHelper != null) {
-						hideNodeHelper.resetCounter();
-					}
-
-					if (node instanceof GraphContainer containerNode) {
-						g.registerChildrenOfContainer(containerNode, true); // recursively add childNodes to graph
-					}
-				}
-				for (GraphNode node : g.getNodes()) {
-					for (GraphConnection connection : node.getTargetConnections()) {
-						container.graph.removeConnection(connection);
-						g.addConnection(connection, true);
-						g.registerItem(connection);
-					}
-					for (GraphConnection connection : node.getSourceConnections()) {
-						container.graph.removeConnection(connection);
-						g.addConnection(connection, true);
-						g.registerItem(connection);
-					}
-				}
-				g.setLayoutAlgorithm(container.getLayoutAlgorithm(), false);
+				List<IFigure> graphFigures = new ArrayList<>(zestRootLayer.getChildren());
 
 				Button backButton = new Button(BACK_ARROW);
 				backButton.setBounds(new Rectangle(new Point(0, 0), backButton.getPreferredSize()));
 				backButton.addActionListener(event -> {
-					for (GraphNode node : new ArrayList<>(g.getNodes())) {
-						g.removeNode(node); // remove nodes from graph
-						container.addNode(node); // add nodes to container
-						container.graph.registerItem(node); // register figure in old graph
-						node.parent = container; // change parent and graph of node
-						node.graph = container.getGraph();
-						node.unhighlight();
-
-						if (node instanceof GraphContainer containerNode) {
-							registerChildrenOfContainer(containerNode, false); // recursively add childNodes to graph
+					rootlayer.remove(backButton);
+					for (GraphNode containerNode : container.getNodes()) {
+						zestRootLayer.remove(containerNode.getNodeFigure());
+						// Connections may also be added to a GraphContainer figure
+						for (GraphConnection sourceConnection : containerNode.getSourceConnections()) {
+							zestRootLayer.remove(sourceConnection.getConnectionFigure());
+						}
+						for (GraphConnection targetConnection : containerNode.getTargetConnections()) {
+							zestRootLayer.remove(targetConnection.getConnectionFigure());
+						}
+						container.zestLayer.addNode(containerNode.getNodeFigure());
+					}
+					for (IFigure graphFigure : graphFigures) {
+						zestRootLayer.add(graphFigure);
+					}
+					container.applyLayout();
+				});
+				// GraphContainer under this mouse
+				container.open(false);
+				for (IFigure graphFigure : graphFigures) {
+					zestRootLayer.remove(graphFigure);
+				}
+				for (GraphNode containerNode : container.getNodes()) {
+					zestRootLayer.add(containerNode.getNodeFigure());
+					// Connections may also be added to a GraphContainer figure
+					for (GraphConnection sourceConnection : containerNode.getSourceConnections()) {
+						IFigure connectionFigure = sourceConnection.getConnectionFigure();
+						if (connectionFigure.getParent() == zestRootLayer) {
+							zestRootLayer.addConnection(connectionFigure);
 						}
 					}
-					for (GraphConnection connection : new ArrayList<GraphConnection>(g.getConnections())) {
-						g.removeConnection(connection);
-						container.graph.addConnection(connection, false);
-						container.graph.registerItem(connection);
-						connection.registerConnection(connection.getSource(), connection.getDestination());
-						connection.setVisible(true);
+					for (GraphConnection targetConnection : containerNode.getTargetConnections()) {
+						IFigure connectionFigure = targetConnection.getConnectionFigure();
+						if (connectionFigure.getParent() == zestRootLayer) {
+							zestRootLayer.addConnection(connectionFigure);
+						}
 					}
-
-					container.applyLayout();
-
-					g.setParent(new Shell()); // remove graph from shell
-					container.getGraph().setParent(shell);
-					shell.layout();
-					shell.setText(oldShellLabel);
-
-					g.release();
-				});
-
-				g.rootlayer.add(backButton);
-
-				shell.addDisposeListener(e -> {
-					g.connections.clear();
-					g.nodes.clear();
-					g.release();
-				});
+				}
+				rootlayer.add(backButton);
+				applyLayout();
 			}
 		}
 
@@ -1280,7 +1231,6 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			this.getSelection().remove(node);
 		}
 		figure2ItemMap.remove(figure);
-		node.getLayout().dispose();
 	}
 
 	void addConnection(GraphConnection connection, boolean addToEdgeLayer) {
@@ -1353,21 +1303,6 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			figure2ItemMap.put(figure, item);
 		} else {
 			throw new RuntimeException("Unknown item type: " + item.getItemType()); //$NON-NLS-1$
-		}
-	}
-
-	private void registerChildrenOfContainer(GraphContainer container, boolean addToMap) {
-		for (GraphNode node : container.getNodes()) {
-			if (node instanceof GraphContainer childContainer) {
-				registerChildrenOfContainer(childContainer, addToMap);
-			} else {
-				node.graph = this;
-				node.unhighlight();
-				if (addToMap) {
-					IFigure figure = node.getFigure();
-					figure2ItemMap.put(figure, node);
-				}
-			}
 		}
 	}
 
