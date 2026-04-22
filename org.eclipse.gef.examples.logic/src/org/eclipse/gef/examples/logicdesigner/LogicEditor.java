@@ -44,6 +44,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -613,6 +614,10 @@ public class LogicEditor extends GraphicalEditorWithFlyoutPalette {
 	}
 
 	protected void handleActivationChanged(Event event) {
+		// Might happen if the editor is open while the IDE is closed
+		if (!Platform.isRunning()) {
+			return;
+		}
 		IAction copy = null;
 		if (event.type == SWT.Deactivate) {
 			copy = getActionRegistry().getAction(ActionFactory.COPY.getId());
