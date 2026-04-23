@@ -220,10 +220,19 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 	}
 
 	private void updateClip(Graphics graphics, Rectangle shadowRect) {
-		int shadowSize = Math.max(haloSize, dropShadowSize) + 1;
+		int shadowSize = getShadowSize();
 		shadowRect.expand(shadowSize, shadowSize);
 		graphics.setClip(shadowRect);
 		shadowRect.shrink(shadowSize, shadowSize);
 	}
 
+	@Override
+	public void eraseBackground(IFigure figure, Rectangle area) {
+		int shadowSize = getShadowSize();
+		area.expand(shadowSize, shadowSize);
+	}
+
+	private int getShadowSize() {
+		return Math.max(haloSize, dropShadowSize) + 1;
+	}
 }
