@@ -19,6 +19,7 @@ import org.eclipse.draw2d.Border;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Insets;
+import org.eclipse.draw2d.geometry.Rectangle;
 
 /**
  * An interface for a special border which can paint both underneath and on top
@@ -45,4 +46,30 @@ public interface BackgroundBorder extends Border {
 	 */
 	void paintBackground(IFigure figure, Graphics graphics, Insets insets);
 
+	/**
+	 * Called when this background should be erased. If the background is drawn
+	 * outside of the figure bounds, the area needs to be expanded to avoid visual
+	 * artifacts. Does nothing by default.
+	 * <p>
+	 * Note: This method is called within the {@link IFigure#erase()} method before
+	 * {@link IFigure#repaint(int, int, int, int)}. Subclasses only need to extend
+	 * the rectangle to cover the area painted by the background.
+	 * </p>
+	 *
+	 * Example:
+	 *
+	 * <pre>
+	 * public void eraseBackground(IFigure figure, Rectangle area) {
+	 * 	area.expand(1, 1);
+	 * }
+	 * </pre>
+	 *
+	 * @param figure The figure whose representation is being erased. Never
+	 *               {@code null}.
+	 * @param area   The area of the figure that is being erased (in parent
+	 *               coordinates)
+	 */
+	default void eraseBackground(IFigure figure, Rectangle area) {
+		// nothing to erase
+	}
 }

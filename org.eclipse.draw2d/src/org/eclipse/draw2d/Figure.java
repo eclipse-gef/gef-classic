@@ -379,6 +379,9 @@ public class Figure implements IFigure {
 		}
 
 		Rectangle r = new Rectangle(getBounds());
+		if (getBorder() instanceof BackgroundBorder border) {
+			border.eraseBackground(this, r);
+		}
 		getParent().translateToParent(r);
 		getParent().repaint(r.x, r.y, r.width, r.height);
 	}
