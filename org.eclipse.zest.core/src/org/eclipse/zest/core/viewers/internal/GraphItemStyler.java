@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
- *                           BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -246,7 +246,7 @@ public class GraphItemStyler {
 			node.setBorderHighlightColor(c);
 		}
 		if ((c = provider.getNodeHighlightColor(entity)) != null) {
-			node.setHighlightColor(c);
+			node.setBackgroundHighlightColor(c);
 		}
 		if ((c = provider.getBackgroundColour(entity)) != null) {
 			node.setBackgroundColor(c);

@@ -7,6 +7,20 @@
 
 ## Zest
 
+- Updated  the styling and color theme of the Zest graph and its items.
+  
+  The color constants defines in the `Graph` class have been deprecated for removal in favor of the new 
+  `GraphColorProvider` class, which provides the colors used by the graph items. The highlight color has been adapted 
+  and is now configurable for both the foreground and the background color.
+  
+  Furthermore, the old gradient-based colors have been removed and the blue background color replaced with gray. For the
+  `GraphLabel`, the new `RectangleDropShadowBorder` is used to give the items a more modern look. As a side-effect, it
+  is therefore no longer possible to define the border color and width of this figure, which is why the
+  `IStyleableFigure` has been removed from this class.
+  
+  For the graph connections, the line width has been changed to 2 and anti-alias enabled, to provide a higher contrast
+  against the background.
+
 ## General
 
 
