@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2025 CHISEL Group, University of Victoria, Victoria,
- *                           BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,17 +15,12 @@ package org.eclipse.zest.core.widgets.internal;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Path;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-
-import org.eclipse.zest.core.widgets.IStyleableFigure;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureUtilities;
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.StackLayout;
+import org.eclipse.draw2d.backgrounds.shadows.RectangleDropShadowBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 
@@ -35,11 +30,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
  *
  * @author Chris Callendar
  */
-public class GraphLabel extends CachedLabel implements IStyleableFigure {
-
-	private Color borderColor;
-	private int borderWidth;
-	private int arcWidth;
+public class GraphLabel extends CachedLabel {
 
 	private final boolean painting = false;
 
@@ -97,11 +88,13 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 	 */
 	protected void initLabel() {
 		super.setFont(Display.getDefault().getSystemFont());
-		this.borderColor = ColorConstants.black;
-		this.borderWidth = 0;
-		this.arcWidth = 8;
 		this.setLayoutManager(new StackLayout());
-		this.setBorder(new MarginBorder(1));
+		this.setOpaque(true);
+		RectangleDropShadowBorder border = new RectangleDropShadowBorder(8);
+		border.setShadowColor(ColorConstants.black);
+		border.setHaloSize(6);
+		border.setSoftness(4.5);
+		this.setBorder(border);
 	}
 
 	/*
@@ -129,69 +122,10 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 					int expandHeight = Math.max(imageRect.height - minSize.height, 0);
 					minSize.expand(imageRect.width + 4, expandHeight);
 				}
-				minSize.expand(10 + (2 * borderWidth), 4 + (2 * borderWidth));
+				minSize.expand(10, 4);
 				setBounds(new Rectangle(getLocation(), minSize));
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.eclipse.draw2d.Label#paintFigure(org.eclipse.draw2d.Graphics)
-	 */
-	@Override
-	public void paint(Graphics graphics) {
-		int blue = getBackgroundColor().getBlue();
-		blue = (int) (blue - (blue * 0.20));
-		blue = blue > 0 ? blue : 0;
-
-		int red = getBackgroundColor().getRed();
-		red = (int) (red - (red * 0.20));
-		red = red > 0 ? red : 0;
-
-		int green = getBackgroundColor().getGreen();
-		green = (int) (green - (green * 0.20));
-		green = green > 0 ? green : 0;
-
-		Color lightenColor = new Color(new RGB(red, green, blue));
-		graphics.setForegroundColor(lightenColor);
-		graphics.setBackgroundColor(getBackgroundColor());
-
-		graphics.pushState();
-
-		Rectangle bounds = getBounds().getCopy();
-		bounds.shrink(1, 1);
-
-		Path p = new Path(Display.getCurrent());
-		p.addArc(bounds.left(), bounds.top(), arcWidth, arcWidth, 90, 90);
-		p.addArc(bounds.left(), bounds.bottom() - arcWidth, arcWidth, arcWidth, 180, 90);
-		p.addArc(bounds.right() - arcWidth, bounds.bottom() - arcWidth, arcWidth, arcWidth, 270, 90);
-		p.addArc(bounds.right() - arcWidth, bounds.top(), arcWidth, arcWidth, 0, 90);
-		graphics.clipPath(p);
-
-		graphics.setBackgroundColor(lightenColor);
-		graphics.setForegroundColor(getBackgroundColor());
-		graphics.fillGradient(bounds, true);
-
-		// Paint the border
-		if (borderWidth > 0) {
-			graphics.setClip(getBounds());
-			graphics.setForegroundColor(borderColor);
-			graphics.setBackgroundColor(borderColor);
-			graphics.setLineWidth(borderWidth);
-			graphics.drawRoundRectangle(bounds, arcWidth, arcWidth);
-		}
-
-		graphics.restoreState();
-
-		p.dispose();
-
-		super.paint(graphics);
-
-		graphics.popState();
-
-		lightenColor.dispose();
 	}
 
 	@Override
@@ -236,29 +170,7 @@ public class GraphLabel extends CachedLabel implements IStyleableFigure {
 		adjustBoundsToFit();
 	}
 
-	public Color getBorderColor() {
-		return borderColor;
-	}
-
-	@Override
-	public void setBorderColor(Color c) {
-		this.borderColor = c;
-	}
-
-	public int getBorderWidth() {
-		return borderWidth;
-	}
-
-	@Override
-	public void setBorderWidth(int width) {
-		this.borderWidth = width;
-	}
-
-	public int getArcWidth() {
-		return arcWidth;
-	}
-
 	public void setArcWidth(int arcWidth) {
-		this.arcWidth = arcWidth;
+		((RectangleDropShadowBorder) getBorder()).setDropShadowSize(arcWidth);
 	}
 }

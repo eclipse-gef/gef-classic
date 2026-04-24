@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -106,14 +107,62 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color LIGHT_BLUE = null;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color LIGHT_BLUE_CYAN = null;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color GREY_BLUE = null;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color DARK_BLUE = null;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color LIGHT_YELLOW = null;
 
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color HIGHLIGHT_COLOR = ColorConstants.yellow;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color HIGHLIGHT_ADJACENT_COLOR = ColorConstants.orange;
+	/**
+	 * @deprecated Use {@link GraphColorProvider} instead. This field will be
+	 *             removed after the 2028-06 release.
+	 * @see #setColorProvider(GraphColorProvider)
+	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color DEFAULT_NODE_COLOR = LIGHT_BLUE;
 
 	/**
@@ -154,6 +203,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 	private final ZoomGestureListener zoomListener;
 	private final RotateGestureListener rotateListener;
+	private GraphColorProvider colorProvider = new GraphColorProvider();
 
 	/**
 	 * Constructor for a Graph. This widget represents the root of the graph, and
@@ -184,7 +234,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 */
 	public Graph(Composite parent, int style, boolean enableHideNodes) {
 		super(parent, style | SWT.DOUBLE_BUFFERED);
-		this.setBackground(ColorConstants.white);
+		this.setBackground(getColorProvider().getBackgroundColor(this));
 
 		LIGHT_BLUE = new Color(216, 228, 248);
 		LIGHT_BLUE_CYAN = new Color(213, 243, 255);
@@ -1780,5 +1830,27 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			zoomManager = new ZoomManager(getRootLayer(), getViewport());
 		}
 		return zoomManager;
+	}
+
+	/**
+	 * Sets the color provider used by this graph and its items. A color provider
+	 * defines the palette used for e.g. the fore- and background of all elements
+	 * and ensures a uniform look-and-feel. This method should be called
+	 * <i>before</i> adding elements to this graph.
+	 *
+	 * @param colorProvider The color provider used for this graph. Must not be
+	 *                      {@code null}.
+	 * @throws NullPointerException if {@code colorProvider} is {@code null}.
+	 * @since 1.18
+	 */
+	public void setColorProvider(GraphColorProvider colorProvider) throws NullPointerException {
+		this.colorProvider = Objects.requireNonNull(colorProvider);
+	}
+
+	/**
+	 * Used by the {@link GraphItem} subclasses to get the current color provider.
+	 */
+	/* package */ GraphColorProvider getColorProvider() {
+		return colorProvider;
 	}
 }

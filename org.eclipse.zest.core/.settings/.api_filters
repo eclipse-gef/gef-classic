@@ -114,4 +114,46 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/zest/core/widgets/internal/GraphLabel.java" type="org.eclipse.zest.core.widgets.internal.GraphLabel">
+        <filter id="572522506">
+            <message_arguments>
+                <message_argument value="RectangleDropShadowBorder"/>
+                <message_argument value="GraphLabel"/>
+            </message_arguments>
+        </filter>
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="RectangleDropShadowBorder(int)"/>
+                <message_argument value="GraphLabel"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AbstractDropShadowBorder"/>
+                <message_argument value="GraphLabel"/>
+                <message_argument value="setDropShadowSize(int)"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AbstractDropShadowBorder"/>
+                <message_argument value="GraphLabel"/>
+                <message_argument value="setHaloSize(int)"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AbstractDropShadowBorder"/>
+                <message_argument value="GraphLabel"/>
+                <message_argument value="setShadowColor(Color)"/>
+            </message_arguments>
+        </filter>
+        <filter id="640712815">
+            <message_arguments>
+                <message_argument value="AbstractDropShadowBorder"/>
+                <message_argument value="GraphLabel"/>
+                <message_argument value="setSoftness(double)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
