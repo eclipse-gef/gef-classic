@@ -1,5 +1,6 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria, BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -249,6 +250,9 @@ public class GraphNode extends GraphItem {
 			this.fishEye(false, false);
 		}
 		super.dispose();
+		if (layout != null) {
+			layout.dispose();
+		}
 		this.isDisposed = true;
 		while (!getSourceConnections().isEmpty()) {
 			GraphConnection connection = getSourceConnections().get(0);
