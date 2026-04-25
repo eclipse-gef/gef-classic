@@ -65,7 +65,8 @@ import org.junit.platform.suite.api.Suite;
 	LabelTest.class,
 	PrecisionTests.class,
 	ScaledGraphicsTest.class,
-	HSLTest.class
+	HSLTest.class,
+	ImagePrintFigureOperationTest.class
 })
 public class Draw2dTestSuite {
 }
