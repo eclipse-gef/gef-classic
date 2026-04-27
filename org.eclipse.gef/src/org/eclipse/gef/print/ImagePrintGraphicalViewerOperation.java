@@ -31,7 +31,7 @@ import org.eclipse.gef.editparts.LayerManager;
 /**
  * Implementation of GEF image drawing capabilities.
  *
- * @since 3.25
+ * @since 3.26
  */
 public class ImagePrintGraphicalViewerOperation extends ImagePrintFigureOperation {
 	private final GraphicalViewer viewer;

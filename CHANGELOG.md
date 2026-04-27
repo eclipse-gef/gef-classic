@@ -2,6 +2,9 @@
 # GEF Classic 3.28.0
 
 ## Draw2D
+- Added `ImagePrintFigureOperation` for painting a Figure on an Image. Using this class in favor of `IFigure.paint(...)`
+  avoids visual artifacts and clipping that result from fractional scaling.
+  
 
 ## GEF
 
@@ -43,7 +46,6 @@
   This feature was originally request in [Bug 172463](https://bugs.eclipse.org/bugs/show_bug.cgi?id=172463)   
 - Implemented `SWTGraphics.getAbsoluteScale()`
   This feature was originally requested in [Bug 267462](https://bugs.eclipse.org/bugs/show_bug.cgi?id=267462)
-  Added `ImagePrintFigureOperation` for painting a Figure on an Image.
 
 ## GEF
 
