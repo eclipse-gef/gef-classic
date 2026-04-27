@@ -331,7 +331,8 @@ public abstract class LayoutEditPolicy extends GraphicalEditPolicy {
 					HSL.fromColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected())
 							.darker(0.3).toColor());
 			((Shape) sizeOnDropFeedback).setAlpha(50);
-			((Shape) sizeOnDropFeedback).setLineStyle(Graphics.LINE_DASHDOT);
+			((Shape) sizeOnDropFeedback).setLineStyle(Graphics.LINE_DOT);
+			((Shape) sizeOnDropFeedback).setLineWidth(2);
 			sizeOnDropFeedback.setForegroundColor(ColorConstants.white);
 			addFeedback(sizeOnDropFeedback);
 		}
