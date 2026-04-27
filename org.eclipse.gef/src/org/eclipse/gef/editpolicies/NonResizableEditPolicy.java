@@ -73,6 +73,7 @@ public class NonResizableEditPolicy extends SelectionHandlesEditPolicy {
 				HSL.fromColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected())
 						.darker(0.3).toColor());
 		r.setAlpha(50);
+		r.setLineWidth(2);
 		r.setLineStyle(Graphics.LINE_DOT);
 		r.setForegroundColor(ColorConstants.white);
 		r.setBounds(getInitialFeedbackBounds());
