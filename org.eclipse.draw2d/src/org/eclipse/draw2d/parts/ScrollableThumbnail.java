@@ -227,7 +227,7 @@ public class ScrollableThumbnail extends Thumbnail {
 	 * @since 3.14
 	 */
 	protected double getViewportScaleX() {
-		return (double) targetSize.width / viewport.getContents().getBounds().width();
+		return (double) targetSize.width() / getViewportContentsBounds().width();
 	}
 
 	/**
@@ -241,7 +241,14 @@ public class ScrollableThumbnail extends Thumbnail {
 	 * @since 3.14
 	 */
 	protected double getViewportScaleY() {
-		return (double) targetSize.height / viewport.getContents().getBounds().height;
+		return (double) targetSize.height() / getViewportContentsBounds().height();
+	}
+
+	private Rectangle getViewportContentsBounds() {
+		IFigure contents = viewport.getContents();
+		Rectangle bounds = contents.getBounds().getCopy();
+		contents.translateToAbsolute(bounds);
+		return bounds;
 	}
 
 	private void hookSelector() {
