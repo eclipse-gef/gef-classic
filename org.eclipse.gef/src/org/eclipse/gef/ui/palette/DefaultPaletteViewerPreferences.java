@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,10 +18,12 @@ import java.beans.PropertyChangeSupport;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import org.eclipse.gef.internal.InternalGEFPlugin;
 
@@ -43,7 +45,8 @@ import org.eclipse.gef.internal.InternalGEFPlugin;
  * @author Pratik Shah
  */
 public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences {
-
+	private static final IPreferenceStore DEFAULT_PREFERENCE_STORE = new ScopedPreferenceStore(InstanceScope.INSTANCE,
+			InternalGEFPlugin.getContext().getBundle().getSymbolicName());
 	private static final String DEFAULT_FONT = "Default"; //$NON-NLS-1$
 
 	private final PreferenceStoreListener listener;
@@ -60,7 +63,7 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 	 * </p>
 	 */
 	public DefaultPaletteViewerPreferences() {
-		this(InternalGEFPlugin.getDefault().getPreferenceStore());
+		this(DEFAULT_PREFERENCE_STORE);
 	}
 
 	/**
@@ -228,7 +231,8 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 		case PREFERENCE_AUTO_COLLAPSE -> firePropertyChanged(property, Integer.valueOf(getAutoCollapseSetting()));
 		case PREFERENCE_FONT -> firePropertyChanged(property, getFontData());
 		case PREFERENCE_SCROLLBARS_MODE -> firePropertyChanged(property, getScrollbarsMode());
-		default -> firePropertyChanged(property, Boolean.valueOf(useLargeIcons(convertPreferenceNameToLayout(property))));
+		default ->
+			firePropertyChanged(property, Boolean.valueOf(useLargeIcons(convertPreferenceNameToLayout(property))));
 		}
 	}
 

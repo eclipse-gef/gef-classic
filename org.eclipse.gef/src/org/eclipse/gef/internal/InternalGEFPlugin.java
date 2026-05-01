@@ -27,9 +27,10 @@ import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageDataProvider;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import org.eclipse.draw2d.ToolTipHelper;
 
@@ -38,20 +39,23 @@ import org.eclipse.gef.EditPartListener;
 import org.eclipse.gef.ui.parts.DomainEventDispatcher;
 import org.eclipse.gef.util.IToolTipHelperFactory;
 
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
 
-public class InternalGEFPlugin extends AbstractUIPlugin {
+public class InternalGEFPlugin implements BundleActivator {
 	/** Monitor scale property */
 	public static final String MONITOR_SCALE_PROPERTY = "monitorScale"; //$NON-NLS-1$
 
 	private static BundleContext context;
-	private static AbstractUIPlugin singleton;
+	private static InternalGEFPlugin singleton;
 	private static Boolean requiresDisabledIcons;
 	private static Collection<ServiceReference<IToolTipHelperFactory>> toolTipProviderRefs;
 	private static Collection<IToolTipHelperFactory> toolTipProviders;
+	private ImageRegistry imageRegistry;
+	private IEclipsePreferences preferences;
 
 	public InternalGEFPlugin() {
 		singleton = this;
@@ -59,36 +63,59 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 
 	@Override
 	public void start(BundleContext bc) throws Exception {
-		super.start(bc);
 		context = bc;
 		toolTipProviders = new ArrayList<>();
 		toolTipProviderRefs = bc.getServiceReferences(IToolTipHelperFactory.class, null);
 		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {
 			toolTipProviders.add(bc.getService(toolTipProviderRef));
 		}
+		imageRegistry = new ImageRegistry();
+		preferences = InstanceScope.INSTANCE.getNode(bc.getBundle().getSymbolicName());
 		Logger.setContext(new LoggerContext());
 	}
 
 	@Override
 	public void stop(BundleContext bc) throws Exception {
+		imageRegistry.dispose();
 		toolTipProviders.clear();
 		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {
 			bc.ungetService(toolTipProviderRef);
 		}
-		super.stop(bc);
-	}
-
-	@Override
-	protected void initializeImageRegistry(ImageRegistry reg) {
-		super.initializeImageRegistry(reg);
 	}
 
 	public static BundleContext getContext() {
 		return context;
 	}
 
-	public static AbstractUIPlugin getDefault() {
+	public static InternalGEFPlugin getDefault() {
 		return singleton;
+	}
+
+	/**
+	 * Returns the image registry for this plug-in.
+	 * <p>
+	 * The image registry contains the images used by this plug-in that are very
+	 * frequently used and so need to be globally shared within the plug-in. Since
+	 * many OSs have a severe limit on the number of images that can be in memory at
+	 * any given time, a plug-in should only keep a small number of images in their
+	 * registry.
+	 *
+	 * @return the image registry
+	 */
+	public ImageRegistry getImageRegistry() {
+		return imageRegistry;
+	}
+
+	/**
+	 * Returns the preference store for this plug-in. This preference store is used
+	 * to hold persistent settings for this plug-in in the context of a workbench.
+	 * Some of these settings will be user controlled, whereas others may be
+	 * internal setting that are never exposed to the user.
+	 *
+	 * @return the plug-in preferences
+	 */
+	public IEclipsePreferences getStorePreferences() {
+		return preferences;
 	}
 
 	/**

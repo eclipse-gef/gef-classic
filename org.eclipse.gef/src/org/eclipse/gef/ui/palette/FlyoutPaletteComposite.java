@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2025 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -47,7 +47,6 @@ import org.eclipse.swt.widgets.Tracker;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
@@ -94,6 +93,8 @@ import org.eclipse.gef.internal.GEFMessages;
 import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.internal.InternalImages;
 import org.eclipse.gef.ui.views.palette.PaletteView;
+
+import org.osgi.service.prefs.Preferences;
 
 /**
  * The FlyoutPaletteComposite is used to show a flyout palette alongside another
@@ -265,19 +266,19 @@ public class FlyoutPaletteComposite extends Composite {
 	/**
 	 * This is a convenient method to get a default FlyoutPreferences object. The
 	 * returned FlyoutPreferences does not save any changes made to the given
-	 * {@link Preferences Preferences}. It's upto the owner plugin to
+	 * {@link org.eclipse.core.runtime Preferences}. It's upto the owner plugin to
 	 * {@link Plugin#savePluginPreferences() save} the changes before it
 	 * {@link Plugin#stop(org.osgi.framework.BundleContext) stops}.
 	 *
 	 * @param prefs {@link Plugin#getPluginPreferences() a plugin's Preferences}
 	 * @return a default implementation of FlyoutPreferences that stores the
 	 *         settings in the given Preferences
-	 * @deprecated Use {@link #createFlyoutPreferences(IPreferenceStore)} instead.
+	 * @deprecated Use {@link #createFlyoutPreferences(Preferences)} instead.
 	 *             This method will be removed after the 2027-06 release.
 	 * @since 3.2
 	 */
 	@Deprecated(forRemoval = true, since = "3.22.0")
-	public static FlyoutPreferences createFlyoutPreferences(Preferences prefs) {
+	public static FlyoutPreferences createFlyoutPreferences(org.eclipse.core.runtime.Preferences prefs) {
 		return new DefaultFlyoutPreferences(prefs::getInt, prefs::setValue);
 	}
 
@@ -287,10 +288,25 @@ public class FlyoutPaletteComposite extends Composite {
 	 * @param prefs an {@link IPreferenceStore}
 	 * @return a default implementation of FlyoutPreferences that stores the
 	 *         settings in the given Preferences
+	 * @deprecated Use {@link #createFlyoutPreferences(Preferences)} instead.
+	 *             This method will be removed after the 2028-06 release.
 	 * @since 3.22
 	 */
+	@Deprecated(forRemoval = true, since = "3.26.0")
 	public static FlyoutPreferences createFlyoutPreferences(IPreferenceStore prefs) {
 		return new DefaultFlyoutPreferences(prefs::getInt, prefs::setValue);
+	}
+
+	/**
+	 * This is a convenient method to get a default FlyoutPreferences object.
+	 *
+	 * @param prefs the Eclipse {@link Preferences}
+	 * @return a default implementation of FlyoutPreferences that stores the
+	 *         settings in the given Preferences
+	 * @since 3.26
+	 */
+	public static FlyoutPreferences createFlyoutPreferences(Preferences prefs) {
+		return new DefaultFlyoutPreferences(key -> prefs.getInt(key, 0), prefs::putInt);
 	}
 
 	private Composite createPaletteContainer() {
