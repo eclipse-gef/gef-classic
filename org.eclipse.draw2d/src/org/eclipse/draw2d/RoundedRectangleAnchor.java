@@ -59,6 +59,18 @@ public class RoundedRectangleAnchor extends ChopboxAnchor {
 	}
 
 	/**
+	 * Return the corner dimensions used to calculate the anchor location in
+	 * {@link #getLocation}. Sub-classes may over-ride this to return a different
+	 * value.
+	 *
+	 * @return The corner dimensions
+	 * @since 3.23
+	 */
+	public Dimension getCornerDimensions() {
+		return getOwner() instanceof RoundedRectangle roundRect ? roundRect.getCornerDimensions() : dimension.getCopy();
+	}
+
+	/**
 	 * Calculates the position with ChopboxAnchor#getLocation() and if the anchor is
 	 * not at the rounded corners, the result is returned. If the anchor point
 	 * should be at a corner, the rectangle for the ellipse is determined and
@@ -69,10 +81,8 @@ public class RoundedRectangleAnchor extends ChopboxAnchor {
 	 */
 	@Override
 	public Point getLocation(final Point ref) {
-		Dimension corner = dimension;
-		if (getOwner() instanceof RoundedRectangle) {
-			corner = ((RoundedRectangle) getOwner()).getCornerDimensions();
-		}
+		final Dimension corner = getCornerDimensions();
+		getOwner().translateToAbsolute(corner);
 		final Point location = super.getLocation(ref);
 		final Rectangle r = Rectangle.SINGLETON;
 		r.setBounds(getOwner().getBounds());
@@ -100,18 +110,15 @@ public class RoundedRectangleAnchor extends ChopboxAnchor {
 		}
 		return switch (pos) {
 		case TOP | MIDDLE, CENTER | LEFT, CENTER | RIGHT, BOTTOM | MIDDLE -> new Point(location.x, location.y);
-		case TOP | LEFT -> ellipseAnchorGetLocation(location, new Rectangle(r.x, r.y, corner.width, corner.height),
-							getOwner().getBounds().getCenter())[0];
+		case TOP | LEFT ->
+			ellipseAnchorGetLocation(location, new Rectangle(r.x, r.y, corner.width, corner.height), r.getCenter())[0];
 		case TOP | RIGHT -> ellipseAnchorGetLocation(location,
-							new Rectangle(r.x + r.width - corner.width, r.y, corner.width, corner.height),
-							getOwner().getBounds().getCenter())[1];
+				new Rectangle(r.x + r.width - corner.width, r.y, corner.width, corner.height), r.getCenter())[1];
 		case CENTER | MIDDLE -> /* default for reference inside Figure */ new Point(r.x, r.y + r.height / 2);
 		case BOTTOM | LEFT -> ellipseAnchorGetLocation(location,
-							new Rectangle(r.x, r.y + r.height - corner.height, corner.width, corner.height),
-							getOwner().getBounds().getCenter())[0];
+				new Rectangle(r.x, r.y + r.height - corner.height, corner.width, corner.height), r.getCenter())[0];
 		case BOTTOM | RIGHT -> ellipseAnchorGetLocation(location, new Rectangle(r.x + r.width - corner.width,
-							r.y + r.height - corner.height, corner.width, corner.height),
-							getOwner().getBounds().getCenter())[1];
+				r.y + r.height - corner.height, corner.width, corner.height), r.getCenter())[1];
 		default -> throw new IllegalStateException("Calculation of RoundedRectangleAnchor missed. Rect: " + r //$NON-NLS-1$
 				+ " Point: " + location); //$NON-NLS-1$
 		};
