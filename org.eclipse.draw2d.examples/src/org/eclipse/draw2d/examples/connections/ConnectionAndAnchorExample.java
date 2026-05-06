@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2023 IBM Corporation and others.
+ * Copyright (c) 2005, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -167,6 +167,10 @@ public class ConnectionAndAnchorExample extends AbstractExample {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
+			// if mouse was pressed outside the figure and then dragged over figure
+			if (last == null) {
+				return;
+			}
 			Point p = e.getLocation();
 			Dimension delta = p.getDifference(last);
 			last = p;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -61,32 +61,21 @@ public class ConnectionEndpointLocator implements Locator {
 	 * @param loc The point that is to be located
 	 */
 	private static int calculateConnectionLocation(Point loc, Point topLeft, Point center) {
-		double m1 = (double) (topLeft.y - center.y) / (double) (topLeft.x - center.x);
-		double m2 = 0;
-
-		if (loc.x - center.x != 0) {
-			m2 = (double) (loc.y - center.y) / (double) (loc.x - center.x);
-		}
-
+		// Case where m2 is vertical
 		if (loc.x == center.x) {
-			// Case where m2 is vertical
-			if (loc.y < center.y) {
-				return 3;
-			}
-			return 1;
+			return (loc.y < center.y) ? 3 : 1;
 		}
+
+		double m1 = (double) (topLeft.y - center.y) / (double) (topLeft.x - center.x);
+		double m2 = (double) (loc.y - center.y) / (double) (loc.x - center.x);
+
+		// Connection start point along left or right side
 		if (Math.abs(m2) <= Math.abs(m1)) {
-			// Connection start point along left or right side
-			if (loc.x < center.x) {
-				return 4;
-			}
-			return 2;
+			return (loc.x < center.x) ? 4 : 2;
 		}
+
 		// Connection start point along top or bottom
-		if (loc.y < center.y) {
-			return 3;
-		}
-		return 1;
+		return (loc.y < center.y) ? 3 : 1;
 	}
 
 	/*
@@ -101,15 +90,9 @@ public class ConnectionEndpointLocator implements Locator {
 	 */
 	private static int calculateConnectionLocation(Point startPoint, Point endPoint) {
 		if (Math.abs(endPoint.x - startPoint.x) > Math.abs(endPoint.y - startPoint.y)) {
-			if (endPoint.x > startPoint.x) {
-				return 2;
-			}
-			return 4;
+			return (endPoint.x > startPoint.x) ? 2 : 4;
 		}
-		if (endPoint.y > startPoint.y) {
-			return 1;
-		}
-		return 3;
+		return (endPoint.y > startPoint.y) ? 1 : 3;
 	}
 
 	/*
