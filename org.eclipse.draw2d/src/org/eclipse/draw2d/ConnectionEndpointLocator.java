@@ -195,8 +195,10 @@ public class ConnectionEndpointLocator implements Locator {
 		IFigure connOwner = getConnectionOwner();
 
 		int quadrant;
-		if (connOwner != null) {
-			Rectangle connOwnerBounds = connOwner.getBounds();
+		if (connOwner != null && useOwnerOffset()) {
+			Rectangle connOwnerBounds = connOwner.getBounds().getCopy();
+			connOwner.translateToAbsolute(connOwnerBounds);
+			conn.translateToRelative(connOwnerBounds);
 			Point connOwnerCenter = connOwnerBounds.getCenter();
 			Point connOwnerTL = connOwnerBounds.getTopLeft();
 			quadrant = calculateConnectionLocation(startPoint, connOwnerTL, connOwnerCenter);
@@ -260,4 +262,18 @@ public class ConnectionEndpointLocator implements Locator {
 		vDistance = distance;
 	}
 
+	/**
+	 * If this method returns <code>true</code> (the default) the end point location
+	 * is calculated relative to the Connection owner's top left corner. If this
+	 * method returns <code>false</code> the location is calculated based only on
+	 * the connection's start and end points.
+	 *
+	 * @return true if location is calculated with an owner offset, false otherwise.
+	 *
+	 * @since 3.23
+	 */
+	@SuppressWarnings("static-method")
+	protected boolean useOwnerOffset() {
+		return true;
+	}
 }
