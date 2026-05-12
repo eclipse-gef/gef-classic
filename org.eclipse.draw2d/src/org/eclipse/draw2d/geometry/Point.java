@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -350,6 +350,18 @@ public class Point implements Cloneable, java.io.Serializable, Translatable {
 	}
 
 	/**
+	 * Creates a new Point which is translated by the values of the provided
+	 * {@link Vector}.
+	 *
+	 * @param vec {@link Vector} which provides the translation amounts.
+	 * @return A new Point
+	 * @since 3.23
+	 */
+	public Point getTranslated(Vector vec) {
+		return getCopy().translate(vec);
+	}
+
+	/**
 	 * Creates a new Point with the transposed values of this Point. Can be useful
 	 * in orientation change calculations.
 	 *
@@ -547,6 +559,18 @@ public class Point implements Cloneable, java.io.Serializable, Translatable {
 	 */
 	public Point translate(Point p) {
 		return translate(p.x(), p.y());
+	}
+
+	/**
+	 * Shifts the location of this Point by the input {@link Vector} along each of
+	 * the axes, and returns this for convenience.
+	 *
+	 * @param vec {@link Vector} to which the origin is being shifted.
+	 * @return <code>this</code> for convenience
+	 * @since 3.23
+	 */
+	public Point translate(Vector vec) {
+		return translate(vec.x, vec.y);
 	}
 
 	/**
