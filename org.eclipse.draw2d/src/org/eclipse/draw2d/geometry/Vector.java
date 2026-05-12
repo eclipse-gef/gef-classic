@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,6 +20,8 @@ package org.eclipse.draw2d.geometry;
  * @since 3.6
  */
 public class Vector {
+
+	private static final double LENGTH_EPSILON = 1e-10;
 
 	/** the X value */
 	public double x;
@@ -203,6 +205,24 @@ public class Vector {
 	 */
 	public Vector getMultiplied(double factor) {
 		return new Vector(PrecisionGeometry.preciseMultiply(x, factor), PrecisionGeometry.preciseMultiply(y, factor));
+	}
+
+	/**
+	 * Creates a new Vector that is normalized with its length, i.e., a vector with
+	 * length 1.
+	 *
+	 * If this vector has zero length (or a length smaller than a small epsilon), a
+	 * zero vector is returned instead of attempting division.
+	 *
+	 * @return the normalized Vector, or a zero vector if this Vector has no length
+	 * @since 3.23
+	 */
+	public Vector getNormalized() {
+		double length = getLength();
+		if (length < LENGTH_EPSILON) {
+			return new Vector(0.0, 0.0);
+		}
+		return getDivided(length);
 	}
 
 	/**
