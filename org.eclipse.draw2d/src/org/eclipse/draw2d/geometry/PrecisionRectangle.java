@@ -822,6 +822,11 @@ public final class PrecisionRectangle extends Rectangle {
 		return translatePrecise(p.preciseX(), p.preciseY());
 	}
 
+	@Override
+	public Rectangle translate(Vector vec) {
+		return translatePrecise(vec.x, vec.y);
+	}
+
 	/**
 	 * Moves this Rectangle horizontally by dx and vertically by dy, then returns
 	 * this Rectangle for convenience.
