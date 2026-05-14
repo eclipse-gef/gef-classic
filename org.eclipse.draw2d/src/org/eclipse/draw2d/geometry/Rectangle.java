@@ -670,6 +670,18 @@ public class Rectangle implements Cloneable, java.io.Serializable, Translatable 
 	}
 
 	/**
+	 * Returns a new Rectangle which is shifted by the position of the given
+	 * {@link Vector}.
+	 *
+	 * @param vec {@link Vector} providing the amount of shift along each axis
+	 * @return The new translated Rectangle
+	 * @since 3.23
+	 */
+	public Rectangle getTranslated(Vector vec) {
+		return getCopy().translate(vec);
+	}
+
+	/**
 	 * Returns a new rectangle whose width and height have been interchanged, as
 	 * well as its x and y values. This can be useful in orientation changes.
 	 *
@@ -1270,6 +1282,21 @@ public class Rectangle implements Cloneable, java.io.Serializable, Translatable 
 	public Rectangle translate(Point p) {
 		x += p.x;
 		y += p.y;
+		return this;
+	}
+
+	/**
+	 * Moves this Rectangle horizontally by the x value of the given {@link Vector}
+	 * and vertically by the y value of the given {@link Vector}, then returns this
+	 * Rectangle for convenience.
+	 *
+	 * @param vec {@link Vector} which provides translation information
+	 * @return <code>this</code> for convenience
+	 * @since 3.23
+	 */
+	public Rectangle translate(Vector vec) {
+		x += vec.x;
+		y += vec.y;
 		return this;
 	}
 
