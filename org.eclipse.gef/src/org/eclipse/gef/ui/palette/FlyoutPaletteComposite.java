@@ -623,7 +623,7 @@ public class FlyoutPaletteComposite extends Composite {
 					restorePaletteState(pViewer, capturedPaletteState);
 				}
 				capturedPaletteState = null;
-				minWidth = Math.round(Math.max(pViewer.getControl().computeSize(0, 0).x * scale, MIN_PALETTE_SIZE));
+				minWidth = Math.round(Math.max(pViewer.getControl().computeSize(0, 0).x, MIN_PALETTE_SIZE));
 			}
 			/*
 			 * Fix for Bug# 63901 When the flyout collapses, if the palette has focus, throw
