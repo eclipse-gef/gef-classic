@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -71,12 +71,17 @@ public class FreeformViewport extends Viewport {
 			return;
 		}
 		Rectangle clientArea = getClientArea();
-		Rectangle bounds = ff.getFreeformExtent().getCopy();
+		Rectangle bounds = getFreeformBounds(ff);
 		bounds.union(0, 0, clientArea.width, clientArea.height);
 		ff.setFreeformBounds(bounds);
 
 		getVerticalRangeModel().setAll(bounds.y, clientArea.height, bounds.bottom());
 		getHorizontalRangeModel().setAll(bounds.x, clientArea.width, bounds.right());
+	}
+
+	@SuppressWarnings("static-method")
+	/* package */ Rectangle getFreeformBounds(FreeformFigure ff) {
+		return ff.getFreeformExtent().getCopy();
 	}
 
 	/**
