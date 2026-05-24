@@ -15,6 +15,9 @@ package org.eclipse.draw2d;
 
 import org.eclipse.pde.api.tools.annotations.NoReference;
 
+import org.eclipse.draw2d.geometry.PrecisionRectangle;
+import org.eclipse.draw2d.geometry.Rectangle;
+
 /**
  * <b>IMPORTANT:</b> This class is <em>not</em> part of the GEF public API. It
  * is marked public only so that it can be by other GEF plugins and should never
@@ -62,5 +65,10 @@ public class AutoscaleFreeformViewport extends FreeformViewport {
 	@Override
 	protected FreeformFigure getFreeformFigure() {
 		return getAutoScaleLayerPane();
+	}
+
+	@Override
+	Rectangle getFreeformBounds(FreeformFigure ff) {
+		return new PrecisionRectangle(ff.getFreeformExtent());
 	}
 }
