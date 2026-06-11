@@ -15,5 +15,6 @@ Snap.*
 .polyglot.META-INF
 *.class
 .polyglot*.xml
+.polyglot*.target
 build.log
 

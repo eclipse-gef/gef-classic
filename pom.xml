@@ -16,12 +16,12 @@
 		<cbi-plugins.version>1.5.4</cbi-plugins.version>
 		<tycho.scmUrl>scm:git:https://github.com/eclipse-gef/gef-classic.git</tycho.scmUrl>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.27.0</comparator.repo>
+		<comparator.repo>https://download.eclipse.org/tools/gef/classic/release/3.28.0</comparator.repo>
 		<surefire.timeout>300</surefire.timeout>
-		<sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
+		<sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
 		<build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
 		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
-		<jruby.version>9.4.14.0</jruby.version>
+		<jruby.version>9.4.15.0</jruby.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
 		<!-- SonarQube configuration -->
 		<sonar.exclusion>**/.tycho-consumer-pom.xml</sonar.exclusion>
