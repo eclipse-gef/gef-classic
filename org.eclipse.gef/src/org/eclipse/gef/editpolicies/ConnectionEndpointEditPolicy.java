@@ -97,8 +97,8 @@ public class ConnectionEndpointEditPolicy extends SelectionHandlesEditPolicy {
 				return;
 			}
 			PointList points = getConnection().getPoints().getCopy();
-			getConnection().translateToAbsolute(points);
 			points = StrokePointList.strokeList(points, 5);
+			getConnection().translateToAbsolute(points);
 			translateToRelative(points);
 			setPoints(points);
 		}
