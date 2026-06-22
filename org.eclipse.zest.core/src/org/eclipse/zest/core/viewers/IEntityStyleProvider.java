@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2006, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2026 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -15,6 +15,8 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
+import org.eclipse.zest.core.widgets.Graph;
+import org.eclipse.zest.core.widgets.GraphColorProvider;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -41,34 +43,51 @@ import org.eclipse.draw2d.IFigure;
 public interface IEntityStyleProvider extends IDisposable {
 
 	/**
-	 * Returns the forground colour of this entity. May return null for defaults.
-	 * Any resources created by this class must be disposed by this class.
+	 * Returns the highlight colour of this entity. May return null for defaults.
 	 *
 	 * @param entity the entity to be styled.
-	 * @return the forground colour of this entity.
-	 * @see #dispose()
+	 * @return the highlight colour of this entity.
+	 * @see GraphColorProvider#getForegroundHighlightColor(Object)
+	 * @see GraphColorProvider#getBackgroundHighlightColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getNodeHighlightColor(Object entity);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getNodeHighlightColor(Object entity) {
+		return null;
+	}
 
 	/**
 	 * Returns the background colour for this entity. May return null for defaults.
-	 * Any resources created by this class must be disposed by this class.
 	 *
 	 * @param entity the entity to be styled.
 	 * @return the background colour for this entity.
-	 * @see #dispose()
+	 * @see GraphColorProvider#getBorderColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getBorderColor(Object entity);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getBorderColor(Object entity) {
+		return null;
+	}
 
 	/**
 	 * Returns the border highlight colour for this entity. May return null for
-	 * defaults. Any resources created by this class must be disposed by this class.
+	 * defaults.
 	 *
 	 * @param entity the entity to be styled.
 	 * @return the border highlight colour for this entity.
-	 * @see #dispose()
+	 * @see GraphColorProvider#getBorderHighlightColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getBorderHighlightColor(Object entity);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getBorderHighlightColor(Object entity) {
+		return null;
+	}
 
 	/**
 	 * Returns the border width for this entity. May return -1 for defaults.
@@ -102,17 +121,36 @@ public interface IEntityStyleProvider extends IDisposable {
 	// @tag ADJACENT : Removed highlight adjacent
 	// public Color getAdjacentEntityHighlightColor(Object entity);
 	/**
-	 * Returns the colour that this node should be coloured. This will be ignored if
-	 * getNodeColour returns null. Any resources created by this class must be
-	 * diposed by this class.
+	 * Returns the background colour that this node should be coloured. This will be
+	 * ignored if getNodeColour returns null.
 	 *
 	 * @param entity The entity to be styled
 	 * @return The colour for the node
-	 * @see #dispose()
+	 * @see GraphColorProvider#getBackgroundColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getBackgroundColour(Object entity);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getBackgroundColour(Object entity) {
+		return null;
+	}
 
-	public Color getForegroundColour(Object entity);
+	/**
+	 * Returns the foreground colour that this node should be coloured. This will be
+	 * ignored if getNodeColour returns null.
+	 *
+	 * @param entity The entity to be styled
+	 * @return The colour for the node
+	 * @see GraphColorProvider#getForegroundColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getForegroundColour(Object entity) {
+		return null;
+	}
 
 	/**
 	 * Returns the tooltop for this node. If null is returned Zest will simply use

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria, BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC, Canada.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -30,7 +30,6 @@ import org.eclipse.zest.layouts.LayoutEntity;
 import org.eclipse.zest.layouts.constraints.LayoutConstraint;
 
 import org.eclipse.draw2d.Animation;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -191,19 +190,19 @@ public class GraphNode extends GraphItem {
 		this.parent = parent;
 		this.sourceConnections = new ArrayList<>();
 		this.targetConnections = new ArrayList<>();
-		this.foreColor = parent.getGraph().DARK_BLUE;
-		this.backColor = parent.getGraph().LIGHT_BLUE;
-		this.highlightColor = parent.getGraph().HIGHLIGHT_COLOR;
+		this.graph = parent.getGraph();
+		this.foreColor = getGraphModel().getColorProvider().getForegroundColor(this);
+		this.backColor = getGraphModel().getColorProvider().getBackgroundColor(this);
+		this.highlightColor = getGraphModel().getColorProvider().getBackgroundHighlightColor(this);
 		// @tag ADJACENT : Removed highlight adjacent
 		// this.highlightAdjacentColor = ColorConstants.orange;
 		this.nodeStyle = SWT.NONE;
-		this.borderColor = ColorConstants.lightGray;
-		this.borderHighlightColor = ColorConstants.blue;
+		this.borderColor = getGraphModel().getColorProvider().getBorderColor(this);
+		this.borderHighlightColor = getGraphModel().getColorProvider().getBorderHighlightColor(this);
 		this.borderWidth = 1;
 		this.currentLocation = new PrecisionPoint(0, 0);
 		this.size = new Dimension(-1, -1);
 		this.font = Display.getDefault().getSystemFont();
-		this.graph = parent.getGraph();
 		this.cacheLabel = false;
 		this.setText(text);
 		this.layoutEntity = new LayoutGraphNode();

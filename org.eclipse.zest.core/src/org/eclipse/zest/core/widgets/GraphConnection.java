@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2025, CHISEL Group, University of Victoria, Victoria,
- *                            BC, Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -107,11 +107,11 @@ public class GraphConnection extends GraphItem {
 		this.visible = true;
 		this.color = ColorConstants.lightGray;
 		this.foreground = ColorConstants.lightGray;
-		this.highlightColor = graphModel.DARK_BLUE;
+		this.graphModel = graphModel;
+		this.highlightColor = getGraphModel().getColorProvider().getForegroundHighlightColor(this);
 		this.lineWidth = 1;
 		this.lineStyle = Graphics.LINE_SOLID;
 		setWeight(weight);
-		this.graphModel = graphModel;
 		this.curveDepth = 0;
 		this.layoutConnection = new GraphLayoutConnection();
 		this.font = Display.getDefault().getSystemFont();

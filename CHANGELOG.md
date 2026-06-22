@@ -6,6 +6,10 @@
 
 ## Zest
 
+- Node styling is node done via the `GraphColorProvider`, as opposed to the `IEntityStyleProvider`. This allows
+  consumers to easily style graph items without relying on JFace classes. The corresponding methods in the
+  `IEntityStyleProvider` have been deprecated for removal.
+
 ## General
 
 

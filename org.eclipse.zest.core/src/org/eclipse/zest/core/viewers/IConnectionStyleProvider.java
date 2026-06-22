@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2005-2006, 2024 CHISEL Group, University of Victoria, Victoria, BC,
+ * Copyright 2005, 2026 CHISEL Group, University of Victoria, Victoria, BC,
  *                      Canada.
  *
  * This program and the accompanying materials are made available under the
@@ -15,6 +15,8 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
+import org.eclipse.zest.core.widgets.Graph;
+import org.eclipse.zest.core.widgets.GraphColorProvider;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -41,24 +43,34 @@ public interface IConnectionStyleProvider extends IDisposable {
 	public int getConnectionStyle(Object rel);
 
 	/**
-	 * Returns the color for the connection. Null for default. Any resources created
-	 * by this class must be disposed by this class.
+	 * Returns the color for the connection. Null for default.
 	 *
 	 * @param rel the relationship represented by this connection.
 	 * @return the color.
-	 * @see #dispose()
+	 * @see GraphColorProvider#getForegroundColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getColor(Object rel);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getColor(Object rel) {
+		return null;
+	}
 
 	/**
-	 * Returns the highlighted color for this connection. Null for default. Any
-	 * resources created by this class must be disposed by this class.
+	 * Returns the highlighted color for this connection. Null for default.
 	 *
 	 * @param rel the relationship represented by this connection.
 	 * @return the highlighted color. Null for default.
-	 * @see #dispose()
+	 * @see GraphColorProvider#getForegroundHighlightColor(Object)
+	 * @deprecated Call {@link Graph#setColorProvider} with a custom
+	 *             {@link GraphColorProvider} instead. This method will be removed
+	 *             after the 2028-09 release.
 	 */
-	public Color getHighlightColor(Object rel);
+	@Deprecated(since = "2026-09", forRemoval = true)
+	default Color getHighlightColor(Object rel) {
+		return null;
+	}
 
 	/**
 	 * Returns the line width of the connection. -1 for default.
