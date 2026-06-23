@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Fabian Steeg. All rights reserved.
+ * Copyright (c) 2011, 2026 Fabian Steeg. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,7 @@
 package org.eclipse.zest.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -21,14 +22,20 @@ import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphConnection;
+import org.eclipse.zest.core.widgets.GraphContainer;
 import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.ZestStyles;
 import org.eclipse.zest.core.widgets.internal.ZestRootLayer;
 import org.eclipse.zest.layouts.interfaces.LayoutContext;
+import org.eclipse.zest.tests.utils.SWTBotGraph;
 
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.Rectangle;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,6 +50,7 @@ public class GraphTests {
 	private GraphNode[] nodes;
 
 	private Graph graph;
+	private SWTBotGraph graphRobot;
 
 	private GraphConnection connection;
 
@@ -52,8 +60,15 @@ public class GraphTests {
 	public void setUp() throws Exception {
 		shell = new Shell();
 		graph = new Graph(shell, SWT.NONE);
+		graph.setSize(400, 400);
+		graphRobot = new SWTBotGraph(graph);
 		nodes = new GraphNode[] { new GraphNode(graph, SWT.NONE), new GraphNode(graph, SWT.NONE) };
 		connection = new GraphConnection(graph, SWT.NONE, nodes[0], nodes[1]);
+	}
+
+	@AfterEach
+	public void tearDown() {
+		shell.dispose();
 	}
 
 	@Test
@@ -184,5 +199,25 @@ public class GraphTests {
 		assertEquals(graph.getListeners(SWT.Gesture).length, 0);
 		graph.setGraphStyle(ZestStyles.NONE);
 		assertEquals(graph.getListeners(SWT.Gesture).length, 2);
+	}
+
+	@Test
+	public void testDoubleClickOnGraphContainer() {
+		GraphContainer c = new GraphContainer(graph, SWT.NONE);
+		IFigure containerFigure = c.getNodeFigure();
+		containerFigure.setBounds(new Rectangle(0, 0, 100, 100));
+
+		GraphNode n = new GraphNode(c, SWT.NONE);
+		n.setText("Hello World"); //$NON-NLS-1$
+		IFigure nodeFigure = n.getNodeFigure();
+
+		Point containerCenter = containerFigure.getBounds().getCenter();
+		graphRobot.mouseDoubleClick(containerCenter.x, containerCenter.y);
+		// no changes to the SWT structure
+		assertSame(graph, c.getGraphModel());
+		assertSame(graph, n.getGraphModel());
+		// Graph only shows the container figures
+		ZestRootLayer rootLayer = (ZestRootLayer) graph.getRootLayer().getChildren().get(0);
+		assertEquals(rootLayer.getChildren(), List.of(nodeFigure));
 	}
 }
