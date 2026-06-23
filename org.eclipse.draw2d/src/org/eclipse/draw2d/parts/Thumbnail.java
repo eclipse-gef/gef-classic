@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2024 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -126,6 +126,7 @@ public class Thumbnail extends Figure implements UpdateListener {
 		public void resetTileValues() {
 			// Keep track of source size that matches the computed tile size.
 			sourceSize = getSourceRectangle().getSize();
+			getSource().translateToAbsolute(sourceSize);
 
 			// Compute number of horizontal and vertical tiles and the size of
 			// each tile (while the last tile in horizontal and vertical
