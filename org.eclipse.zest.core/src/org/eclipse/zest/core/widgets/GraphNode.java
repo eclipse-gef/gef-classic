@@ -1,5 +1,6 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria, BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -30,7 +31,6 @@ import org.eclipse.zest.layouts.LayoutEntity;
 import org.eclipse.zest.layouts.constraints.LayoutConstraint;
 
 import org.eclipse.draw2d.Animation;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -64,8 +64,9 @@ public class GraphNode extends GraphItem {
 	private List<GraphConnection> targetConnections;
 
 	private Color foreColor;
+	private Color foreHighlightColor;
 	private Color backColor;
-	private Color highlightColor;
+	private Color backHighlightColor;
 	// @tag ADJACENT : Removed highlight adjacent
 	// private Color highlightAdjacentColor;
 	private Color borderColor;
@@ -191,14 +192,15 @@ public class GraphNode extends GraphItem {
 		this.parent = parent;
 		this.sourceConnections = new ArrayList<>();
 		this.targetConnections = new ArrayList<>();
-		this.foreColor = parent.getGraph().DARK_BLUE;
-		this.backColor = parent.getGraph().LIGHT_BLUE;
-		this.highlightColor = parent.getGraph().HIGHLIGHT_COLOR;
+		this.foreColor = parent.getGraph().getColorProvider().getForegroundColor(this);
+		this.foreHighlightColor = parent.getGraph().getColorProvider().getForegroundHighlightColor(this);
+		this.backColor = parent.getGraph().getColorProvider().getBackgroundColor(this);
+		this.backHighlightColor = parent.getGraph().getColorProvider().getBackgroundHighlightColor(this);
 		// @tag ADJACENT : Removed highlight adjacent
 		// this.highlightAdjacentColor = ColorConstants.orange;
 		this.nodeStyle = SWT.NONE;
-		this.borderColor = ColorConstants.lightGray;
-		this.borderHighlightColor = ColorConstants.blue;
+		this.borderColor = parent.getGraph().getColorProvider().getBorderColor(this);
+		this.borderHighlightColor = parent.getGraph().getColorProvider().getBorderHighlightColor(this);
 		this.borderWidth = 1;
 		this.currentLocation = new PrecisionPoint(0, 0);
 		this.size = new Dimension(-1, -1);
@@ -445,16 +447,60 @@ public class GraphNode extends GraphItem {
 
 	/**
 	 * Get the highlight colour for this node
+	 *
+	 * @deprecated Use {@link #getBackgroundHighlightColor()} instead. This method
+	 *             will be removed after the 2028-06 release.
 	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public Color getHighlightColor() {
-		return highlightColor;
+		return backHighlightColor;
+	}
+
+	/**
+	 * Get the highlight background colour for this node
+	 *
+	 * @since 1.18
+	 */
+	public Color getBackgroundHighlightColor() {
+		return getHighlightColor();
 	}
 
 	/**
 	 * Set the highlight colour for this node
+	 *
+	 * @deprecated Use {@link #setBackgroundHighlightColor(Color)} instead. This
+	 *             method will be removed after the 2028-06 release.
 	 */
+	@Deprecated(since = "2026-06", forRemoval = true)
 	public void setHighlightColor(Color c) {
-		this.highlightColor = c;
+		this.backHighlightColor = c;
+	}
+
+	/**
+	 * Set the highlight background colour for this node
+	 *
+	 * @since 1.18
+	 */
+	public void setBackgroundHighlightColor(Color c) {
+		setHighlightColor(c);
+	}
+
+	/**
+	 * Get the highlight background colour for this node
+	 *
+	 * @since 1.18
+	 */
+	public Color getForegroundHighlightColor() {
+		return foreHighlightColor;
+	}
+
+	/**
+	 * Set the highlight background colour for this node
+	 *
+	 * @since 1.18
+	 */
+	public void setForegroundHighlightColor(Color c) {
+		this.foreHighlightColor = c;
 	}
 
 	/**
@@ -853,23 +899,15 @@ public class GraphNode extends GraphItem {
 		}
 
 		if (figure instanceof IStyleableFigure styleableFigure) {
-			// update styles (colors, border) for figures implementing
-			// IStyleableFigure
-			if (highlighted == HIGHLIGHT_ON) {
-				styleableFigure.setForegroundColor(getForegroundColor());
-				styleableFigure.setBackgroundColor(getHighlightColor());
-				styleableFigure.setBorderColor(getBorderHighlightColor());
-			} else {
-				styleableFigure.setForegroundColor(getForegroundColor());
-				styleableFigure.setBackgroundColor(getBackgroundColor());
-				styleableFigure.setBorderColor(getBorderColor());
-			}
-
+			// update styles (colors, border) for figures implementing IStyleableFigure
+			styleableFigure.setBorderColor(highlighted == HIGHLIGHT_ON ? getBorderHighlightColor() : getBorderColor());
 			styleableFigure.setBorderWidth(getBorderWidth());
+		}
+		figure.setForegroundColor(highlighted == HIGHLIGHT_ON ? getForegroundHighlightColor() : getForegroundColor());
+		figure.setBackgroundColor(highlighted == HIGHLIGHT_ON ? getBackgroundHighlightColor() : getBackgroundColor());
 
-			if (figure.getFont() != getFont()) {
-				figure.setFont(getFont());
-			}
+		if (figure.getFont() != getFont()) {
+			figure.setFont(getFont());
 		}
 
 		if (this.getTooltip() == null && hasCustomTooltip == false) {
@@ -941,17 +979,8 @@ public class GraphNode extends GraphItem {
 
 		// @tag TODO: Add border and foreground colours to highlight
 		// (this.borderColor)
-		if (highlighted == HIGHLIGHT_ON) {
-			label.setForegroundColor(getForegroundColor());
-			label.setBackgroundColor(getHighlightColor());
-			label.setBorderColor(getBorderHighlightColor());
-		} else {
-			label.setForegroundColor(getForegroundColor());
-			label.setBackgroundColor(getBackgroundColor());
-			label.setBorderColor(getBorderColor());
-		}
-
-		label.setBorderWidth(getBorderWidth());
+		label.setForegroundColor(highlighted == HIGHLIGHT_ON ? getForegroundHighlightColor() : getForegroundColor());
+		label.setBackgroundColor(highlighted == HIGHLIGHT_ON ? getBackgroundHighlightColor() : getBackgroundColor());
 		label.setFont(getFont());
 		return label;
 	}

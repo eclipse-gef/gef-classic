@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2025, CHISEL Group, University of Victoria, Victoria,
- *                            BC, Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@
  ******************************************************************************/
 package org.eclipse.zest.core.widgets;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
@@ -106,9 +107,9 @@ public class GraphConnection extends GraphItem {
 		this.destinationNode = destination;
 		this.visible = true;
 		this.color = ColorConstants.lightGray;
-		this.foreground = ColorConstants.lightGray;
-		this.highlightColor = graphModel.DARK_BLUE;
-		this.lineWidth = 1;
+		this.foreground = graphModel.getColorProvider().getForegroundColor(this);
+		this.highlightColor = graphModel.getColorProvider().getBackgroundHighlightColor(this);
+		this.lineWidth = 2;
 		this.lineStyle = Graphics.LINE_SOLID;
 		setWeight(weight);
 		this.graphModel = graphModel;
@@ -759,7 +760,12 @@ public class GraphConnection extends GraphItem {
 	 * @since 1.7
 	 */
 	protected PolylineConnection cachedOrNewConnectionFigure() {
-		return cachedConnectionFigure == null ? new PolylineArcConnection() : cachedConnectionFigure;
+		if (cachedConnectionFigure != null) {
+			return cachedConnectionFigure;
+		}
+		PolylineConnection connectionFigure = new PolylineArcConnection();
+		connectionFigure.setAntialias(SWT.ON);
+		return connectionFigure;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024, CHISEL Group, University of Victoria, Victoria, BC,
- *                            Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -37,7 +37,6 @@ import org.eclipse.zest.layouts.dataStructures.DisplayIndependentRectangle;
 import org.eclipse.zest.layouts.interfaces.LayoutContext;
 
 import org.eclipse.draw2d.Animation;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
@@ -771,17 +770,18 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 		zestLayer.setLayoutManager(new FreeformLayout());
 		scrollPane.setSize(computeChildArea());
 		scrollPane.setLocation(new Point(0, containerDimension.labelHeight - SUBLAYER_OFFSET));
-		scrollPane.setForegroundColor(ColorConstants.gray);
+		scrollPane.setForegroundColor(getGraph().getColorProvider().getForegroundColor(this));
 
 		expandGraphLabel.setBackgroundColor(getBackgroundColor());
 		expandGraphLabel.setForegroundColor(getForegroundColor());
 		expandGraphLabel.setLocation(new Point(0, 0));
+		expandGraphLabel.setBorder(new LineBorder(getGraph().getColorProvider().getBorderColor(this)));
 
 		containerFigure.add(scrollPane);
 		containerFigure.add(expandGraphLabel);
 
 		scrollPane.getViewport().setContents(scalledLayer);
-		scrollPane.setBorder(new LineBorder());
+		scrollPane.setBorder(new LineBorder(getGraph().getColorProvider().getBorderColor(this)));
 
 		return containerFigure;
 	}
@@ -826,8 +826,8 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 		expandGraphLabel.setFont(getFont());
 
 		if (highlighted == HIGHLIGHT_ON) {
-			expandGraphLabel.setForegroundColor(getForegroundColor());
-			expandGraphLabel.setBackgroundColor(getHighlightColor());
+			expandGraphLabel.setForegroundColor(getForegroundHighlightColor());
+			expandGraphLabel.setBackgroundColor(getBackgroundHighlightColor());
 		}
 		// @tag ADJACENT : Removed highlight adjacent
 		/*

@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2006, CHISEL Group, University of Victoria, Victoria, BC,
- *                      Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,10 +12,8 @@
  ******************************************************************************/
 package org.eclipse.zest.core.widgets.internal;
 
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.zest.core.widgets.GraphContainer;
@@ -101,7 +99,6 @@ public class ExpandGraphLabel extends Figure implements ActionListener {
 		}
 	}
 
-	private final int arcWidth;
 	private Label label = null;
 	private final GraphContainer container;
 	private final ToolbarLayout layout;
@@ -151,7 +148,6 @@ public class ExpandGraphLabel extends Figure implements ActionListener {
 		this.setImage(image);
 		this.container = container;
 		this.expander = new Expander();
-		this.arcWidth = 8;
 		this.setFont(Display.getDefault().getSystemFont());
 		layout = new ToolbarLayout(true);
 		layout.setSpacing(5);
@@ -159,6 +155,7 @@ public class ExpandGraphLabel extends Figure implements ActionListener {
 		this.setLayoutManager(layout);
 		this.add(this.expander);
 		this.add(this.label);
+		this.setOpaque(true);
 		// this.remove(this.label);
 	}
 
@@ -188,62 +185,6 @@ public class ExpandGraphLabel extends Figure implements ActionListener {
 
 	private String getText() {
 		return this.label.getText();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see org.eclipse.draw2d.Label#paintFigure(org.eclipse.draw2d.Graphics)
-	 */
-	@Override
-	public void paint(Graphics graphics) {
-		Color baseColor = getBackgroundColor();
-		int blue = (int) (baseColor.getBlue() * 0.8 + 0.5);
-		int red = (int) (baseColor.getRed() * 0.8 + 0.5);
-		int green = (int) (baseColor.getGreen() * 0.8 + 0.5);
-		Color darkerBackground = new Color(new RGB(red, green, blue));
-		graphics.setForegroundColor(darkerBackground);
-		graphics.setBackgroundColor(getBackgroundColor());
-
-		graphics.pushState();
-
-		// fill in the background
-		Rectangle bounds = getBounds().getCopy();
-		Rectangle r = bounds.getCopy();
-		// r.x += arcWidth / 2;
-		r.y += arcWidth / 2;
-		// r.width -= arcWidth;
-		r.height -= arcWidth;
-
-		Rectangle top = bounds.getCopy();
-		top.height /= 2;
-		// graphics.setForegroundColor(lightenColor);
-		// graphics.setBackgroundColor(lightenColor);
-		graphics.setForegroundColor(getBackgroundColor());
-		graphics.setBackgroundColor(getBackgroundColor());
-		graphics.fillRoundRectangle(top, arcWidth, arcWidth);
-
-		top.y = top.y + top.height;
-		// graphics.setForegroundColor(getBackgroundColor());
-		// graphics.setBackgroundColor(getBackgroundColor());
-		graphics.setForegroundColor(darkerBackground);
-		graphics.setBackgroundColor(darkerBackground);
-		graphics.fillRoundRectangle(top, arcWidth, arcWidth);
-
-		// graphics.setForegroundColor(lightenColor);
-		// graphics.setBackgroundColor(getBackgroundColor());
-		graphics.setBackgroundColor(darkerBackground);
-		graphics.setForegroundColor(getBackgroundColor());
-		graphics.fillGradient(r, true);
-
-		super.paint(graphics);
-		graphics.popState();
-		graphics.setForegroundColor(darkerBackground);
-		graphics.setBackgroundColor(darkerBackground);
-		// paint the border
-		bounds.setSize(bounds.width - 1, bounds.height - 1);
-		graphics.drawRoundRectangle(bounds, arcWidth, arcWidth);
-		darkerBackground.dispose();
 	}
 
 //	public Dimension getPreferredSize(int hint, int hint2) {
