@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2006, 2024 CHISEL Group, University of Victoria, Victoria, BC,
- *                      Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -78,29 +78,6 @@ public interface IEntityStyleProvider extends IDisposable {
 	 */
 	public int getBorderWidth(Object entity);
 
-	/**
-	 * Returns true iff the adjacent entities should be highlighted when this node
-	 * is selected. Zest's default action is true.
-	 *
-	 * @return true iff the adjacent entities should be highlighted when this node
-	 *         is selected.
-	 */
-	// @tag ADJACENT : Removed highlight adjacent
-	// public boolean highlightAdjacentEntities(Object entity);
-	/**
-	 * Returns the color that adjacent entities will be drawn when this entity is
-	 * selected. Will be ignored if HighlightAdjacentEntities() returns false. May
-	 * return null for defaults. Any resources created by this class must be
-	 * disposed by this class.
-	 *
-	 * @param entity the entity to be styled.
-	 * @return the color for adjacent entities.
-	 * @see #highlightAdjacentEntities(Object entity)
-	 * @see #dispose()
-	 */
-
-	// @tag ADJACENT : Removed highlight adjacent
-	// public Color getAdjacentEntityHighlightColor(Object entity);
 	/**
 	 * Returns the colour that this node should be coloured. This will be ignored if
 	 * getNodeColour returns null. Any resources created by this class must be

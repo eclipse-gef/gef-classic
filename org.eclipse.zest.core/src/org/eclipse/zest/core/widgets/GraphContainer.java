@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024, CHISEL Group, University of Victoria, Victoria, BC,
- *                            Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -828,14 +828,7 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 		if (highlighted == HIGHLIGHT_ON) {
 			expandGraphLabel.setForegroundColor(getForegroundColor());
 			expandGraphLabel.setBackgroundColor(getHighlightColor());
-		}
-		// @tag ADJACENT : Removed highlight adjacent
-		/*
-		 * else if (highlighted == HIGHLIGHT_ADJACENT) {
-		 * expandGraphLabel.setForegroundColor(getForegroundColor());
-		 * expandGraphLabel.setBackgroundColor(getHighlightAdjacentColor()); }
-		 */
-		else {
+		} else {
 			expandGraphLabel.setForegroundColor(getForegroundColor());
 			expandGraphLabel.setBackgroundColor(getBackgroundColor());
 		}
