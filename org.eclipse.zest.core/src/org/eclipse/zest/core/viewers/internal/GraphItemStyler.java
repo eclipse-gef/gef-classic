@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
- *                           BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -224,15 +224,7 @@ public class GraphItemStyler {
 	// @tag bug(151327-Styles) : resolution
 	private static void styleNode(GraphNode node, IEntityStyleProvider provider) {
 		Object entity = node.getData();
-		// @tag ADJACENT : Removed highlight adjacent
-		// node.setHighlightAdjacentNodes(provider.highlightAdjacentEntities(entity));
 
-		// @tag ADJACENT : Removed highlight adjacent
-		/*
-		 * if (provider.highlightAdjacentEntities(entity)) { Color c =
-		 * provider.getAdjacentEntityHighlightColor(entity); if (c != null) {
-		 * node.setHighlightAdjacentColor(c); } }
-		 */
 		Color c;
 		IFigure figure;
 		int width = -1;

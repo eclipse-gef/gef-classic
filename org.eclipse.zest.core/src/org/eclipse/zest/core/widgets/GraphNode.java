@@ -1,5 +1,6 @@
 /*******************************************************************************
- * Copyright 2005, 2025, CHISEL Group, University of Victoria, Victoria, BC, Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -55,8 +56,6 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class GraphNode extends GraphItem {
 	public static final int HIGHLIGHT_NONE = 0;
 	public static final int HIGHLIGHT_ON = 1;
-	// @tag ADJACENT : Removed highlight adjacent
-	// public static final int HIGHLIGHT_ADJACENT = 2;
 
 	private int nodeStyle;
 
@@ -66,8 +65,6 @@ public class GraphNode extends GraphItem {
 	private Color foreColor;
 	private Color backColor;
 	private Color highlightColor;
-	// @tag ADJACENT : Removed highlight adjacent
-	// private Color highlightAdjacentColor;
 	private Color borderColor;
 	private Color borderHighlightColor;
 	private int borderWidth;
@@ -194,8 +191,6 @@ public class GraphNode extends GraphItem {
 		this.foreColor = parent.getGraph().DARK_BLUE;
 		this.backColor = parent.getGraph().LIGHT_BLUE;
 		this.highlightColor = parent.getGraph().HIGHLIGHT_COLOR;
-		// @tag ADJACENT : Removed highlight adjacent
-		// this.highlightAdjacentColor = ColorConstants.orange;
 		this.nodeStyle = SWT.NONE;
 		this.borderColor = ColorConstants.lightGray;
 		this.borderHighlightColor = ColorConstants.blue;
@@ -458,25 +453,6 @@ public class GraphNode extends GraphItem {
 	}
 
 	/**
-	 * Get the highlight adjacent colour for this node. This is the colour that
-	 * adjacent nodes will get
-	 */
-	// @tag ADJACENT : Removed highlight adjacent
-	/*
-	 * public Color getHighlightAdjacentColor() { return highlightAdjacentColor; }
-	 */
-
-	/**
-	 * Set the highlight adjacent colour for this node. This is the colour that
-	 * adjacent node will get.
-	 */
-	// @tag ADJACENT : Removed highlight adjacent
-	/*
-	 * public void setHighlightAdjacentColor(Color c) { this.highlightAdjacentColor
-	 * = c; }
-	 */
-
-	/**
 	 * Highlights the node changing the background color and border color. The
 	 * source and destination connections are also highlighted, and the adjacent
 	 * nodes are highlighted too in a different color.
@@ -486,17 +462,6 @@ public class GraphNode extends GraphItem {
 		if (highlighted == HIGHLIGHT_ON) {
 			return;
 		}
-		// @tag ADJACENT : Removed highlight adjacent
-		/*
-		 * if (ZestStyles.checkStyle(getNodeStyle(),
-		 * ZestStyles.NODES_HIGHLIGHT_ADJACENT)) { for (Iterator iter =
-		 * sourceConnections.iterator(); iter.hasNext();) { GraphConnection conn =
-		 * (GraphConnection) iter.next(); conn.highlight();
-		 * conn.getDestination().highlightAdjacent(); } for (Iterator iter =
-		 * targetConnections.iterator(); iter.hasNext();) { GraphConnection conn =
-		 * (GraphConnection) iter.next(); conn.highlight();
-		 * conn.getSource().highlightAdjacent(); } }
-		 */
 		if (nodeFigure.getParent() instanceof ZestRootLayer rootLayer) {
 			rootLayer.highlightNode(nodeFigure);
 		}
@@ -510,24 +475,9 @@ public class GraphNode extends GraphItem {
 	@Override
 	public void unhighlight() {
 
-		// @tag ADJACENT : Removed highlight adjacent
-		// boolean highlightedAdjacently = (highlighted == HIGHLIGHT_ADJACENT);
 		if (highlighted == HIGHLIGHT_NONE) {
 			return;
 		}
-		// @tag ADJACENT : Removed highlight adjacent
-		/*
-		 * if (!highlightedAdjacently) { // IF we are highlighted as an adjacent node,
-		 * we don't need to deal // with our connections. if
-		 * (ZestStyles.checkStyle(getNodeStyle(), ZestStyles.NODES_HIGHLIGHT_ADJACENT))
-		 * { // unhighlight the adjacent edges for (Iterator iter =
-		 * sourceConnections.iterator(); iter.hasNext();) { GraphConnection conn =
-		 * (GraphConnection) iter.next(); conn.unhighlight(); if (conn.getDestination()
-		 * != this) { conn.getDestination().unhighlight(); } } for (Iterator iter =
-		 * targetConnections.iterator(); iter.hasNext();) { GraphConnection conn =
-		 * (GraphConnection) iter.next(); conn.unhighlight(); if (conn.getSource() !=
-		 * this) { conn.getSource().unhighlight(); } } } }
-		 */
 		if (nodeFigure.getParent() instanceof ZestRootLayer rootLayer) {
 			rootLayer.unHighlightNode(nodeFigure);
 		}
@@ -559,34 +509,6 @@ public class GraphNode extends GraphItem {
 			}
 		}
 	}
-
-	/**
-	 * Highlights this node using the adjacent highlight color. This only does
-	 * something if highlighAdjacentNodes is set to true and if the node isn't
-	 * already highlighted.
-	 *
-	 * @see #setHighlightAdjacentNodes(boolean)
-	 */
-	// @tag ADJACENT : removed highlight adjacent
-	/*
-	 * public void highlightAdjacent() { if (highlighted > 0) { return; }
-	 * highlighted = HIGHLIGHT_ADJACENT; updateFigureForModel(nodeFigure); if
-	 * (parent.getItemType() == GraphItem.CONTAINER) { ((GraphContainer)
-	 * parent).highlightNode(this); } else { ((Graph) parent).highlightNode(this); }
-	 * }
-	 */
-
-	/**
-	 * Returns if the nodes adjacent to this node will be highlighted when this node
-	 * is selected.
-	 *
-	 * @return GraphModelNode
-	 */
-	// @tag ADJACENT : Removed highlight adjacent
-	/*
-	 * public boolean isHighlightAdjacentNodes() { return
-	 * ZestStyles.checkStyle(nodeStyle, ZestStyles.NODES_HIGHLIGHT_ADJACENT); }
-	 */
 
 	public Color getBorderColor() {
 		return borderColor;
