@@ -395,6 +395,7 @@
 		<module>org.eclipse.gef.examples</module>
 		<module>org.eclipse.gef.examples.digraph1</module>
 		<module>org.eclipse.gef.examples.digraph2</module>
+		<module>org.eclipse.gef.examples.e4</module>
 		<module>org.eclipse.gef.examples.flow</module>
 		<module>org.eclipse.gef.examples.logic</module>
 		<module>org.eclipse.gef.examples.shapes</module>
