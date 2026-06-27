@@ -20,7 +20,7 @@ Alternatively, graphs can also be created using the JFace structured viewers.
 Edges and vertices are created by supplying a special ContentProvider and can be
 stylized by a special LabelProvider.
 
-image:images/GraphViewer.png[width=33%,height=33%]
+image:images/GraphViewer.svg[The relation between the GraphViewer, ContentProvider and LabelProvider,width=100%,height=100%]
 
 === Content Provider
 
@@ -44,21 +44,53 @@ interface (except the `ITreeContentProvider`) to support sub-graphs.
 
 === Label Provider
 
-The label provider may implement one (but not multiple) of the following
-interfaces:
+A custom label provider may either implement the `ILabelProvider` or the
+`ILabelDecorator` interface. The `ILabelProvider` should primarily be used for
+simple graph items consisting of only a label and an image. For further
+stylization, this label provider may also implement the `IColorProvider` and
+`IFontProvider` interfaces.
 
-- `ISelfStyleProvider` for generic customizations of both edges and vertices,
-   such as dotted lines.
-- `IConnectionStyleProvider` (Edges only) for contributing details about an
-   edge. Incompatible with `IEntityConnectionStyleProvider`.
-- `IEntityConnectionStyleProvider` (Edges only) for contributing details
+If a more complex stylization is required, the `IGraphLabelDecorator` interface
+should be used. Whenever a new graph item is created, the `decorateNode` and
+`decorateConnection` methods are called to allow full customization of the
+underlying widget.
+
+Zest provides the following decorators for common use cases:
+
+- `ConnectionStyleDecorator` (Edges only) for contributing details about an
+   edge.
+- `EntityConnectionStyleDecorator` (Edges only) for contributing details
    about an edge. Here the edge is described via the source and destination
-   vertices. Incompatible with `IConnectionStyleProvider`
-- `IEntityStyleProvider` (Vertices only) for contributing details about a
+   vertices.
+- `EntityStyleDecorator` (Vertices only) for contributing details about a
    vertex.
 
 Additionally, the label provider may implement the `IFigureProvider` interface
 to supply custom figures for the graph elements.
+
+If both a label provider and decorator are required, a `DecoratingLabelProvider`
+can be used.
+
+Example:
+
+```java
+class MyGraphContentProvider implements IGraphContentProvider {
+	...
+}
+
+class MyGraphLabelProvider extends LabelProvider {
+	...
+}
+
+class MyGraphDecorator extends GraphDecorator {
+	...
+}
+
+GraphViewer viewer = new GraphViewer(parent, SWT.NONE);
+viewer.setContentProvider(new MyGraphContentProvider());
+viewer.setLabelProvider(new DecoratingLabelProvider(new MyGraphLabelProvider(), new MyGraphDecorator()));
+viewer.setInput(new Object());
+```
 
 == Graph Node
 

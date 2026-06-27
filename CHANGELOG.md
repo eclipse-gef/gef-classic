@@ -6,6 +6,23 @@
 
 ## Zest
 
+- Several of the style provider interface have been deprecated for removal, with
+  replacement API available:
+
+  `IConnectionStyleProvider`, `IConnectionStyleProvider2`
+  ⇒ Replaced by `ConnectionStyleDecorator`.
+
+  `IEntityConnectionStyleProvider`, `IEntityConnectionStyleProvider2`
+  ⇒ Replaced by `EntityConnectionStyleDecorator`.
+
+  `IEntityStyleProvider`
+  ⇒ Replaced by `EntityStyleDecorator`.
+
+  `ISelfStyler`
+  ⇒ Replaced by `GraphDecorator`.
+  
+  See the [migration guide](https://github.com/eclipse-gef/gef-classic/tree/master/org.eclipse.zest.doc.isv/guide-src/migration-guide.adoc) for more details.
+
 ## General
 
 
