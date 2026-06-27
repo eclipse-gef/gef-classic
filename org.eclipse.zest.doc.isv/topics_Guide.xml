@@ -8,5 +8,6 @@
 	<topic label="Zest" href="guide/guide.html">
 		<topic label="Overview" href="guide/overview.html"/>
  		<topic label="Graph" href="guide/graph.html"/>
+		<topic label="Plug-in Migration Guide" href="guide/migration-guide.html"/>
 	</topic>
 </toc>

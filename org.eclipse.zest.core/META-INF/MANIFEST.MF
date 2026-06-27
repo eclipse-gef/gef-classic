@@ -4,15 +4,17 @@ Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.zest.core;singleton:=true
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
-Bundle-Version: 1.18.100.qualifier
+Bundle-Version: 1.19.0.qualifier
 Require-Bundle: org.eclipse.zest.layouts,
  org.eclipse.ui;bundle-version="[3.2.0,4.0.0)",
  org.eclipse.draw2d;bundle-version="[3.21.0,4.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.zest.core.viewers,
+ org.eclipse.zest.core.viewers.decorators,
  org.eclipse.zest.core.viewers.internal;x-internal:=true,
  org.eclipse.zest.core.widgets,
  org.eclipse.zest.core.widgets.custom,
+ org.eclipse.zest.core.widgets.decorators,
  org.eclipse.zest.core.widgets.gestures,
  org.eclipse.zest.core.widgets.internal;x-friends:="org.eclipse.zest.tests"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
