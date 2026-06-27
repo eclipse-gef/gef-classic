@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Patrick Ziegler and others.
+ * Copyright (c) 2025, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.zest.tests.utils;
 
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
@@ -81,5 +82,19 @@ public class SWTBotGraphNode extends SWTBotGraphItem {
 	 */
 	public Image getImage() {
 		return syncExec(getWidget()::getImage);
+	}
+
+	/**
+	 * @return the node's background color
+	 */
+	public Color getBackgroundColor() {
+		return syncExec(getWidget()::getBackgroundColor);
+	}
+
+	/**
+	 * @return the node's foreground color
+	 */
+	public Color getForegroundColor() {
+		return syncExec(getWidget()::getForegroundColor);
 	}
 }

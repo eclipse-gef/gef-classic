@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 Fabian Steeg and others.
+ * Copyright (c) 2011, 2026 Fabian Steeg and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,14 +18,14 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.EntityConnectionData;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphEntityContentProvider;
-import org.eclipse.zest.core.viewers.ISelfStyleProvider;
+import org.eclipse.zest.core.viewers.decorators.GraphLabelDecorator;
 import org.eclipse.zest.core.widgets.GraphConnection;
-import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.examples.Messages;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
 
@@ -73,7 +73,7 @@ public class GraphJFaceSnippet8 {
 		}
 	}
 
-	static class MyLabelProvider extends LabelProvider implements ISelfStyleProvider {
+	static class MyLabelProvider extends LabelProvider {
 
 		@Override
 		public Image getImage(Object element) {
@@ -88,8 +88,11 @@ public class GraphJFaceSnippet8 {
 			return element.toString();
 		}
 
+	}
+
+	static class MyGraphLabelDecorator extends GraphLabelDecorator {
 		@Override
-		public void selfStyleConnection(Object element, GraphConnection connection) {
+		public void decorateConnection(GraphConnection connection) {
 			connection.setLineStyle(SWT.LINE_CUSTOM);
 			PolylineConnection pc = (PolylineConnection) connection.getConnectionFigure();
 			pc.setLineDash(new float[] { 4 });
@@ -109,11 +112,6 @@ public class GraphJFaceSnippet8 {
 			decoration.setBackgroundColor(color);
 			return decoration;
 		}
-
-		@Override
-		public void selfStyleNode(Object element, GraphNode node) {
-		}
-
 	}
 
 	static GraphViewer viewer = null;
@@ -126,7 +124,7 @@ public class GraphJFaceSnippet8 {
 		shell.setSize(400, 400);
 		viewer = new GraphViewer(shell, SWT.NONE);
 		viewer.setContentProvider(new MyContentProvider());
-		viewer.setLabelProvider(new MyLabelProvider());
+		viewer.setLabelProvider(new DecoratingLabelProvider(new MyLabelProvider(), new MyGraphLabelDecorator()));
 		viewer.setLayoutAlgorithm(new RadialLayoutAlgorithm());
 		viewer.setInput(new Object());
 

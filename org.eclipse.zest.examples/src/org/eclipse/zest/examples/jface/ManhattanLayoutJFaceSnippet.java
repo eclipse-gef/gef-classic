@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2007, 2024, CHISEL Group, University of Victoria, Victoria,
- *                            BC, Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -23,16 +23,15 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.GraphViewer;
-import org.eclipse.zest.core.viewers.IConnectionStyleProvider;
-import org.eclipse.zest.core.viewers.IConnectionStyleProvider2;
-import org.eclipse.zest.core.viewers.IEntityConnectionStyleProvider2;
 import org.eclipse.zest.core.viewers.IGraphContentProvider;
+import org.eclipse.zest.core.viewers.decorators.ConnectionStyleDecorator;
 import org.eclipse.zest.examples.Messages;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
@@ -41,7 +40,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 
 /**
- * This snippet shows how to use the {@link IConnectionStyleProvider} interface
+ * This snippet shows how to use the {@link ConnectionStyleDecorator} class
  * to set the connection router for some references.
  *
  * Based on {@link GraphJFaceSnippet4}.
@@ -97,23 +96,7 @@ public class ManhattanLayoutJFaceSnippet {
 
 	}
 
-	static class MyConnectionRelationLabelProvider extends LabelProvider implements IConnectionStyleProvider2 {
-		final Image image = Display.getDefault().getSystemImage(SWT.ICON_WARNING);
-
-		@Override
-		public Image getImage(Object element) {
-			if (element.equals(Messages.Rock) || element.equals(Messages.Paper) || element.equals(Messages.Scissors)) {
-				return image;
-			}
-			return null;
-		}
-
-		@Override
-		public String getText(Object element) {
-			return element.toString();
-		}
-
-		/* Relation-based customization: IConnectionStyleProvider */
+	static class MyConnectionStyleDecorator extends ConnectionStyleDecorator {
 
 		@Override
 		public ConnectionRouter getRouter(Object rel) {
@@ -147,10 +130,9 @@ public class ManhattanLayoutJFaceSnippet {
 		public IFigure getTooltip(Object entity) {
 			return null;
 		}
-
 	}
 
-	static class MyEndpointEntityLabelProvider extends LabelProvider implements IEntityConnectionStyleProvider2 {
+	static class MyConnectionRelationLabelProvider extends LabelProvider {
 		final Image image = Display.getDefault().getSystemImage(SWT.ICON_WARNING);
 
 		@Override
@@ -165,48 +147,6 @@ public class ManhattanLayoutJFaceSnippet {
 		public String getText(Object element) {
 			return element.toString();
 		}
-
-		/* Endpoint-based customization: IEntityConnectionStyleProvider */
-
-		@Override
-		public ConnectionRouter getRouter(Object src, Object dest) {
-			System.out.println(src + " -> " + dest); //$NON-NLS-1$
-			if (!(src.equals(Messages.Paper) && dest.equals(Messages.Rock))) {
-				return new ManhattanConnectionRouter();
-			}
-			return null;
-		}
-
-		@Override
-		public int getConnectionStyle(Object src, Object dest) {
-			return SWT.NONE;
-		}
-
-		@Override
-		public Color getColor(Object src, Object dest) {
-			return null;
-		}
-
-		@Override
-		public Color getHighlightColor(Object src, Object dest) {
-			return null;
-		}
-
-		@Override
-		public int getLineWidth(Object src, Object dest) {
-			return -1;
-		}
-
-		@Override
-		public IFigure getTooltip(Object src, Object dest) {
-			return null;
-		}
-
-		@Override
-		public IFigure getTooltip(Object entity) {
-			return null;
-		}
-
 	}
 
 	static GraphViewer viewer = null;
@@ -222,7 +162,8 @@ public class ManhattanLayoutJFaceSnippet {
 		shell.setSize(400, 400);
 		viewer = new GraphViewer(shell, SWT.NONE);
 		viewer.setContentProvider(new MyContentProvider());
-		viewer.setLabelProvider(new MyConnectionRelationLabelProvider()); // MyEndpointEntityLabelProvider
+		viewer.setLabelProvider(
+				new DecoratingLabelProvider(new MyConnectionRelationLabelProvider(), new MyConnectionStyleDecorator())); // MyEndpointEntityLabelProvider
 		viewer.setLayoutAlgorithm(new SpringLayoutAlgorithm());
 		viewer.setInput(new Object());
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {

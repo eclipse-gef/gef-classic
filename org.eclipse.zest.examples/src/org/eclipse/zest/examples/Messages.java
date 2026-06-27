@@ -62,6 +62,7 @@ public class Messages extends NLS {
 	public static String GraphJFaceSnippet9_Reload;
 	public static String GraphJFaceSnippet10_Title;
 	public static String GraphJFaceSnippet10_Reload;
+	public static String GraphJFaceSnippet11_Title;
 	public static String GraphSnippet1_Title;
 	public static String GraphSnippet10_Title;
 	public static String GraphSnippet10_ChangeCurve;

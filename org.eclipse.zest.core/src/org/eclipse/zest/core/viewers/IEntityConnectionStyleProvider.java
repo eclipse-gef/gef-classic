@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2006, 2024 CHISEL Group, University of Victoria, Victoria, BC,
- *                      Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -15,6 +15,7 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
+import org.eclipse.zest.core.viewers.decorators.EntityConnectionStyleDecorator;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -23,9 +24,11 @@ import org.eclipse.draw2d.IFigure;
  * connections that are based on entity end points.
  *
  * @author Del Myers
- *
+ * @deprecated Use {@link EntityConnectionStyleDecorator} instead. This
+ *             interface will be removed after the 2028-09 release.
  */
 //@tag bug(151327-Styles) : fix
+@Deprecated(since = "1.19", forRemoval = true)
 public interface IEntityConnectionStyleProvider extends IDisposable {
 
 	/**
@@ -38,6 +41,7 @@ public interface IEntityConnectionStyleProvider extends IDisposable {
 	 * @return the style flags for this connection.
 	 * @see org.eclipse.zest.core.widgets.ZestStyles
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public int getConnectionStyle(Object src, Object dest);
 
 	/**
@@ -49,6 +53,7 @@ public interface IEntityConnectionStyleProvider extends IDisposable {
 	 * @return the color.
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getColor(Object src, Object dest);
 
 	/**
@@ -60,6 +65,7 @@ public interface IEntityConnectionStyleProvider extends IDisposable {
 	 * @return the highlighted color. Null for default.
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getHighlightColor(Object src, Object dest);
 
 	/**
@@ -69,6 +75,7 @@ public interface IEntityConnectionStyleProvider extends IDisposable {
 	 * @param dest the destination entity.
 	 * @return the line width for the connection. -1 for default.
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public int getLineWidth(Object src, Object dest);
 
 	/**

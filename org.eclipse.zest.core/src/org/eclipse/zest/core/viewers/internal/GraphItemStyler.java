@@ -12,10 +12,13 @@
  ******************************************************************************/
 package org.eclipse.zest.core.viewers.internal;
 
+import java.util.Optional;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.graphics.Color;
 
+import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.IFontProvider;
@@ -30,6 +33,7 @@ import org.eclipse.zest.core.widgets.GraphConnection;
 import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.ZestStyles;
+import org.eclipse.zest.core.widgets.decorators.IGraphDecorator;
 
 import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
@@ -52,6 +56,18 @@ public class GraphItemStyler {
 				node.setNodeStyle(SWT.NONE);
 			}
 			Object entity = node.getData();
+			if (labelProvider instanceof DecoratingLabelProvider provider) {
+				Optional.ofNullable(provider.getForeground(entity)).ifPresent(node::setForegroundColor);
+				Optional.ofNullable(provider.getBackground(entity)).ifPresent(node::setBackgroundColor);
+				Optional.ofNullable(provider.getFont(entity)).ifPresent(node::setFont);
+				Optional.ofNullable(provider.getText(entity)).ifPresent(node::setText);
+				Optional.ofNullable(provider.getImage(entity)).ifPresent(node::setImage);
+				if (provider.getLabelDecorator() instanceof IGraphDecorator decorator) {
+					decorator.decorateNode(node);
+				}
+				// DecoratingLabelProvider also covers "other" providers
+				return;
+			}
 			if (labelProvider instanceof IEntityStyleProvider) {
 				styleNode(node, (IEntityStyleProvider) labelProvider);
 			}
@@ -70,6 +86,9 @@ public class GraphItemStyler {
 			if (labelProvider instanceof ISelfStyleProvider) {
 				((ISelfStyleProvider) labelProvider).selfStyleNode(entity, node);
 			}
+			if (labelProvider instanceof IGraphDecorator decorator) {
+				decorator.decorateNode(node);
+			}
 		} else if (item instanceof GraphConnection conn) {
 			// set defaults
 			if (conn.getGraphModel().getConnectionStyle() != ZestStyles.NONE) {
@@ -77,6 +96,20 @@ public class GraphItemStyler {
 				conn.setConnectionStyle(s);
 			} else {
 				conn.setConnectionStyle(SWT.NONE);
+			}
+			if (labelProvider instanceof DecoratingLabelProvider provider) {
+				Object entity = conn.getData();
+				Optional.ofNullable(provider.getText(entity)).ifPresent(conn::setText);
+				Optional.ofNullable(provider.getImage(entity)).ifPresent(conn::setImage);
+
+				int swt = getLineStyleForZestStyle(conn.getConnectionStyle());
+				conn.setLineStyle(swt);
+
+				if (provider.getLabelDecorator() instanceof IGraphDecorator decorator) {
+					decorator.decorateConnection(conn);
+				}
+				// DecoratingLabelProvider also covers "other" providers
+				return;
 			}
 			if (labelProvider instanceof ILabelProvider) {
 				String text = ((ILabelProvider) labelProvider).getText(conn.getExternalConnection());
@@ -92,6 +125,9 @@ public class GraphItemStyler {
 			conn.setLineStyle(swt);
 			if (labelProvider instanceof ISelfStyleProvider) {
 				((ISelfStyleProvider) labelProvider).selfStyleConnection(conn.getData(), conn);
+			}
+			if (labelProvider instanceof IGraphDecorator decorator) {
+				decorator.decorateConnection(conn);
 			}
 		}
 	}
