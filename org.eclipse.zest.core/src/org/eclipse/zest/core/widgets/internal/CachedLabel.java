@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria,
- *                           BC, Canada and others.
+ * Copyright 2005, 2026 CHISEL Group, University of Victoria, Victoria,
+ *                      BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -207,8 +207,7 @@ public abstract class CachedLabel extends Label implements ILabeledFigure {
 			cleanImage();
 			cachedImage = new Image(Display.getCurrent(), width, height);
 
-			// @tag TODO : Dispose of the image properly
-			// ZestPlugin.getDefault().addImage(cachedImage.toString(), cachedImage);
+			getImageRegistry().put(cachedImage.toString(), cachedImage);
 
 			GC gc = new GC(cachedImage);
 
@@ -246,9 +245,16 @@ public abstract class CachedLabel extends Label implements ILabeledFigure {
 	protected void cleanImage() {
 		if (cachedImage != null) {
 
-			// ZestPlugin.getDefault().removeImage(cachedImage.toString());
+			getImageRegistry().remove((cachedImage.toString()));
 			cachedImage.dispose();
 			cachedImage = null;
 		}
+	}
+
+	private ImageRegistry getImageRegistry() {
+		if (internalGetLightweightSystem() instanceof GraphLightweightSystem lws) {
+			return lws.internalGetImageRegistry();
+		}
+		return ImageRegistry.getSharedRegistry();
 	}
 }
