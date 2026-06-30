@@ -1317,7 +1317,12 @@ public class Figure implements IFigure {
 					clipping = clippingStrategy.getClip(child);
 				} else {
 					// default clipping behaviour is to clip at bounds
-					clipping = new Rectangle[] { child.getBounds() };
+					PRIVATE_RECT.setBounds(child.getBounds());
+					if (child.getBorder() instanceof BackgroundBorder border) {
+						border.eraseBackground(child, PRIVATE_RECT);
+						PRIVATE_RECT.intersect(getBounds());
+					}
+					clipping = new Rectangle[] { PRIVATE_RECT };
 				}
 				// child may now paint inside the clipping areas
 				for (Rectangle element : clipping) {
