@@ -375,6 +375,7 @@
 		<!--plug-ins-->
 		<module>org.eclipse.draw2d</module>
 		<module>org.eclipse.gef</module>
+		<module>org.eclipse.gef.e3</module>
 		<module>org.eclipse.zest.cloudio</module>
 		<module>org.eclipse.zest.core</module>
 		<module>org.eclipse.zest.layouts</module>
@@ -395,6 +396,7 @@
 		<module>org.eclipse.gef.examples</module>
 		<module>org.eclipse.gef.examples.digraph1</module>
 		<module>org.eclipse.gef.examples.digraph2</module>
+		<module>org.eclipse.gef.examples.e4</module>
 		<module>org.eclipse.gef.examples.flow</module>
 		<module>org.eclipse.gef.examples.logic</module>
 		<module>org.eclipse.gef.examples.shapes</module>

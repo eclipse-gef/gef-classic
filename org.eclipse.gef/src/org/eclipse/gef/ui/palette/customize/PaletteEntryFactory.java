@@ -47,7 +47,6 @@ import org.eclipse.gef.palette.PaletteRoot;
  *
  * @author Pratik Shah
  * @see org.eclipse.gef.ui.palette.PaletteCustomizer
- * @see org.eclipse.gef.ui.palette.customize.PaletteCustomizerDialog
  */
 public abstract class PaletteEntryFactory {
 

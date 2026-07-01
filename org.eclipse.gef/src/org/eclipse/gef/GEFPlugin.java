@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.gef;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.ui.views.properties.IPropertySheetEntry;
 
 import org.eclipse.gef.commands.CommandStack;
@@ -22,7 +22,7 @@ import org.eclipse.gef.internal.InternalGEFPlugin;
  * @deprecated The GEF plugin class must not be referenced by clients.
  */
 @Deprecated
-public final class GEFPlugin extends AbstractUIPlugin {
+public final class GEFPlugin extends Plugin {
 
 	private static GEFPlugin singleton;
 

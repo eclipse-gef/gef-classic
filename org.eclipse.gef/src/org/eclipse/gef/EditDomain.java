@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -32,9 +32,9 @@ import org.eclipse.gef.ui.palette.PaletteViewer;
 /**
  * The collective state of a GEF "application", loosely defined by a
  * CommandStack, one or more EditPartViewers, and the active Tool. An EditDomain
- * is usually tied with an Eclipse {@link org.eclipse.ui.IEditorPart
- * IEditorPart}). However, the distinction between EditorPart and EditDomain was
- * made to allow for much flexible use of the Graphical Editing Framework.
+ * is usually tied with an Eclipse 3.x {@code IEditorPart}). However, the
+ * distinction between EditorPart and EditDomain was made to allow for much
+ * flexible use of the Graphical Editing Framework.
  */
 public class EditDomain {
 
@@ -60,8 +60,8 @@ public class EditDomain {
 
 	/**
 	 * Adds an EditPartViewer into the EditDomain. A viewer is most likely placed in
-	 * a {@link org.eclipse.ui.IWorkbenchPart WorkbenchPart} of some form, such as
-	 * the IEditorPart or an IViewPart.
+	 * an Eclipse 3.x {@code WorkbenchPart} of some form, such as the IEditorPart or
+	 * an IViewPart.
 	 *
 	 * @param viewer The EditPartViewer
 	 */

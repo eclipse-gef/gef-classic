@@ -16,8 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 
 import org.eclipse.draw2d.internal.ImageUtils;
 
@@ -132,7 +134,11 @@ public class InternalImages {
 
 	private static final Map<String, Image> overloadedImages = new HashMap<>();
 
+	private static final ImageRegistry IMAGE_REGISTRY;
+
 	static {
+		IMAGE_REGISTRY = new ImageRegistry(Display.getCurrent());
+
 		DESC_BOLD = createDescriptor("icons/style_bold.svg"); //$NON-NLS-1$
 		DESC_ITALIC = createDescriptor("icons/style_italic.svg"); //$NON-NLS-1$
 		DESC_UNDERLINE = createDescriptor("icons/style_underline.svg"); //$NON-NLS-1$
@@ -198,7 +204,7 @@ public class InternalImages {
 	 */
 	private static ImageDescriptor createAndCache(String imageName) {
 		ImageDescriptor result = createDescriptor(imageName);
-		InternalGEFPlugin.getDefault().getImageRegistry().put(imageName, result);
+		IMAGE_REGISTRY.put(imageName, result);
 		return result;
 	}
 
@@ -216,7 +222,7 @@ public class InternalImages {
 		if (image != null) {
 			return image;
 		}
-		return InternalGEFPlugin.getDefault().getImageRegistry().get(imageName);
+		return IMAGE_REGISTRY.get(imageName);
 	}
 
 	public static void set(String imageName, Image image) {

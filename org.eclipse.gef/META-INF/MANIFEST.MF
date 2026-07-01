@@ -22,23 +22,17 @@ Export-Package: org.eclipse.gef,
  org.eclipse.gef.requests,
  org.eclipse.gef.rulers,
  org.eclipse.gef.tools,
- org.eclipse.gef.ui.actions,
  org.eclipse.gef.ui.palette,
  org.eclipse.gef.ui.palette.customize,
  org.eclipse.gef.ui.palette.editparts,
  org.eclipse.gef.ui.parts,
  org.eclipse.gef.ui.properties,
- org.eclipse.gef.ui.rulers,
- org.eclipse.gef.ui.views.palette,
  org.eclipse.gef.util
-Require-Bundle: org.eclipse.draw2d;visibility:=reexport;bundle-version="[3.21.0,4.0.0)",
+Require-Bundle: org.eclipse.draw2d;bundle-version="[3.21.0,4.0.0)";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- org.eclipse.ui.views;resolution:=optional;bundle-version="[3.2.0,4.0.0)",
- org.eclipse.ui.workbench;bundle-version="[3.133.0,4.0.0)",
  org.eclipse.jface;bundle-version="[3.2.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Automatic-Module-Name: org.eclipse.gef
 Require-Capability: eclipse.swt;filter:="(image.format=svg)";resolution:=optional
-Service-Component: OSGI-INF/org.eclipse.gef.internal.ColorProviderService.xml
 
