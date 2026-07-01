@@ -4,7 +4,7 @@ Bundle-Name: %Bundle-Name
 Bundle-Vendor: %Bundle-Vendor
 Bundle-SymbolicName: org.eclipse.gef.examples.digraph1;singleton:=true
 Bundle-Version: 1.2.1000.qualifier
-Require-Bundle: org.eclipse.gef;bundle-version="[3.18.0,4.0.0)";visibility:=reexport,
+Require-Bundle: org.eclipse.gef.e3;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.core.runtime;bundle-version="[3.3.0,4.0.0)";visibility:=reexport,
  org.eclipse.ui;bundle-version="[3.3.0,4.0.0)";visibility:=reexport,
  org.eclipse.ui.ide;bundle-version="[3.3.0,4.0.0)";visibility:=reexport,

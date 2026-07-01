@@ -17,12 +17,12 @@ import java.beans.PropertyChangeSupport;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
-
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.gef.internal.InternalGEFPlugin;
 
 /**
@@ -43,7 +43,7 @@ import org.eclipse.gef.internal.InternalGEFPlugin;
  * @author Pratik Shah
  */
 public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences {
-
+	private static final IPreferenceStore PREFERENCE_STORE = new ScopedPreferenceStore(InstanceScope.INSTANCE, InternalGEFPlugin.getDefault().getBundle().getSymbolicName());
 	private static final String DEFAULT_FONT = "Default"; //$NON-NLS-1$
 
 	private final PreferenceStoreListener listener;
@@ -60,7 +60,7 @@ public class DefaultPaletteViewerPreferences implements PaletteViewerPreferences
 	 * </p>
 	 */
 	public DefaultPaletteViewerPreferences() {
-		this(InternalGEFPlugin.getDefault().getPreferenceStore());
+		this(PREFERENCE_STORE);
 	}
 
 	/**

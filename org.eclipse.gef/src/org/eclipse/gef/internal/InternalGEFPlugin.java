@@ -27,9 +27,8 @@ import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageDataProvider;
 
+import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import org.eclipse.draw2d.ToolTipHelper;
 
@@ -43,12 +42,12 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Version;
 
-public class InternalGEFPlugin extends AbstractUIPlugin {
+public class InternalGEFPlugin extends Plugin {
 	/** Monitor scale property */
 	public static final String MONITOR_SCALE_PROPERTY = "monitorScale"; //$NON-NLS-1$
 
 	private static BundleContext context;
-	private static AbstractUIPlugin singleton;
+	private static Plugin singleton;
 	private static Boolean requiresDisabledIcons;
 	private static Collection<ServiceReference<IToolTipHelperFactory>> toolTipProviderRefs;
 	private static Collection<IToolTipHelperFactory> toolTipProviders;
@@ -78,16 +77,11 @@ public class InternalGEFPlugin extends AbstractUIPlugin {
 		super.stop(bc);
 	}
 
-	@Override
-	protected void initializeImageRegistry(ImageRegistry reg) {
-		super.initializeImageRegistry(reg);
-	}
-
 	public static BundleContext getContext() {
 		return context;
 	}
 
-	public static AbstractUIPlugin getDefault() {
+	public static Plugin getDefault() {
 		return singleton;
 	}
 

@@ -15,7 +15,8 @@ package org.eclipse.gef.ui.parts;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.internal.InternalGEFPlugin;
 import org.eclipse.gef.palette.PaletteRoot;
@@ -25,6 +26,7 @@ import org.eclipse.gef.ui.palette.PaletteViewer;
 import org.eclipse.gef.ui.palette.PaletteViewerProvider;
 import org.eclipse.gef.ui.views.palette.PalettePage;
 import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
+import org.eclipse.jface.preference.IPreferenceStore;
 
 /**
  * This class serves as a quick starting point for clients who are new to GEF.
@@ -39,7 +41,7 @@ import org.eclipse.gef.ui.views.palette.PaletteViewerPage;
  * @since 3.0
  */
 public abstract class GraphicalEditorWithFlyoutPalette extends GraphicalEditor {
-
+	private static final IPreferenceStore PREFERENCE_STORE = new ScopedPreferenceStore(InstanceScope.INSTANCE, InternalGEFPlugin.getDefault().getBundle().getSymbolicName());
 	private PaletteViewerProvider provider;
 	private FlyoutPaletteComposite splitter;
 	private CustomPalettePage page;
@@ -129,7 +131,7 @@ public abstract class GraphicalEditorWithFlyoutPalette extends GraphicalEditor {
 	 */
 	@SuppressWarnings("static-method")
 	protected FlyoutPreferences getPalettePreferences() {
-		return FlyoutPaletteComposite.createFlyoutPreferences(InternalGEFPlugin.getDefault().getPreferenceStore());
+		return FlyoutPaletteComposite.createFlyoutPreferences(PREFERENCE_STORE);
 	}
 
 	/**
