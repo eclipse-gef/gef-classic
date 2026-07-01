@@ -15,6 +15,7 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
+import org.eclipse.zest.core.viewers.decorators.EntityStyleDecorator;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -37,7 +38,10 @@ import org.eclipse.draw2d.IFigure;
  * @author Del Myers
  * @see org.eclipse.jface.viewers.IColorProvider
  * @tag bug(151327-Styles) : created to solve this bug
+ * @deprecated Use {@link EntityStyleDecorator} instead. This interface will be
+ *             removed after the 2028-09 release.
  */
+@Deprecated(since = "1.19", forRemoval = true)
 public interface IEntityStyleProvider extends IDisposable {
 
 	/**
@@ -48,6 +52,7 @@ public interface IEntityStyleProvider extends IDisposable {
 	 * @return the forground colour of this entity.
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getNodeHighlightColor(Object entity);
 
 	/**
@@ -58,6 +63,7 @@ public interface IEntityStyleProvider extends IDisposable {
 	 * @return the background colour for this entity.
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getBorderColor(Object entity);
 
 	/**
@@ -68,6 +74,7 @@ public interface IEntityStyleProvider extends IDisposable {
 	 * @return the border highlight colour for this entity.
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getBorderHighlightColor(Object entity);
 
 	/**
@@ -76,6 +83,7 @@ public interface IEntityStyleProvider extends IDisposable {
 	 * @param entity the entity to be styled.
 	 * @return the border width, or -1 for defaults.
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public int getBorderWidth(Object entity);
 
 	/**
@@ -87,8 +95,10 @@ public interface IEntityStyleProvider extends IDisposable {
 	 * @return The colour for the node
 	 * @see #dispose()
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getBackgroundColour(Object entity);
 
+	@Deprecated(since = "1.19", forRemoval = true)
 	public Color getForegroundColour(Object entity);
 
 	/**
@@ -97,8 +107,10 @@ public interface IEntityStyleProvider extends IDisposable {
 	 *
 	 * @param entity
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	public IFigure getTooltip(Object entity);
 
+	@Deprecated(since = "1.19", forRemoval = true)
 	public boolean fisheyeNode(Object entity);
 
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Patrick Ziegler and others.
+ * Copyright (c) 2025, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  *     Patrick Ziegler - initial API and implementation
  *******************************************************************************/
 package org.eclipse.zest.tests.utils;
+
+import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
@@ -60,5 +62,12 @@ public class SWTBotGraphConnection extends AbstractSWTBot<GraphConnection> {
 	 */
 	public void setData(Object value) {
 		syncExec(() -> widget.setData(value));
+	}
+
+	/**
+	 * @return The color of the connection line.
+	 */
+	public Color getLineColor() {
+		return syncExec(widget::getLineColor);
 	}
 }

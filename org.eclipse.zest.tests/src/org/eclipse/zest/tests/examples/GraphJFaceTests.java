@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,9 +26,11 @@ import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphContentProvider;
 import org.eclipse.zest.core.viewers.IGraphEntityContentProvider;
 import org.eclipse.zest.core.viewers.INestedContentProvider;
+import org.eclipse.zest.core.viewers.decorators.GraphLabelDecorator;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.internal.ContainerFigure;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet1;
+import org.eclipse.zest.examples.jface.GraphJFaceSnippet11;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet2;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet3;
 import org.eclipse.zest.examples.jface.GraphJFaceSnippet4;
@@ -41,6 +43,8 @@ import org.eclipse.zest.tests.utils.SWTBotGraphConnection;
 import org.eclipse.zest.tests.utils.SWTBotGraphContainer;
 import org.eclipse.zest.tests.utils.SWTBotGraphNode;
 import org.eclipse.zest.tests.utils.Snippet;
+
+import org.eclipse.draw2d.ColorConstants;
 
 import org.junit.jupiter.api.Test;
 
@@ -260,5 +264,22 @@ public class GraphJFaceTests extends AbstractGraphTest {
 		assertCurve(connection4, 0);
 
 		assertNoOverlap(graphRobot);
+	}
+
+	/**
+	 * Test graph styling using a {@link GraphLabelDecorator}.
+	 */
+	@Test
+	@Snippet(type = GraphJFaceSnippet11.class)
+	public void testGraphJFaceSnippet11() {
+		for (SWTBotGraphNode node : graphRobot.getNodes()) {
+			assertEquals(ColorConstants.blue, node.getBackgroundColor());
+		}
+		for (SWTBotGraphConnection conn : graphRobot.getConnections()) {
+			SWTBotGraphNode source = conn.getSource();
+			SWTBotGraphNode destination = conn.getDestination();
+			assertEquals(source.getText() + '-' + destination.getText(), conn.getText());
+			assertEquals(ColorConstants.red, conn.getLineColor());
+		}
 	}
 }

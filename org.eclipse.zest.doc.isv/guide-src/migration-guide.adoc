@@ -1,0 +1,30 @@
+ifdef::env-github[]
+:imagesdir: ../guide/
+endif::[]
+
+= Plug-in Migration Guide
+
+== Contents
+
+* xref:#migrating-from-118-to-119[Migrating from 1.18 to 1.19]
+
+=== [#migrating-from-118-to-119]#Migrating from 1.18 to 1.19#
+
+The styler API underwent a major refactoring, with several interfaces being
+deprecated for removal. Following interfaces are affected:
+
+- `IConnectionStyleProvider`, `IConnectionStyleProvider2`
+  ⇒ Replaced by `ConnectionStyleDecorator`.
+
+- `IEntityConnectionStyleProvider`, `IEntityConnectionStyleProvider2`
+  ⇒ Replaced by `EntityConnectionStyleDecorator`.
+
+- `IEntityStyleProvider`
+  ⇒ Replaced by `EntityStyleDecorator`.
+
+- `ISelfStyleProvider`
+  ⇒ Replaced by `GraphDecorator`.
+
+The decorator class can be used directly as label provider for the
+`GraphViewer` or used together with a dedicated `ILabelProvider` in the
+`DecoratingLabelProvider`.

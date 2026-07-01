@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2010, 2024 CHISEL Group, University of Victoria, Victoria, BC,
- *                      Canada.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
+ *                       Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -11,6 +11,8 @@
  * Contributors: The Chisel Group, University of Victoria
  *******************************************************************************/
 package org.eclipse.zest.core.viewers;
+
+import org.eclipse.zest.core.viewers.decorators.EntityConnectionStyleDecorator;
 
 import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
@@ -24,8 +26,12 @@ import org.eclipse.draw2d.IFigure;
  * @author Del Myers
  * @since 1.12
  * @noreference This interface is not intended to be referenced by clients.
+ * @deprecated Use {@link EntityConnectionStyleDecorator} instead. This
+ *             interface will be removed after the 2028-09 release.
  */
 // TODO Zest 2.x - Integrate into IEntityConnectionStyleProvider
+@SuppressWarnings("removal")
+@Deprecated(since = "1.19", forRemoval = true)
 public interface IEntityConnectionStyleProvider2 extends IEntityConnectionStyleProvider {
 	/**
 	 * Returns the tooltip for the connection.
@@ -35,6 +41,7 @@ public interface IEntityConnectionStyleProvider2 extends IEntityConnectionStyleP
 	 * @return the tooltip for the connection. Null for default.
 	 * @since 1.12
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	IFigure getTooltip(Object src, Object dest);
 
 	/**
@@ -45,5 +52,6 @@ public interface IEntityConnectionStyleProvider2 extends IEntityConnectionStyleP
 	 * @return the router for the connection. Null for default.
 	 * @since 1.12
 	 */
+	@Deprecated(since = "1.19", forRemoval = true)
 	ConnectionRouter getRouter(Object src, Object dest);
 }
