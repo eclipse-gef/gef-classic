@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 Stephan Schwiebert and others.
+ * Copyright (c) 2011, 2026 Stephan Schwiebert and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,25 +26,31 @@ import org.osgi.framework.BundleContext;
 /**
  *
  * @author sschwieb
- *
+ * @deprecated Do not use. This class will be removed after the 2028-09 release.
  */
+@Deprecated(since = "2026-09", forRemoval = true)
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public static final String PLUGIN_ID = "org.schwiebert.eclipsetagcloud"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
 
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public static final String ADD = "add.gif"; //$NON-NLS-1$
 
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public static final String REMOVE = "remove.gif"; //$NON-NLS-1$
 
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public static final String TOGGLE_COLORS = "toggle_colors.gif"; //$NON-NLS-1$
 
 	/**
 	 * The constructor
 	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Activator() {
 	}
 
@@ -54,6 +60,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.
 	 * BundleContext)
 	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -77,6 +84,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @see
 	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
@@ -88,6 +96,7 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public static Activator getDefault() {
 		return plugin;
 	}

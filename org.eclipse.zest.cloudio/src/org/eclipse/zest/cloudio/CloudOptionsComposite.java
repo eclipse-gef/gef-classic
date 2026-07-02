@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 Stephan Schwiebert and others.
+ * Copyright (c) 2011, 2026 Stephan Schwiebert and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -40,6 +40,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
@@ -54,6 +57,14 @@ import org.eclipse.jface.viewers.Viewer;
  *
  */
 public class CloudOptionsComposite extends Composite {
+	private static final ImageDescriptor ADD = ImageDescriptor.createFromFile(CloudOptionsComposite.class,
+			"/img/add.gif"); //$NON-NLS-1$
+	private static final ImageDescriptor REMOVE = ImageDescriptor.createFromFile(CloudOptionsComposite.class,
+			"/img/remove.gif"); //$NON-NLS-1$
+	private static final ImageDescriptor TOGGLE_COLORS = ImageDescriptor.createFromFile(CloudOptionsComposite.class,
+			"/img/toggle_colors.gif"); //$NON-NLS-1$
+
+	private final ResourceManager resourceManager;
 
 	protected TagCloudViewer viewer;
 
@@ -101,6 +112,7 @@ public class CloudOptionsComposite extends Composite {
 		Assert.isLegal(viewer.getLabelProvider() instanceof IEditableCloudLabelProvider,
 				"Cloud label provider must be of type " + IEditableCloudLabelProvider.class); //$NON-NLS-1$
 		this.viewer = viewer;
+		this.resourceManager = JFaceResources.managerFor(this);
 		setLayout(new GridLayout());
 		addGroups();
 	}
@@ -184,7 +196,7 @@ public class CloudOptionsComposite extends Composite {
 		fonts.add(getFont().getFontData()[0]);
 		tv.setInput(fonts);
 		Button add = new Button(comp, SWT.FLAT);
-		add.setImage(Activator.getDefault().getImageRegistry().get(Activator.ADD));
+		add.setImage(resourceManager.create(ADD));
 		add.setToolTipText(Messages.CloudOptionsComposite_AddFonts);
 		add.addSelectionListener(new SelectionListener() {
 
@@ -219,7 +231,7 @@ public class CloudOptionsComposite extends Composite {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
-		remove.setImage(Activator.getDefault().getImageRegistry().get(Activator.REMOVE));
+		remove.setImage(resourceManager.create(REMOVE));
 		return buttons;
 	}
 
@@ -280,7 +292,7 @@ public class CloudOptionsComposite extends Composite {
 		initColors();
 		tv.setInput(colors);
 		Button add = new Button(comp, SWT.FLAT);
-		add.setImage(Activator.getDefault().getImageRegistry().get(Activator.ADD));
+		add.setImage(resourceManager.create(ADD));
 		add.setToolTipText(Messages.CloudOptionsComposite_AddColor);
 		add.addSelectionListener(new SelectionListener() {
 
@@ -316,7 +328,7 @@ public class CloudOptionsComposite extends Composite {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
-		remove.setImage(Activator.getDefault().getImageRegistry().get(Activator.REMOVE));
+		remove.setImage(resourceManager.create(REMOVE));
 		Button toggle = new Button(comp, SWT.FLAT);
 		toggle.setToolTipText(Messages.CloudOptionsComposite_ToggleColors);
 		toggle.addSelectionListener(new SelectionListener() {
@@ -332,7 +344,7 @@ public class CloudOptionsComposite extends Composite {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
-		toggle.setImage(Activator.getDefault().getImageRegistry().get(Activator.TOGGLE_COLORS));
+		toggle.setImage(resourceManager.create(TOGGLE_COLORS));
 
 		comp = new Composite(buttons, SWT.NONE);
 		gd = new GridData(SWT.FILL, SWT.FILL, true, false);
