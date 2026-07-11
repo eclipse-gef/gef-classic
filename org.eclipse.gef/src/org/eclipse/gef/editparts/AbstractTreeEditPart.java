@@ -121,7 +121,8 @@ public abstract class AbstractTreeEditPart extends AbstractEditPart implements T
 
 	/**
 	 * Override this method to return the String to be used in this EditPart's
-	 * {@link #widget}. This method is called from {@link #refreshVisuals()}.
+	 * {@link #widget}. This method is called from {@link #refreshVisuals()} and
+	 * must <b>not</b> return {@code null}.
 	 *
 	 * @return the String to be displayed by the TreeItem
 	 */
