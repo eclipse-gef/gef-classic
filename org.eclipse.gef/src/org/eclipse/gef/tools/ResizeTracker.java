@@ -210,7 +210,10 @@ public class ResizeTracker extends SimpleDragTracker {
 	 */
 	@Override
 	protected Cursor getDefaultCursor() {
-		return Cursors.getDirectionalCursor(direction, getTargetEditPart().getFigure().isMirrored());
+		if (getTargetEditPart() != null) {
+			return Cursors.getDirectionalCursor(direction, getTargetEditPart().getFigure().isMirrored());
+		}
+		return Cursors.getDirectionalCursor(direction);
 	}
 
 	/**
@@ -243,9 +246,7 @@ public class ResizeTracker extends SimpleDragTracker {
 	/**
 	 * The TargetEditPart is the parent of the EditPart being resized.
 	 *
-	 * @return The target EditPart; may be <code>null</code> in 2.1 applications
-	 *         that use the now deprecated {@link ResizeTracker#ResizeTracker(int)
-	 *         constructor}.
+	 * @return The target EditPart; may be <code>null</code>.
 	 */
 	protected GraphicalEditPart getTargetEditPart() {
 		if (owner != null) {
