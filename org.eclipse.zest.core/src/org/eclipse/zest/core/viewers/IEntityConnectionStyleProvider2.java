@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.zest.core.viewers;
 
-import org.eclipse.zest.core.viewers.decorators.EntityConnectionStyleDecorator;
+import org.eclipse.zest.core.viewers.decorators.IEntityConnectionStyleDecorator;
 
 import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
@@ -26,7 +26,7 @@ import org.eclipse.draw2d.IFigure;
  * @author Del Myers
  * @since 1.12
  * @noreference This interface is not intended to be referenced by clients.
- * @deprecated Use {@link EntityConnectionStyleDecorator} instead. This
+ * @deprecated Use {@link IEntityConnectionStyleDecorator} instead. This
  *             interface will be removed after the 2028-09 release.
  */
 // TODO Zest 2.x - Integrate into IEntityConnectionStyleProvider

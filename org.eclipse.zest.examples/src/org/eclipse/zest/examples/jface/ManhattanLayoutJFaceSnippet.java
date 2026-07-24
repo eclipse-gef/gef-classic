@@ -31,7 +31,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.zest.core.viewers.GraphViewer;
 import org.eclipse.zest.core.viewers.IGraphContentProvider;
-import org.eclipse.zest.core.viewers.decorators.ConnectionStyleDecorator;
+import org.eclipse.zest.core.viewers.decorators.IConnectionStyleDecorator;
+import org.eclipse.zest.core.viewers.decorators.GraphLabelDecorator;
 import org.eclipse.zest.examples.Messages;
 import org.eclipse.zest.layouts.algorithms.SpringLayoutAlgorithm;
 
@@ -40,7 +41,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 
 /**
- * This snippet shows how to use the {@link ConnectionStyleDecorator} class
+ * This snippet shows how to use the {@link IConnectionStyleDecorator} class
  * to set the connection router for some references.
  *
  * Based on {@link GraphJFaceSnippet4}.
@@ -96,7 +97,7 @@ public class ManhattanLayoutJFaceSnippet {
 
 	}
 
-	static class MyConnectionStyleDecorator extends ConnectionStyleDecorator {
+	static class MyConnectionStyleDecorator extends GraphLabelDecorator implements IConnectionStyleDecorator {
 
 		@Override
 		public ConnectionRouter getRouter(Object rel) {

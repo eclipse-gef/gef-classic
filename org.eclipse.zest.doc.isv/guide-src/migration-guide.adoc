@@ -14,16 +14,42 @@ The styler API underwent a major refactoring, with several interfaces being
 deprecated for removal. Following interfaces are affected:
 
 - `IConnectionStyleProvider`, `IConnectionStyleProvider2`
-  ⇒ Replaced by `ConnectionStyleDecorator`.
+  ⇒ Replaced by `IConnectionStyleDecorator`.
 
 - `IEntityConnectionStyleProvider`, `IEntityConnectionStyleProvider2`
-  ⇒ Replaced by `EntityConnectionStyleDecorator`.
+  ⇒ Replaced by `IEntityConnectionStyleDecorator`.
 
 - `IEntityStyleProvider`
-  ⇒ Replaced by `EntityStyleDecorator`.
+  ⇒ Replaced by `IEntityStyleDecorator`.
 
 - `ISelfStyleProvider`
-  ⇒ Replaced by `GraphDecorator`.
+  ⇒ Replaced by `GraphLabelDecorator`.
+
+In order to use the `IConnectionStyleDecorator`, `IEntityStyleDecorator` or
+`IEntityConnectionStyleDecorator`, extend the `GraphLabelDecorator` and
+implement the desired interfaces. The default implementation of this decorator
+will detect those interfaces and style the nodes and connections accordingly.
+
+Example:
+
+```java
+class MyGraphLabelDecorator extends GraphLabelDecorator implements IConnectionStyleDecorator, IEntityStyleDecorator {
+	// ConnectionStyleDecorator
+	public Color getColor(Object rel) {
+		...
+	}
+	...
+
+	// EntityStyleDecorator
+	public boolean fisheyeNode(Object entity) {
+		...
+	}
+	...
+}
+```
+
+Note that implementing both the `IEntityConnectionStyleDecorator` and
+`IConnectionStyleDecorator` results in undefined behavior.
 
 The decorator class can be used directly as label provider for the
 `GraphViewer` or used together with a dedicated `ILabelProvider` in the

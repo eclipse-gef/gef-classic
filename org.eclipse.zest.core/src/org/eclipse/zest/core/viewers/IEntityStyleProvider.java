@@ -15,7 +15,7 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
-import org.eclipse.zest.core.viewers.decorators.EntityStyleDecorator;
+import org.eclipse.zest.core.viewers.decorators.IEntityStyleDecorator;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -38,7 +38,7 @@ import org.eclipse.draw2d.IFigure;
  * @author Del Myers
  * @see org.eclipse.jface.viewers.IColorProvider
  * @tag bug(151327-Styles) : created to solve this bug
- * @deprecated Use {@link EntityStyleDecorator} instead. This interface will be
+ * @deprecated Use {@link IEntityStyleDecorator} instead. This interface will be
  *             removed after the 2028-09 release.
  */
 @Deprecated(since = "1.19", forRemoval = true)

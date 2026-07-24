@@ -15,7 +15,7 @@ package org.eclipse.zest.core.viewers;
 import org.eclipse.swt.graphics.Color;
 
 import org.eclipse.ui.services.IDisposable;
-import org.eclipse.zest.core.viewers.decorators.ConnectionStyleDecorator;
+import org.eclipse.zest.core.viewers.decorators.IConnectionStyleDecorator;
 
 import org.eclipse.draw2d.IFigure;
 
@@ -26,7 +26,7 @@ import org.eclipse.draw2d.IFigure;
  * @author Del Myers
  * @see IGraphContentProvider
  * @see IEntityStyleProvider
- * @deprecated Use {@link ConnectionStyleDecorator} instead. This interface will
+ * @deprecated Use {@link IConnectionStyleDecorator} instead. This interface will
  *             be removed after the 2028-09 release.
  */
 //@tag bug(151327-Styles) : created to solve this bug
