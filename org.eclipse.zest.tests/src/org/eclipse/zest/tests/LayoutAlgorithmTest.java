@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,7 +29,7 @@ import org.eclipse.zest.layouts.progress.ProgressListener;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-@SuppressWarnings("removal")
+@SuppressWarnings({ "removal", "deprecation" })
 public class LayoutAlgorithmTest {
 	private LayoutAlgorithm.Zest1 layoutAlgorithm;
 	private Set<String> logger;
