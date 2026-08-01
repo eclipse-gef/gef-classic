@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,6 +14,7 @@
 package org.eclipse.draw2d.test;
 
 import org.eclipse.draw2d.graph.test.DirectedGraphLayoutTest;
+import org.eclipse.draw2d.test.GraphicsTest.ScaledGraphicsTest;
 import org.eclipse.draw2d.test.colors.HSLTest;
 
 import org.junit.platform.suite.api.SelectClasses;
