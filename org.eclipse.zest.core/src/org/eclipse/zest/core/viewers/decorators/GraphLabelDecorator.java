@@ -95,7 +95,8 @@ public class GraphLabelDecorator extends LabelProvider implements IGraphLabelDec
 
 			Optional.ofNullable(decorator.getBorderColor(entity)).ifPresent(node::setBorderColor);
 			Optional.ofNullable(decorator.getBorderHighlightColor(entity)).ifPresent(node::setBorderHighlightColor);
-			Optional.ofNullable(decorator.getNodeHighlightColor(entity)).ifPresent(node::setHighlightColor);
+			Optional.ofNullable(decorator.getNodeForegroundHighlightColor(entity)).ifPresent(node::setForegroundHighlightColor);
+			Optional.ofNullable(decorator.getNodeBackgroundHighlightColor(entity)).ifPresent(node::setBackgroundHighlightColor);
 			Optional.ofNullable(decorator.getBackgroundColor(entity)).ifPresent(node::setBackgroundColor);
 			Optional.ofNullable(decorator.getForegroundColor(entity)).ifPresent(node::setForegroundColor);
 			Optional.ofNullable(decorator.getBorderWidth(entity)).filter(width -> width >= 0).ifPresent(node::setBorderWidth);

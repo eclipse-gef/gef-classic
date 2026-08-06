@@ -94,13 +94,22 @@ public interface IEntityStyleDecorator {
 	Color getForegroundColor(Object entity);
 
 	/**
-	 * Returns the foreground color of this entity. May return {@code null} for
-	 * defaults.
+	 * Returns the foreground highlight color of this entity. May return
+	 * {@code null} for defaults.
 	 *
 	 * @param entity the entity to be styled.
 	 * @return the foreground color of this entity.
 	 */
-	Color getNodeHighlightColor(Object entity);
+	Color getNodeForegroundHighlightColor(Object entity);
+
+	/**
+	 * Returns the background highlight color of this entity. May return
+	 * {@code null} for defaults.
+	 *
+	 * @param entity the entity to be styled.
+	 * @return the background color of this entity.
+	 */
+	Color getNodeBackgroundHighlightColor(Object entity);
 
 	/**
 	 * Returns the tool-tip for this node. If {@code null} is returned Zest will

@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria, BC,
- *                       Canada and others.
+ * Copyright 2005, 2026, CHISEL Group, University of Victoria, Victoria,
+ *                       BC, Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -63,8 +63,9 @@ public class GraphNode extends GraphItem {
 	private List<GraphConnection> targetConnections;
 
 	private Color foreColor;
+	private Color foreHighlightColor;
 	private Color backColor;
-	private Color highlightColor;
+	private Color backHighlightColor;
 	private Color borderColor;
 	private Color borderHighlightColor;
 	private int borderWidth;
@@ -190,8 +191,9 @@ public class GraphNode extends GraphItem {
 		this.sourceConnections = new ArrayList<>();
 		this.targetConnections = new ArrayList<>();
 		this.foreColor = parent.getGraph().DARK_BLUE;
+		this.foreHighlightColor = null;
 		this.backColor = parent.getGraph().LIGHT_BLUE;
-		this.highlightColor = parent.getGraph().HIGHLIGHT_COLOR;
+		this.backHighlightColor = parent.getGraph().HIGHLIGHT_COLOR;
 		this.nodeStyle = SWT.NONE;
 		this.borderColor = ColorConstants.lightGray;
 		this.borderHighlightColor = ColorConstants.blue;
@@ -440,17 +442,65 @@ public class GraphNode extends GraphItem {
 	}
 
 	/**
-	 * Get the highlight colour for this node
+	 * Get the highlight background color for this node.
+	 *
+	 * @since 1.19
 	 */
+	public Color getBackgroundHighlightColor() {
+		return getHighlightColor();
+	}
+
+	/**
+	 * Set the highlight background color for this node.
+	 *
+	 * @since 1.19
+	 */
+	public void setBackgroundHighlightColor(Color c) {
+		setHighlightColor(c);
+	}
+
+	/**
+	 * Get the highlight foreground color for this node. Returns
+	 * {@link #getForegroundColor()} if no highlight color is set.
+	 *
+	 * @since 1.19
+	 */
+	public Color getForegroundHighlightColor() {
+		if (foreHighlightColor == null) {
+			return getForegroundColor();
+		}
+		return foreHighlightColor;
+	}
+
+	/**
+	 * Set the highlight foreground color for this node.
+	 *
+	 * @since 1.19
+	 */
+	public void setForegroundHighlightColor(Color c) {
+		this.foreHighlightColor = c;
+	}
+
+	/**
+	 * Get the highlight colour for this node
+	 *
+	 * @deprecated Use {@link #getBackgroundHighlightColor()} instead. This method
+	 *             will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color getHighlightColor() {
-		return highlightColor;
+		return backHighlightColor;
 	}
 
 	/**
 	 * Set the highlight colour for this node
+	 *
+	 * @deprecated Use {@link #setBackgroundHighlightColor(Color)} instead. This
+	 *             method will be removed after the 2028-09 release.
 	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public void setHighlightColor(Color c) {
-		this.highlightColor = c;
+		this.backHighlightColor = c;
 	}
 
 	/**
@@ -779,8 +829,8 @@ public class GraphNode extends GraphItem {
 			// update styles (colors, border) for figures implementing
 			// IStyleableFigure
 			if (highlighted == HIGHLIGHT_ON) {
-				styleableFigure.setForegroundColor(getForegroundColor());
-				styleableFigure.setBackgroundColor(getHighlightColor());
+				styleableFigure.setForegroundColor(getForegroundHighlightColor());
+				styleableFigure.setBackgroundColor(getBackgroundHighlightColor());
 				styleableFigure.setBorderColor(getBorderHighlightColor());
 			} else {
 				styleableFigure.setForegroundColor(getForegroundColor());
@@ -865,8 +915,8 @@ public class GraphNode extends GraphItem {
 		// @tag TODO: Add border and foreground colours to highlight
 		// (this.borderColor)
 		if (highlighted == HIGHLIGHT_ON) {
-			label.setForegroundColor(getForegroundColor());
-			label.setBackgroundColor(getHighlightColor());
+			label.setForegroundColor(getForegroundHighlightColor());
+			label.setBackgroundColor(getBackgroundHighlightColor());
 			label.setBorderColor(getBorderHighlightColor());
 		} else {
 			label.setForegroundColor(getForegroundColor());
