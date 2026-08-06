@@ -183,6 +183,7 @@ public class GraphNode extends GraphItem {
 
 	static int count = 0;
 
+	@SuppressWarnings("removal")
 	protected void initModel(IContainer parent, String text, Image image) {
 		this.nodeStyle |= parent.getGraph().getNodeStyle();
 		this.parent = parent;

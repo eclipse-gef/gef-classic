@@ -106,14 +106,46 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color LIGHT_BLUE = null;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color LIGHT_BLUE_CYAN = null;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color GREY_BLUE = null;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color DARK_BLUE = null;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color LIGHT_YELLOW = null;
 
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color HIGHLIGHT_COLOR = ColorConstants.yellow;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color HIGHLIGHT_ADJACENT_COLOR = ColorConstants.orange;
+	/**
+	 * @deprecated Do not use. This field will be removed after the 2028-09 release.
+	 */
+	@Deprecated(since = "2026-09", forRemoval = true)
 	public Color DEFAULT_NODE_COLOR = LIGHT_BLUE;
 
 	/**
