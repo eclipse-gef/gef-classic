@@ -231,7 +231,7 @@ public abstract class NativeGraphics extends Graphics {
 		if (sharedClipping) {
 			sharedClipping = false;
 
-			boolean previouslyApplied = (appliedState == currentState.relativeClip);
+			boolean previouslyApplied = (appliedState.relativeClip == currentState.relativeClip);
 			// Fix: currentState.relativeClip can be null and lead to NPE
 			if (currentState.relativeClip != null) {
 				currentState.relativeClip = currentState.relativeClip.getCopy();

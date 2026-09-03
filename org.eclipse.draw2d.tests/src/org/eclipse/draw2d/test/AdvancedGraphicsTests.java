@@ -42,7 +42,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 	static final int[] LINE = { 5, 5, 20, 20, 35, 5, 50, 5 };
 	static final int[] POLY = { 5, 5, 45, 15, 20, 30, 20, 20, 45, 35, 5, 45 };
-	private SWTGraphics g;
+	private SWTGraphicsTest g;
 
 	private Image image;
 	private final Deque<Resource> resources = new ArrayDeque<>();
@@ -120,7 +120,7 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 
 		image = new Image(Display.getDefault(), 800, 600);
 		GC imageGC = new GC(image, SWT.NONE);
-		g = new SWTGraphics(imageGC);
+		g = new SWTGraphicsTest(imageGC);
 
 		resources.push(path1);
 		resources.push(path2);
@@ -434,5 +434,29 @@ public class AdvancedGraphicsTests extends BaseTestCase {
 		g.rotate(14.753f);
 		assertEquals(3.22, g.getAbsoluteScale(), 1e-2);
 		g.restoreState();
+	}
+
+	@Test
+	public void testSharedClipping() {
+		// sharedClipping = true, currentState != appliedState
+		g.pushState();
+		assertNotSame(g.getAppliedClipping(), g.getCurrentClipping());
+		// currentState == appliedState due to call to checkGC()
+		g.scale(2.0);
+		assertSame(g.getAppliedClipping(), g.getCurrentClipping());
+	}
+
+	private static class SWTGraphicsTest extends SWTGraphics {
+		public SWTGraphicsTest(GC gc) {
+			super(gc);
+		}
+
+		public Clipping getAppliedClipping() {
+			return appliedState.relativeClip;
+		}
+
+		public Clipping getCurrentClipping() {
+			return currentState.relativeClip;
+		}
 	}
 }
