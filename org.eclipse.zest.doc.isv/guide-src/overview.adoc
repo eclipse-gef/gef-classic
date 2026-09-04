@@ -2,7 +2,7 @@ ifdef::env-github[]
 :imagesdir: ../guide/
 endif::[]
 
-= Draw2d Architecture
+= Zest Architecture
 
 == Zest Overview
 
