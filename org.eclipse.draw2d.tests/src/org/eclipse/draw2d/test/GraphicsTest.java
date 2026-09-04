@@ -25,11 +25,13 @@ import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.PathData;
 import org.eclipse.swt.widgets.Display;
 
+import org.eclipse.draw2d.AWTGraphics;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.ScaledGraphics;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.test.utils.Graphics2DToGraphicsAdapter;
 import org.eclipse.draw2d.test.utils.GraphicsRecorder;
 
 import org.junit.jupiter.api.Test;
@@ -47,36 +49,6 @@ public abstract class GraphicsTest {
 		return Arrays.stream(inputs).boxed()
 				.flatMap(source -> Arrays.stream(monitorZooms).boxed().flatMap(monitorZoom -> Arrays
 						.stream(diagramZooms).mapToObj(diagramZoom -> Arguments.of(source, monitorZoom, diagramZoom))));
-	}
-
-	@Test
-	public void testTranlsationWithMulipleScaledLayers() {
-		GraphicsRecorder actualRecorder = new GraphicsRecorder();
-		Graphics graphics = createGraphics(actualRecorder);
-		graphics.scale(1.5);
-		graphics.translate(1f, 1f);
-		Graphics graphics2 = createGraphics(graphics);
-		graphics2.scale(2.5);
-		graphics2.translate(1f, 1f);
-		graphics2.drawRectangle(0, 0, 10, 10);
-
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.translate(1, 1);
-		expectedRecorder.translate(4, 4);
-		expectedRecorder.drawRectangle(0, 0, 37, 37);
-		expectedRecorder.assertEquals(actualRecorder);
-		graphics2.dispose();
-		graphics.dispose();
-		actualRecorder.dispose();
-	}
-
-	@Test
-	public void testDrawLineForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawLine(new Point(5, 5), new Point(5, 5 + 20)));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawLine(30, 30, 30, 130);
-		expectedRecorder.assertEquals(actualRecorder);
 	}
 
 	@ParameterizedTest
@@ -108,15 +80,6 @@ public abstract class GraphicsTest {
 				graphics -> graphics.drawLine(new Point(source, source), new Point(source, source + 20)));
 	}
 
-	@Test
-	public void testDrawOvalForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawOval(5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawOval(30, 40, 45, 125);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testDrawOvalWithInt(int source, int monitorZoom, int diagramZoom) {
@@ -145,14 +108,6 @@ public abstract class GraphicsTest {
 		validation.executeTranslated(graphics -> graphics.drawOval(new Rectangle(source, source, source, source + 20)));
 	}
 
-	@Test
-	public void testDrawPointForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.drawPoint(5, 5));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawPoint(30, 30);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testDrawPoint(int source, int monitorZoom, int diagramZoom) {
@@ -165,21 +120,6 @@ public abstract class GraphicsTest {
 	public void testDrawPointTranslated(int source, int monitorZoom, int diagramZoom) {
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation.executeTranslated(graphics -> graphics.drawPoint(source, source + 10));
-	}
-
-	@Test
-	public void testDrawArcForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawArc(5, 7, 9, 25, 12, 18));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawArc(new Rectangle(30, 40, 45, 125), 12, 18);
-		expectedRecorder.assertEquals(actualRecorder);
-
-		actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.drawArc(0, 0, 0, 0, 12, 18));
-		actualRecorder.assertEmpty();
-
-		actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.drawArc(5, 7, 9, 25, 12, 0));
-		actualRecorder.assertEmpty();
 	}
 
 	@ParameterizedTest
@@ -212,15 +152,6 @@ public abstract class GraphicsTest {
 				graphics -> graphics.drawArc(new Rectangle(source, source, source, source + 20), source, source));
 	}
 
-	@Test
-	public void testDrawFocusForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawFocus(5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawFocus(30, 40, 45, 125);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testDrawFocusWithInt(int source, int monitorZoom, int diagramZoom) {
@@ -248,17 +179,6 @@ public abstract class GraphicsTest {
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation
 				.executeTranslated(graphics -> graphics.drawFocus(new Rectangle(source, source, source, source + 20)));
-	}
-
-	@Test
-	public void testDrawFullImageForRegression() {
-		Image image = new Image(Display.getDefault(), 9, 25);
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawImage(image, 5, 7));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawImage(image, 0, 0, 9, 25, 30, 40, 45, 125);
-		expectedRecorder.assertEquals(actualRecorder);
-		image.dispose();
 	}
 
 	@ParameterizedTest
@@ -294,56 +214,6 @@ public abstract class GraphicsTest {
 		Image image = new Image(Display.getDefault(), source, source + 15);
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation.executeTranslated(graphics -> graphics.drawImage(image, new Point(source, source + 15)));
-		image.dispose();
-	}
-
-	@Test
-	public void testDrawImageForRegression() {
-		Image image = new Image(Display.getDefault(), 5, 5);
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawImage(image, 5, 5, 5, 5, 5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawImage(image, 5, 5, 5, 5, 30, 40, 45, 125);
-		expectedRecorder.assertEquals(actualRecorder);
-		image.dispose();
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testDrawImageWithInt(int source, int monitorZoom, int diagramZoom) {
-		Image image = new Image(Display.getDefault(), 5, 5);
-		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(graphics -> graphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 5));
-		image.dispose();
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testDrawImageWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
-		Image image = new Image(Display.getDefault(), 5, 5);
-		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(
-				graphics -> graphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 10));
-		image.dispose();
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testDrawImageWithRectangle(int source, int monitorZoom, int diagramZoom) {
-		Image image = new Image(Display.getDefault(), 5, 5);
-		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
-		validation.execute(graphics -> graphics.drawImage(image, new Rectangle(5, 5, 5, 5),
-				new Rectangle(source, source, source, source + 15)));
-		image.dispose();
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testDrawImageWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
-		Image image = new Image(Display.getDefault(), 5, 5);
-		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
-		validation.executeTranslated(graphics -> graphics.drawImage(image, new Rectangle(5, 5, 5, 5),
-				new Rectangle(source, source, source, source + 20)));
 		image.dispose();
 	}
 
@@ -404,15 +274,6 @@ public abstract class GraphicsTest {
 		validation.execute(graphics -> graphics.drawPolygon(new PointList(points)));
 	}
 
-	@Test
-	public void testDrawRectangleForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawRectangle(5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawRectangle(30, 40, 45, 125);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testDrawRectangleWithInt(int source, int monitorZoom, int diagramZoom) {
@@ -442,15 +303,6 @@ public abstract class GraphicsTest {
 				graphics -> graphics.drawRectangle(new Rectangle(source, source, source, source + 20)));
 	}
 
-	@Test
-	public void testDrawRoundRectangleForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.drawRoundRectangle(new Rectangle(5, 7, 9, 25), 5, 5));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.drawRoundRectangle(new Rectangle(30, 40, 45, 125), 25, 25);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testDrawRoundRectangle(int source, int monitorZoom, int diagramZoom) {
@@ -465,15 +317,6 @@ public abstract class GraphicsTest {
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation.executeTranslated(
 				graphics -> graphics.drawRoundRectangle(new Rectangle(source, source, source, source + 20), 5, 5));
-	}
-
-	@Test
-	public void testFillOvalForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.fillOval(5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.fillOval(30, 40, 41, 121);
-		expectedRecorder.assertEquals(actualRecorder);
 	}
 
 	@ParameterizedTest
@@ -504,21 +347,6 @@ public abstract class GraphicsTest {
 		validation.executeTranslated(graphics -> graphics.fillOval(new Rectangle(source, source, source, source + 20)));
 	}
 
-	@Test
-	public void testFillArcForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.fillArc(5, 7, 9, 25, 12, 18));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.fillArc(30, 40, 41, 121, 12, 18);
-		expectedRecorder.assertEquals(actualRecorder);
-
-		actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.fillArc(0, 0, 0, 0, 12, 18));
-		actualRecorder.assertEmpty();
-
-		actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.fillArc(5, 7, 9, 25, 12, 0));
-		actualRecorder.assertEmpty();
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testFillArcWithInt(int source, int monitorZoom, int diagramZoom) {
@@ -547,15 +375,6 @@ public abstract class GraphicsTest {
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation.executeTranslated(
 				graphics -> graphics.fillArc(new Rectangle(source, source, source, source + 20), source, source));
-	}
-
-	@Test
-	public void testFillGradientForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.fillGradient(5, 7, 9, 25, true));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.fillGradient(30, 40, 41, 121, true);
-		expectedRecorder.assertEquals(actualRecorder);
 	}
 
 	@ParameterizedTest
@@ -644,15 +463,6 @@ public abstract class GraphicsTest {
 		validation.execute(graphics -> graphics.fillPolygon(new PointList(points)));
 	}
 
-	@Test
-	public void testFillRectangleForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.fillRectangle(5, 7, 9, 25));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.fillRectangle(30, 40, 41, 121);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testFillRectangleWithInt(int source, int monitorZoom, int diagramZoom) {
@@ -682,15 +492,6 @@ public abstract class GraphicsTest {
 				graphics -> graphics.fillRectangle(new Rectangle(source, source, source, source + 20)));
 	}
 
-	@Test
-	public void testFillRoundRectangleForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.fillRoundRectangle(new Rectangle(5, 7, 9, 25), 5, 5));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.fillRoundRectangle(new Rectangle(30, 40, 41, 121), 25, 25);
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testFillRoundRectangle(int source, int monitorZoom, int diagramZoom) {
@@ -707,15 +508,6 @@ public abstract class GraphicsTest {
 				graphics -> graphics.fillRoundRectangle(new Rectangle(source, source, source, source + 20), 5, 5));
 	}
 
-	@Test
-	public void testClipRectForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.clipRect(new Rectangle(5, 7, 9, 25)));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.clipRect(new Rectangle(30, 40, 45, 125));
-		expectedRecorder.assertEquals(actualRecorder);
-	}
-
 	@ParameterizedTest
 	@MethodSource("singleValueTestCombinations")
 	public void testClipRectWithRectangle(int source, int monitorZoom, int diagramZoom) {
@@ -728,49 +520,6 @@ public abstract class GraphicsTest {
 	public void testClipRectWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
 		GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
 		validation.executeTranslated(graphics -> graphics.clipRect(new Rectangle(source, source, source, source + 20)));
-	}
-
-	@Test
-	public void testGetClipRectForRegression() {
-		Rectangle clipRect = new Rectangle();
-		executeTranslatedWithOneLayer(200, 250, graphics -> graphics.getClip(clipRect),
-				graphics -> graphics.setClip(new Rectangle(25, 35, 45, 125)));
-		validateRect(clipRect, new Rectangle(5, 7, 9, 25));
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testGetClipRectWithRectangle(int source, int monitorZoom, int diagramZoom) {
-		Rectangle clipRectOne = new Rectangle();
-		executeWithOneLayer(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectOne),
-				graphics -> graphics.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
-
-		Rectangle clipRectTwo = new Rectangle();
-		executeWithTwoLayers(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectTwo),
-				graphics -> graphics.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
-		validateRect(clipRectTwo, clipRectOne);
-	}
-
-	@ParameterizedTest
-	@MethodSource("singleValueTestCombinations")
-	public void testGetClipRectWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
-		Rectangle clipRectOne = new Rectangle();
-		executeTranslatedWithOneLayer(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectOne),
-				graphics -> graphics.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
-
-		Rectangle clipRectTwo = new Rectangle();
-		executeTranslatedWithTwoLayers(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectTwo),
-				graphics -> graphics.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
-		validateRect(clipRectTwo, clipRectOne);
-	}
-
-	@Test
-	public void testSetClipRectForRegression() {
-		GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
-				graphics -> graphics.setClip(new Rectangle(5, 7, 9, 25)));
-		GraphicsRecorder expectedRecorder = new GraphicsRecorder();
-		expectedRecorder.setClip(new Rectangle(30, 40, 45, 125));
-		expectedRecorder.assertEquals(actualRecorder);
 	}
 
 	@ParameterizedTest
@@ -821,12 +570,12 @@ public abstract class GraphicsTest {
 				String.format("Actual value for height must match value %s", expected.height)); //$NON-NLS-1$
 	}
 
-	private GraphicsRecorder executeWithOneLayer(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall) {
+	protected GraphicsRecorder executeWithOneLayer(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall) {
 		return executeWithOneLayer(monitorZoom, diagramZoom, graphicsCall, graphics -> {
 		});
 	}
 
-	private GraphicsRecorder executeWithOneLayer(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall,
+	protected GraphicsRecorder executeWithOneLayer(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall,
 			Consumer<GraphicsRecorder> initializeGraphics) {
 		GraphicsRecorder recorder = new GraphicsRecorder();
 		initializeGraphics.accept(recorder);
@@ -838,13 +587,13 @@ public abstract class GraphicsTest {
 		return recorder;
 	}
 
-	private GraphicsRecorder executeTranslatedWithOneLayer(int monitorZoom, int diagramZoom,
+	protected GraphicsRecorder executeTranslatedWithOneLayer(int monitorZoom, int diagramZoom,
 			Consumer<Graphics> graphicsCall) {
 		return executeTranslatedWithOneLayer(monitorZoom, diagramZoom, graphicsCall, graphics -> {
 		});
 	}
 
-	private GraphicsRecorder executeTranslatedWithOneLayer(int monitorZoom, int diagramZoom,
+	protected GraphicsRecorder executeTranslatedWithOneLayer(int monitorZoom, int diagramZoom,
 			Consumer<Graphics> graphicsCall, Consumer<GraphicsRecorder> initializeGraphics) {
 		GraphicsRecorder recorder = new GraphicsRecorder();
 		initializeGraphics.accept(recorder);
@@ -858,12 +607,12 @@ public abstract class GraphicsTest {
 		return recorder;
 	}
 
-	private GraphicsRecorder executeWithTwoLayers(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall) {
+	protected GraphicsRecorder executeWithTwoLayers(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall) {
 		return executeWithTwoLayers(monitorZoom, diagramZoom, graphicsCall, graphics -> {
 		});
 	}
 
-	private GraphicsRecorder executeWithTwoLayers(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall,
+	protected GraphicsRecorder executeWithTwoLayers(int monitorZoom, int diagramZoom, Consumer<Graphics> graphicsCall,
 			Consumer<GraphicsRecorder> initializeGraphics) {
 		GraphicsRecorder recorder = new GraphicsRecorder();
 		initializeGraphics.accept(recorder);
@@ -878,13 +627,13 @@ public abstract class GraphicsTest {
 		return recorder;
 	}
 
-	private GraphicsRecorder executeTranslatedWithTwoLayers(int monitorZoom, int diagramZoom,
+	protected GraphicsRecorder executeTranslatedWithTwoLayers(int monitorZoom, int diagramZoom,
 			Consumer<Graphics> graphicsCall) {
 		return executeTranslatedWithTwoLayers(monitorZoom, diagramZoom, graphicsCall, graphics -> {
 		});
 	}
 
-	private GraphicsRecorder executeTranslatedWithTwoLayers(int monitorZoom, int diagramZoom,
+	protected GraphicsRecorder executeTranslatedWithTwoLayers(int monitorZoom, int diagramZoom,
 			Consumer<Graphics> graphicsCall, Consumer<GraphicsRecorder> initializeGraphics) {
 		GraphicsRecorder recorder = new GraphicsRecorder();
 		initializeGraphics.accept(recorder);
@@ -911,6 +660,271 @@ public abstract class GraphicsTest {
 		@SuppressWarnings("removal")
 		protected Graphics createGraphics(Graphics recorder) {
 			return new ScaledGraphics(recorder);
+		}
+
+		@Test
+		public void testClipRectForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.clipRect(new Rectangle(5, 7, 9, 25)));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.clipRect(new Rectangle(30, 40, 45, 125));
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawArcForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawArc(5, 7, 9, 25, 12, 18));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawArc(new Rectangle(30, 40, 45, 125), 12, 18);
+			expectedRecorder.assertEquals(actualRecorder);
+
+			actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.drawArc(0, 0, 0, 0, 12, 18));
+			actualRecorder.assertEmpty();
+
+			actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.drawArc(5, 7, 9, 25, 12, 0));
+			actualRecorder.assertEmpty();
+		}
+
+		@Test
+		public void testDrawFocusForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawFocus(5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawFocus(30, 40, 45, 125);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawFullImageForRegression() {
+			Image image = new Image(Display.getDefault(), 9, 25);
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawImage(image, 5, 7));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawImage(image, 0, 0, 9, 25, 30, 40, 45, 125);
+			expectedRecorder.assertEquals(actualRecorder);
+			image.dispose();
+		}
+
+		@Test
+		public void testDrawImageForRegression() {
+			Image image = new Image(Display.getDefault(), 5, 5);
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawImage(image, 5, 5, 5, 5, 5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawImage(image, 5, 5, 5, 5, 30, 40, 45, 125);
+			expectedRecorder.assertEquals(actualRecorder);
+			image.dispose();
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testDrawImageWithInt(int source, int monitorZoom, int diagramZoom) {
+			Image image = new Image(Display.getDefault(), 5, 5);
+			GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
+			validation.execute(graphics -> graphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 5));
+			image.dispose();
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testDrawImageWithIntTranslated(int source, int monitorZoom, int diagramZoom) {
+			Image image = new Image(Display.getDefault(), 5, 5);
+			GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
+			validation.executeTranslated(
+					graphics -> graphics.drawImage(image, 5, 5, 5, 5, source, source, source, source + 10));
+			image.dispose();
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testDrawImageWithRectangle(int source, int monitorZoom, int diagramZoom) {
+			Image image = new Image(Display.getDefault(), 5, 5);
+			GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
+			validation.execute(graphics -> graphics.drawImage(image, new Rectangle(5, 5, 5, 5),
+					new Rectangle(source, source, source, source + 15)));
+			image.dispose();
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testDrawImageWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+			Image image = new Image(Display.getDefault(), 5, 5);
+			GraphicsValidation validation = new GraphicsValidation(monitorZoom, diagramZoom);
+			validation.executeTranslated(graphics -> graphics.drawImage(image, new Rectangle(5, 5, 5, 5),
+					new Rectangle(source, source, source, source + 20)));
+			image.dispose();
+		}
+
+		@Test
+		public void testDrawLineForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawLine(new Point(5, 5), new Point(5, 5 + 20)));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawLine(30, 30, 30, 130);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawOvalForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawOval(5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawOval(30, 40, 45, 125);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawPointForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawPoint(5, 5));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawPoint(30, 30);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawRectangleForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawRectangle(5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawRectangle(30, 40, 45, 125);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testDrawRoundRectangleForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.drawRoundRectangle(new Rectangle(5, 7, 9, 25), 5, 5));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.drawRoundRectangle(new Rectangle(30, 40, 45, 125), 25, 25);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testFillArcForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.fillArc(5, 7, 9, 25, 12, 18));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.fillArc(30, 40, 41, 121, 12, 18);
+			expectedRecorder.assertEquals(actualRecorder);
+
+			actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.fillArc(0, 0, 0, 0, 12, 18));
+			actualRecorder.assertEmpty();
+
+			actualRecorder = executeTranslatedWithOneLayer(200, 250, graphics -> graphics.fillArc(5, 7, 9, 25, 12, 0));
+			actualRecorder.assertEmpty();
+		}
+
+		@Test
+		public void testFillGradientForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.fillGradient(5, 7, 9, 25, true));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.fillGradient(30, 40, 41, 121, true);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testFillOvalForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.fillOval(5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.fillOval(30, 40, 41, 121);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testFillRectangleForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.fillRectangle(5, 7, 9, 25));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.fillRectangle(30, 40, 41, 121);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testFillRoundRectangleForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.fillRoundRectangle(new Rectangle(5, 7, 9, 25), 5, 5));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.fillRoundRectangle(new Rectangle(30, 40, 41, 121), 25, 25);
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testGetClipRectForRegression() {
+			Rectangle clipRect = new Rectangle();
+			executeTranslatedWithOneLayer(200, 250, graphics -> graphics.getClip(clipRect),
+					graphics -> graphics.setClip(new Rectangle(25, 35, 45, 125)));
+			validateRect(clipRect, new Rectangle(5, 7, 9, 25));
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testGetClipRectWithRectangle(int source, int monitorZoom, int diagramZoom) {
+			Rectangle clipRectOne = new Rectangle();
+			executeWithOneLayer(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectOne),
+					graphics -> graphics
+							.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
+
+			Rectangle clipRectTwo = new Rectangle();
+			executeWithTwoLayers(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectTwo),
+					graphics -> graphics
+							.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
+			validateRect(clipRectTwo, clipRectOne);
+		}
+
+		@ParameterizedTest
+		@MethodSource("singleValueTestCombinations")
+		public void testGetClipRectWithRectangleTranslated(int source, int monitorZoom, int diagramZoom) {
+			Rectangle clipRectOne = new Rectangle();
+			executeTranslatedWithOneLayer(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectOne),
+					graphics -> graphics
+							.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
+
+			Rectangle clipRectTwo = new Rectangle();
+			executeTranslatedWithTwoLayers(monitorZoom, diagramZoom, graphics -> graphics.getClip(clipRectTwo),
+					graphics -> graphics
+							.setClip(new Rectangle(source * 10, source * 10, source * 10, source * 10 + 15)));
+			validateRect(clipRectTwo, clipRectOne);
+		}
+
+		@Test
+		public void testSetClipRectForRegression() {
+			GraphicsRecorder actualRecorder = executeTranslatedWithOneLayer(200, 250,
+					graphics -> graphics.setClip(new Rectangle(5, 7, 9, 25)));
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.setClip(new Rectangle(30, 40, 45, 125));
+			expectedRecorder.assertEquals(actualRecorder);
+		}
+
+		@Test
+		public void testTranslationWithMulipleScaledLayers() {
+			GraphicsRecorder actualRecorder = new GraphicsRecorder();
+			Graphics graphics = createGraphics(actualRecorder);
+			graphics.scale(1.5);
+			graphics.translate(1f, 1f);
+			Graphics graphics2 = createGraphics(graphics);
+			graphics2.scale(2.5);
+			graphics2.translate(1f, 1f);
+			graphics2.drawRectangle(0, 0, 10, 10);
+
+			GraphicsRecorder expectedRecorder = new GraphicsRecorder();
+			expectedRecorder.translate(1, 1);
+			expectedRecorder.translate(4, 4);
+			expectedRecorder.drawRectangle(0, 0, 37, 37);
+			expectedRecorder.assertEquals(actualRecorder);
+			graphics2.dispose();
+			graphics.dispose();
+			actualRecorder.dispose();
+		}
+	}
+
+	public static class AWTGraphicsTest extends GraphicsTest {
+		@Override
+		protected Graphics createGraphics(Graphics recorder) {
+			return new AWTGraphics(new Graphics2DToGraphicsAdapter(recorder));
 		}
 	}
 }

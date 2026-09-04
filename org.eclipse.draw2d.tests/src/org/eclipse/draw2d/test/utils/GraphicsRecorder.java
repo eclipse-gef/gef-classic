@@ -18,18 +18,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.LineAttributes;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.PathData;
 import org.eclipse.swt.widgets.Display;
 
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.SWTGraphics;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.junit.jupiter.api.Assertions;
 
 public class GraphicsRecorder extends GraphicsStub {
-	@SuppressWarnings("unused") // make sure the SWT UI thread exists
 	private final Display display = Display.getDefault();
 	private final List<String> events = new ArrayList<>();
 
@@ -90,6 +93,16 @@ public class GraphicsRecorder extends GraphicsStub {
 	@Override
 	public void drawFocus(int x, int y, int w, int h) {
 		log("drawFocus(x={0}, y={1}, w={2}, h={3})", x + dx, y + dy, w, h); //$NON-NLS-1$
+	}
+
+	@Override
+	public void drawImage(Image srcImage, int x, int y) {
+		log("drawImage(x={0}, y={1})", x + dx, y + dy); //$NON-NLS-1$
+	}
+
+	@Override
+	public void drawImage(Image srcImage, int x, int y, int w, int h) {
+		log("drawImage(x={0}, y={1}, w={2}, h={3})", x + dx, y + dy, w, h); //$NON-NLS-1$
 	}
 
 	@Override
@@ -178,8 +191,11 @@ public class GraphicsRecorder extends GraphicsStub {
 	}
 
 	// #########################################################################
-	private Font font;
-	private float lineWidth;
+	private final LineAttributes lineAttributes = new LineAttributes(1.0f);
+	private int alpha = 255;
+	private Font font = display.getSystemFont();
+	private Color bgColor = ColorConstants.white;
+	private Color fgColor = ColorConstants.black;
 
 	@Override
 	public void setFont(Font font) {
@@ -198,7 +214,7 @@ public class GraphicsRecorder extends GraphicsStub {
 
 	@Override
 	public float getLineWidthFloat() {
-		return lineWidth;
+		return lineAttributes.width;
 	}
 
 	@Override
@@ -208,7 +224,42 @@ public class GraphicsRecorder extends GraphicsStub {
 
 	@Override
 	public void setLineWidthFloat(float lineWidth) {
-		this.lineWidth = lineWidth;
+		this.lineAttributes.width = lineWidth;
+	}
+
+	@Override
+	public LineAttributes getLineAttributes() {
+		return SWTGraphics.clone(lineAttributes);
+	}
+
+	@Override
+	public void setBackgroundColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+
+	@Override
+	public Color getBackgroundColor() {
+		return bgColor;
+	}
+
+	@Override
+	public void setForegroundColor(Color fgColor) {
+		this.fgColor = fgColor;
+	}
+
+	@Override
+	public Color getForegroundColor() {
+		return fgColor;
+	}
+
+	@Override
+	public int getAlpha() {
+		return alpha;
+	}
+
+	@Override
+	public void setAlpha(int alpha) {
+		this.alpha = alpha;
 	}
 
 	@Override

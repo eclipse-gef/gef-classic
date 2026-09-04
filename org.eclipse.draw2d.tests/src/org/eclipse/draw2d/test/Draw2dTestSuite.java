@@ -14,6 +14,9 @@
 package org.eclipse.draw2d.test;
 
 import org.eclipse.draw2d.graph.test.DirectedGraphLayoutTest;
+import org.eclipse.draw2d.test.GraphicsClipping.AWTGraphicsClipping;
+import org.eclipse.draw2d.test.GraphicsClipping.SWTGraphicsClipping;
+import org.eclipse.draw2d.test.GraphicsTest.AWTGraphicsTest;
 import org.eclipse.draw2d.test.GraphicsTest.ScaledGraphicsTest;
 import org.eclipse.draw2d.test.colors.HSLTest;
 
@@ -34,7 +37,8 @@ import org.junit.platform.suite.api.Suite;
 	LocalOptimizerTest.class,
 	AdvancedGraphicsTests.class,
 	FlowBorderTests.class,
-	GraphicsClipping.class,
+	AWTGraphicsClipping.class,
+	SWTGraphicsClipping.class,
 	PaintDamageEraseTest.class,
 	LayeredPaneTest.class,
 	ConnectionEndPointMoveTest.class,
@@ -65,6 +69,7 @@ import org.junit.platform.suite.api.Suite;
 	ScrollPaneTests.class,
 	LabelTest.class,
 	PrecisionTests.class,
+	AWTGraphicsTest.class,
 	ScaledGraphicsTest.class,
 	HSLTest.class,
 	ImagePrintFigureOperationTest.class
