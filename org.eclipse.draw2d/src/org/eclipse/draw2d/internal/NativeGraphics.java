@@ -349,6 +349,14 @@ public abstract class NativeGraphics extends Graphics {
 	}
 
 	/**
+	 * @see Graphics#getLineAttributes()
+	 */
+	@Override
+	public LineAttributes getLineAttributes() {
+		return currentState.lineAttributes;
+	}
+
+	/**
 	 * @see Graphics#getLineCap()
 	 */
 	@Override

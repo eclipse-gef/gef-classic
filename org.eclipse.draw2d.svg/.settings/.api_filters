@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.draw2d.svg" version="2">
+    <resource path="src/org/eclipse/draw2d/svg/SVGGraphics.java" type="org.eclipse.draw2d.svg.SVGGraphics">
+        <filter id="571473929">
+            <message_arguments>
+                <message_argument value="AWTGraphics"/>
+                <message_argument value="SVGGraphics"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
