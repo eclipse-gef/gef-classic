@@ -158,6 +158,7 @@ public class TextEditor extends GraphicalEditor {
 	 * @see org.eclipse.gef.ui.parts.GraphicalEditor#createActions()
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	protected void createActions() {
 		super.createActions();
 		IKeyBindingService service = getSite().getKeyBindingService();
@@ -265,6 +266,7 @@ public class TextEditor extends GraphicalEditor {
 	 * @see GraphicalEditor#init(IEditorSite, IEditorInput)
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		setEditDomain(new DefaultEditDomain(this));
 		getCommandStack().addCommandStackEventListener(event -> {

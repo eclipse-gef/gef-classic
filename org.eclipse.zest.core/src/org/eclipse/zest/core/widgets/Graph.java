@@ -1396,7 +1396,7 @@ public class Graph extends FigureCanvas implements IContainer2 {
 		}
 	}
 
-	@SuppressWarnings("removal")
+	@SuppressWarnings({ "removal", "deprecation" })
 	private void applyLayoutInternal(boolean clean) {
 		if ((internalGetLayoutContext().getLayoutAlgorithm() == null) || this.getNodes().isEmpty()) {
 			return;

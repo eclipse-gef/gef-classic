@@ -120,6 +120,7 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 	 *
 	 * @param fe the focusEvent received by this viewer's control
 	 */
+	@SuppressWarnings("deprecation")
 	protected void handleFocusGained(FocusEvent fe) {
 		if (focusPart != null) {
 			focusPart.setFocus(true);
@@ -133,6 +134,7 @@ public class GraphicalViewerImpl extends AbstractEditPartViewer implements Graph
 	 *
 	 * @param fe the focusEvent received by this viewer's control
 	 */
+	@SuppressWarnings("deprecation")
 	protected void handleFocusLost(FocusEvent fe) {
 		if (focusPart != null) {
 			focusPart.setFocus(false);

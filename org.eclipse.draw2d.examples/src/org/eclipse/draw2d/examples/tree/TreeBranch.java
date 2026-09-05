@@ -60,7 +60,7 @@ public class TreeBranch extends Figure {
 			// if (resize) Layouts dont depend on size.
 			// invalidate();
 			if (resize || translate) {
-				fireMoved();
+				fireFigureMoved();
 				repaint();
 			}
 		}
