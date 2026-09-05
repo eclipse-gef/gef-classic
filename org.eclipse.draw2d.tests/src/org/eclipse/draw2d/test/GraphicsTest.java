@@ -657,7 +657,7 @@ public abstract class GraphicsTest {
 
 	public static class ScaledGraphicsTest extends GraphicsTest {
 		@Override
-		@SuppressWarnings("removal")
+		@SuppressWarnings({ "removal", "deprecation" })
 		protected Graphics createGraphics(Graphics recorder) {
 			return new ScaledGraphics(recorder);
 		}

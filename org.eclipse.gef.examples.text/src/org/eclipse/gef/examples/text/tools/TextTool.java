@@ -379,6 +379,7 @@ public class TextTool extends SelectionTool implements StyleProvider {
 		return handleTextEdit(edit);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void doSelect(Object type, boolean isForward, boolean append, Point loc) {
 		GraphicalTextViewer viewer = getTextualViewer();
 		SearchResult result = new SearchResult();
@@ -522,6 +523,7 @@ public class TextTool extends SelectionTool implements StyleProvider {
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	private SelectionRange getSelectionRange() {
 		if (getCurrentViewer() instanceof GraphicalTextViewer) {
 			return getTextualViewer().getSelectionRange();
@@ -636,6 +638,7 @@ public class TextTool extends SelectionTool implements StyleProvider {
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean handleTextEdit(TextRequest edit) {
 		EditPart target = getTextTarget(edit);
 

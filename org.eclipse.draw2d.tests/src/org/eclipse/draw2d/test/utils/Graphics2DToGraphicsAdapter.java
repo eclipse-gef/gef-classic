@@ -76,15 +76,22 @@ public class Graphics2DToGraphicsAdapter extends Graphics2DStub {
 
 	@Override
 	public void draw(Shape s) {
-		switch (s) {
-		case Arc2D arc -> drawArc(arc);
-		case Line2D line -> drawLine(line);
-		case Ellipse2D ellipse -> drawOval(ellipse);
-		case Rectangle2D rectangle -> drawRectangle(rectangle);
-		case RoundRectangle2D roundRectangle -> drawRoundRectangle(roundRectangle);
-		case Polygon polygon -> drawPolygon2(polygon);
-		case Path2D path -> drawPath(path);
-		default -> throw new UnsupportedOperationException(s.getClass().toString());
+		if (s instanceof Arc2D arc) {
+			drawArc(arc);
+		} else if (s instanceof Line2D line) {
+			drawLine(line);
+		} else if (s instanceof Ellipse2D ellipse) {
+			drawOval(ellipse);
+		} else if (s instanceof Rectangle2D rectangle) {
+			drawRectangle(rectangle);
+		} else if (s instanceof RoundRectangle2D roundRectangle) {
+			drawRoundRectangle(roundRectangle);
+		} else if (s instanceof Polygon polygon) {
+			drawPolygon2(polygon);
+		} else if (s instanceof Path2D path) {
+			drawPath(path);
+		} else {
+			throw new UnsupportedOperationException(s.getClass().toString());
 		}
 	}
 
@@ -133,14 +140,20 @@ public class Graphics2DToGraphicsAdapter extends Graphics2DStub {
 
 	@Override
 	public void fill(Shape s) {
-		switch (s) {
-		case Arc2D arc -> fillArc(arc);
-		case Ellipse2D ellipse -> fillOval(ellipse);
-		case Rectangle2D rectangle -> fillRectangle(rectangle);
-		case RoundRectangle2D roundRectangle -> fillRoundRectangle(roundRectangle);
-		case Polygon polygon -> fillPolygon2(polygon);
-		case Path2D path -> fillPath(path);
-		default -> throw new UnsupportedOperationException(s.getClass().toString());
+		if (s instanceof Arc2D arc) {
+			fillArc(arc);
+		} else if (s instanceof Ellipse2D ellipse) {
+			fillOval(ellipse);
+		} else if (s instanceof Rectangle2D rectangle) {
+			fillRectangle(rectangle);
+		} else if (s instanceof RoundRectangle2D roundRectangle) {
+			fillRoundRectangle(roundRectangle);
+		} else if (s instanceof Polygon polygon) {
+			fillPolygon2(polygon);
+		} else if (s instanceof Path2D path) {
+			fillPath(path);
+		} else {
+			throw new UnsupportedOperationException(s.getClass().toString());
 		}
 	}
 

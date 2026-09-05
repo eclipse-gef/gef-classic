@@ -128,6 +128,7 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void appendSelection(EditPart editpart) {
 		if (focusPart != editpart) {
 			setFocus(null);
@@ -152,6 +153,7 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void select(EditPart editpart) {
 		if (focusPart != editpart) {
 			setFocus(null);
