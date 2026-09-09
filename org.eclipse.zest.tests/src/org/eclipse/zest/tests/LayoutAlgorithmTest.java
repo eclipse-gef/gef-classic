@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Patrick Ziegler and others.
+ * Copyright (c) 2024, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -35,6 +35,7 @@ public class LayoutAlgorithmTest {
 	private Set<String> logger;
 
 	@BeforeEach
+	@SuppressWarnings("deprecation")
 	public void setUp() {
 		logger = new HashSet<>();
 		layoutAlgorithm = new GridLayoutAlgorithm.Zest1();
@@ -48,6 +49,7 @@ public class LayoutAlgorithmTest {
 	public void testWithConcurrentModification1() throws InvalidLayoutConfiguration {
 		testWith(new ProgressListener.Stub() {
 			@Override
+			@SuppressWarnings("deprecation")
 			public void progressStarted(ProgressEvent e) {
 				logger.add("progressStarted()"); //$NON-NLS-1$
 				layoutAlgorithm.removeProgressListener(this);
@@ -62,6 +64,7 @@ public class LayoutAlgorithmTest {
 	public void testWithConcurrentModification2() throws InvalidLayoutConfiguration {
 		testWith(new ProgressListener.Stub() {
 			@Override
+			@SuppressWarnings("deprecation")
 			public void progressUpdated(ProgressEvent e) {
 				logger.add("progressUpdated()"); //$NON-NLS-1$
 				layoutAlgorithm.removeProgressListener(this);
@@ -76,6 +79,7 @@ public class LayoutAlgorithmTest {
 	public void testWithConcurrentModification3() throws InvalidLayoutConfiguration {
 		testWith(new ProgressListener.Stub() {
 			@Override
+			@SuppressWarnings("deprecation")
 			public void progressEnded(ProgressEvent e) {
 				logger.add("progressEnded()"); //$NON-NLS-1$
 				layoutAlgorithm.removeProgressListener(this);
@@ -83,6 +87,7 @@ public class LayoutAlgorithmTest {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	private void testWith(ProgressListener progressListener) throws InvalidLayoutConfiguration {
 		LayoutEntity[] nodes = {};
 		layoutAlgorithm.addProgressListener(progressListener);

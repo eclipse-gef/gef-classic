@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Copyright 2005-2011, 2024 CHISEL Group, University of Victoria, Victoria,
- *                           BC, Canada and others.
+ * Copyright 2005, 2026 CHISEL Group, University of Victoria, Victoria, BC,
+ *                      Canada and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -701,6 +701,7 @@ public abstract class AbstractStructuredGraphViewer extends AbstractZoomableView
 	 *
 	 * @param connection
 	 */
+	@SuppressWarnings("deprecation")
 	public void removeRelationship(Object connection) {
 		GraphConnection relationship = connectionsMap.get(connection);
 
@@ -733,6 +734,7 @@ public abstract class AbstractStructuredGraphViewer extends AbstractZoomableView
 	 *
 	 * @param element The node element to remove.
 	 */
+	@SuppressWarnings("deprecation")
 	public void removeNode(Object element) {
 		GraphNode node = nodesMap.get(element);
 
