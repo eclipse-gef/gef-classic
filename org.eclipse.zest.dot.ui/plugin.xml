@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="dot,gv"
+            id="org.eclipse.zest.dot.ui.content-type"
+            name="DOT"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editorContentTypeBinding
+            contentTypeId="org.eclipse.zest.dot.ui.content-type"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.icons">
+      <icon
+            contentType="org.eclipse.zest.dot.ui.content-type"
+            icon="images/graph.png">
+      </icon>
+   </extension>
+   <extension
+         point="org.eclipse.lsp4e.languageServer">
+      <server
+            class="org.eclipse.zest.dot.ui.internal.DOTConnectionProvider"
+            id="org.eclipse.zest.dot.ui.server"
+            label="DOT Language Server">
+      </server>
+      <contentTypeMapping
+            contentType="org.eclipse.zest.dot.ui.content-type"
+            id="org.eclipse.zest.dot.ui.server"
+            languageId="dot">
+      </contentTypeMapping>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.ui.texteditor.ITextEditor"
+            class="org.eclipse.zest.dot.ui.internal.DOTContentOutlineAdapter">
+         <adapter
+               type="org.eclipse.ui.views.contentoutline.IContentOutlinePage">
+         </adapter>
+      </factory>
+   </extension>
+
+</plugin>

@@ -144,20 +144,19 @@ public abstract class AbstractStructuredGraphViewer extends AbstractZoomableView
 	}
 
 	/**
-	 * Sets the default style for connections in this graph. Note: if an input is
-	 * set on the viewer, a ZestException will be thrown.
+	 * Sets the default style for connections in this graph.
 	 *
 	 * @param connectionStyle the style for the connections.
 	 * @see ZestStyles
 	 */
 	public void setConnectionStyle(int connectionStyle) {
-		if (getInput() != null) {
-			throw new SWTError(SWT.ERROR_UNSPECIFIED);
-		}
 		if (!ZestStyles.validateConnectionStyle(connectionStyle)) {
 			throw new SWTError(SWT.ERROR_INVALID_ARGUMENT);
 		}
 		this.connectionStyle = connectionStyle;
+		if (getInput() != null) {
+			refresh();
+		}
 	}
 
 	/**
