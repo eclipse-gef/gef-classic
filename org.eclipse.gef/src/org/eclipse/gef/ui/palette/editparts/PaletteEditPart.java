@@ -433,7 +433,7 @@ public abstract class PaletteEditPart extends AbstractGraphicalEditPart implemen
 			resourceManager.destroy(imgDescriptor);
 		}
 		imgDescriptor = desc;
-		setImageInFigure(resourceManager.create(imgDescriptor));
+		setImageInFigure(imgDescriptor == null ? null : resourceManager.create(imgDescriptor));
 	}
 
 	/**
