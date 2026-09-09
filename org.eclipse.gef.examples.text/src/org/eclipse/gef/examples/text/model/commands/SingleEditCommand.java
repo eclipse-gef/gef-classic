@@ -13,7 +13,10 @@
 
 package org.eclipse.gef.examples.text.model.commands;
 
+import java.util.Collections;
+
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.SelectionRange;
 import org.eclipse.gef.examples.text.TextLocation;
 import org.eclipse.gef.examples.text.model.ModelLocation;
@@ -43,24 +46,26 @@ public class SingleEditCommand extends ExampleTextCommand {
 	}
 
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
 		ModelLocation loc = edit.getResultingLocation();
 		if (loc != null) {
-			return new SelectionRange(lookupModel(viewer, loc.model), loc.offset);
+			SelectionRange range = new SelectionRange(lookupModel(viewer, loc.model), loc.offset);
+			return new SelectionModel(range, Collections.emptyList());
 		}
-		return getUndoSelectionRange(viewer);
+		return getUndoSelectionModel(viewer);
 	}
 
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
-		return getExecuteSelectionRange(viewer);
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
+		return getExecuteSelectionModel(viewer);
 	}
 
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
 		TextLocation startLoc = new TextLocation(lookupModel(viewer, start.model), start.offset);
 		TextLocation endLoc = new TextLocation(lookupModel(viewer, end.model), end.offset);
-		return new SelectionRange(startLoc, endLoc);
+		SelectionRange range = new SelectionRange(startLoc, endLoc);
+		return new SelectionModel(range, Collections.emptyList());
 	}
 
 	@Override

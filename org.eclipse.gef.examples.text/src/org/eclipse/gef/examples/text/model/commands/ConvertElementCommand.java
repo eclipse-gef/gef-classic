@@ -13,7 +13,10 @@
 
 package org.eclipse.gef.examples.text.model.commands;
 
+import java.util.Collections;
+
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.SelectionRange;
 import org.eclipse.gef.examples.text.model.Container;
 import org.eclipse.gef.examples.text.model.ModelElement;
@@ -52,17 +55,18 @@ public class ConvertElementCommand extends ExampleTextCommand {
 	}
 
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
 		return null;
 	}
 
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
-		return new SelectionRange(lookupModel(viewer, caret.model), caret.offset);
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
+		SelectionRange range = new SelectionRange(lookupModel(viewer, caret.model), caret.offset);
+		return new SelectionModel(range, Collections.emptyList());
 	}
 
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
 		return null;
 	}
 

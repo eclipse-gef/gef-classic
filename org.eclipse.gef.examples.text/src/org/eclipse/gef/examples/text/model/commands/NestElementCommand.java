@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -13,7 +13,10 @@
 
 package org.eclipse.gef.examples.text.model.commands;
 
+import java.util.Collections;
+
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.SelectionRange;
 import org.eclipse.gef.examples.text.edit.TextEditPart;
 import org.eclipse.gef.examples.text.model.Container;
@@ -54,18 +57,19 @@ public class NestElementCommand extends ExampleTextCommand {
 	}
 
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
-		return new SelectionRange(lookupModel(viewer, run), caretOffset);
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
+		SelectionRange range = new SelectionRange(lookupModel(viewer, run), caretOffset);
+		return new SelectionModel(range, Collections.emptyList());
 	}
 
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
-		return getExecuteSelectionRange(viewer);
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
+		return getExecuteSelectionModel(viewer);
 	}
 
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
-		return getExecuteSelectionRange(viewer);
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
+		return getExecuteSelectionModel(viewer);
 	}
 
 }

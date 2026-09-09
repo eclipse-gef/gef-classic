@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2023 IBM Corporation and others.
+ * Copyright (c) 2004, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -14,7 +14,7 @@
 package org.eclipse.gef.examples.text.model.commands;
 
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
-import org.eclipse.gef.examples.text.SelectionRange;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.model.ModelElement;
 import org.eclipse.gef.examples.text.model.ModelLocation;
 import org.eclipse.gef.examples.text.model.TextRun;
@@ -39,26 +39,26 @@ public class ProcessMacroCommand extends CompoundEditCommand {
 	}
 
 	/**
-	 * @see org.eclipse.gef.examples.text.TextCommand#getRedoSelectionRange(org.eclipse.gef.examples.text.GraphicalTextViewer)
+	 * @see org.eclipse.gef.examples.text.TextCommand#getRedoSelectionModel(org.eclipse.gef.examples.text.GraphicalTextViewer)
 	 */
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
 		return null;
 	}
 
 	/**
-	 * @see org.eclipse.gef.examples.text.TextCommand#getExecuteSelectionRange(org.eclipse.gef.examples.text.GraphicalTextViewer)
+	 * @see org.eclipse.gef.examples.text.TextCommand#getExecuteSelectionModel(org.eclipse.gef.examples.text.GraphicalTextViewer)
 	 */
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
-		return super.getExecuteSelectionRange(viewer);
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
+		return super.getExecuteSelectionModel(viewer);
 	}
 
 	/**
-	 * @see org.eclipse.gef.examples.text.TextCommand#getUndoSelectionRange(org.eclipse.gef.examples.text.GraphicalTextViewer)
+	 * @see org.eclipse.gef.examples.text.TextCommand#getUndoSelectionModel(org.eclipse.gef.examples.text.GraphicalTextViewer)
 	 */
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
 		return null;
 	}
 

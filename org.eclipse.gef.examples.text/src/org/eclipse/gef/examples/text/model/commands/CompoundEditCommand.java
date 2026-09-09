@@ -14,12 +14,14 @@
 package org.eclipse.gef.examples.text.model.commands;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 
 import org.eclipse.gef.examples.text.AppendableCommand;
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.SelectionRange;
 import org.eclipse.gef.examples.text.edit.TextEditPart;
 import org.eclipse.gef.examples.text.model.ModelLocation;
@@ -81,27 +83,30 @@ public class CompoundEditCommand extends ExampleTextCommand implements Appendabl
 	}
 
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
 		ModelLocation loc = edits.get(edits.size() - 1).getResultingLocation();
 		if (loc == null) {
-			return getUndoSelectionRange(viewer);
+			return getUndoSelectionModel(viewer);
 		}
-		return new SelectionRange(lookupModel(viewer, loc.model), loc.offset);
+		SelectionRange range = new SelectionRange(lookupModel(viewer, loc.model), loc.offset);
+		return new SelectionModel(range, Collections.emptyList());
 	}
 
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
-		return getExecuteSelectionRange(viewer);
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
+		return getExecuteSelectionModel(viewer);
 	}
 
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
 		TextEditPart begin = lookupModel(viewer, beginLocation.model);
 		if (endLocation == null) {
-			return new SelectionRange(begin, beginLocation.offset);
+			SelectionRange range = new SelectionRange(begin, beginLocation.offset);
+			return new SelectionModel(range, Collections.emptyList());
 		}
 		TextEditPart end = lookupModel(viewer, endLocation.model);
-		return new SelectionRange(begin, beginLocation.offset, end, endLocation.offset);
+		SelectionRange range = new SelectionRange(begin, beginLocation.offset, end, endLocation.offset);
+		return new SelectionModel(range, Collections.emptyList());
 	}
 
 	public void pendEdit(MiniEdit edit) {

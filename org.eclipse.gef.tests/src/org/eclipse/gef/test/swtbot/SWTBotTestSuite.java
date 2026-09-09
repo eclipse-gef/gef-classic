@@ -26,7 +26,8 @@ import org.junit.platform.suite.api.Suite;
 	LogicDiagramTests.class,
 	ShapesDiagramTests.class,
 	PaletteSettingsDialogTests.class,
-	PaletteSnippetTests.class
+	PaletteSnippetTests.class,
+	GraphicalTextViewerTests.class
 })
 public class SWTBotTestSuite {
 }

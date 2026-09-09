@@ -272,11 +272,11 @@ public class TextEditor extends GraphicalEditor {
 			if (command != null) {
 				GraphicalTextViewer textViewer = (GraphicalTextViewer) getGraphicalViewer();
 				if (event.getDetail() == CommandStack.POST_EXECUTE) {
-					textViewer.setSelectionRange(command.getExecuteSelectionRange(textViewer));
+					textViewer.setSelectionModel(command.getExecuteSelectionModel(textViewer));
 				} else if (event.getDetail() == CommandStack.POST_REDO) {
-					textViewer.setSelectionRange(command.getRedoSelectionRange(textViewer));
+					textViewer.setSelectionModel(command.getRedoSelectionModel(textViewer));
 				} else if (event.getDetail() == CommandStack.POST_UNDO) {
-					textViewer.setSelectionRange(command.getUndoSelectionRange(textViewer));
+					textViewer.setSelectionModel(command.getUndoSelectionModel(textViewer));
 				}
 			}
 		});

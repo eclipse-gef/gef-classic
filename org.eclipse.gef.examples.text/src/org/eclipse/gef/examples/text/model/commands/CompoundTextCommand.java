@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2024 IBM Corporation and others.
+ * Copyright (c) 2005, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -19,7 +19,7 @@ import org.eclipse.gef.commands.Command;
 
 import org.eclipse.gef.examples.text.AppendableCommand;
 import org.eclipse.gef.examples.text.GraphicalTextViewer;
-import org.eclipse.gef.examples.text.SelectionRange;
+import org.eclipse.gef.examples.text.SelectionModel;
 import org.eclipse.gef.examples.text.TextCommand;
 
 public class CompoundTextCommand extends Command implements TextCommand, AppendableCommand {
@@ -86,11 +86,11 @@ public class CompoundTextCommand extends Command implements TextCommand, Appenda
 	}
 
 	@Override
-	public SelectionRange getExecuteSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getExecuteSelectionModel(GraphicalTextViewer viewer) {
 		if (applied.isEmpty()) {
 			return null;
 		}
-		return getAppliedTextCommand(applied.size() - 1).getExecuteSelectionRange(viewer);
+		return getAppliedTextCommand(applied.size() - 1).getExecuteSelectionModel(viewer);
 	}
 
 	private TextCommand getAppliedTextCommand(int i) {
@@ -98,19 +98,19 @@ public class CompoundTextCommand extends Command implements TextCommand, Appenda
 	}
 
 	@Override
-	public SelectionRange getRedoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getRedoSelectionModel(GraphicalTextViewer viewer) {
 		if (applied.isEmpty()) {
 			return null;
 		}
-		return getAppliedTextCommand(applied.size() - 1).getExecuteSelectionRange(viewer);
+		return getAppliedTextCommand(applied.size() - 1).getExecuteSelectionModel(viewer);
 	}
 
 	@Override
-	public SelectionRange getUndoSelectionRange(GraphicalTextViewer viewer) {
+	public SelectionModel getUndoSelectionModel(GraphicalTextViewer viewer) {
 		if (applied.isEmpty()) {
 			return null;
 		}
-		return getAppliedTextCommand(0).getUndoSelectionRange(viewer);
+		return getAppliedTextCommand(0).getUndoSelectionModel(viewer);
 	}
 
 	@Override

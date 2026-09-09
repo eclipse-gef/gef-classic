@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2010 IBM Corporation and others.
+ * Copyright (c) 2005, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -36,19 +36,30 @@ import org.eclipse.gef.examples.text.edit.TextEditPart;
 public class SelectionModel {
 
 	private final SelectionRange selectionRange;
-	private final EditPart selectionContainer;
 	private final List<EditPart> constantSelection;
 
 	@SuppressWarnings("unchecked")
-	public SelectionModel(ISelection selection) {
-		this(null, selection instanceof IStructuredSelection structSel ? structSel.toList() : null, null);
+	public SelectionModel(IStructuredSelection selection) {
+		this(null, selection.toList());
 	}
 
-	public SelectionModel(SelectionRange range, List<EditPart> selectedParts, EditPart container) {
+	/**
+	 * Constructs a selection model combining an optional text selection range and
+	 * an (optional) ordered list of EditParts to be selected. Passing an empty list
+	 * leaves the current selection unchanged.
+	 *
+	 * @param range         the {@link SelectionRange} describing text selection
+	 *                      (caret and range). May be {@code null} when there is no
+	 *                      text selection.
+	 * @param selectedParts a list of {@link EditPart}s to be selected; the last
+	 *                      element in the list will be treated as the focus/primary
+	 *                      selection. The list must not be {@code null}. If no edit
+	 *                      parts should be selected supply an empty list (e.g.
+	 *                      {@code Collections.emptyList()}).
+	 */
+	public SelectionModel(SelectionRange range, List<EditPart> selectedParts) {
 		selectionRange = range;
-		selectionContainer = container;
-		constantSelection = selectedParts == null ? Collections.emptyList()
-				: Collections.unmodifiableList(selectedParts);
+		constantSelection = Collections.unmodifiableList(selectedParts);
 	}
 
 	protected void applySelectedParts() {
@@ -103,11 +114,8 @@ public class SelectionModel {
 	public boolean equals(Object obj) {
 		boolean result = obj == this;
 		if (!result && obj instanceof SelectionModel other) {
-			EditPart otherContainer = other.getSelectionContainer();
 			SelectionRange otherRange = other.getSelectionRange();
 			result = constantSelection.equals(other.getSelectedEditParts())
-					&& (selectionContainer == otherContainer
-							|| (selectionContainer != null && selectionContainer.equals(otherContainer)))
 					&& (selectionRange == otherRange || (selectionRange != null && selectionRange.equals(otherRange)));
 		}
 		return result;
@@ -117,13 +125,13 @@ public class SelectionModel {
 		ArrayList<EditPart> list = new ArrayList<>(constantSelection);
 		list.remove(newPart);
 		list.add(newPart);
-		return new SelectionModel(selectionRange, list, selectionContainer);
+		return new SelectionModel(selectionRange, list);
 	}
 
 	public SelectionModel getExcludedSelection(EditPart exclude) {
 		ArrayList<EditPart> list = new ArrayList<>(constantSelection);
 		list.remove(exclude);
-		return new SelectionModel(selectionRange, list, selectionContainer);
+		return new SelectionModel(selectionRange, list);
 	}
 
 	public EditPart getFocusPart() {
@@ -139,10 +147,6 @@ public class SelectionModel {
 
 	public ISelection getSelection() {
 		return new StructuredSelection(constantSelection);
-	}
-
-	public EditPart getSelectionContainer() {
-		return selectionContainer;
 	}
 
 	public SelectionRange getSelectionRange() {

@@ -104,7 +104,7 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 		SelectionModel newModel = null;
 		if (newRange != null) {
 			newModel = createSelectionModel(null, newRange,
-					selectionModel == null ? null : selectionModel.getSelectedEditParts(), null);
+					selectionModel == null ? Collections.emptyList() : selectionModel.getSelectedEditParts());
 		}
 		setSelectionModel(newModel);
 	}
@@ -129,7 +129,7 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 
 	@Override
 	public void appendSelection(EditPart editpart) {
-		if (focusPart != editpart) {
+		if (getFocusEditPart() != editpart) {
 			setFocus(null);
 		}
 		if (selectionModel != null) {
@@ -153,12 +153,12 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 
 	@Override
 	public void select(EditPart editpart) {
-		if (focusPart != editpart) {
+		if (getFocusEditPart() != editpart) {
 			setFocus(null);
 		}
 		ArrayList<EditPart> list = new ArrayList<>();
 		list.add(editpart);
-		setSelectionModel(createSelectionModel(null, null, list, null));
+		setSelectionModel(createSelectionModel(null, null, list));
 	}
 
 	// @TODO:Pratik Hack. This shouldn't be here. CommandStack should be doing
@@ -174,11 +174,11 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 			TextCommand command = (TextCommand) event.getCommand();
 			if (command != null) {
 				if (event.getDetail() == CommandStack.POST_EXECUTE) {
-					setSelectionRange(command.getExecuteSelectionRange(GraphicalTextViewer.this));
+					setSelectionModel(command.getExecuteSelectionModel(GraphicalTextViewer.this));
 				} else if (event.getDetail() == CommandStack.POST_REDO) {
-					setSelectionRange(command.getRedoSelectionRange(GraphicalTextViewer.this));
+					setSelectionModel(command.getRedoSelectionModel(GraphicalTextViewer.this));
 				} else if (event.getDetail() == CommandStack.POST_UNDO) {
-					setSelectionRange(command.getUndoSelectionRange(GraphicalTextViewer.this));
+					setSelectionModel(command.getUndoSelectionModel(GraphicalTextViewer.this));
 				}
 			}
 		});
@@ -187,7 +187,7 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 	@Override
 	public void setSelection(ISelection newSelection) {
 		if (newSelection != null) {
-			setSelectionModel(createSelectionModel(newSelection, null, null, null));
+			setSelectionModel(createSelectionModel(newSelection, null, Collections.emptyList()));
 		} else {
 			setSelectionModel(null);
 		}
@@ -201,12 +201,11 @@ public class GraphicalTextViewer extends ScrollingGraphicalViewer {
 		return new StructuredSelection(getContents());
 	}
 
-	private static SelectionModel createSelectionModel(ISelection selection, SelectionRange range, List<EditPart> parts,
-			EditPart container) {
-		if (selection instanceof IStructuredSelection) {
-			return new SelectionModel(selection);
+	private static SelectionModel createSelectionModel(ISelection selection, SelectionRange range, List<EditPart> parts) {
+		if (selection instanceof IStructuredSelection structuredSelection) {
+			return new SelectionModel(structuredSelection);
 		}
-		return new SelectionModel(range, parts, container);
+		return new SelectionModel(range, parts);
 	}
 
 	/**

@@ -664,7 +664,7 @@ public class TextTool extends SelectionTool implements StyleProvider {
 			}
 			pendingCommand.executePending();
 			GraphicalTextViewer viewer = getTextualViewer();
-			viewer.setSelectionRange(((TextCommand) pendingCommand).getExecuteSelectionRange(viewer));
+			viewer.setSelectionModel(((TextCommand) pendingCommand).getExecuteSelectionModel(viewer));
 		}
 
 		return true;
