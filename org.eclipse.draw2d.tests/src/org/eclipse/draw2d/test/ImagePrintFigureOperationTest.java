@@ -16,6 +16,7 @@ package org.eclipse.draw2d.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Shell;
@@ -53,6 +54,56 @@ public class ImagePrintFigureOperationTest {
 				return true;
 			}
 		});
+	}
+
+	/**
+	 * @see <a href="https://github.com/eclipse-gef/gef-classic/issues/1146">Issue
+	 *      1146</a>
+	 */
+	@Test
+	public void testPaintWithAutoScaling() {
+		figure.setSize(310, 310);
+		Image image = new ImagePrintFigureOperation(shell, figure) {
+			@Override
+			protected boolean isDraw2DAutoScalingEnabled() {
+				return true;
+			}
+		}.run();
+
+		GC gc = new GC(shell);
+		gc.drawImage(image, 0, 0, 310, 310, 0, 0, 100, 100);
+		gc.dispose();
+
+		image.dispose();
+	}
+
+	/**
+	 * SWT uses {@link Math#round(double)} for rounding, while Draw2D uses
+	 * {@link Math#floor(double)}. For a zoom < 100% this leads to a mismatch which
+	 * results in an {@link IllegalArgumentException} when trying to paint the
+	 * image, as the "scaled" image doesn't match the expected size due to an
+	 * off-by-one rounding error.
+	 *
+	 * @see <a href="https://github.com/eclipse-gef/gef-classic/issues/1146">Issue
+	 *      1146</a>
+	 */
+	@Test
+	public void testImageBoundsWithAutoScaling() {
+		figure.setSize(310, 310);
+		Image image = new ImagePrintFigureOperation(shell, figure) {
+			@Override
+			protected boolean isDraw2DAutoScalingEnabled() {
+				return true;
+			}
+		}.run();
+
+		for (int i = 1; i < 100; ++i) {
+			ImageData imageData = image.getImageData(i);
+			assertEquals(Math.round(310 * i / 100.0), imageData.width);
+			assertEquals(Math.round(310 * i / 100.0), imageData.height);
+		}
+
+		image.dispose();
 	}
 
 	@Test
