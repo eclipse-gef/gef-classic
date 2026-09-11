@@ -196,6 +196,8 @@
             url="https://download.eclipse.org/cbi/updates/license"/>
         <repository
             url="https://download.eclipse.org/technology/swtbot/releases/latest"/>
+        <repository
+            url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/milestone/latest"/>
       </repositoryList>
     </targlet>
   </setupTask>

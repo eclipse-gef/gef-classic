@@ -2,6 +2,13 @@
 
 ## Draw2D
 
+- Introduction of a new `AWTGraphics` class, which supports painting on a Swing
+  surface using a `Graphics2D` object.
+
+- Introduction of a new `SVGGraphics` class, which supports exporting a Figure
+  to an SVG document. This class requires Batik and is therefore only available
+  in the `org.eclipse.draw2d.svg` bundle.
+
 ## GEF
 
 ## Zest

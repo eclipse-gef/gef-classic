@@ -63,6 +63,76 @@ is parented by Figure 1.
 
 image:images/paintclip.gif[image,width=616,height=186]
 
+== Painting on a Swing JComponent
+
+Painting on a Swing component is possible via the link:../reference/api/org/eclipse/draw2d/AWTGraphics.html[*`AWTGraphics`*]
+class. Similar to SWT, the instances of this class require a _Graphics2D_
+object, which has to be derived from e.g. a _JComponent_ or _BufferedImage_.
+
+Unlike SWT, the Graphics2D object is generally initialized with a _null_ clip.
+When painting a figure, this clip must be explicitly set.
+
+Example:
+
+[source,java]
+----
+IFigure figure = ...;
+BufferedImage image = ...;
+
+Graphics2D g2d = image.createGraphics();
+g2d.setClip(0, 0, image.getWidth(), image.getHeight());
+
+AWTGraphics g = new AWTGraphics(g2d);
+figure.paint(g);
+g.dispose();
+
+g2d.dispose();
+----
+
+Note that Draw2D is built on top of SWT and thus support for other GUI toolkits
+is limited. For example, event handling requires a custom implementation of the
+_EventDispatcher_ and is currently not supported.
+
+WARNING: All methods of the _AWTGraphics_ class which expect SWT arguments are
+         fundamentally unsupported, as the Swing paint operations are generally
+         done within the Event Dispatcher thread and not the SWT UI thread.
+
+== Painting on an SVG document
+
+In addition to the SWT _Composite_ and Swing _JComponent_, it is also possible
+to paint directly into an SVG document by using the link:../reference/api/org/eclipse/draw2d/svg/SVGGraphics.html[*`SVGGraphics`*]
+class. Because this class requires Batik for updating the DOM structure, it is
+only available via the _org.eclipse.draw2d.svg_ plug-in. 
+
+Instances of this class can be created similarly to the _AWTGraphics_ class,
+except that they now require an _SVGGraphics2D_ object as constructor argument.
+
+The created document can be exported to a string or the file system using the
+link:../reference/api/org/eclipse/draw2d/svg/SVGGraphics.html#stream(java.io.Writer)[*`SVGGraphics#stream(Writer)`*]
+method.
+
+Example:
+
+[source,java]
+----
+try (Writer writer = ...) {
+	SVGGraphics g = new SVGGraphics();
+	g.setViewport(...);
+	g.setClip(...);
+	paint(g);
+	g.stream(writer);
+	g.dispose();
+} catch (IOException e) {
+	...
+}
+----
+
+NOTE: The _SVGGraphics_ class is based on the _AWTGraphics_ class. It is
+      therefore also necessary to explicitly set the initial clip. In addition,
+      an SVG document also requires a viewport, which can be set via the
+      link:../reference/api/org/eclipse/draw2d/svg/SVGGraphics.html#setViewport(org.eclipse.draw2d.geometry.Dimensionm)[*`SVGGraphics#setViewport(Dimension)`*]
+      method.
+
 === See Also
 
 * xref:hittest.adoc[Hit Testing]
