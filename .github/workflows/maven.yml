@@ -11,13 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ 21, 25 ]
+        java: [ 25 ]
         os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          - java: 21
-            target: 2024-09
-          - java: 25
-            target: master
+        target: [2024-09, master]
     runs-on: ${{ matrix.os }} 
     name: OS ${{ matrix.os }} Target ${{ matrix.target }} compile
     steps:
