@@ -46,7 +46,7 @@
                   <goal>eclipse-run</goal>
                 </goals>
                 <configuration>
-                  <executionEnvironment>JavaSE-17</executionEnvironment>
+                  <executionEnvironment>${execution-environment}</executionEnvironment>
                   <dependencies>
                     <dependency>
                       <artifactId>org.eclipse.justj.p2</artifactId>
