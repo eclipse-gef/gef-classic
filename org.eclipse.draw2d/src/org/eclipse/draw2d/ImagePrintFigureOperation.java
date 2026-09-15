@@ -15,7 +15,7 @@ package org.eclipse.draw2d;
 
 import java.util.Objects;
 
-import org.eclipse.swt.SWTException;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.internal.ImageUtils;
 import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 
 /**
@@ -148,20 +147,13 @@ public class ImagePrintFigureOperation {
 
 	/**
 	 * Creates and returns an {@link Image} created as if at 100% zoom but scaled by
-	 * the current zoom. This image has two {@link ImageData}, one at 100% and one
-	 * at the current monitor zoom.
+	 * the current zoom.
 	 *
 	 * @return The image if Draw2D-based auto-scaling is enabled.
 	 */
 	private Image createAutoScaledImage() {
 		double scale = InternalDraw2dUtils.calculateScale(control);
-		Image image = createImageAtScale(scale);
-		try {
-			ImageData imageData = image.getImageData(100);
-			return new Image(display, new ScaledImageDataProvider(imageData, (int) (scale * 100)));
-		} finally {
-			image.dispose();
-		}
+		return createImageAtScale(scale);
 	}
 
 	/**
@@ -187,9 +179,12 @@ public class ImagePrintFigureOperation {
 			throw new IllegalArgumentException("Scaling factor must be 1.0 if Draw2D-based scaling is disabled."); //$NON-NLS-1$
 		}
 
-		Dimension size = getImageSize().getCopy();
+		Dimension size100 = getImageSize();
+		Dimension size = size100.getCopy();
 		if (isDraw2DAutoScalingEnabled()) {
-			size.scale(scale);
+			// size.scale(scale) internally use Math.floor(), but SWT requires Math.round()
+			size.width = (int) Math.round(size.width * scale);
+			size.height = (int) Math.round(size.height * scale);
 		}
 
 		Image image = new Image(display, size.width, size.height);
@@ -214,33 +209,36 @@ public class ImagePrintFigureOperation {
 
 		graphics.dispose();
 		gc.dispose();
-		return image;
-	}
 
-	/**
-	 * {@link ImageData} provider containing the image data at the current monitor
-	 * zoom and at 100% zoom (as required by SWT). This class is used if
-	 * Draw2D-based scaling to make sure that the image remains sharp.
-	 */
-	private class ScaledImageDataProvider implements ImageDataProvider {
-		private final ImageData imageData;
-		private final int zoom;
-
-		public ScaledImageDataProvider(ImageData imageData, int zoom) {
-			this.imageData = imageData;
-			this.zoom = zoom;
-		}
-
-		@Override
-		public ImageData getImageData(int zoom) {
-			if (this.zoom == zoom) {
+		int monitorZoom = (int) (scale * 100);
+		// Simulate new Image(display, imageData, monitorZoom)
+		ImageData imageData = image.getImageData(100);
+		image.dispose();
+		// The image doesn't have image data for the current monitor zoom due to the
+		// call to getImageData(100). This causes a blank image when painting and needs
+		// to be corrected.
+		Image imageTMP = new Image(display, (ImageDataProvider) zoom -> {
+			if (zoom == monitorZoom) {
 				return imageData;
 			}
-			try {
-				return getImageDataAtZoom(zoom);
-			} catch (SWTException e) {
-				return ImageUtils.smoothScaleTo(display, imageData, zoom * 1.0 / this.zoom);
+			if (zoom == 100) {
+				// We must provide image data for 100% zoom, even if unused
+				return imageData.scaledTo(size100.width, size100.height);
 			}
+			return null;
+		});
+
+		Image image100 = new Image(display, size100.width, size100.height);
+		GC gc100 = new GC(image100);
+		if (isDraw2DAutoScalingEnabled()) {
+			// Force image to be drawn at monitor zoom
+			image100.getImageData(monitorZoom);
 		}
+		gc100.setInterpolation(SWT.NONE);
+		gc100.drawImage(imageTMP, 0, 0);
+		gc100.dispose();
+		imageTMP.dispose();
+
+		return image100;
 	}
 }
