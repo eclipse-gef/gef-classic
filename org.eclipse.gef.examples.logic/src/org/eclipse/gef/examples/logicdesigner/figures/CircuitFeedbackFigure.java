@@ -18,7 +18,6 @@ public class CircuitFeedbackFigure extends RectangleFigure {
 
 	public CircuitFeedbackFigure() {
 		this.setFill(false);
-		this.setXOR(true);
 		setBorder(new CircuitFeedbackBorder());
 	}
 
