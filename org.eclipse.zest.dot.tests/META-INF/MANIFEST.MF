@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.zest.dot.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Name: %Plugin.name
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.zest.dot.core;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.zest.dot.ui;bundle-version="[1.0.0,2.0.0)",
+ junit-jupiter-api;bundle-version="[5.11.0,6.0.0)",
+ junit-jupiter-params;bundle-version="[5.11.0,6.0.0)",
+ org.eclipse.lsp4j;bundle-version="[0.23.1,2.0.0)",
+ org.eclipse.lsp4j.jsonrpc;bundle-version="[0.23.1,2.0.0)"
+Automatic-Module-Name: org.eclipse.zest.dot.core.test
+Bundle-RequiredExecutionEnvironment: JavaSE-17

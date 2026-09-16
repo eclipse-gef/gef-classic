@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.zest.dot.core
+Bundle-Name: %Plugin.name
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.eclipse.zest.dot.core,
+ org.eclipse.zest.dot.core.internal;x-friends:="org.eclipse.zest.dot.test,org.eclipse.zest.dot.ui"
+Import-Package: org.antlr.v4.runtime;version="[4.13.2,5.0.0)",
+ org.antlr.v4.runtime.atn;version="[4.13.2,5.0.0)",
+ org.antlr.v4.runtime.dfa;version="[4.13.2,5.0.0)",
+ org.antlr.v4.runtime.tree;version="[4.13.2,5.0.0)"
+Require-Bundle: org.eclipse.lsp4j;bundle-version="[0.23.1,2.0.0)",
+ org.eclipse.lsp4j.jsonrpc;bundle-version="[0.23.1,2.0.0)"
+Automatic-Module-Name: org.eclipse.zest.dot
+Bundle-RequiredExecutionEnvironment: JavaSE-21
