@@ -240,6 +240,9 @@ public class GraphNode extends GraphItem {
 			this.fishEye(false, false);
 		}
 		super.dispose();
+		if (layout != null) {
+			layout.dispose();
+		}
 		this.isDisposed = true;
 		while (!getSourceConnections().isEmpty()) {
 			GraphConnection connection = getSourceConnections().get(0);
