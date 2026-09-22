@@ -20,6 +20,7 @@
 		<build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
 		<asciidoctor-maven-plugin.version>3.2.0</asciidoctor-maven-plugin.version>
 		<jruby.version>9.4.15.0</jruby.version>
+		<antlr.version>4.13.2</antlr.version>
 		<target-platform>../target-platform/GEF_classic.target</target-platform>
 		<!-- SonarQube configuration -->
 		<sonar.exclusion>**/.tycho-consumer-pom.xml</sonar.exclusion>
@@ -376,6 +377,8 @@
 		<module>org.eclipse.zest.cloudio</module>
 		<module>org.eclipse.zest.core</module>
 		<module>org.eclipse.zest.layouts</module>
+		<module>org.eclipse.zest.dot.core</module>
+		<module>org.eclipse.zest.dot.ui</module>
 		
 		<!--docs-->
 		<module>org.eclipse.draw2d.doc.isv</module>
@@ -387,6 +390,7 @@
 		<module>org.eclipse.draw2d.tests</module>
 		<module>org.eclipse.zest.tests</module>
 		<module>org.eclipse.gef.tests</module>
+		<module>org.eclipse.zest.dot.tests</module>
 		
 		<!--examples-->
 		<module>org.eclipse.draw2d.examples</module>
