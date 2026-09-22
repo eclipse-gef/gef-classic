@@ -51,7 +51,7 @@ import org.eclipse.draw2d.internal.InternalDraw2dUtils;
 public class FigureCanvas extends Canvas {
 
 	private static final int ACCEPTED_STYLES = SWT.RIGHT_TO_LEFT | SWT.LEFT_TO_RIGHT | SWT.V_SCROLL | SWT.H_SCROLL
-			| SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED | SWT.BORDER;
+			| SWT.NO_BACKGROUND | SWT.NO_REDRAW_RESIZE | SWT.DOUBLE_BUFFERED | SWT.BORDER | SWT.SKIA;
 
 	/**
 	 * The default styles are mixed in when certain constructors are used. This
@@ -63,7 +63,7 @@ public class FigureCanvas extends Canvas {
 	 * <LI>{@link SWT#H_SCROLL}</LI>
 	 * </UL>
 	 */
-	static final int DEFAULT_STYLES = SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND | SWT.V_SCROLL | SWT.H_SCROLL;
+	static final int DEFAULT_STYLES = SWT.NO_REDRAW_RESIZE | SWT.NO_BACKGROUND | SWT.V_SCROLL | SWT.H_SCROLL | SWT.SKIA;
 
 	private static final int REQUIRED_STYLES = SWT.NO_REDRAW_RESIZE | SWT.V_SCROLL | SWT.H_SCROLL;
 
