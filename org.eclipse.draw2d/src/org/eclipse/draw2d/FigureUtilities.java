@@ -219,6 +219,8 @@ public class FigureUtilities {
 	 * @param s the shape
 	 * @return the ghosted shape
 	 * @since 2.0
+	 * @deprecated XOR is not fully supported on all operating systems when Advanced
+	 *             Mode is enabled.
 	 */
 	@Deprecated(forRemoval = true, since = "2026-06")
 	public static Shape makeGhostShape(Shape s) {
