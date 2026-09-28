@@ -72,7 +72,8 @@ import org.junit.platform.suite.api.Suite;
 	AWTGraphicsTest.class,
 	ScaledGraphicsTest.class,
 	HSLTest.class,
-	ImagePrintFigureOperationTest.class
+	ImagePrintFigureOperationTest.class,
+	DrawableFigureUtilitiesTest.class
 })
 public class Draw2dTestSuite {
 }

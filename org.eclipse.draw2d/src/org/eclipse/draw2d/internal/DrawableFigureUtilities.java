@@ -34,18 +34,22 @@ public class DrawableFigureUtilities {
 	private FontMetrics metrics;
 
 	public DrawableFigureUtilities(Control source) {
-		gc = new GC(source);
-		gc.setAdvanced(true);
+		gc = initGC(source);
 		source.addDisposeListener(e -> {
 			gc.dispose();
 		});
 		source.addListener(SWT.ZoomChanged, event -> {
 			gc.dispose();
-			gc = new GC(source);
-			gc.setAdvanced(true);
-			metrics = null;
+			gc = initGC(source);
 		});
-		appliedFont = gc.getFont();
+	}
+
+	private GC initGC(Control source) {
+		GC localGC = new GC(source);
+		localGC.setAdvanced(true);
+		metrics = null;
+		appliedFont = localGC.getFont();
+		return localGC;
 	}
 
 	/**
