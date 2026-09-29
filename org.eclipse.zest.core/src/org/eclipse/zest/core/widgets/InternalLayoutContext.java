@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009-2010, 2024 Mateusz Matela and others.
+ * Copyright (c) 2009, 2026, Mateusz Matela and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -362,7 +362,7 @@ class InternalLayoutContext implements LayoutContext {
 	@SuppressWarnings("removal")
 	void setLayoutAlgorithm(LayoutAlgorithm algorithm) {
 		this.layoutAlgorithm = algorithm;
-		if (!(layoutAlgorithm instanceof LayoutAlgorithm.Zest1)) {
+		if (layoutAlgorithm != null && !(layoutAlgorithm instanceof LayoutAlgorithm.Zest1)) {
 			this.layoutAlgorithm.setLayoutContext(this);
 		}
 	}
