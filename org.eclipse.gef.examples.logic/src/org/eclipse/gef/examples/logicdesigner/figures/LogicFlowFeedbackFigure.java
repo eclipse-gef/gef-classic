@@ -18,7 +18,6 @@ public class LogicFlowFeedbackFigure extends RectangleFigure {
 
 	public LogicFlowFeedbackFigure() {
 		this.setFill(false);
-		this.setXOR(true);
 		setBorder(new LogicFlowFeedbackBorder());
 	}
 
