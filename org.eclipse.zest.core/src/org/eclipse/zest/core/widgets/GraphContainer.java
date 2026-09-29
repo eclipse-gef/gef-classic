@@ -554,6 +554,7 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 		return new DisplayIndependentRectangle(25, 25, width - 50, height - 50);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void applyLayout() {
 		if ((this.getNodes().isEmpty())) {
