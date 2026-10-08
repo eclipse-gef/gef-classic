@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -18,7 +18,7 @@ import org.eclipse.swt.SWT;
 
 import org.eclipse.pde.api.tools.annotations.NoExtend;
 
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
@@ -198,6 +198,17 @@ public class BlockFlow extends FlowFigure {
 	}
 
 	/**
+	 * @see org.eclipse.draw2d.Figure#paintFigure(org.eclipse.draw2d.Graphics)
+	 */
+	@Override
+	protected void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
+		if (selectionStart != -1) {
+			paintSelection(graphics);
+		}
+	}
+
+	/**
 	 * @see org.eclipse.draw2d.Figure#paintBorder(org.eclipse.draw2d.Graphics)
 	 */
 	@Override
@@ -209,12 +220,18 @@ public class BlockFlow extends FlowFigure {
 		} else {
 			super.paintBorder(graphics);
 		}
-		if (selectionStart != -1) {
-			graphics.restoreState();
-			graphics.setXORMode(true);
-			graphics.setBackgroundColor(ColorConstants.white);
-			graphics.fillRectangle(getBounds());
-		}
+	}
+
+	/**
+	 * Renders the selection rectangles to the graphics.
+	 *
+	 * @param graphics the graphics to paint on
+	 * @since 3.24
+	 */
+	protected void paintSelection(Graphics graphics) {
+		graphics.restoreState();
+		graphics.setBackgroundColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected());
+		graphics.fillRectangle(getBounds());
 	}
 
 	/**
