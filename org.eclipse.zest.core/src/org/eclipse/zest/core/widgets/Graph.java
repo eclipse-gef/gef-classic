@@ -31,12 +31,10 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Item;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 
 import org.eclipse.zest.core.viewers.internal.ZoomManager;
@@ -105,6 +103,12 @@ public class Graph extends FigureCanvas implements IContainer2 {
 	 * @since 1.18
 	 */
 	public static final String KEY_FISHEYE_ANIMATION_TIME = "zest.fisheyeAnimationTime"; //$NON-NLS-1$
+
+	/**
+	 * Key for the currently shown sub-graph. The value is a callback function to
+	 * move the sub-graph back to its original layer.
+	 */
+	private static final String KEY_SUBGRAPH = "zest.subGraph"; //$NON-NLS-1$
 
 	// @tag CGraph.Colors : These are the colour constants for the graph, they
 	// are disposed on clean-up
@@ -955,98 +959,29 @@ public class Graph extends FigureCanvas implements IContainer2 {
 
 			GraphItem itemUnderMouse = figure2ItemMap.get(figureUnderMouse);
 			if (itemUnderMouse instanceof GraphContainer container) {
-				// GraphContainer under this mouse
+				Runnable callback = (Runnable) getData(KEY_SUBGRAPH);
 
-				Display display = Display.getCurrent();
-				Shell shell = display.getActiveShell();
-				shell.setLayout(new FillLayout());
-
-				String oldShellLabel = display.getActiveShell().getText();
-				StringBuilder labelBuilder = new StringBuilder();
-				IContainer currentContainer = container;
-				while (currentContainer instanceof GraphContainer current) {
-					labelBuilder.insert(0, current.getText());
-					labelBuilder.insert(0, '/');
-					currentContainer = current.getParent();
+				if (callback == null) {
+					// Only add "back" button for the first sub-graph
+					Button backButton = new Button(BACK_ARROW);
+					backButton.setBounds(new Rectangle(new Point(0, 0), backButton.getPreferredSize()));
+					backButton.addActionListener(event -> {
+						rootlayer.remove(backButton);
+						Runnable actionCallback = (Runnable) getData(KEY_SUBGRAPH);
+						actionCallback.run();
+						zestRootLayer.setVisible(true);
+						setData(KEY_SUBGRAPH, null);
+					});
+					rootlayer.add(backButton);
+				} else {
+					// Move current sub-graph back to original layer
+					callback.run();
 				}
-				labelBuilder.insert(0, oldShellLabel);
-				shell.setText(labelBuilder.toString());
 
-				Graph g = new Graph(shell, SWT.NONE);
-				container.getGraph().setParent(new Shell()); // remove old graph from shell
-				shell.layout();
-
-				for (GraphNode node : container.getNodes()) {
-					container.graph.removeNode(node); // remove nodes from old graph
-					g.addNode(node); // add node to new graph
-					g.registerItem(node); // register figure in new graph
-					node.parent = g; // change parent and graph of node
-					node.graph = g;
-					node.setVisible(true); // make sure the nodes are visible
-					node.unhighlight();
-					HideNodeHelper hideNodeHelper = node.getHideNodeHelper();
-					if (hideNodeHelper != null) {
-						hideNodeHelper.resetCounter();
-					}
-
-					if (node instanceof GraphContainer containerNode) {
-						g.registerChildrenOfContainer(containerNode, true); // recursively add childNodes to graph
-					}
-				}
-				for (GraphNode node : g.getNodes()) {
-					for (GraphConnection connection : node.getTargetConnections()) {
-						container.graph.removeConnection(connection);
-						g.addConnection(connection, true);
-						g.registerItem(connection);
-					}
-					for (GraphConnection connection : node.getSourceConnections()) {
-						container.graph.removeConnection(connection);
-						g.addConnection(connection, true);
-						g.registerItem(connection);
-					}
-				}
-				g.setLayoutAlgorithm(container.getLayoutAlgorithm(), false);
-
-				Button backButton = new Button(BACK_ARROW);
-				backButton.setBounds(new Rectangle(new Point(0, 0), backButton.getPreferredSize()));
-				backButton.addActionListener(event -> {
-					for (GraphNode node : new ArrayList<>(g.getNodes())) {
-						g.removeNode(node); // remove nodes from graph
-						container.addNode(node); // add nodes to container
-						container.graph.registerItem(node); // register figure in old graph
-						node.parent = container; // change parent and graph of node
-						node.graph = container.getGraph();
-						node.unhighlight();
-
-						if (node instanceof GraphContainer containerNode) {
-							registerChildrenOfContainer(containerNode, false); // recursively add childNodes to graph
-						}
-					}
-					for (GraphConnection connection : new ArrayList<GraphConnection>(g.getConnections())) {
-						g.removeConnection(connection);
-						container.graph.addConnection(connection, false);
-						container.graph.registerItem(connection);
-						connection.registerConnection(connection.getSource(), connection.getDestination());
-						connection.setVisible(true);
-					}
-
-					container.applyLayout();
-
-					g.setParent(new Shell()); // remove graph from shell
-					container.getGraph().setParent(shell);
-					shell.layout();
-					shell.setText(oldShellLabel);
-
-					g.release();
-				});
-
-				g.rootlayer.add(backButton);
-
-				shell.addDisposeListener(e -> {
-					g.connections.clear();
-					g.nodes.clear();
-					g.release();
-				});
+				callback = container.moveToLayer(rootlayer);
+				setData(KEY_SUBGRAPH, callback);
+				zestRootLayer.setVisible(false);
+				applyLayout();
 			}
 		}
 
@@ -1425,21 +1360,6 @@ public class Graph extends FigureCanvas implements IContainer2 {
 			figure2ItemMap.put(figure, item);
 		} else {
 			throw new RuntimeException("Unknown item type: " + item.getItemType()); //$NON-NLS-1$
-		}
-	}
-
-	private void registerChildrenOfContainer(GraphContainer container, boolean addToMap) {
-		for (GraphNode node : container.getNodes()) {
-			if (node instanceof GraphContainer childContainer) {
-				registerChildrenOfContainer(childContainer, addToMap);
-			} else {
-				node.graph = this;
-				node.unhighlight();
-				if (addToMap) {
-					IFigure figure = node.getFigure();
-					figure2ItemMap.put(figure, node);
-				}
-			}
 		}
 	}
 
