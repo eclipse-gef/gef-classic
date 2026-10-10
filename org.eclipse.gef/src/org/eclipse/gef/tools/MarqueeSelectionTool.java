@@ -15,6 +15,8 @@ package org.eclipse.gef.tools;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.function.Supplier;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -78,6 +80,7 @@ import org.eclipse.gef.util.EditPartUtilities;
 public class MarqueeSelectionTool extends AbstractTool {
 
 	private static class MarqueeRectangleFigure extends Figure {
+		public static final Supplier<IFigure> DEFAULT_MARQUEE_RECTANGLE_FIGURE_CREATOR = MarqueeRectangleFigure::new;
 
 		private static final int DELAY = 110; // animation delay in millisecond
 		private int offset = 0;
@@ -215,6 +218,10 @@ public class MarqueeSelectionTool extends AbstractTool {
 	private Collection<? extends GraphicalEditPart> selectedEditParts;
 
 	private Request targetRequest;
+
+	private static Supplier<? extends IFigure> globalMarqueeRectangleFigureCreator = MarqueeRectangleFigure.DEFAULT_MARQUEE_RECTANGLE_FIGURE_CREATOR;
+
+	private Supplier<? extends IFigure> marqueeRectangleFigureCreator = null;
 
 	/**
 	 * Creates a new MarqueeSelectionTool of default type
@@ -424,9 +431,9 @@ public class MarqueeSelectionTool extends AbstractTool {
 	 *
 	 * @since 3.13
 	 */
-	@SuppressWarnings("static-method")
 	protected IFigure createMarqueeRectangleFigure() {
-		return new MarqueeRectangleFigure();
+		return (marqueeRectangleFigureCreator != null) ? marqueeRectangleFigureCreator.get()
+				: globalMarqueeRectangleFigureCreator.get();
 	}
 
 	private Request getTargetRequest() {
@@ -743,6 +750,33 @@ public class MarqueeSelectionTool extends AbstractTool {
 			throw new IllegalArgumentException("Invalid marquee behaviour specified."); //$NON-NLS-1$
 		}
 		marqueeBehavior = type;
+	}
+
+	/**
+	 * Set a specific MarqueeRectangleFigureCreator to be used per default for all
+	 * MarqueeSelectionTools.
+	 *
+	 * @param marqueeRectangleFigureCreator the creator object, must not be null
+	 * @since 3.26
+	 */
+	public static void setGlobalMarqueeRectangleFigureCreator(
+			Supplier<? extends IFigure> marqueeRectangleFigureCreator) {
+		Objects.nonNull(marqueeRectangleFigureCreator);
+		globalMarqueeRectangleFigureCreator = marqueeRectangleFigureCreator;
+	}
+
+	/**
+	 * Allow to set a dedicated creator for a marquee rectangle figure to be used as
+	 * feedback figure for marquee selections of this MarqueeSelectionTool instance.
+	 *
+	 * @param marqueeRectangleFigureCreator the creator object, null if the global
+	 *                                      marqueeRectangleFigureCreator should be
+	 *                                      used
+	 * @since 3.26
+	 */
+	public void setMarqueeRectangleFigureCreator(Supplier<? extends IFigure> marqueeRectangleFigureCreator) {
+		Objects.nonNull(marqueeRectangleFigureCreator);
+		this.marqueeRectangleFigureCreator = marqueeRectangleFigureCreator;
 	}
 
 	private void setSelectionMode(int mode) {
