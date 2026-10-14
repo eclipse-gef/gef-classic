@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -26,6 +26,7 @@ public class MatchWidthRetargetAction extends LabelRetargetAction {
 	/**
 	 * Constructs a <code>MatchWidthRetargetAction</code>.
 	 */
+	@SuppressWarnings("deprecation")
 	public MatchWidthRetargetAction() {
 		super(GEFActionConstants.MATCH_WIDTH, GEFMessages.MatchWidthAction_Label);
 		setImageDescriptor(InternalImages.DESC_MATCH_WIDTH);
