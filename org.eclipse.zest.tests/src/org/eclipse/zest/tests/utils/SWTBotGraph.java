@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Patrick Ziegler and others.
+ * Copyright (c) 2025, 2026 Patrick Ziegler and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -177,6 +177,22 @@ public class SWTBotGraph extends AbstractSWTBotControl<Graph> implements ISWTBot
 		Assert.isTrue(getBounds().contains(x, y), "Coordinates are not inside the graph."); //$NON-NLS-1$
 		syncExec(() -> {
 			Event event = createGraphMouseEvent(SWT.MouseDown, x, y);
+			widget.notifyListeners(event.type, event);
+		});
+	}
+
+	/**
+	 * This method simulates a {@link SWT#MouseDoubleClick} event using the given
+	 * {@code x} and {@code y} coordinates. Events are sent to the current
+	 * {@link #widget} instance. The coordinates must be inside the graph.
+	 *
+	 * @param x The x coordinate of the simulated mouse cursor.
+	 * @param y The y coordinate of the simulated mouse cursor.
+	 */
+	public void mouseDoubleClick(int x, int y) {
+		Assert.isTrue(getBounds().contains(x, y), "Coordinates are not inside the graph."); //$NON-NLS-1$
+		syncExec(() -> {
+			Event event = createGraphMouseEvent(SWT.MouseDoubleClick, x, y);
 			widget.notifyListeners(event.type, event);
 		});
 	}

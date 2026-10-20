@@ -41,6 +41,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.FreeformViewport;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.LayeredPane;
 import org.eclipse.draw2d.LayoutAnimator;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.PolylineConnection;
@@ -625,6 +626,28 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 	 */
 	public void setScale(double scale) {
 		this.scalledLayer.setScale(scale);
+	}
+
+	/**
+	 * This method is used by the sub-graph feature to make this graph container the
+	 * root of the graph.
+	 *
+	 * @param layeredPane The root layer of the Zest Graph.
+	 * @return A callback function to move the container back to its original layer.
+	 */
+	/* package */ Runnable moveToLayer(LayeredPane layeredPane) {
+		boolean isOpen = isExpanded;
+		// force-open to make sure the nodes are visible
+		if (!isOpen) {
+			open(false);
+		}
+		layeredPane.add(zestLayer);
+		return () -> {
+			scalledLayer.add(zestLayer);
+			if (!isOpen) {
+				close(false);
+			}
+		};
 	}
 
 	@Override
