@@ -22,6 +22,16 @@
   <setupTask
       xsi:type="setup:CompoundTask"
       name="User Preferences">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/UserPreferences"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.core.resources">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/description.disableLinking"
+          value="false"/>
+    </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
         name="org.eclipse.oomph.setup.ui">
@@ -30,6 +40,13 @@
           key="/instance/org.eclipse.oomph.setup.ui/showToolBarContributions"
           value="true"/>
     </setupTask>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="User Preferences">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.oomph.setup.ui"/>
   </setupTask>
   <setupTask
       xsi:type="jdt:JRETask"
