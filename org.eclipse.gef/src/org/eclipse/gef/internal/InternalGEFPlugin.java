@@ -54,6 +54,8 @@ import org.osgi.framework.Version;
 public class InternalGEFPlugin implements BundleActivator {
 	/** Monitor scale property */
 	public static final String MONITOR_SCALE_PROPERTY = "monitorScale"; //$NON-NLS-1$
+	/** Label provider property */
+	public static final String LABEL_PROVIDER_PROPERTY = "labelProvider"; //$NON-NLS-1$
 
 	private static BundleContext context;
 	private static InternalGEFPlugin singleton;
