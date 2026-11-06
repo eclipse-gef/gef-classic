@@ -51,7 +51,7 @@ public final class PrecisionPointList extends PointList {
 	 * @param points int array where two consecutive ints form the coordinates of a
 	 *               point
 	 */
-	public PrecisionPointList(int[] points) {
+	public PrecisionPointList(int... points) {
 		super(points);
 		decimalFractions = new double[points.length];
 	}
