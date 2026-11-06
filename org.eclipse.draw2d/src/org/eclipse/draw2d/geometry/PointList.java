@@ -46,7 +46,7 @@ public class PointList implements java.io.Serializable, Translatable, Iterable<P
 	 *               point
 	 * @since 3.1
 	 */
-	public PointList(int points[]) {
+	public PointList(int... points) {
 		this.points = points;
 		this.size = points.length / 2;
 	}
