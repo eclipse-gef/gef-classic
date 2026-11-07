@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.pde.api.tools.annotations.NoExtend;
 
 import org.eclipse.draw2d.Border;
-import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -100,9 +100,7 @@ public class InlineFlow extends FlowFigure {
 	}
 
 	/**
-	 * Overridden to paint a {@link FlowBorder} if present, and draw selection. The
-	 * border is painted first, followed by selection which is generally done in
-	 * XOR, which still allows the border to be seen.
+	 * Overridden to paint a {@link FlowBorder} if present, and draw selection.
 	 *
 	 * @param graphics the graphics
 	 */
@@ -132,21 +130,28 @@ public class InlineFlow extends FlowFigure {
 			}
 			graphics.restoreState();
 		}
+	}
+
+	/**
+	 * @see org.eclipse.draw2d.Figure#paintFigure(org.eclipse.draw2d.Graphics)
+	 */
+	@Override
+	protected void paintFigure(Graphics graphics) {
+		super.paintFigure(graphics);
 		if (selectionStart != -1) {
 			paintSelection(graphics);
 		}
 	}
 
 	/**
-	 * Renders the XOR selection rectangles to the graphics.
+	 * Renders the selection rectangles to the graphics.
 	 *
 	 * @param graphics the graphics to paint on
 	 * @since 3.1
 	 */
 	protected void paintSelection(Graphics graphics) {
 		graphics.restoreState();
-		graphics.setXORMode(true);
-		graphics.setBackgroundColor(ColorConstants.white);
+		graphics.setBackgroundColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected());
 		for (FlowBox box : getFragments()) {
 			int top = box.getLineRoot().getVisibleTop();
 			int bottom = box.getLineRoot().getVisibleBottom();
