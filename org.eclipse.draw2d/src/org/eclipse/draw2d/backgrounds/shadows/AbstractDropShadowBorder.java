@@ -62,7 +62,6 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 	 * the figure
 	 */
 	private static final Insets DEFAULT_SHADOW_INSETS = new Insets();
-	private static final Rectangle CLIP_RECT_CACHE = new Rectangle();
 	private int dropShadowSize;
 	private int haloSize;
 	private Insets insets;
@@ -124,13 +123,11 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 		final var foregroundColor = graphics.getForegroundColor();
 		final var alpha = graphics.getAlpha();
 		final var lineWidth = graphics.getLineWidth();
-		graphics.getClip(CLIP_RECT_CACHE);
 
 		graphics.setForegroundColor(shadowColor);
 		graphics.setLineWidth(2);
 
 		final Rectangle shadowRect = getPaintRectangle(figure, getInsets(figure));
-		updateClip(graphics, shadowRect);
 
 		double absScale = graphics.getAbsoluteScale();
 		doHalo(graphics, shadowRect, absScale);
@@ -139,7 +136,6 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 		graphics.setForegroundColor(foregroundColor);
 		graphics.setAlpha(alpha);
 		graphics.setLineWidth(lineWidth);
-		graphics.clipRect(CLIP_RECT_CACHE);
 	}
 
 	protected abstract void paintDropShadow(final Graphics graphics, final Rectangle shadowRect, final int size);
@@ -217,13 +213,6 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 	 */
 	public void setSoftness(double softness) {
 		this.softness = softness;
-	}
-
-	private void updateClip(Graphics graphics, Rectangle shadowRect) {
-		int shadowSize = getShadowSize();
-		shadowRect.expand(shadowSize, shadowSize);
-		graphics.setClip(shadowRect);
-		shadowRect.shrink(shadowSize, shadowSize);
 	}
 
 	@Override
