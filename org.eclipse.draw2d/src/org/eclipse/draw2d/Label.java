@@ -495,7 +495,8 @@ public class Label extends Figure implements PositionConstants {
 		Rectangle bounds = getBounds();
 		if (icon != null) {
 			Point iconLoc = getIconLocation();
-			graphics.drawImage(icon, bounds.x + iconLoc.x, bounds.y + iconLoc.y);
+			Dimension iconS = getIconSize();
+			graphics.drawImage(icon, bounds.x + iconLoc.x, bounds.y + iconLoc.y, iconS.width, iconS.height);
 		}
 		Point curTextLocation = getTextLocation();
 		final int tx = bounds.x + curTextLocation.x;
@@ -522,9 +523,9 @@ public class Label extends Figure implements PositionConstants {
 		// Call repaint, in case the image dimensions are the same.
 		repaint();
 		if (icon == null) {
-			setIconDimension(new Dimension());
+			setIconSize(new Dimension());
 		} else {
-			setIconDimension(new Dimension(image));
+			setIconSize(new Dimension(image));
 		}
 	}
 
@@ -556,16 +557,28 @@ public class Label extends Figure implements PositionConstants {
 	 * Sets the label's icon size to the passed Dimension.
 	 *
 	 * @param d the new icon size
-	 * @deprecated the icon is automatically displayed at 1:1
+	 * @deprecated renamed, use <code>setIconSize</code> instead; this method will
+	 *             be removed in 2029-03
 	 * @since 2.0
 	 */
-	@Deprecated
+	@Deprecated(forRemoval = true)
 	public void setIconDimension(Dimension d) {
 		if (d.equals(getIconSize())) {
 			return;
 		}
 		iconSize = d;
 		revalidate();
+		repaint();
+	}
+
+	/**
+	 * Sets the label's icon size to the passed Dimension.
+	 *
+	 * @param d the new icon size
+	 * @since 3.30
+	 */
+	public void setIconSize(Dimension d) {
+		setIconDimension(d);
 	}
 
 	/**
