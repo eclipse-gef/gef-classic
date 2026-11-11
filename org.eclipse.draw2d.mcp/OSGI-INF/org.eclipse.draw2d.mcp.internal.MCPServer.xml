@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.3.0" deactivate="deactivate" name="org.eclipse.draw2d.mcp.internal.MCPServer">
+   <reference cardinality="1..1" field="mapperSupplier" interface="io.modelcontextprotocol.json.McpJsonMapperSupplier" name="mapperSupplier"/>
+   <reference cardinality="1..1" field="validatorSupplier" interface="io.modelcontextprotocol.json.schema.JsonSchemaValidatorSupplier" name="validatorSupplier"/>
+   <implementation class="org.eclipse.draw2d.mcp.internal.MCPServer"/>
+</scr:component>
