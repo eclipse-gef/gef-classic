@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -28,6 +28,7 @@ public class MatchSizeRetargetAction extends LabelRetargetAction {
 	/**
 	 * Constructs a <code>MatchSizeRetargetAction</code>.
 	 */
+	@SuppressWarnings("deprecation")
 	public MatchSizeRetargetAction() {
 		super(GEFActionConstants.MATCH_SIZE, GEFMessages.MatchSizeAction_Label);
 		setImageDescriptor(InternalImages.DESC_MATCH_SIZE);

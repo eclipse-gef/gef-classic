@@ -64,6 +64,7 @@ public class SelectionRangeDragTracker extends SimpleDragTracker {
 	 *
 	 * @since 3.1
 	 */
+	@SuppressWarnings("deprecation")
 	private void doNormalSwipe() {
 		SearchResult result = getCurrentTextLocation();
 		endDrag = result.location;
@@ -99,6 +100,7 @@ public class SelectionRangeDragTracker extends SimpleDragTracker {
 	 *
 	 * @since 3.1
 	 */
+	@SuppressWarnings("deprecation")
 	private void doWordSelect() {
 		SearchResult result = new SearchResult();
 		CaretRequest locationRequest = new CaretRequest();
@@ -161,6 +163,7 @@ public class SelectionRangeDragTracker extends SimpleDragTracker {
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	protected boolean handleButtonDown(int button) {
 		if (button == 1) {
 			SearchResult result = getCurrentTextLocation();
