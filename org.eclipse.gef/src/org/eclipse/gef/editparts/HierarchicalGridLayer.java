@@ -30,10 +30,12 @@ import org.eclipse.draw2d.geometry.Rectangle;
 public class HierarchicalGridLayer extends GridLayer {
 	private static final double MIN_ABSOLUTE_INTERLEAVE = 5.0;
 	private static final int DEFAULT_MAJOR_INTERLEAVE = 10;
+	private static final int DEFAULT_LINE_WIDTH = 1;
 	private static final int MAJOR_ALPHA = 30;
 	private static final int MINOR_ALPHA = 70;
 
 	private int majorInterleave = DEFAULT_MAJOR_INTERLEAVE;
+	private int lineWidth = DEFAULT_LINE_WIDTH;
 	private float[] minorLineStyle;
 
 	public HierarchicalGridLayer() {
@@ -45,24 +47,40 @@ public class HierarchicalGridLayer extends GridLayer {
 	public void setSpacing(final Dimension spacing) {
 		super.setSpacing(spacing);
 		updateMinorLineStyle();
+		repaint();
 	}
 
 	public void setMajorInterleave(int majorInterleave) {
 		this.majorInterleave = majorInterleave;
 		updateMinorLineStyle();
+		repaint();
+	}
+
+	/**
+	 * Sets the line widths of the grid to the passed value.
+	 *
+	 * @param lineWidth the new lineWidth
+	 * @since 3.27
+	 */
+	public void setLineWidth(int lineWidth) {
+		this.lineWidth = lineWidth;
+		updateMinorLineStyle();
+		repaint();
 	}
 
 	@Override
 	protected void paintGrid(final Graphics g) {
 		final int origLineStyle = g.getLineStyle();
 		final int alpha = g.getAlpha();
-		g.setLineWidth(1);
+		g.setLineWidth(lineWidth);
 
 		final Rectangle clip = g.getClip(Rectangle.SINGLETON);
 
-		g.setLineDash(minorLineStyle);
-		g.setAlpha(MINOR_ALPHA);
-		drawMinorGrid(g, clip);
+		if (minorLineStyle != null) {
+			g.setLineDash(minorLineStyle);
+			g.setAlpha(MINOR_ALPHA);
+			drawMinorGrid(g, clip);
+		}
 
 		// clear line dash switch back to solid lines for major grid lines
 		g.setLineDash((float[]) null);
@@ -74,7 +92,7 @@ public class HierarchicalGridLayer extends GridLayer {
 	}
 
 	private void drawMinorGrid(final Graphics g, final Rectangle clip) {
-		if (g.getAbsoluteScale() < 0.7) {
+		if (g.getAbsoluteScale() * lineWidth < 0.7) {
 			// for small grids do not draw the minor grid to reduce clutter
 			return;
 		}
@@ -114,11 +132,15 @@ public class HierarchicalGridLayer extends GridLayer {
 	}
 
 	private void updateMinorLineStyle() {
-		final float normalGap = (float) gridY - 1;
+		if (lineWidth <= 0 || gridY - lineWidth <= 0) {
+			minorLineStyle = null;
+			return;
+		}
+		final int normalGap = gridY - lineWidth;
 		minorLineStyle = new float[(majorInterleave - 1) * 2];
 
 		for (int i = 0; i < (majorInterleave - 1) * 2; i += 2) {
-			minorLineStyle[i] = 1.0f;
+			minorLineStyle[i] = lineWidth;
 			minorLineStyle[i + 1] = normalGap;
 		}
 		minorLineStyle[minorLineStyle.length - 1] += gridY; // the last one is wider to not draw on the horizontal line
