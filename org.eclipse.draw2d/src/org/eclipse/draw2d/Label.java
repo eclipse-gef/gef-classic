@@ -575,7 +575,7 @@ public class Label extends Figure implements PositionConstants {
 	 * Sets the label's icon size to the passed Dimension.
 	 *
 	 * @param d the new icon size
-	 * @since 3.30
+	 * @since 3.24
 	 */
 	public void setIconSize(Dimension d) {
 		setIconDimension(d);
