@@ -86,6 +86,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/zest/core/widgets/GraphNode.java" type="org.eclipse.zest.core.widgets.GraphNode$LayoutGraphNode">
+        <filter id="574619656">
+            <message_arguments>
+                <message_argument value="LayoutEntity"/>
+                <message_argument value="LayoutGraphNode"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/zest/core/widgets/decorators/GraphDecorator.java" type="org.eclipse.zest.core.widgets.decorators.GraphDecorator">
         <filter id="576725006">
             <message_arguments>

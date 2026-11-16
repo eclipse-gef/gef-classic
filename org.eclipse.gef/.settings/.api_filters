@@ -161,6 +161,22 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/gef/ui/palette/FlyoutPaletteComposite.java" type="org.eclipse.gef.ui.palette.FlyoutPaletteComposite$ButtonCanvas">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="ScalableLightweightSystem()"/>
+                <message_argument value="ButtonCanvas"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/ui/palette/FlyoutPaletteComposite.java" type="org.eclipse.gef.ui.palette.FlyoutPaletteComposite$TitleCanvas">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="ScalableLightweightSystem()"/>
+                <message_argument value="TitleCanvas"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/gef/ui/palette/PinDrawerAction.java" type="org.eclipse.gef.ui.palette.PinDrawerAction">
         <filter id="643850349">
             <message_arguments>
@@ -220,6 +236,14 @@
             <message_arguments>
                 <message_argument value="PropertySheetPage"/>
                 <message_argument value="UndoablePropertySheetPage"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/gef/ui/rulers/RulerComposite.java" type="org.eclipse.gef.ui.rulers.RulerComposite$RulerViewer">
+        <filter id="640708718">
+            <message_arguments>
+                <message_argument value="ScalableLightweightSystem()"/>
+                <message_argument value="RulerViewer"/>
             </message_arguments>
         </filter>
     </resource>
