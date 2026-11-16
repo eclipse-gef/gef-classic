@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -29,6 +29,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
+import org.eclipse.draw2d.geometry.Rectangle;
 
 import org.eclipse.gef.AutoexposeHelper;
 import org.eclipse.gef.EditPart;
@@ -207,7 +208,7 @@ public class DragEditPartsTracker extends SelectEditPartTracker {
 			if (compoundSrcRect == null) {
 				compoundSrcRect = new PrecisionRectangle(bounds);
 			} else {
-				compoundSrcRect = compoundSrcRect.union(bounds);
+				compoundSrcRect.union((Rectangle) bounds);
 			}
 			if (child == getSourceEditPart()) {
 				sourceRectangle = bounds;
