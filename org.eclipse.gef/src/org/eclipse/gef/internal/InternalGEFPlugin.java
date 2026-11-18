@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     DBeaver Corporation - preserve lazy bundle activation
  *******************************************************************************/
 
 package org.eclipse.gef.internal;
@@ -62,6 +63,7 @@ public class InternalGEFPlugin implements BundleActivator {
 	private static Collection<IToolTipHelperFactory> toolTipProviders;
 	private final ReentrantLock lock = new ReentrantLock();
 	private IPersistentPreferenceStore preferenceStore;
+	private ColorProviderService colorProviderService;
 
 	private static Constructor<?> UI_SCOPED_PREFERENCE_STORE_CONSTRUCTOR = getConstructor(
 			"org.eclipse.ui.preferences.ScopedPreferenceStore", IScopeContext.class, String.class); //$NON-NLS-1$
@@ -81,10 +83,16 @@ public class InternalGEFPlugin implements BundleActivator {
 			toolTipProviders.add(bc.getService(toolTipProviderRef));
 		}
 		Logger.setContext(new LoggerContext());
+		colorProviderService = new ColorProviderService(bc);
+		colorProviderService.open();
 	}
 
 	@Override
 	public void stop(BundleContext bc) throws Exception {
+		if (colorProviderService != null) {
+			colorProviderService.close();
+			colorProviderService = null;
+		}
 		toolTipProviders.clear();
 		for (ServiceReference<IToolTipHelperFactory> toolTipProviderRef : toolTipProviderRefs) {
 			bc.ungetService(toolTipProviderRef);

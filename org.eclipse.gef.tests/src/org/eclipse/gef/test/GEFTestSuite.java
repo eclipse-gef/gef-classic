@@ -31,6 +31,7 @@ import org.junit.platform.suite.api.Suite;
 	RulerLayoutTests.class,
 	GraphicalViewerTest.class,
 	PaletteColorProviderTest.class,
+	ColorProviderServiceTest.class,
 	SWTBotTestSuite.class,
 	DirectEditManagerTest.class,
 	HandleLocatorTests.class,
