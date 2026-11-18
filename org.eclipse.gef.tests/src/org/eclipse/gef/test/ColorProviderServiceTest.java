@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2026 DBeaver Corporation and others.
+ * Copyright (c) 2026 Contributors to the Eclipse Foundation.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  *
  * Contributors:
- *     DBeaver Corporation - initial API and implementation
+ *     Contributors to the Eclipse Foundation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.gef.test;
 
