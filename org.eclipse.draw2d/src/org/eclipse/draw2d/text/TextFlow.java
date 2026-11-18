@@ -21,6 +21,7 @@ import org.eclipse.swt.graphics.TextLayout;
 import org.eclipse.pde.api.tools.annotations.NoExtend;
 
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.ColorProvider;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.TextUtilities;
@@ -556,6 +557,7 @@ public class TextFlow extends InlineFlow {
 	 */
 	@Override
 	protected void paintFigure(Graphics g) {
+		paintSelection(g);
 		TextFragmentBox frag;
 		g.getClip(Rectangle.SINGLETON);
 		int yStart = Rectangle.SINGLETON.y;
@@ -593,8 +595,10 @@ public class TextFlow extends InlineFlow {
 				g.setForegroundColor(ColorConstants.buttonDarker);
 				paintText(g, draw, frag.getX(), frag.getBaseline() - getAscent(), frag.getBidiLevel());
 				g.setForegroundColor(fgColor);
-			} else {
+			} else if (selectionStart == -1 || !isFragmentSelected(frag)) {
 				paintText(g, draw, frag.getX(), frag.getBaseline() - getAscent(), frag.getBidiLevel());
+			} else {
+				paintTextWithSelection(g, draw, frag, i);
 			}
 		}
 	}
@@ -607,8 +611,7 @@ public class TextFlow extends InlineFlow {
 		if (selectionStart == -1) {
 			return;
 		}
-		graphics.setXORMode(true);
-		graphics.setBackgroundColor(ColorConstants.white);
+		graphics.setBackgroundColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuBackgroundSelected());
 
 		TextFragmentBox frag;
 		for (int i = 0; i < fragments.size(); i++) {
@@ -634,6 +637,84 @@ public class TextFlow extends InlineFlow {
 				graphics.fillRectangle(rect);
 			}
 		}
+	}
+
+	/**
+	 * Determines if a fragment is (partially or fully) selected.
+	 *
+	 * @param frag the fragment to check
+	 * @return {@code true} if the fragment overlaps with the selection range
+	 */
+	private boolean isFragmentSelected(TextFragmentBox frag) {
+		if (selectionStart == -1) {
+			return false;
+		}
+		return !(frag.offset + frag.length <= selectionStart || frag.offset > selectionEnd);
+	}
+
+	/**
+	 * Paints text with selection-aware foreground coloring. The selected portion of
+	 * text (if any) is painted with the selection foreground color, while
+	 * non-selected portions use the regular foreground color.
+	 *
+	 * @param g         the graphics context
+	 * @param draw      the full text string to draw (including any BIDI markers)
+	 * @param frag      the text fragment box
+	 * @param fragIndex the fragment index
+	 */
+	private void paintTextWithSelection(Graphics g, String draw, TextFragmentBox frag, int fragIndex) {
+		int baselineY = frag.getBaseline() - getAscent();
+		int currentX = frag.getX();
+		Color originalColor = g.getForegroundColor();
+
+		int fragStart = frag.offset;
+		int fragEnd = frag.offset + frag.length;
+		int selStart = Math.max(fragStart, selectionStart);
+		int selEnd = Math.min(fragEnd, selectionEnd);
+
+		if (fragStart < selStart) {
+			String beforeSel = getText().substring(fragStart, selStart);
+			g.setForegroundColor(originalColor);
+			paintText(g, beforeSel, currentX, baselineY, frag.getBidiLevel());
+
+			int segmentWidth = getTextSegmentWidth(beforeSel, frag.getBidiLevel());
+			currentX += segmentWidth;
+		}
+
+		if (selStart < selEnd) {
+			String selectedText = getText().substring(selStart, selEnd);
+			g.setForegroundColor(ColorProvider.SystemColorFactory.getColorProvider().getMenuForegroundSelected());
+			paintText(g, selectedText, currentX, baselineY, frag.getBidiLevel());
+
+			int segmentWidth = getTextSegmentWidth(selectedText, frag.getBidiLevel());
+			currentX += segmentWidth;
+		}
+
+		if (selEnd < fragEnd) {
+			String afterSel = getText().substring(selEnd, fragEnd);
+			g.setForegroundColor(originalColor);
+			paintText(g, afterSel, currentX, baselineY, frag.getBidiLevel());
+		}
+
+		g.setForegroundColor(originalColor);
+	}
+
+	/**
+	 * Calculates the width of a text segment for positioning purposes.
+	 *
+	 * @param text      the text segment
+	 * @param bidiLevel the BIDI level (-1 for no BIDI)
+	 * @return the width in pixels
+	 * @since 3.24
+	 */
+	private int getTextSegmentWidth(String text, int bidiLevel) {
+		if (bidiInfo == null) {
+			return getTextUtilities().getTextExtents(text, getFont()).width;
+		}
+		TextLayout layout = FlowUtilities.getTextLayout();
+		layout.setFont(getFont());
+		layout.setText(text);
+		return layout.getBounds().width;
 	}
 
 	protected void paintText(Graphics g, String draw, int x, int y, int bidiLevel) {
