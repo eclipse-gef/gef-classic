@@ -9,6 +9,7 @@
  *
  * Contributors:
  *     Patrick Ziegler - initial API and implementation
+ *     DBeaver Corporation - preserve lazy bundle activation
  *******************************************************************************/
 
 package org.eclipse.gef.internal;
@@ -20,17 +21,27 @@ import org.eclipse.draw2d.ColorProvider;
 
 import org.eclipse.gef.GEFColorProvider;
 
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTracker;
 
-@Component
-public class ColorProviderService {
-	@Reference
-	@SuppressWarnings("static-method")
-	public void setWorkbench(IWorkbench workbench) {
+/**
+ * Installs the theme color provider when a workbench is available. The tracker is
+ * opened by the bundle activator so workbench startup does not activate GEF.
+ */
+public class ColorProviderService extends ServiceTracker<IWorkbench, IWorkbench> {
+
+	public ColorProviderService(BundleContext context) {
+		super(context, IWorkbench.class, null);
+	}
+
+	@Override
+	public IWorkbench addingService(ServiceReference<IWorkbench> reference) {
+		IWorkbench workbench = super.addingService(reference);
 		// Overloads the basic color provider with customizable one
-		if (ColorProvider.SystemColorFactory.getColorProvider() instanceof BasicColorProvider) {
+		if (workbench != null && ColorProvider.SystemColorFactory.getColorProvider() instanceof BasicColorProvider) {
 			ColorProvider.SystemColorFactory.setColorProvider(new GEFColorProvider());
 		}
+		return workbench;
 	}
 }
