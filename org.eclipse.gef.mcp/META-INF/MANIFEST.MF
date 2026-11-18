@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-Localization: plugin
+Bundle-SymbolicName: org.eclipse.gef.mcp;singleton:=true
+Bundle-Vendor: %Plugin.providerName
+Bundle-Version: 1.0.0.qualifier
+Import-Package: com.fasterxml.jackson.annotation;version="[2.21.0,3.0.0)";resolution:=optional
+Require-Bundle: org.eclipse.draw2d.mcp;bundle-version="1.0.0",
+ org.eclipse.gef;bundle-version="[3.26.200,4.0.0)",
+ org.eclipse.jface;bundle-version="[3.41.0,4.0.0)",
+ org.eclipse.core.runtime;bundle-version="[3.31.100,4.0.0)",
+ org.eclipse.ui.workbench;bundle-version="[3.133.0,4.0.0)"
+Automatic-Module-Name: org.eclipse.gef.mcp
+Bundle-RequiredExecutionEnvironment: JavaSE-25
