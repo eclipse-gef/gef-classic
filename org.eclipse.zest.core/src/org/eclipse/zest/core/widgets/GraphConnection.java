@@ -14,6 +14,7 @@
  ******************************************************************************/
 package org.eclipse.zest.core.widgets;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
@@ -104,7 +105,7 @@ public class GraphConnection extends GraphItem {
 		this.sourceNode = source;
 		this.destinationNode = destination;
 		this.visible = true;
-		this.lineWidth = 1;
+		this.lineWidth = 2;
 		this.lineStyle = Graphics.LINE_SOLID;
 		setWeight(weight);
 		this.graphModel = graphModel;
@@ -754,9 +755,27 @@ public class GraphConnection extends GraphItem {
 	 * expose to allow to use custom figures
 	 *
 	 * @since 1.7
+	 * @deprecated Use {@link #createNewConnectionFigure()} instead. Overriding this
+	 *             method may cause the cached figure to differ from the actual
+	 *             figure used by this connection.
 	 */
+	@Deprecated
 	protected PolylineConnection cachedOrNewConnectionFigure() {
-		return cachedConnectionFigure == null ? new PolylineArcConnection() : cachedConnectionFigure;
+		return cachedConnectionFigure == null ? createNewConnectionFigure() : cachedConnectionFigure;
+	}
+
+	/**
+	 * Creates and returns a new PolylineConnection. May be overridden by
+	 * subclasses.
+	 *
+	 * @return The figure representing this connection.
+	 * @since 1.20
+	 */
+	@SuppressWarnings("static-method")
+	protected PolylineConnection createNewConnectionFigure() {
+		final PolylineArcConnection connection = new PolylineArcConnection();
+		connection.setAntialias(SWT.ON);
+		return connection;
 	}
 
 	/**
