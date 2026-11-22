@@ -130,7 +130,9 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 		graphics.setLineWidth(2);
 
 		final Rectangle shadowRect = getPaintRectangle(figure, getInsets(figure));
-		updateClip(graphics, shadowRect);
+		if (figure.getParent() == null || figure.getParent().getClippingStrategy() == null) {
+			updateClip(graphics, shadowRect);
+		}
 
 		double absScale = graphics.getAbsoluteScale();
 		doHalo(graphics, shadowRect, absScale);
@@ -232,7 +234,13 @@ public abstract class AbstractDropShadowBorder extends AbstractBackgroundBorder 
 		area.expand(shadowSize, shadowSize);
 	}
 
-	private int getShadowSize() {
+	/**
+	 * The shadow size is used to determine by what amount the figure clip to fully
+	 * include the drop-shadow.
+	 *
+	 * @return The drop-shadow size
+	 */
+	public final int getShadowSize() {
 		return Math.max(haloSize, dropShadowSize) + 1;
 	}
 }
