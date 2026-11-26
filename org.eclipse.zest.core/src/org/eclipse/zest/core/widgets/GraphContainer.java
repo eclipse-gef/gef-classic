@@ -47,6 +47,7 @@ import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.ScrollPane;
 import org.eclipse.draw2d.Viewport;
+import org.eclipse.draw2d.backgrounds.shadows.AbstractDropShadowBorder;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -793,6 +794,18 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 
 		// container.setLayoutManager(new FreeformLayout());
 		zestLayer.setLayoutManager(new FreeformLayout());
+		zestLayer.setClippingStrategy(childFigure -> {
+			if (childFigure.getBorder() instanceof AbstractDropShadowBorder border) {
+				int shadowSize = border.getShadowSize();
+				Rectangle bounds = childFigure.getBounds().getCopy();
+				bounds.expand(shadowSize, shadowSize);
+				// Make sure we don't draw outside this container
+				// See https://github.com/eclipse-gef/gef-classic/issues/1098
+				bounds.intersect(zestLayer.getClientArea());
+				return new Rectangle[] { bounds };
+			}
+			return new Rectangle[] { childFigure.getBounds() };
+		});
 		scrollPane.setSize(computeChildArea());
 		scrollPane.setLocation(new Point(0, containerDimension.labelHeight - SUBLAYER_OFFSET));
 		scrollPane.setForegroundColor(ColorConstants.gray);
@@ -800,12 +813,13 @@ public class GraphContainer extends GraphNode implements IContainer2 {
 		expandGraphLabel.setBackgroundColor(getBackgroundColor());
 		expandGraphLabel.setForegroundColor(getForegroundColor());
 		expandGraphLabel.setLocation(new Point(0, 0));
+		expandGraphLabel.setBorder(new LineBorder(ColorConstants.black));
 
 		containerFigure.add(scrollPane);
 		containerFigure.add(expandGraphLabel);
 
 		scrollPane.getViewport().setContents(scalledLayer);
-		scrollPane.setBorder(new LineBorder());
+		scrollPane.setBorder(new LineBorder(ColorConstants.black));
 
 		return containerFigure;
 	}

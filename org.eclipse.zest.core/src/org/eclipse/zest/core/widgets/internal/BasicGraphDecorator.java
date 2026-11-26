@@ -36,21 +36,17 @@ public class BasicGraphDecorator implements IGraphDecorator {
 	}
 
 	@Override
-	@SuppressWarnings("removal")
 	public void decorateConnection(GraphConnection connection) {
 		connection.setLineColor(ColorConstants.lightGray);
-		connection.setHighlightColor(connection.getGraphModel().DARK_BLUE);
+		connection.setHighlightColor(ColorConstants.menuBackgroundSelected);
 	}
 
 	@Override
-	@SuppressWarnings("removal")
 	public void decorateNode(GraphNode node) {
-		node.setForegroundColor(node.getGraphModel().DARK_BLUE);
-		node.setForegroundHighlightColor(null);
-		node.setBackgroundColor(node.getGraphModel().LIGHT_BLUE);
-		node.setBackgroundHighlightColor(node.getGraphModel().HIGHLIGHT_COLOR);
-		node.setBorderColor(ColorConstants.lightGray);
-		node.setBorderHighlightColor(ColorConstants.blue);
+		node.setForegroundColor(ColorConstants.black);
+		node.setForegroundHighlightColor(ColorConstants.menuForegroundSelected);
+		node.setBackgroundColor(ColorConstants.lightGray);
+		node.setBackgroundHighlightColor(ColorConstants.menuBackgroundSelected);
 	}
 
 	@Override

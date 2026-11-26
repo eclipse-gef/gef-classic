@@ -819,20 +819,24 @@ public class GraphNode extends GraphItem {
 			// update styles (colors, border) for figures implementing
 			// IStyleableFigure
 			if (highlighted == HIGHLIGHT_ON) {
-				styleableFigure.setForegroundColor(getForegroundHighlightColor());
-				styleableFigure.setBackgroundColor(getBackgroundHighlightColor());
 				styleableFigure.setBorderColor(getBorderHighlightColor());
 			} else {
-				styleableFigure.setForegroundColor(getForegroundColor());
-				styleableFigure.setBackgroundColor(getBackgroundColor());
 				styleableFigure.setBorderColor(getBorderColor());
 			}
 
 			styleableFigure.setBorderWidth(getBorderWidth());
+		}
 
-			if (figure.getFont() != getFont()) {
-				figure.setFont(getFont());
-			}
+		if (highlighted == HIGHLIGHT_ON) {
+			figure.setForegroundColor(getForegroundHighlightColor());
+			figure.setBackgroundColor(getBackgroundHighlightColor());
+		} else {
+			figure.setForegroundColor(getForegroundColor());
+			figure.setBackgroundColor(getBackgroundColor());
+		}
+
+		if (figure.getFont() != getFont()) {
+			figure.setFont(getFont());
 		}
 
 		if (this.getTooltip() == null && hasCustomTooltip == false) {
@@ -907,14 +911,10 @@ public class GraphNode extends GraphItem {
 		if (highlighted == HIGHLIGHT_ON) {
 			label.setForegroundColor(getForegroundHighlightColor());
 			label.setBackgroundColor(getBackgroundHighlightColor());
-			label.setBorderColor(getBorderHighlightColor());
 		} else {
 			label.setForegroundColor(getForegroundColor());
 			label.setBackgroundColor(getBackgroundColor());
-			label.setBorderColor(getBorderColor());
 		}
-
-		label.setBorderWidth(getBorderWidth());
 		label.setFont(getFont());
 		return label;
 	}

@@ -13,6 +13,12 @@
 
 ## Zest
 
+- The gradient color of graph nodes has been replaced with a uniform, gray 
+  background color, together with a switch to the blue-ish selection color for
+  highlighted items.
+
+  ![image](.changelog/3.30/ZestStyling.png)
+
 # GEF Classic 3.29.0
 
 ## Draw2D
