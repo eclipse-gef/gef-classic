@@ -13,6 +13,8 @@
 
 package org.eclipse.gef.test.swtbot;
 
+import org.eclipse.gef.test.swtbot.mcp.MCPServerTestSuite;
+
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
@@ -26,7 +28,8 @@ import org.junit.platform.suite.api.Suite;
 	LogicDiagramTests.class,
 	ShapesDiagramTests.class,
 	PaletteSettingsDialogTests.class,
-	PaletteSnippetTests.class
+	PaletteSnippetTests.class,
+	MCPServerTestSuite.class
 })
 public class SWTBotTestSuite {
 }
