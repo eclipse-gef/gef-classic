@@ -31,11 +31,13 @@ public class HierarchicalGridLayer extends GridLayer {
 	private static final double MIN_ABSOLUTE_INTERLEAVE = 5.0;
 	private static final int DEFAULT_MAJOR_INTERLEAVE = 10;
 	private static final int DEFAULT_LINE_WIDTH = 1;
-	private static final int MAJOR_ALPHA = 30;
-	private static final int MINOR_ALPHA = 70;
+	private static final int DEFAULT_MAJOR_ALPHA = 30;
+	private static final int DEFAULT_MINOR_ALPHA = 70;
 
 	private int majorInterleave = DEFAULT_MAJOR_INTERLEAVE;
 	private int lineWidth = DEFAULT_LINE_WIDTH;
+	private int majorAlpha = DEFAULT_MAJOR_ALPHA;
+	private int minorAlpha = DEFAULT_MINOR_ALPHA;
 	private float[] minorLineStyle;
 
 	public HierarchicalGridLayer() {
@@ -68,6 +70,28 @@ public class HierarchicalGridLayer extends GridLayer {
 		repaint();
 	}
 
+	/**
+	 * Set the alpha value of the major grid
+	 *
+	 * @param alpha
+	 * @since 3.28
+	 */
+	public void setMajorAlpha(int alpha) {
+		majorAlpha = alpha;
+		repaint();
+	}
+
+	/**
+	 * Set the alpha value of the minor grid
+	 *
+	 * @param alpha
+	 * @since 3.28
+	 */
+	public void setMinorAlpha(int alpha) {
+		minorAlpha = alpha;
+		repaint();
+	}
+
 	@Override
 	protected void paintGrid(final Graphics g) {
 		final int origLineStyle = g.getLineStyle();
@@ -78,13 +102,13 @@ public class HierarchicalGridLayer extends GridLayer {
 
 		if (minorLineStyle != null) {
 			g.setLineDash(minorLineStyle);
-			g.setAlpha(MINOR_ALPHA);
+			g.setAlpha(minorAlpha);
 			drawMinorGrid(g, clip);
 		}
 
 		// clear line dash switch back to solid lines for major grid lines
 		g.setLineDash((float[]) null);
-		g.setAlpha(MAJOR_ALPHA);
+		g.setAlpha(majorAlpha);
 		drawMajorGrid(g, clip);
 
 		g.setAlpha(alpha);
